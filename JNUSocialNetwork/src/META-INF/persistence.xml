@@ -1,0 +1,40 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+version="2.1">
+	<persistence-unit name="JnuSocialNetwork" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>model.Member</class>
+		<class>model.CommunityOwner</class>
+		<class>model.God</class>
+		<class>model.Account</class>
+		<class>model.Post</class>
+		<class>model.Comment</class>
+		<class>model.Community</class>
+		<class>model.ChatRoom</class>
+		<class>model.Message</class>
+		<class>model.ServerSentEvent</class>
+		<class>model.Application</class>
+		<shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
+		<validation-mode>AUTO</validation-mode>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/jnusocialnetwork"/>
+			<property name="javax.persistence.jdbc.user"
+				value="root"/>
+			<property name="javax.persistence.jdbc.password"
+				value="BM1003mb"/>
+			
+			<property name="javax.persistence.schema-generation.database.action" 
+				value="drop-and-create"/>
+			<!-- <property name="javax.persistence.schema-generation.create-source"
+				value="metadata"/> -->
+		</properties>
+	</persistence-unit>
+
+</persistence>

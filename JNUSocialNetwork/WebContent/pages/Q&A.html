@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<!-- Bootstrap core CSS -->
+    <link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="styles/custom.css"rel="stylesheet">
+</head>
+
+<body>
+	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Guitar Web</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large">Community</span><b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="home.jsp"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
+                    <li><a href="activities.jsp"><span class="glyphicon glyphicon-th">&nbsp;Activities</span></a></li>
+                    <li><a href="circle.jsp"><span class="glyphicon glyphicon-comment">&nbsp;Chat</span></a></li>
+                    <li><a href="Q&A.html"><span class="glyphicon glyphicon glyphicon-check">&nbsp;Q&A</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+          <ul class="nav navbar-nav nav_cust">
+          	<li><a><span class="glyphicon glyphicon-user"> User</span></a></li>
+            <li><a><span class="glyphicon glyphicon-bell" style="font-size:18px"></span></a></li>
+          	<li><button type="button" class="btn btn-success btn_cust">分享</button></li>
+            <li><img src="images/1.jpg" class="img-circle img_cust"></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+ 	<div class="container container_custom">
+    	<div class="question_box">
+        	<h4>试着问个问题吧</h4>
+        	<div class="question_ask"></div>
+        </div>
+        <div class="question_container">
+        	<ul class="nav nav-tabs">
+  				<li class="active"><a href="#">Home</a></li>
+ 				<li><a href="#">Profile</a></li>
+  				<li><a href="#">Messages</a></li>
+			</ul>
+        </div>
+    </div>
+	<script src="js/jquery-1.10.2.js"></script>
+    <script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/jquery.infinitescroll.js"></script>
+    <script type="text/javascript">
+	var container = document.querySelector('.pro_body');
+	var msnry;
+	imagesLoaded( container, function() {
+	msnry = new Masonry( container,{
+  	columnWidth: 435,
+  	itemSelector: '.post',
+	gutter:20
+	});
+});
+
+</script>
+    
+</body>
+</html>
