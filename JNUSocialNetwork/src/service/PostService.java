@@ -49,7 +49,6 @@ public class PostService {
 		transaction = new SSECreatePostTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID,
-					PostType.valueOf((String) post.get("postType")),
 					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -71,8 +70,8 @@ public class PostService {
 		transaction = new SSECreatePostInCommunityTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
-					PostType.valueOf((String)post.get("postType")), post.get("attributes"),
-					post.get("imageLinks"));
+					PostType.valueOf((String) post.get("postType")),
+					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,8 +126,8 @@ public class PostService {
 		transaction = new FetchPostsTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction
-					.execute("Post.fetchByOwner", ID, startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchByOwner", ID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,8 +149,8 @@ public class PostService {
 		transaction = new FetchPostsTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction
-					.execute("Post.fetchByFollowee", ID, startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchByFollowee", ID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -164,6 +163,27 @@ public class PostService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Path("fetchActivities/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchActivities(@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchByTypeASC", PostType.ACTIVITY, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Path("fetchByID/{postID : \\d+}")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -172,8 +192,7 @@ public class PostService {
 		transaction = new FetchPostTransaction();
 		Map<String, Object> results;
 		try {
-			results = (Map<String, Object>) transaction
-					.execute(postID);
+			results = (Map<String, Object>) transaction.execute(postID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -193,8 +212,7 @@ public class PostService {
 		transaction = new FetchPostsByIDsTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction
-					.execute(postIDs);
+			results = (List<Map<String, Object>>) transaction.execute(postIDs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

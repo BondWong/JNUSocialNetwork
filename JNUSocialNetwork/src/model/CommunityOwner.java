@@ -65,7 +65,11 @@ public class CommunityOwner extends User {
 		community.setOwner(this);
 		this.communities.add(community);
 	}
-
+	
+	public void createActivity(Community community, Post activity) {
+		community.addPost(activity);
+	}
+	
 	@Override
 	public String toString() {
 		return toRepresentation().toString();

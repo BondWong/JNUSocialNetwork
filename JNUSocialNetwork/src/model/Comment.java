@@ -27,7 +27,7 @@ import model.factory.AttributesFactory;
 		@NamedQuery(name = "Comment.fetchByPost", query = "SELECT c FROM Post p JOIN p.comments c WHERE p.ID = ?1"),
 		@NamedQuery(name = "Comment.fetchByID", query = "SELECT c FROM Comment c WHERE c.ID = ?1"),
 		@NamedQuery(name = "Comment.fetchUnavailableIDs", query = "SELECT c.ID FROM Comment c WHERE c.available = 0"),
-		@NamedQuery(name = "Comment.deleteUnavailable", query = "DELETE FROM Comment c WHERE c.available = 0")})
+		@NamedQuery(name = "Comment.deleteUnavailable", query = "DELETE FROM Comment c WHERE c.available = 0") })
 public class Comment extends AttributeModel {
 	@Id
 	private Long ID;
@@ -121,7 +121,7 @@ public class Comment extends AttributeModel {
 	public void clearLikers() {
 		this.likers.clear();
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Comment) {
@@ -153,10 +153,12 @@ public class Comment extends AttributeModel {
 		representation.put("publishDate", this.publishDate);
 		representation.put("attributes", this.attributes);
 
-		Map<String, Object> owner = this.owner.toRepresentation();
-		owner.remove("followeeIDs");
-		owner.remove("followerIDs");
-		representation.put("owner", owner);
+		if (this.owner != null) {
+			Map<String, Object> owner = this.owner.toRepresentation();
+			owner.remove("followeeIDs");
+			owner.remove("followerIDs");
+			representation.put("owner", owner);
+		}
 
 		List<String> likerIDs = new ArrayList<String>();
 		for (Member member : this.likers) {
@@ -164,7 +166,7 @@ public class Comment extends AttributeModel {
 		}
 
 		representation.put("likerIDs", likerIDs);
-		
+
 		return representation;
 	}
 

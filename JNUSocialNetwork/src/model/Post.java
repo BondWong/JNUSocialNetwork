@@ -39,6 +39,8 @@ import model.modelType.PostType;
 		@NamedQuery(name = "Post.fetchByJoinedCommunity", query = "SELECT p FROM Community c JOIN c.posts p WHERE c IN "
 				+ "(SELECT cs FROM Member m JOIN m.joinedCommunities cs WHERE m.ID = ?1) ORDER BY p.publishDate"),
 		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1"),
+		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.publishDate"),
+		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.publishDate DESC"),
 		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.ID = ?1"),
 		@NamedQuery(name = "Post.fetchUnavailableIDs", query = "SELECT p.ID FROM Post p WHERE p.available = 0"),
 		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0")})
@@ -273,10 +275,12 @@ public class Post extends AttributeModel {
 		representation.put("imageLinks", this.imageLinks);
 		representation.put("attributes", this.attributes);
 
-		Map<String, Object> owner = this.owner.toRepresentation();
-		owner.remove("followeeIDs");
-		owner.remove("followerIDs");
-		representation.put("owner", owner);
+		if(this.owner != null) {
+			Map<String, Object> owner = this.owner.toRepresentation();
+			owner.remove("followeeIDs");
+			owner.remove("followerIDs");
+			representation.put("owner", owner);
+		}
 
 		List<String> likerIDs = new ArrayList<String>();
 		for (Member liker : this.likers) {

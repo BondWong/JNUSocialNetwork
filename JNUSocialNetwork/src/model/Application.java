@@ -102,6 +102,12 @@ public class Application extends AttributeModel {
 		representation.put("available", this.available);
 		representation.put("submiteDate", this.submitDate);
 		representation.put("attributes", this.attributes);
+		if(this.applicant != null) {
+			Map<String, Object> applicant = this.applicant.toRepresentation();
+			applicant.remove("followeeIDs");
+			applicant.remove("followerIDs");
+			representation.put("applicant", applicant);
+		}
 		return representation;
 	}
 
