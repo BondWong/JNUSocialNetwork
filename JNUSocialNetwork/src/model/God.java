@@ -77,5 +77,11 @@ public class God extends User{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void createPost(Community community, Post post) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

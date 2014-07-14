@@ -148,7 +148,7 @@ public class Member extends User {
 		this.createdPosts.add(post);
 	}
 
-	public void createPost(Post post, Community community) {
+	public void createPost(Community community, Post post ) {
 		post.setOwner(this);
 		this.createdPosts.add(post);
 		community.addPost(post);

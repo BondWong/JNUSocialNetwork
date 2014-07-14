@@ -66,8 +66,8 @@ public class CommunityOwner extends User {
 		this.communities.add(community);
 	}
 	
-	public void createActivity(Community community, Post activity) {
-		community.addPost(activity);
+	public void createPost(Community community, Post post) {
+		community.addPost(post);
 	}
 	
 	@Override

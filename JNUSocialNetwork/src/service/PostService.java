@@ -15,6 +15,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.CommunityOwner;
+import model.Member;
 import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
@@ -61,7 +63,7 @@ public class PostService {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}")
+	@Path("add/{ID : \\d+}/{communityID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addPostToCommuniy(@PathParam("ID") String ID,
@@ -70,6 +72,30 @@ public class PostService {
 		transaction = new SSECreatePostInCommunityTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
+					Member.class,
+					PostType.valueOf((String) post.get("postType")),
+					post.get("attributes"), post.get("imageLinks"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		broadcaster.broadcast(sse);
+
+		return Response.ok().build();
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Path("communityOwnerAddPost/{ID : \\d+}/{communityID : \\d+}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response communityOwnerAddPost(@PathParam("ID") String ID,
+			@PathParam("communityID") Long communityID, Map post)
+			throws Exception {
+		transaction = new SSECreatePostInCommunityTransaction();
+		try {
+			sse = (ServerSentEvent) transaction.execute(ID, communityID,
+					CommunityOwner.class,
 					PostType.valueOf((String) post.get("postType")),
 					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {
@@ -114,6 +140,30 @@ public class PostService {
 		broadcaster.broadcast(sse);
 
 		return Response.ok().build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchByCommunity/{communityID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchPostsByCommunity(
+			@PathParam("communityID") Long communityID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchByCommunity", communityID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
 
 	@SuppressWarnings("unchecked")

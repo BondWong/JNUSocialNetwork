@@ -18,6 +18,8 @@ public abstract class User extends AttributeModel{
 	@Enumerated(EnumType.STRING)
 	protected UserType userType;
 	
+	public abstract void createPost(Community community, Post post);
+	
 	@Override
 	public boolean equals(Object object){
 		if(object instanceof User){
