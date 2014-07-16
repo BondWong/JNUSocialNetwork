@@ -47,7 +47,7 @@ public class Initialtor implements ServletContextListener {
     	
     	Transaction transaction = new CreateModelTransaction();
     	try {
-			transaction.execute(God.class, "2011052407", MD5.toMD5Code("1901103390"));
+			transaction.execute(God.class, "WongZeonbong", MD5.toMD5Code("1901103390"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

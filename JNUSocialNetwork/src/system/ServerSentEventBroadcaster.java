@@ -38,7 +38,7 @@ public class ServerSentEventBroadcaster {
 				.mediaType(MediaType.TEXT_HTML_TYPE)
 				.data(String.class, serverSentEvent.getData())
 				.build();
-		
+		System.out.println(event);
 		this.sseBroadcaster.broadcast(event);
 	}
 }
