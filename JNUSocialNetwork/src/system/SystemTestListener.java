@@ -45,7 +45,7 @@ public class SystemTestListener implements ServletContextListener {
         // TODO Auto-generated method stub
     	Transaction transaction = new CreateModelTransaction();
     	try{
-    		transaction.execute(CommunityOwner.class, "2011052407", "1901103390");
+    		transaction.execute(CommunityOwner.class, "2011052405", "1901103390");
     		Map<String, Object> attributes = new HashMap<String, Object>();
     		attributes.put("nickName", "Bond");
     		attributes.put("gender", "Male");
