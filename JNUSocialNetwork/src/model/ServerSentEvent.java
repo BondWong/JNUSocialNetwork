@@ -30,7 +30,7 @@ public class ServerSentEvent extends Model{
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
 		this.ID = System.currentTimeMillis();
-		this.name = JsonUtil.toJson(((SSEType)initParams[0]).name());
+		this.name = ((SSEType)initParams[0]).name();
 		this.data = JsonUtil.toJson(initParams[1]);
 	}
 	
