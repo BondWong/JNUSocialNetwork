@@ -7,7 +7,7 @@ function Subscribe(){
 	return source;
 }
 //fileUpload
-//AddPost parameter:addpost.pnd -d  response:CREATEPOST
+//AddPost parameter:addpost.pnd -d  response:success fail
 function AddPost(UserID,JsonData){
 	var response="";
 	$.ajax({
