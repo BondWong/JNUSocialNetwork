@@ -101,48 +101,6 @@
 					<div class="row">
 						<div class="col-md-2">
 							<div class="user_img">
-								<img src="images/user_img.jpg" />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="user_name">
-								<strong>Winson_Lau</strong>
-							</div>
-							<div class="user_info">Yesterday 21:23pm</div>
-						</div>
-					</div>
-					<div class="post_info">
-						This is not a new article in PNAS, but it details results from a
-						unique study and I have wanted to write about it for a while.
-						NOTE: this is a
-						<div class="post_more">
-							<a>read more...</a>
-						</div>
-					</div>
-					<div class="post_img">
-						<img src="images/9.jpg" />
-					</div>
-					<div class="row">
-						<div class="col-md-1">
-							<div class="like">
-								<a><span class="glyphicon glyphicon-heart-empty"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-						<div class="col-md-1">
-							<div class="post_share">
-								<a><span class="glyphicon glyphicon-share-alt"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="post">
-				<div class="post_body">
-					<div class="row">
-						<div class="col-md-2">
-							<div class="user_img">
 								<img class="userImg" src="images/user_img.jpg" />
 							</div>
 						</div>
@@ -162,7 +120,7 @@
 						</div>
 					</div>
 					<div class="post_img">
-						<img src="images/12.png" />
+						<img src="images/2.jgp" />
 					</div>
 					<div class="row">
 						<div class="col-md-1">
@@ -233,140 +191,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="post">
-				<div class="post_body">
-					<div class="row">
-						<div class="col-md-2">
-							<div class="user_img">
-								<img src="images/user_img.jpg" />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="user_name">
-								<strong>Winson_Lau</strong>
-							</div>
-							<div class="user_info">Yesterday 21:23pm</div>
-						</div>
-					</div>
-					<div class="post_info">
-						This is not a new article in PNAS, but it details results from a
-						unique study and I have wanted to write about it for a while.
-						NOTE: this is a
-						<div class="post_more">
-							<a>read more...</a>
-						</div>
-					</div>
-					<div class="post_img">
-						<img src="images/2.jpg" />
-					</div>
-					<div class="row">
-						<div class="col-md-1">
-							<div class="like">
-								<a><span class="glyphicon glyphicon-heart-empty"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-						<div class="col-md-1">
-							<div class="post_share">
-								<a><span class="glyphicon glyphicon-share-alt"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="post">
-				<div class="post_body">
-					<div class="row">
-						<div class="col-md-2">
-							<div class="user_img">
-								<img src="images/user_img.jpg" />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="user_name">
-								<strong>Winson_Lau</strong>
-							</div>
-							<div class="user_info">Yesterday 21:23pm</div>
-						</div>
-					</div>
-					<div class="post_info">
-						This is not a new article in PNAS, but it details results from a
-						unique study and I have wanted to write about it for a while.
-						NOTE: this is a
-						<div class="post_more">
-							<a>read more...</a>
-						</div>
-					</div>
-					<div class="post_img">
-						<img src="images/4.jpg" />
-					</div>
-					<div class="row">
-						<div class="col-md-1">
-							<div class="like">
-								<a><span class="glyphicon glyphicon-heart-empty"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-						<div class="col-md-1">
-							<div class="post_share">
-								<a><span class="glyphicon glyphicon-share-alt"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="post">
-				<div class="post_body">
-					<div class="row">
-						<div class="col-md-2">
-							<div class="user_img">
-								<img src="images/user_img.jpg" />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="user_name">
-								<strong>Winson_Lau</strong>
-							</div>
-							<div class="user_info">Yesterday 21:23pm</div>
-						</div>
-					</div>
-					<div class="post_info">
-						This is not a new article in PNAS, but it details results from a
-						unique study and I have wanted to write about it for a while.
-						NOTE: this is a
-						<div class="post_more">
-							<a>read more...</a>
-						</div>
-					</div>
-					<div class="post_img">
-						<img src="images/13.png" />
-					</div>
-					<div class="row">
-						<div class="col-md-1">
-							<div class="like">
-								<a><span class="glyphicon glyphicon-heart-empty"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-						<div class="col-md-1">
-							<div class="post_share">
-								<a><span class="glyphicon glyphicon-share-alt"
-									style="font-size: 20px"></span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="post">
-				<img src="images/3.jpg" />
-			</div>
-			<div class="post">
-				<img src="images/2.jpg" />
 			</div>
 		</div>
 	</div>

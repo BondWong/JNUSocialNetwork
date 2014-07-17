@@ -20,6 +20,7 @@
 		<!-- /.container -->
 	</div>
 	<!-- /.navbar -->
+	
 	<div class="container container_custom">
 	<div class="communityGroupTitle"><h3>发现社区</h3></div>
 	<div class="container containerDiscovery">
@@ -27,6 +28,7 @@
 			<a href="show.jsp"><div class="img_container">
 					<img src="images/i1.jpg" />
 				</div></a>
+			<!-- 社区例子-->
 			<div class="content_info">
 				<div class="conten_head">Joke of the Day</div>
 				<div class="content_count">268,123 members</div>
