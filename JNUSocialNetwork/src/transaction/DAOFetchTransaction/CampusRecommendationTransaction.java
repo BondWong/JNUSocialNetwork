@@ -6,10 +6,11 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-import model.Member;
 import transaction.DAOTransaction;
 
 public class CampusRecommendationTransaction extends DAOTransaction {
+	static final int STARTINDEX = 0;
+	static final int TOINDEX = 10;
 	DAOTransaction transaction;
 
 	@SuppressWarnings("unchecked")
@@ -20,18 +21,28 @@ public class CampusRecommendationTransaction extends DAOTransaction {
 		List<Map<String, Object>> recommendations = new LinkedList<Map<String, Object>>();
 
 		transaction = new RandomlyFetchMemberTransaction();
-		List<Member> members = (List<Member>) transaction.execute();
+		List<Map<String, Object>> members = (List<Map<String, Object>>) transaction
+				.execute();
 		transaction = new FetchMemberTransaction();
-		Member member = (Member) transaction.execute(params);
+		Map<String, Object> member = (Map<String, Object>) transaction
+				.execute(params);
 
-		for (Member m : members) {
-			if (m.getAttribute("campus") != ""
-					&& m.getAttribute("campus") != null
-					&& m.getAttribute("campus") == member.getAttribute("campus"))
-				recommendations.add(m.toRepresentation());
+		for (Map<String, Object> m : members) {
+			Map<String, String> mattributes = (Map<String, String>) m
+					.get("attributes");
+			Map<String, String> memberAttributes = (Map<String, String>) member
+					.get("attributes");
+			if (mattributes != null
+					&& memberAttributes != null
+					&& mattributes.get("campus") != ""
+					&& mattributes.get("campus") != null
+					&& mattributes.get("campus").equals(
+							memberAttributes.get("campus")))
+				recommendations.add(m);
 		}
 
-		return recommendations;
+		return recommendations.size() > TOINDEX ? recommendations.subList(
+				STARTINDEX, TOINDEX) : recommendations;
 	}
 
 }

@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
+import model.modelType.CommunityType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
@@ -39,7 +40,8 @@ public class CommunityService {
 		Map<String, Object> result;
 		try {
 			result = (Map<String, Object>) transaction.execute(ID,
-					community.get("attributes"), community.get("tags"), community.get("communityType"));
+					community.get("attributes"), community.get("tags"),
+					CommunityType.valueOf((String)community.get("communityType")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +79,7 @@ public class CommunityService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Community.fetch", startIndex, pageSize);
+					"Community.fetch", null, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,5 +110,30 @@ public class CommunityService {
 		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Path("/fetchByType/{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchByType(
+			@PathParam("communityType") String communityType,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchCommunitiesTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Community.fetchByType",
+					CommunityType.valueOf(communityType), startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
 }

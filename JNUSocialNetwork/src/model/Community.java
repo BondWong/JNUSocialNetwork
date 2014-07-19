@@ -30,8 +30,9 @@ import model.modelType.CommunityType;
 @NamedQueries(value = {
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
+		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?1"),
 		@NamedQuery(name = "Community.fetchUnavailableIDs", query = "SELECT c.ID FROM Community c WHERE c.available = 0"),
-		@NamedQuery(name = "Community.deleteUnavailable", query = "DELETE FROM Community c WHERE c.available = 0")})
+		@NamedQuery(name = "Community.deleteUnavailable", query = "DELETE FROM Community c WHERE c.available = 0") })
 public class Community extends AttributeModel {
 	@Id
 	private Long ID;
@@ -203,6 +204,7 @@ public class Community extends AttributeModel {
 		representation.put("available", this.available);
 		representation.put("tags", this.tages);
 		representation.put("attributes", this.attributes);
+		representation.put("communityType", this.communityType);
 
 		List<String> memberIDs = new ArrayList<String>();
 		for (Member member : this.members) {

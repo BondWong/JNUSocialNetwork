@@ -29,6 +29,7 @@ import model.modelType.UserType;
 		@NamedQuery(name = "Member.fetchFollowees", query = "SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1"),
 		@NamedQuery(name = "Member.fetchFollowers", query = "SELECT f FROM Member m JOIN m.followers f WHERE m.ID = ?1"),
 		@NamedQuery(name = "Member.fetchByID", query = "SELECT m FROM Member m WHERE m.ID = ?1"),
+		@NamedQuery(name = "Member.fetch", query = "SELECT m FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0")})
 public class Member extends User {
@@ -72,7 +73,7 @@ public class Member extends User {
 		this.followees = new LinkedHashSet<Member>();
 		this.followers = new LinkedHashSet<Member>();
 		
-		this.setAttribute("grade", this.ID.substring(0, 4));
+		this.setAttribute("session", this.ID.substring(0, 4));
 	}
 
 	public String getID() {

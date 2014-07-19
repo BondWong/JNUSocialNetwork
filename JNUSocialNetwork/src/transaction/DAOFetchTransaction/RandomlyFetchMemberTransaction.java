@@ -16,7 +16,7 @@ public class RandomlyFetchMemberTransaction extends DAOTransaction{
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
-		List<Member> members = (List<Member>) transaction.execute("Member.fetch", null, Math.round((Math.random() * MemberNumManager.get())), 500);
+		List<Member> members = (List<Member>) transaction.execute("Member.fetch", null, (int) Math.round((Math.random() * MemberNumManager.get())), 500);
 		return members;
 	}
 
