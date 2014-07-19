@@ -71,6 +71,8 @@ public class Member extends User {
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
 		this.followees = new LinkedHashSet<Member>();
 		this.followers = new LinkedHashSet<Member>();
+		
+		this.setAttribute("grade", this.ID.substring(0, 4));
 	}
 
 	public String getID() {

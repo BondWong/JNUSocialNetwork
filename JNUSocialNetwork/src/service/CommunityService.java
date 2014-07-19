@@ -39,7 +39,7 @@ public class CommunityService {
 		Map<String, Object> result;
 		try {
 			result = (Map<String, Object>) transaction.execute(ID,
-					community.get("attributes"), community.get("tags"));
+					community.get("attributes"), community.get("tags"), community.get("communityType"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,4 +108,5 @@ public class CommunityService {
 		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
 	}
+	
 }

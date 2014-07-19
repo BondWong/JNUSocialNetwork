@@ -9,9 +9,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import transaction.Transaction;
-import transaction.DAOCreateTransaction.CreateModelTransaction;
+import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import utils.MD5;
-import model.God;
 
 /**
  * Application Lifecycle Listener implementation class Boostrap
@@ -45,9 +44,9 @@ public class Initialtor implements ServletContextListener {
     	Executor executor = Executors.newCachedThreadPool(); 
     	servletContextEvent.getServletContext().setAttribute("executor", executor); 
     	
-    	Transaction transaction = new CreateModelTransaction();
+    	Transaction transaction = new RegisterGodTransaction();
     	try {
-			transaction.execute(God.class, "WongZeonbong", MD5.toMD5Code("1901103390"));
+			transaction.execute("WongZeonbong", MD5.toMD5Code("1901103390"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

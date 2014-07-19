@@ -1,15 +1,17 @@
 package transaction.DAOFetchTransaction;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
+import model.Post;
 import transaction.DAOTransaction;
 
 public class FetchPostsByIDsTransaction extends DAOTransaction{
-private DAOTransaction transaction = new FetchPostsTransaction();
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -29,7 +31,13 @@ private DAOTransaction transaction = new FetchPostsTransaction();
 		
 		query = query + ")";
 		
-		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction.execute(query, null, 0, 1);
+		TypedQuery<Post> q = em.createQuery(query, Post.class);
+		List<Post> posts = q.getResultList();
+		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+		for(Post post : posts) {
+			results.add(post.toRepresentation());
+		}
+		
 		return results;
 	}
 }

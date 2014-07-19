@@ -31,7 +31,7 @@ public class Account extends Model{
 	@Id
 	@NotNull
 	@NotBlank
-	@Pattern(regexp = "\\d{10,}")
+	@Pattern(regexp = "\\w{1,}")
 	private String ID;
 	@NotNull
 	@NotBlank

@@ -20,8 +20,13 @@ import model.Member;
 import model.ServerSentEvent;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
+import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
+import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
+import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
+import transaction.DAOFetchTransaction.SessionRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
@@ -33,8 +38,9 @@ import transaction.SSETransaction.SSEFollowTransaction;
 public class UserService {
 	private Transaction transaction;
 	private ServerSentEvent sse;
-	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster.getInstance();
-	
+	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
+			.getInstance();
+
 	@Path("deleteMember/{ID : \\d+}")
 	@PUT
 	public Response deleteMember(@PathParam("ID") String ID) throws Exception {
@@ -48,10 +54,11 @@ public class UserService {
 		}
 		return Response.ok().build();
 	}
-	
+
 	@Path("deleteCommunityOwner/{ID : \\d+}")
 	@PUT
-	public Response deleteCommunityOwner(@PathParam("ID") String ID) throws Exception {
+	public Response deleteCommunityOwner(@PathParam("ID") String ID)
+			throws Exception {
 		transaction = new DeleteCommunityOwnerTransaction();
 		try {
 			transaction.execute(ID);
@@ -61,7 +68,7 @@ public class UserService {
 		}
 		return Response.ok().build();
 	}
-	
+
 	@Path("follow/{ID : \\d+}/{otherID : \\d+}")
 	@PUT
 	public Response follow(@PathParam("ID") String ID,
@@ -75,10 +82,10 @@ public class UserService {
 			throw e;
 		}
 		broadcaster.broadcast(sse);
-		
+
 		return Response.ok().build();
 	}
-	
+
 	@Path("cancelFollow/{ID : \\d+}/{otherID : \\d+}")
 	@PUT
 	public Response cancelFollow(@PathParam("ID") String ID,
@@ -91,36 +98,38 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 		return Response.ok().build();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Path("updateProfile/{ID : \\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(@PathParam("ID") String ID, 
-			Map attributes)
-					throws Exception {
+	public Response updateProfile(@PathParam("ID") String ID, Map attributes)
+			throws Exception {
 		transaction = new UpdateAttributeTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(Member.class, ID, attributes);
+			result = (Map<String, Object>) transaction.execute(Member.class,
+					ID, attributes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return Response.ok(new GenericEntity<Map<String, Object>>(result){}).build();
+
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("addImages/{ID : \\d+}")
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addImages(@PathParam("ID") String ID, @QueryParam("imageLinks") List<String> imageLinks) throws Exception {
+	public Response addImages(@PathParam("ID") String ID,
+			@QueryParam("imageLinks") List<String> imageLinks) throws Exception {
 		transaction = new MemberAddImageLinksTransaction();
 		Set<String> links = new LinkedHashSet<String>(imageLinks);
 		Map<String, Object> result;
@@ -131,50 +140,57 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return Response.ok(new GenericEntity<Map<String, Object>>(result){}).build();
+
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchFollowees/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchFollowees(@PathParam("ID") String ID, 
-			@PathParam("startIndex") int startIndex, 
+	public Response fetchFollowees(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
 		transaction = new FetchMembersTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute("Member.fetchFollowees", ID, startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.fetchFollowees", ID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return Response.ok(new GenericEntity<List<Map<String, Object>>>(results){}).build();
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchFollowers/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchFollowers(@PathParam("ID") String ID, 
-			@PathParam("startIndex") int startIndex, 
+	public Response fetchFollowers(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
 		transaction = new FetchMembersTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute("Member.fetchFollowers", ID, startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.fetchFollowers", ID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return Response.ok(new GenericEntity<List<Map<String, Object>>>(results){}).build();
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchByID/{ID : \\d+}")
 	@GET
@@ -189,8 +205,104 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return Response.ok(new GenericEntity<Map<String, Object>>(result){}).build();
+
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("recommendateViaFollowee/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaFollowee(@PathParam("ID") String ID) throws Exception {
+		transaction = new FolloweeRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("recommendateViaCampus/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaCampus(@PathParam("ID") String ID) throws Exception {
+		transaction = new CampusRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("recommendateViaMajor/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaMajor(@PathParam("ID") String ID) throws Exception {
+		transaction = new MajorRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("recommendateViaSession/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaSession(@PathParam("ID") String ID) throws Exception {
+		transaction = new SessionRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("recommendateViaClass/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaClass(@PathParam("ID") String ID) throws Exception {
+		transaction = new ClassRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
 	}
 	
 }

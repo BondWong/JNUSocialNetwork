@@ -10,9 +10,10 @@ import javax.servlet.annotation.WebListener;
 
 import model.CommunityOwner;
 import model.Member;
+import model.modelType.UserType;
 import transaction.Transaction;
-import transaction.DAOCreateTransaction.CreateModelTransaction;
 import transaction.DAOCreateTransaction.CreatePostTransaction;
+import transaction.DAOCreateTransaction.RegisterTransaction;
 import transaction.DAOFetchTransaction.FetchChatRoomTransaction;
 import transaction.DAOUpdateTransaction.FollowTransaction;
 
@@ -43,18 +44,18 @@ public class SystemTestListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent arg0) {
         // TODO Auto-generated method stub
-    	Transaction transaction = new CreateModelTransaction();
+    	Transaction transaction = new RegisterTransaction();
     	try{
-    		transaction.execute(CommunityOwner.class, "2011052405", "1901103390");
+    		transaction.execute(CommunityOwner.class, "2011052405", "1901103390", null, UserType.COMMUNITYOWNER);
     		Map<String, Object> attributes = new HashMap<String, Object>();
     		attributes.put("nickName", "Bond");
     		attributes.put("gender", "Male");
     		attributes.put("relationship", "available");
-    		transaction.execute(Member.class, "2011052407", "1901103390", attributes);
+    		transaction.execute(Member.class, "2011052407", "1901103390", attributes, UserType.MEMBER);
     		attributes.put("nickName", "Obama");
     		attributes.put("gender", "Male");
     		attributes.put("relationship", "available");
-    		transaction.execute(Member.class, "2011052406", "1901103390", attributes);
+    		transaction.execute(Member.class, "2011052406", "1901103390", attributes, UserType.MEMBER);
     		transaction = new FetchChatRoomTransaction();
     		transaction.execute("2011052406", "2011052407");
     		transaction = new CreatePostTransaction();

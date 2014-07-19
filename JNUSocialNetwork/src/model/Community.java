@@ -12,6 +12,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import model.factory.AttributesFactory;
+import model.modelType.CommunityType;
 
 @Entity
 @Access(AccessType.FIELD)
@@ -32,6 +35,8 @@ import model.factory.AttributesFactory;
 public class Community extends AttributeModel {
 	@Id
 	private Long ID;
+	@Enumerated(EnumType.STRING)
+	private CommunityType communityType;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> tages;
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -55,12 +60,21 @@ public class Community extends AttributeModel {
 				Community.class, initParams[0]);
 		this.tages = new LinkedHashSet<String>();
 		tages.addAll((Collection<String>) initParams[1]);
+		this.communityType = (CommunityType) initParams[2];
 		this.members = new LinkedHashSet<Member>();
 		this.posts = new LinkedHashSet<Post>();
 	}
 
 	public Long getID() {
 		return ID;
+	}
+
+	public CommunityType getCommunityType() {
+		return communityType;
+	}
+
+	public void setCommunityType(CommunityType communityType) {
+		this.communityType = communityType;
 	}
 
 	public boolean isAvailable() {

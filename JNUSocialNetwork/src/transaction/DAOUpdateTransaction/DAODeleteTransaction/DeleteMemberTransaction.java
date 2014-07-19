@@ -8,8 +8,9 @@ import model.Member;
 import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
+import utils.MemberNumManager;
 
-public class DeleteMemberTransaction extends DAOTransaction{
+public class DeleteMemberTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -19,8 +20,8 @@ public class DeleteMemberTransaction extends DAOTransaction{
 		Account account = dao.get(Account.class, params[0]);
 		account.delete();
 		Member member = dao.get(Member.class, params[0]);
-		for(Post post : member.getCreatedPosts()) {
-			for(Comment comment : post.getComments()) {
+		for (Post post : member.getCreatedPosts()) {
+			for (Comment comment : post.getComments()) {
 				comment.delete();
 				comment.clearAttributes();
 				comment.clearLikers();
@@ -48,7 +49,7 @@ public class DeleteMemberTransaction extends DAOTransaction{
 		member.delete();
 		dao.update(member);
 		dao.update(account);
-		
+		MemberNumManager.decrement();
 		return member;
 	}
 
