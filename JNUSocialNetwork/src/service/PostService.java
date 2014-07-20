@@ -63,39 +63,22 @@ public class PostService {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Path("add/{ID : \\d+}/{communityID : \\d+}")
+	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}/{userType : [A-Z]+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addPostToCommuniy(@PathParam("ID") String ID,
-			@PathParam("communityID") Long communityID, Map post)
-			throws Exception {
+			@PathParam("communityID") Long communityID,
+			@PathParam("userType") String userType, Map post) throws Exception {
 		transaction = new SSECreatePostInCommunityTransaction();
 		try {
-			sse = (ServerSentEvent) transaction.execute(ID, communityID,
-					Member.class,
-					PostType.valueOf((String) post.get("postType")),
-					post.get("attributes"), post.get("imageLinks"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		broadcaster.broadcast(sse);
-
-		return Response.ok().build();
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Path("communityOwnerAddPost/{ID : \\d+}/{communityID : \\d+}")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response communityOwnerAddPost(@PathParam("ID") String ID,
-			@PathParam("communityID") Long communityID, Map post)
-			throws Exception {
-		transaction = new SSECreatePostInCommunityTransaction();
-		try {
-			sse = (ServerSentEvent) transaction.execute(ID, communityID,
-					CommunityOwner.class,
+			Class type = null;
+			if (userType.equals("MEMBER"))
+				type = Member.class;
+			if (userType.equals("COMMUNITYOWNER"))
+				type = CommunityOwner.class;
+			if(type == null)
+				throw new Exception();
+			sse = (ServerSentEvent) transaction.execute(ID, communityID, type,
 					PostType.valueOf((String) post.get("postType")),
 					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {

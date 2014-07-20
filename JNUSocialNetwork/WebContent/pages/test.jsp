@@ -50,6 +50,7 @@
 <button class="addposttocommunity">addPostToCommunity</button>
 <button class="DeletePostFromCommunity">DeletePostFromCommunity</button>
 <button class="JoinActivity">JoinActivity</button>
+<button class="leaveActivity">leaveActivity</button>
 <form>
 	<input id="fileupload" type="file" name="files[]" multiple>
 	<input type="submit" value="fileupload" />
@@ -219,6 +220,10 @@ $('body').on('click','.GetDormInfo',function(){
 $('body').on('click','.JoinActivity',function(){
 	JoinActivity("2011052406","1405858229694");
 });
+$('body').on('click','.leaveActivity',function(){
+	LeaveActivity("2011052406","1405858229694");
+});
+
 
 
 </script>

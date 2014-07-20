@@ -246,6 +246,21 @@ function JoinActivity (userID,postID){
     });
 	return response;
 }
+//leaveActivity 输入：userID,postID 
+function LeaveActivity (userID,postID){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/post/leaveActivity/'+userID+'/'+postID,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
 //***********************************PostService   end*********************************
 //***********************************CommentService   begin*********************************
 //AddComment parameter:addcomment.pnd -d  response:success fail
