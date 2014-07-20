@@ -1,7 +1,8 @@
 //funtion fileupload
+
 	var fileDri = [];
 	$('#fileupload').fileupload({
-		url:'../../GuitarWebApp/app/fileUploader',
+		url:'../../JNUSocialNetwork/app/fileUploader',
 	    success:function(data){
 	    	for(var i=0;i<data.length;i++){
 	    		var dataString=data[i];
