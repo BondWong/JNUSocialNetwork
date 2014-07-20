@@ -31,7 +31,8 @@ import transaction.DAOFetchTransaction.FetchUnreadMessagesTransaction;
 import transaction.SSETransaction.SSEConnectTransaction;
 import transaction.SSETransaction.SSEDisconnectTransaction;
 
-@ServerEndpoint(value = "/endpoint/connect/{ID}", encoders = { MapEncoder.class, ListEncoder.class }, decoders = { MapDecoder.class })
+@ServerEndpoint(value = "/endpoint/connect/{ID}", encoders = {
+		MapEncoder.class, ListEncoder.class }, decoders = { MapDecoder.class })
 public class WebSocketEndPotint {
 	static final int MAXIMUMQUEUESIZE = 100;
 	static MessageStorage messageStorage = MessageStorage.getInstance();
@@ -53,16 +54,18 @@ public class WebSocketEndPotint {
 			throw e;
 		}
 
+		session.getBasicRemote().sendObject(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
-			if (!sess.getUserProperties().containsValue(ID))
-				sess.getBasicRemote().sendObject(sse.toRepresentation());
+			sess.getBasicRemote().sendObject(sse.toRepresentation());
 		}
-		
+
 		Map<String, List<Map<String, Object>>> info = new HashMap<String, List<Map<String, Object>>>();
 		transaction = new FetchUnreadMessagesTransaction();
-		info.put("unreadMessages", (List<Map<String, Object>>)transaction.execute(ID));
+		info.put("unreadMessages",
+				(List<Map<String, Object>>) transaction.execute(ID));
 		transaction = new FetchUnhandledEventsTransaction();
-		info.put("unhandledEvents", (List<Map<String, Object>>)transaction.execute(ID));
+		info.put("unhandledEvents",
+				(List<Map<String, Object>>) transaction.execute(ID));
 		try {
 			session.getBasicRemote().sendObject(info);
 		} catch (Exception e) {
@@ -70,7 +73,7 @@ public class WebSocketEndPotint {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@OnClose
