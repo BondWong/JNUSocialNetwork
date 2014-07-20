@@ -48,6 +48,8 @@
 <button class="DeleteAbandoned">DeleteAbandoned</button>
 <button class="GetDormInfo">GetDormInfo</button>
 <button class="addposttocommunity">addPostToCommunity</button>
+<button class="DeletePostFromCommunity">DeletePostFromCommunity</button>
+<button class="JoinActivity">JoinActivity</button>
 <form>
 	<input id="fileupload" type="file" name="files[]" multiple>
 	<input type="submit" value="fileupload" />
@@ -64,7 +66,7 @@ $('body').on('click','.fileupload',function(){
 	alert(response);
 });
 $('body').on('click','.addpost',function(){
-	var jsonString ={postType:"NORMAL",attributes:{content:"test"},imageLinks:[]};
+	var jsonString ={postType:"ACTIVITY",attributes:{content:"test"},imageLinks:[]};
 	var jsonData = $.toJSON(jsonString);
 	AddPost("2011052407",jsonData);
 });
@@ -75,6 +77,9 @@ $('body').on('click','.addposttocommunity',function(){
 });
 $('body').on('click','.deletepost',function(){
 	DeletePost("1405701186191");
+});
+$('body').on('click','.DeletePostFromCommunity',function(){
+	DeletePostFromCommunity("1405856667670","1405857984414");
 });
 $('body').on('click','.likepost',function(){
 	LikePost("2011052407","1405701186191");
@@ -211,6 +216,10 @@ $('body').on('click','.GetDormInfo',function(){
 	var response = GetDormInfo("ZhuhaiCampus");
 	alert(response);
 });
+$('body').on('click','.JoinActivity',function(){
+	JoinActivity("2011052406","1405858229694");
+});
+
 
 </script>
 

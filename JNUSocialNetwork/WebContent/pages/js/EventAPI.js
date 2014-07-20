@@ -77,11 +77,11 @@ function DeletePost(postID){
 	return response;
 }
 //DeletePostFromCommunity 输入：postID
-function DeletePost(postID){
+function DeletePostFromCommunity(communityID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/delete/'+postID,
+    	url:'../../JNUSocialNetwork/app/post/delete/'+communityID+'/'+postID,
     	success:function(data,status){
     		response = status;
     	},
@@ -228,6 +228,21 @@ function FetchPostByIDs(postID){
     		response = status;
     	}
     	
+    });
+	return response;
+}
+//joinActivity 输入：userID,postID 
+function JoinActivity (userID,postID){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/post/joinActivity/'+userID+'/'+postID,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
     });
 	return response;
 }
