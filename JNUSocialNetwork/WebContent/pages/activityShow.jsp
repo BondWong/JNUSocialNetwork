@@ -86,7 +86,7 @@
 					<h1>Are you going to join in?</h1>
 					<select class="btn btn-default">
 						<option>Maybe</option>
-						<option>Yes</option>
+						<option class="activityJoin">Yes</option>
 						<option>No</option>
 					</select>
 			</div>
@@ -100,6 +100,7 @@
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<script src="js/EventAPI.js"></script>
 	<script type="text/javascript">
 		Msnry('.containerDiscovery', '.content_container', 265);
 	</script>

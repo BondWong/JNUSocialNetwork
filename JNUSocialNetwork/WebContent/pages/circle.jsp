@@ -110,13 +110,13 @@
 					<div class="row">
 						<div class="col-md-1">
 							<div class="post_like" style="cursor: pointer">
-								<a><input id="likeID" type='hidden' value="1" /><span
+								<a><input id="likeID" type='hidden' value="1405950973690" /><span
 									class="glyphicon glyphicon-heart-empty" style="font-size: 20px">0</span></a>
 							</div>
 						</div>
 						<div class="col-md-1">
 							<div class="post_collect" style="cursor: pointer">
-								<a><input id="collectID" type='hidden' value="1" /><span
+								<a><input id="collectID" type='hidden' value="1405950973690" /><span
 									class="glyphicon glyphicon-star-empty" style="font-size: 20px"></span></a>
 							</div>
 						</div>
@@ -205,6 +205,7 @@
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
 	<script src="js/function.js"></script>
+	<script src="js/EventAPI.js"></script>
 	<script src="js/circle.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">

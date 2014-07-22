@@ -1,3 +1,4 @@
+//***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe(){
 	/*if (!window.EventSource) {
@@ -6,6 +7,8 @@ function Subscribe(){
 	var source = new EventSource("../../JNUSocialNetwork/app/event/subscribe");
 	return source;
 }
+//***********************************SSES   end*********************************
+//***********************************FileService   begin************************
 //文件上传 输入：formDate格式 输出：imagelink数组
 function FileUpload(formData){
 	var fileDri = [];
@@ -25,7 +28,8 @@ function FileUpload(formData){
     });
 	return fileDri;
 }
-//***********************************PostService   begin*********************************
+//***********************************FileService   end*********************************
+//***********************************PostService   begin*******************************
 //AddPost parameter:addpost.pnd -d  response:success fail
 function AddPost(UserID,JsonData){
 	var response="";
@@ -44,11 +48,11 @@ function AddPost(UserID,JsonData){
 	return response;
 }
 //AddPostToCommunity parameter:addpost.pnd -d  response:success fail
-function AddPostToCommunity(UserID,communityID,JsonData){
+function AddPostToCommunity(UserID,communityID,userType,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/post/add/'+UserID+'/'+communityID,
+    	url:'../../JNUSocialNetwork/app/post/addToCommunity/'+UserID+'/'+communityID+'/'+userType,
     	data:JsonData,
     	contentType: "application/json",
     	success:function(data,status){
@@ -237,6 +241,21 @@ function JoinActivity (userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/joinActivity/'+userID+'/'+postID,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
+//leaveActivity 输入：userID,postID 
+function LeaveActivity (userID,postID){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/post/leaveActivity/'+userID+'/'+postID,
     	success:function(data,status){
     		response = status;
     	},

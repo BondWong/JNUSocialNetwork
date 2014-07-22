@@ -1,5 +1,5 @@
-//funtion fileupload
 
+//funtion fileupload
 	var fileDri = [];
 	$('#fileupload').fileupload({
 		url:'../../JNUSocialNetwork/app/fileUploader',
@@ -59,46 +59,25 @@
         });
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');	
-/*.on('fileuploaddone', function (e, data) {
-        $.each(data.result.files, function (index, file) {
-            if (file.url) {
-                var link = $('<a>')
-                    .attr('target', '_blank')
-                    .prop('href', file.url);
-                $(data.context.children()[index])
-                    .wrap(link);
-            } else if (file.error) {
-                var error = $('<span class="text-danger"/>').text(file.error);
-                $(data.context.children()[index])
-                    .append('<br>')
-                    .append(error);
-            }
-        });
-    })*/
+
 //function addPost
-		$('body').on("click","#btn_share",function(){
-			//get urls
-		   var d = new Date();
-		   var publishDateN = d.getFullYear() + "/" +(d.getMonth()+1) + "/" + d.getDate();
-		   var date = new Date(publishDateN);
-		   var jtopic = $("#topic").val();
-		   var jcontent = $("#share_txt2").val();
-		   var jtype = $("#type").val();
-		   var jpublishDate = $("#publishDate").val();
-		   var jstartDate = $("#startDate").val();
-		   
-		   var jsonString = {mediaLocation:fileDri,topic:jtopic,content:jcontent,postType:"DISCUSSION",publishDate:date,startDate:date};
-		   var jsonData = $.toJSON(jsonString);
-		   $.ajax({
-		    	type:"POST",
-		    	url:'../../GuitarWebApp/app/post/add/'+userID,
-		    	data:jsonData,
-		    	contentType: "application/json",
-		    });
+	$('#btn_share').click(function(e){
+		e.preventDefault();
+			//var formData = new FormData($('.photofom'));
+			
+			var post={
+					postType:'NORMAL',
+					attributes:{
+						content:$('#share_txt2').val()
+					},
+					imageLinks:fileDri
+			};
+			var json = $.toJSON(post);
+			AddPost("2011052407",json);
 		    $('#addPostModal').modal('hide');
-		});
+	});
 		
-		//function fetchPostsByIDs
+//function fetchPostsByIDs
 		var postIdContainer = [];
 		function fetchPostByIDs(){
 			var Urls = '../../GuitarWebApp/app/post/getByIDs?';
