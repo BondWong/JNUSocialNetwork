@@ -2,6 +2,7 @@ package transaction.DAOUpdateTransaction.DAODeleteTransaction;
 
 import javax.persistence.EntityManager;
 
+import model.Account;
 import model.Comment;
 import model.Community;
 import model.CommunityOwner;
@@ -17,6 +18,8 @@ public class DeleteCommunityOwnerTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		CommunityOwner communityOwner = dao.get(CommunityOwner.class, params[0]);
+		Account account = dao.get(Account.class, params[0]);
+		account.delete();
 		for(Community community : communityOwner.getCommunities()) {
 			for(Post post : community.getPosts()) {
 				for(Comment comment : post.getComments()) {
