@@ -74,7 +74,7 @@ $('body').on('click','.addpost',function(){
 $('body').on('click','.addposttocommunity',function(){
 	var jsonString ={postType:"NORMAL",attributes:{content:"test"},imageLinks:[]};
 	var jsonData = $.toJSON(jsonString);
-	AddPostToCommunity("2011052406","1405856667670",jsonData);
+	AddPostToCommunity("2011052407","1405859940858","MEMBER",jsonData);
 });
 $('body').on('click','.deletepost',function(){
 	DeletePost("1405701186191");
@@ -218,10 +218,10 @@ $('body').on('click','.GetDormInfo',function(){
 	alert(response);
 });
 $('body').on('click','.JoinActivity',function(){
-	JoinActivity("2011052406","1405858229694");
+	JoinActivity("2011052406","1405860077274");
 });
 $('body').on('click','.leaveActivity',function(){
-	LeaveActivity("2011052406","1405858229694");
+	LeaveActivity("2011052406","1405860077274");
 });
 
 

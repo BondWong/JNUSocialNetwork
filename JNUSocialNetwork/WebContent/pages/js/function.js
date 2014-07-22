@@ -175,67 +175,41 @@ $(document).ready(function(){
 	$('img.userImg').userTips();
 
 //function collectPost and cancelCollcet
-		$('body').on('click','.post_collect',function() {
-			if($(this).find("span").attr("class") == "glyphicon glyphicon-star-empty"){
-				var id = $(this).find("input").attr("value");
-				$.ajax({
-					url:'../../GuitarWebApp/app/post/collect/'+userID+'/'+id,//'../../GuitarWebApp/app/post/collect/2011052405/'+id
-					type:'put',
-					success:function(){
-						var inputID = $("input[value='"+id+"'][id='collectID']");
-						inputID.next().attr("class","glyphicon glyphicon-star");
-					}
-				});
-			}
-			if($(this).find("span").attr("class") == "glyphicon glyphicon-star"){
-				var id = $(this).find("input").attr("value");
-				$.ajax({
-					url:'../../GuitarWebApp/app/post/cancelCollect/'+userID+'/'+id,//'../../GuitarWebApp/app/post/collect/2011052405/'+id
-					type:'put',
-					success:function(){
-						var inputID = $("input[value='"+id+"'][id='collectID']");
-						inputID.next().attr("class","glyphicon glyphicon-star-empty");
-					}
-				});
-			}
-		});
+	$('.post_collect').click(function(e){
+		e.preventDefault();
+		var id = $(this).find("input").attr("value");
+		if($(this).find("span").attr("class") == "glyphicon glyphicon-star-empty"){
+			CollectPost("2011052407",id);
+		}
+		if($(this).find("span").attr("class") == "glyphicon glyphicon-star"){
+			CancelCollectPost("2011052407",id);
+		}
+	});
 //function likePost and cancelLike
-		$('body').on('click','.post_like',function(){
-			if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
-
-				var id = $(this).find("input").val();
-				$.ajax({
-					url:'../../GuitarWebApp/app/post/like/'+userID+'/'+id,//'../../GuitarWebApp/app/post/collect/2011052405/'+id
-					type:'put',
-					success:function(){
-						var inputID = $("input[value='"+id+"'][id='likeID']");
-						inputID.next().attr("class","glyphicon glyphicon-heart");
-					}
-				});
-			}
-			if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
-				var id = $(this).find("input").val();
-				$.ajax({
-					url:'../../GuitarWebApp/app/post/cancelLike/'+userID+'/'+id,//'../../GuitarWebApp/app/post/collect/2011052405/'+id
-					type:'put',
-					success:function(){
-						var inputID = $("input[value='"+id+"'][id='likeID']");
-						inputID.next().attr("class","glyphicon glyphicon-heart-empty");
-					}
-				});
-			}
-		});
+	$('.post_like').click(function(e){
+		e.preventDefault();
+		var id = $(this).find("input").attr("value");
+		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
+			LikePost("2011052407",id);
+		}
+		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
+			CancelLikePost("2011052407",id);
+		}
+	});
 //function joinactivity
-		$('body').on('click','#activityJoin',function(){
-			var id = $(this).find("input").val();
-			$.ajax({
-				url:'../../GuitarWebApp/app/post/join/'+userID+'/1',//'../../GuitarWebApp/app/post/collect/2011052405/'+id
-				type:'put',
-				success:function(){
-					alert("success!");
-				}
-			});
-		});
+	$('.activityJoin').click(function(e){
+		e.preventDefault();
+		//var id = $(this).find("input").val();
+		//if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
+		//	var id = $(this).find("input").attr("value");
+			JoinActivity("2011052407","1405954161110");
+		//}
+		/*if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
+			var id = $(this).find("input").attr("value");
+			LeaveActivity("2011052407",id);
+		}*/
+	});
+	
 
 //function addComment
 		$('body').on('click','#addComment',function(){
