@@ -53,16 +53,37 @@ public class Initialtor implements ServletContextListener {
 				executor);
 
 		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor) Executors
-				.newScheduledThreadPool(1);
+				.newScheduledThreadPool(5);
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				System.out.println("test");
+				//System.out.println("test1");
 			}
 
 		}, 5, 5, TimeUnit.SECONDS);
+		
+		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//System.out.println("test2");
+			}
+
+		}, 4, 4, TimeUnit.SECONDS);
+		
+		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//System.out.println("test3");
+			}
+
+		}, 3, 3, TimeUnit.SECONDS);
+		
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
 

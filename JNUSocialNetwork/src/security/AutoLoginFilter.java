@@ -60,6 +60,7 @@ public class AutoLoginFilter implements Filter {
 				}
 				if (account != null) {
 					HttpSession session = httpRequest.getSession();
+					System.out.println("autoLogin");
 					synchronized (session) {
 						session.setAttribute("ID", account.getID());
 						session.setAttribute("userType", account.getUserType());
