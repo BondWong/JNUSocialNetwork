@@ -86,7 +86,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="btn_share" value="upload">Share</button>
+									<button type="button" class="btn btn-primary" id="btn_shareC" value="upload">Share</button>
 								</div>
 							</form>
 						</div>
@@ -218,7 +218,8 @@
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
 	<script src="js/function.js"></script>
-	<script src="js/circle.js"></script>
+	<script src="js/EventAPI.js"></script>
+	<script src="js/communityCircle.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.pro_body', '.post', 435);

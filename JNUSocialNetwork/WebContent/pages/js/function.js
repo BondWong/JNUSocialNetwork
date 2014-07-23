@@ -188,20 +188,6 @@ $(document).ready(function(){
 			return 0;
 		}
 	});
-//function joinactivity
-	$('.activityJoin').click(function(e){
-		e.preventDefault();
-		//var id = $(this).find("input").val();
-		//if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
-		//	var id = $(this).find("input").attr("value");
-			JoinActivity("2011052407","1405954161110");
-		//}
-		/*if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
-			var id = $(this).find("input").attr("value");
-			LeaveActivity("2011052407",id);
-		}*/
-	});
-	
 
 //function addComment
 		$('body').on('click','#addComment',function(){
@@ -257,3 +243,4 @@ $(document).ready(function(){
 		$(this).css("display","none");
 		postIdContainer = [];
 	});
+	

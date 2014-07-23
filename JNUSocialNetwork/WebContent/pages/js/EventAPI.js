@@ -191,6 +191,23 @@ function FetchPostsByFollowee(userID,startIndex,pageSize){
     });
 	return response;
 }
+//FetchByFolloweeOrOwner  输入：userID 开始index，数量  如：0/5 表示最新的5个;返回：postJson
+function FetchByFolloweeOrOwner(userID,startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/post/fetchByFolloweeOrOwner/'+userID+'/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 //FetchPostsByID  输入：postID;返回：postJson
 function FetchPostByID(postID){
 	var response="";

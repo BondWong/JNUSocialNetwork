@@ -87,7 +87,7 @@
 					<select class="btn btn-default">
 						<option>Maybe</option>
 						<option class="activityJoin">Yes</option>
-						<option>No</option>
+						<option class="leaveactivityJoin">No</option>
 					</select>
 			</div>
 		</div>
@@ -101,6 +101,7 @@
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/EventAPI.js"></script>
+	<script src="js/activity.js"></script>
 	<script type="text/javascript">
 		Msnry('.containerDiscovery', '.content_container', 265);
 	</script>
