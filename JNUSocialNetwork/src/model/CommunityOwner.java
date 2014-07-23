@@ -20,6 +20,7 @@ import model.modelType.UserType;
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
 		@NamedQuery(name = "CommunityOwner.fetchByID", query = "SELECT c FROM CommunityOwner c WHERE c.ID = ?1"),
+		@NamedQuery(name = "CommunityOwner.fetch", query = "SELECT c FROM CommunityOwner c WHERE c.available = 1"),
 		@NamedQuery(name = "CommunityOwner.fetchUnavailableIDs", query = "SELECT c.ID FROM CommunityOwner c WHERE c.available = 0"),
 		@NamedQuery(name = "CommunityOwner.deleteUnavailable", query = "DELETE FROM CommunityOwner c WHERE c.available = 0")})
 public class CommunityOwner extends User {

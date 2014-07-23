@@ -33,6 +33,7 @@ import model.modelType.PostType;
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
 		@NamedQuery(name = "Post.fetchByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 ORDER BY p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.publishDate DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
 				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
 				+ "m.ID = ?1 ) ORDER BY p.publishDate DESC"),
@@ -43,7 +44,7 @@ import model.modelType.PostType;
 		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.publishDate DESC"),
 		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.ID = ?1"),
 		@NamedQuery(name = "Post.fetchUnavailableIDs", query = "SELECT p.ID FROM Post p WHERE p.available = 0"),
-		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0")})
+		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0") })
 public class Post extends AttributeModel {
 	@Id
 	private Long ID;
@@ -80,7 +81,7 @@ public class Post extends AttributeModel {
 		this.attributes = AttributesFactory.getInstance().create(Post.class,
 				postType, initParams[1]);
 		imageLinks = new LinkedHashSet<String>();
-		imageLinks.addAll((Collection<String>)initParams[2]);
+		imageLinks.addAll((Collection<String>) initParams[2]);
 		likers = new LinkedHashSet<Member>();
 		collectors = new LinkedHashSet<Member>();
 		participants = new LinkedHashSet<Member>();
@@ -275,7 +276,7 @@ public class Post extends AttributeModel {
 		representation.put("imageLinks", this.imageLinks);
 		representation.put("attributes", this.attributes);
 
-		if(this.owner != null) {
+		if (this.owner != null) {
 			Map<String, Object> owner = this.owner.toRepresentation();
 			owner.remove("followeeIDs");
 			owner.remove("followerIDs");

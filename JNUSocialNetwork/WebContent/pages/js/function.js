@@ -57,24 +57,6 @@
 			}
 		});
 	};
-//function fetchPostsByFollowee
-	function fetchPostByFollowee(){
-		$.ajax({
-			url:'../../GuitarWebApp/app/post/fetchByFollowee/'+userID+'/0/5',// /post/fetchByUserID/'+id
-			type:'get',
-			success:function(data){
-				//var jsondata = $.parseJSON(data);
-				var dataR = data.reverse();
-				$.each(dataR,function(index,jsonPostShortCut){
-					if(index==0){
-						return true;
-					}
-					addPost(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);
-				});
-			}
-		});
-	}
-
 	//function getUserRepresentation
 	function getUserRepresentation(){
 		$.ajax({
@@ -123,7 +105,7 @@
 		$('.Alooking').html(LookingFor);
 	}*/
 
-$(document).ready(function(){
+
 //function userTip
 	(function($){  
 		$.fn.userTips = function () {
@@ -173,27 +155,37 @@ $(document).ready(function(){
 		};
 	})(jQuery);
 	$('img.userImg').userTips();
-
 //function collectPost and cancelCollcet
-	$('.post_collect').click(function(e){
-		e.preventDefault();
+$(document).ready(function(){
+	$('body').on('click','.post_collect',function(){
 		var id = $(this).find("input").attr("value");
 		if($(this).find("span").attr("class") == "glyphicon glyphicon-star-empty"){
 			CollectPost("2011052407",id);
+			var inputID = $("input[value='"+id+"'][id='collectID']");
+			inputID.next().attr("class","glyphicon glyphicon-star");
+			return 0;
 		}
 		if($(this).find("span").attr("class") == "glyphicon glyphicon-star"){
 			CancelCollectPost("2011052407",id);
+			var inputID = $("input[value='"+id+"'][id='collectID']");
+			inputID.next().attr("class","glyphicon glyphicon-star-empty");
+			return 0;
 		}
 	});
 //function likePost and cancelLike
-	$('.post_like').click(function(e){
-		e.preventDefault();
+	$('body').on('click','.post_like',function(){
 		var id = $(this).find("input").attr("value");
 		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
 			LikePost("2011052407",id);
+			var inputID = $("input[value='"+id+"'][id='likeID']");
+			inputID.next().attr("class","glyphicon glyphicon-heart");
+			return 0;
 		}
 		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
 			CancelLikePost("2011052407",id);
+			var inputID = $("input[value='"+id+"'][id='likeID']");
+			inputID.next().attr("class","glyphicon glyphicon-heart-empty");
+			return 0;
 		}
 	});
 //function joinactivity
@@ -248,3 +240,20 @@ $(document).ready(function(){
 			}
 		});		
 });
+
+	//function fetchPostsByIDs
+	var postIdContainer = [];
+	function fetchPostByIDs(){
+		var response = FetchPostByIDs(postIdContainer);
+		$.each(response,function(n,dataString){
+			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+		});
+	}
+	$('body').on('click','.alertCust',function(){
+		/*var jsondata = $.parseJSON(event.data);
+		var jsonPostShortCut = jsondata.postRepresentationShortCut;
+		addPost(jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.ID,jsonPostShortCut.likeNum);*/
+		fetchPostByIDs();
+		$(this).css("display","none");
+		postIdContainer = [];
+	});

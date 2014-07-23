@@ -3,12 +3,11 @@
 $(document).ready(function(){
 window.onload = function(){
 if (!!window.EventSource) {
-		var source = new EventSource("../../GuitarWebApp/app/event/subscribe");
-		source.addEventListener("ADDPOST",function(event){
+		var source = Subscribe();
+		source.addEventListener("CREATEPOST",function(event){
 		var jsondata = $.parseJSON(event.data);
-		var jsonPostShortCut = jsondata.postRepresentationShortCut;
-		postIdContainer.push(jsonPostShortCut.ID);
-		if(jsondata.userID==userID){
+		postIdContainer.push(jsondata.post.ID);
+		if(jsondata.post.owner.ID==userID){
 			fetchPostByIDs();
 			postIdContainer = [];
 		}
@@ -20,14 +19,14 @@ if (!!window.EventSource) {
 		source.addEventListener('deletePostSSE',function(e){});
 		source.addEventListener('LIKEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
-			var postID = jsondata.pcID;
+			var postID = jsondata.postID;
 			var inputID = $("input[value='"+postID+"'][id='likeID']");
 			var like = parseInt(inputID.next().text())+1;
 			inputID.next().text(like); 
 		});
-		source.addEventListener('CANCELLIKE',function(event){
+		source.addEventListener('CANCELLIKEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
-			var postID = jsondata.pcID;
+			var postID = jsondata.postID;
 			var inputID = $("input[value='"+postID+"'][id='likeID']");
 			var like = parseInt(inputID.next().text())-1;
 			inputID.next().text(like);
@@ -37,7 +36,7 @@ if (!!window.EventSource) {
 			var postID = jsondata.pcID;
 			
 		});
-		source.addEventListener('CANCELCOLLECT',function(event){
+		source.addEventListener('CANCELCOLLECTPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
 			var postID = jsondata.pcID;
 			

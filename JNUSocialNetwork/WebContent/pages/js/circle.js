@@ -1,6 +1,6 @@
-
-//funtion fileupload
-	var fileDri = [];
+var fileDri = [];
+$(document).ready(function(){
+	//funtion fileupload
 	$('#fileupload').fileupload({
 		url:'../../JNUSocialNetwork/app/fileUploader',
 	    success:function(data){
@@ -73,41 +73,15 @@
 					imageLinks:fileDri
 			};
 			var json = $.toJSON(post);
-			AddPost("2011052407",json);
+			AddPost("2011052406",json);
 		    $('#addPostModal').modal('hide');
 	});
-		
-//function fetchPostsByIDs
-		var postIdContainer = [];
-		function fetchPostByIDs(){
-			var Urls = '../../GuitarWebApp/app/post/getByIDs?';
-			$.each(postIdContainer,function(n,value){
-				if(n != postIdContainer.length-1){
-					Urls = Urls +'postIDs='+ value+'&';
-				}
-				else{
-					Urls = Urls +'postIDs='+ value;
-					return true;
-				}
-			});
-			$.ajax({
-				url: Urls,// 
-				type:'get',
-				success:function(data){
-					//var jsondata = $.parseJSON(data);
-					var dataR = data.reverse();
-					$.each(dataR,function(index,jsonPostShortCut){
-						addPost(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);			
-					});
-				}
-			});
-		}
-		$('body').on('click','.alertCust',function(){
-			/*var jsondata = $.parseJSON(event.data);
-			var jsonPostShortCut = jsondata.postRepresentationShortCut;
-			addPost(jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.ID,jsonPostShortCut.likeNum);*/
-			fetchPostByIDs();
-			$(this).css("display","none");
-			postIdContainer = [];
+});
+//function fectchPostByFollowee
+	function fetchPostsByFollowee(){
+		var response = FetchPostsByFollowee("2011052407","1","5");
+		$.each(response.reverse(),function(n,dataString){
+			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
 		});
 		
+	}

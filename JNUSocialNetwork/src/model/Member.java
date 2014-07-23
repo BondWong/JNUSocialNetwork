@@ -104,12 +104,16 @@ public class Member extends User {
 		imageLinks.add(link);
 	}
 
-	public void addImageLink(Set<String> links) {
+	public void addImageLinks(Set<String> links) {
 		this.imageLinks.addAll(links);
 	}
 
 	public void removeImageLink(String link) {
 		imageLinks.remove(link);
+	}
+	
+	public void removeImageLinks(Set<String> links) {
+		this.imageLinks.removeAll(links);
 	}
 
 	public Set<String> getImageLinks() {

@@ -210,7 +210,7 @@
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.pro_body', '.post', 435);
-		fecthPostsByType('DISCUSSION');
+		fetchPostsByFollowee();
 	</script>
 </body>
 </html>

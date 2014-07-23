@@ -78,12 +78,13 @@ public class LoginServlet extends HttpServlet {
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 						response.addCookie(cookie);
 					}
-					response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
+					response.setStatus(200);
 				}
 			} else {
 				account.setLastAccessDate(new Date());
 				account.setChance((account.getChance() - 1));
-				response.sendRedirect("/JNUSocialNetwork/pages/regAndLogin.jsp?invalid=true");
+				response.setStatus(400);
+				response.setHeader("Refresh", "0");
 			}
 
 			Transaction t = new UpdateAccountTransaction();
@@ -97,7 +98,8 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} else {
-			response.sendRedirect("/JNUSocialNetwork/pages/regAndLogin.jsp?invalid=true");
+			response.setStatus(400);
+			response.setHeader("Refresh", "0");
 		}
 
 	}

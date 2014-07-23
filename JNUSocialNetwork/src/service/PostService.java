@@ -194,6 +194,29 @@ public class PostService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("fetchByFolloweeOrOwner/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response fetchPostsByFolloweeOrOwner(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchByFolloweeOrOwner", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Path("fetchActivities/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")

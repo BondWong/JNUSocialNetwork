@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 
 import persistence.DAO;
 import transaction.DAOTransaction;
-import utils.MD5;
 import model.Account;
 import model.User;
 import model.factory.ModelFactory;
@@ -20,7 +19,6 @@ public class RegisterTransaction extends DAOTransaction{
 		DAO dao = new DAO(em);
 		String ID = (String) params[1];
 		String password = (String) params[2];
-		password = MD5.toMD5Code(password);
 		
 		User user = ModelFactory.getInstance().create((Class)params[0], ID, password, params[3]);
 		Account account = new Account();

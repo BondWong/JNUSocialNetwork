@@ -8,7 +8,7 @@ import model.Member;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class MemberAddImageLinksTransaction extends DAOTransaction{
+public class MemberRemoveImageLinksTransaction extends DAOTransaction{
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -17,7 +17,7 @@ public class MemberAddImageLinksTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Member member = dao.get(Member.class, params[0]);
-		member.addImageLinks((Set<String>)params[1]);
+		member.removeImageLinks((Set<String>) params[1]);
 		dao.update(member);
 		return member.toRepresentation();
 	}
