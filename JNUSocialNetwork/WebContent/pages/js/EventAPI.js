@@ -174,6 +174,23 @@ function FetchPostsByOwner(ownerID,startIndex,pageSize){
 	return response;
 	
 }
+//fetchByCommunity
+function FetchByCommunity(communityID,startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/post/fetchByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 // FetchPostsByFollowee  输入：userID 开始index，数量  如：0/5 表示最新的5个;返回：postJson
 function FetchPostsByFollowee(userID,startIndex,pageSize){
 	var response="";

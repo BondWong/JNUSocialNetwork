@@ -86,3 +86,15 @@ $(document).ready(function(){
 		});
 		
 	}
+	//function fetchPostsByIDs
+	var postIdContainer = [];
+	
+	$('body').on('click','.alertCust',function(){
+		fetchPostByIDs(postIdContainer);
+		$(this).css("display","none");
+		postIdContainer = [];
+	});
+	$('body').on('click','.deletePostBtn',function(){
+		var id = $(this).find("input").attr("value");
+		DeletePost(id);
+	});

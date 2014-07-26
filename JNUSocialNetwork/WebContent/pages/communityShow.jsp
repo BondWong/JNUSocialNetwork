@@ -21,7 +21,7 @@
 	</div>
 	<!-- /.navbar -->
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust">New Post!</div>
+		<div class="alert alert-success alertCust alertCustC">New Post!</div>
 		<div class="communityCard">
 			<div class="cardSetter glyphicon glyphicon-cog"></div>
 			<div class=communityCardInfo>
@@ -120,18 +120,18 @@
 						</div>
 					</div>
 					<div class="post_img">
-						<img src="images/2.jgp" />
+						<img src="images/2.jpg" />
 					</div>
 					<div class="row">
 						<div class="col-md-1">
 							<div class="post_like" style="cursor: pointer">
-								<a><input id="likeID" type='hidden' value="1" /><span
+								<a><input id="likeID" type='hidden' value="1405950973690" /><span
 									class="glyphicon glyphicon-heart-empty" style="font-size: 20px">0</span></a>
 							</div>
 						</div>
 						<div class="col-md-1">
 							<div class="post_collect" style="cursor: pointer">
-								<a><input id="collectID" type='hidden' value="1" /><span
+								<a><input id="collectID" type='hidden' value="1405950973690" /><span
 									class="glyphicon glyphicon-star-empty" style="font-size: 20px"></span></a>
 							</div>
 						</div>
@@ -223,7 +223,7 @@
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.pro_body', '.post', 435);
-		fecthPostsByType('DISCUSSION');
+		fetchByCommunity();
 	</script>
 </body>
 </html>

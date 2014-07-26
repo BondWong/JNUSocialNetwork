@@ -95,6 +95,12 @@
 							</div>
 							<div class="user_info">Yesterday 21:23pm</div>
 						</div>
+						<div class="col-md-4">
+						<div class="deletePostBtn">
+								<a><input id="deleteID" type='hidden' value="1405950973690" /><span
+									class="glyphicon glyphicon-remove" style="font-size: 14px"></span></a>
+						</div>
+						</div>
 					</div>
 					<div class="post_info">
 						This is not a new article in PNAS, but it details results from a

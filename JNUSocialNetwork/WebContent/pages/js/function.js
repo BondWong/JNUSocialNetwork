@@ -14,7 +14,7 @@
 	var userID = $("input[name='userID']").val();
 //function addDiv
 	function addPost(ownerID,ownerNickName,publishDate,content,ID,likeNum){
-		 var boarddiv = "<div class='post'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"+ownerID+"' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"+ownerNickName+"</strong></div><div class='user_info'>"+publishDate+"</div></div> </div><div class='post_info'>"+content+"<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"+likeNum+"</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control' id='commentText"+ID+"'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="+ID+">Submit</button></div></div></div></div></div>";
+		 var boarddiv = "<div class='post "+ID+"'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"+ownerID+"' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"+ownerNickName+"</strong></div><div class='user_info'>"+publishDate+"</div></div><div class='col-md-4'><div class='deletePostBtn'><a><input id='deleteID' type='hidden' value="+ID+" /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"+content+"<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"+likeNum+"</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control' id='commentText"+ID+"'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="+ID+">Submit</button></div></div></div></div></div>";
 			$(".share").after(boarddiv); 
 			Msnry('.pro_body','.post',435);
 			$('img.userImg').userTips();
@@ -57,6 +57,13 @@
 			}
 		});
 	};
+	//fetchPostByIDs
+	function fetchPostByIDs(container){
+		var response = FetchPostByIDs(container);
+		$.each(response,function(n,dataString){
+			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+		});
+	}
 	//function getUserRepresentation
 	function getUserRepresentation(){
 		$.ajax({
@@ -227,20 +234,5 @@ $(document).ready(function(){
 		});		
 });
 
-	//function fetchPostsByIDs
-	var postIdContainer = [];
-	function fetchPostByIDs(){
-		var response = FetchPostByIDs(postIdContainer);
-		$.each(response,function(n,dataString){
-			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
-		});
-	}
-	$('body').on('click','.alertCust',function(){
-		/*var jsondata = $.parseJSON(event.data);
-		var jsonPostShortCut = jsondata.postRepresentationShortCut;
-		addPost(jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.ID,jsonPostShortCut.likeNum);*/
-		fetchPostByIDs();
-		$(this).css("display","none");
-		postIdContainer = [];
-	});
+	
 	

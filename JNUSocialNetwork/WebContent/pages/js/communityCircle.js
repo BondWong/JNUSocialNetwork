@@ -73,7 +73,26 @@ $(document).ready(function(){
 					imageLinks:fileDri
 			};
 			var json = $.toJSON(post);
-			AddPostToCommunity("2011052407","1406131869198","MEMBER",json);
+			AddPostToCommunity("2011052407","1406356613315","MEMBER",json);
 		    $('#addPostModal').modal('hide');
 	});
+});
+//function fectchPostByFollowee
+
+function fetchByCommunity(){
+	var response = FetchByCommunity("1406356613315","0","5");
+	$.each(response.reverse(),function(n,dataString){
+		addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+	});
+	
+}
+var communityPostIdContainer = [];
+$('body').on('click','.alertCustC',function(){
+	fetchPostByIDs(communityPostIdContainer);
+	$(this).css("display","none");
+	communityPostIdContainer = [];
+});
+$('body').on('click','.deletePostBtn',function(){
+	var id = $(this).find("input").attr("value");
+	DeletePostFromCommunity("1406356613315",id);
 });

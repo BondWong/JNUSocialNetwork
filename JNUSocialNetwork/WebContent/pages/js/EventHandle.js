@@ -5,18 +5,41 @@ window.onload = function(){
 if (!!window.EventSource) {
 		var source = Subscribe();
 		source.addEventListener("CREATEPOST",function(event){
-		var jsondata = $.parseJSON(event.data);
-		postIdContainer.push(jsondata.post.ID);
-		if(jsondata.post.owner.ID==userID){
-			fetchPostByIDs();
-			postIdContainer = [];
-		}
-		if(jsondata.userID!=userID){
-			$('.alertCust').css("display","block");
-		}
+			var jsondata = $.parseJSON(event.data);
+			postIdContainer.push(jsondata.post.ID);
+			if(jsondata.post.owner.ID==userID){
+				fetchPostByIDs(postIdContainer);
+				postIdContainer = [];
+			}
+			if(jsondata.userID!=userID){
+				$('.alertCust').css("display","block");
+			}
 	
- });
-		source.addEventListener('deletePostSSE',function(e){});
+ });	
+		source.addEventListener("CREATEPOSTINCOMMUNITY",function(event){
+			var jsondata = $.parseJSON(event.data);
+			communityPostIdContainer.push(jsondata.post.ID);
+			if(jsondata.post.owner.ID==userID){
+				fetchByCommunity();
+				communityPostIdContainer = [];
+			}
+			if(jsondata.userID!=userID){
+				$('.alertCustC').css("display","block");
+			}
+	
+});
+		source.addEventListener('DELETEPOST',function(event){
+			var jsondata = $.parseJSON(event.data);
+			$("div[class='post "+jsondata.ID+"']").remove();
+			fetchByFolloweeOrOwner();
+			Msnry('.pro_body','.post',435);
+		});
+		source.addEventListener('DELETEPOSTFROMCOMMUNITY',function(event){
+			var jsondata = $.parseJSON(event.data);
+			$("div[class='post "+jsondata.ID+"']").remove();
+			fetchByCommunity();
+			Msnry('.pro_body','.post',435);
+		});
 		source.addEventListener('LIKEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
 			var postID = jsondata.postID;
