@@ -18,7 +18,8 @@ import utils.DateTimeUtil;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Application.fetch", query = "SELECT c FROM Application c ORDER BY c.submitDate"),
+		@NamedQuery(name = "Application.fetch", query = "SELECT c FROM Application c WHERE c.available = 1 ORDER BY c.submitDate "),
+		@NamedQuery(name = "Application.fetchIDs", query = "SELECT a.ID FROM Application a WHERE a.available = 1 ORDER BY a.submitDate"),
 		@NamedQuery(name = "Application.fetchUnavailableIDs", query = "SELECT a.ID FROM Application a WHERE a.available = 0"),
 		@NamedQuery(name = "Application.deleteUnavailable", query = "DELETE FROM Application a WHERE a.available = 0")})
 public class Application extends AttributeModel {

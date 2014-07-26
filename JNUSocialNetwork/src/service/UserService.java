@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import model.Member;
 import model.ServerSentEvent;
@@ -22,10 +23,13 @@ import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
 import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
+import transaction.DAOFetchTransaction.FetchCommunityOwnerTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityOwnersTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
+import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
+import transaction.DAOFetchTransaction.GetCommunityOwnerIDStatusTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.SessionRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
@@ -162,7 +166,36 @@ public class UserService {
 		}
 		return Response.ok().build();
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@GET
+	@Path("fetchIDs/{userType : [A-Z]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchIDs(@PathParam("userType") String userType) throws Exception {
+		List results;
+		transaction = new FetchModelColumnTransaction();
+		try {
+			if (userType.equals("MEMBER")) {
+				results = (List) transaction.execute(
+						"Member.fetchIDs", null);
+			} else if (userType.equals("COMMUNITYOWNER")) {
+				results = (List) transaction.execute(
+						"CommunityOwner.fetchIDs", null);
+			} else {
+				throw new Exception();
+			}
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<String>>(results) {
+				}).build();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@GET
 	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}/{userType : [A-Z]+}")
@@ -247,6 +280,25 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByID(@PathParam("ID") String ID) throws Exception {
 		transaction = new FetchMemberTransaction();
+		Map<String, Object> result;
+		try {
+			result = (Map<String, Object>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("fetchCommunityOwnerByID/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchCommunityOwnerByID(@PathParam("ID") String ID) throws Exception {
+		transaction = new FetchCommunityOwnerTransaction();
 		Map<String, Object> result;
 		try {
 			result = (Map<String, Object>) transaction.execute(ID);
@@ -358,6 +410,22 @@ public class UserService {
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(members) {
 				}).build();
+	}
+	
+	@Path("getIDStatus/{communityOwnerID : \\d+}")
+	@GET
+	public Response getIDStatus(@PathParam("communityOwnerID") String applicationID) throws Exception {
+		transaction = new GetCommunityOwnerIDStatusTransaction();
+		boolean result = false;
+		try {
+			result = (boolean) transaction.execute(applicationID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(result) 
+			return Response.ok().build();
+		return Response.status(Status.BAD_REQUEST).build();
 	}
 
 }
