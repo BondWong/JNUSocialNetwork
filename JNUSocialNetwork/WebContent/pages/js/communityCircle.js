@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	var fileDri = [];
 	//funtion fileupload
@@ -60,9 +59,9 @@ $(document).ready(function(){
         });
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');	
-
-//function addPost
-	$('#btn_share').click(function(e){
+//function addPostToCommunity
+	
+	$('#btn_shareC').click(function(e){
 		e.preventDefault();
 			//var formData = new FormData($('.photofom'));
 			
@@ -74,27 +73,26 @@ $(document).ready(function(){
 					imageLinks:fileDri
 			};
 			var json = $.toJSON(post);
-			AddPost("2011052407",json);
+			AddPostToCommunity("2011052407","1406356613315","MEMBER",json);
 		    $('#addPostModal').modal('hide');
 	});
 });
 //function fectchPostByFollowee
-	function fetchByFolloweeOrOwner(){
-		var response = FetchByFolloweeOrOwner("2011052407","0","5");
-		$.each(response.reverse(),function(n,dataString){
-			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
-		});
-		
-	}
-	//function fetchPostsByIDs
-	var postIdContainer = [];
+
+function fetchByCommunity(){
+	var response = FetchByCommunity("1406356613315","0","5");
+	$.each(response.reverse(),function(n,dataString){
+		addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+	});
 	
-	$('body').on('click','.alertCust',function(){
-		fetchPostByIDs(postIdContainer);
-		$(this).css("display","none");
-		postIdContainer = [];
-	});
-	$('body').on('click','.deletePostBtn',function(){
-		var id = $(this).find("input").attr("value");
-		DeletePost(id);
-	});
+}
+var communityPostIdContainer = [];
+$('body').on('click','.alertCustC',function(){
+	fetchPostByIDs(communityPostIdContainer);
+	$(this).css("display","none");
+	communityPostIdContainer = [];
+});
+$('body').on('click','.deletePostBtn',function(){
+	var id = $(this).find("input").attr("value");
+	DeletePostFromCommunity("1406356613315",id);
+});

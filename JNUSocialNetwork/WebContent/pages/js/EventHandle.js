@@ -3,31 +3,53 @@
 $(document).ready(function(){
 window.onload = function(){
 if (!!window.EventSource) {
-		var source = new EventSource("../../GuitarWebApp/app/event/subscribe");
-		source.addEventListener("ADDPOST",function(event){
-		var jsondata = $.parseJSON(event.data);
-		var jsonPostShortCut = jsondata.postRepresentationShortCut;
-		postIdContainer.push(jsonPostShortCut.ID);
-		if(jsondata.userID==userID){
-			fetchPostByIDs();
-			postIdContainer = [];
-		}
-		if(jsondata.userID!=userID){
-			$('.alertCust').css("display","block");
-		}
+		var source = Subscribe();
+		source.addEventListener("CREATEPOST",function(event){
+			var jsondata = $.parseJSON(event.data);
+			postIdContainer.push(jsondata.post.ID);
+			if(jsondata.post.owner.ID==userID){
+				fetchPostByIDs(postIdContainer);
+				postIdContainer = [];
+			}
+			if(jsondata.userID!=userID){
+				$('.alertCust').css("display","block");
+			}
 	
- });
-		source.addEventListener('deletePostSSE',function(e){});
+ });	
+		source.addEventListener("CREATEPOSTINCOMMUNITY",function(event){
+			var jsondata = $.parseJSON(event.data);
+			communityPostIdContainer.push(jsondata.post.ID);
+			if(jsondata.post.owner.ID==userID){
+				fetchByCommunity();
+				communityPostIdContainer = [];
+			}
+			if(jsondata.userID!=userID){
+				$('.alertCustC').css("display","block");
+			}
+	
+});
+		source.addEventListener('DELETEPOST',function(event){
+			var jsondata = $.parseJSON(event.data);
+			$("div[class='post "+jsondata.ID+"']").remove();
+			fetchByFolloweeOrOwner();
+			Msnry('.pro_body','.post',435);
+		});
+		source.addEventListener('DELETEPOSTFROMCOMMUNITY',function(event){
+			var jsondata = $.parseJSON(event.data);
+			$("div[class='post "+jsondata.ID+"']").remove();
+			fetchByCommunity();
+			Msnry('.pro_body','.post',435);
+		});
 		source.addEventListener('LIKEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
-			var postID = jsondata.pcID;
+			var postID = jsondata.postID;
 			var inputID = $("input[value='"+postID+"'][id='likeID']");
 			var like = parseInt(inputID.next().text())+1;
 			inputID.next().text(like); 
 		});
-		source.addEventListener('CANCELLIKE',function(event){
+		source.addEventListener('CANCELLIKEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
-			var postID = jsondata.pcID;
+			var postID = jsondata.postID;
 			var inputID = $("input[value='"+postID+"'][id='likeID']");
 			var like = parseInt(inputID.next().text())-1;
 			inputID.next().text(like);
@@ -37,7 +59,7 @@ if (!!window.EventSource) {
 			var postID = jsondata.pcID;
 			
 		});
-		source.addEventListener('CANCELCOLLECT',function(event){
+		source.addEventListener('CANCELCOLLECTPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
 			var postID = jsondata.pcID;
 			

@@ -22,3 +22,14 @@ $(document).ready(function(){
 		CollectPost("2011052407",id);
 	});
 });
+//function fetchPostsByIDs
+var postIdContainer = [];
+function fetchPostByIDs(){
+	var response = FetchPostByIDs(postIdContainer);
+	var dataString="";
+	$.each(response,function(n,value){
+		dataString = $.parseJSON(value);
+	});
+		
+	addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+}

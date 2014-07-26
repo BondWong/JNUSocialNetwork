@@ -7,7 +7,9 @@
 <script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/EventAPI.js"></script>
 <script src="js/function.js"></script>
+<script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
@@ -32,7 +34,7 @@
 	<c:otherwise>
 		<script type="text/javascript">
 			Msnry('.pro_body', '.post', 435);
-			fetchPostsByUserID();
+			fetchPostsByOwner();
 		</script>
 	</c:otherwise>
 </c:choose>

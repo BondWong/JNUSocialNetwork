@@ -170,3 +170,9 @@
 				}
 			});
 		}
+		function fetchPostsByOwner(){
+			var response = FetchPostsByOwner("2011052407","0","5");
+			$.each(response.reverse(),function(n,dataString){
+				addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+			});
+		}
