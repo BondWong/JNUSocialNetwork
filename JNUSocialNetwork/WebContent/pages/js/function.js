@@ -16,8 +16,8 @@
 	function addPost(ownerID,ownerNickName,publishDate,content,ID,likeNum){
 		 var response = FetchCommentByPost(ID,"0","2");
 		 var comment = "";
-		 $.each(response.reverse(),function(index,jsonComment){
-			comment = comment + "<div class='act_content'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"+jsonComment.owner.attributes.nickName+"</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn'><a><input id='deleteID' type='hidden' value='"+ID+"' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"+jsonComment.publishDate+"</div></div><div class='col-lg-7 custom_lg-6'><div class='comment_like' style='cursor: pointer'><a><input id='likeID' type='hidden' value='"+ID+"' />+1<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'>"+jsonComment.attributes.content+"﻿</div></div>";
+		 $.each(response,function(index,jsonComment){
+			comment = comment + "<div class='act_content "+jsonComment.ID+"'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"+jsonComment.owner.attributes.nickName+"</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"+ID+"' type='hidden' value='"+jsonComment.ID+"' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"+jsonComment.publishDate+"</div></div><div class='col-lg-7 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"+jsonComment.ID+"'>+<span>"+jsonComment.likerIDs.length+"</span></div><a><input id='likeID' type='hidden' value='"+jsonComment.ID+"' />+1<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'>"+jsonComment.attributes.content+"﻿</div></div>";
 		 });
 		 var boarddiv = "<div class='post "+ID+"'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"+ownerID+"' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"+ownerNickName+"</strong></div><div class='user_info'>"+publishDate+"</div></div><div class='col-md-4'><div class='deletePostBtn'><a><input id='deleteID' type='hidden' value="+ID+" /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"+content+"<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"+likeNum+"</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control' id='commentText"+ID+"'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="+ID+">Submit</button></div></div>"+comment+"</div></div></div>";
 		 
@@ -159,19 +159,22 @@ $(document).ready(function(){
 			return 0;
 		}
 	});
-//function likePost and cancelLike
+//function likecomment and cancelLike
 	$('body').on('click','.comment_like',function(){
 		var id = $(this).find("input").attr("value");
-		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
-			LikePost("2011052407",id);
+		if($(this).find("a").css("color") == "rgb(90, 90, 90)"){
+			LikeComment("2011052407",id);
 			var inputID = $("input[value='"+id+"'][id='likeID']");
-			inputID.next().attr("class","glyphicon glyphicon-heart");
+			inputID.parents("a").css("color","rgb(255, 255, 255)");
+			inputID.parents("a").css("background-color","rgb(66,139,202)");
 			return 0;
 		}
-		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
-			CancelLikePost("2011052407",id);
+		if($(this).find("a").css("color") == "rgb(255, 255, 255)"){
+			CancelLikeComment("2011052407",id);
 			var inputID = $("input[value='"+id+"'][id='likeID']");
-			inputID.next().attr("class","glyphicon glyphicon-heart-empty");
+			
+			inputID.parents("a").css("color","rgb(90, 90, 90)");
+			inputID.parents("a").css("background-color","rgb(255, 255, 255)");
 			return 0;
 		}
 	});
@@ -208,8 +211,9 @@ $(document).ready(function(){
 });
 //deleteComment
 $('body').on('click','.deleteCommBtn',function(){
-	var id = $(this).find("input").attr("value");
-	DeleteComment(id);
+	var commentID = $(this).find("input").attr("value");
+	var postID = $(this).find("input").attr("id");
+	DeleteComment(postID,commentID);
 });
 
 	
