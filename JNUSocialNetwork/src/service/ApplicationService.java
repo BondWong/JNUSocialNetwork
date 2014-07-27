@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,21 +15,24 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.grizzly.http.util.URLDecoder;
+
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateApplicationTransaction;
-import transaction.DAOFetchTransaction.FetchApplicationsTransaction;
+import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOUpdateTransaction.PassApplicationTransaction;
 import transaction.DAOUpdateTransaction.RejectApplicationTransaction;
 
 @Path("/application")
 public class ApplicationService {
 	private Transaction transaction;
-	
+
 	@SuppressWarnings("rawtypes")
 	@Path("create/{ID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(@PathParam("ID") String ID, Map attributes) throws Exception {
+	public Response create(@PathParam("ID") String ID, Map attributes)
+			throws Exception {
 		transaction = new CreateApplicationTransaction();
 		try {
 			transaction.execute(ID, attributes);
@@ -39,31 +43,36 @@ public class ApplicationService {
 		}
 		return Response.ok().build();
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Path("fetch/{startIndex : \\d+}/{pageSize : \\d+}")
+
+	@SuppressWarnings({ "rawtypes" })
+	@Path("fetchIDs")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetch(@PathParam("startIndex") int startIndex, @PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchApplicationsTransaction();
-		List<Map<String, Object>> results;
+	public Response fetchIDs() throws Exception {
+		transaction = new FetchModelColumnTransaction();
+		List results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute(startIndex, pageSize);
+			results = (List) transaction.execute("Application.fetchIDs");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		return Response.ok(new GenericEntity<List<Map<String, Object>>>(results){}).build();
+		List<String> r = new ArrayList<String>();
+		for(Object o : results) 
+			r.add(o + "");
+		return Response.ok(new GenericEntity<List<String>>(r) {
+		}).build();
 	}
-	
-	@Path("reject/{applicationID : \\d+}")
+
+	@Path("reject/{applicationID : \\d+}/{reason : [\\w|\\+]+}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response reject(@PathParam("applicationID") Long applicationID, String reason) throws Exception {
+	public Response reject(@PathParam("applicationID") Long applicationID,
+			@PathParam("reason") String reason) throws Exception {
 		transaction = new RejectApplicationTransaction();
 		try {
-			transaction.execute(applicationID, reason);
+			transaction.execute(applicationID, URLDecoder.decode(reason));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,10 +80,11 @@ public class ApplicationService {
 		}
 		return Response.ok().build();
 	}
-	
+
 	@Path("pass/{applicationID : \\d+}")
 	@PUT
-	public Response pass(@PathParam("applicationID") Long applicationID) throws Exception {
+	public Response pass(@PathParam("applicationID") Long applicationID)
+			throws Exception {
 		transaction = new PassApplicationTransaction();
 		try {
 			transaction.execute(applicationID);
@@ -85,5 +95,5 @@ public class ApplicationService {
 		}
 		return Response.ok().build();
 	}
-	
+
 }

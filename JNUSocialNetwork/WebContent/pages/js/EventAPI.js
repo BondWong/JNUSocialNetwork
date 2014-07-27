@@ -16,6 +16,7 @@ function FileUpload(formData){
     	type:"POST",
     	url:'../../JNUSocialNetwork/app/fileUploader',
     	data:formData,
+    	async: false,
     	success:function(data){
 	    	for(var i=0;i<data.length;i++){
 	    		var dataString=data[i];

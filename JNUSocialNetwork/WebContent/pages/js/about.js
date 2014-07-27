@@ -4,66 +4,47 @@
 			$("span[class='Alooking']").html("<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
 			$("span[class='Atelenum']").html("<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
 			$("span[class='Arelationship']").html("<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-			var campusC = $('.Acampus').html();
-			if(campusC=="珠海校区"){campus="ZhuhaiCampus";}
-			if(campusC=="华文校区"){campus="HuawenCampus";}
-			if(campusC=="深圳校区"){campus="ShenzhenCampus";}
-			if(campusC=="校本部"){campus="GuangzhouCampus";}
+			var campus = "";
+			if($('.Acampus').html()=="珠海校区"){campus="ZhuhaiCampus";}
+			if($('.Acampus').html()=="华文校区"){campus="HuawenCampus";}
+			if($('.Acampus').html()=="深圳校区"){campus="ShenzhenCampus";}
+			if($('.Acampus').html()=="校本部"){campus="GuangzhouCampus";}
 			
-			$.ajax({
-				url:'../../GuitarWebApp/app/dormInfo/getInfo/'+campus,
-				type:'get',
-				success:function(data){		
-					var option="";
-					$.each(data,function(index,dorm){
-						 option=option+"<option value='"+dorm+"'>"+dorm+"</option>";
-					});
-					$("span[class='Aaddress']").html("<select class='addressE'>"+option+"</select>");
-				}
+			var dormInfo = GetDormInfo("HuawenCampus");
+			var option="";
+			$.each(dormInfo,function(index,dorm){
+				option=option+"<option value='"+dorm+"'>"+dorm+"</option>";
 			});
-			
+			$("span[class='Aaddress']").html("<select class='addressE'>"+option+"</select>");	
 			$("span[class='Aemail']").html("<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
+			
 			$(this).text("Save");
 			$(this).attr("class","btn btn-primary aSavebtn");
 		});
 		//function saveProfileInfro
 		$('body').on('click','.aSavebtn',function(){
-			var nickName = $('.nicknameE').val();
-			var telenum = $('.telenumE').val();
-			var relationship = $('.relationshipnE').val();
-			var lookingfor = $('.lookingforE').val();
-			var email = $('.emailE').val();
-			var dorm = $('.addressE').val();
-			//var lookingfor = $('.nicknameE').val();
-			$.ajax({
-				type:'put',
-				url:'../../GuitarWebApp/app/user/updateProfile/'+userID+'/'+nickName+'/'+lookingfor+'/'+relationship+'/'+telenum+'/'+email+'/'+dorm,
-				success:function(){
-					getUserRepresentation();
-				}
-			});
+			var datajson={
+				nickName:$('.nicknameE').val(),
+				lookingFor:$('.lookingforE').val(),	
+				relationship:$('.relationshipnE').val(),
+				telenum:$('.telenumE').val(),
+				email:$('.emailE').val(),
+				dorm:$('.addressE').val()
+			};
+			var json = $.toJSON(datajson);
+			UpdateUserProfile("2011052407",json);
+			fetchUserByID();
 			$(this).text("Edit");
 			$(this).attr("class","btn btn-primary aEditbtn");
 		});
 		//function avatarImgBtn
 		$('body').on("click",".avatarImgBtn",function(){
-			var formData = new FormData($('.avatarForm')[0]);
-			$.ajax({
-				type:'POST',
-				url:'../../GuitarWebApp/app/fileUploader',
-				success:function(data){
-					$.ajax({
-						type:'PUT',
-						url:'../../GuitarWebApp/app/user/changeAvatar/'+userID+'?avatarLink='+data
-					});
-				},
-				// Form data
-		        data: formData,
-		        //Options to tell jQuery not to process data or worry about content-type.
-		        cache: false,
-		        contentType: false,
-		        processData: false
-			});
+			var datajson={
+					avatarLink:FileUpload(new FormData($('.avatarForm')[0])),
+				};
+			var json = $.toJSON(datajson);
+			UpdateUserProfile("2011052407",json);
+			fetchUserByID();
 			$('#myModal').modal('hide');
 		});
 		//function addPhoto
@@ -124,6 +105,7 @@
 		});
 	//show followees
 		function showFollowees(){
+			FetchFollowees("2011052407","0","5");
 			$.ajax({
 				url:'../../GuitarWebApp/app/user/getRepresentation/'+userID,
 				type:'get',
@@ -155,24 +137,30 @@
 				}
 			});
 		}
-		//function getUserInfor
-		function getUserInfo(){
-			$.ajax({
-				url:'../../GuitarWebApp/app/user/getRepresentation/2011052395',
-				type:'get',
-				success:function(data){
-					$('.Agender').html(data.gender);
-					$('.Ainstitution').html(data.institution);
-					$('.Amajor').html(data.major);
-					var d = new Date(data.birthday);
-					$('.Abirth').html(d.getFullYear() + "/" +(d.getMonth()+1) + "/" + d.getDate());
-					$('.Acampus').html(data.campus);
-				}
-			});
-		}
+		
+		//function fetchPostsByOwner()
 		function fetchPostsByOwner(){
 			var response = FetchPostsByOwner("2011052407","0","5");
 			$.each(response.reverse(),function(n,dataString){
 				addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
 			});
 		}
+
+	//fetchUserByID
+	function fetchUserByID(){
+		var userInfo = FetchUserByID("2011052407");
+		$('.Agender').html(userInfo.attributes.gender);
+		$('.Ainstitution').html(userInfo.attributes.institution);
+		$('.Amajor').html(userInfo.attributes.major);
+		$('.Acampus').html(userInfo.attributes.campus);
+		$('.Anickname').html(userInfo.attributes.nickName);
+		$('.Aemail').html(userInfo.attributes.email);
+		$('.Arelationship').html(userInfo.attributes.relationship);
+		$('.Atelenum').html(userInfo.attributes.telenum);
+		$('.Aaddress').html(userInfo.attributes.dorm);
+		$('.Alooking').html(userInfo.attributes.lookingFor);
+		if(userInfo.attributes.birthday!=""){
+			var d = new Date(userInfo.attributes.birthday);
+			$('.Abirth').html(d.getFullYear() + "/" +(d.getMonth()+1) + "/" + d.getDate());
+		}
+	}

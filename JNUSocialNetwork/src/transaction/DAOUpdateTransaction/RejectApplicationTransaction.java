@@ -13,7 +13,7 @@ import model.modelType.SSEType;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class RejectApplicationTransaction extends DAOTransaction{
+public class RejectApplicationTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -22,13 +22,18 @@ public class RejectApplicationTransaction extends DAOTransaction{
 		DAO dao = new DAO(em);
 		Application application = dao.get(Application.class, params[0]);
 		Member member = application.getApplicant();
-		
+
 		Map<String, Object> reason = new HashMap<String, Object>();
-		reason.put("application", application.toRepresentation());
+		Map<String, Object> a = new HashMap<String, Object>();
+		a.put("submitDate", application.toRepresentation().get("submitDate"));
+		a.put("attributes", application.toRepresentation().get("attributes"));
+		a.put("ID", application.toRepresentation().get("ID"));
+		reason.put("application", a);
 		reason.put("reason", params[1]);
-		ServerSentEvent sse = ModelFactory.getInstance().create(ServerSentEvent.class, SSEType.APPLICATIONREJECTED, reason);
+		ServerSentEvent sse = ModelFactory.getInstance().create(
+				ServerSentEvent.class, SSEType.APPLICATIONREJECTED, reason);
 		member.addUnhandledEvent(sse);
-		
+
 		application.delete();
 		application.clearAttributes();
 		application.setApplicant(null);

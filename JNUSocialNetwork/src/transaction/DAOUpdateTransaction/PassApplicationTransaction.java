@@ -16,7 +16,7 @@ import model.modelType.UserType;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class PassApplicationTransaction extends DAOTransaction{
+public class PassApplicationTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -26,17 +26,23 @@ public class PassApplicationTransaction extends DAOTransaction{
 		Application application = dao.get(Application.class, params[0]);
 		Member member = application.getApplicant();
 		Account account = new Account();
-		account.setID(System.currentTimeMillis() + "");
+		account.setID(application.getAttribute("ID"));
 		account.setPassword(application.getAttribute("password"));
 		account.setUserType(UserType.COMMUNITYOWNER);
-		CommunityOwner communityOwner = ModelFactory.getInstance().create(CommunityOwner.class, account.getID(), account.getPassword());
-		
+		CommunityOwner communityOwner = ModelFactory.getInstance().create(
+				CommunityOwner.class, account.getID(), account.getPassword());
+
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("application", application.toRepresentation());
+		Map<String, Object> a = new HashMap<String, Object>();
+		a.put("submitDate", application.toRepresentation().get("submitDate"));
+		a.put("attributes", application.toRepresentation().get("attributes"));
+		a.put("ID", application.toRepresentation().get("ID"));
+		data.put("application", a);
 		data.put("communityOwner", communityOwner.toRepresentation());
-		ServerSentEvent event = ModelFactory.getInstance().create(ServerSentEvent.class, SSEType.APPLICATIONPASSED, data);
+		ServerSentEvent event = ModelFactory.getInstance().create(
+				ServerSentEvent.class, SSEType.APPLICATIONPASSED, data);
 		member.addUnhandledEvent(event);
-		
+
 		application.delete();
 		application.clearAttributes();
 		application.setApplicant(null);

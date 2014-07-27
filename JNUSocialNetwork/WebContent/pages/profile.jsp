@@ -62,9 +62,8 @@
 	</c:choose>
 	<%@ include file="parts/securityCode.jsp"%>
 	<%@ include file="parts/profileJavaScript.jsp"%>
-	<script src="js/about.js"></script>
 	<script>
-		getUserInfo();
+		//getUserInfo();
 	</script>
 </body>
 </html>
