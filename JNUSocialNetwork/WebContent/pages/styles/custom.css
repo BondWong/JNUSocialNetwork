@@ -843,3 +843,9 @@ body {
 	margin-top:5px;
 	cursor:pointer;
 }
+.deleteCommBtn{
+	float:right;
+}
+.custom_lg-6{
+	padding:0px;
+}

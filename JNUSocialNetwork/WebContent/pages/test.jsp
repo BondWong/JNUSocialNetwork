@@ -113,7 +113,7 @@ $('body').on('click','.fetchPostByIDs',function(){
 $('body').on('click','.addcomment',function(){
 	var jsonString ={attributes:{content:"test"}};
 	var jsonData = $.toJSON(jsonString);
-	AddComment("2011052407","1405784525603",jsonData);
+	AddComment("2011052407","1406381857475",jsonData);
 });
 $('body').on('click','.deletecomment',function(){
 	DeleteComment("1405784525603","1405785150369");
@@ -125,7 +125,7 @@ $('body').on('click','.cancellikecomment',function(){
 	CancelLikeComment("2011052407","1405785780802");
 });
 $('body').on('click','.fetchByPost',function(){
-	var response = FetchCommentByPost("1405784525603","0","2");
+	var response = FetchCommentByPost("1406381857475","0","2");
 	alert(response);
 });
 $('body').on('click','.addcommunity',function(){

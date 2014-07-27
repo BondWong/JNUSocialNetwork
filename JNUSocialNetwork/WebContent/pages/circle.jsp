@@ -171,11 +171,29 @@
 								<div class="col-lg-1">
 									<img src="images/user_img3.jpg" />
 								</div>
-								<div class="col-lg-11">
-									<div class="ures_name">
+								<div class="col-lg-10">
+								  <div class="col-lg-6 custom_lg-6">
+									<div class="user_name">
 										<strong>Thackoor Singh</strong>
 									</div>
-									<div class="user_info">Yesterday 21:23pm</div>
+								  </div>
+								  <div class="col-lg-6 custom_lg-6">
+									<div class="deleteCommBtn">
+										<a><input id="deleteID" type='hidden' value="1405950973690" /><span
+										class="glyphicon glyphicon-remove" style="font-size: 8px"></span></a>
+									</div>
+								   </div>
+								   <div class="col-lg-5 custom_lg-6">
+								   		<div class="user_info">Yesterday 21:23pm</div>
+								   </div>
+								   <div class="col-lg-7 custom_lg-6">
+									   <div class="comment_like" style="cursor: pointer">
+											<a><input id="likeID" type='hidden' value="1405950973690" />+1<span
+										style="font-size: 8px"></span></a>
+									    </div>
+								   </div>
+									
+									
 								</div>
 							</div>
 							<div class="act_comment">free!</div>

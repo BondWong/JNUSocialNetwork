@@ -15,7 +15,7 @@
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">
 			Msnry('.pro_body', '.post', 435);
-			getUserRepresentation();
+			fetchUserByID();
 			//aboutUpdata();
 		</script>
 	</c:when>
