@@ -26,33 +26,17 @@
 			$('img.userImg').userTips();
 	}
 //function hovercommentDeleteBtn
+
 	$('.act_content').hover(function(){
-		var supportBtn = "<div></div>";
-		$(".user_name").after(boarddiv); 
-			
+		var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";//<button class='btn btn-success avatarImgBtn'>Change Avatar</button>
+		$('.profile_img').append(changeBtn);
+		$('.changeBtnGroup').hide();
+		$('.changeBtnGroup').fadeIn(300);
+	},function(){
+		$('.changeBtnGroup').fadeOut(300, function(){
+			$(this).remove();
+		});	
 	});
-//function fecthPostsBytype
-	function fecthPostsByType(type){
-		$.ajax({
-			url:'../../GuitarWebApp/app/post/fetchByType/'+type+'/0/5',
-			type:'get',
-			success:function(data){
-				var dataR = data.reverse();
-				$.each(dataR,function(index,jsonPostShortCut){
-					var flag=0;
-					$.each(jsonPostShortCut.likerIDs,function(index,likerID){
-						if(likerID==userID){flag=1;}
-					});
-					if(flag==0){
-						addPost(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);
-					}
-					if(flag==1){
-						addPostS(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);
-					}
-				});
-			}
-		});
-	};
 
 //function fetchPostsByUserID
 
@@ -69,7 +53,7 @@
 			}
 		});
 	};
-	//fetchPostByIDs
+//fetchPostByIDs
 	function fetchPostByIDs(container){
 		var response = FetchPostByIDs(container);
 		$.each(response,function(n,dataString){
@@ -90,30 +74,27 @@
 				nPos.top = pos.top + 20;
 				nPos.left = pos.left + 40;
 				var userid = $(this).next().val();
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/getRepresentationShortCut/'+userid,
-					type:'get',
-					success:function(data){
-						//var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>Bond</h1></p><p> a good guy</p><button id="followBtn">Follow</button></div></div></div>';
-						var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>'+data.nickName+'</h1></p><p>'+data.lookingFor+'</p><button id="followBtn">Follow</button></div></div></div>';
-						$('body').append(tipFrame);
-						var divTip = 'div.popTip';
-						tinyTip = $(divTip);
-						tinyTip.hide();
+				var data =  FetchUserByID(userid);
+				if(data != ""){
+					//var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>Bond</h1></p><p> a good guy</p><button id="followBtn">Follow</button></div></div></div>';
+					var tipFrame = '<div id="'+data.ID+'" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>'+data.attributes.nickName+'</h1></p><p>'+data.attributes.lookingFor+'</p><button id="followBtn">Follow</button></div></div></div>';
+					$('body').append(tipFrame);
+					var divTip = 'div.popTip';
+					tinyTip = $(divTip);
+					tinyTip.hide();
 
-						// Make sure that the tooltip has absolute positioning and a high z-index, 
-						// then place it at the correct spot and fade it in.
-						tinyTip.css('position', 'absolute').css('z-index', '1000');
-						tinyTip.css(nPos).fadeIn(animSpeed);
-						tinyTip.hover(function(){
-							clearTimeout(window.timer);
-						},function(){
-							tinyTip.fadeOut(animSpeed, function() {
-								$(this).remove();
-							});
+					// Make sure that the tooltip has absolute positioning and a high z-index, 
+					// then place it at the correct spot and fade it in.
+					tinyTip.css('position', 'absolute').css('z-index', '1000');
+					tinyTip.css(nPos).fadeIn(animSpeed);
+					tinyTip.hover(function(){
+						clearTimeout(window.timer);
+					},function(){
+						tinyTip.fadeOut(animSpeed, function() {
+							$(this).remove();
 						});
-					},
-				});
+					});
+				}
 			}, function() {
 				// Fade the tooltip out once the mouse moves away and then remove it from the DOM.	
 				window.timer = setTimeout(function(){
@@ -192,20 +173,17 @@ $(document).ready(function(){
 			var commentJson = $.toJSON(comment);
 			AddComment("2011052407",id,commentJson);			
 		});
-//function follow
+//function follow cancelfollow
 		$('body').on('click','#followBtn',function(){
 			//get post owner
+			var id = $('.popTip').attr('id');
 			if($(this).text()=="Follow"){
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/follow/'+userID+'/2011052406',//'../../GuitarWebApp/app/user/follow/2011052405/'+id
-					type:'put'
-				});
+				Follow("2011052407",id);
 			}
 			if($(this).text()=="Following"){
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/cancelFollow/'+userID+'/2011052406',//'../../GuitarWebApp/app/user/follow/2011052405/'+id
-					type:'put'
-				});
+				CancelFollow("2011052407",id);
+				var followBtn = $("button[id='followBtn']");
+				followBtn.text("Follow");
 			}
 		});		
 });

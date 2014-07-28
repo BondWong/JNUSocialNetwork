@@ -849,6 +849,7 @@ body {
 .custom_lg-6{
 	padding:0px;
 }
+
 .comment_like a{
 	border-width: 1px;
 	border-style: solid;
@@ -857,7 +858,6 @@ body {
 	padding-right:2px;
 	color:#5A5A5A;
 	margin-left:5px;
-
 }
 .likeComment{
 	float:left;

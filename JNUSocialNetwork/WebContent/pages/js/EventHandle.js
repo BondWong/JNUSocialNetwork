@@ -103,12 +103,6 @@ if (!!window.EventSource) {
 			followBtn.text("Following");
 			
 		});
-		source.addEventListener('CANCELFOLLOW',function(event){
-			var jsondata = $.parseJSON(event.data);
-			var followBtn = $("button[id='followBtn']");
-			followBtn.text("Follow");
-			
-		});
 		
 }
 };
