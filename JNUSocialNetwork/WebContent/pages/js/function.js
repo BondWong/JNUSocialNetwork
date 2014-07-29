@@ -10,6 +10,7 @@
 			});
 		});
 	}
+
 //global userID
 	var userID = $("input[name='userID']").val();
 //function addDiv

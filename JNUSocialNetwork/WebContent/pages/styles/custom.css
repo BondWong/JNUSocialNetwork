@@ -802,7 +802,11 @@ body {
 	margin-left:45px;
 	text-align:center;
 	width:200px;
+	height:200px;
 	background-color:#f9f9f9;
+}
+.pubCreate{
+	float:left;
 }
 .regTop{
 	padding-top:40px;
