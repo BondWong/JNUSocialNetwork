@@ -1,5 +1,5 @@
 package model.modelType;
 
 public enum MessageStatus {
-	SENT, ARRIVED, READ;
+	SENDING, ARRIVED, READ, FAIL;
 }

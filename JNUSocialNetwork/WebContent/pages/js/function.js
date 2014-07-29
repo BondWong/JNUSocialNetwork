@@ -16,8 +16,8 @@
 	function addPost(ownerID,ownerNickName,publishDate,content,ID,likeNum){
 		 var response = FetchCommentByPost(ID,"0","2");
 		 var comment = "";
-		 $.each(response.reverse(),function(index,jsonComment){
-			comment = comment + "<div class='act_content'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"+jsonComment.owner.attributes.nickName+"</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn'><a><input id='deleteID' type='hidden' value='"+ID+"' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"+jsonComment.publishDate+"</div></div><div class='col-lg-7 custom_lg-6'><div class='comment_like' style='cursor: pointer'><a><input id='likeID' type='hidden' value='"+ID+"' />+1<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'>"+jsonComment.attributes.content+"﻿</div></div>";
+		 $.each(response,function(index,jsonComment){
+			comment = comment + "<div class='act_content "+jsonComment.ID+"'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"+jsonComment.owner.attributes.nickName+"</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"+ID+"' type='hidden' value='"+jsonComment.ID+"' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"+jsonComment.publishDate+"</div></div><div class='col-lg-7 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"+jsonComment.ID+"'>+<span>"+jsonComment.likerIDs.length+"</span></div><a><input id='likeID' type='hidden' value='"+jsonComment.ID+"' />+1<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'>"+jsonComment.attributes.content+"﻿</div></div>";
 		 });
 		 var boarddiv = "<div class='post "+ID+"'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"+ownerID+"' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"+ownerNickName+"</strong></div><div class='user_info'>"+publishDate+"</div></div><div class='col-md-4'><div class='deletePostBtn'><a><input id='deleteID' type='hidden' value="+ID+" /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"+content+"<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"+likeNum+"</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="+ID+"><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control' id='commentText"+ID+"'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="+ID+">Submit</button></div></div>"+comment+"</div></div></div>";
 		 
@@ -26,33 +26,17 @@
 			$('img.userImg').userTips();
 	}
 //function hovercommentDeleteBtn
+
 	$('.act_content').hover(function(){
-		var supportBtn = "<div></div>";
-		$(".user_name").after(boarddiv); 
-			
+		var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";//<button class='btn btn-success avatarImgBtn'>Change Avatar</button>
+		$('.profile_img').append(changeBtn);
+		$('.changeBtnGroup').hide();
+		$('.changeBtnGroup').fadeIn(300);
+	},function(){
+		$('.changeBtnGroup').fadeOut(300, function(){
+			$(this).remove();
+		});	
 	});
-//function fecthPostsBytype
-	function fecthPostsByType(type){
-		$.ajax({
-			url:'../../GuitarWebApp/app/post/fetchByType/'+type+'/0/5',
-			type:'get',
-			success:function(data){
-				var dataR = data.reverse();
-				$.each(dataR,function(index,jsonPostShortCut){
-					var flag=0;
-					$.each(jsonPostShortCut.likerIDs,function(index,likerID){
-						if(likerID==userID){flag=1;}
-					});
-					if(flag==0){
-						addPost(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);
-					}
-					if(flag==1){
-						addPostS(jsonPostShortCut.ownerID,jsonPostShortCut.ownerNickName,jsonPostShortCut.publishDate,jsonPostShortCut.content,jsonPostShortCut.id,jsonPostShortCut.likeNum);
-					}
-				});
-			}
-		});
-	};
 
 //function fetchPostsByUserID
 
@@ -69,7 +53,7 @@
 			}
 		});
 	};
-	//fetchPostByIDs
+//fetchPostByIDs
 	function fetchPostByIDs(container){
 		var response = FetchPostByIDs(container);
 		$.each(response,function(n,dataString){
@@ -90,30 +74,27 @@
 				nPos.top = pos.top + 20;
 				nPos.left = pos.left + 40;
 				var userid = $(this).next().val();
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/getRepresentationShortCut/'+userid,
-					type:'get',
-					success:function(data){
-						//var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>Bond</h1></p><p> a good guy</p><button id="followBtn">Follow</button></div></div></div>';
-						var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>'+data.nickName+'</h1></p><p>'+data.lookingFor+'</p><button id="followBtn">Follow</button></div></div></div>';
-						$('body').append(tipFrame);
-						var divTip = 'div.popTip';
-						tinyTip = $(divTip);
-						tinyTip.hide();
+				var data =  FetchUserByID(userid);
+				if(data != ""){
+					//var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>Bond</h1></p><p> a good guy</p><button id="followBtn">Follow</button></div></div></div>';
+					var tipFrame = '<div id="'+data.ID+'" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1>'+data.attributes.nickName+'</h1></p><p>'+data.attributes.lookingFor+'</p><button id="followBtn">Follow</button></div></div></div>';
+					$('body').append(tipFrame);
+					var divTip = 'div.popTip';
+					tinyTip = $(divTip);
+					tinyTip.hide();
 
-						// Make sure that the tooltip has absolute positioning and a high z-index, 
-						// then place it at the correct spot and fade it in.
-						tinyTip.css('position', 'absolute').css('z-index', '1000');
-						tinyTip.css(nPos).fadeIn(animSpeed);
-						tinyTip.hover(function(){
-							clearTimeout(window.timer);
-						},function(){
-							tinyTip.fadeOut(animSpeed, function() {
-								$(this).remove();
-							});
+					// Make sure that the tooltip has absolute positioning and a high z-index, 
+					// then place it at the correct spot and fade it in.
+					tinyTip.css('position', 'absolute').css('z-index', '1000');
+					tinyTip.css(nPos).fadeIn(animSpeed);
+					tinyTip.hover(function(){
+						clearTimeout(window.timer);
+					},function(){
+						tinyTip.fadeOut(animSpeed, function() {
+							$(this).remove();
 						});
-					},
-				});
+					});
+				}
 			}, function() {
 				// Fade the tooltip out once the mouse moves away and then remove it from the DOM.	
 				window.timer = setTimeout(function(){
@@ -159,19 +140,22 @@ $(document).ready(function(){
 			return 0;
 		}
 	});
-//function likePost and cancelLike
+//function likecomment and cancelLike
 	$('body').on('click','.comment_like',function(){
 		var id = $(this).find("input").attr("value");
-		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty"){
-			LikePost("2011052407",id);
+		if($(this).find("a").css("color") == "rgb(90, 90, 90)"){
+			LikeComment("2011052407",id);
 			var inputID = $("input[value='"+id+"'][id='likeID']");
-			inputID.next().attr("class","glyphicon glyphicon-heart");
+			inputID.parents("a").css("color","rgb(255, 255, 255)");
+			inputID.parents("a").css("background-color","rgb(66,139,202)");
 			return 0;
 		}
-		if($(this).find("span").attr("class") == "glyphicon glyphicon-heart"){
-			CancelLikePost("2011052407",id);
+		if($(this).find("a").css("color") == "rgb(255, 255, 255)"){
+			CancelLikeComment("2011052407",id);
 			var inputID = $("input[value='"+id+"'][id='likeID']");
-			inputID.next().attr("class","glyphicon glyphicon-heart-empty");
+			
+			inputID.parents("a").css("color","rgb(90, 90, 90)");
+			inputID.parents("a").css("background-color","rgb(255, 255, 255)");
 			return 0;
 		}
 	});
@@ -189,27 +173,25 @@ $(document).ready(function(){
 			var commentJson = $.toJSON(comment);
 			AddComment("2011052407",id,commentJson);			
 		});
-//function follow
+//function follow cancelfollow
 		$('body').on('click','#followBtn',function(){
 			//get post owner
+			var id = $('.popTip').attr('id');
 			if($(this).text()=="Follow"){
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/follow/'+userID+'/2011052406',//'../../GuitarWebApp/app/user/follow/2011052405/'+id
-					type:'put'
-				});
+				Follow("2011052407",id);
 			}
 			if($(this).text()=="Following"){
-				$.ajax({
-					url:'../../GuitarWebApp/app/user/cancelFollow/'+userID+'/2011052406',//'../../GuitarWebApp/app/user/follow/2011052405/'+id
-					type:'put'
-				});
+				CancelFollow("2011052407",id);
+				var followBtn = $("button[id='followBtn']");
+				followBtn.text("Follow");
 			}
 		});		
 });
 //deleteComment
 $('body').on('click','.deleteCommBtn',function(){
-	var id = $(this).find("input").attr("value");
-	DeleteComment(id);
+	var commentID = $(this).find("input").attr("value");
+	var postID = $(this).find("input").attr("id");
+	DeleteComment(postID,commentID);
 });
 
 	

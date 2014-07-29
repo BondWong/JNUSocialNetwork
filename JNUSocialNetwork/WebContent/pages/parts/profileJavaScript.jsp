@@ -29,6 +29,7 @@
 		<script type="text/javascript">
 			Msnry('.pro_body', '.post', 435);
 			showFollowees();
+			showFollowers();
 		</script>
 	</c:when>
 	<c:otherwise>

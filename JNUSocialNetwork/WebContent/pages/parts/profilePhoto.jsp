@@ -17,7 +17,7 @@
 							</div>
 							<form class="photoForm" enctype="multipart/form-data">
 								<div class="modal-body">
-									<input type="file" name="file" />
+									<input type="file" name="file" multiple="multiple" />
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"

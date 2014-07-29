@@ -47,43 +47,25 @@
 			fetchUserByID();
 			$('#myModal').modal('hide');
 		});
+		//change Background
+		$('body').on("click",".changeBg",function(){
+			var datajson={
+					profileImageLink:FileUpload(new FormData($('.changBgForm')[0])),
+				};
+			var json = $.toJSON(datajson);
+			UpdateUserProfile("2011052407",json);
+			fetchUserByID();
+			$('#myModalB').modal('hide');
+		});
 		//function addPhoto
 		$('body').on("click",".addPhoto",function(){
-			var formData = new FormData($('.photoForm')[0]);
-			$.ajax({
-				type:'POST',
-				url:'../../GuitarWebApp/app/fileUploader',
-				success:function(data){
-					var Urls = '../../GuitarWebApp/app/user/addImages/'+userID+'?';
-					$.each(data,function(n,photoUrl){
-						if(n != data.length-1){
-							Urls = Urls +'imageLinks='+ photoUrl+'&';
-						}
-						else{
-							Urls = Urls +'imageLinks='+ photoUrl;
-							return true;
-						}
-					});
-					$.ajax({
-						type:'PUT',
-						url: Urls,
-						success: function(){
-							showPhotos();
-						}
-					});
-				},
-				// Form data
-		        data: formData,
-		        //Options to tell jQuery not to process data or worry about content-type.
-		        cache: false,
-		        contentType: false,
-		        processData: false
-			});
+			var	photoLinks = FileUpload(new FormData($('.photoForm')[0]));
+			AddImages("2011052407",photoLinks);
 			$('#myModal2').modal('hide');
 		});
 		//function profileBg
 		$('.profile_img').hover(function(){
-			var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";//<button class='btn btn-success avatarImgBtn'>Change Avatar</button>
+			var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";//<button class='btn btn-success avatarImgBtn'>Change Avatar</button>
 			$('.profile_img').append(changeBtn);
 			$('.changeBtnGroup').hide();
 			$('.changeBtnGroup').fadeIn(300);
@@ -103,38 +85,28 @@
 				$(this).remove();
 			});	
 		});
-	//show followees
-		function showFollowees(){
-			FetchFollowees("2011052407","0","5");
-			$.ajax({
-				url:'../../GuitarWebApp/app/user/getRepresentation/'+userID,
-				type:'get',
-				success: function(data){
-					var followeesIDs = data.followeesID;
-					$.each(followeesIDs,function(index,followeesID){
-						$.ajax({
-							url:'../../GuitarWebApp/app/user/getRepresentationShortCut/'+followeesID,
-							type:'get',
-							success: function(followeesShortCut){
-								var followee="<img src='"+followeesShortCut.avatarLink+"'></img>";
-								$('.followeeShow').append(followee);
-							}
-						});
-					});
-				}
-			});
-		}
 	//show photos
 		function showPhotos(){
-			$.ajax({
-				url:'../../GuitarWebApp/app/user/getRepresentation/'+userID,
-				type:'get',
-				success: function(data){
-					$.each(data.imageLinks,function(index,imageLink){
-						var photoContainer="<div class='photo'><img src='"+imageLink+"' /></div>";
-						$('.photoAddBtn').after(photoContainer);
-					});
-				}
+			var response = FetchUserByID("2011052407");
+			$.each(response.imageLinks,function(index,imageLink){
+				var photoContainer="<div class='photo'><img src='"+imageLink+"' /></div>";
+				$('.photoAddBtn').after(photoContainer);
+			});
+		}
+	//show followees
+		function showFollowees(){
+			var response = FetchFollowees("2011052407","0","5");
+			$.each(response,function(index,followee){
+				var followeeDiv="<img src='"+followee.attributes.avatarLink+"'></img>";
+				$('.followeeShow').append(followeeDiv);
+			});
+		}
+	//show followers
+		function showFollowers(){
+			var response = FetchFollowers("2011052407","0","5");
+			$.each(response,function(index,follower){
+				var followerDiv="<img src='"+follower.attributes.avatarLink+"'></img>";
+				$('.followerShow').append(followerDiv);
 			});
 		}
 		

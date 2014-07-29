@@ -188,8 +188,10 @@
 								   </div>
 								   <div class="col-lg-7 custom_lg-6">
 									   <div class="comment_like" style="cursor: pointer">
+									   		<div class="likeComment">+<span>23</span></div>
 											<a><input id="likeID" type='hidden' value="1405950973690" />+1<span
 										style="font-size: 8px"></span></a>
+										
 									    </div>
 								   </div>
 									
