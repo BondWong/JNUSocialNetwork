@@ -8,7 +8,7 @@
 		<ul class="dropdown-menu">
 			<li><a href="home.jsp"><span
 					class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
-			<li><a href="activities.jsp"><span
+			<li><a href="community.jsp"><span
 					class="glyphicon glyphicon-th">&nbsp;Activities</span></a></li>
 			<li><a href="circle.jsp"><span
 					class="glyphicon glyphicon-comment">&nbsp;Chat</span></a></li>
