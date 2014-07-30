@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	var fileDri = [];
 	//funtion fileupload
@@ -60,7 +59,6 @@ $(document).ready(function(){
         });
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');	
-
 //function addPost
 	$('#btn_share').click(function(e){
 		e.preventDefault();

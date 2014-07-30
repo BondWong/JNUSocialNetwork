@@ -2,6 +2,7 @@ package service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,9 +64,12 @@ public class WebSocketEndPotint {
 		transaction = new FetchUnreadMessagesTransaction();
 		info.put("unreadMessages",
 				(List<Map<String, Object>>) transaction.execute(ID));
+		((List<Map<String, Object>>) info.get("unreadMessages"))
+				.addAll(messageStorage.getUnreadMessages(ID));
 		transaction = new FetchUnhandledEventsTransaction();
 		info.put("unhandledEvents",
 				(List<Map<String, Object>>) transaction.execute(ID));
+		System.out.println(info);
 		try {
 			session.getBasicRemote().sendObject(info);
 		} catch (Exception e) {
@@ -102,6 +106,7 @@ public class WebSocketEndPotint {
 			e.printStackTrace();
 			throw e;
 		}
+		messageStorage.removeMessagesQueue(ID);
 	}
 
 	@OnError
@@ -121,6 +126,9 @@ public class WebSocketEndPotint {
 			break;
 		case CHAT:
 			handleMessageTransimit(session, param);
+			break;
+		case UNSAVEDCHAT:
+			handleUnsavedMessage(session, param);
 			break;
 		case UPDATEMESSAGESTATUS:
 			handleUpdateMessageStatus(session, param);
@@ -159,13 +167,39 @@ public class WebSocketEndPotint {
 
 	private void handleMessageTransimit(Session session,
 			Map<String, Object> param) throws Exception {
+		boolean online = false;
 		for (Session sess : session.getOpenSessions()) {
 			if (sess.getUserProperties().containsValue(param.get("toID"))) {
 				sess.getBasicRemote().sendObject(param);
+				online = true;
 			}
+		}
+		if (!online) {
+			Map<String, Object> sent = new HashMap<String, Object>();
+			sent.put("action", "UPDATEMESSAGESTATUS");
+			sent.put("fromID", param.get("fromID"));
+			sent.put("ID", param.get("ID"));
+			sent.put("status", "SENT");
+			param.put("status", "SENT");
+			session.getBasicRemote().sendObject(sent);
 		}
 
 		messageStorage.addMessage(param);
+	}
+
+	private void handleUnsavedMessage(Session session, Map<String, Object> param)
+			throws Exception {
+		List<Map<String, Object>> unsavedMessages = new LinkedList<Map<String, Object>>();
+		for (Map<String, Object> message : messageStorage
+				.getMessageQueue((String) param.get("fromID"))) {
+			if (message.get("toID").equals((String) param.get("toID")))
+				unsavedMessages.add(message);
+		}
+		for (Session sess : session.getOpenSessions()) {
+			if (sess.getUserProperties().containsValue(param.get("toID"))) {
+				sess.getBasicRemote().sendObject(unsavedMessages);
+			}
+		}
 	}
 
 	private void handleUpdateMessageStatus(Session session,

@@ -10,6 +10,7 @@ import model.ChatRoom;
 import model.Member;
 import model.Message;
 import model.factory.ModelFactory;
+import model.modelType.MessageStatus;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
@@ -28,7 +29,8 @@ public class CreateMessagesTransaction extends DAOTransaction{
 			Member from = dao.get(Member.class, messageMap.get("fromID"));
 			Member to = dao.get(Member.class, messageMap.get("toID"));
 			ChatRoom chatRoom = dao.get(ChatRoom.class, messageMap.get("chatRoomID"));
-			Message message = ModelFactory.getInstance().create(Message.class, messageMap.get("messageStatus"), messageMap.get("publishDate"), messageMap.get("attributes"));
+			Message message = ModelFactory.getInstance().create(Message.class, MessageStatus.valueOf((String) messageMap.get("status")), messageMap.get("publishDate"), messageMap.get("attributes"));
+			message.setID(((Double)messageMap.get("ID")).longValue());
 			message.setFrom(from);
 			message.setTo(to);
 			chatRoom.addMessage(message);

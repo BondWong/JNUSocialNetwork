@@ -17,7 +17,7 @@ public class CommunityAddTagTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Community community = dao.get(Community.class, params[0]);
-		community.addTag((Set<String>)params[1]);
+		community.addTags((Set<String>)params[1]);
 		dao.update(community);
 		return community.toRepresentation();
 	}

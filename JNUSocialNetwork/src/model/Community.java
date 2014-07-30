@@ -90,7 +90,7 @@ public class Community extends AttributeModel {
 		this.tages.add(tag);
 	}
 
-	public void addTag(Set<String> tags) {
+	public void addTags(Set<String> tags) {
 		this.tages.addAll(tags);
 	}
 

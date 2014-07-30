@@ -21,10 +21,10 @@ import model.modelType.MessageStatus;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Message.fetchUnread", query = "SELECT m FROM Message m WHERE m.messageStatus != model.modelType.MessageStatus.READ AND m.to.ID = ?1 ORDER BY m.publishDate DESC"),
+		@NamedQuery(name = "Message.fetchUnread", query = "SELECT m FROM Message m WHERE m.messageStatus != model.modelType.MessageStatus.READ AND m.to.ID = ?1 ORDER BY m.ID DESC"),
 		@NamedQuery(name = "Message.fetchUnavailableIDs", query = "SELECT m.ID FROM Message m WHERE m.available = 0"),
 		@NamedQuery(name = "Message.deleteUnavailable", query = "DELETE FROM Message m WHERE m.available = 0"),
-		@NamedQuery(name = "Message.fetchByChatRoom", query = "SELECT m FROM ChatRoom c JOIN c.messages m WHERE c.ID = ?1 ORDER BY m.publishDate DESC") })
+		@NamedQuery(name = "Message.fetchByChatRoom", query = "SELECT m FROM ChatRoom c JOIN c.messages m WHERE c.ID = ?1 ORDER BY m.ID DESC") })
 public class Message extends AttributeModel {
 	@Id
 	private Long ID;
@@ -45,7 +45,6 @@ public class Message extends AttributeModel {
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
-		this.ID = (Long) System.currentTimeMillis();
 		this.available = true;
 		this.messageStatus = (MessageStatus) initParams[0];
 		this.setPublishDate((String) initParams[1]);
@@ -55,6 +54,10 @@ public class Message extends AttributeModel {
 
 	public Long getID() {
 		return ID;
+	}
+
+	public void setID(Long ID) {
+		this.ID = ID;
 	}
 
 	public void delete() {
@@ -148,7 +151,8 @@ public class Message extends AttributeModel {
 		representation.put("attributes", this.attributes);
 		representation.put("toID", this.to.getID());
 		representation.put("fromID", this.from.getID());
-		representation.put("chatRoom", this.chatRoom.toRepresentation());
+		representation.put("chatRoomID",
+				this.chatRoom.toRepresentation().get("ID"));
 		return representation;
 	}
 

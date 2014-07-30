@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
 import system.ServerSentEventBroadcaster;
@@ -21,6 +23,9 @@ import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
+import transaction.DAOUpdateTransaction.CommunityAddTagTransaction;
+import transaction.DAOUpdateTransaction.CommunityRemoveTagTransaction;
+import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
 import transaction.SSETransaction.SSEDeleteCommunityTransaction;
 
 @Path("/community")
@@ -39,9 +44,9 @@ public class CommunityService {
 		transaction = new CreateCommunityTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(ID,
-					community.get("attributes"), community.get("tags"),
-					CommunityType.valueOf((String)community.get("communityType")));
+			result = (Map<String, Object>) transaction.execute(ID, community
+					.get("attributes"), community.get("tags"), CommunityType
+					.valueOf((String) community.get("communityType")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,6 +139,63 @@ public class CommunityService {
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Path("updateAttributes/{communityID : \\d+}")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateAttributes(
+			@PathParam("communityID") Long communityID, Map attributes) throws Exception {
+		transaction = new UpdateAttributeTransaction();
+		Map<String, Object> community;
+		try {
+			community = (Map<String, Object>) transaction.execute(Community.class, communityID, attributes);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return Response.ok(new GenericEntity<Map<String, Object>>(community){}).build();
+	}
+	
+	@SuppressWarnings({ "unchecked"})
+	@Path("addTags/{communityID : \\d+}")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addTags(
+			@PathParam("communityID") Long communityID, Set<String> tags) throws Exception {
+		transaction = new CommunityAddTagTransaction();
+		Map<String, Object> community;
+		try {
+			community = (Map<String, Object>) transaction.execute(communityID, tags);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return Response.ok(new GenericEntity<Map<String, Object>>(community){}).build();
+	}
+	
+	@SuppressWarnings({ "unchecked"})
+	@Path("removeTag/{communityID : \\d+}/{tag : \\w+}")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response removeTag(
+			@PathParam("communityID") Long communityID, @PathParam("tag")String tag) throws Exception {
+		transaction = new CommunityRemoveTagTransaction();
+		Map<String, Object> community;
+		try {
+			community = (Map<String, Object>) transaction.execute(communityID, tag);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return Response.ok(new GenericEntity<Map<String, Object>>(community){}).build();
 	}
 
 }

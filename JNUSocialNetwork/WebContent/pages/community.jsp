@@ -109,16 +109,55 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title" id="myModalLabel">Create community</h4>
 							</div>
-							<form class="photoForm" enctype="multipart/form-data">
-								<div class="modal-body modalBody">
-									<div class="pubCreate" id="createBlock">Public</div>
-									<div class="priCreate" id="createBlock">Private</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="btn_share" value="upload">Share</button>
-								</div>
+							<form class="communityForm" enctype="multipart/form-data">
+							<div class="modal-body modalBody">
+								<!--  <div class="pubCreate" id="createBlock">Public</div>
+								<div class="priCreate" id="createBlock">Private</div>
+								-->
+								<p>
+									<span>社区名：</span>
+									<input type="text" class="form-control"
+										placeholder="" id="communityName" required
+										autofocus />
+								</p>
+								<p>
+									<span>社区标签：</span>
+									<input type="text" class="form-control"
+										placeholder="" id="communityTag" required
+										autofocus />
+								</p>
+								<p>
+									<span>社区介绍：</span>
+									<input type="text" class="form-control"
+										placeholder="" id="communityIntro" required
+										autofocus />
+								</p>
+								<p>
+									<span>社区类型：</span>
+									<select id="communityType">
+										<option value="SchoolUnion">SchoolUnion</option>
+										<option value="Folk">Folk</option>
+									</select>
+								</p>
+								<span>社区名片</span>
+								<span class="btn btn-success fileinput-button">
+									        <i class="glyphicon glyphicon-plus"></i>
+									        <span>Add photos...</span>
+									        <!-- The file input field used as target for the file upload widget -->
+									        <input id="fileupload" type="file" name="files[]">
+								</span>
+								 <!-- The container for the uploaded files -->
+									    <div id="files" class="files">
+									    	
+									    </div>
+								 <br>
+							</div>
+							<br></br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="communityCreate" value="upload">Create</button>
+							</div>
 							</form>
 						</div>
 						<!-- /.modal-content -->
@@ -127,6 +166,7 @@
 				</div>
 				<!-- /.modal -->
 	  </div>
+	  
 	</div>
 	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/jquery-1.10.2.js"></script>
@@ -134,7 +174,9 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/EventAPI.js"></script>
 	<script src="js/function.js"></script>
+	<script src="js/community.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.containerDiscovery', '.content_container', 265);
