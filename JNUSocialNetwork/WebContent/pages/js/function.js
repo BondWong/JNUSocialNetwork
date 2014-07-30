@@ -24,7 +24,7 @@
 		 
 			$(".share").after(boarddiv); 
 			Msnry('.pro_body','.post',435);
-			$('img.userImg').userTips();
+
 	}
 //function hovercommentDeleteBtn
 

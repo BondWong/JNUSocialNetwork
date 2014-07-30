@@ -24,39 +24,7 @@
 	<div class="container container_custom">
 	<div class="communityGroupTitle"><h3>发现社区</h3></div>
 	<div class="container containerDiscovery">
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
-					<img src="images/i1.jpg" />
-				</div></a>
-			<!-- 社区例子-->
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<div class="content_join" id="activityJoin" style="cursor: pointer">
-					<a><input id="joinID" type='hidden' value="1" />Join</a>
-				</div>
-			</div>
-		</div>
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
-					<img src="images/i2.jpg" />
-				</div></a>
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
-			</div>
-		</div>
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
-					<img src="images/i3.jpg" />
-				</div></a>
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
-			</div>
-		</div>
+		<div class="communityBord"></div>
 		<div class="content_container">
 			<a href="show.jsp"><div class="img_container">
 					<img src="images/i2.jpg" />
@@ -135,8 +103,8 @@
 								<p>
 									<span>社区类型：</span>
 									<select id="communityType">
-										<option value="SchoolUnion">SchoolUnion</option>
-										<option value="Folk">Folk</option>
+										<option value="SCHOOLUNION">SchoolUnion</option>
+										<option value="FOLK">Folk</option>
 									</select>
 								</p>
 								<span>社区名片</span>
@@ -180,6 +148,7 @@
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.containerDiscovery', '.content_container', 265);
+		fetchCommunity();
 	</script>
 </body>
 </html>
