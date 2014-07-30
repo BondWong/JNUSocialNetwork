@@ -12,4 +12,5 @@ $(document).ready(function(){
 		var json = $.toJSON(community);
 		AddCommunity("2011052407",json);
 	});
+	
 });
