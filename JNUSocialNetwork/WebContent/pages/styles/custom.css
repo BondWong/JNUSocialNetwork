@@ -886,7 +886,7 @@ a.chat-room :hover {
 }
 
 div.chat-room-body {
-	height: 260px;
+	height: 300px;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
@@ -908,49 +908,42 @@ textarea.chat-room-input {
 }
 
 div.chat-room-load-histroy {
-	position: relative;
-	left: 65px;
+	text-align: center;
 }
 
 div.chat-bubble {
-	width: 150px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 img.chat-avatar {
-	float: left;
+	width: 25px;
+	height: 25px;
 }
 
-div.chat-content-other {
-	border-radius: 8px;
+.chat-content-self {
 	position: relative;
-	left: 30px;
-	width: 100%;
-	box-sizing: border-box; /* For IE and modern versions of Chrome */
-	-moz-box-sizing: border-box; /* For Firefox                          */
-	-webkit-box-sizing: border-box;
-	background-color: #ADD8E6;
-	border: 0px;;
-}
-
-div.chat-content-self {
-	border-radius: 8px;
-	position: relative;
-	left: 30px;
-	width: 100%;
-	box-sizing: border-box; /* For IE and modern versions of Chrome */
-	-moz-box-sizing: border-box; /* For Firefox                          */
-	-webkit-box-sizing: border-box;
-	background-color: #90EE90;
-	border: 0px;
-}
-
-p.chat-content {
+	left: 25px;
+	top: -25px;
 	font-size: 15px;
+	background-color: #90EE90;
+	border-radius: 8px;
+	text-align: center;
+	width: 100px;
+}
+
+.chat-content-other {
+	position: relative;
+	left: 25px;
+	top: -25px;
+	font-size: 15px;
+	background-color: #ADD8E6;
+	border-radius: 8px;
+	text-align: center;
+	width: 100px;
 }
 
 .status {
-	font-size: 10px;
+	font-size: 8px;
 	font-style: oblique;
 }
