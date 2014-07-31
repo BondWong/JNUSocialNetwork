@@ -18,15 +18,22 @@ if (!!window.EventSource) {
  });	
 		source.addEventListener("CREATEPOSTINCOMMUNITY",function(event){
 			var jsondata = $.parseJSON(event.data);
-			communityPostIdContainer.push(jsondata.post.ID);
-			if(jsondata.post.owner.ID==userID){
-				fetchByCommunity();
-				communityPostIdContainer = [];
+			if(jsondata.post.postType=="NORMAL"){
+				communityPostIdContainer.push(jsondata.post.ID);
+				if(jsondata.post.owner.ID==userID){
+					fetchByCommunity();
+					communityPostIdContainer = [];
+				}
+				if(jsondata.userID!=userID){
+					$('.alertCustC').css("display","block");
+				}
 			}
-			if(jsondata.userID!=userID){
-				$('.alertCustC').css("display","block");
+			if(jsondata.post.postType=="ACTIVITY"){
+				if(jsondata.post.owner.ID=="2011052407"){
+					fetchActivityByCommunity();
+				}
 			}
-	
+
 });
 		source.addEventListener('DELETEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);

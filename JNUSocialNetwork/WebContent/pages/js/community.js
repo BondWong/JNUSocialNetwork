@@ -35,3 +35,4 @@ $(document).ready(function(){
 		$(".communityBord").after(boarddiv); 
 		Msnry('.containerDiscovery', '.content_container', 265);
 	}
+	
