@@ -97,7 +97,6 @@ public class WebSocketEndPotint {
 
 		List<Map<String, Object>> messageQueue = messageStorage
 				.getMessageQueue(ID);
-
 		transaction = new CreateMessagesTransaction();
 		try {
 			transaction.execute(messageQueue);
@@ -110,7 +109,8 @@ public class WebSocketEndPotint {
 	}
 
 	@OnError
-	public void error(Session session, Throwable eror) throws IOException {
+	public void error(Session session, Throwable error) throws IOException {
+		System.out.println(error);
 		session.close();
 	}
 

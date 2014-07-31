@@ -947,3 +947,58 @@ img.chat-avatar {
 	font-size: 8px;
 	font-style: oblique;
 }
+.activityHeader{
+	width:100%;
+}
+.activityHeader button{
+	float:right;
+}
+.activityHeader > span{
+	font-size:18px;
+	font-weight: bolder;
+}
+.activity{
+	width:435px;
+	padding-bottom:20px;
+	background-color:#fff;
+}
+.activityAvatar{
+	margin-left:370px;
+	margin-top:-20px;
+}
+.activityName{
+	margin-right:auto;
+	margin-left:auto;
+	width:90%;
+	font-size:16px;
+}
+.activityTime{
+	margin-top:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:90%;
+}
+.activityD{
+	margin-top:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:90%;
+	padding-bottom:20px;
+	border-bottom:1px solid #DFDFDF;
+}
+.activityAsk{
+	margin-top:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:90%;
+}
+.activityaddre{
+	margin-top:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:90%;
+}
+.activityAsk > span{
+	font-size:16px;
+	margin-right:120px;
+}

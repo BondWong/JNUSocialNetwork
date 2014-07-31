@@ -18,11 +18,11 @@ $(document).ready(
 				};
 
 				ws.onclose = function(e) {
-
+					
 				};
 
 				ws.onerror = function(e) {
-
+					alert(e);
 				};
 
 				ws.onmessage = function(e) {
@@ -31,10 +31,10 @@ $(document).ready(
 						case "CHAT":
 							handle_message($.parseJSON(e.data));
 							break;
-						case "UPDATEMESSAGESTATUS":
+						/*case "UPDATEMESSAGESTATUS":
 							alert(e.data);
 							handle_update_message_status($.parseJSON(e.data));
-							break;
+							reak;*/
 						}
 					}
 				};

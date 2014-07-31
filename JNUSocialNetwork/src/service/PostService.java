@@ -21,6 +21,7 @@ import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchActivitiesByCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
@@ -76,7 +77,7 @@ public class PostService {
 				type = Member.class;
 			if (userType.equals("COMMUNITYOWNER"))
 				type = CommunityOwner.class;
-			if(type == null)
+			if (type == null)
 				throw new Exception();
 			sse = (ServerSentEvent) transaction.execute(ID, communityID, type,
 					PostType.valueOf((String) post.get("postType")),
@@ -194,7 +195,7 @@ public class PostService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchByFolloweeOrOwner/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
@@ -228,6 +229,29 @@ public class PostService {
 		try {
 			activities = (List<Map<String, Object>>) transaction.execute(
 					"Post.fetchByTypeASC", PostType.ACTIVITY, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchActivitiesByCommunity/{communityID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchActivitiesByCommunity(
+			@PathParam("communityID") Long communityID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchActivitiesByCommunityTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchActivitiesByCommunity", communityID, startIndex,
 					pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
