@@ -31,6 +31,7 @@ import model.modelType.CommunityType;
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?1"),
+		@NamedQuery(name = "Community.fetchByMember", query = "SELECT c FROM Member m JOIN m.joinedCommunities c WHERE m.ID = ?1"),
 		@NamedQuery(name = "Community.fetchUnavailableIDs", query = "SELECT c.ID FROM Community c WHERE c.available = 0"),
 		@NamedQuery(name = "Community.deleteUnavailable", query = "DELETE FROM Community c WHERE c.available = 0") })
 public class Community extends AttributeModel {
