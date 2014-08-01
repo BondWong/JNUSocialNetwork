@@ -1,5 +1,4 @@
 $(document).ready(function(){
-<<<<<<< HEAD
 	var fileDri = [];
 	//funtion fileupload
 	$('#fileupload').fileupload({
@@ -59,10 +58,7 @@ $(document).ready(function(){
                 .append(error);
         });
     }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');	
-=======
-	
->>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');		
 //function addPost
 	$('#btn_share').click(function(e){
 		e.preventDefault();

@@ -18,12 +18,12 @@
 				imageLinks:FileUpload(new FormData($('.activityForm')[0]))
 		};
 		var json = $.toJSON(post);
-		AddPostToCommunity("2011052405","1406820610144","COMMUNITYOWNER",json);
+		AddPostToCommunity("2011052405","1406909884572","COMMUNITYOWNER",json);
 	    $('#activityCommunity').modal('hide');
 	});
 	//function fetchActivityByCommunity
-	function fetchActivityByCommunity(){
-		var response = fetchByCommunity("1406820610144","0","5");
+	function fetchActivitiesByCommunity(){
+		var response = FetchActivitiesByCommunity("1406909884572","0","5");
 		$.each(response.reverse(),function(n,dataString){
 			addActivity(dataString.communityID,dataString.activityName,dataString.activityTime,dataString.activityAddr,dataString.activityMore,dataString.imageLinks);
 		});

@@ -29,8 +29,8 @@ if (!!window.EventSource) {
 				}
 			}
 			if(jsondata.post.postType=="ACTIVITY"){
-				if(jsondata.post.owner.ID=="2011052407"){
-					fetchActivityByCommunity();
+				if(jsondata.post.ID=="2011052405"){
+					fetchActivitiesByCommunity();
 				}
 			}
 
@@ -39,12 +39,6 @@ if (!!window.EventSource) {
 			var jsondata = $.parseJSON(event.data);
 			$("div[class='post "+jsondata.ID+"']").remove();
 			fetchByFolloweeOrOwner();
-			Msnry('.pro_body','.post',435);
-		});
-		source.addEventListener('DELETECOMMENT',function(event){
-			var jsondata = $.parseJSON(event.data);
-			$("div[class='act_content "+jsondata.comment+"']").remove();
-			FetchCommentByPost(jsondata.postID,"0","2");
 			Msnry('.pro_body','.post',435);
 		});
 		source.addEventListener('DELETECOMMENT',function(event){

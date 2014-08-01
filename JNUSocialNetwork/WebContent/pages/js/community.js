@@ -1,21 +1,5 @@
 $(document).ready(function(){
 	$('body').on('click','#communityCreate',function(){
-<<<<<<< HEAD
-		var community = {
-				tags:$('#communityTag').val(),
-				attributes:{
-					name:$('#communityName').val(),
-					introduct:$('#communityIntro').val(),
-					communityCard:FileUpload(new FormData($('.communityForm')[0]))
-				},
-				communityType:$('#communityType').val()
-		};
-		var json = $.toJSON(community);
-		AddCommunity("2011052407",json);
-	});
-	
-});
-=======
 		
 		var community = {
 				tags:[],
@@ -52,4 +36,3 @@ $(document).ready(function(){
 		Msnry('.containerDiscovery', '.content_container', 265);
 	}
 	
->>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork

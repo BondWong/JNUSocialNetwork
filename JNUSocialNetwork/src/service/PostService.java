@@ -51,7 +51,7 @@ public class PostService {
 			throws Exception {
 		transaction = new SSECreatePostTransaction();
 		try {
-			sse = (ServerSentEvent) transaction.execute(ID,
+			sse = (ServerSentEvent) transaction.execute(ID, PostType.NORMAL,
 					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
