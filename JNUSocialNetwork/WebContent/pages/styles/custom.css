@@ -733,13 +733,16 @@ body {
 	background-color:#FFF;
 }
 .aBodyComment{
-
+	width:100%;
 	margin-top:20px;
 }
 .aCommentItem{
 	width:100%;
 	background-color:#FFF;
 	padding:10px 20px;
+}
+.commentBtn{
+	height:65px;
 }
 .aCommentItem img{
 	float:left;

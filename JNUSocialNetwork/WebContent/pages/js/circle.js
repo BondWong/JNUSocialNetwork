@@ -73,7 +73,6 @@ $(document).ready(function(){
 			};
 			var json = $.toJSON(post);
 			AddPost("2011052407",json);
-			
 		    $('#addPostModal').modal('hide');
 		    
 	});

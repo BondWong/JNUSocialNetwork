@@ -42,10 +42,19 @@
 						<div class="detailTxt activityShowD">Please join +Tony Darnell as he discusses an amazing technique developed by Dr. Rémi Soummer and his team at STScI to extract hidden planetary disks from Hubble data.  The technique involves systematically removing bright light from a star, eventually revealing the disk hidden in its glare.</div>
 					</div>
 				</div>
-				<div class="aBodyComment">
+				<div class="aBodyComment commentBtn">
 					<div class="aCommentItem">
-						<img alt=""  src="images/user_img.jpg">
-						<input type="text" placeholder="Add a comment" class="" />
+						
+							<img alt=""  src="images/user_img.jpg">
+						
+						<div class="col-lg-6">								
+									<input type="text" placeholder="Add a comment"
+										class="form-control" id="commentText12" />
+						</div>
+						<div class="col-lg-3">
+							<button type="button" class="btn btn-success" id="addComment"
+								value="12">Submit</button>
+						</div>
 					</div>
 				</div>
 				<div class="aBodyComment">

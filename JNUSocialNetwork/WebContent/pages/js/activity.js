@@ -11,7 +11,7 @@ $(document).ready(function(){
 				imageLinks:FileUpload(new FormData($('.activityForm')[0]))
 		};
 		var json = $.toJSON(post);
-		AddPostToCommunity("2011052405","1406962347159","COMMUNITYOWNER",json);
+		AddPostToCommunity("2011052405","1406981738359","COMMUNITYOWNER",json);
 	    $('#activityCommunity').modal('hide');
 	});
 });
