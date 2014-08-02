@@ -958,9 +958,14 @@ img.chat-avatar {
 	font-weight: bolder;
 }
 .activity{
-	width:435px;
+	background-color: #FFF;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 20px;
+	margin-left: 0px;
+	float: left;
+	width: 435px;
 	padding-bottom:20px;
-	background-color:#fff;
 }
 .activityAvatar{
 	margin-left:370px;

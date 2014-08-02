@@ -161,7 +161,15 @@ $(document).ready(function(){
 		}
 	});
 	
-
+	//function Activity
+	$('.activityJoin').click(function(e){
+		var activityID = $(this).attr("id");
+		JoinActivity("2011052407",activityID);
+	});
+	$('.leaveactivityJoin').click(function(e){
+		LeaveActivity("2011052407",activityID);
+	});
+//
 //function addComment
 		$('body').on('click','#addComment',function(){
         	var id = this.getAttribute("value");

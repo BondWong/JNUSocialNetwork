@@ -24,7 +24,7 @@
 		<div class="activityHead">
 			<img alt="" width="100%" src="images/activityHead.jpg">
 			<div class="activityInfo">
-				<p>草地吉他弹唱会</p>
+				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
 					<span class="glyphicon glyphicon-heart-empty" style="font-size: 20px"></span>
 					<span class="glyphicon glyphicon-share-alt" style="font-size: 20px"></span>
@@ -36,10 +36,10 @@
 				<div class="activityDetail">
 					<span class="activityTitle">Detail</span>
 					<div class="detailBody">
-						<span class="glyphicon glyphicon-user">&nbsp;Create By WinsonLau</span>
-						<span class="glyphicon glyphicon-time">&nbsp;Fri, Aug 1, 4:00 AM - 5:00 AM</span>
-						<span class="glyphicon glyphicon-flag">&nbsp;Hangouts On Air</span>
-						<div class="detailTxt">Please join +Tony Darnell as he discusses an amazing technique developed by Dr. Rémi Soummer and his team at STScI to extract hidden planetary disks from Hubble data.  The technique involves systematically removing bright light from a star, eventually revealing the disk hidden in its glare.</div>
+						<span class="glyphicon glyphicon-user activityShowOwner">&nbsp;Create By WinsonLau</span>
+						<span class="glyphicon glyphicon-time activityShowTime">&nbsp;Fri, Aug 1, 4:00 AM - 5:00 AM</span>
+						<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;Hangouts On Air</span>
+						<div class="detailTxt activityShowD">Please join +Tony Darnell as he discusses an amazing technique developed by Dr. Rémi Soummer and his team at STScI to extract hidden planetary disks from Hubble data.  The technique involves systematically removing bright light from a star, eventually revealing the disk hidden in its glare.</div>
 					</div>
 				</div>
 				<div class="aBodyComment">
@@ -101,9 +101,9 @@
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/EventAPI.js"></script>
-	<script src="js/activity.js"></script>
+	<script src="js/activityShow.js"></script>
 	<script type="text/javascript">
-		Msnry('.containerDiscovery', '.content_container', 265);
+		showActivityDetail();
 	</script>
 </body>
 </html>
