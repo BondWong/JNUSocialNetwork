@@ -733,13 +733,16 @@ body {
 	background-color:#FFF;
 }
 .aBodyComment{
-
+	width:100%;
 	margin-top:20px;
 }
 .aCommentItem{
 	width:100%;
 	background-color:#FFF;
 	padding:10px 20px;
+}
+.commentBtn{
+	height:65px;
 }
 .aCommentItem img{
 	float:left;
@@ -930,6 +933,7 @@ img.chat-avatar {
 	border-radius: 8px;
 	text-align: center;
 	width: 100px;
+	word-wrap: break-word;
 }
 
 .chat-content-other {
@@ -941,11 +945,18 @@ img.chat-avatar {
 	border-radius: 8px;
 	text-align: center;
 	width: 100px;
+	word-wrap: break-word;
 }
 
 .status {
 	font-size: 8px;
 	font-style: oblique;
+}
+
+.time {
+	font-size: 8px;
+	font-style: oblique;
+	text-align: center;
 }
 .activityHeader{
 	width:100%;
@@ -958,9 +969,14 @@ img.chat-avatar {
 	font-weight: bolder;
 }
 .activity{
-	width:435px;
+	background-color: #FFF;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 20px;
+	margin-left: 0px;
+	float: left;
+	width: 435px;
 	padding-bottom:20px;
-	background-color:#fff;
 }
 .activityAvatar{
 	margin-left:370px;

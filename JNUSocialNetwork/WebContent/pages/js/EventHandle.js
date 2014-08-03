@@ -21,7 +21,7 @@ if (!!window.EventSource) {
 			if(jsondata.post.postType=="NORMAL"){
 				communityPostIdContainer.push(jsondata.post.ID);
 				if(jsondata.post.owner.ID==userID){
-					fetchByCommunity();
+					fetchPostByCommunity();
 					communityPostIdContainer = [];
 				}
 				if(jsondata.userID!=userID){
@@ -29,22 +29,15 @@ if (!!window.EventSource) {
 				}
 			}
 			if(jsondata.post.postType=="ACTIVITY"){
-				if(jsondata.post.owner.ID=="2011052407"){
-					fetchActivityByCommunity();
-				}
+				 addActivity(jsondata.communityID,jsondata.post.attributes.activityName,jsondata.post.attributes.activityTime,jsondata.post.attributes.activityAddr,jsondata.post.attributes.activityMore,jsondata.post.imageLinks);
 			}
+			
 
 });
 		source.addEventListener('DELETEPOST',function(event){
 			var jsondata = $.parseJSON(event.data);
 			$("div[class='post "+jsondata.ID+"']").remove();
 			fetchByFolloweeOrOwner();
-			Msnry('.pro_body','.post',435);
-		});
-		source.addEventListener('DELETECOMMENT',function(event){
-			var jsondata = $.parseJSON(event.data);
-			$("div[class='act_content "+jsondata.comment+"']").remove();
-			FetchCommentByPost(jsondata.postID,"0","2");
 			Msnry('.pro_body','.post',435);
 		});
 		source.addEventListener('DELETECOMMENT',function(event){

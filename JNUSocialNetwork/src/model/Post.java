@@ -32,8 +32,8 @@ import model.modelType.PostType;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Post.fetchByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 ORDER BY p.publishDate DESC"),
-		@NamedQuery(name = "Post.fetchActivitiesByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType =?2 ORDER BY p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchPostsByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.NORMAL ORDER BY p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchActivitiesByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.publishDate DESC"),
 		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.publishDate DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
 				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "

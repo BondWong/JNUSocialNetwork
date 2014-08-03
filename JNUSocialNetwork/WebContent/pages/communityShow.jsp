@@ -223,7 +223,7 @@
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
 		Msnry('.pro_body', '.post', 435);
-		fetchByCommunity();
+		fetchPostByCommunity();
 	</script>
 </body>
 </html>

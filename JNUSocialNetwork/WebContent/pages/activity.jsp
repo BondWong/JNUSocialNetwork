@@ -129,9 +129,6 @@
 						</select>
 					</div>
 				</div>
-				<div class="activity">
-				
-				</div>
 			</div>
 		</div>
 	</div>
@@ -160,11 +157,11 @@
 	<script src="js/jquery.fileupload-validate.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
-	<script src="js/activity.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<script src="js/activity.js"></script>
 	<script type="text/javascript">
 		Msnry('.activityBody', '.activity', 435);
-		
+		fetchPostByCommunity();
 	</script>
 </body>
 </html>
