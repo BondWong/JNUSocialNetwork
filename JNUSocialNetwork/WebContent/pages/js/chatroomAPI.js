@@ -20,14 +20,14 @@ function create_chatroom(data, fromID, toID, toName, online, top, right) {
 		chatroom += '<span class="label label-success">'
 				+ toName
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
-				+ data.ID + '"><input type="hidden" id="toID" value="' + fromID
-				+ '"></div>';
+				+ data.ID + '"><input type="hidden" id="fromID" value="'
+				+ fromID + '"></div>';
 	} else {
 		chatroom += '<span class="label label-default">'
 				+ toName
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
-				+ data.ID + '"><input type="hidden" id="toID" value="' + fromID
-				+ '"></div>';
+				+ data.ID + '"><input type="hidden" id="fromID" value="'
+				+ fromID + '"></div>';
 	}
 
 	$("body").append(chatroom);
@@ -62,7 +62,6 @@ function prepare_chat_room_close_button(data, fromID) {
 							clickCount = 0;
 						else
 							clickCount = $.parseJSON(clickCount);
-						alert(clickCount);
 						$
 								.ajax({
 									type : "GET",
@@ -118,6 +117,7 @@ function on_click_send(chatRoomID, fromID, toID) {
 	} else {
 		var value = textarea.val();
 		textarea.val("");
+		value = value.replace(/ /g, '&nbsp;');
 		var date = new Date();
 		do_send({
 			"action" : "CHAT",
@@ -126,7 +126,7 @@ function on_click_send(chatRoomID, fromID, toID) {
 			"status" : "SENDING",
 			"ID" : date.getTime(),
 			"chatRoomID" : chatRoomID,
-			"publicDate" : date.toLocaleString(),
+			"publishDate" : date.toLocaleString(),
 			"attributes" : {
 				"content" : value
 			}
@@ -136,16 +136,23 @@ function on_click_send(chatRoomID, fromID, toID) {
 }
 
 function do_receive(data) {
+	if ($("#chatroom") != null && !$("#chatroom").is(":visible")) {
+		online_remind(data);
+	}
 	if ($("#chatroom") != null && $("#chatroom").is(":visible")
-			&& $("#chatroom #toID").val() == data.toID) {
+			&& $("#chatroom #fromID").val() == data.toID) {
 		append_to_content_panel(data, "other");
 		save_message(data);
-		ws.send(JSON.stringify({
+		oriented_send({
 			"action" : "UPDATEMESSAGESTATUS",
 			"fromID" : data.fromID,
 			"ID" : data.ID,
 			"status" : "READ"
-		}));
+		});
+		/*
+		 * ws.send(JSON.stringify({ "action" : "UPDATEMESSAGESTATUS", "fromID" :
+		 * data.fromID, "ID" : data.ID, "status" : "READ" }));
+		 */
 	}
 }
 
@@ -157,29 +164,63 @@ function do_send(data) {
 
 function append_to_content_panel(data, who) {
 	sessionStorage.avatarLink = "pages/images/12.png";
-	var message = '<div class="chat-bubble"><img class="chat-avatar" src="'
-			+ sessionStorage.avatarLink
+	var message = '<div class="chat-bubble" id="' + data.ID
+			+ '" ><img class="chat-avatar" src="' + sessionStorage.avatarLink
 			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
 			+ data.attributes.content;
 	if (who == "self")
-		message += '<br /><span class="label label-warning status">SENDING</span></p></div></div>';
+		message += '<br /><span class="label label-warning status">'
+				+ data.status + '</span></p></div>';
 	if (who == "other")
-		message += '</p></div></div>';
+		message += '</p></div>';
+
+	var id = $("#chatroom .chat-bubble").last().attr("id");
+	id = parseInt(id);
+	var time = parseInt(data.ID) - id;
+	if (time > 5 * 60 * 1000) {
+		var timeInfo = '<p class="time">' + data.publishDate + '</p>';
+		$("#chatroom .panel-body").append(timeInfo);
+	}
+
 	$("#chatroom .panel-body").append(message);
+	if (data.attributes.content.length > 10
+			&& data.attributes.content.length <= 18)
+		$("#" + data.ID + ' .chat-content-' + who).css("width",
+				100 + (data.attributes.content.length - 10) * 10 + "px");
+	if (data.attributes.content.length > 18)
+		$("#" + data.ID + ' .chat-content-' + who).css("width", "180px");
 	$("#chatroom .panel-body").scrollTop(10000000);
 }
 
 function prepend_to_content_panel(data, who) {
 	sessionStorage.avatarLink = "pages/images/12.png";
-	var message = '<div class="chat-bubble"><img class="chat-avatar" src="'
-			+ sessionStorage.avatarLink
+	var message = '<div class="chat-bubble" id="' + data.ID
+			+ '" ><img class="chat-avatar" src="' + sessionStorage.avatarLink
 			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
 			+ data.attributes.content;
 	if (who == "self")
-		message += '<br /><span class="label label-warning status">SENDING</span></p></div></div>';
+		message += '<br /><span class="label label-warning status">'
+				+ data.status + '</span></p></div>';
 	if (who == "other")
-		message += '</p></div></div>';
+		message += '</p></div>';
+
+	var id = $("#chatroom .chat-bubble").first().attr("id");
+	id = parseInt(id);
+	var time = id - parseInt(data.ID);
+	if (time > 5 * 60 * 10000) {
+		var date = new Date();
+		date.setTime(id);
+		var timeInfo = '<p class="time">' + date.toLocaleString() + '</p>';
+		$("#chatroom .chat-room-load-histroy").after(timeInfo);
+	}
+
 	$("#chatroom .chat-room-load-histroy").after(message);
+	if (data.attributes.content.length > 10
+			&& data.attributes.content.length <= 18)
+		$("#" + data.ID + ' .chat-content-' + who).css("width",
+				100 + (data.attributes.content.length - 10) * 10 + "px");
+	if (data.attributes.content.length > 18)
+		$("#" + data.ID + ' .chat-content-' + who).css("width", "180px");
 }
 
 function save_message(data) {
@@ -214,17 +255,189 @@ function fetch_from_local(chat_room_ID, fromID) {
 }
 
 function send_to_server(data) {
-	ws.send(JSON.stringify({
+	oriented_send({
 		"action" : "CHAT",
 		"fromID" : data.fromID,
 		"toID" : data.toID,
 		"status" : "SENDING",
 		"ID" : data.ID,
+		"publishDate" : data.publishDate,
 		"chatRoomID" : data.chatRoomID,
 		"attributes" : data.attributes
-	}));
+	});
+	/*
+	 * ws.send(JSON.stringify({ "action" : "CHAT", "fromID" : data.fromID,
+	 * "toID" : data.toID, "status" : "SENDING", "ID" : data.ID, "publishDate" :
+	 * data.publishDate, "chatRoomID" : data.chatRoomID, "attributes" :
+	 * data.attributes }));
+	 */
 }
 
-function change_status(id, status) {
+function do_change_status(data) {
+	$("#" + data.ID + " span").replaceWith(
+			'<span class="label label-warning status">' + data.status
+					+ '</span>');
+	var messages = sessionStorage.getItem("messages");
+	messages = $.parseJSON(messages);
+	for (var i = 0; i < messages.length; i++)
+		if (messages[i].ID == data.ID)
+			messages[i].status = data.status;
+	sessionStorage.setItem("messages", JSON.stringify(messages));
+}
 
+function handle_unread_messages(messages) {
+	var count = {};
+	var i = 0;
+	for (i; messages != null && i < messages.length; i++) {
+		if (count[messages[i].fromID] == null) {
+			count[messages[i].fromID] = 1;
+			$("#unreadmessages ul")
+					.append(
+							'<li role="presentation" id="'
+									+ messages[i].fromID
+									+ '"><a role="menuitem" tabindex="-1" href="javaScript:void(0);">'
+									+ messages[i].from + '<span class="badge">'
+									+ count[messages[i].fromID]
+									+ '</span></a></li>');
+			$("#" + messages[i].fromID).css({
+				"background-color" : "#FFA07A"
+			});
+			var tempFromID = messages[i].fromID;
+			var tempToID = messages[i].toID;
+			var tempFrom = messages[i].from;
+			$("#" + messages[i].fromID)
+					.click(
+							function(e) {
+								e.stopPropagation();
+								$(this).css("background-color", "#FFFFF");
+								var lis = $("#unreadmessages ul")
+										.children("li");
+								var j = 0;
+								for (j; j < lis.length; j++) {
+									if ($(lis[j]).css("background-color") != 'rgb(255, 255, 255)')
+										break;
+								}
+								if (j == lis.length) {
+									$("#unreadmessages").fadeOut("fast");
+									$("#unreadmessages ul").empty();
+								}
+								show_unread_messages(messages, tempToID,
+										tempFromID, tempFrom, true, 30, 30);
+								show_online_messages($
+										.parseJSON(sessionStorage
+												.getItem("online_message_"
+														+ tempFromID)),
+										tempToID, tempFromID, tempFrom, true,
+										30, 30);
+							});
+		} else {
+			count[messages[i].fromID]++;
+			$("#unreadmessages " + "#" + messages[i].fromID + " span")
+					.replaceWith(
+							'<span class="badge">' + count[messages[i].fromID]
+									+ '</span>');
+		}
+	}
+	if (i != 0)
+		$("#unreadmessages").show();
+}
+
+function show_unread_messages(messages, toID, fromID, toName, online, top,
+		right) {
+	open_chatroom(toID, fromID, toName, online, top, right);
+	for (var i = 0; i < messages.length; i++) {
+		if (messages[i].fromID == fromID) {
+			append_to_content_panel(messages[i], "other");
+			save_message(messages[i]);
+			oriented_send({
+				"action" : "UPDATEMESSAGESTATUSTOSERVER",
+				"fromID" : messages[i].fromID,
+				"ID" : messages[i].ID,
+				"status" : "READ"
+			});
+			/*
+			 * ws.send(JSON.stringify({ "action" :
+			 * "UPDATEMESSAGESTATUSTOSERVER", "fromID" : messages[i].fromID,
+			 * "ID" : messages[i].ID, "status" : "READ" }));
+			 */
+		}
+	}
+}
+
+function online_remind(message) {
+	if ($("#unreadmessages #" + message.fromID).length == 0) {
+		$("#unreadmessages ul")
+				.append(
+						'<li role="presentation" id="'
+								+ message.fromID
+								+ '"><a role="menuitem" tabindex="-1" href="javaScript:void(0);">'
+								+ message.from
+								+ '<span class="badge">1</span></a></li>');
+		$("#unreadmessages #" + message.fromID).css({
+			"background-color" : "#FFA07A"
+		});
+		sessionStorage.setItem("online_message_" + message.fromID, JSON
+				.stringify([ message ]));
+		var tempToID = message.toID;
+		var tempFromID = message.fromID;
+		var tempFrom = message.from;
+		$("#unreadmessages #" + message.fromID)
+				.click(
+						function(e) {
+							e.stopPropagation();
+							$(this).css("background-color", "#FFFFF");
+							var lis = $("#unreadmessages ul").children("li");
+							var j = 0;
+							for (j; j < lis.length; j++) {
+								if ($(lis[j]).css("background-color") != 'rgb(255, 255, 255)')
+									break;
+							}
+							if (j == lis.length) {
+								$("#unreadmessages").fadeOut("fast");
+								$("#unreadmessages ul").empty();
+							}
+							show_online_messages($.parseJSON(sessionStorage
+									.getItem("online_message_" + tempFromID)),
+									tempToID, tempFromID, tempFrom, true, 30,
+									30);
+						});
+	} else {
+		var temp = $("#unreadmessages #" + message.fromID + " span").text();
+		temp = parseInt(temp);
+		$("#unreadmessages #" + message.fromID + " span").text(temp + 1);
+		var online_messages = sessionStorage.getItem("online_message_"
+				+ message.fromID);
+		if (online_messages == null) {
+			online_messages = [];
+		} else {
+			online_messages = $.parseJSON(online_messages);
+		}
+		online_messages[online_messages.length] = message;
+		sessionStorage.setItem("online_message_" + message.fromID, JSON
+				.stringify(online_messages));
+	}
+	$("#unreadmessages").show();
+}
+
+function show_online_messages(messages, toID, fromID, toName, online, top,
+		right) {
+	open_chatroom(toID, fromID, toName, online, top, right);
+	for (var i = 0; messages != null && i < messages.length; i++) {
+		append_to_content_panel(messages[i], "other");
+		save_message(messages[i]);
+		oriented_send({
+			"action" : "UPDATEMESSAGESTATUS",
+			"fromID" : messages[i].fromID,
+			"ID" : messages[i].ID,
+			"status" : "READ"
+		});
+		/*
+		 * ws.send(JSON.stringify({ "action" : "UPDATEMESSAGESTATUS", "fromID" :
+		 * messages[i].fromID, "ID" : messages[i].ID, "status" : "READ" }));
+		 */
+	}
+}
+
+function oriented_send(data) {
+	ws.send(JSON.stringify(data));
 }

@@ -21,6 +21,7 @@ import model.modelType.MessageStatus;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
+		@NamedQuery(name = "Message.fetchByID", query = "SELECT m FROM Message m WHERE m.ID = ?1 "),
 		@NamedQuery(name = "Message.fetchUnread", query = "SELECT m FROM Message m WHERE m.messageStatus != model.modelType.MessageStatus.READ AND m.to.ID = ?1 ORDER BY m.ID DESC"),
 		@NamedQuery(name = "Message.fetchUnavailableIDs", query = "SELECT m.ID FROM Message m WHERE m.available = 0"),
 		@NamedQuery(name = "Message.deleteUnavailable", query = "DELETE FROM Message m WHERE m.available = 0"),
@@ -147,12 +148,13 @@ public class Message extends AttributeModel {
 		representation.put("ID", this.ID);
 		representation.put("available", this.available);
 		representation.put("publishDate", this.publishDate);
-		representation.put("messageState", this.messageStatus);
+		representation.put("status", this.messageStatus);
 		representation.put("attributes", this.attributes);
 		representation.put("toID", this.to.getID());
 		representation.put("fromID", this.from.getID());
 		representation.put("chatRoomID",
 				this.chatRoom.toRepresentation().get("ID"));
+		representation.put("from", this.from.getAttribute("name"));
 		return representation;
 	}
 

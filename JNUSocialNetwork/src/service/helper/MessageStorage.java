@@ -31,16 +31,6 @@ public class MessageStorage {
 		return messagesQueueMap.get(from);
 	}
 
-	public List<Map<String, Object>> getUnreadMessages(String to) {
-		List<Map<String, Object>> messages = new LinkedList<Map<String, Object>>();
-		for (List<Map<String, Object>> messageQueues : messagesQueueMap
-				.values())
-			for(Map<String, Object> message : messageQueues) 
-				if(message.get("toID").equals(to))
-					messages.add(message);
-		return messages;
-	}
-
 	public void addMessage(Map<String, Object> message) {
 		if (this.messagesQueueMap.get(message.get("fromID")) == null)
 			this.messagesQueueMap.put((String) message.get("fromID"),
@@ -57,7 +47,7 @@ public class MessageStorage {
 		for (Map<String, Object> message : this.messagesQueueMap.get(params
 				.get("fromID"))) {
 			if (message.containsValue(params.get("ID"))) {
-				message.put("messageStatus", params.get("value"));
+				message.put("status", params.get("status"));
 			}
 		}
 	}

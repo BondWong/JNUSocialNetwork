@@ -9,7 +9,7 @@ $(document).ready(
 					var id = $("#chatroom input").val();
 					close_chatroom(id);
 				});
-
+				
 				window.ws = new WebSocket(
 						"ws://localhost:8080/JNUSocialNetwork/endpoint/connect/"
 								+ $("#ID").val());
@@ -18,7 +18,7 @@ $(document).ready(
 				};
 
 				ws.onclose = function(e) {
-					
+
 				};
 
 				ws.onerror = function(e) {
@@ -31,26 +31,28 @@ $(document).ready(
 						case "CHAT":
 							handle_message($.parseJSON(e.data));
 							break;
-						/*case "UPDATEMESSAGESTATUS":
-							alert(e.data);
+						case "UPDATEMESSAGESTATUS":
 							handle_update_message_status($.parseJSON(e.data));
-							reak;*/
+							break;
+						case "REMIND":
+							handle_remind($.parseJSON(e.data));
+							break;
 						}
 					}
 				};
 
 				function handle_message(data) {
 					do_receive(data);
-					ws.send(JSON.stringify({
-						"action" : "UPDATEMESSAGESTATUS",
-						"fromID" : data.fromID,
-						"ID" : data.ID,
-						"status" : "ARRIVED"
-					}));
 				}
 
 				function handle_update_message_status(data) {
-					do_update_message_status(data);
+					do_change_status(data);
 				}
+
+				function handle_remind(data) {
+					handle_unread_messages(data.unreadMessages);
+					// handle_unhandledEvents(data.unhandledEvents);
+				}
+
 			};
 		});

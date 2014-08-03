@@ -21,7 +21,6 @@ import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
-import transaction.DAOFetchTransaction.FetchActivitiesByCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
@@ -138,7 +137,8 @@ public class PostService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Post.fetchByCommunity", communityID, startIndex, pageSize);
+					"Post.fetchPostByCommunity", communityID, startIndex,
+					pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -247,7 +247,7 @@ public class PostService {
 			@PathParam("communityID") Long communityID,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchActivitiesByCommunityTransaction();
+		transaction = new FetchPostsTransaction();
 		List<Map<String, Object>> activities;
 		try {
 			activities = (List<Map<String, Object>>) transaction.execute(

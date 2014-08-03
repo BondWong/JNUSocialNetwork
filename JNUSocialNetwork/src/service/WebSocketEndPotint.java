@@ -1,8 +1,8 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +29,7 @@ import transaction.DAOCreateTransaction.CreateMessagesTransaction;
 import transaction.DAOCreateTransaction.CreateUnhandledEventsTransaction;
 import transaction.DAOFetchTransaction.FetchUnhandledEventsTransaction;
 import transaction.DAOFetchTransaction.FetchUnreadMessagesTransaction;
+import transaction.DAOUpdateTransaction.UpdateMessageStatusTransaction;
 import transaction.SSETransaction.SSEConnectTransaction;
 import transaction.SSETransaction.SSEDisconnectTransaction;
 
@@ -60,15 +61,14 @@ public class WebSocketEndPotint {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
 		}
 
-		Map<String, List<Map<String, Object>>> info = new HashMap<String, List<Map<String, Object>>>();
+		Map<String, Object> info = new HashMap<String, Object>();
 		transaction = new FetchUnreadMessagesTransaction();
 		info.put("unreadMessages",
 				(List<Map<String, Object>>) transaction.execute(ID));
-		((List<Map<String, Object>>) info.get("unreadMessages"))
-				.addAll(messageStorage.getUnreadMessages(ID));
 		transaction = new FetchUnhandledEventsTransaction();
 		info.put("unhandledEvents",
 				(List<Map<String, Object>>) transaction.execute(ID));
+		info.put("action", "REMIND");
 		System.out.println(info);
 		try {
 			session.getBasicRemote().sendObject(info);
@@ -110,7 +110,7 @@ public class WebSocketEndPotint {
 
 	@OnError
 	public void error(Session session, Throwable error) throws IOException {
-		System.out.println(error);
+		error.printStackTrace();
 		session.close();
 	}
 
@@ -127,11 +127,12 @@ public class WebSocketEndPotint {
 		case CHAT:
 			handleMessageTransimit(session, param);
 			break;
-		case UNSAVEDCHAT:
-			handleUnsavedMessage(session, param);
-			break;
 		case UPDATEMESSAGESTATUS:
 			handleUpdateMessageStatus(session, param);
+			break;
+		case UPDATEMESSAGESTATUSTOSERVER:
+			handleUpdateMessageStatusToServer(session, param);
+			break;
 		}
 
 	}
@@ -174,32 +175,21 @@ public class WebSocketEndPotint {
 				online = true;
 			}
 		}
+		Map<String, Object> sent = new HashMap<String, Object>();
+		sent.put("action", "UPDATEMESSAGESTATUS");
+		sent.put("fromID", param.get("fromID"));
+		sent.put("ID", param.get("ID"));
+		sent.put("status", "SENT");
+		session.getBasicRemote().sendObject(sent);
 		if (!online) {
-			Map<String, Object> sent = new HashMap<String, Object>();
-			sent.put("action", "UPDATEMESSAGESTATUS");
-			sent.put("fromID", param.get("fromID"));
-			sent.put("ID", param.get("ID"));
-			sent.put("status", "SENT");
+			List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 			param.put("status", "SENT");
-			session.getBasicRemote().sendObject(sent);
-		}
+			params.add(param);
+			transaction = new CreateMessagesTransaction();
+			transaction.execute(params);
+		} else
+			messageStorage.addMessage(param);
 
-		messageStorage.addMessage(param);
-	}
-
-	private void handleUnsavedMessage(Session session, Map<String, Object> param)
-			throws Exception {
-		List<Map<String, Object>> unsavedMessages = new LinkedList<Map<String, Object>>();
-		for (Map<String, Object> message : messageStorage
-				.getMessageQueue((String) param.get("fromID"))) {
-			if (message.get("toID").equals((String) param.get("toID")))
-				unsavedMessages.add(message);
-		}
-		for (Session sess : session.getOpenSessions()) {
-			if (sess.getUserProperties().containsValue(param.get("toID"))) {
-				sess.getBasicRemote().sendObject(unsavedMessages);
-			}
-		}
 	}
 
 	private void handleUpdateMessageStatus(Session session,
@@ -211,6 +201,23 @@ public class WebSocketEndPotint {
 		}
 
 		messageStorage.updateMessageStatus(param);
+	}
+
+	private void handleUpdateMessageStatusToServer(Session session,
+			Map<String, Object> param) throws Exception {
+		transaction = new UpdateMessageStatusTransaction();
+		try {
+			transaction.execute(param.get("ID"), param.get("status"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		param.put("action", "UPDATEMESSAGESTATUS");
+		for (Session sess : session.getOpenSessions()) {
+			if (sess.getUserProperties().containsValue(param.get("fromID"))) {
+				sess.getBasicRemote().sendObject(param);
+			}
+		}
 	}
 
 }
