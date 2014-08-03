@@ -61,7 +61,7 @@
 			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
 		});
 	}
-
+$(document).ready(function(){
 //function userTip
 	(function($){  
 		$.fn.userTips = function () {
@@ -109,7 +109,7 @@
 	})(jQuery);
 	$('img.userImg').userTips();
 //function collectPost and cancelCollcet
-$(document).ready(function(){
+
 	$('body').on('click','.post_collect',function(){
 		var id = $(this).find("input").attr("value");
 		if($(this).find("span").attr("class") == "glyphicon glyphicon-star-empty"){
@@ -202,6 +202,20 @@ $('body').on('click','.deleteCommBtn',function(){
 	var postID = $(this).find("input").attr("id");
 	DeleteComment(postID,commentID);
 });
+//function mention
+$('body').on("click",".mentionBell",function(){
+	var pos = $(this).offset();
+	var nPos = pos;
+	nPos.top = pos.top + 20;
+	nPos.left = pos.left + 40;
+	var divTip = 'div.mentionBody';
+	tinyTip = $(divTip);
+	tinyTip.hide();
 
-	
+	// Make sure that the tooltip has absolute positioning and a high z-index, 
+	// then place it at the correct spot and fade it in.
+	tinyTip.css('position', 'absolute').css('z-index', '1000');
+	tinyTip.css(nPos).fadeIn(animSpeed);
+});
+
 	

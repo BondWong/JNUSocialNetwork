@@ -433,6 +433,35 @@ function DeleteCommunity(communityID){
     });
 	return response;
 }
+//joinCommunity
+function JoinCommunity(userID,communityID){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/community/join/'+userID+'/'+communityID,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
+function LeaveCommunity(userID,communityID){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/community/leave/'+userID+'/'+communityID,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
 //fetch  输入： 开始index，数量  如：0/5 表示最新的5个;返回：postJson
 function FetchCommunity(startIndex,pageSize){
 	var response="";

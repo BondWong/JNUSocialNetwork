@@ -11,20 +11,20 @@ $(document).ready(function(){
 				imageLinks:FileUpload(new FormData($('.activityForm')[0]))
 		};
 		var json = $.toJSON(post);
-		AddPostToCommunity("2011052405","1406981738359","COMMUNITYOWNER",json);
+		AddPostToCommunity("2011052405","1407044989969","COMMUNITYOWNER",json);
 	    $('#activityCommunity').modal('hide');
 	});
 });
 	//function fetchActivityByCommunity
 	function fetchActivitiesByCommunity(){
-		var response = FetchActivitiesByCommunity("1406962347159","0","5");
+		var response = FetchActivitiesByCommunity("1407032792193","0","5");
 		$.each(response.reverse(),function(n,dataString){
 			addActivity(dataString.communityID,dataString.activityName,dataString.activityTime,dataString.activityAddr,dataString.activityMore,dataString.imageLinks);
 		});
 	}
 	//function fetchActivityByCommunity
 	function fetchPostByCommunity(){
-		var response = FetchActivitiesByCommunity("1406962347159","0","5");
+		var response = FetchActivitiesByCommunity("1407032792193","0","5");
 		$.each(response.reverse(),function(n,dataString){
 			addActivity(dataString.ID,dataString.attributes.activityName,dataString.attributes.activityTime,dataString.attributes.activityAddr,dataString.attributes.activityMore,dataString.imageLinks);
 		});

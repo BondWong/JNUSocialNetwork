@@ -36,7 +36,6 @@
 				<div class="activityDetail">
 					<span class="activityTitle">Detail</span>
 					<div class="detailBody">
-						<span class="glyphicon glyphicon-user activityShowOwner">&nbsp;Create By WinsonLau</span>
 						<span class="glyphicon glyphicon-time activityShowTime">&nbsp;Fri, Aug 1, 4:00 AM - 5:00 AM</span>
 						<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;Hangouts On Air</span>
 						<div class="detailTxt activityShowD">Please join +Tony Darnell as he discusses an amazing technique developed by Dr. Rémi Soummer and his team at STScI to extract hidden planetary disks from Hubble data.  The technique involves systematically removing bright light from a star, eventually revealing the disk hidden in its glare.</div>
@@ -44,16 +43,14 @@
 				</div>
 				<div class="aBodyComment commentBtn">
 					<div class="aCommentItem">
-						
-							<img alt=""  src="images/user_img.jpg">
-						
+						<img alt=""  src="images/user_img.jpg">
 						<div class="col-lg-6">								
-									<input type="text" placeholder="Add a comment"
-										class="form-control" id="commentText12" />
+								<input type="text" placeholder="Add a comment"
+									class="form-control" id="commentText1407032926865" />
 						</div>
 						<div class="col-lg-3">
 							<button type="button" class="btn btn-success" id="addComment"
-								value="12">Submit</button>
+								value="1407032926865">Submit</button>
 						</div>
 					</div>
 				</div>
@@ -84,10 +81,9 @@
 				<div class="aBodyCard">
 					<div class="communityBS"><img alt="" src="images/communityBgSm.jpg"></div>
 					<div class="cBcontent">
-						<img src="images/user_img4.jpg" />
 						<p>Hosted by:</p>
-						<h1>Hubble Space Telescope</h1>
-						<p>2,569,262 have them in circles</p>
+						<h1 class="communityName">Hubble Space Telescope</h1>
+						<p class="communityNum">2,569,262 have them in circles</p>
 						<button class="btn btn-danger">Add community</button>
 					</div>
 				</div>
