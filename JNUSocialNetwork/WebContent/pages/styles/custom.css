@@ -1084,3 +1084,28 @@ left: 251px;
 	background-color:#f6f6f6;
 }
 
+.white_content
+{
+    display: none;
+    position: absolute;
+    top:0%;
+    width: 100%;
+    height: 100%;
+    padding:0;
+    border:none;
+    background-color: white;
+    z-index: 10000;
+    overflow: auto;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+	.imgBox
+	{
+		height:570px;
+		weight:600px;
+		margin:0 auto;
+		text-align:center;
+		vertical-align:middle;
+	}
+	
