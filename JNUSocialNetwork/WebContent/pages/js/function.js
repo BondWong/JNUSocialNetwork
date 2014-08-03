@@ -194,7 +194,20 @@ $(document).ready(function(){
 				var followBtn = $("button[id='followBtn']");
 				followBtn.text("Follow");
 			}
-		});		
+		});	
+		//提醒
+		$('body').on("click",".mentionBell",function(){
+			var animSpeed = 300;			
+			var tinyTip;	
+			var pos = $(this).offset();
+			var nPos = pos;
+			nPos.top = pos.top + 20;
+			nPos.left = pos.left -250;
+			var divTip = 'div.mentionBody';
+			tinyTip = $(divTip);
+			tinyTip.hide();
+			tinyTip.css(nPos).fadeIn(animSpeed);
+		});
 });
 //deleteComment
 $('body').on('click','.deleteCommBtn',function(){
@@ -217,5 +230,7 @@ $('body').on("click",".mentionBell",function(){
 	tinyTip.css('position', 'absolute').css('z-index', '1000');
 	tinyTip.css(nPos).fadeIn(animSpeed);
 });
-
+$(document).ready(function(){
+	
+	});
 	
