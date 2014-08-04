@@ -20,7 +20,7 @@ import model.modelType.UserType;
 /**
  * Servlet implementation class UserLoginServlet
  */
-@WebServlet("/security/LoginServlet")
+@WebServlet("/security/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			account = (Account) transaction.execute(
 					"Account.fetchByIDAndUserType", ID, userType);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 			response.setStatus(500);
 			return;
 		}
@@ -78,13 +78,12 @@ public class LoginServlet extends HttpServlet {
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 						response.addCookie(cookie);
 					}
-					response.setStatus(200);
+					response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
 				}
 			} else {
 				account.setLastAccessDate(new Date());
 				account.setChance((account.getChance() - 1));
-				response.setStatus(400);
-				response.setHeader("Refresh", "0");
+				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false&chance="+account.getChance());
 			}
 
 			Transaction t = new UpdateAccountTransaction();
@@ -98,8 +97,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} else {
-			response.setStatus(400);
-			response.setHeader("Refresh", "0");
+			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false&chance="+account.getChance());
 		}
 
 	}

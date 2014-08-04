@@ -46,11 +46,14 @@ function create_chatroom(data, fromID, toID, toName, online, top, right) {
 			key.preventDefault();
 		}
 	});
-	prepare_chat_room_close_button(data, fromID);
+	prepare_chat_room_load_more(data, fromID);
+	$("#chatroom #chatroom-close").click(function() {
+		$("#chatroom").fadeOut("fast");
+	});
 	do_fetch_messages(data.ID, fromID);
 }
 
-function prepare_chat_room_close_button(data, fromID) {
+function prepare_chat_room_load_more(data, fromID) {
 	$("#chatroom #load_more")
 			.click(
 					function() {
@@ -91,16 +94,12 @@ function prepare_chat_room_close_button(data, fromID) {
 											$("#chatroom #loading_wait")
 													.replaceWith(
 															'<a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a>');
-											prepare_chat_room_close_button(
-													data, fromID);
+											prepare_chat_room_load_more(data,
+													fromID);
 										}
 									}
 								});
 					});
-}
-
-function close_chatroom(ID) {
-	$("#chatroom").fadeOut("fast");
 }
 
 function on_click_send(chatRoomID, fromID, toID) {
