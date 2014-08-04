@@ -53,7 +53,7 @@ public class AutoLoginFilter implements Filter {
 				Account account = null;
 				try {
 					account = (Account) transation.execute(
-							"Account.fetchBySeriesNum", autoLoginSeriesNum);
+							"Account.fetchBySeriesNum", autoLoginSeriesNum, null);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

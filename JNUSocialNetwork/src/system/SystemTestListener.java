@@ -17,6 +17,7 @@ import transaction.DAOCreateTransaction.CreatePostTransaction;
 import transaction.DAOCreateTransaction.RegisterTransaction;
 import transaction.DAOFetchTransaction.FetchChatRoomTransaction;
 import transaction.DAOUpdateTransaction.FollowTransaction;
+import utils.MD5;
 
 
 /**
@@ -50,11 +51,11 @@ public class SystemTestListener implements ServletContextListener {
     		transaction.execute(CommunityOwner.class, "2011052405", "1901103390", null, UserType.COMMUNITYOWNER);
     		Map<String, Object> attributes = new HashMap<String, Object>();
     		attributes.put("nickName", "Bond");
-    		transaction.execute(Member.class, "2011052407", "1901103390", attributes, UserType.MEMBER);
+    		transaction.execute(Member.class, "2011052407", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
     		attributes.put("nickName", "Obama");
-    		transaction.execute(Member.class, "2011052406", "1901103390", attributes, UserType.MEMBER);
+    		transaction.execute(Member.class, "2011052406", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
     		attributes.put("nickName", "Nobama");
-    		transaction.execute(Member.class, "2011052408", "1901103390", attributes, UserType.MEMBER);
+    		transaction.execute(Member.class, "2011052408", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
     		transaction = new FetchChatRoomTransaction();
     		transaction.execute("2011052406", "2011052407");
     		transaction = new CreatePostTransaction();

@@ -34,7 +34,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		query.setFirstResult(startIndex);
 		query.setMaxResults(pageSize);
 		for (int i = 1; params != null && i <= params.length
-				&& params[0] != null; i++) {
+				&& params[i-1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -45,7 +45,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		// TODO Auto-generated method stub
 		TypedQuery<T> query = em.createNamedQuery(queryName, type);
 		for (int i = 1; params != null && i <= params.length
-				&& params[0] != null; i++) {
+				&& params[i-1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -73,7 +73,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		query.setFirstResult(startIndex);
 		query.setMaxResults(pageSize);
 		for (int i = 1; params != null && i <= params.length
-				&& params[0] != null; i++) {
+				&& params[i-1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -85,7 +85,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		// TODO Auto-generated method stub
 		Query query = em.createNamedQuery(queryName);
 		for (int i = 1; params != null && i <= params.length
-				&& params[0] != null; i++) {
+				&& params[i-1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();

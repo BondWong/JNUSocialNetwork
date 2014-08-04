@@ -1,5 +1,5 @@
 //show reghtml
-		$('body').on("click",".signIn",function(){
+		/*$('body').on("click",".signIn",function(){
 			$('.containerReg').fadeOut(300);
 			$('.containerReg').attr("style","display:none");
 			$('.containerSign').fadeIn(300);
@@ -8,4 +8,4 @@
 			$('.containerSign').fadeOut(300);
 			$('.containerSign').attr("style","display:none");
 			$('.containerReg').fadeIn(300);
-		});
+		});*/

@@ -39,5 +39,7 @@ function on_strangers_node_click() {
 }
 
 function do_create_chatroom() {
-	
+	var top = $("#contact-list").css("top");
+	var right = $("#contact-list").css("right");
+	open_chatroom("2011052406", "2011052407", "Bond", false, top, right);
 }

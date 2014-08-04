@@ -37,7 +37,7 @@
 						<div class="carousel-caption">
 							
 							<p>
-								<a class="btn btn-lg btn-success" href="regAndLogin.jsp" role="button">Sign
+								<a class="btn btn-lg btn-success" href="register.jsp" role="button">Sign
 									up today</a>
 							</p>
 						</div>
