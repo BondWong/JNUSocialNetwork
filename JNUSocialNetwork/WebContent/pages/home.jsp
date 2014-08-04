@@ -185,9 +185,7 @@
 
 						<!-- FOOTER -->
 						<footer>
-						<p class="pull-right">
-							<a href="#">Back to top</a>
-						</p>
+						<div class="back_to_top_button"></div>
 						<p>
 							&copy; 2014 11软工, Bond and Winson. &middot; <a href="#">Privacy</a>
 							&middot; <a href="#">Terms</a>

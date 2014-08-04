@@ -42,7 +42,9 @@
 			<div class="content_info">
 				<div class="conten_head">Joke of the Day</div>
 				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
+				<a><div class="content_join" style="cursor:pointer;">
+				<input type="hidden" value="">Join
+				</div></a>
 			</div>
 		</div>
 		<div class="content_container">

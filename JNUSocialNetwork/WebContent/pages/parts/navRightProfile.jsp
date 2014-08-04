@@ -11,9 +11,39 @@
 			<li><a href="../security/UserLogoutServlet"><span
 					class="glyphicon glyphicon-th">&nbsp;Logout</span></a></li>
 		</ul></li>
-	<li><a><span class="glyphicon glyphicon-bell"
+	<li><a><span class="glyphicon glyphicon-bell mentionBell"
 			style="font-size: 18px"></span></a></li>
 	<li><button type="button" class="btn btn-success btn_cust">Share</button></li>
 	<li><img src="images/1.jpg" class="img-circle img_cust"></li>
 	
 </ul>
+<div class="mentionBody bottom">
+	<div class="arrow"></div>
+	<h2 class="mentionBody-title">Notifications</h2>
+	<div class="mentionBody-content">
+		<div class="NotiItem">
+			<div class="col-lg-3">
+				<div><img src="../images/type.jpg" /></div>
+			</div>
+			<div class="col-lg-6">
+				<div>i want to fuck you!</div>
+			</div>
+		</div>
+		<div class="NotiItem">
+			<div class="col-lg-3">
+				<div><img src="../images/type.jpg" /></div>
+			</div>
+			<div class="col-lg-6">
+				<div>i want to fuck you!</div>
+			</div>
+		</div>
+		<div class="NotiItem">
+			<div class="col-lg-3">
+				<div><img src="../images/type.jpg" /></div>
+			</div>
+			<div class="col-lg-6">
+				<div>i want to fuck you!</div>
+			</div>
+		</div>
+	</div>
+</div>

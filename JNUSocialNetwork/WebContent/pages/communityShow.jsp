@@ -20,10 +20,145 @@
 		<!-- /.container -->
 	</div>
 	<!-- /.navbar -->
+	<div id="light" class="white_content">
+		<div class="row">
+			<div class="col-xs-9" style="background-color: #222222;">
+			<div class="row" style="height: 30px;margin-bottom: 0px;">
+			<div class="col-md-5"></div>
+			<div class="col-md-5">
+			<nav class="navbar navbar-inverse" role="navigation" style="border: none;">
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="#">分  享</a></li>
+					<li><a href="#">幻灯片</a></li>
+					<li class="dropdown">
+            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               			更多 <b class="caret"></b>
+           		 		</a>
+           		 		<ul class="dropdown-menu">
+               				<li><a href="#">举报图片</a></li>
+               				<li><a href="#">......</a></li>
+						</ul>
+					</li>
+				</ul>
+				</div>
+				</nav>
+				</div>
+				<div class="deletePostBtn" style="margin-right: 10px;margin-top: 10px">
+					<a href = "javascript:void(0)"  onclick = "document.getElementById('light').style.display='none';"><input id="deleteImg" type='hidden' value="1405950973690" /><span
+									class="glyphicon glyphicon-remove" style="font-size: 14px" ></span></a>
+					</div>
+			</div>
+			<div class="row">
+			<div class="imgBox">
+				<img src="images/2.jpg" style="max-width: 1000px;min-height: 500px;" />
+			</div>
+			</div>
+			<div class="row" style="height: 30px;margin:o auto;text-align: center;">
+				<input type="button" value="信息中的照片" class="btn btn-link" style="color: white;">
+				<input type="button" value="被查看次数"  class="btn btn-link" style="color: white;"><span>111</span>
+			</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+						<div class="col-md-2">
+							<div class="user_img">
+								<img class="userImg" src="images/user_img.jpg" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="user_name">
+								<strong>Winson_Lau</strong>
+							</div>
+							<div class="user_info">Yesterday 21:23pm</div>
+						</div>
+				</div>	
+				<p>This is not a new article in PNAS, but it details results from a unique study and I have wanted to write about it for a while. </p>
+				<div class="row">
+					<input type="button" value="赞" class="btn btn-default" style="margin-left: 10px;">
+					<input type="button" value="转发" class="btn btn-default">
+				</div>
+				<div class="act_content">
+							<div class="row">
+								<div class="col-lg-1">
+									<img src="images/user_img2.jpg" />
+								</div>
+								<div class="col-lg-10">
+									<div class="ures_name">
+										<strong>Winson_Lau</strong>
+									</div>
+									<div class="user_info">Yesterday 21:23pm</div>
+								</div>
+							</div>
+							<div class="act_comment">There's an extension that whenever
+								you choose something that has a shortcut it has a toast popup
+								that tells you what the shortcut would have been. I used it
+								briefly a long time ago. But it turned out to be really
+								annoying. Still it was a great idea.﻿</div>
+						</div>
+				<div class="act_content">
+							<div class="row">
+								<div class="col-lg-1">
+									<img src="images/user_img2.jpg" />
+								</div>
+								<div class="col-lg-10">
+									<div class="ures_name">
+										<strong>Winson_Lau</strong>
+									</div>
+									<div class="user_info">Yesterday 21:23pm</div>
+								</div>
+							</div>
+							<div class="act_comment">There's an extension that whenever
+								you choose something that has a shortcut it has a toast popup
+								that tells you what the shortcut would have been. I used it
+								briefly a long time ago. But it turned out to be really
+								annoying. Still it was a great idea.﻿</div>
+						</div>
+			</div>
+		</div>
+	</div>
+	<!-- Pop-up layer -->
 	<div class="container container_custom">
 		<div class="alert alert-success alertCust alertCustC">New Post!</div>
-		<div class="communityCard">
-			<div class="cardSetter glyphicon glyphicon-cog"></div>
+			<div class="communityCard">
+			
+				<div class="dropdown">
+					<div class="cardSetter glyphicon glyphicon-cog"  id="dropdownMenu1" data-toggle="dropdown"></div>
+					<ul class="dropdown-menu pull-right " role="menu">
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Invite people</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Share community</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Edit community</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Manage menbers</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Leave community</a>
+	      				</li>
+	      				<li role="presentation" class="divider"></li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Show posts in home stream      </a>
+	      				</li>
+	      				<li class="dropdown">
+	      					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Amount:Standard</a>
+	      					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		      					<li role="presentation">
+			         				<a role="menuitem" tabindex="-1" href="#">...</a>
+			      				</li>
+			      				<li role="presentation">
+			         				<a role="menuitem" tabindex="-1" href="#">...</a>
+			      				</li>	
+			      			</ul>
+			      		</li>
+	      				
+	   				</ul>
+				
+				</div>
 			<div class=communityCardInfo>
 				<h1>Joke of the Day</h1>
 				<p>Funny quotes, jokes, memes, photos, and good humor!</p>
@@ -120,7 +255,9 @@
 						</div>
 					</div>
 					<div class="post_img">
-						<img src="images/2.jpg" />
+						<a href="jovascript:void(0)" onclick = "document.getElementById('light').style.display='block'">
+							<img src="images/2.jpg" />
+						</a>
 					</div>
 					<div class="row">
 						<div class="col-md-1">
