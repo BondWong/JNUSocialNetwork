@@ -195,7 +195,7 @@ $(document).ready(function(){
 				followBtn.text("Follow");
 			}
 		});	
-		//提醒
+		//Notification
 		$('body').on("click",".mentionBell",function(){
 			var animSpeed = 300;			
 			var tinyTip;	

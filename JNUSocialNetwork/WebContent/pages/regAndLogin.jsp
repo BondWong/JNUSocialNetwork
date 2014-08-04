@@ -39,12 +39,13 @@
 			<button class="btn btn-lg btn-success btn-block" type="submit">Sign
 				up</button>
 			<h4>
-				Have a account?<span class="btn signIn">Sign in</span>
+				Have a account?<a href="Login.jsp"><span class="btn signIn">Sign in</span></a>
 			</h4>
 		</form>
 	  </div>
 	</div>
 	<!-- /container -->
+	<!-- 
 	<div class="containerSign" style="display: none">
 
 		<form class="form-signin" role="form" method="post"
@@ -66,6 +67,7 @@
 			</h4>
 		</form>
 	</div>
+	-->
 </div>
 </div>
 	<c:choose>

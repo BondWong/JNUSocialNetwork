@@ -8,11 +8,12 @@
 
 <body>
 <div class="regBody">
+<div class="layer">
 	<div class="regTop">
 		<span>Watch</span>
 		<span>Join</span>
 	</div>
-	<div class="regTitle">Social</div>
+	<div class="regTitle">JNU</div>
 	<div class="regTitle">Your videos will love it here</div>
 	<div class="containerReg" style="display: block">
 	  <div class="regBox">
@@ -30,9 +31,10 @@
 			<button class="btn btn-lg btn-success btn-block signInBtn"
 				type="submit">Sign in</button>
 			<h4>
-				Have no account?<span class="btn signUp">Sign up</span>
+				Have no account?<a href="regAndLogin.jsp"><span class="btn signUp">Sign up</span></a>
 			</h4>
 		</form>
+	  </div>
 	  </div>
 	</div>
 	<!-- /container -->
