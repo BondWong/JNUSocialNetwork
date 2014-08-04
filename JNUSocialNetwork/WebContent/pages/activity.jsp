@@ -23,7 +23,43 @@
 	<div class="container container_custom">
 		<div class="alert alert-success alertCust alertCustC">New Post!</div>
 		<div class="communityCard">
-			<div class="cardSetter glyphicon glyphicon-cog"></div>
+			<div class="dropdown">
+					<div class="cardSetter glyphicon glyphicon-cog"  id="dropdownMenu1" data-toggle="dropdown"></div>
+					<ul class="dropdown-menu pull-right " role="menu">
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Invite people</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Share community</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Edit community</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Manage menbers</a>
+	      				</li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Leave community</a>
+	      				</li>
+	      				<li role="presentation" class="divider"></li>
+	      				<li role="presentation">
+	         				<a role="menuitem" tabindex="-1" href="#">Show posts in home stream      </a>
+	      				</li>
+	      				<li class="dropdown">
+	      					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Amount:Standard</a>
+	      					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		      					<li role="presentation">
+			         				<a role="menuitem" tabindex="-1" href="#">...</a>
+			      				</li>
+			      				<li role="presentation">
+			         				<a role="menuitem" tabindex="-1" href="#">...</a>
+			      				</li>	
+			      			</ul>
+			      		</li>
+	      				
+	   				</ul>
+				
+				</div>
 			<div class=communityCardInfo>
 				<h1>Joke of the Day</h1>
 				<p>Funny quotes, jokes, memes, photos, and good humor!</p>
@@ -41,7 +77,11 @@
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
 				<span>Community Activities</span>
-				<button role="button" class="btn btn-success" data-toggle='modal' data-target='#activityCommunity'>Create Activity</button>
+				<button role="button" class="btn btn-primary" data-toggle='modal' data-target='#activityCommunity'>Create Activity</button>
+			</div>
+			<div style="background-color: #247EEC;color: white;text-align: center;padding-top: 10px;padding-bottom: 10px;margin-top: 15px;">
+				<h1>Nothing here?Create an event for this community</h1>
+				<p>Schedule your next community get-together or hangout</p>
 			</div>
 			<div class="modal fade" id="activityCommunity" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
