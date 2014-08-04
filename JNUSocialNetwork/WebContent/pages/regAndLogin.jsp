@@ -6,13 +6,14 @@
 
 <%@ include file="parts/head.jsp"%>
 
-<body>
+<body style="overflow-x:hidden;overflow-y:hidden;">
 <div class="regBody">
+<div class="layer">
 	<div class="regTop">
 		<span>Watch</span>
 		<span>Join</span>
 	</div>
-	<div class="regTitle">Social</div>
+	<div class="regTitle">JNU</div>
 	<div class="regTitle">Your videos will love it here</div>
 	<div class="containerReg" style="display: block">
 	  <div class="regBox">
@@ -65,6 +66,7 @@
 			</h4>
 		</form>
 	</div>
+</div>
 </div>
 	<c:choose>
 		<c:when test="${ param.invalid}">
