@@ -27,44 +27,14 @@
 		<div class="communityBord"></div>
 		<div class="content_container">
 			<a href="show.jsp"><div class="img_container">
-					<img src="images/i2.jpg" />
-				</div></a>
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
-			</div>
-		</div>
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
 					<img src="images/i1.jpg" />
 				</div></a>
 			<div class="content_info">
 				<div class="conten_head">Joke of the Day</div>
 				<div class="content_count">268,123 members</div>
 				<a><div class="content_join" style="cursor:pointer;">
-				<input type="hidden" value="">Join
+				<input type="hidden" value="1407168802526">Join
 				</div></a>
-			</div>
-		</div>
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
-					<img src="images/i2.jpg" />
-				</div></a>
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
-			</div>
-		</div>
-		<div class="content_container">
-			<a href="show.jsp"><div class="img_container">
-					<img src="images/i3.jpg" />
-				</div></a>
-			<div class="content_info">
-				<div class="conten_head">Joke of the Day</div>
-				<div class="content_count">268,123 members</div>
-				<a><div class="content_join">Join</div></a>
 			</div>
 		</div>
 	  </div>

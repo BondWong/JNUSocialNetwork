@@ -23,7 +23,7 @@
 	<div class="mentionBody-content">
 		<div class="NotiItem">
 			<div class="col-lg-3">
-				<div><img src="../images/type.jpg" /></div>
+				<div><img src="images/type.jpg" /></div>
 			</div>
 			<div class="col-lg-6">
 				<div>i want to fuck you!</div>
@@ -31,7 +31,7 @@
 		</div>
 		<div class="NotiItem">
 			<div class="col-lg-3">
-				<div><img src="../images/type.jpg" /></div>
+				<div><img src="images/type.jpg" /></div>
 			</div>
 			<div class="col-lg-6">
 				<div>i want to fuck you!</div>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="NotiItem">
 			<div class="col-lg-3">
-				<div><img src="../images/type.jpg" /></div>
+				<div><img src="images/type.jpg" /></div>
 			</div>
 			<div class="col-lg-6">
 				<div>i want to fuck you!</div>

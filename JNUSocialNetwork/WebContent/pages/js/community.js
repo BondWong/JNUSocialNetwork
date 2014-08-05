@@ -20,37 +20,34 @@ $(document).ready(function(){
 	//fetchCommunityByID
 	function fetchCommunityByID(communityID){
 		var community = FetchCommunityByID(communityID);
-		addCommunity(community.attributes.name,community.memberIDs.length);
+		addCommunity(community.ID,community.attributes.name,community.memberIDs.length);
 	}
 	//fetchCommunity()
 	function fetchCommunity(){
 		var communities = FetchCommunity("0","5");
 		$.each(communities,function(n,community){
-			addCommunity(community.attributes.name,community.memberIDs.length);
+			addCommunity(community.ID,community.attributes.name,community.memberIDs.length);
 		});
 	}
 	//增加社区
-	function addCommunity(name,memberNum){
-		var boarddiv = "<div class='content_container'><a href='show.jsp'><div class='img_container'><img src='images/i2.jpg' /></div></a><div class='content_info'><div class='conten_head'>"+name+"</div><div class='content_count'>"+memberNum+" members</div><a><div class='content_join'>Join</div></a></div></div>"; 
+	function addCommunity(id,name,memberNum){
+		var boarddiv = "<div class='content_container'><a href='show.jsp'><div class='img_container'><img src='images/i2.jpg' /></div></a><div class='content_info'><div class='conten_head'>"+name+"</div><div class='content_count'>"+memberNum+" members</div><a><div class='content_join style='cursor:pointer;'><input type='hidden' value='"+id+"'>Join</div></a></div></div>"; 
 		$(".communityBord").after(boarddiv); 
 		Msnry('.containerDiscovery', '.content_container', 265);
 	}
 	//function joinCommunity
 	$('body').on('click','.content_join',function(){
 		var id = $(this).find("input").attr("value");
-		if($(this).find("a").css("color") == "rgb(66,139,202)"){
+		if($(this).css("background-color") == "rgb(255, 255, 255)"){
 			JoinCommunity("2011052407",id);
-			var inputID = $("input[value='"+id+"']");
-			inputID.parents("a").css("color","rgb(255, 255, 255)");
-			inputID.parents("a").css("background-color","rgb(66,139,202)");
+			$(this).css("color","rgb(255, 255, 255)");
+			$(this).css("background-color","rgb(66,139,202)");
 			return 0;
 		}
-		if($(this).find("a").css("color") == "rgb(255, 255, 255)"){
+		else{
 			LeaveCommunity("2011052407",id);
-			var inputID = $("input[value='"+id+"']");
-			
-			inputID.parents("a").css("color","rgb(90, 90, 90)");
-			inputID.parents("a").css("background-color","rgb(255, 255, 255)");
+			$(this).css("color","rgb(66,139,202)");
+			$(this).css("background-color","rgb(255, 255, 255)");
 			return 0;
 		}
 	});
