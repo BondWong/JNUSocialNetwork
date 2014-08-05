@@ -9,7 +9,7 @@
 			<li><a href="home.jsp"><span
 					class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
 			<li><a href="community.jsp"><span
-					class="glyphicon glyphicon-th">&nbsp;Activities</span></a></li>
+					class="glyphicon glyphicon-th">&nbsp;Communities</span></a></li>
 			<li><a href="circle.jsp"><span
 					class="glyphicon glyphicon-comment">&nbsp;Chat</span></a></li>
 			<li><a href="Q&A.html"><span

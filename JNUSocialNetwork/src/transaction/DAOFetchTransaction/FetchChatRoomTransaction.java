@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.persistence.EntityManager;
 
 import model.ChatRoom;
+import model.Member;
 import model.factory.ModelFactory;
 import persistence.DAO;
 import transaction.DAOTransaction;
@@ -21,6 +22,10 @@ public class FetchChatRoomTransaction extends DAOTransaction{
 		ChatRoom chatRoom = dao.get(ChatRoom.class, ID);
 		if(chatRoom == null) {
 			chatRoom = ModelFactory.getInstance().create(ChatRoom.class, params[0], params[1], new HashMap<String, String>());
+			Member m1 = dao.get(Member.class, (String)params[0]);
+			Member m2 = dao.get(Member.class, (String)params[1]);
+			chatRoom.setM1(m1);
+			chatRoom.setM2(m2);
 			dao.create(chatRoom);
 		}
 		return chatRoom.toRepresentation();

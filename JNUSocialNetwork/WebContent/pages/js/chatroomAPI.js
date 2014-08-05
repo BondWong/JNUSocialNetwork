@@ -2,13 +2,21 @@
  * 
  */
 
-function open_chatroom(fromID, toID, toName, online, top, right) {
+function open_chatroom(fromID, toID, toName, online) {
 	$.ajax({
 		type : "GET",
 		url : '../../JNUSocialNetwork/app/chatRoom/fetch/' + fromID + '/'
 				+ toID,
 		success : function(data) {
-			create_chatroom(data, fromID, toID, toName, online, top, right);
+			var top = $("#contact-list").css("top");
+			var right = $("#contact-list").css("right");
+			var width = $("#contact-list").css("width");
+			right = right.substring(0, right.indexOf("px"));
+			right = parseInt(right);
+			width = width.substring(0, width.indexOf("px"));
+			width = parseInt(width);
+			create_chatroom(data, fromID, toID, toName, online, top, right
+					+ width);
 		}
 	});
 }
@@ -118,6 +126,7 @@ function on_click_send(chatRoomID, fromID, toID) {
 		textarea.val("");
 		value = value.replace(/ /g, '&nbsp;');
 		var date = new Date();
+
 		do_send({
 			"action" : "CHAT",
 			"fromID" : fromID,
@@ -148,10 +157,6 @@ function do_receive(data) {
 			"ID" : data.ID,
 			"status" : "READ"
 		});
-		/*
-		 * ws.send(JSON.stringify({ "action" : "UPDATEMESSAGESTATUS", "fromID" :
-		 * data.fromID, "ID" : data.ID, "status" : "READ" }));
-		 */
 	}
 }
 
@@ -254,22 +259,19 @@ function fetch_from_local(chat_room_ID, fromID) {
 }
 
 function send_to_server(data) {
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
 	oriented_send({
 		"action" : "CHAT",
 		"fromID" : data.fromID,
 		"toID" : data.toID,
 		"status" : "SENDING",
 		"ID" : data.ID,
+		"from" : user.attributes.name,
 		"publishDate" : data.publishDate,
 		"chatRoomID" : data.chatRoomID,
 		"attributes" : data.attributes
 	});
-	/*
-	 * ws.send(JSON.stringify({ "action" : "CHAT", "fromID" : data.fromID,
-	 * "toID" : data.toID, "status" : "SENDING", "ID" : data.ID, "publishDate" :
-	 * data.publishDate, "chatRoomID" : data.chatRoomID, "attributes" :
-	 * data.attributes }));
-	 */
 }
 
 function do_change_status(data) {
@@ -294,7 +296,7 @@ function handle_unread_messages(messages) {
 					.append(
 							'<li role="presentation" id="'
 									+ messages[i].fromID
-									+ '"><a role="menuitem" tabindex="-1" href="javaScript:void(0);">'
+									+ '"><a role="menuitem" tabindex="-1"href="javaScript:void(0);">'
 									+ messages[i].from + '<span class="badge">'
 									+ count[messages[i].fromID]
 									+ '</span></a></li>');
@@ -320,30 +322,38 @@ function handle_unread_messages(messages) {
 									$("#unreadmessages").fadeOut("fast");
 									$("#unreadmessages ul").empty();
 								}
+								var online = false;
+								IDs = sessionStorage.getItem("onlineUserIDs");
+								IDs = $.parseJSON(IDs);
+								for (var k = 0; k < IDs.length; k++)
+									if (IDs[k] == tempFromID)
+										break;
+								if (k != IDs.length)
+									online = true;
 								show_unread_messages(messages, tempToID,
-										tempFromID, tempFrom, true, 30, 30);
+										tempFromID, tempFrom, online);
 								show_online_messages($
 										.parseJSON(sessionStorage
 												.getItem("online_message_"
 														+ tempFromID)),
-										tempToID, tempFromID, tempFrom, true,
-										30, 30);
+										tempToID, tempFromID, tempFrom, online);
 							});
 		} else {
-			count[messages[i].fromID]++;
-			$("#unreadmessages " + "#" + messages[i].fromID + " span")
-					.replaceWith(
-							'<span class="badge">' + count[messages[i].fromID]
-									+ '</span>');
+			var number = $(
+					"#unreadmessages " + "#" + messages[i].fromID + "span")
+					.text();
+			number = parseInt(number);
+			number++;
+			$("#unreadmessages " + "#" + messages[i].fromID + "span")
+					.replaceWith('<span class="badge">' + number + '</span>');
 		}
 	}
 	if (i != 0)
 		$("#unreadmessages").show();
 }
 
-function show_unread_messages(messages, toID, fromID, toName, online, top,
-		right) {
-	open_chatroom(toID, fromID, toName, online, top, right);
+function show_unread_messages(messages, toID, fromID, toName, online) {
+	open_chatroom(toID, fromID, toName, online);
 	for (var i = 0; i < messages.length; i++) {
 		if (messages[i].fromID == fromID) {
 			append_to_content_panel(messages[i], "other");
@@ -354,11 +364,6 @@ function show_unread_messages(messages, toID, fromID, toName, online, top,
 				"ID" : messages[i].ID,
 				"status" : "READ"
 			});
-			/*
-			 * ws.send(JSON.stringify({ "action" :
-			 * "UPDATEMESSAGESTATUSTOSERVER", "fromID" : messages[i].fromID,
-			 * "ID" : messages[i].ID, "status" : "READ" }));
-			 */
 		}
 	}
 }
@@ -416,11 +421,11 @@ function online_remind(message) {
 				.stringify(online_messages));
 	}
 	$("#unreadmessages").show();
+
 }
 
-function show_online_messages(messages, toID, fromID, toName, online, top,
-		right) {
-	open_chatroom(toID, fromID, toName, online, top, right);
+function show_online_messages(messages, toID, fromID, toName, online) {
+	open_chatroom(toID, fromID, toName, online);
 	for (var i = 0; messages != null && i < messages.length; i++) {
 		append_to_content_panel(messages[i], "other");
 		save_message(messages[i]);
@@ -430,10 +435,6 @@ function show_online_messages(messages, toID, fromID, toName, online, top,
 			"ID" : messages[i].ID,
 			"status" : "READ"
 		});
-		/*
-		 * ws.send(JSON.stringify({ "action" : "UPDATEMESSAGESTATUS", "fromID" :
-		 * messages[i].fromID, "ID" : messages[i].ID, "status" : "READ" }));
-		 */
 	}
 }
 

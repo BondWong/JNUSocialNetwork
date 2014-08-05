@@ -36,7 +36,7 @@ public class AttributesFactory {
 				attributes.put("avatarLink", "");
 				attributes.put("profileImageLink", "");
 				attributes.put("gender", "");
-				attributes.put("nickName", "");
+				attributes.put("name", "");
 				attributes.put("lookingFor", "");
 				attributes.put("relationship", "");
 				attributes.put("institution", "");

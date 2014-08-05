@@ -155,6 +155,7 @@ public class Message extends AttributeModel {
 		representation.put("chatRoomID",
 				this.chatRoom.toRepresentation().get("ID"));
 		representation.put("from", this.from.getAttribute("name"));
+		representation.put("fromAvatar", this.from.getAttribute("avatarLink"));
 		return representation;
 	}
 

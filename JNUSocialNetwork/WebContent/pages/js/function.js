@@ -196,18 +196,26 @@ $(document).ready(function(){
 			}
 		});	
 		//Notification
-		$('body').on("click",".mentionBell",function(){
-			var animSpeed = 300;			
+		$(".mentionBell").click(function(e){			
 			var tinyTip;	
 			var pos = $(this).offset();
 			var nPos = pos;
-			nPos.top = pos.top + 20;
+			nPos.top = pos.top+20;
 			nPos.left = pos.left -250;
 			var divTip = 'div.mentionBody';
 			tinyTip = $(divTip);
 			tinyTip.hide();
-			tinyTip.css(nPos).fadeIn(animSpeed);
+			tinyTip.css(nPos).fadeIn(300);
+			e.stopPropagation();
 		});
+		$(document).mousedown(function(e){
+			if(e.which==1){
+				var divTip = 'div.mentionBody';
+				tinyTip = $(divTip);
+				tinyTip.fadeOut(300);
+			}
+		}); 
+		
 });
 //deleteComment
 $('body').on('click','.deleteCommBtn',function(){
@@ -215,22 +223,5 @@ $('body').on('click','.deleteCommBtn',function(){
 	var postID = $(this).find("input").attr("id");
 	DeleteComment(postID,commentID);
 });
-//function mention
-$('body').on("click",".mentionBell",function(){
-	var pos = $(this).offset();
-	var nPos = pos;
-	nPos.top = pos.top + 20;
-	nPos.left = pos.left + 40;
-	var divTip = 'div.mentionBody';
-	tinyTip = $(divTip);
-	tinyTip.hide();
 
-	// Make sure that the tooltip has absolute positioning and a high z-index, 
-	// then place it at the correct spot and fade it in.
-	tinyTip.css('position', 'absolute').css('z-index', '1000');
-	tinyTip.css(nPos).fadeIn(animSpeed);
-});
-$(document).ready(function(){
-	
-	});
 	

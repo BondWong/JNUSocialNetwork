@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Chatroom API</title>
+<title>Friends List</title>
 <!-- Bootstrap core CSS -->
 <link href="pages/styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
 	rel="stylesheet">
@@ -31,10 +31,29 @@
 <script src="pages/styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<button
-		onclick="open_chatroom('2011052406', '2011052407', 'Bond', true, 30, 30)">女神
-		create chat room</button>
-	<input type="hidden" value="2011052406" id="ID" />
+	<div class="panel panel-default contact-list" id="contact-list">
+		<div class="panel-body contact-list-body">
+			<ul class="nav nav-pills contact-list-nav-bar" role="tablist">
+				<li class="active" id="contact-button"><a href="#contact"
+					role="tab" data-toggle="tab">Contact</a></li>
+				<li><a href="#history" role="tab" data-toggle="tab"
+					id="history-button">History</a></li>
+			</ul>
+			<div class="tab-content contact-list-content">
+				<div class="tab-pane active" id="contact">
+					<div class="friends-tree-node">
+						<a href="javaScript:void(0);" class="friends-tree-node-button"><span
+							class="glyphicon glyphicon-chevron-right">Contacts</span></a>
+					</div>
+				</div>
+				<div class="tab-pane" id="history"></div>
+			</div>
+		</div>
+		<div class="panel-footer contant-list-footer">
+			<a href="javaScript:void(0);" class="open_button"><span
+				class="glyphicon glyphicon-chevron-left open_button"></span></a>
+		</div>
+	</div>
 	<div class="dropdown" id="unreadmessages">
 		<button class="btn btn-default dropdown-toggle" type="button"
 			id="dropdownMenu1" data-toggle="dropdown">
@@ -43,10 +62,10 @@
 		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 		</ul>
 	</div>
-	<script>
-		$("#unreadmessages").hide();
-	</script>
+	<input type="hidden" id="ID" value="2011052406" />
+	<script src="pages/js/friend-list.js"></script>
 	<script src="pages/js/chatroomAPI.js"></script>
-	<script src="pages/js/json-initialization.js"></script>
+	<script src="pages/js/initialization.js"></script>
+	<script src="pages/js/login-initialization.js"></script>
 </body>
 </html>

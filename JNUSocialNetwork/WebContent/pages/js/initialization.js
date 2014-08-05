@@ -25,18 +25,6 @@ $(document).ready(function() {
 			}, duration);
 			return false;
 		});
-		/*
-		 * initialize friend-list
-		 */
-		$("#contact-list .friends-tree-node-button").click(function() {
-			on_friends_node_click();
-		});
-		$("#contact-list .strangers-tree-node-button").click(function() {
-			on_strangers_node_click();
-		});
-		$("#contact-list .person").click(function() {
-			do_create_chatroom();
-		});
 
 	};
 
