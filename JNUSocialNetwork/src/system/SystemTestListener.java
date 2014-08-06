@@ -78,6 +78,7 @@ public class SystemTestListener implements ServletContextListener {
     		transaction.execute("2011052406", PostType.NORMAL, new HashMap<String, String>(), new LinkedHashSet<String>());
     		transaction = new FollowTransaction();
     		transaction.execute("2011052408", "2011052406");
+    		transaction.execute("2011052406", "2011052404");
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
