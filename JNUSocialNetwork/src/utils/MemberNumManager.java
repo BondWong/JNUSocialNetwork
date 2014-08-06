@@ -7,12 +7,10 @@ public class MemberNumManager {
 	
 	public static void increment() {
 		memberNum.getAndIncrement();
-		System.out.println(memberNum);
 	}
 	
 	public static void decrement() {
 		memberNum.getAndDecrement();
-		System.out.println(memberNum);
 	}
 	
 	public static int get() {

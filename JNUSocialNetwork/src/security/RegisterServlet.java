@@ -35,7 +35,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import transaction.Transaction;
-import transaction.DAOCreateTransaction.RegisterTransaction;
+import transaction.DAOCreateTransaction.RegisterMemberTransaction;
 
 /**
  * Servlet implementation class LoginServlet
@@ -189,7 +189,7 @@ public class RegisterServlet extends HttpServlet {
 				Map<String, Object> params = new HashMap<String, Object>();
 				params.put("ID", txtYHBS);
 				params.put("password", txtYHMM);
-				Transaction transaction = new RegisterTransaction();
+				Transaction transaction = new RegisterMemberTransaction();
 				try {
 					transaction.execute(params);
 				} catch (Exception e) {
