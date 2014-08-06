@@ -18,7 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="styles/custom.css" rel="stylesheet">
-    
+    <link href="styles/instant-chat.css" rel="stylesheet">
 	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="styles/jquery.fileupload.css">
 	<style>

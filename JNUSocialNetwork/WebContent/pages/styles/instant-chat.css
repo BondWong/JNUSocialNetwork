@@ -24,7 +24,7 @@ div.chat-room-body {
 }
 
 div.chat-room-footer {
-	height: 100px;
+	height: 110px;
 }
 
 textarea.chat-room-input {
@@ -90,9 +90,9 @@ img.chat-avatar {
 
 .contact-list {
 	width: 200px;
-	height: 45%;
+	height: 500px;
 	position: fixed;
-	right: 0px;
+	right: -200px;
 	position: fixed;
 	top: 200px;
 }
@@ -104,6 +104,18 @@ img.chat-avatar {
 
 .contant-list-footer {
 	height: 10%;
+	position: relative;
+	right: 40px;
+	border: 1px solid Gainsboro;
+	border-radius: 2px;
+}
+
+.open_button {
+	color: Crimson;
+}
+
+span.open_button {
+	font-size: 20px;
 }
 
 .contact-list-nav-bar {
@@ -132,4 +144,9 @@ img.chat-avatar {
 
 .person-info {
 	text-alignn: center;
+}
+
+#unreadmessages {
+	display: none;
+	top: 100px;
 }

@@ -1,5 +1,6 @@
 package service;
 
+import java.net.URLDecoder;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import model.Member;
 import model.ServerSentEvent;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
@@ -31,11 +31,12 @@ import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
 import transaction.DAOFetchTransaction.GetCommunityOwnerIDStatusTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
+import transaction.DAOFetchTransaction.SearchMemberTransaction;
 import transaction.DAOFetchTransaction.SessionRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
-import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
+import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteCommunityOwnerTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
@@ -115,11 +116,10 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateProfile(@PathParam("ID") String ID, Map attributes)
 			throws Exception {
-		transaction = new UpdateAttributeTransaction();
+		transaction = new UpdateMemberAttributeTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(Member.class,
-					ID, attributes);
+			result = (Map<String, Object>) transaction.execute(ID, attributes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,21 +166,21 @@ public class UserService {
 		}
 		return Response.ok().build();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GET
 	@Path("fetchIDs/{userType : [A-Z]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchIDs(@PathParam("userType") String userType) throws Exception {
+	public Response fetchIDs(@PathParam("userType") String userType)
+			throws Exception {
 		List results;
 		transaction = new FetchModelColumnTransaction();
 		try {
 			if (userType.equals("MEMBER")) {
-				results = (List) transaction.execute(
-						"Member.fetchIDs", null);
+				results = (List) transaction.execute("Member.fetchIDs", null);
 			} else if (userType.equals("COMMUNITYOWNER")) {
-				results = (List) transaction.execute(
-						"CommunityOwner.fetchIDs", null);
+				results = (List) transaction.execute("CommunityOwner.fetchIDs",
+						null);
 			} else {
 				throw new Exception();
 			}
@@ -191,11 +191,10 @@ public class UserService {
 			throw e;
 		}
 
-		return Response.ok(
-				new GenericEntity<List<String>>(results) {
-				}).build();
+		return Response.ok(new GenericEntity<List<String>>(results) {
+		}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@GET
 	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}/{userType : [A-Z]+}")
@@ -292,12 +291,13 @@ public class UserService {
 		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchCommunityOwnerByID/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchCommunityOwnerByID(@PathParam("ID") String ID) throws Exception {
+	public Response fetchCommunityOwnerByID(@PathParam("ID") String ID)
+			throws Exception {
 		transaction = new FetchCommunityOwnerTransaction();
 		Map<String, Object> result;
 		try {
@@ -411,10 +411,36 @@ public class UserService {
 				new GenericEntity<List<Map<String, Object>>>(members) {
 				}).build();
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Path("search/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response searchMember(@PathParam("key") String key,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		key = URLDecoder.decode(key, "utf-8");
+		System.out.println(key);
+		transaction = new SearchMemberTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(key,
+					startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
 	@Path("getIDStatus/{communityOwnerID : \\d+}")
 	@GET
-	public Response getIDStatus(@PathParam("communityOwnerID") String applicationID) throws Exception {
+	public Response getIDStatus(
+			@PathParam("communityOwnerID") String applicationID)
+			throws Exception {
 		transaction = new GetCommunityOwnerIDStatusTransaction();
 		boolean result = false;
 		try {
@@ -423,7 +449,7 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		if(result) 
+		if (result)
 			return Response.ok().build();
 		return Response.status(Status.BAD_REQUEST).build();
 	}

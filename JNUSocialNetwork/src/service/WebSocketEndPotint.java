@@ -27,6 +27,7 @@ import service.helper.MessageStorage;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateMessagesTransaction;
 import transaction.DAOCreateTransaction.CreateUnhandledEventsTransaction;
+import transaction.DAOFetchTransaction.FetchChatRoomsTransaction;
 import transaction.DAOFetchTransaction.FetchUnhandledEventsTransaction;
 import transaction.DAOFetchTransaction.FetchUnreadMessagesTransaction;
 import transaction.DAOUpdateTransaction.UpdateMessageStatusTransaction;
@@ -55,11 +56,28 @@ public class WebSocketEndPotint {
 			e.printStackTrace();
 			throw e;
 		}
+		Map<String, Object> contactsMap = new HashMap<String, Object>();
+		transaction = new FetchChatRoomsTransaction();
+		List<Map<String, Object>> contacts = (List<Map<String, Object>>) transaction
+				.execute(ID);
+		contactsMap.put("action", "SENDCONTACT");
 
-		session.getBasicRemote().sendObject(sse.toRepresentation());
+		for (Map<String, Object> contact : contacts)
+			contact.put("online", false);
+		
+		System.out.println(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
+			for (int i = 0; i < contacts.size(); i++) {
+				if (sess.getUserProperties().get("ID")
+						.equals(contacts.get(i).get("m1ID"))
+						|| sess.getUserProperties().get("ID")
+								.equals(contacts.get(i).get("m2ID")))
+					contacts.get(i).put("online", true);
+			}
 		}
+
+		contactsMap.put("contacts", contacts);
 
 		Map<String, Object> info = new HashMap<String, Object>();
 		transaction = new FetchUnreadMessagesTransaction();
@@ -69,9 +87,9 @@ public class WebSocketEndPotint {
 		info.put("unhandledEvents",
 				(List<Map<String, Object>>) transaction.execute(ID));
 		info.put("action", "REMIND");
-		System.out.println(info);
 		try {
 			session.getBasicRemote().sendObject(info);
+			session.getBasicRemote().sendObject(contactsMap);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,6 +109,7 @@ public class WebSocketEndPotint {
 			e.printStackTrace();
 			throw e;
 		}
+		System.out.println(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
 		}
@@ -132,6 +151,8 @@ public class WebSocketEndPotint {
 			break;
 		case UPDATEMESSAGESTATUSTOSERVER:
 			handleUpdateMessageStatusToServer(session, param);
+			break;
+		case SENDCONTACT:
 			break;
 		}
 

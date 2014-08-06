@@ -10,6 +10,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import service.helper.SearchMap;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import utils.MD5;
@@ -59,37 +60,38 @@ public class Initialtor implements ServletContextListener {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				//System.out.println("test1");
+				// System.out.println("test1");
 			}
 
 		}, 5, 5, TimeUnit.SECONDS);
-		
+
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				//System.out.println("test2");
+				// System.out.println("test2");
 			}
 
 		}, 4, 4, TimeUnit.SECONDS);
-		
+
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				//System.out.println("test3");
+				// System.out.println("test3");
 			}
 
 		}, 3, 3, TimeUnit.SECONDS);
-		
+
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
 
 		Transaction transaction = new RegisterGodTransaction();
 		try {
 			transaction.execute("WongZeonbong", MD5.toMD5Code("1901103390"));
+			SearchMap.initializeEnvironment();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

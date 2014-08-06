@@ -9,10 +9,10 @@
 <body>
 	<div class="regBody">
 		<div class="regTop">
-			<span>Watch</span> <span>Join</span>
+			<span>這個位置完本地Watch有什麼用</span> <span>這個Join呢</span>
 		</div>
-		<div class="regTitle">Social</div>
-		<div class="regTitle">Your videos will love it here</div>
+		<div class="regTitle">Sign In</div>
+		<div class="regTitle">這個是幹嘛的</div>
 		<div class="containerReg" style="display: block">
 			<div class="regBox">
 				<form class="form-signin" role="form" method="post"
@@ -28,16 +28,6 @@
 					<input type="hidden" name="userType" value="MEMBER" />
 					<button class="btn btn-lg btn-success btn-block signInBtn"
 						type="submit">Sign in</button>
-					<script src="js/jquery-1.10.2.js"></script>
-					<script src="js/md5.js"></script>
-					<script>
-						$('body').on("click", ".signInBtn", function() {
-							var pass = $("#mad5Password").val();
-							if (pass.length > 0) {
-								$("#mad5Password").val(md5(pass));
-							}
-						});
-					</script>
 					<h4>
 						Have no account?<span class="btn signUp">Sign up</span>
 					</h4>
@@ -48,18 +38,22 @@
 		<div class="containerSign" style="display: none"></div>
 	</div>
 	<c:choose>
-		<c:when test="${ param.invalid}">
+		<c:when test="${ param.success eq false}">
+
 			<script type="text/javascript">
-				alert("UserID or Password error!");
+				alert("UserID or Password error! " + '${param.chance}'
+						+ " chances left");
 			</script>
+
 		</c:when>
-		<c:when test="${ param.error !=null}">
-			<script type="text/javascript">
-				alert("${param.error}");
+		<c:when test="${param.register} }">
+		
+		<script type="text/javascript">
+				alert("Register success");
 			</script>
+		
 		</c:when>
 	</c:choose>
-	<%@ include file="parts/securityCode.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
@@ -68,7 +62,6 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
-	<script src="js/regAndLogin.js"></script>
 	<script src="js/md5.js"></script>
 	<script>
 		$('body').on("click", ".signInBtn", function() {
@@ -77,6 +70,11 @@
 				$("#md5Password").val(md5(pass));
 			}
 		});
+		$("h4 span.signUp").click(function() {
+			location.href = "register.jsp";
+		});
 	</script>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/initialization.js"></script>
 </body>
 </html>

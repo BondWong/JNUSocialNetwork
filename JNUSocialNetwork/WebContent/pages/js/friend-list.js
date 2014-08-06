@@ -8,9 +8,45 @@ function on_friends_node_click() {
 		$("#contact-list .friends-tree-node span")
 				.replaceWith(
 						'<span class="glyphicon glyphicon-chevron-down">Friends</span>');
-		$("#contact-list .friends-tree-node")
-				.append(
-						'<div class="person"><img src="" class="person-img" /><p class="person-info">Bond<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></div>');
+		var chatRooms = sessionStorage.getItem("chatrooms");
+		var userID = sessionStorage.getItem("user");
+		userID = $.parseJSON(userID);
+		userID = userID.ID;
+		chatRooms = $.parseJSON(chatRooms);
+		for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
+			var chatRoom = chatRooms[i];
+			if (chatRooms[i].m1ID == userID) {
+				var info = '<div class="person" id="' + chatRooms[i].m2ID
+						+ '"><img src="' + chatRooms[i].m2.avatarLink
+						+ '" class="person-img" /><p class="person-info">'
+						+ chatRooms[i].m2.name;
+				if (!chatRooms[i].online)
+					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></div>';
+				else
+					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></div>';
+				$("#contact-list .friends-tree-node").append(info);
+				$("#contact-list #" + chatRoom.m2ID).click(
+						function() {
+							open_chatroom(userID, chatRoom.m2ID,
+									chatRoom.m2.name, chatRoom.online);
+						});
+			} else {
+				var info = '<div class="person" id="' + chatRooms[i].m1ID
+						+ '"><img src="' + chatRooms[i].m1.avatarLink
+						+ '" class="person-img" /><p class="person-info">'
+						+ chatRooms[i].m1.name;
+				if (!chatRooms[i].online)
+					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></div>';
+				else
+					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></div>';
+				$("#contact-list .friends-tree-node").append(info);
+				$("#contact-list #" + chatRoom.m1ID).click(
+						function() {
+							open_chatroom(userID, chatRoom.m1ID,
+									chatRoom.m1.name, chatRoom.online);
+						});
+			}
+		}
 	} else if ($("#contact-list .friends-tree-node span").attr("class")
 			.indexOf("glyphicon-chevron-down") != -1) {
 		$("#contact-list .friends-tree-node span")
@@ -20,26 +56,3 @@ function on_friends_node_click() {
 	}
 }
 
-function on_strangers_node_click() {
-	if ($("#contact-list .strangers-tree-node span").attr("class").indexOf(
-			"glyphicon-chevron-right") != -1) {
-		$("#contact-list .strangers-tree-node span")
-				.replaceWith(
-						'<span class="glyphicon glyphicon-chevron-down">Strangers</span>');
-		$("#contact-list .strangers-tree-node")
-				.append(
-						'<div class="person"><img src="" class="person-img" /><p class="person-info">Mary<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></div>');
-	} else if ($("#contact-list .strangers-tree-node span").attr("class")
-			.indexOf("glyphicon-chevron-down") != -1) {
-		$("#contact-list .strangers-tree-node span")
-				.replaceWith(
-						'<span class="glyphicon glyphicon-chevron-right">Strangers</span>');
-		$("#contact-list .strangers-tree-node .person").remove();
-	}
-}
-
-function do_create_chatroom() {
-	var top = $("#contact-list").css("top");
-	var right = $("#contact-list").css("right");
-	open_chatroom("2011052406", "2011052407", "Bond", false, top, right);
-}
