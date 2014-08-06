@@ -5,11 +5,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
-import model.Member;
+import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 
 public class CrawAttributesTransaction implements Transaction{
-	Transaction transaction = new UpdateAttributeTransaction();
+	Transaction transaction = new UpdateMemberAttributeTransaction();
 	private static Pattern p;
 	
 	@SuppressWarnings("unchecked")
@@ -86,7 +85,7 @@ public class CrawAttributesTransaction implements Transaction{
 		attributes.put("email", email);
 		
 		System.out.println(params);
-		transaction.execute(Member.class, ID, attributes);
+		transaction.execute(ID, attributes);
 		
 		return null;
 	}

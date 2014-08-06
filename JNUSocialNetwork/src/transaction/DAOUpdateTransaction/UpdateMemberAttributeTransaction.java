@@ -15,6 +15,10 @@ public class UpdateMemberAttributeTransaction implements Transaction {
 	public Object execute(Object... params) throws Exception {
 		// TODO Auto-generated method stub
 		SearchMap.deserialize();
+		String name = ((Map<String, String>)params[1]).get("name");
+		SearchMap.addRecord(name, (String) params[0]);
+		String gender = ((Map<String, String>)params[1]).get("gender");
+		SearchMap.addRecord(gender, (String) params[0]);
 		String lookingFor = ((Map<String, String>) params[1]).get("lookingFor");
 		if (lookingFor != null && lookingFor != "")
 			SearchMap.addRecord(lookingFor, (String) params[0]);

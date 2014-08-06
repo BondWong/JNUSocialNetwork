@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				account.setLastAccessDate(new Date());
 				account.setChance((account.getChance() - 1));
-				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false&chance="+account.getChance());
+				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
 			}
 
 			Transaction t = new UpdateAccountTransaction();
@@ -97,7 +97,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} else {
-			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false&chance="+account.getChance());
+			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
 		}
 
 	}

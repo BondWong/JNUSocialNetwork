@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -186,12 +185,9 @@ public class RegisterServlet extends HttpServlet {
 						.getServletContext().getAttribute("executor");
 				executor.execute(new UserInfoCrawler(asyncCtx));
 
-				Map<String, Object> params = new HashMap<String, Object>();
-				params.put("ID", txtYHBS);
-				params.put("password", txtYHMM);
 				Transaction transaction = new RegisterMemberTransaction();
 				try {
-					transaction.execute(params);
+					transaction.execute(txtYHBS, txtYHMM, new HashMap<String, String>());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -199,10 +195,10 @@ public class RegisterServlet extends HttpServlet {
 					return;
 				}
 
-				response.sendRedirect("/GuitarWebApp/pages/regAndLogin.jsp?ok=true");
+				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?register=true");
 
 			} else {
-				response.sendRedirect("/GuitarWebApp/pages/regAndLogin.jsp?error="
+				response.sendRedirect("/JNUSocialNetwork/pages/register.jsp?error="
 						+ findErrorMessage(httpResponse));
 			}
 		} finally {

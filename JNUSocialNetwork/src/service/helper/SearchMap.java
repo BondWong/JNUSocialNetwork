@@ -17,6 +17,8 @@ public class SearchMap {
 	}
 	
 	public static void addRecord(String key, String ID) {
+		if(key == null)
+			return;
 		String IDs = null;
 		synchronized (SearchMap.class) {
 			IDs = searchMap.get(key);
