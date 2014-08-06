@@ -48,7 +48,7 @@ public class SystemTestListener implements ServletContextListener {
     	Transaction transaction;
     	try{
     		transaction = new RegisterCommunityOwnerTransaction();
-    		transaction.execute("2011052405", "1901103390", null, UserType.COMMUNITYOWNER);
+    		transaction.execute("2011052405", "123456", null, UserType.COMMUNITYOWNER);
     		transaction = new RegisterMemberTransaction();
     		Map<String, Object> attributes = new HashMap<String, Object>();
     		attributes.put("name", "Bond");
@@ -57,27 +57,27 @@ public class SystemTestListener implements ServletContextListener {
     		attributes.put("lookingFor", "girls");
     		attributes.put("中文", "测试");
     		attributes.put("avatarLink", "images/user_img.jpg");
-    		transaction.execute("2011052407", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
+    		transaction.execute("2011052404", MD5.toMD5Code("123456"), attributes, UserType.MEMBER);
     		attributes.put("name", "Obama");
     		attributes.put("gender", "male");
     		attributes.put("relationship", "married");
     		attributes.put("lookingFor", "geeks");
     		attributes.put("avatarLink", "images/user_img.jpg");
-    		transaction.execute("2011052406", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
+    		transaction.execute("2011052406", MD5.toMD5Code("123456"), attributes, UserType.MEMBER);
     		attributes.put("name", "黃俊邦");
     		attributes.put("gender", "male");
     		attributes.put("relationship", "available");
     		attributes.put("lookingFor", "girls");
     		attributes.put("avatarLink", "images/user_img.jpg");
-    		transaction.execute("2011052408", MD5.toMD5Code("1901103390"), attributes, UserType.MEMBER);
+    		transaction.execute("2011052408", MD5.toMD5Code("123456"), attributes, UserType.MEMBER);
     		transaction = new FetchChatRoomTransaction();
-    		transaction.execute("2011052406", "2011052407");
+    		transaction.execute("2011052406", "2011052404");
     		transaction = new CreatePostTransaction();
     		transaction.execute("2011052406", PostType.NORMAL, new HashMap<String, String>(), new LinkedHashSet<String>());
     		transaction.execute("2011052406", PostType.NORMAL, new HashMap<String, String>(), new LinkedHashSet<String>());
     		transaction.execute("2011052406", PostType.NORMAL, new HashMap<String, String>(), new LinkedHashSet<String>());
     		transaction = new FollowTransaction();
-    		transaction.execute("2011052407", "2011052406");
+    		transaction.execute("2011052408", "2011052406");
     	} catch(Exception e) {
     		e.printStackTrace();
     	}

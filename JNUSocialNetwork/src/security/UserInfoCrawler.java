@@ -62,13 +62,9 @@ public class UserInfoCrawler implements Runnable{
 		}
 		
 		String ID = asyncContext.getRequest().getParameter("ID");
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("response", response);
-		params.put("patterns", patternMap);
-		params.put("ID", ID);
 		Transaction transaction = new CrawAttributesTransaction();
 		try {
-			transaction.execute(params);
+			transaction.execute(response, patternMap, ID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

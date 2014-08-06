@@ -35,6 +35,7 @@ import org.apache.http.util.EntityUtils;
 
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
+import utils.MD5;
 
 /**
  * Servlet implementation class LoginServlet
@@ -187,7 +188,7 @@ public class RegisterServlet extends HttpServlet {
 
 				Transaction transaction = new RegisterMemberTransaction();
 				try {
-					transaction.execute(txtYHBS, txtYHMM, new HashMap<String, String>());
+					transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM), new HashMap<String, String>());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

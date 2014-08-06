@@ -84,7 +84,7 @@ public class CrawAttributesTransaction implements Transaction{
 		attributes.put("telnum", telnum);
 		attributes.put("email", email);
 		
-		System.out.println(params);
+		System.out.println(attributes);
 		transaction.execute(ID, attributes);
 		
 		return null;
