@@ -12,7 +12,7 @@
 			<%@ include file="parts/navLeft.jsp"%>
 			<div class="collapse navbar-collapse">
 				<%@ include file="parts/communityDropDown.jsp"%>
-				
+
 				<%@ include file="parts/navRight.jsp"%>
 			</div>
 			<!-- /.nav-collapse -->
@@ -134,12 +134,17 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	<%@ include file="parts/securityCode.jsp"%>
+	<!-- CHATROOM -->
+	<%@ include file="parts/chatRoom.jsp"%>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery.json.min.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/initialization.js"></script>
 </body>
 </html>

@@ -48,8 +48,7 @@
 									data-toggle="popover" data-placement="bottom"
 									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">图片</button>
 								<button type="button" class="btn btn-default" id="btn_video">视频</button>
-								<button type="button" class="btn btn-success" 
-									value="upload">分享</button>
+								<button type="button" class="btn btn-success" value="upload">分享</button>
 								<input type="file" name="file" />
 
 							</div>
@@ -60,10 +59,13 @@
 	</div>
 	</c:otherwise>
 	</c:choose>
-	<%@ include file="parts/securityCode.jsp"%>
+	<!-- CHATROOM -->
+	<%@ include file="parts/chatRoom.jsp"%>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
 	<%@ include file="parts/profileJavaScript.jsp"%>
-	<script>
-		//getUserInfo();
-	</script>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/initialization.js"></script>
 </body>
 </html>

@@ -182,7 +182,8 @@
 
 						<!-- /END THE FEATURETTES -->
 
-
+						<!-- CHATROOM -->
+						<%@ include file="parts/chatRoom.jsp"%>
 						<!-- FOOTER -->
 						<footer>
 						<div class="back_to_top_button"></div>
@@ -192,7 +193,6 @@
 						</p>
 						</footer>
 	</div>
-	<%@ include file="parts/securityCode.jsp"%>
 	<!-- /.container -->
 
 	<!-- Bootstrap core JavaScript
@@ -200,5 +200,8 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+	<script src="js/function.js"></script>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/initialization.js"></script>
 </body>
 </html>

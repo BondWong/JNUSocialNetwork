@@ -59,7 +59,6 @@
 			</script>
 		</c:when>
 	</c:choose>
-	<%@ include file="parts/securityCode.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
@@ -78,5 +77,7 @@
 			}
 		});
 	</script>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/initialization.js"></script>
 </body>
 </html>

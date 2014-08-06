@@ -6,7 +6,7 @@ $(document)
 		.ready(
 				function() {
 					window.onload = function() {
-						var ID = $("#ID").val();
+						var ID = $("#security-code-user-ID").val();
 						/*
 						 * initialize user info
 						 */
