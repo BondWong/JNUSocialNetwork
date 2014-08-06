@@ -28,7 +28,6 @@ $(document).ready(function() {
 		var ID = $("#security-code-user-ID").val();
 		if (ID != null && ID != "")
 			login_initialization(ID);
-
 	};
 
 });
@@ -131,6 +130,11 @@ function login_initialization(ID) {
 	$("#contact-list .remind-tree-node-button").click(function() {
 		on_remind_node_click();
 	});
+	/*
+	 * initialize nav bar
+	 */
+	$("#nav-bar-user").text($.parseJSON(sessionStorage.getItem("user")).attributes.name);
+	$("#nav-bar-avatar").text($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 }
 
 function handle_message(data) {

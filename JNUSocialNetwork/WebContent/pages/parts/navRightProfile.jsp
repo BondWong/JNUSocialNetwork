@@ -3,7 +3,7 @@
 
 <ul class="nav navbar-nav nav_cust">
 	<li class="dropdown"><a href="#" class="dropdown-toggle"
-		data-toggle="dropdown"><span class="glyphicon glyphicon-user">
+		data-toggle="dropdown"><span class="glyphicon glyphicon-user" id="nav-bar-user">
 				User</span><b class="caret"></b></a>
 		<ul class="dropdown-menu">
 			<li><a href="profile.jsp"><span
@@ -14,7 +14,7 @@
 	<li><a href="javaScript:void(0);" id="remind-bell"><span
 			class="glyphicon glyphicon-bell mentionBell" style="font-size: 18px"></span></a></li>
 	<li><button type="button" class="btn btn-success btn_cust">Share</button></li>
-	<li><img src="images/1.jpg" class="img-circle img_cust"></li>
+	<li><img src="" class="img-circle img_cust" id="nav-bar-avatar"></li>
 
 </ul>
 <div class="mentionBody bottom">
