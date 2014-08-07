@@ -24,7 +24,7 @@ public class SearchMemberTransaction extends DAOTransaction {
 		if (IDs != null && IDs.length != 0) {
 			String query = "SELECT m FROM Member m WHERE m.ID IN (";
 			for (int i = 0; i < IDs.length;) {
-				if (IDs[i].equals(params[0]))
+				if (IDs[i++].equals(params[0]))
 					continue;
 				else {
 					query += IDs[i++];
