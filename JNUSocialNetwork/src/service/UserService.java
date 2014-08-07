@@ -413,10 +413,10 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("search/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("search/{ID : \\d+}{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response searchMember(@PathParam("key") String key,
+	public Response searchMember(@PathParam("ID") String ID, @PathParam("key") String key,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
 		key = URLDecoder.decode(key, "utf-8");
@@ -424,7 +424,7 @@ public class UserService {
 		transaction = new SearchMemberTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute(key,
+			results = (List<Map<String, Object>>) transaction.execute(ID, key,
 					startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
