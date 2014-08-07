@@ -43,7 +43,7 @@
 	});
 	$('body').on('click','.pinCommon',function(){
 		$('.peopeleType').css("background-color","#fff");
-		$('.peopeleType').css("border-left"," ");
+		$('.peopeleType').css("border-left","#4285f4");
 		$(this).css("background-color","#f6f6f6");
 		$(this).css("border-left","2px solid #4285f4");
 		$('.userContainer').remove();
@@ -53,7 +53,7 @@
 	});
 	$('body').on('click','.pCampus',function(){
 		$('.peopeleType').css("background-color","#fff");
-		$('.peopeleType').css("border-left"," ");
+		$('.peopeleType').css("border-left","#4285f4");
 		$(this).css("background-color","#f6f6f6");
 		$(this).css("border-left","2px solid #4285f4");
 		$('.userContainer').remove();
@@ -63,7 +63,7 @@
 	});
 	$('body').on('click','.pMajor',function(){
 		$('.peopeleType').css("background-color","#fff");
-		$('.peopeleType').css("border-left"," ");
+		$('.peopeleType').css("border-left","#4285f4");
 		$(this).css("background-color","#f6f6f6");
 		$(this).css("border-left","2px solid #4285f4");
 		$('.userContainer').remove();
@@ -73,7 +73,7 @@
 	});
 	$('body').on('click','.pSeason',function(){
 		$('.peopeleType').css("background-color","#fff");
-		$('.peopeleType').css("border-left"," ");
+		$('.peopeleType').css("border-left","#4285f4");
 		$(this).css("background-color","#f6f6f6");
 		$(this).css("border-left","2px solid #4285f4");
 		$('.userContainer').remove();
@@ -84,7 +84,7 @@
 	
 	$('body').on('click','.pClass',function(){
 		$('.peopeleType').css("background-color","#fff");
-		$('.peopeleType').css("border-left"," ");
+		$('.peopeleType').css("border-left","#4285f4");
 		$(this).css("background-color","#f6f6f6");
 		$(this).css("border-left","2px solid #4285f4");
 		$('.userContainer').remove();
