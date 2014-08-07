@@ -82,9 +82,6 @@
 		PinCommon();
 		Msnry('.userContainer', '.userCard', 200);
 	</script>
-
-	<%@ include file="parts/peopleJavaScript.jsp"%>
-
 	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>
