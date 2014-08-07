@@ -67,7 +67,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="parts/securityCode.jsp"%>
 	<%@ include file="parts/peopleJavaScript.jsp"%>
+	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

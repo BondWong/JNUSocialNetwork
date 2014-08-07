@@ -88,10 +88,10 @@ public class CommunityService {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 		return Response.ok().build();
 	}
-	
+
 	@Path("/leave/{ID : \\d+}/{communityID : \\d+}")
 	@PUT
 	public Response leave(@PathParam("ID") String ID,
@@ -104,7 +104,7 @@ public class CommunityService {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 		return Response.ok().build();
 	}
 
@@ -118,7 +118,7 @@ public class CommunityService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Community.fetch", null, startIndex, pageSize);
+					"Community.fetch", null, null, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,7 +141,7 @@ public class CommunityService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Community.fetchByMember", ID, startIndex, pageSize);
+					"Community.fetchByMember", ID, null, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -174,10 +174,10 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetchByType/{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("/fetchByType/{ID : \\d+}{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchByType(
+	public Response fetchByType(@PathParam("ID") String ID,
 			@PathParam("communityType") String communityType,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
@@ -185,7 +185,7 @@ public class CommunityService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Community.fetchByType",
+					"Community.fetchByType", ID,
 					CommunityType.valueOf(communityType), startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
