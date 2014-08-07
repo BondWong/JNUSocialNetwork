@@ -1210,7 +1210,11 @@ body {
 	
 }
 
+<<<<<<< HEAD
 .peopeleType {
+=======
+.peopeleTypeA {
+>>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
 	display: block;
 	width: 100%;
 	height: 40px;
@@ -1220,12 +1224,17 @@ body {
 	border-bottom: 1px solid #f7f7f7;
 }
 
+<<<<<<< HEAD
 
 .peopeleTypeHover {
+=======
+.peopeleTypeA:hover {
+>>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
 	background-color: #f6f6f6;
 	border-left: 2px solid #4285f4;
 }
 
+<<<<<<< HEAD
 .peopleType a {
 	color: #404040;
 	text-decoration: none;
@@ -1245,10 +1254,46 @@ body {
 }
 .searchBody{
 	height:40px;
+=======
+.peopeleTypeHover {
+	display: block;
+	width: 100%;
+	height: 40px;
+	cursor: pointer;
+	padding-left: 20px;
+	padding-top: 10px;
+	border-bottom: 1px solid #f7f7f7;
+	background-color: #f6f6f6;
+	border-left: 2px solid #4285f4;
+>>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
 }
+<<<<<<< HEAD
 .searchInput{
 	margin-left:20px;
+=======
+
+.peopleType a {
+	color: #404040;
+	text-decoration: none;
 }
+
+.glyphicon-search-custom {
+	color: #4285f4;
+	font-size: 16px;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.searchUser {
+	font-size: 14px;
+	margin-left: 20px;
+	color: #c5c5c5;
+>>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/JavaEEBoy/JNUSocialNetwork
 .userCard {
 	margin-top: 20px;
 	float: left;

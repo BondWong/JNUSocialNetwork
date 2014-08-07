@@ -67,6 +67,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery.json.min.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
@@ -81,6 +82,9 @@
 		PinCommon();
 		Msnry('.userContainer', '.userCard', 200);
 	</script>
+
+	<%@ include file="parts/peopleJavaScript.jsp"%>
+
 	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

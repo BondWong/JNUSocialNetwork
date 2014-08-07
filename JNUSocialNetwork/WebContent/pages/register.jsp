@@ -20,8 +20,8 @@
 						action="../security/RegServlet">
 						<p>
 							<input type="text" class="form-control"
-								placeholder="ID of academic affairs system" name="ID"
-								required autofocus />
+								placeholder="ID of academic affairs system" name="ID" required
+								autofocus />
 						</p>
 						<p>
 							<input type="password" class="form-control"
@@ -41,15 +41,12 @@
 							Have a account?<span class="btn signIn">Sign in</span>
 						</h4>
 					</form>
+					<div id="register_fail" class="alert alert-danger"
+						style="display: none"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<c:if test="${ param.error !=null}">
-		<script type="text/javascript">
-			alert("${param.error}");
-		</script>
-	</c:if>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
@@ -64,6 +61,23 @@
 			location.href = "login.jsp";
 		});
 	</script>
+
+	<c:choose>
+		<c:when test='${param.error == "VALCODEERROR"}'>
+			<script type="text/javascript">
+				$("#register_fail").text("Validation Code Error!");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#regiter_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+		<c:when test='${param.error == "IDORPAERROR"}'>
+			<script type="text/javascript">
+				$("#register_fail").text("ID or Password Error!");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+	</c:choose>
 	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/initialization.js"></script>
 </body>

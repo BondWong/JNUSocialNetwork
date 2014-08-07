@@ -32,28 +32,15 @@
 						Have no account?<span class="btn signUp">Sign up</span>
 					</h4>
 				</form>
+				<div id="login_fail_popover" class="alert alert-danger"
+					style="display: none">Sign In Unsuccessfully</div>
+				<div class="alert alert-success" id="register_success"
+					style="display: none">Sign Up Successfully, Please Sign In</div>
 			</div>
 		</div>
 		<!-- /container -->
 		<div class="containerSign" style="display: none"></div>
 	</div>
-	<c:choose>
-		<c:when test="${ param.success eq false}">
-
-			<script type="text/javascript">
-				alert("UserID or Password error! " + '${param.chance}'
-						+ " chances left");
-			</script>
-
-		</c:when>
-		<c:when test="${param.register} }">
-		
-		<script type="text/javascript">
-				alert("Register success");
-			</script>
-		
-		</c:when>
-	</c:choose>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
@@ -74,6 +61,23 @@
 			location.href = "register.jsp";
 		});
 	</script>
+	<c:choose>
+		<c:when test="${ param.success eq false}">
+			<script type="text/javascript">
+				$('#login_fail_popover').fadeIn("fast");
+				setTimeout('$("#login_fail_popover").fadeOut("slow")', 3000);
+			</script>
+
+		</c:when>
+		<c:when test="${param.register}">
+
+			<script type="text/javascript">
+				$('#register_success').fadeIn("fast");
+				setTimeout('$("#register_success").fadeOut("slow")', 3000);
+			</script>
+
+		</c:when>
+	</c:choose>
 	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/initialization.js"></script>
 </body>

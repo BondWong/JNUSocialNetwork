@@ -6,9 +6,8 @@
 						+ "");
 			}</jsp:scriptlet>
 
-<input name="hiddenCode" value="${sessionScope.hiddenCode }"
-	type="hidden" />
-<input name="ID" value="${sessionScope.ID }" type="hidden" id="security-code-user-ID"/>
+<p id="hiddenCode" style="display: none">${sessionScope.hiddenCode }</p>
+<p id="security-code-user-ID" style="display: none">${sessionScope.ID }</p>
 <c:if test='${sessionScope.ID != null && sessionScope.ID != ""}'>
 	<script src="js/friend-list.js"></script>
 	<script src="js/chatroomAPI.js"></script>
