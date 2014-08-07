@@ -756,6 +756,23 @@ function RecommendateViaClass(userID){
     });
 	return response;
 }
+//RecommendateViaClass 输入：userID;返回：userJson
+function SearchMember(userID,key,startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/user/search/'+userID+'/'+key+'/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 
 //***********************************UserService   end*********************************
 //***********************************ChatRoomService   begin*********************************
