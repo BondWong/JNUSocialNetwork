@@ -357,6 +357,7 @@
 		Msnry('.pro_body', '.post', 435);
 		fetchByFolloweeOrOwner();
 	</script>
+	<%@ include file="parts/contentScroll.jsp"%>
 	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/initialization.js"></script>
 </body>
