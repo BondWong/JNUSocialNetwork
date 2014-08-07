@@ -413,7 +413,7 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("search/{ID : \\d+}{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("search/{ID : \\d+}/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response searchMember(@PathParam("ID") String ID, @PathParam("key") String key,
