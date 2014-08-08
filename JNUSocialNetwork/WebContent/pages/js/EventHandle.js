@@ -7,11 +7,11 @@ if (!!window.EventSource) {
 		source.addEventListener("CREATEPOST",function(event){
 			var jsondata = $.parseJSON(event.data);
 			postIdContainer.push(jsondata.post.ID);
-			if(jsondata.post.owner.ID==userID){
+			if(jsondata.post.owner.ID=="2011052406"){
 				fetchPostByIDs(postIdContainer);
 				postIdContainer = [];
 			}
-			if(jsondata.userID!=userID){
+			if(jsondata.userID!="2011052406"){
 				$('.alertCust').css("display","block");
 			}
 	

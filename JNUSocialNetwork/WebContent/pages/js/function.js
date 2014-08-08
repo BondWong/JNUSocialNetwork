@@ -221,7 +221,7 @@ $(document)
 										var id = $(this).find("input").attr(
 												"value");
 										if ($(this).find("span").attr("class") == "glyphicon glyphicon-star-empty") {
-											CollectPost("2011052407", id);
+											CollectPost("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='collectID']");
 											inputID.next().attr("class",
@@ -229,7 +229,7 @@ $(document)
 											return 0;
 										}
 										if ($(this).find("span").attr("class") == "glyphicon glyphicon-star") {
-											CancelCollectPost("2011052407", id);
+											CancelCollectPost("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='collectID']");
 											inputID
@@ -248,7 +248,7 @@ $(document)
 										var id = $(this).find("input").attr(
 												"value");
 										if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty") {
-											LikePost("2011052407", id);
+											LikePost("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='likeID']");
 											inputID
@@ -258,7 +258,7 @@ $(document)
 											return 0;
 										}
 										if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart") {
-											CancelLikePost("2011052407", id);
+											CancelLikePost("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='likeID']");
 											inputID
@@ -277,7 +277,7 @@ $(document)
 										var id = $(this).find("input").attr(
 												"value");
 										if ($(this).find("a").css("color") == "rgb(90, 90, 90)") {
-											LikeComment("2011052407", id);
+											LikeComment("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='likeID']");
 											inputID.parents("a").css("color",
@@ -288,7 +288,7 @@ $(document)
 											return 0;
 										}
 										if ($(this).find("a").css("color") == "rgb(255, 255, 255)") {
-											CancelLikeComment("2011052407", id);
+											CancelLikeComment("2011052406", id);
 											var inputID = $("input[value='"
 													+ id + "'][id='likeID']");
 
@@ -304,10 +304,10 @@ $(document)
 					// function Activity
 					$('.activityJoin').click(function(e) {
 						var activityID = $(this).attr("id");
-						JoinActivity("2011052407", activityID);
+						JoinActivity("2011052406", activityID);
 					});
 					$('.leaveactivityJoin').click(function(e) {
-						LeaveActivity("2011052407", activityID);
+						LeaveActivity("2011052406", activityID);
 					});
 					//
 					// function addComment
@@ -325,17 +325,17 @@ $(document)
 									}
 								};
 								var commentJson = $.toJSON(comment);
-								AddComment("2011052407", id, commentJson);
+								AddComment("2011052406", id, commentJson);
 							});
 					// function follow cancelfollow
 					$('body').on('click', '#followBtn', function() {
 						// get post owner
 						var id = $('.popTip').attr('id');
 						if ($(this).text() == "Follow") {
-							Follow("2011052407", id);
+							Follow("2011052406", id);
 						}
 						if ($(this).text() == "Following") {
-							CancelFollow("2011052407", id);
+							CancelFollow("2011052406", id);
 							var followBtn = $("button[id='followBtn']");
 							followBtn.text("Follow");
 						}
