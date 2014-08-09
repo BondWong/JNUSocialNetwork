@@ -20,10 +20,11 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
+				}else{
+					clickOffEvent();
 				}
 				Msnry('.pro_body', '.post', 435);
 				fetchUserByID();
-				clickOffEvent();
 			});
 		</script>
 	</c:when>
@@ -34,10 +35,12 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
+				}else{
+					clickOffEvent();
 				}
 				Msnry('.pro_body', '.photo', 280);
 				showPhotos();
-				clickOffEvent();
+				
 			});
 		</script>
 	</c:when>
@@ -48,11 +51,13 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
+				}else{
+					clickOffEvent();
 				}
 				Msnry('.pro_body', '.post', 435);
 				showFollowees();
 				showFollowers();
-				clickOffEvent();
+				
 			});
 		</script>
 	</c:when>
@@ -63,10 +68,12 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
+				}else{
+					clickOffEvent();
 				}
 				Msnry('.pro_body', '.post', 435);
 				fetchPostsByOwner();
-				clickOffEvent();
+				
 			});
 		</script>
 	</c:otherwise>
