@@ -30,7 +30,7 @@
 						for anyone</span>
 				</div>
 				<span class="peopeleType peopeleTypeHover pinCommon">People
-					in common</span> <span class="peopeleType pCampus">eople in the
+					in common</span> <span class="peopeleType pCampus">People in the
 					same campus</span> <span class="peopeleType pMajor">People in the
 					same major</span> <span class="peopeleType pSeason">People in the
 					same season</span> <span class="peopeleType pClass">Find classmates</span>
@@ -88,16 +88,19 @@
 	<script src="js/community.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/people.js"></script>
+	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			if (ID != null && ID != "") {
-				login_initialization(ID);
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
 				peopleClickEvent();
 				clickEvent();
+			}else{
+				clickOffEvent();
 			}
 			PinCommon();
 			Msnry('.userContainer', '.userCard', 200);
-			clickOffEvent();
+			
 		});
 	</script>
 	<%@ include file="parts/securityCode.jsp"%>

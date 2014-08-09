@@ -7,7 +7,7 @@ import model.ServerSentEvent;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class CreateUnhandledEventsTransaction extends DAOTransaction{
+public class CreateUnhandledEventsTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)

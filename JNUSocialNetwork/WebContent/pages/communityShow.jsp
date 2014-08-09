@@ -384,6 +384,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/communityCircle.js"></script>
 	<script src="js/EventHandle.js"></script>
+		<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -401,6 +402,5 @@
 			showCommunityInfo();
 		});
 	</script>
-	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

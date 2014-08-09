@@ -11,12 +11,13 @@
 <script src="js/function.js"></script>
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
+<script src="js/global-initialization.js"></script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">
 			$(document).ready(function() {
-				if (ID != null && ID != "") {
-					login_initialization(ID);
+				if (USERID != null && USERID != "") {
+					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
 				}
@@ -29,8 +30,8 @@
 	<c:when test="${param.nav eq 'photo' }">
 		<script type="text/javascript">
 			$(document).ready(function() {
-				if (ID != null && ID != "") {
-					login_initialization(ID);
+				if (USERID != null && USERID != "") {
+					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
 				}
@@ -43,8 +44,8 @@
 	<c:when test="${param.nav eq 'circle' }">
 		<script type="text/javascript">
 			$(document).ready(function() {
-				if (ID != null && ID != "") {
-					login_initialization(ID);
+				if (USERID != null && USERID != "") {
+					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
 				}
@@ -58,8 +59,8 @@
 	<c:otherwise>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				if (ID != null && ID != "") {
-					login_initialization(ID);
+				if (USERID != null && USERID != "") {
+					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
 				}

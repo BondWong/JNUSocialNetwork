@@ -23,9 +23,8 @@ $(document).ready(function() {
 			}, duration);
 			return false;
 		});
-		window.ID = $("#security-code-user-ID").val();
-		if (ID != null && ID != "")
-			login_initialization(ID);
+		if (USERID != null && USERID != "")
+			login_initialization(USERID);
 	};
 
 });

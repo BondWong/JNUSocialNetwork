@@ -376,7 +376,7 @@ public class UserService {
 	@Path("recommendateViaSession/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaSession(@PathParam("ID") String ID)
+	public Response recommendateViaSeason(@PathParam("ID") String ID)
 			throws Exception {
 		transaction = new SessionRecommendationTransaction();
 		List<Map<String, Object>> members;

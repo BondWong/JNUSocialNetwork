@@ -36,7 +36,7 @@ import transaction.SSETransaction.SSEDisconnectTransaction;
 
 @ServerEndpoint(value = "/endpoint/connect/{ID}", encoders = {
 		MapEncoder.class, ListEncoder.class }, decoders = { MapDecoder.class })
-public class WebSocketEndPotint {
+public class WebSocketEndPoint {
 	static final int MAXIMUMQUEUESIZE = 100;
 	static MessageStorage messageStorage = MessageStorage.getInstance();
 	Transaction transaction;
@@ -64,7 +64,7 @@ public class WebSocketEndPotint {
 
 		for (Map<String, Object> contact : contacts)
 			contact.put("online", false);
-		
+
 		System.out.println(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
@@ -86,7 +86,7 @@ public class WebSocketEndPotint {
 		transaction = new FetchUnhandledEventsTransaction();
 		info.put("unhandledEvents",
 				(List<Map<String, Object>>) transaction.execute(ID));
-		info.put("action", "REMIND");
+		info.put("action", "OFFLINEREMIND");
 		try {
 			session.getBasicRemote().sendObject(info);
 			session.getBasicRemote().sendObject(contactsMap);
@@ -140,7 +140,7 @@ public class WebSocketEndPotint {
 		WebSocketAction action = WebSocketAction.valueOf((String) param
 				.get("action"));
 		switch (action) {
-		case REMIND:
+		case EVENT:
 			handleEvent(session, param);
 			break;
 		case CHAT:
@@ -161,21 +161,25 @@ public class WebSocketEndPotint {
 	@SuppressWarnings("unchecked")
 	private void handleEvent(Session session, Map<String, Object> param)
 			throws Exception {
+		System.out.println(param);
 		String toID = (String) param.get("toID");
-		SSEType sseType = SSEType.valueOf((String) param.get("SSEType"));
-		Map<String, Object> data = (Map<String, Object>) param.get("data");
-		ServerSentEvent sse = ModelFactory.getInstance().create(
-				ServerSentEvent.class, sseType, data);
 
 		int i = 0;
 		for (Session sess : session.getOpenSessions()) {
 			if (sess.getUserProperties().containsValue(toID)) {
-				sess.getBasicRemote().sendObject(sse);
+				sess.getBasicRemote().sendObject(param);
 				i++;
 			}
 		}
 
 		if (i == 0) {
+			SSEType sseType = SSEType.valueOf((String) param.get("SSEType"));
+			Map<String, Object> data = (Map<String, Object>) param.get("data");
+			Long eventID = System.currentTimeMillis();
+			data.put("eventID", eventID);
+			ServerSentEvent sse = ModelFactory.getInstance().create(
+					ServerSentEvent.class, sseType, data);
+			sse.setID(eventID);
 			transaction = new CreateUnhandledEventsTransaction();
 			try {
 				transaction.execute(param.get("toID"), sse);

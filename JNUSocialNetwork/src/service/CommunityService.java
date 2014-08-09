@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
+import security.helper.CommunityValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
@@ -38,9 +39,10 @@ public class CommunityService {
 			.getInstance();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Path("/add/{ID : \\d+}")
+	@Path("add/{ID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@CommunityValidation
 	public Response addCommunity(@PathParam("ID") String ID, Map community)
 			throws Exception {
 		transaction = new CreateCommunityTransaction();
@@ -59,7 +61,7 @@ public class CommunityService {
 		}).build();
 	}
 
-	@Path("/delete/{communityID : \\d+}")
+	@Path("delete/{communityID : \\d+}")
 	@PUT
 	public Response deleteCommunity(@PathParam("communityID") Long communityID)
 			throws Exception {
@@ -76,7 +78,7 @@ public class CommunityService {
 		return Response.ok().build();
 	}
 
-	@Path("/join/{ID : \\d+}/{communityID : \\d+}")
+	@Path("join/{ID : \\d+}/{communityID : \\d+}")
 	@PUT
 	public Response join(@PathParam("ID") String ID,
 			@PathParam("communityID") Long communityID) throws Exception {
@@ -92,7 +94,7 @@ public class CommunityService {
 		return Response.ok().build();
 	}
 
-	@Path("/leave/{ID : \\d+}/{communityID : \\d+}")
+	@Path("leave/{ID : \\d+}/{communityID : \\d+}")
 	@PUT
 	public Response leave(@PathParam("ID") String ID,
 			@PathParam("communityID") Long communityID) throws Exception {
@@ -109,7 +111,7 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetch(@PathParam("startIndex") int startIndex,
@@ -131,7 +133,7 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetchByMember/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByMember/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByMember(@PathParam("ID") String ID,
@@ -154,7 +156,7 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetchByID/{communityID : \\d+}")
+	@Path("fetchByID/{communityID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByID(@PathParam("communityID") Long communityID)
@@ -174,7 +176,7 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetchByType/{ID : \\d+}{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByType/{ID : \\d+}{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByType(@PathParam("ID") String ID,

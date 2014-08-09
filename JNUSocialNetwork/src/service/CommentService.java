@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
+import security.helper.CommentValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchCommentsTransaction;
@@ -30,9 +31,10 @@ public class CommentService {
 			.getInstance();
 
 	@SuppressWarnings("rawtypes")
-	@Path("/add/{ID : \\d+}/{postID : \\d+}")
+	@Path("add/{ID : \\d+}/{postID : \\d+}")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
+	@CommentValidation
 	public Response addComment(@PathParam("ID") String ID,
 			@PathParam("postID") Long postID, Map comment) throws Exception {
 		transaction = new SSECreateCommentTransaction();
@@ -65,7 +67,7 @@ public class CommentService {
 		return Response.ok().build();
 	}
 
-	@Path("/like/{ID : \\d+}/{commentID : \\d+}")
+	@Path("like/{ID : \\d+}/{commentID : \\d+}")
 	@PUT
 	public Response likeComment(@PathParam("ID") String ID,
 			@PathParam("commentID") Long commentID) throws Exception {
@@ -81,7 +83,7 @@ public class CommentService {
 		return Response.ok().build();
 	}
 
-	@Path("/cancelLike/{ID : \\d+}/{commentID : \\d+}")
+	@Path("cancelLike/{ID : \\d+}/{commentID : \\d+}")
 	@PUT
 	public Response cancelLike(@PathParam("ID") String ID,
 			@PathParam("commentID") Long commentID) throws Exception {
@@ -98,7 +100,7 @@ public class CommentService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("/fetchByPost/{postID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByPost/{postID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	public Response fetchByPost(@PathParam("postID") Long postID,
 			@PathParam("startIndex") int startIndex,

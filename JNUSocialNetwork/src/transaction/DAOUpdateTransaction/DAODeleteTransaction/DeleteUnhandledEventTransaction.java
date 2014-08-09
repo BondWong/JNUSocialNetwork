@@ -7,7 +7,7 @@ import model.ServerSentEvent;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class DeleteUnhandledEventsTransaction extends DAOTransaction{
+public class DeleteUnhandledEventTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -15,9 +15,11 @@ public class DeleteUnhandledEventsTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Member member = dao.get(Member.class, params[0]);
-		for(ServerSentEvent sse : member.getUnhandledEvents()) {
-			sse.delete();
-			dao.update(sse);
+		for (ServerSentEvent sse : member.getUnhandledEvents()) {
+			if (sse.getID().equals(params[1])) {
+				sse.delete();
+				dao.update(sse);
+			}
 		}
 		member.clearUnhandledEvents();
 		dao.update(member);

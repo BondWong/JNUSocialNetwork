@@ -15,12 +15,12 @@ import javax.servlet.http.HttpSession;
 import security.helper.ProtectedURLManager;
 
 
-public class HiddenCodeFilter implements Filter {
+public class HiddenCodeCheckFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public HiddenCodeFilter() {
+    public HiddenCodeCheckFilter() {
         // TODO Auto-generated constructor stub
     }
 

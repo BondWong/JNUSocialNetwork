@@ -14,4 +14,5 @@
 <c:if test='${sessionScope.ID != null && sessionScope.ID != ""}'>
 	<script src="js/friend-list.js"></script>
 	<script src="js/chatroomAPI.js"></script>
+	<script src="js/oriented-event.js"></script>
 </c:if>

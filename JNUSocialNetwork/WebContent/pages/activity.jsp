@@ -193,11 +193,12 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/activity.js"></script>
+	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			if (ID != null && ID != ""){
-				login_initialization(ID);
+			if (USERID != null && USERID != ""){
+				login_initialization(USERID);
 				activityClickEvent();
 				clickEvent();
 			}else{
@@ -207,6 +208,5 @@
 		fetchPostByCommunity();
 		});
 	</script>
-	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

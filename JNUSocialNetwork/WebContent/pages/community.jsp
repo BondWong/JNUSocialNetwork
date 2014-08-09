@@ -117,6 +117,7 @@
 	<script src="js/function.js"></script>
 	<script src="js/community.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -131,6 +132,5 @@
 			fetchCommunity();
 		});
 	</script>
-	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

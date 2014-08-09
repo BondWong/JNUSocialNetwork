@@ -19,6 +19,7 @@ import model.CommunityOwner;
 import model.Member;
 import model.ServerSentEvent;
 import model.modelType.PostType;
+import security.helper.PostValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
@@ -46,6 +47,7 @@ public class PostService {
 	@Path("add/{ID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@PostValidation
 	public Response addPost(@PathParam("ID") String ID, Map post)
 			throws Exception {
 		transaction = new SSECreatePostTransaction();
@@ -66,6 +68,7 @@ public class PostService {
 	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}/{userType : [A-Z]+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@PostValidation
 	public Response addPostToCommuniy(@PathParam("ID") String ID,
 			@PathParam("communityID") Long communityID,
 			@PathParam("userType") String userType, Map post) throws Exception {

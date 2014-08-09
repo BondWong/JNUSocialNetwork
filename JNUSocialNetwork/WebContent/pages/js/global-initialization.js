@@ -8,6 +8,14 @@ function login_initialization(ID) {
 		success : function(data) {
 			sessionStorage.setItem("user", JSON.stringify(data));
 			sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
+			
+			/*
+			 * initialize nav bar
+			 */
+			$("#nav-bar-user").text(
+					$.parseJSON(sessionStorage.getItem("user")).attributes.name);
+			$("#nav-bar-avatar").text(
+					$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 		}
 	});
 	
@@ -41,8 +49,11 @@ function login_initialization(ID) {
 			case "UPDATEMESSAGESTATUS":
 				handle_update_message_status($.parseJSON(e.data));
 				break;
-			case "REMIND":
+			case "OFFLINEREMIND":
 				handle_remind($.parseJSON(e.data));
+				break;
+			case "EVENT":
+				handle_event($.parseJSON(e.data));
 				break;
 			case "SENDCONTACT":
 				handle_contact($.parseJSON(e.data));
@@ -101,11 +112,6 @@ function login_initialization(ID) {
 	$("#contact-list .remind-tree-node-button").click(function() {
 		on_remind_node_click();
 	});
-	/*
-	 * initialize nav bar
-	 */
-	$("#nav-bar-user").text($.parseJSON(sessionStorage.getItem("user")).attributes.name);
-	$("#nav-bar-avatar").text($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 }
 
 function handle_message(data) {
@@ -127,6 +133,10 @@ function handle_contact(data) {
 		-(a.online - b.online);
 	});
 	sessionStorage.setItem("chatrooms", JSON.stringify(data));
+}
+
+function handle_event(data) {
+	do_handle_event(data);
 }
 
 function handle_connect(data) {
