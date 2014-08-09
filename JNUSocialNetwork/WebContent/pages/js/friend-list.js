@@ -9,13 +9,10 @@ function on_friends_node_click() {
 				.replaceWith(
 						'<span class="glyphicon glyphicon-chevron-down">Friends</span>');
 		var chatRooms = sessionStorage.getItem("chatrooms");
-		var userID = sessionStorage.getItem("user");
-		userID = $.parseJSON(userID);
-		userID = userID.ID;
 		chatRooms = $.parseJSON(chatRooms);
 		for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
 			var chatRoom = chatRooms[i];
-			if (chatRooms[i].m1ID == userID) {
+			if (chatRooms[i].m1ID == USERID) {
 				var info = '<div class="person" id="' + chatRooms[i].m2ID
 						+ '"><img src="' + chatRooms[i].m2.avatarLink
 						+ '" class="person-img" /><p class="person-info">'
@@ -27,7 +24,7 @@ function on_friends_node_click() {
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRoom.m2ID).click(
 						function() {
-							open_chatroom(userID, chatRoom.m2ID,
+							open_chatroom(USERID, chatRoom.m2ID,
 									chatRoom.m2.name, chatRoom.online);
 						});
 			} else {
@@ -42,7 +39,7 @@ function on_friends_node_click() {
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRoom.m1ID).click(
 						function() {
-							open_chatroom(userID, chatRoom.m1ID,
+							open_chatroom(USERID, chatRoom.m1ID,
 									chatRoom.m1.name, chatRoom.online);
 						});
 			}

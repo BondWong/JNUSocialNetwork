@@ -148,7 +148,7 @@ function off_line_event_remind(event) {
 function delete_event(eventID) {
 	$.ajax({
 		type : "PUT",
-		url : '../../JNUSocialNetwork/app/event/deleteUnhandledEvent/' + ID
+		url : '../../JNUSocialNetwork/app/event/deleteUnhandledEvent/' + USERID
 				+ '/' + eventID,
 		success : function(data) {
 		}
