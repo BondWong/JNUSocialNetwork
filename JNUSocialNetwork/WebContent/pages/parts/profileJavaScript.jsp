@@ -11,6 +11,7 @@
 <script src="js/function.js"></script>
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
+<script src="js/global-initialization.js"></script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">

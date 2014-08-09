@@ -61,11 +61,10 @@
 	</c:choose>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	<%@ include file="parts/securityCode.jsp"%>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<%@ include file="parts/profileJavaScript.jsp"%>
-	
+	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

@@ -354,6 +354,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/circle.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<%@ include file="parts/securityCode.jsp"%>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			if (USERID != null && USERID != ""){
@@ -369,7 +370,6 @@
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
-	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/global-initialization.js"></script>
 </body>
 </html>
