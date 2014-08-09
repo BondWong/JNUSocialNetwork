@@ -12,5 +12,7 @@
 					class="glyphicon glyphicon-th">&nbsp;Communities</span></a></li>
 			<li><a href="circle.jsp"><span
 					class="glyphicon glyphicon-comment">&nbsp;Chat</span></a></li>
+			<li><a href="people.jsp"><span
+					class="glyphicon glyphicon-magnet">&nbsp;people</span></a></li>
 		</ul></li>
 </ul>

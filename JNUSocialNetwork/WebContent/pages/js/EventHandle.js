@@ -174,7 +174,7 @@ function CREATECOMMENT() {
 							var comment = "<div class='aBodyComment'><div class='aCommentItem'><img alt=''  src='images/user_img.jpg'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.nickName
 									+ "</strong></div><div class='user_info'>"
-									+ jsonComment.publishData
+									+ jsonComment.publishDate
 									+ "</div><br><div>"
 									+ jsonComment.attributes.content
 									+ "</div></div></div>";

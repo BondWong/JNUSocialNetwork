@@ -54,12 +54,13 @@
 
 			</div>
 			<div class=communityCardInfo>
-				<h1>Joke of the Day</h1>
-				<p>Funny quotes, jokes, memes, photos, and good humor!</p>
+				<h1 class="cName">Joke of the Day</h1>
+				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
+					humor!</p>
 			</div>
 			<div class="communityPic"></div>
 			<div class="cardA">
-				<span>All posts</span> <span>Activities</span>
+				<span class="communityHref">All posts</span> <span>Activities</span>
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
@@ -130,25 +131,27 @@
 			<div class="activityBody">
 				<div class="activityBord"></div>
 				<div class="activity">
-					<div class="activityBg">
-						<img src="images/activityBgS.jpg" />
-					</div>
-					<div class="user_img activityAvatar">
-						<img class="userImg" src="images/user_img.jpg" />
-					</div>
-					<div class="activityName">
-						<span>Activity</span>
-					</div>
-					<div class="activityTime">
-						<span class="glyphicon glyphicon-time">&nbsp;Fri,Aug 1,4:00
-							AM - 5:00 AM</span>
-					</div>
-					<div class="activityaddre">
-						<span class="glyphicon glyphicon-flag">&nbsp;Hangouts On
-							Air</span>
-					</div>
-					<div class="activityD">
-						<span>asd</span>
+					<div class="activityHref">
+						<div class="activityBg">
+							<img src="images/activityBgS.jpg" />
+						</div>
+						<div class="user_img activityAvatar">
+							<img class="userImg" src="images/user_img.jpg" />
+						</div>
+						<div class="activityName">
+							<span>Activity</span>
+						</div>
+						<div class="activityTime">
+							<span class="glyphicon glyphicon-time">&nbsp;Fri,Aug
+								1,4:00 AM - 5:00 AM</span>
+						</div>
+						<div class="activityaddre">
+							<span class="glyphicon glyphicon-flag">&nbsp;Hangouts On
+								Air</span>
+						</div>
+						<div class="activityD">
+							<span>asd</span>
+						</div>
 					</div>
 					<div class="activityAsk">
 						<span>Are you going to join in?</span> <select
@@ -157,6 +160,7 @@
 							<option class="activityJoin">Yes</option>
 							<option class="leaveactivityJoin">No</option>
 						</select>
+
 					</div>
 				</div>
 			</div>
@@ -196,16 +200,20 @@
 	<%@ include file="parts/securityCode.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			if (USERID != null && USERID != ""){
+		$(document).ready(function() {
+			if (USERID != null && USERID != "") {
 				login_initialization(USERID);
 				activityClickEvent();
 				clickEvent();
-			}else{
+			} else {
 				clickOffEvent();
 			}
-		Msnry('.activityBody', '.activity', 435);
-		fetchPostByCommunity();
+			var url = window.location.search;
+			window.communityID = url.substr(url.indexOf("?") + 1);
+			window.community = FetchCommunityByID(communityID);
+			Msnry('.activityBody', '.activity', 435);
+			fetchActivitiesByCommunity();
+			showCommunityInfo();
 		});
 	</script>
 </body>

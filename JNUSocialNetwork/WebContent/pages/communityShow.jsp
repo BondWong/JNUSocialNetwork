@@ -166,7 +166,7 @@
 			</div>
 			<div class="communityPic"></div>
 			<div class="cardA">
-				<span>All posts</span> <span>Activities</span>
+				<span>All posts</span> <span class="activityHref">Activities</span>
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
@@ -396,7 +396,9 @@
 			} else {
 				clickOffEvent();
 			}
-			window.community = $.parseJSON(sessionStorage.getItem("community"));
+			var url = window.location.search;
+			window.communityID = url.substr(url.indexOf("?")+1);
+			window.community = FetchCommunityByID(communityID);
 			Msnry('.pro_body', '.post', 435);
 			fetchPostByCommunity();
 			showCommunityInfo();

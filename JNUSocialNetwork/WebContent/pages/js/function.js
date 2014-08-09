@@ -124,77 +124,7 @@ $(document)
 		.ready(
 				function() {
 					// function userTip
-					(function($) {
-						$.fn.userTips = function() {
-							// Speed of the animations in milliseconds - 1000 =
-							// 1 second.
-							var animSpeed = 300;
-							var tinyTip;
-							// When we hover over the element that we want the
-							// tooltip applied to
-							$(this)
-									.hover(
-											function() {
-												var pos = $(this).offset();
-												var nPos = pos;
-												nPos.top = pos.top + 20;
-												nPos.left = pos.left + 40;
-												var userid = $(this).next()
-														.val();
-												var data = FetchUserByID(userid);
-												sessionStorage.setItem(
-														"otherUserID", data.ID);
-												if (data != "") {
-													var tipFrame = '<div id="'
-															+ data.ID
-															+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a>'
-															+ data.attributes.nickName
-															+ '</a></h1></p><p>'
-															+ data.attributes.lookingFor
-															+ '</p><button id="followBtn">Follow</button></div></div></div>';
-													$('body').append(tipFrame);
-													var divTip = 'div.popTip';
-													tinyTip = $(divTip);
-													tinyTip.hide();
-													tinyTip.css('position',
-															'absolute').css(
-															'z-index', '1000');
-													tinyTip.css(nPos).fadeIn(
-															animSpeed);
-													tinyTip
-															.hover(
-																	function() {
-																		clearTimeout(window.timer);
-																	},
-																	function() {
-																		tinyTip
-																				.fadeOut(
-																						animSpeed,
-																						function() {
-																							$(
-																									this)
-																									.remove();
-																						});
-																	});
-												}
-											},
-											function() {
-												window.timer = setTimeout(
-														function() {
-															tinyTip
-																	.fadeOut(
-																			animSpeed,
-																			function() {
-																				$(
-																						this)
-																						.remove();
-																			});
-														}, 200);
-
-											});
-						};
-					})(jQuery);
-					$('img.userImg').userTips();
+					
 					// Notification
 					$(".mentionBell").click(function(e) {
 						clearInterval(window.bellIntervalID);
@@ -244,6 +174,7 @@ function clickEvent() {
 							return 0;
 						}
 					});
+$(document).ready(function(){});
 	// function likePost and cancelLike
 	$('body')
 			.on(
@@ -288,15 +219,15 @@ function clickEvent() {
 		}
 	});
 	// function Activity
-	$('.activityJoin').click(function(e) {
-		e.preventDefault();
+	$('body').on('click', '.activityJoin', function() {
 		var activityID = $(this).attr("id");
 		JoinActivity(USERID, activityID);
 	});
-	$('.leaveactivityJoin').click(function(e) {
-		e.preventDefault();
+	$('body').on('click', '.leaveactivityJoin', function() {
+		var activityID = $(this).attr("id");
 		LeaveActivity(USERID, activityID);
 	});
+
 	//
 	// function addComment
 	$('body').on('click', '#addComment', function() {
@@ -402,3 +333,74 @@ function clickOffEvent() {
 	$('.aEditbtn').css("display", "none");
 
 }
+(function($) {
+	$.fn.userTips = function() {
+		// Speed of the animations in milliseconds - 1000 =
+		// 1 second.
+		var animSpeed = 300;
+		var tinyTip;
+		// When we hover over the element that we want the
+		// tooltip applied to
+		$(this)
+				.hover(
+						function() {
+							var pos = $(this).offset();
+							var nPos = pos;
+							nPos.top = pos.top + 20;
+							nPos.left = pos.left + 40;
+							var userid = $(this).next()
+									.val();
+							var data = FetchUserByID(userid);
+							sessionStorage.setItem(
+									"otherUserID", data.ID);
+							if (data != "") {
+								var tipFrame = '<div id="'
+										+ data.ID
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a>'
+										+ data.attributes.nickName
+										+ '</a></h1></p><p>'
+										+ data.attributes.lookingFor
+										+ '</p><button id="followBtn">Follow</button></div></div></div>';
+								$('body').append(tipFrame);
+								var divTip = 'div.popTip';
+								tinyTip = $(divTip);
+								tinyTip.hide();
+								tinyTip.css('position',
+										'absolute').css(
+										'z-index', '1000');
+								tinyTip.css(nPos).fadeIn(
+										animSpeed);
+								tinyTip
+										.hover(
+												function() {
+													clearTimeout(window.timer);
+												},
+												function() {
+													tinyTip
+															.fadeOut(
+																	animSpeed,
+																	function() {
+																		$(
+																				this)
+																				.remove();
+																	});
+												});
+							}
+						},
+						function() {
+							window.timer = setTimeout(
+									function() {
+										tinyTip
+												.fadeOut(
+														animSpeed,
+														function() {
+															$(
+																	this)
+																	.remove();
+														});
+									}, 200);
+
+						});
+	};
+})(jQuery);
+$('img.userImg').userTips();

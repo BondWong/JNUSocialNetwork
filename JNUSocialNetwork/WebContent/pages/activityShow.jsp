@@ -54,11 +54,11 @@
 						<img alt="" src="images/user_img.jpg">
 						<div class="col-lg-6">
 							<input type="text" placeholder="Add a comment"
-								class="form-control" id="commentText1407032926865" />
+								class="form-control acBtn" id="commentText1407032926865" />
 						</div>
 						<div class="col-lg-3">
 							<button type="button" class="btn btn-success" id="addComment"
-								value="1407032926865">Submit</button>
+								value="">Submit</button>
 						</div>
 					</div>
 				</div>
@@ -123,10 +123,19 @@
 		<script src="js/EventHandle.js"></script>
 		<script src="js/EventAPI.js"></script>
 		<script src="js/activityShow.js"></script>
+		<script src="js/global-initialization.js"></script>
 		<script type="text/javascript">
+		$(document).ready(function() {
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				clickEvent();
+			} else {
+				clickOffEvent();
+			}
 			showActivityDetail();
+		});
+			
 		</script>
 		<%@ include file="parts/securityCode.jsp"%>
-		<script src="js/initialization.js"></script>
 </body>
 </html>

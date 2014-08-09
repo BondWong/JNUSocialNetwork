@@ -52,7 +52,9 @@ function fetchCommunity() {
 }
 // 增加社区
 function addCommunity(id, name, memberNum) {
-	var boarddiv = "<div class='content_container'><a href='communityShow.jsp'><div class='img_container'><img src='images/i2.jpg' /></div></a><div class='content_info'><div class='conten_head'>"
+	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
+			+ id
+			+ "'><img src='images/i2.jpg' /></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
@@ -61,11 +63,10 @@ function addCommunity(id, name, memberNum) {
 	$(".communityBord").after(boarddiv);
 	Msnry('.containerDiscovery', '.content_container', 265);
 }
-$(document).ready(function(){
+$(document).ready(function() {
 	// funtion sessionID
-	$('body').on("click",".content_container",function(){
-		var comm = FetchCommunityByID($(this).find("input").attr("value"));
-		sessionStorage.setItem("community", JSON.stringify(comm));
+	$('body').on("click", ".img_container", function() {
+		var comm = $(this).find("input").attr("value");
+		window.location.href='http://localhost:8080/JNUSocialNetwork/pages/communityShow.jsp?'+comm;
 	});
 });
-

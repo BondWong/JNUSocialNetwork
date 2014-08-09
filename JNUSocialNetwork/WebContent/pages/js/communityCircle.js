@@ -72,7 +72,6 @@ $(document).ready(function(){
 					imageLinks:fileDri
 			};
 			var json = $.toJSON(post);
-			var user = $.parseJSON(sessionStorage.getItem("user"));
 			AddPostToCommunity(USERID,community.ID,"MEMBER",json);
 		    $('#addPostModal').modal('hide');
 	});
@@ -100,3 +99,9 @@ $('body').on('click','.deletePostBtn',function(){
 	var id = $(this).find("input").attr("value");
 	DeletePostFromCommunity(community.ID,id);
 });
+
+	// funtion sessionID
+	$('body').on("click", ".activityHref", function() {
+		window.location.href='http://localhost:8080/JNUSocialNetwork/pages/activity.jsp?'+community.ID;
+	});
+
