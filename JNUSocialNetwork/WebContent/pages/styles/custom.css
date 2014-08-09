@@ -1225,6 +1225,26 @@ body {
 	border-left: 2px solid #4285f4;
 }
 
+.peopleType a {
+	color: #404040;
+	text-decoration: none;
+}
+
+.glyphicon-search-custom {
+	color: #4285f4;
+	font-size: 16px;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.searchUser {
+	font-size: 14px;
+	margin-left: 20px;
+	color: #c5c5c5;
+}
+.searchBody{
+	height:40px;
+}
 .peopeleTypeHover {
 	display: block;
 	width: 100%;
@@ -1235,6 +1255,10 @@ body {
 	border-bottom: 1px solid #f7f7f7;
 	background-color: #f6f6f6;
 	border-left: 2px solid #4285f4;
+}
+
+.searchInput{
+	margin-left:20px;
 }
 
 .peopleType a {

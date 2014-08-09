@@ -12,7 +12,5 @@
 					class="glyphicon glyphicon-th">&nbsp;Communities</span></a></li>
 			<li><a href="circle.jsp"><span
 					class="glyphicon glyphicon-comment">&nbsp;Chat</span></a></li>
-			<li><a href="Q&A.html"><span
-					class="glyphicon glyphicon glyphicon-check">&nbsp;Q&A</span></a></li>
 		</ul></li>
 </ul>

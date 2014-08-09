@@ -12,29 +12,31 @@ import org.glassfish.jersey.media.sse.SseFeature;
 
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
-import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteUnhandledEventsTransaction;
+import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteUnhandledEventTransaction;
 
 @Path("/event")
 public class ServerSentEventService {
 	private Transaction transaction;
-	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster.getInstance();
-	
+	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
+			.getInstance();
+
 	@GET
 	@Path("subscribe")
 	@Produces(SseFeature.SERVER_SENT_EVENTS)
-	public EventOutput subscribe(){
+	public EventOutput subscribe() {
 		final EventOutput eventoutput = new EventOutput();
 		this.broadcaster.subscribe(eventoutput);
 		return eventoutput;
 	}
-	
-	@Path("deleteUnhandledEvents/{ID : \\d+}")
+
+	@Path("deleteUnhandledEvent/{ID : \\d+}/{eventID : \\d+}")
 	@PUT
-	public Response deleteUnhandledEvents(@PathParam("ID") String ID) throws Exception {
-		transaction = new DeleteUnhandledEventsTransaction();
-		transaction.execute(ID);
-		
+	public Response deleteUnhandledEvent(@PathParam("ID") String ID, @PathParam("eventID") Long eventID)
+			throws Exception {
+		transaction = new DeleteUnhandledEventTransaction();
+		transaction.execute(ID, eventID);
+
 		return Response.ok().build();
 	}
-	
+
 }

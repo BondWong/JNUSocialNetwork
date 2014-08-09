@@ -8,6 +8,7 @@
 
 <body>
 	<div class="regBody">
+	<div class="layer">
 		<div class="regTop">
 			<span>這個位置完本地Watch有什麼用</span> <span>這個Join呢</span>
 		</div>
@@ -40,9 +41,10 @@
 		</div>
 		<!-- /container -->
 		<div class="containerSign" style="display: none"></div>
+	 </div>
 	</div>
 	<!-- /container -->
-
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -79,6 +81,5 @@
 		</c:when>
 	</c:choose>
 	<%@ include file="parts/securityCode.jsp"%>
-	<script src="js/initialization.js"></script>
 </body>
 </html>

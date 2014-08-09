@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,7 @@ import model.modelType.UserType;
 /**
  * Servlet Filter implementation class AuthorizationCheckFilter
  */
-@WebFilter("/AuthorizationCheckFilter")
+//@WebFilter("/AuthorizationCheckFilter")
 public class AuthorizationCheckFilter implements Filter {
 
     /**
@@ -49,7 +48,7 @@ public class AuthorizationCheckFilter implements Filter {
 		synchronized(session) {
 			userType = (UserType) session.getAttribute("userType");
 		}
-		if(ProtectedURLManager.authorized(uri, userType))
+		if(ProtectedURLManager.isAuthorized(uri, userType))
 			chain.doFilter(request, response);
 		else {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;

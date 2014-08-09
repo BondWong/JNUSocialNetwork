@@ -354,23 +354,6 @@ function show_unread_messages(messages, toID, fromID, toName, online) {
 	}
 }
 
-function handle_unhandled_events(events) {
-	for (var i = 0; i < events.length; i++) {
-		switch (events[i].name) {
-		case "CREATECOMMENT":
-			break;
-		case "LIKEPOST":
-			break;
-		case "LIKECOMMENT":
-			break;
-		case "FOLLOW":
-			break;
-		case "REPLYCOMMENT":
-			break;
-		}
-	}
-}
-
 function online_remind(message) {
 	if ($("div.mentionBody-content #" + message.fromID).length == 0) {
 		$("div.mentionBody-content").append(

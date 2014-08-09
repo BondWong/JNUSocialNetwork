@@ -104,6 +104,7 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -116,11 +117,20 @@
 	<script src="js/function.js"></script>
 	<script src="js/community.js"></script>
 	<script src="js/EventHandle.js"></script>
-	<script type="text/javascript">
-		Msnry('.containerDiscovery', '.content_container', 265);
-		fetchCommunity();
-	</script>
 	<%@ include file="parts/securityCode.jsp"%>
-	<script src="js/initialization.js"></script>
+	<script src="js/global-initialization.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				clickEvent();
+				communityClickEvent();
+			} else {
+				clickOffEvent();
+			}
+			Msnry('.containerDiscovery', '.content_container', 265);
+			fetchCommunity();
+		});
+	</script>
 </body>
 </html>

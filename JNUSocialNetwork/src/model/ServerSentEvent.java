@@ -29,13 +29,16 @@ public class ServerSentEvent extends Model{
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
-		this.ID = System.currentTimeMillis();
 		this.name = ((SSEType)initParams[0]).name();
 		this.data = JsonUtil.toJson(initParams[1]);
 	}
 	
 	public Long getID() {
 		return ID;
+	}
+	
+	public void setID(Long ID) {
+		this.ID = ID;
 	}
 	
 	public void delete() {

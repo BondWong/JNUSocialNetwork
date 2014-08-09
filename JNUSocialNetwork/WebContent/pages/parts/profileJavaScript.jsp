@@ -14,28 +14,59 @@
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">
-			Msnry('.pro_body', '.post', 435);
-			fetchUserByID();
-			//aboutUpdata();
+			$(document).ready(function() {
+				if (ID != null && ID != "") {
+					login_initialization(ID);
+					aboutClickEvent();
+					clickEvent();
+				}
+				Msnry('.pro_body', '.post', 435);
+				fetchUserByID();
+				clickOffEvent();
+			});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'photo' }">
 		<script type="text/javascript">
-			Msnry('.pro_body', '.photo', 280);
-			showPhotos();
+			$(document).ready(function() {
+				if (ID != null && ID != "") {
+					login_initialization(ID);
+					aboutClickEvent();
+					clickEvent();
+				}
+				Msnry('.pro_body', '.photo', 280);
+				showPhotos();
+				clickOffEvent();
+			});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'circle' }">
 		<script type="text/javascript">
-			Msnry('.pro_body', '.post', 435);
-			showFollowees();
-			showFollowers();
+			$(document).ready(function() {
+				if (ID != null && ID != "") {
+					login_initialization(ID);
+					aboutClickEvent();
+					clickEvent();
+				}
+				Msnry('.pro_body', '.post', 435);
+				showFollowees();
+				showFollowers();
+				clickOffEvent();
+			});
 		</script>
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
-			Msnry('.pro_body', '.post', 435);
-			fetchPostsByOwner();
+			$(document).ready(function() {
+				if (ID != null && ID != "") {
+					login_initialization(ID);
+					aboutClickEvent();
+					clickEvent();
+				}
+				Msnry('.pro_body', '.post', 435);
+				fetchPostsByOwner();
+				clickOffEvent();
+			});
 		</script>
 	</c:otherwise>
 </c:choose>
