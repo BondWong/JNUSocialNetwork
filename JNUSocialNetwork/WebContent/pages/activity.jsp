@@ -197,8 +197,8 @@
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			if (ID != null && ID != ""){
-				login_initialization(ID);
+			if (USERID != null && USERID != ""){
+				login_initialization(USERID);
 				activityClickEvent();
 				clickEvent();
 			}else{
