@@ -161,8 +161,8 @@
 
 			</div>
 			<div class=communityCardInfo>
-				<h1>Joke of the Day</h1>
-				<p>Funny quotes, jokes, memes, photos, and good humor!</p>
+				<h1 class="cName">Joke of the Day</h1>
+				<p class="cIntro">Funny quotes, jokes, memes, photos, and good humor!</p>
 			</div>
 			<div class="communityPic"></div>
 			<div class="cardA">
@@ -354,6 +354,7 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -383,11 +384,23 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/communityCircle.js"></script>
 	<script src="js/EventHandle.js"></script>
+	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		Msnry('.pro_body', '.post', 435);
-		fetchPostByCommunity();
+		$(document).ready(function() {
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				window.fileDri = [];
+				window.communityPostIdContainer = [];	
+				clickEvent();
+			} else {
+				clickOffEvent();
+			}
+			window.community = $.parseJSON(sessionStorage.getItem("community"));
+			Msnry('.pro_body', '.post', 435);
+			fetchPostByCommunity();
+			showCommunityInfo();
+		});
 	</script>
 	<%@ include file="parts/securityCode.jsp"%>
-	<script src="js/initialization.js"></script>
 </body>
 </html>

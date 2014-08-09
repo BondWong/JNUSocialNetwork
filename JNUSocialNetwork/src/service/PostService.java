@@ -137,7 +137,7 @@ public class PostService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Post.fetchPostByCommunity", communityID, startIndex,
+					"Post.fetchPostsByCommunity", communityID, startIndex,
 					pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

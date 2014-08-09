@@ -1,68 +1,73 @@
 //function editProfileInfro
-		$('body').on('click','.aEditbtn',function(){
-			$("span[class='Anickname']").html("<input id='focusedInput' class='nicknameE' type='text' value='Winson_Lau' />");
-			$("span[class='Alooking']").html("<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
-			$("span[class='Atelenum']").html("<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
-			$("span[class='Arelationship']").html("<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-			var campus = "";
-			if($('.Acampus').html()=="珠海校区"){campus="ZhuhaiCampus";}
-			if($('.Acampus').html()=="华文校区"){campus="HuawenCampus";}
-			if($('.Acampus').html()=="深圳校区"){campus="ShenzhenCampus";}
-			if($('.Acampus').html()=="校本部"){campus="GuangzhouCampus";}
-			
-			var dormInfo = GetDormInfo("HuawenCampus");
-			var option="";
-			$.each(dormInfo,function(index,dorm){
-				option=option+"<option value='"+dorm+"'>"+dorm+"</option>";
+	function aboutClickEvent(){
+		if(sessionStorage.getItem("otherUserID")==ID){
+			$('body').on('click','.aEditbtn',function(){
+				$("span[class='Anickname']").html("<input id='focusedInput' class='nicknameE' type='text' value='Winson_Lau' />");
+				$("span[class='Alooking']").html("<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
+				$("span[class='Atelenum']").html("<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
+				$("span[class='Arelationship']").html("<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
+				var campus = "";
+				if($('.Acampus').html()=="珠海校区"){campus="ZhuhaiCampus";}
+				if($('.Acampus').html()=="华文校区"){campus="HuawenCampus";}
+				if($('.Acampus').html()=="深圳校区"){campus="ShenzhenCampus";}
+				if($('.Acampus').html()=="校本部"){campus="GuangzhouCampus";}
+				
+				var dormInfo = GetDormInfo("HuawenCampus");
+				var option="";
+				$.each(dormInfo,function(index,dorm){
+					option=option+"<option value='"+dorm+"'>"+dorm+"</option>";
+				});
+				$("span[class='Aaddress']").html("<select class='addressE'>"+option+"</select>");	
+				$("span[class='Aemail']").html("<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
+				
+				$(this).text("Save");
+				$(this).attr("class","btn btn-primary aSavebtn");
 			});
-			$("span[class='Aaddress']").html("<select class='addressE'>"+option+"</select>");	
-			$("span[class='Aemail']").html("<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
-			
-			$(this).text("Save");
-			$(this).attr("class","btn btn-primary aSavebtn");
-		});
-		//function saveProfileInfro
-		$('body').on('click','.aSavebtn',function(){
-			var datajson={
-				nickName:$('.nicknameE').val(),
-				lookingFor:$('.lookingforE').val(),	
-				relationship:$('.relationshipnE').val(),
-				telenum:$('.telenumE').val(),
-				email:$('.emailE').val(),
-				dorm:$('.addressE').val()
-			};
-			var json = $.toJSON(datajson);
-			UpdateUserProfile("2011052407",json);
-			fetchUserByID();
-			$(this).text("Edit");
-			$(this).attr("class","btn btn-primary aEditbtn");
-		});
-		//function avatarImgBtn
-		$('body').on("click",".avatarImgBtn",function(){
-			var datajson={
-					avatarLink:FileUpload(new FormData($('.avatarForm')[0])),
+			//function saveProfileInfro
+			$('body').on('click','.aSavebtn',function(){
+				var datajson={
+					nickName:$('.nicknameE').val(),
+					lookingFor:$('.lookingforE').val(),	
+					relationship:$('.relationshipnE').val(),
+					telenum:$('.telenumE').val(),
+					email:$('.emailE').val(),
+					dorm:$('.addressE').val()
 				};
-			var json = $.toJSON(datajson);
-			UpdateUserProfile("2011052407",json);
-			fetchUserByID();
-			$('#myModal').modal('hide');
-		});
-		//change Background
-		$('body').on("click",".changeBg",function(){
-			var datajson={
-					profileImageLink:FileUpload(new FormData($('.changBgForm')[0])),
-				};
-			var json = $.toJSON(datajson);
-			UpdateUserProfile("2011052407",json);
-			fetchUserByID();
-			$('#myModalB').modal('hide');
-		});
-		//function addPhoto
-		$('body').on("click",".addPhoto",function(){
-			var	photoLinks = FileUpload(new FormData($('.photoForm')[0]));
-			AddImages("2011052407",photoLinks);
-			$('#myModal2').modal('hide');
-		});
+				var json = $.toJSON(datajson);
+				UpdateUserProfile(ID,json);
+				fetchUserByID();
+				$(this).text("Edit");
+				$(this).attr("class","btn btn-primary aEditbtn");
+			});
+			//function avatarImgBtn
+			$('body').on("click",".avatarImgBtn",function(){
+				var datajson={
+						avatarLink:FileUpload(new FormData($('.avatarForm')[0])),
+					};
+				var json = $.toJSON(datajson);
+				UpdateUserProfile(ID,json);
+				fetchUserByID();
+				$('#myModal').modal('hide');
+			});
+			//change Background
+			$('body').on("click",".changeBg",function(){
+				var datajson={
+						profileImageLink:FileUpload(new FormData($('.changBgForm')[0])),
+					};
+				var json = $.toJSON(datajson);
+				UpdateUserProfile(ID,json);
+				fetchUserByID();
+				$('#myModalB').modal('hide');
+			});
+			//function addPhoto
+			$('body').on("click",".addPhoto",function(){
+				var	photoLinks = FileUpload(new FormData($('.photoForm')[0]));
+				AddImages(ID,photoLinks);
+				$('#myModal2').modal('hide');
+			});
+		}
+	}
+		
 		//function profileBg
 		$('.profile_img').hover(function(){
 			var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";//<button class='btn btn-success avatarImgBtn'>Change Avatar</button>
@@ -87,7 +92,7 @@
 		});
 	//show photos
 		function showPhotos(){
-			var response = FetchUserByID("2011052407");
+			var response = FetchUserByID(sessionStorage.get("otherUserID"));
 			$.each(response.imageLinks,function(index,imageLink){
 				var photoContainer="<div class='photo'><img src='"+imageLink+"' /></div>";
 				$('.photoAddBtn').after(photoContainer);
@@ -95,7 +100,7 @@
 		}
 	//show followees
 		function showFollowees(){
-			var response = FetchFollowees("2011052407","0","5");
+			var response = FetchFollowees(sessionStorage.get("otherUserID"),"0","5");
 			$.each(response,function(index,followee){
 				var followeeDiv="<img src='"+followee.attributes.avatarLink+"'></img>";
 				$('.followeeShow').append(followeeDiv);
@@ -103,7 +108,7 @@
 		}
 	//show followers
 		function showFollowers(){
-			var response = FetchFollowers("2011052407","0","5");
+			var response = FetchFollowers(sessionStorage.get("otherUserID"),"0","5");
 			$.each(response,function(index,follower){
 				var followerDiv="<img src='"+follower.attributes.avatarLink+"'></img>";
 				$('.followerShow').append(followerDiv);
@@ -112,7 +117,7 @@
 		
 		//function fetchPostsByOwner()
 		function fetchPostsByOwner(){
-			var response = FetchPostsByOwner("2011052407","0","5");
+			var response = FetchPostsByOwner(sessionStorage.get("otherUserID"),"0","5");
 			$.each(response.reverse(),function(n,dataString){
 				addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
 			});
@@ -120,7 +125,7 @@
 
 	//fetchUserByID
 	function fetchUserByID(){
-		var userInfo = FetchUserByID("2011052407");
+		var userInfo = FetchUserByID(sessionStorage.get("otherUserID"));
 		$('.Agender').html(userInfo.attributes.gender);
 		$('.Ainstitution').html(userInfo.attributes.institution);
 		$('.Amajor').html(userInfo.attributes.major);

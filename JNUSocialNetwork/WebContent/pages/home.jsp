@@ -201,7 +201,7 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/function.js"></script>
+	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<%@ include file="parts/securityCode.jsp"%>
-	<script src="js/initialization.js"></script>
 </body>
 </html>

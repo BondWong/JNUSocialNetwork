@@ -12,7 +12,7 @@
 			<%@ include file="parts/navLeft.jsp"%>
 			<div class="collapse navbar-collapse">
 				<%@ include file="parts/communityDropDown.jsp"%>
-				
+
 				<%@ include file="parts/navRight.jsp"%>
 			</div>
 			<!-- /.nav-collapse -->
@@ -20,19 +20,20 @@
 		<!-- /.container -->
 	</div>
 	<!-- /.navbar -->
-	
+
 	<div class="container container_custom">
 		<div class="col-lg-3">
 			<div class="peopleType">
 				<div class="searchBody">
-					<span class="glyphicon glyphicon-search glyphicon-search-custom" style="cursor:pointer;"></span>
-					<span class="searchUser">Search for anyone</span>
+					<span class="glyphicon glyphicon-search glyphicon-search-custom"
+						style="cursor: pointer;"></span> <span class="searchUser">Search
+						for anyone</span>
 				</div>
-				<span class="peopeleType peopeleTypeHover pinCommon">People in common</span>
-				<span class="peopeleType pCampus">eople in the same campus</span>
-				<span class="peopeleType pMajor">People in the same major</span>
-				<span class="peopeleType pSeason">People in the same season</span>
-				<span class="peopeleType pClass">Find classmates</span>
+				<span class="peopeleType peopeleTypeHover pinCommon">People
+					in common</span> <span class="peopeleType pCampus">eople in the
+					same campus</span> <span class="peopeleType pMajor">People in the
+					same major</span> <span class="peopeleType pSeason">People in the
+					same season</span> <span class="peopeleType pClass">Find classmates</span>
 			</div>
 		</div>
 		<div class="col-lg-9">
@@ -43,25 +44,34 @@
 				<div class="userCard">
 					<img src="images/userRecomm.jpg" width="200px">
 					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University of Mexico</p>
-					<div class="recommendBtn"><button class="btn btn-default ">
-						+<span class="glyphicon glyphicon-user" >&nbsp;Follow</span></button>
+					<p class="recommendLooking">(?), National Autonomous University
+						of Mexico</p>
+					<div class="recommendBtn">
+						<button class="btn btn-default ">
+							+<span class="glyphicon glyphicon-user">&nbsp;Follow</span>
+						</button>
 					</div>
 				</div>
 				<div class="userCard">
 					<img src="images/userRecomm.jpg" width="200px">
 					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University of Mexico</p>
-					<div class="recommendBtn"><button class="btn btn-default ">
-						+<span class="glyphicon glyphicon-user" >&nbsp;Follow</span></button>
+					<p class="recommendLooking">(?), National Autonomous University
+						of Mexico</p>
+					<div class="recommendBtn">
+						<button class="btn btn-default ">
+							+<span class="glyphicon glyphicon-user">&nbsp;Follow</span>
+						</button>
 					</div>
 				</div>
 				<div class="userCard">
 					<img src="images/userRecomm.jpg" width="200px">
 					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University of Mexico</p>
-					<div class="recommendBtn"><button class="btn btn-default ">
-						+<span class="glyphicon glyphicon-user" id="followBtn" >&nbsp;Follow</span></button>
+					<p class="recommendLooking">(?), National Autonomous University
+						of Mexico</p>
+					<div class="recommendBtn">
+						<button class="btn btn-default ">
+							+<span class="glyphicon glyphicon-user" id="followBtn">&nbsp;Follow</span>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -79,8 +89,16 @@
 	<script src="js/EventHandle.js"></script>
 	<script src="js/people.js"></script>
 	<script type="text/javascript">
-		PinCommon();
-		Msnry('.userContainer', '.userCard', 200);
+		$(document).ready(function() {
+			if (ID != null && ID != "") {
+				login_initialization(ID);
+				peopleClickEvent();
+				clickEvent();
+			}
+			PinCommon();
+			Msnry('.userContainer', '.userCard', 200);
+			clickOffEvent();
+		});
 	</script>
 	<%@ include file="parts/securityCode.jsp"%>
 </body>

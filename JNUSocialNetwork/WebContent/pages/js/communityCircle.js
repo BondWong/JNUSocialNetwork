@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	var fileDri = [];
 	//funtion fileupload
 	$('#fileupload').fileupload({
 		url:'../../JNUSocialNetwork/app/fileUploader',
@@ -73,19 +72,25 @@ $(document).ready(function(){
 					imageLinks:fileDri
 			};
 			var json = $.toJSON(post);
-			AddPostToCommunity("2011052407","1406962347159","MEMBER",json);
+			var user = $.parseJSON(sessionStorage.getItem("user"));
+			AddPostToCommunity(USERID,community.ID,"MEMBER",json);
 		    $('#addPostModal').modal('hide');
 	});
 });
 //function fectchPostByFollowee
 
 function fetchPostByCommunity(){
-	var response = FetchByCommunity("1406962347159","0","5");
+	var response = FetchByCommunity(community.ID,"0","5");
 	$.each(response.reverse(),function(n,dataString){
-		addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+		if(dataString.available == "true"){
+			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+		}
 	});
 }
-var communityPostIdContainer = [];
+function showCommunityInfo(){
+	$('.cName').html(community.attributes.name);
+	$('.cIntro').html(community.attributes.introduct);
+}
 $('body').on('click','.alertCustC',function(){
 	fetchPostByIDs(communityPostIdContainer);
 	$(this).css("display","none");
@@ -93,5 +98,5 @@ $('body').on('click','.alertCustC',function(){
 });
 $('body').on('click','.deletePostBtn',function(){
 	var id = $(this).find("input").attr("value");
-	DeletePostFromCommunity("1406962347159",id);
+	DeletePostFromCommunity(community.ID,id);
 });

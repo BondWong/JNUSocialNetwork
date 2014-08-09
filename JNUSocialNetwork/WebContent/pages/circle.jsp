@@ -324,8 +324,7 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	<%@ include file="parts/contentScroll.jsp"%>
-	<%@ include file="parts/securityCode.jsp"%>
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -356,9 +355,21 @@
 	<script src="js/circle.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			if (USERID != null && USERID != ""){
+				login_initialization(USERID);
+				window.fileDri = [];
+				window.postIdContainer = [];
+				clickEvent();
+			}else{
+				clickOffEvent();
+			}
 		Msnry('.pro_body', '.post', 435);
-		fetchByFolloweeOrOwner();
+		fetchByFolloweeOrOwner();	
+		});
 	</script>
-	<script src="js/initialization.js"></script>
+	<%@ include file="parts/contentScroll.jsp"%>
+	<%@ include file="parts/securityCode.jsp"%>
+	<script src="js/global-initialization.js"></script>
 </body>
 </html>

@@ -193,11 +193,20 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/activity.js"></script>
+	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			if (ID != null && ID != ""){
+				login_initialization(ID);
+				activityClickEvent();
+				clickEvent();
+			}else{
+				clickOffEvent();
+			}
 		Msnry('.activityBody', '.activity', 435);
 		fetchPostByCommunity();
+		});
 	</script>
 	<%@ include file="parts/securityCode.jsp"%>
-	<script src="js/initialization.js"></script>
 </body>
 </html>

@@ -8,6 +8,9 @@
 
 <p id="hiddenCode" style="display: none">${sessionScope.hiddenCode }</p>
 <p id="security-code-user-ID" style="display: none">${sessionScope.ID }</p>
+<script type="text/javascript">
+		window.USERID = $("#security-code-user-ID").text();
+</script>
 <c:if test='${sessionScope.ID != null && sessionScope.ID != ""}'>
 	<script src="js/friend-list.js"></script>
 	<script src="js/chatroomAPI.js"></script>
