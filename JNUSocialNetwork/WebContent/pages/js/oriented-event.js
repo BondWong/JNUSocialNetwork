@@ -108,19 +108,19 @@ function handle_unhandled_events(events) {
 function event_remind(event) {
 	switch (event.SSEType) {
 	case "CREATECOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "added comment to your post");
 		break;
 	case "REPLYCOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "replied your comment");
 		break;
 	case "LIKEPOST":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "liked your post");
 		break;
 	case "LIKECOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "liked your comment");
 		break;
 	case "FOLLOW":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "followed you");
 		break;
 	}
 }
@@ -128,19 +128,19 @@ function event_remind(event) {
 function off_line_event_remind(event) {
 	switch (event.name) {
 	case "CREATECOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "added comment to your post");
 		break;
 	case "REPLYCOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "replied your comment");
 		break;
 	case "LIKEPOST":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "liked your post");
 		break;
 	case "LIKECOMMENT":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "liked your comment");
 		break;
 	case "FOLLOW":
-		alert(JSON.stringify(event));
+		add_to_bell(event, "followed you");
 		break;
 	}
 }
@@ -153,4 +153,26 @@ function delete_event(eventID) {
 		success : function(data) {
 		}
 	});
+}
+
+function add_to_bell(event, description) {
+	$("div.mentionBody-content").append(
+			'<div class="NotiItem" id="' + event.data.eventID
+					+ '"><div class="col-lg-3"><div><img src="'
+					+ event.data.avatar
+					+ '" /></div></div><div class="col-lg-6"><div>'
+					+ event.data.name + '<br />' + description + '</div></div><div>');
+	var event_data = event.data;
+	$("#" + event.data.eventID).click(function(e) {
+		e.stopPropagation();
+		$(this).fadeOut("fast");
+		alert(event_data);
+		/*
+		 * 
+		 */
+		$(this).remove();
+	});
+	window.bellIntervalID = setInterval(function() {
+		$("a#remind-bell").fadeOut(300).fadeIn(300);
+	}, 600);
 }
