@@ -10,7 +10,7 @@
 			function() {
 				if ($(window).scrollTop() == $(document).height()
 						- $(window).height()) {
-					//$('div#infinite_loader').show();
+					$('div#infinite_loader').show();
 					$.ajax({
 						//数post个数作为startIndex，pageSize规定好
 						url : "",
