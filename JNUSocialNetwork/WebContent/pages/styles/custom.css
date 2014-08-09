@@ -1303,3 +1303,10 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+.tipUser{
+	color: #404040;
+}
+.tipUser:hover{
+	color: #404040;
+    cursor:pointer;
+}

@@ -23,6 +23,8 @@
 				}else{
 					clickOffEvent();
 				}
+				var url = window.location.search;
+				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				fetchUserByID();
 			});
@@ -38,6 +40,8 @@
 				}else{
 					clickOffEvent();
 				}
+				var url = window.location.search;
+				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.photo', 280);
 				showPhotos();
 				
@@ -54,6 +58,8 @@
 				}else{
 					clickOffEvent();
 				}
+				var url = window.location.search;
+				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				showFollowees();
 				showFollowers();
@@ -71,6 +77,8 @@
 				}else{
 					clickOffEvent();
 				}
+				var url = window.location.search;
+				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				fetchPostsByOwner();
 				

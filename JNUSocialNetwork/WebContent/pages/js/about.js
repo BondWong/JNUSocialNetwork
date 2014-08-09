@@ -59,7 +59,7 @@ function aboutClickEvent() {
 				dorm : $('.addressE').val()
 			};
 			var json = $.toJSON(datajson);
-			UpdateUserProfile(USERID, json);
+			UpdateUserProfile(userID, json);
 			fetchUserByID();
 			$(this).text("Edit");
 			$(this).attr("class", "btn btn-primary aEditbtn");
@@ -70,7 +70,7 @@ function aboutClickEvent() {
 				avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
 			};
 			var json = $.toJSON(datajson);
-			UpdateUserProfile(USERID, json);
+			UpdateUserProfile(userID, json);
 			fetchUserByID();
 			$('#myModal').modal('hide');
 		});
@@ -84,14 +84,14 @@ function aboutClickEvent() {
 								$('.changBgForm')[0])),
 					};
 					var json = $.toJSON(datajson);
-					UpdateUserProfile(USERID, json);
+					UpdateUserProfile(userID, json);
 					fetchUserByID();
 					$('#myModalB').modal('hide');
 				});
 		// function addPhoto
 		$('body').on("click", ".addPhoto", function() {
 			var photoLinks = FileUpload(new FormData($('.photoForm')[0]));
-			AddImages(USERID, photoLinks);
+			AddImages(userID, photoLinks);
 			$('#myModal2').modal('hide');
 		});
 	}
@@ -131,7 +131,7 @@ $('.profile_user_img')
 // show photos
 
 function showPhotos() {
-	var response = FetchUserByID(USERID);
+	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {
 		var photoContainer = "<div class='photo'><img src='" + imageLink
 				+ "' /></div>";
@@ -140,7 +140,7 @@ function showPhotos() {
 }
 // show followees
 function showFollowees() {
-	var response = FetchFollowees(USERID,"0","5");
+	var response = FetchFollowees(userID,"0","5");
 	$.each(response, function(index, followee) {
 		var followeeDiv = "<img src='" + followee.attributes.avatarLink
 				+ "'></img>";
@@ -149,7 +149,7 @@ function showFollowees() {
 }
 // show followers
 function showFollowers() {
-	var response = FetchFollowers(USERID, "0","5");
+	var response = FetchFollowers(userID, "0","5");
 	$.each(response, function(index, follower) {
 		var followerDiv = "<img src='" + follower.attributes.avatarLink
 				+ "'></img>";
@@ -159,7 +159,7 @@ function showFollowers() {
 
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
-	var response = FetchPostsByOwner(USERID,"0", "5");
+	var response = FetchPostsByOwner(userID,"0", "5");
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
 				dataString.publishDate, dataString.attributes.content,
@@ -169,7 +169,7 @@ function fetchPostsByOwner() {
 
 // fetchUserByID
 function fetchUserByID() {
-	var userInfo = FetchUserByID(USERID);
+	var userInfo = FetchUserByID(userID);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);

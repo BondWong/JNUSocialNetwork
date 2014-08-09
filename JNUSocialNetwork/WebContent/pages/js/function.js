@@ -174,7 +174,12 @@ function clickEvent() {
 							return 0;
 						}
 					});
-$(document).ready(function(){});
+$(document).ready(function(){
+		$('img.userImg').userTips();
+		$('body').on("click",".tipUser",function(){
+			window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?'+sessionStorage.getItem("otherUserID");
+		});
+	});
 	// function likePost and cancelLike
 	$('body')
 			.on(
@@ -356,7 +361,7 @@ function clickOffEvent() {
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a>'
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
 										+ data.attributes.nickName
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
@@ -403,4 +408,3 @@ function clickOffEvent() {
 						});
 	};
 })(jQuery);
-$('img.userImg').userTips();
