@@ -20,7 +20,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 					response,
 					function(index, jsonComment) {
 						comment = comment
-								+ "<div class='act_content "
+								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.nickName
@@ -30,14 +30,21 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 								+ jsonComment.ID
 								+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
 								+ jsonComment.publishDate
-								+ "</div></div><div class='col-lg-7 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
+								+ "</div></div><div class='col-lg-5 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 								+ jsonComment.ID
 								+ "'>+<span>"
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'>"
-								+ jsonComment.attributes.content
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
+								+ postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.nickName
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
+								+ jsonComment.attributes.commentToComment
+								+ "</a>" +"&nbsp;"+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 						if (USERID != jsonComment.owner.ID) {
 							$('.deleteCommBtn').css("display", "none");
@@ -62,7 +69,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 			+ likeNum
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control' id='commentText"
+			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
 			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment
@@ -71,6 +78,9 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 		$('.deletePostBtn').css("display", "none");
 	}
 	$(".share").after(boarddiv);
+	$("#commentText" + postID).blur(function() {
+		$(this).attr("placeholder", "add a comment");
+	});
 	Msnry('.pro_body', '.post', 435);
 
 }
@@ -120,34 +130,33 @@ function fetchPostByIDs(container) {
 				dataString.ID, dataString.likerIDs.length);
 	});
 }
-$(document)
-		.ready(
-				function() {
-					// function userTip
-					
-					// Notification
-					$(".mentionBell").click(function(e) {
-						clearInterval(window.bellIntervalID);
-						var tinyTip;
-						var pos = $(this).offset();
-						var nPos = pos;
-						nPos.top = pos.top + 20;
-						nPos.left = pos.left - 250;
-						var divTip = 'div.mentionBody';
-						tinyTip = $(divTip);
-						tinyTip.hide();
-						tinyTip.css(nPos).fadeIn(300);
-						e.stopPropagation();
-					});
-					$(document).mousedown(function(e) {
-						if (e.which == 1) {
-							var divTip = 'div.mentionBody';
-							tinyTip = $(divTip);
-							tinyTip.fadeOut(300);
-						}
-					});
+$(document).ready(function() {
+	// function userTip
 
-				});
+	// Notification
+	$(".mentionBell").click(function(e) {
+		clearInterval(window.bellIntervalID);
+		var tinyTip;
+		var pos = $(this).offset();
+		var nPos = pos;
+		nPos.top = pos.top + 20;
+		nPos.left = pos.left - 250;
+		var divTip = 'div.mentionBody';
+		tinyTip = $(divTip);
+		tinyTip.hide();
+		tinyTip.css(nPos).fadeIn(300);
+		e.stopPropagation();
+	});
+	$(document).mousedown(function(e) {
+		if (e.which == 1) {
+			var divTip = 'div.mentionBody';
+			tinyTip = $(divTip);
+			tinyTip.fadeOut(300);
+
+		}
+	});
+
+});
 // function clickFuntion
 function clickEvent() {
 	// function collectPost and cancelCollcet
@@ -174,12 +183,29 @@ function clickEvent() {
 							return 0;
 						}
 					});
-$(document).ready(function(){
-		$('img.userImg').userTips();
-		$('body').on("click",".tipUser",function(){
-			window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?'+sessionStorage.getItem("otherUserID");
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$('img.userImg').userTips();
+						$('body')
+								.on(
+										"click",
+										".tipUser",
+										function() {
+											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
+													+ sessionStorage
+															.getItem("otherUserID");
+										});
+						$('body')
+								.on(
+										"click",
+										".glyphicon-home",
+										function() {
+											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
+													+ sessionStorage
+															.getItem("otherUserID");
+										});
+					});
 	// function likePost and cancelLike
 	$('body')
 			.on(
@@ -204,18 +230,29 @@ $(document).ready(function(){
 							return 0;
 						}
 					});
+	// reply comment
+	$('body').on("click", ".comment_reply", function() {
+		var postID = $(this).attr("id");
+		var commmentName = $(this).find("input[id='replyName']").attr("value");
+		// var commentID = $(this).find("input[id='replyID']").attr("value");
+		sessionStorage.setItem("commentOwnerName", commmentName);
+		var inputID = $("input[id='commentText" + postID + "']");
+		inputID.attr("placeholder", "@" + commmentName);
+		inputID.focus();
+	});
+
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
 		if ($(this).find("a").css("color") == "rgb(90, 90, 90)") {
-			LikeComment("2011052406", id);
+			LikeComment(USERID, id);
 			var inputID = $("input[value='" + id + "'][id='likeID']");
 			inputID.parents("a").css("color", "rgb(255, 255, 255)");
 			inputID.parents("a").css("background-color", "rgb(66,139,202)");
 			return 0;
 		}
 		if ($(this).find("a").css("color") == "rgb(255, 255, 255)") {
-			CancelLikeComment("2011052406", id);
+			CancelLikeComment(USERID, id);
 			var inputID = $("input[value='" + id + "'][id='likeID']");
 
 			inputID.parents("a").css("color", "rgb(90, 90, 90)");
@@ -237,14 +274,16 @@ $(document).ready(function(){
 	// function addComment
 	$('body').on('click', '#addComment', function() {
 		var id = this.getAttribute("value");
-		var inputID = "commentText" + id;
+		var inputComm = $("input[id='commentText" + id + "']");
 		var comment = {
 			attributes : {
-				content : $("input[id='" + inputID + "']").val()
+				content : inputComm.val(),
+				commentToComment : sessionStorage.getItem("commentOwnerName")
 			}
 		};
 		var commentJson = $.toJSON(comment);
 		AddComment(USERID, id, commentJson);
+		sessionStorage.setItem("commentOwnerName","");
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -268,6 +307,12 @@ $(document).ready(function(){
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {
 		e.preventDefault();
+		$(this).attr("data-toggle", "");
+		alert("Sign In");
+	});
+	$('.share_txt').click(function(e) {
+		e.preventDefault();
+		$(this).attr("data-toggle", "");
 		alert("Sign In");
 	});
 	$('.post_collect').click(function(e) {
@@ -334,8 +379,16 @@ function clickOffEvent() {
 		e.preventDefault();
 		alert("Sign In");
 	});
+	$('.addphotoBtn').click(function(e) {
+		$(this).attr("data-toggle", "");
+		alert("Sign In");
+	});
 	$('.aSavebtn').css("display", "none");
 	$('.aEditbtn').css("display", "none");
+	$('.createCom').click(function(e) {
+		$(this).attr("data-toggle", "");
+		alert("Sign In");
+	});
 
 }
 (function($) {
@@ -353,11 +406,9 @@ function clickOffEvent() {
 							var nPos = pos;
 							nPos.top = pos.top + 20;
 							nPos.left = pos.left + 40;
-							var userid = $(this).next()
-									.val();
+							var userid = $(this).next().val();
 							var data = FetchUserByID(userid);
-							sessionStorage.setItem(
-									"otherUserID", data.ID);
+							sessionStorage.setItem("otherUserID", data.ID);
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
@@ -370,40 +421,23 @@ function clickOffEvent() {
 								var divTip = 'div.popTip';
 								tinyTip = $(divTip);
 								tinyTip.hide();
-								tinyTip.css('position',
-										'absolute').css(
+								tinyTip.css('position', 'absolute').css(
 										'z-index', '1000');
-								tinyTip.css(nPos).fadeIn(
-										animSpeed);
-								tinyTip
-										.hover(
-												function() {
-													clearTimeout(window.timer);
-												},
-												function() {
-													tinyTip
-															.fadeOut(
-																	animSpeed,
-																	function() {
-																		$(
-																				this)
-																				.remove();
-																	});
-												});
+								tinyTip.css(nPos).fadeIn(animSpeed);
+								tinyTip.hover(function() {
+									clearTimeout(window.timer);
+								}, function() {
+									tinyTip.fadeOut(animSpeed, function() {
+										$(this).remove();
+									});
+								});
 							}
-						},
-						function() {
-							window.timer = setTimeout(
-									function() {
-										tinyTip
-												.fadeOut(
-														animSpeed,
-														function() {
-															$(
-																	this)
-																	.remove();
-														});
-									}, 200);
+						}, function() {
+							window.timer = setTimeout(function() {
+								tinyTip.fadeOut(animSpeed, function() {
+									$(this).remove();
+								});
+							}, 200);
 
 						});
 	};

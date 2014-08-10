@@ -12,6 +12,22 @@
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
 <script src="js/global-initialization.js"></script>
+<script type="text/javascript">
+	var url = window.location.search;
+	window.userID = url.substr(url.indexOf("&") + 1);
+	$('body').on('click', '.aboutNav', function() {
+		window.location.href = "profile.jsp?nav=about&" + userID;
+	});
+	$('body').on('click', '.postNav', function() {
+		window.location.href = "profile.jsp?nav=post&" + userID;
+	});
+	$('body').on('click', '.photoNav', function() {
+		window.location.href = "profile.jsp?nav=photo&" + userID;
+	});
+	$('body').on('click', '.circleNav', function() {
+		window.location.href = "profile.jsp?nav=circle&" + userID;
+	});
+</script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">
@@ -20,11 +36,9 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
-				}else{
+				} else {
 					clickOffEvent();
 				}
-				var url = window.location.search;
-				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				fetchUserByID();
 			});
@@ -37,14 +51,12 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
-				}else{
+				} else {
 					clickOffEvent();
 				}
-				var url = window.location.search;
-				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.photo', 280);
 				showPhotos();
-				
+
 			});
 		</script>
 	</c:when>
@@ -55,15 +67,13 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
-				}else{
+				} else {
 					clickOffEvent();
 				}
-				var url = window.location.search;
-				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				showFollowees();
 				showFollowers();
-				
+
 			});
 		</script>
 	</c:when>
@@ -74,14 +84,12 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
-				}else{
+				} else {
 					clickOffEvent();
 				}
-				var url = window.location.search;
-				window.userID = url.substr(url.indexOf("?") + 1);
 				Msnry('.pro_body', '.post', 435);
 				fetchPostsByOwner();
-				
+
 			});
 		</script>
 	</c:otherwise>

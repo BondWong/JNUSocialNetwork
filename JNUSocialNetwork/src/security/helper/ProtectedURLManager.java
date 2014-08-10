@@ -8,20 +8,10 @@ import java.util.Map;
 import model.modelType.UserType;
 
 public class ProtectedURLManager {
-	private static List<String> protectedURLs;
-	private static List<String> deleteHiddenCodeProtectionURLs;
 	private static List<String> loginProtectionURLs;
 	private static Map<String, UserType> authorizationProtectionURLs;
-	
-	static{
-		protectedURLs = new ArrayList<String>();
-		protectedURLs.add("app");
-		protectedURLs.add("security");
-		
-		deleteHiddenCodeProtectionURLs = new ArrayList<String>();
-		deleteHiddenCodeProtectionURLs.add("login");
-		deleteHiddenCodeProtectionURLs.add("register");
-		
+
+	static {
 		loginProtectionURLs = new ArrayList<String>();
 		loginProtectionURLs.add("post/add");
 		loginProtectionURLs.add("post/addToCommunity");
@@ -32,7 +22,7 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("post/cancelCollect");
 		loginProtectionURLs.add("post/joinActivity");
 		loginProtectionURLs.add("post/leaveActivity");
-		
+
 		loginProtectionURLs.add("community/add");
 		loginProtectionURLs.add("community/delete");
 		loginProtectionURLs.add("community/join");
@@ -40,12 +30,12 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("community/updateAttributes");
 		loginProtectionURLs.add("community/addTags");
 		loginProtectionURLs.add("community/removeTag");
-		
+
 		loginProtectionURLs.add("comment/add");
 		loginProtectionURLs.add("comment/delete");
 		loginProtectionURLs.add("comment/like");
 		loginProtectionURLs.add("comment/cancelLike");
-		
+
 		loginProtectionURLs.add("user/deleteMember");
 		loginProtectionURLs.add("user/deleteCommunityOwner");
 		loginProtectionURLs.add("user/follow");
@@ -56,19 +46,15 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("user/fetchIDs");
 		loginProtectionURLs.add("user/fetchCommunityOwnerByID");
 		loginProtectionURLs.add("user/getIDStatus");
-		
+
 		loginProtectionURLs.add("chatRoom");
-		
+
 		loginProtectionURLs.add("application");
-		
-		loginProtectionURLs.add("event");
-		
-		loginProtectionURLs.add("endpoint/connect");
-		
+
+		loginProtectionURLs.add("event/deleteUnhandledEvent");
+
 		loginProtectionURLs.add("fileUploader");
-		
-		loginProtectionURLs.add("logout");
-		
+
 		authorizationProtectionURLs = new HashMap<String, UserType>();
 		authorizationProtectionURLs.put("post/add", UserType.MEMBER);
 		authorizationProtectionURLs.put("post/addToCommunity", UserType.MEMBER);
@@ -79,85 +65,73 @@ public class ProtectedURLManager {
 		authorizationProtectionURLs.put("post/cancelCollect", UserType.MEMBER);
 		authorizationProtectionURLs.put("post/joinActivity", UserType.MEMBER);
 		authorizationProtectionURLs.put("post/leaveActivity", UserType.MEMBER);
-		
-		authorizationProtectionURLs.put("community/add", UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/delete", UserType.COMMUNITYOWNER);
+
+		authorizationProtectionURLs.put("community/add",
+				UserType.COMMUNITYOWNER);
+		authorizationProtectionURLs.put("community/delete",
+				UserType.COMMUNITYOWNER);
 		authorizationProtectionURLs.put("community/join", UserType.MEMBER);
 		authorizationProtectionURLs.put("community/leave", UserType.MEMBER);
-		authorizationProtectionURLs.put("community/updateAttributes", UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/addTags", UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/removeTag", UserType.COMMUNITYOWNER);
-		
+		authorizationProtectionURLs.put("community/updateAttributes",
+				UserType.COMMUNITYOWNER);
+		authorizationProtectionURLs.put("community/addTags",
+				UserType.COMMUNITYOWNER);
+		authorizationProtectionURLs.put("community/removeTag",
+				UserType.COMMUNITYOWNER);
+
 		authorizationProtectionURLs.put("comment/add", UserType.MEMBER);
 		authorizationProtectionURLs.put("comment/delete", UserType.MEMBER);
 		authorizationProtectionURLs.put("comment/like", UserType.MEMBER);
 		authorizationProtectionURLs.put("comment/cancelLike", UserType.MEMBER);
-		
+
 		authorizationProtectionURLs.put("user/deleteMember", UserType.GOD);
-		authorizationProtectionURLs.put("user/deleteCommunityOwner", UserType.GOD);
+		authorizationProtectionURLs.put("user/deleteCommunityOwner",
+				UserType.GOD);
 		authorizationProtectionURLs.put("user/removeImages", UserType.MEMBER);
 		authorizationProtectionURLs.put("user/fetchIDs", UserType.GOD);
-		authorizationProtectionURLs.put("user/fetchCommunityOwnerByID", UserType.GOD);
+		authorizationProtectionURLs.put("user/fetchCommunityOwnerByID",
+				UserType.GOD);
 		authorizationProtectionURLs.put("user/addImages", UserType.MEMBER);
 		authorizationProtectionURLs.put("user/updateProfile", UserType.MEMBER);
 		authorizationProtectionURLs.put("user/follow", UserType.MEMBER);
 		authorizationProtectionURLs.put("user/cancelFollow", UserType.MEMBER);
 		authorizationProtectionURLs.put("user/getIDStatus", UserType.GOD);
-		
+
 		authorizationProtectionURLs.put("chatRoom/fetch", UserType.MEMBER);
-		authorizationProtectionURLs.put("chatRoom/fetchMessages", UserType.MEMBER);
+		authorizationProtectionURLs.put("chatRoom/fetchMessages",
+				UserType.MEMBER);
 		authorizationProtectionURLs.put("chatRoom/delete", UserType.GOD);
-		
+
 		authorizationProtectionURLs.put("application/create", UserType.MEMBER);
 		authorizationProtectionURLs.put("application/fetchIDs", UserType.GOD);
 		authorizationProtectionURLs.put("application/reject", UserType.GOD);
 		authorizationProtectionURLs.put("application/pass", UserType.GOD);
-		
-		authorizationProtectionURLs.put("event/subscribe", UserType.MEMBER);
-		authorizationProtectionURLs.put("event/deleteUnhandledEvents", UserType.MEMBER);
-		
-		authorizationProtectionURLs.put("endpoint/connect", UserType.MEMBER);
-		
+
+		authorizationProtectionURLs.put("event/deleteUnhandledEvents",
+				UserType.MEMBER);
+
 	}
-	
-	public static boolean needHiddenCodeProtection(String url) {
-		for(String u : protectedURLs) {
-			if(url.contains(u))
-				return true;
-		}
-		
-		return false;
-	}
-	
-	public static boolean needDeleteHiddenCodeProtection(String url) {
-		for(String u : deleteHiddenCodeProtectionURLs) {
-			if(url.contains(u))
-				return true;
-		}
-		
-		return false;
-	}
-	
+
 	public static boolean needLoginProtection(String url) {
-		for(String u : loginProtectionURLs) {
-			if(url.contains(u))
+		for (String u : loginProtectionURLs) {
+			if (url.contains(u))
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public static boolean isAuthorized(String url, UserType userType) {
-		for(String u : authorizationProtectionURLs.keySet()) {
-			if(url.contains(u)) {
-				if(authorizationProtectionURLs.get(u).equals(userType))
+		for (String u : authorizationProtectionURLs.keySet()) {
+			if (url.contains(u)) {
+				if (authorizationProtectionURLs.get(u).equals(userType))
 					return true;
 				else
 					return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 }

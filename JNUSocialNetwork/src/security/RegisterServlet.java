@@ -153,58 +153,71 @@ public class RegisterServlet extends HttpServlet {
 		String txtFJM = request.getParameter("valCode");
 		String txtYHBS = request.getParameter("ID");
 		String txtYHMM = request.getParameter("password");
+		String hiddenCode = request.getParameter("hiddenCode");
 
-		CloseableHttpClient httpClient = null;
 		HttpSession session = request.getSession();
+		String sessionHiddenCode = "";
 		synchronized (session) {
-			httpClient = (CloseableHttpClient) session
-					.getAttribute("httpClient");
+			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
+			System.out.println("hiddenCode:" + hiddenCode);
+			System.out.println("sessionHiddenCode:" + sessionHiddenCode);
 		}
-
-		HttpPost post = new HttpPost(LOGINURL);
-
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-		nameValuePairs.add(new BasicNameValuePair("__EVENTVALIDATION",
-				__EVENTVALIDATION));
-		nameValuePairs.add(new BasicNameValuePair("__VIEWSTATE", __VIEWSTATE));
-		nameValuePairs.add(new BasicNameValuePair("btnLogin", btnLogin));
-		nameValuePairs.add(new BasicNameValuePair("txtFJM", txtFJM));
-		nameValuePairs.add(new BasicNameValuePair("txtYHBS", txtYHBS));
-		nameValuePairs.add(new BasicNameValuePair("txtYHMM", txtYHMM));
-		post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-		CloseableHttpResponse httpResponse = httpClient.execute(post);
-		try {
-			if (isOK(httpResponse)) {
-
-				post.abort();
-				request.setAttribute("responseHandler", responseHandler);
-				request.setAttribute("httpClient", httpClient);
-				AsyncContext asyncCtx = request.startAsync();
-				asyncCtx.setTimeout(10000);
-				ThreadPoolExecutor executor = (ThreadPoolExecutor) request
-						.getServletContext().getAttribute("executor");
-				executor.execute(new UserInfoCrawler(asyncCtx));
-
-				Transaction transaction = new RegisterMemberTransaction();
-				try {
-					transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM),
-							new HashMap<String, String>());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					response.sendError(500);
-					return;
-				}
-
-				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?register=true");
-
-			} else {
-				response.sendRedirect("/JNUSocialNetwork/pages/register.jsp?error="
-						+ findErrorMessage(httpResponse));
+		if (hiddenCode == null || sessionHiddenCode == null
+				|| !hiddenCode.equals(sessionHiddenCode))
+			response.sendRedirect("/JNUSocialNetwork/pages/register.jsp");
+		else {
+			CloseableHttpClient httpClient = null;
+			synchronized (session) {
+				httpClient = (CloseableHttpClient) session
+						.getAttribute("httpClient");
 			}
-		} finally {
-			httpResponse.close();
+
+			HttpPost post = new HttpPost(LOGINURL);
+
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+			nameValuePairs.add(new BasicNameValuePair("__EVENTVALIDATION",
+					__EVENTVALIDATION));
+			nameValuePairs.add(new BasicNameValuePair("__VIEWSTATE",
+					__VIEWSTATE));
+			nameValuePairs.add(new BasicNameValuePair("btnLogin", btnLogin));
+			nameValuePairs.add(new BasicNameValuePair("txtFJM", txtFJM));
+			nameValuePairs.add(new BasicNameValuePair("txtYHBS", txtYHBS));
+			nameValuePairs.add(new BasicNameValuePair("txtYHMM", txtYHMM));
+			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+			CloseableHttpResponse httpResponse = httpClient.execute(post);
+			try {
+				if (isOK(httpResponse)) {
+
+					post.abort();
+					request.setAttribute("responseHandler", responseHandler);
+					request.setAttribute("httpClient", httpClient);
+					AsyncContext asyncCtx = request.startAsync();
+					asyncCtx.setTimeout(10000);
+					ThreadPoolExecutor executor = (ThreadPoolExecutor) request
+							.getServletContext().getAttribute("executor");
+					executor.execute(new UserInfoCrawler(asyncCtx));
+
+					Transaction transaction = new RegisterMemberTransaction();
+					try {
+						transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM),
+								new HashMap<String, String>());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						response.sendError(500);
+						return;
+					}
+
+					response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?register=true");
+
+				} else {
+					response.sendRedirect("/JNUSocialNetwork/pages/register.jsp?error="
+							+ findErrorMessage(httpResponse));
+				}
+			} finally {
+				httpResponse.close();
+			}
 		}
 	}
 

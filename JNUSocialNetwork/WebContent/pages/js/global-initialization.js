@@ -5,6 +5,9 @@ function login_initialization(ID) {
 	$.ajax({
 		type : "GET",
 		url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
+		beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
 		success : function(data) {
 			sessionStorage.setItem("user", JSON.stringify(data));
 			sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));

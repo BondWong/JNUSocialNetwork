@@ -129,6 +129,27 @@ public class PostService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetch(@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchHeat", null, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Path("fetchByCommunity/{communityID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

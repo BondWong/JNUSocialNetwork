@@ -2,6 +2,9 @@ $(document).ready(function(){
 	//funtion fileupload
 	$('#fileupload').fileupload({
 		url:'../../JNUSocialNetwork/app/fileUploader',
+		beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
 	    success:function(data){
 	    	for(var i=0;i<data.length;i++){
 	    		var dataString=data[i];

@@ -128,8 +128,8 @@ $('.profile_user_img')
 						$(this).remove();
 					});
 				});
-// show photos
 
+// show photos
 function showPhotos() {
 	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {

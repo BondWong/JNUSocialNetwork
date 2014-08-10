@@ -3,48 +3,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+<jsp:scriptlet>synchronized (session) {
+				session.setAttribute("hiddenCode", System.currentTimeMillis()
+						+ "");
+			}</jsp:scriptlet>
 <%@ include file="parts/head.jsp"%>
 
 <body>
 	<div class="regBody">
-	<div class="layer">
-		<div class="regTop">
-			<span>這個位置完本地Watch有什麼用</span> <span>這個Join呢</span>
-		</div>
-		<div class="regTitle">Sign In</div>
-		<div class="regTitle">這個是幹嘛的</div>
-		<div class="containerReg" style="display: block">
-			<div class="regBox">
-				<form class="form-signin" role="form" method="post"
-					action="../security/Login">
-					<p>
-						<input type="text" class="form-control" placeholder="ID" name="ID"
-							required autofocus>
-					</p>
-					<p>
-						<input type="password" class="form-control" placeholder="Password"
-							name="password" id="md5Password" required>
-					</p>
-					<input type="hidden" name="userType" value="MEMBER" />
-					<button class="btn btn-lg btn-success btn-block signInBtn"
-						type="submit">Sign in</button>
-					<h4>
-						Have no account?<span class="btn signUp">Sign up</span>
-					</h4>
-				</form>
-				<div id="login_fail_popover" class="alert alert-danger"
-					style="display: none">Sign In Unsuccessfully</div>
-				<div class="alert alert-success" id="register_success"
-					style="display: none">Sign Up Successfully, Please Sign In</div>
+		<div class="layer">
+			<div class="regTop">
+				<span>這個位置完本地Watch有什麼用</span> <span>這個Join呢</span>
 			</div>
+			<div class="regTitle">Sign In</div>
+			<div class="regTitle">這個是幹嘛的</div>
+			<div class="containerReg" style="display: block">
+				<div class="regBox">
+					<form class="form-signin" role="form" method="post"
+						action="../security/Login">
+						<p>
+							<input type="text" class="form-control" placeholder="ID"
+								name="ID" required autofocus>
+						</p>
+						<p>
+							<input type="password" class="form-control"
+								placeholder="Password" name="password" id="md5Password" required>
+						</p>
+						<input type="hidden" name="hiddenCode"
+							value="${sessionScope.hiddenCode }" /> <input type="hidden"
+							name="userType" value="MEMBER" />
+						<button class="btn btn-lg btn-success btn-block signInBtn"
+							type="submit">Sign in</button>
+						<h4>
+							Have no account?<span class="btn signUp">Sign up</span>
+						</h4>
+					</form>
+					<div id="login_fail_popover" class="alert alert-danger"
+						style="display: none">Sign In Unsuccessfully</div>
+					<div class="alert alert-success" id="register_success"
+						style="display: none">Sign Up Successfully, Please Sign In</div>
+				</div>
+			</div>
+			<!-- /container -->
+			<div class="containerSign" style="display: none"></div>
 		</div>
-		<!-- /container -->
-		<div class="containerSign" style="display: none"></div>
-	 </div>
 	</div>
 	<!-- /container -->
-	
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

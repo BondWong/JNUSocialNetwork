@@ -17,6 +17,9 @@ function FileUpload(formData){
     	url:'../../JNUSocialNetwork/app/fileUploader',
     	data:formData,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data){
 	    	for(var i=0;i<data.length;i++){
 	    		var dataString=data[i];
@@ -39,6 +42,9 @@ function AddPost(UserID,JsonData){
     	url:'../../JNUSocialNetwork/app/post/add/'+UserID,
     	data:JsonData,
     	contentType: "application/json",
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -56,6 +62,9 @@ function AddPostToCommunity(UserID,communityID,userType,JsonData){
     	url:'../../JNUSocialNetwork/app/post/addToCommunity/'+UserID+'/'+communityID+'/'+userType,
     	data:JsonData,
     	contentType: "application/json",
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -72,6 +81,9 @@ function DeletePost(postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/delete/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -87,6 +99,9 @@ function DeletePostFromCommunity(communityID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/delete/'+communityID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -103,6 +118,9 @@ function LikePost(userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/like/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -118,6 +136,9 @@ function CancelLikePost(userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/cancelLike/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -133,6 +154,9 @@ function CollectPost(userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/collect/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -148,6 +172,9 @@ function CancelCollectPost(userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/cancelCollect/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -163,6 +190,9 @@ function FetchPostsByOwner(ownerID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByOwner/'+ownerID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -181,6 +211,9 @@ function FetchByCommunity(communityID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -198,6 +231,9 @@ function FetchActivitiesByCommunity(communityID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchActivitiesByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -216,6 +252,9 @@ function FetchPostsByFollowee(userID,startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByFollowee/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = data;
     	},
@@ -233,6 +272,9 @@ function FetchByFolloweeOrOwner(userID,startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByFolloweeOrOwner/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = data;
     	},
@@ -250,6 +292,9 @@ function FetchPostByID(postID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByID/'+postID,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = data;
     	},
@@ -277,6 +322,9 @@ function FetchPostByIDs(postID){
     	type:"GET",
     	url:Urls,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = data;
     	},
@@ -293,6 +341,9 @@ function JoinActivity (userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/joinActivity/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -308,6 +359,9 @@ function LeaveActivity (userID,postID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/leaveActivity/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -325,6 +379,9 @@ function AddComment(userID,postID,JsonData){
 	$.ajax({
     	type:"POST",
     	url:'../../JNUSocialNetwork/app/comment/add/'+userID+'/'+postID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	data:JsonData,
     	contentType: "application/json",
     	success:function(data,status){
@@ -342,6 +399,9 @@ function DeleteComment(postID,commentID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/delete/'+postID+'/'+commentID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -357,6 +417,9 @@ function LikeComment(userID,commentID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/like/'+userID+'/'+commentID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -372,6 +435,9 @@ function CancelLikeComment(userID,commentID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/cancelLike/'+userID+'/'+commentID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -387,6 +453,9 @@ function FetchCommentByPost(postID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/comment/fetchByPost/'+postID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -406,6 +475,9 @@ function AddCommunity(userID,JsonData){
 	$.ajax({
     	type:"POST",
     	url:'../../JNUSocialNetwork/app/community/add/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	data:JsonData,
     	async: false,
     	contentType: "application/json",
@@ -424,6 +496,9 @@ function DeleteCommunity(communityID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/delete/'+communityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -439,6 +514,9 @@ function JoinCommunity(userID,communityID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/join/'+userID+'/'+communityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -453,6 +531,9 @@ function LeaveCommunity(userID,communityID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/leave/'+userID+'/'+communityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -469,6 +550,9 @@ function FetchCommunity(startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetch/'+startIndex+'/'+pageSize,
     	async: false,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = data;
     	},
@@ -486,6 +570,9 @@ function FetchCommunityByID(communityID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetchByID/'+communityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -503,6 +590,9 @@ function FetchCommunityByType(communityType,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetchByType/'+communityType+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -522,6 +612,9 @@ function DeleteMember(userID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/deleteMember/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -537,6 +630,9 @@ function DeleteCommunityOwner(ownerID){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/deleteCommunityOwner/'+ownerID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -552,6 +648,9 @@ function Follow(followeeID,followerID){
 	$.ajax({
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/follow/'+followeeID+'/'+followerID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -567,6 +666,9 @@ function CancelFollow(followeeID,followerID){
 	$.ajax({
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/cancelFollow/'+followeeID+'/'+followerID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	success:function(data,status){
     		response = status;
     	},
@@ -582,6 +684,9 @@ function UpdateUserProfile(userID,JsonData){
 	$.ajax({
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/updateProfile/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	data:JsonData,
     	async: false,
     	contentType: "application/json",
@@ -609,6 +714,9 @@ function AddImages(userID,imageLinks){
 	$.ajax({
     	type:"PUT",
     	url:Urls,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -626,6 +734,9 @@ function FetchFollowees(userID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchFollowees/'+userID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -643,6 +754,9 @@ function FetchFollowers(userID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchFollowers/'+userID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -660,6 +774,9 @@ function FetchUserByID(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchByID/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -677,6 +794,9 @@ function RecommendateViaFollowee(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaFollowee/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -694,6 +814,9 @@ function RecommendateViaCampus(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaCampus/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -711,6 +834,9 @@ function RecommendateViaMajor(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaMajor/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -728,6 +854,9 @@ function RecommendateViaSession(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaSession/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -745,6 +874,9 @@ function RecommendateViaClass(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaClass/'+userID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -762,6 +894,9 @@ function SearchMember(userID,key,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/search/'+userID+'/'+key+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -782,6 +917,9 @@ function FetchChatRoom(userID1,userID2){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/chatRoom/fetch/'+userID1+'/'+userID2,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -799,6 +937,9 @@ function FetchMessages(chatRoomID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/chatRoom/fetchMessages/'+chatRoomID+'/'+startIndex+'/'+pageSize,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -816,6 +957,9 @@ function DeleteAbandoned(chatRoomID,year,month,date){
 	$.ajax({
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/chatRoom/delete/'+chatRoomID+'/'+year+'/'+month+'/'+date,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = status;
@@ -835,6 +979,9 @@ function GetDormInfo(campus){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/dormInfo/getInfo/'+campus,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -842,7 +989,6 @@ function GetDormInfo(campus){
     	error:function(data,status){
     		response = status;
     	}
-    	
     });
 	return response;
 }

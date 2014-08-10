@@ -3,10 +3,10 @@
 
 <div class="pro_body">
 			<div class="photo photoAddBtn">
-				<button class='btn btn-success' data-toggle='modal'
-					data-target='#myModal2'>add</button>
+				<button class='btn btn-success addphotoBtn' data-toggle='modal'
+					data-target='#myModalPhoto'>Add photos</button>
 				<!-- Modal -->
-				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+				<div class="modal fade" id="myModalPhoto" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">

@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+<jsp:scriptlet>synchronized (session) {
+				session.setAttribute("hiddenCode", System.currentTimeMillis()
+						+ "");
+			}</jsp:scriptlet>
 <%@ include file="parts/head.jsp"%>
 
 <body style="overflow-x: hidden; overflow-y: hidden;">
@@ -35,6 +38,8 @@
 								<img src="../security/RegServlet" />
 							</div>
 						</div>
+						<input type="hidden" name="hiddenCode"
+							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signUpBtn"
 							type="submit">Sign up</button>
 						<h4>
@@ -48,7 +53,7 @@
 		</div>
 	</div>
 	<!-- /container -->
-	
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -61,7 +66,6 @@
 			location.href = "login.jsp";
 		});
 	</script>
-
 	<c:choose>
 		<c:when test='${param.error == "VALCODEERROR"}'>
 			<script type="text/javascript">

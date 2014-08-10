@@ -3,9 +3,9 @@
 	
 <div class="profile_nav">
 	<ul class="nav nav-tabs profile_navul">
-		<li><a href="profile.jsp?nav=about">about</a></li>
-		<li><a href="profile.jsp">post</a></li>
-		<li><a href="profile.jsp?nav=photo">photos</a></li>
-		<li><a href="profile.jsp?nav=circle">circle</a></li>
+		<li class="aboutNav"><a>about</a></li>
+		<li class="postNav"><a>post</a></li>
+		<li class="photoNav"><a>photos</a></li>
+		<li class="circleNav"><a>circle</a></li>
 	</ul>
 </div>

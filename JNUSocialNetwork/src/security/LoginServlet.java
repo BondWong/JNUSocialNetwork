@@ -53,53 +53,62 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String type = request.getParameter("userType");
 		UserType userType = UserType.valueOf(type);
-
-		Transaction transaction = new FetchAccountTransaction();
-		try {
-			account = (Account) transaction.execute(
-					"Account.fetchByIDAndUserType", ID, userType);
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(500);
-			return;
+		String hiddenCode = request.getParameter("hiddenCode");
+		
+		HttpSession session = request.getSession();
+		String sessionHiddenCode = "";
+		synchronized (session) {
+			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
 		}
-
-		if (account != null && !account.isProtected(new Date())) {
-			if (password.equals(account.getPassword())) {
-				HttpSession session = request.getSession();
-				synchronized (session) {
-					session.setAttribute("ID", account.getID());
-					session.setAttribute("userType", userType);
-					if (userType.equals(UserType.MEMBER)) {
-						account.setAutoLoginSeriesNum(session.getId());
-						Cookie cookie = new Cookie("ALG", session.getId());
-						cookie.setHttpOnly(true);
-						cookie.setPath("/JNUSocialNetwork");
-						cookie.setMaxAge(15 * 24 * 60 * 60);
-						response.addCookie(cookie);
-					}
-					response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
-				}
-			} else {
-				account.setLastAccessDate(new Date());
-				account.setChance((account.getChance() - 1));
-				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
-			}
-
-			Transaction t = new UpdateAccountTransaction();
+		if (sessionHiddenCode == null || hiddenCode == null
+				|| !sessionHiddenCode.equals(hiddenCode))
+			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp");
+		else {
+			Transaction transaction = new FetchAccountTransaction();
 			try {
-				t.execute(account);
+				account = (Account) transaction.execute(
+						"Account.fetchByIDAndUserType", ID, userType);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				response.sendError(500);
+				response.setStatus(500);
 				return;
 			}
 
-		} else {
-			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
-		}
+			if (account != null && !account.isProtected(new Date())) {
+				if (password.equals(account.getPassword())) {
+					synchronized (session) {
+						session.setAttribute("ID", account.getID());
+						session.setAttribute("userType", userType);
+						if (userType.equals(UserType.MEMBER)) {
+							account.setAutoLoginSeriesNum(session.getId());
+							Cookie cookie = new Cookie("ALG", session.getId());
+							cookie.setHttpOnly(true);
+							cookie.setPath("/JNUSocialNetwork");
+							cookie.setMaxAge(15 * 24 * 60 * 60);
+							response.addCookie(cookie);
+						}
+						response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
+					}
+				} else {
+					account.setLastAccessDate(new Date());
+					account.setChance((account.getChance() - 1));
+					response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
+				}
 
+				Transaction t = new UpdateAccountTransaction();
+				try {
+					t.execute(account);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					response.sendError(500);
+					return;
+				}
+
+			} else {
+				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
+			}
+		}
 	}
 
 }
