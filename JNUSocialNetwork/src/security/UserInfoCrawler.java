@@ -14,7 +14,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import transaction.CrawAttributesTransaction;
 import transaction.Transaction;
 
-public class UserInfoCrawler implements Runnable{
+public class UserInfoCrawler implements Runnable {
 	private static String URL = "http://202.116.0.176/Secure/Xjgl/Xjgl_Xsxxgl_Xjxxxg_XS.aspx";
 	private static String CAMPUSPATTERN = "name=\"txtXQ\" type=\"text\" value=\"(.+)\" readonly=\"readonly\"";
 	private static String INSTITUTIONPATTERN = "name=\"txtXY_X\" type=\"text\" value=\"(.+)\" readonly=\"readonly\"";
@@ -25,7 +25,7 @@ public class UserInfoCrawler implements Runnable{
 	private static String TELNUMPATTERN = "name=\"txtSJHM\" type=\"text\" value=\"(.+)\" id=\"txtSJHM\"";
 	private static String EMAILPATTERN = "name=\"txtYX\" type=\"text\" value=\"(.+)\" id=\"txtYX\"";
 	private static Map<String, String> patternMap;
-	static{
+	static {
 		patternMap = new HashMap<String, String>();
 		patternMap.put("campusPattern", CAMPUSPATTERN);
 		patternMap.put("institutionPattern", INSTITUTIONPATTERN);
@@ -36,20 +36,22 @@ public class UserInfoCrawler implements Runnable{
 		patternMap.put("telnumPattern", TELNUMPATTERN);
 		patternMap.put("emailPattern", EMAILPATTERN);
 	}
-	
+
 	private AsyncContext asyncContext;
-	
-	public UserInfoCrawler(AsyncContext asyncCtx) { 
-        this.asyncContext = asyncCtx; 
-    }
-	
+
+	public UserInfoCrawler(AsyncContext asyncCtx) {
+		this.asyncContext = asyncCtx;
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		CloseableHttpClient httpClient = (CloseableHttpClient) asyncContext.getRequest().getAttribute("httpClient");
+		CloseableHttpClient httpClient = (CloseableHttpClient) asyncContext
+				.getRequest().getAttribute("httpClient");
 		HttpGet get = new HttpGet(URL);
 		@SuppressWarnings("unchecked")
-		ResponseHandler<String> responseHandler = (ResponseHandler<String>) asyncContext.getRequest().getAttribute("responseHandler");
+		ResponseHandler<String> responseHandler = (ResponseHandler<String>) asyncContext
+				.getRequest().getAttribute("responseHandler");
 		String response = "";
 		try {
 			response = httpClient.execute(get, responseHandler);
@@ -60,7 +62,7 @@ public class UserInfoCrawler implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		String ID = asyncContext.getRequest().getParameter("ID");
 		Transaction transaction = new CrawAttributesTransaction();
 		try {
@@ -69,9 +71,9 @@ public class UserInfoCrawler implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		asyncContext.complete();
-		
+
 	}
 
 }

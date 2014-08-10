@@ -188,7 +188,8 @@ public class RegisterServlet extends HttpServlet {
 
 				Transaction transaction = new RegisterMemberTransaction();
 				try {
-					transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM), new HashMap<String, String>());
+					transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM),
+							new HashMap<String, String>());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -2,16 +2,82 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>JNUSocialNetwork</display-name>
   
+  <!-- AutoLoginFilter -->
   <filter>
   	<filter-name>AutoLoginFilter</filter-name>
   	<filter-class>
   		security.AutoLoginFilter
   	</filter-class>
   </filter>
+  
   <filter-mapping>
   	<filter-name>AutoLoginFilter</filter-name>
   	<url-pattern>
-  		*.jsp
+  		/activity.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/activityShow.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/circle.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/community.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/communityShow.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/home.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/people.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>
+  		/profile.jsp
+  	</url-pattern>
+  </filter-mapping>
+  
+  
+  <!-- HiddenCodeCheckFilter -->
+  <filter>
+  	<filter-name>HiddenCodeCheckFilter</filter-name>
+  	<filter-class>
+  		security.HiddenCodeCheckFilter
+  	</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>HiddenCodeCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>HiddenCodeCheckFilter</filter-name>
+  	<url-pattern>
+  		/security/*
   	</url-pattern>
   </filter-mapping>
   

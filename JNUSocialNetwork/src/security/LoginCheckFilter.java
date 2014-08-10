@@ -19,12 +19,12 @@ import security.helper.ProtectedURLManager;
  */
 public class LoginCheckFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public LoginCheckFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public LoginCheckFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -36,26 +36,27 @@ public class LoginCheckFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String uri = httpRequest.getRequestURI();
-		if(ProtectedURLManager.needLoginProtection(uri)){
-		// pass the request along the filter chain
+		if (ProtectedURLManager.needLoginProtection(uri)) {
+			// pass the request along the filter chain
 			HttpSession session = httpRequest.getSession();
 			String ID = httpRequest.getHeader("ID");
 			String sessionID = "";
-			synchronized(session){
+			synchronized (session) {
 				sessionID = (String) session.getAttribute("ID");
 			}
-			if(ID!=null&&sessionID!=null&&ID.equals(sessionID)){
+			if (ID != null && sessionID != null && ID.equals(sessionID)) {
 				chain.doFilter(request, response);
-			} else{
+			} else {
 				HttpServletResponse httpResponse = (HttpServletResponse) response;
 				httpResponse.setStatus(401);
 			}
-		} else{
+		} else {
 			chain.doFilter(request, response);
 		}
 	}

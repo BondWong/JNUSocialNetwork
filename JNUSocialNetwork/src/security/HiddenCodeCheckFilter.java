@@ -14,15 +14,14 @@ import javax.servlet.http.HttpSession;
 
 import security.helper.ProtectedURLManager;
 
-
 public class HiddenCodeCheckFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public HiddenCodeCheckFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public HiddenCodeCheckFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -34,32 +33,33 @@ public class HiddenCodeCheckFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String uri = httpRequest.getRequestURI();
-		
-		if(ProtectedURLManager.needHiddenCodeProtection(uri)){
+
+		if (ProtectedURLManager.needHiddenCodeProtection(uri)) {
 			HttpSession session = httpRequest.getSession();
 			String hiddenCode = httpRequest.getHeader("hiddenCode");
 			String sessionHiddenCode = "";
-			
-			synchronized(session){
+
+			synchronized (session) {
 				sessionHiddenCode = (String) session.getAttribute("hiddenCode");
-				if(ProtectedURLManager.needDeleteHiddenCodeProtection(uri))
+				if (ProtectedURLManager.needDeleteHiddenCodeProtection(uri))
 					session.removeAttribute("hiddenCode");
 			}
-			
-			if(sessionHiddenCode!=null&&hiddenCode!=null&&hiddenCode.equals(sessionHiddenCode)){
+
+			if (sessionHiddenCode != null && hiddenCode != null
+					&& hiddenCode.equals(sessionHiddenCode)) {
 				// pass the request along the filter chain
 				chain.doFilter(request, response);
-			} else{
+			} else {
 				HttpServletResponse httpResponse = (HttpServletResponse) response;
 				httpResponse.setStatus(403);
 			}
-		}
-		else {
+		} else {
 			chain.doFilter(request, response);
 		}
 	}

@@ -18,15 +18,15 @@ import model.modelType.UserType;
 /**
  * Servlet Filter implementation class AuthorizationCheckFilter
  */
-//@WebFilter("/AuthorizationCheckFilter")
+// @WebFilter("/AuthorizationCheckFilter")
 public class AuthorizationCheckFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AuthorizationCheckFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public AuthorizationCheckFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -38,17 +38,18 @@ public class AuthorizationCheckFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String uri = httpRequest.getRequestURI();
 		HttpSession session = httpRequest.getSession();
 		UserType userType = null;
-		synchronized(session) {
+		synchronized (session) {
 			userType = (UserType) session.getAttribute("userType");
 		}
-		if(ProtectedURLManager.isAuthorized(uri, userType))
+		if (ProtectedURLManager.isAuthorized(uri, userType))
 			chain.doFilter(request, response);
 		else {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
