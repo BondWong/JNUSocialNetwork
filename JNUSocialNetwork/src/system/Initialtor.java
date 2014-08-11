@@ -57,7 +57,7 @@ public class Initialtor implements ServletContextListener {
 		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor) Executors
 				.newScheduledThreadPool(5);
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new SmsRemindTask(),
-				10, 10, TimeUnit.SECONDS);
+				30, 30, TimeUnit.SECONDS);
 
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 

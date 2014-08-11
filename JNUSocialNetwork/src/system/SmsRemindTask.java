@@ -1,27 +1,24 @@
 package system;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.Header;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchMembersByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchRemindableActivitiesTransaction;
 
-@SuppressWarnings("deprecation")
 public class SmsRemindTask implements Runnable {
+	private static final String addr = "http://api.sms.cn/mt/";
+	private static final String userId = "55443";
+	private static final String pwd = "bcfcd8e4100c47fcd1a90195360461df";
+	private static final String encode = "utf8";
 
-	@SuppressWarnings({ "resource", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -34,39 +31,53 @@ public class SmsRemindTask implements Runnable {
 			e.printStackTrace();
 		}
 		System.out.println(activities);
-		/*
-		CloseableHttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost("http://utf8.sms.webchinese.cn");
-		post.addHeader("Content-Type",
-				"application/x-www-form-urlencoded;charset=utf8");// 在头文件中设置转码
-		List<NameValuePair> data = new ArrayList<NameValuePair>();
-		data.add(new BasicNameValuePair("Uid", "Bond"));
-		data.add(new BasicNameValuePair("Key", "ff1b377184d7d48f2c24"));
-		data.add(new BasicNameValuePair("smsMob", "13750046645"));
-		data.add(new BasicNameValuePair("smsText",
-				"毛主席您好，您参加的青年志愿者面试活动将在半小时后开始，地点为人民大会堂"));
-
-		try {
-			CloseableHttpResponse response;
-			post.setEntity(new UrlEncodedFormEntity(data));
-			response = client.execute(post);
-			Header[] headers = post.getAllHeaders();
-			int statusCode = response.getStatusLine().getStatusCode();
-			System.out.println("statusCode:" + statusCode);
-			for (Header h : headers) {
-				System.out.println(h.toString());
+		for (Map<String, Object> activity : activities) {
+			List<String> IDs = (List<String>) activity.get("participantIDs");
+			System.out.println(IDs);
+			transaction = new FetchMembersByIDsTransaction();
+			List<Map<String, Object>> members = new ArrayList<Map<String, Object>>();
+			try {
+				members = (List<Map<String, Object>>) transaction.execute(IDs);
+				System.out.println(members);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			String result = response.getEntity().toString();
-			System.out.println(result);
+			for (Map<String, Object> member : members)
+				try {
+					System.out.println(((Map<String, String>) member
+							.get("attributes")).get("telnum"));
+					/*
+					 * send(mode, ((Map<String, String>)
+					 * member.get("attributes")) .get("telnum"));
+					 */
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
 
-			response.close();
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
+	public static void send(String msgContent, String mobile) throws Exception {
+
+		// 组建请求
+		String straddr = addr + "?uid=" + userId + "&pwd=" + pwd + "&mobile="
+				+ mobile + "&encode=" + encode + "&content=" + msgContent;
+
+		StringBuffer sb = new StringBuffer(straddr);
+		System.out.println("URL:" + sb);
+
+		// 发送请求
+		URL url = new URL(sb.toString());
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setRequestMethod("POST");
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				url.openStream()));
+
+		// 返回结果
+		String inputline = in.readLine();
+		System.out.println("Response:" + inputline);
+
 	}
 
 }
