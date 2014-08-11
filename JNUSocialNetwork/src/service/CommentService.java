@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +18,7 @@ import model.ServerSentEvent;
 import security.helper.CommentValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchCommentTransaction;
 import transaction.DAOFetchTransaction.FetchCommentsTransaction;
 import transaction.SSETransaction.SSECancelLikeCommentTransaction;
 import transaction.SSETransaction.SSECreateCommentTransaction;
@@ -99,6 +101,25 @@ public class CommentService {
 		return Response.ok().build();
 	}
 
+	@Path("fetchByID/{commentID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@SuppressWarnings("unchecked")
+	public Response fetchByID(@PathParam("commentID") Long commentID)
+			throws Exception {
+		transaction = new FetchCommentTransaction();
+		Map<String, Object> result;
+		try {
+			result = (Map<String, Object>) transaction.execute(commentID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Path("fetchByPost/{postID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
@@ -108,8 +129,8 @@ public class CommentService {
 		transaction = new FetchCommentsTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction
-					.execute("Comment.fetchByPost", postID, startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Comment.fetchByPost", postID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
