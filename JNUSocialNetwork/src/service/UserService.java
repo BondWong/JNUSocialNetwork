@@ -442,7 +442,6 @@ public class UserService {
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
 		key = URLDecoder.decode(key, "utf-8");
-		System.out.println(key);
 		transaction = new SearchMemberTransaction();
 		List<Map<String, Object>> results;
 		try {

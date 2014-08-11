@@ -3,6 +3,7 @@ package system;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
@@ -14,13 +15,26 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchRemindableActivitiesTransaction;
+
 @SuppressWarnings("deprecation")
 public class SmsRemindTask implements Runnable {
 
-	@SuppressWarnings({ "resource" })
+	@SuppressWarnings({ "resource", "unchecked" })
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		Transaction transaction = new FetchRemindableActivitiesTransaction();
+		List<Map<String, Object>> activities = new ArrayList<Map<String, Object>>();
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(activities);
+		/*
 		CloseableHttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost("http://utf8.sms.webchinese.cn");
 		post.addHeader("Content-Type",
@@ -52,7 +66,7 @@ public class SmsRemindTask implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
 	}
 
 }

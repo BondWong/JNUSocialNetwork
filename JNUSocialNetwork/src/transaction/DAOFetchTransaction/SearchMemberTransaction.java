@@ -28,13 +28,13 @@ public class SearchMemberTransaction extends DAOTransaction {
 					continue;
 				else {
 					query += IDs[i];
-					if (i == IDs.length-1)
+					if (i == IDs.length - 1)
 						query += ")";
 					else
 						query += ", ";
 				}
 			}
-			if(!query.equals("")){
+			if (!query.equals("")) {
 				query = "SELECT m FROM Member m WHERE m.ID IN (" + query;
 				System.out.println(query);
 				TypedQuery<Member> tq = em.createQuery(query, Member.class);
@@ -44,6 +44,13 @@ public class SearchMemberTransaction extends DAOTransaction {
 				for (Member member : members)
 					results.add(member.toRepresentation());
 			}
+		} else {
+			System.out.println((String) params[1]);
+			TypedQuery<Member> tq = em.createNamedQuery("Member.fetchByID",
+					Member.class);
+			tq.setParameter(1, params[1]);
+			Member member = tq.getSingleResult();
+			results.add(member.toRepresentation());
 		}
 		return results;
 	}

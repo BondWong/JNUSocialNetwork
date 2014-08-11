@@ -52,7 +52,6 @@ public class AttributesFactory {
 				attributes.put("topic", "");
 				attributes.put("content", "");
 				attributes.put("startDate", "");
-				attributes.put("reminded", "false");
 			}
 			if(params[0].equals(Post.class)&&params[1].equals(PostType.NORMAL)) {
 				attributes.put("topic", "");

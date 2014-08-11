@@ -10,6 +10,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import service.helper.ActivityMap;
 import service.helper.SearchMap;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
@@ -55,15 +56,8 @@ public class Initialtor implements ServletContextListener {
 
 		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor) Executors
 				.newScheduledThreadPool(5);
-		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				// System.out.println("test1");
-			}
-
-		}, 5, 5, TimeUnit.SECONDS);
+		scheduledThreadPoolExecutor.scheduleAtFixedRate(new SmsRemindTask(),
+				10, 10, TimeUnit.SECONDS);
 
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 
@@ -92,6 +86,7 @@ public class Initialtor implements ServletContextListener {
 		try {
 			transaction.execute("WongZeonbong", MD5.toMD5Code("1901103390"));
 			SearchMap.initializeEnvironment();
+			ActivityMap.initializeEnvironment();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
