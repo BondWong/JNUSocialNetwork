@@ -41,7 +41,7 @@ public class ActivityMap {
 		return IDs;
 	}
 
-	public static void serialize() throws IOException {
+	public static synchronized void serialize() throws IOException {
 		try {
 			if (!Files.exists(Paths.get(PATH))) {
 				Files.createFile(Paths.get(PATH));
@@ -56,7 +56,7 @@ public class ActivityMap {
 		}
 	}
 
-	public static void deserialize() throws IOException {
+	public static synchronized void deserialize() throws IOException {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(Paths.get(PATH));

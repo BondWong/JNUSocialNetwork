@@ -11,6 +11,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import service.helper.ActivityMap;
+import service.helper.DesertFileLinkMap;
 import service.helper.SearchMap;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
@@ -22,6 +23,10 @@ import utils.MD5;
  */
 @WebListener
 public class Initialtor implements ServletContextListener {
+	private static final int ACTIVITYREMINDTIME = 30 * 60;
+	private static final int DELETEFILETIME = 12 * 60 * 60;
+	@SuppressWarnings("unused")
+	private static final int DELETEMODELTIME = 24 * 60 * 60;
 
 	/**
 	 * Default constructor.
@@ -57,27 +62,14 @@ public class Initialtor implements ServletContextListener {
 		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = (ScheduledThreadPoolExecutor) Executors
 				.newScheduledThreadPool(5);
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new SmsRemindTask(),
-				30, 30, TimeUnit.SECONDS);
+				ACTIVITYREMINDTIME, ACTIVITYREMINDTIME, TimeUnit.SECONDS);
 
-		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
+		scheduledThreadPoolExecutor.scheduleAtFixedRate(new DeleteFileTask(),
+				DELETEFILETIME, DELETEFILETIME, TimeUnit.SECONDS);
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				// System.out.println("test2");
-			}
-
-		}, 4, 4, TimeUnit.SECONDS);
-
-		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				// System.out.println("test3");
-			}
-
-		}, 3, 3, TimeUnit.SECONDS);
+		scheduledThreadPoolExecutor.scheduleAtFixedRate(
+				new DeleteUnavailableTask(), DELETEMODELTIME, DELETEMODELTIME,
+				TimeUnit.SECONDS);
 
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
@@ -87,6 +79,7 @@ public class Initialtor implements ServletContextListener {
 			transaction.execute("WongZeonbong", MD5.toMD5Code("1901103390"));
 			SearchMap.initializeEnvironment();
 			ActivityMap.initializeEnvironment();
+			DesertFileLinkMap.initializeEnvironment();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

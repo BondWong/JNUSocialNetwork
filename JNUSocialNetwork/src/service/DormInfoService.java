@@ -11,7 +11,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import utils.DormInfoManager;
+import service.helper.DormInfoManager;
 
 @Path(value = "/dormInfo")
 public class DormInfoService {

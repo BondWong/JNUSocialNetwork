@@ -31,8 +31,8 @@ public class ServerSentEventService {
 
 	@Path("deleteUnhandledEvent/{ID : \\d+}/{eventID : \\d+}")
 	@PUT
-	public Response deleteUnhandledEvent(@PathParam("ID") String ID, @PathParam("eventID") Long eventID)
-			throws Exception {
+	public Response deleteUnhandledEvent(@PathParam("ID") String ID,
+			@PathParam("eventID") Long eventID) throws Exception {
 		transaction = new DeleteUnhandledEventTransaction();
 		transaction.execute(ID, eventID);
 

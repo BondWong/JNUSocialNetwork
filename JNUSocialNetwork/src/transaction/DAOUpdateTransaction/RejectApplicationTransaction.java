@@ -32,6 +32,7 @@ public class RejectApplicationTransaction extends DAOTransaction {
 		reason.put("reason", params[1]);
 		ServerSentEvent sse = ModelFactory.getInstance().create(
 				ServerSentEvent.class, SSEType.APPLICATIONREJECTED, reason);
+		sse.setID(System.currentTimeMillis());
 		member.addUnhandledEvent(sse);
 
 		application.delete();

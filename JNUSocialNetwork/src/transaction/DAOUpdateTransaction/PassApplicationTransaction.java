@@ -41,6 +41,7 @@ public class PassApplicationTransaction extends DAOTransaction {
 		data.put("communityOwner", communityOwner.toRepresentation());
 		ServerSentEvent event = ModelFactory.getInstance().create(
 				ServerSentEvent.class, SSEType.APPLICATIONPASSED, data);
+		event.setID(System.currentTimeMillis());
 		member.addUnhandledEvent(event);
 
 		application.delete();

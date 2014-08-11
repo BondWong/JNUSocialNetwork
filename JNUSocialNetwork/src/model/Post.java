@@ -25,6 +25,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import service.helper.DesertFileLinkMap;
 import utils.DateTimeUtil;
 import model.factory.AttributesFactory;
 import model.modelType.PostType;
@@ -119,6 +120,7 @@ public class Post extends AttributeModel {
 	}
 
 	public void clearImageLinks() {
+		DesertFileLinkMap.addLinks(this.imageLinks);
 		this.imageLinks.clear();
 	}
 

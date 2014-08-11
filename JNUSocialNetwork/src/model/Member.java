@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import service.helper.DesertFileLinkMap;
 import model.factory.AttributesFactory;
 import model.modelType.UserType;
 
@@ -33,7 +34,7 @@ import model.modelType.UserType;
 		@NamedQuery(name = "Member.fetchIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
-		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0")})
+		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
@@ -74,7 +75,7 @@ public class Member extends User {
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
 		this.followees = new LinkedHashSet<Member>();
 		this.followers = new LinkedHashSet<Member>();
-		
+
 		this.setAttribute("session", this.ID.substring(0, 4));
 	}
 
@@ -113,7 +114,7 @@ public class Member extends User {
 	public void removeImageLink(String link) {
 		imageLinks.remove(link);
 	}
-	
+
 	public void removeImageLinks(Set<String> links) {
 		this.imageLinks.removeAll(links);
 	}
@@ -123,6 +124,7 @@ public class Member extends User {
 	}
 
 	public void clearImageLinks() {
+		DesertFileLinkMap.addLinks(this.imageLinks);
 		this.imageLinks.clear();
 	}
 
@@ -157,7 +159,7 @@ public class Member extends User {
 		this.createdPosts.add(post);
 	}
 
-	public void createPost(Community community, Post post ) {
+	public void createPost(Community community, Post post) {
 		post.setOwner(this);
 		this.createdPosts.add(post);
 		community.addPost(post);
@@ -221,9 +223,13 @@ public class Member extends User {
 	public void addUnhandledEvent(ServerSentEvent sse) {
 		this.unhandledEvents.add(sse);
 	}
-	
+
 	public Set<ServerSentEvent> getUnhandledEvents() {
 		return unhandledEvents;
+	}
+
+	public void removeUnhandledEvent(ServerSentEvent sse) {
+		this.unhandledEvents.remove(sse);
 	}
 
 	public void clearUnhandledEvents() {

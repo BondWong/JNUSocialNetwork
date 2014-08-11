@@ -18,10 +18,10 @@ public class DeleteUnhandledEventTransaction extends DAOTransaction {
 		for (ServerSentEvent sse : member.getUnhandledEvents()) {
 			if (sse.getID().equals(params[1])) {
 				sse.delete();
+				member.removeUnhandledEvent(sse);
 				dao.update(sse);
 			}
 		}
-		member.clearUnhandledEvents();
 		dao.update(member);
 		return member.toRepresentation();
 	}

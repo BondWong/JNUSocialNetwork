@@ -18,7 +18,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import utils.ExtensionManager;
+import service.helper.ExtensionManager;
 import utils.JsonUtil;
 
 @WebServlet("/app/fileUploader")
