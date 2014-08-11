@@ -3,14 +3,18 @@ function communityClickEvent() {
 			'click',
 			'#communityCreate',
 			function() {
-
+				var communityC;
+				if($('#fileupload').val()!=""){
+					communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
+				}else{
+					communityC="";
+				}
 				var community = {
 					tags : [],
 					attributes : {
 						name : $('#communityName').val(),
 						introduct : $('#communityIntro').val(),
-						communityCard : FileUpload(new FormData(
-								$('.communityForm')[0]))
+						communityCard : communityC
 					},
 					communityType : $('#communityType').val()
 				};
