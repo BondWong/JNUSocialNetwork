@@ -90,27 +90,33 @@
 						</div>
 						<form class="activityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
-								<p>
-									<span>活动名：</span> <input type="text" class="form-control"
+								<div class="activityItem">
+									<span>活动名：</span> <input  type="text" class="form-control activityInput"
 										placeholder="" id="activityName" required autofocus />
-								</p>
-								<p>
-									<span>活动时间：</span> <input type="text" class="form-control"
-										placeholder="" id="activityTime" required autofocus />
-								</p>
-								<p>
-									<span>活动地点：</span> <input type="text" class="form-control"
-										placeholder="" id="activityAddr" required autofocus />
-								</p>
-								<p>
-									<span>活动细节：</span> <input type="text" class="form-control"
+								</div>
+								<div class="activityItem">
+									<span>活动时间：</span>
+									<div class="input-group date form_datetime col-lg-10" data-link-field="dtp_input1">
+									  <input type="text" class="form-control activityInput"  id="activityTime" readonly />
+									  <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+									</div>
+								</div>
+								<div class="activityItem">
+									<span>活动地点：</span>
+									 <input type="text" class="form-control activityInput" placeholder="" id="activityAddr" required autofocus />
+								</div>
+								<div class="activityItem">
+									<span>活动细节：</span> <input type="text" class="form-control activityInput"
 										placeholder="" id="activityMore" required autofocus />
-								</p>
-								<span>活动图片</span> <span class="btn btn-success fileinput-button">
-									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <!-- The file input field used as target for the file upload widget -->
-									<input id="fileupload" type="file" name="files[]">
-								</span>
+								</div>
+								<div class="activityItem">
+									<span>活动图片</span> <span class="btn btn-success fileinput-button" style="width:auto;">
+										<i class="glyphicon glyphicon-plus"></i> <span>Add
+											photos...</span> 
+									<!-- The file input field used as target for the file upload widget -->
+										<input id="fileupload" type="file" name="files[]">
+									</span>
+								</div>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
 								<br>
@@ -193,6 +199,7 @@
 	<script src="js/jquery.fileupload-video.js"></script>
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>

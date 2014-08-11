@@ -1,10 +1,12 @@
 function activityClickEvent() {
 	$('body').on("click", "#activityCreate", function() {
+		var millisecond = Date.parse($('#activityTime').val())+"";
 		var post = {
 			postType : 'ACTIVITY',
 			attributes : {
 				activityName : $('#activityName').val(),
-				activityTime : $('#activityTime').val(),
+				startDate : millisecond,
+				activityTime:$('#activityTime').val(),
 				activityAddr : $('#activityAddr').val(),
 				activityMore : $('#activityMore').val(),
 			},
@@ -70,3 +72,18 @@ $('body')
 					window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/activityShow.jsp?'+community.ID+'&'
 							+ id;
 				});
+
+var date=new Date();
+date.setDate(date.getDate()+ 1);
+$('.form_datetime').datetimepicker({
+    //language:  'fr',
+	format: "MM dd,yyyy - hh:ii",
+	startDate:date,
+    todayBtn:  1,
+	autoclose: 1,
+	startView: 2,
+	Integer:1,
+	forceParse: 0,
+    showMeridian: 1,
+    pickerPosition: "bottom-left"
+});

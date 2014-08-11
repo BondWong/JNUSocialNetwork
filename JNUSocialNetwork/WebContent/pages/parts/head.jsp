@@ -21,6 +21,7 @@
     <link href="styles/instant-chat.css" rel="stylesheet">
 	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 	<link rel="stylesheet" href="styles/jquery.fileupload.css">
+	<link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 	<style>
 </style>
 </head>

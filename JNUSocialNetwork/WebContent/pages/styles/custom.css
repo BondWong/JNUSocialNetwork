@@ -1026,44 +1026,45 @@ body {
 	margin-left: 370px;
 	margin-top: -20px;
 }
+.activityInput{
 
-.activityName {
+	width: 415px;
+	font-size: 16px;
+	
+}
+.activityItem{
+	margin-top:30px;
+}
+.activityItem > span{
+	width:70px;
+	float:left;
+}
+.activityName{
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 	font-size: 16px;
 }
-
-.activityTime {
-	margin-top: 20px;
+.activityTime{
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-
-.activityD {
-	margin-top: 20px;
-	margin-right: auto;
-	margin-left: auto;
-	width: 90%;
-	padding-bottom: 20px;
-	border-bottom: 1px solid #DFDFDF;
-}
-
-.activityAsk {
-	margin-top: 20px;
+.activityaddre{
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-
-.activityaddre {
-	margin-top: 20px;
+.activityD{
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-
+.activityAsk{
+	margin-right: auto;
+	margin-left: auto;
+	width: 90%;
+}
 .activityAsk>span {
 	font-size: 16px;
 	margin-right: 120px;
