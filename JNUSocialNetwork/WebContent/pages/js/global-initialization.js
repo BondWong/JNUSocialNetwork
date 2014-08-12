@@ -2,26 +2,30 @@ function login_initialization(ID) {
 	/*
 	 * initialize user info
 	 */
-	$.ajax({
-		type : "GET",
-		url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
-		beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
-		success : function(data) {
-			sessionStorage.setItem("user", JSON.stringify(data));
-			sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
-			
-			/*
-			 * initialize nav bar
-			 */
-			$("#nav-bar-user").text(
-					$.parseJSON(sessionStorage.getItem("user")).attributes.name);
-			$("#nav-bar-avatar").text(
-					$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
-		}
-	});
-	
+	$
+			.ajax({
+				type : "GET",
+				url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
+				beforeSend : function(request) {
+					request.setRequestHeader("hiddenCode", $('#hiddenCode')
+							.text());
+				},
+				success : function(data) {
+					sessionStorage.setItem("user", JSON.stringify(data));
+					sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
+
+					/*
+					 * initialize nav bar
+					 */
+					$("#nav-bar-user")
+							.text(
+									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
+					$("#nav-bar-avatar")
+							.text(
+									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+				}
+			});
+
 	/*
 	 * SSE Handle
 	 */
@@ -30,6 +34,7 @@ function login_initialization(ID) {
 	/*
 	 * initialize websocket
 	 */
+	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
 	window.ws = new WebSocket(
 			"ws://localhost:8080/JNUSocialNetwork/endpoint/connect/" + ID);
 	ws.onopen = function(e) {
@@ -73,6 +78,7 @@ function login_initialization(ID) {
 			}
 		}
 	};
+	// sessionStorage.setItem("websocket", JSON.stringify(window.ws));
 
 	/*
 	 * initialize friend-list

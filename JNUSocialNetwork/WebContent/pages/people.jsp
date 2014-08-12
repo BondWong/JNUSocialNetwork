@@ -77,6 +77,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- CHATROOM -->
+	<%@ include file="parts/chatRoom.jsp"%>
 
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery.json.min.js"></script>
@@ -95,12 +97,12 @@
 				login_initialization(USERID);
 				peopleClickEvent();
 				clickEvent();
-			}else{
+			} else {
 				clickOffEvent();
 			}
 			PinCommon();
 			Msnry('.userContainer', '.userCard', 200);
-			
+
 		});
 	</script>
 	<%@ include file="parts/securityCode.jsp"%>

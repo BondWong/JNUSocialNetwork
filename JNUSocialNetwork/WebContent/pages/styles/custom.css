@@ -195,9 +195,11 @@ body {
 	margin-left: 150px;
 	font-size: 16px;
 }
+
 .profile_navul a {
-	cursor:pointer;
+	cursor: pointer;
 }
+
 .share {
 	width: 440px;
 	background-color: #FFFFFF;
@@ -980,8 +982,9 @@ body {
 	padding-right: 2px;
 	color: #5A5A5A;
 	margin-left: 5px;
-	text-decoration:none;
+	text-decoration: none;
 }
+
 .comment_reply a {
 	border-width: 1px;
 	border-style: solid;
@@ -990,7 +993,7 @@ body {
 	padding-right: 2px;
 	color: #5A5A5A;
 	margin-left: 5px;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 .likeComment {
@@ -1026,45 +1029,52 @@ body {
 	margin-left: 370px;
 	margin-top: -20px;
 }
-.activityInput{
 
+.activityInput {
 	width: 415px;
 	font-size: 16px;
-	
 }
-.activityItem{
-	margin-top:30px;
+
+.activityItem {
+	margin-top: 30px;
 }
-.activityItem > span{
-	width:70px;
-	float:left;
+
+.activityItem>span {
+	width: 70px;
+	float: left;
 }
-.activityName{
+
+.activityName {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 	font-size: 16px;
 }
-.activityTime{
+
+.activityTime {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-.activityaddre{
+
+.activityaddre {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-.activityD{
+
+.activityD {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
-.activityAsk{
+
+.activityAsk {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
 }
+
 .activityAsk>span {
 	font-size: 16px;
 	margin-right: 120px;
@@ -1208,12 +1218,12 @@ body {
 }
 
 .peopleType {
-	width:100%;
-	padding-bottom:10px;
-	color:#404040;
-	background-color:#fff;
-	font-size:15px;
-	margin-top:10px;
+	width: 100%;
+	padding-bottom: 10px;
+	color: #404040;
+	background-color: #fff;
+	font-size: 15px;
+	margin-top: 10px;
 }
 
 .peopeleType {
@@ -1248,9 +1258,11 @@ body {
 	margin-left: 20px;
 	color: #c5c5c5;
 }
-.searchBody{
-	height:40px;
+
+.searchBody {
+	height: 40px;
 }
+
 .peopeleTypeHover {
 	display: block;
 	width: 100%;
@@ -1263,8 +1275,8 @@ body {
 	border-left: 2px solid #4285f4;
 }
 
-.searchInput{
-	margin-left:20px;
+.searchInput {
+	margin-left: 20px;
 }
 
 .peopleType a {
@@ -1278,7 +1290,6 @@ body {
 	padding-left: 20px;
 	padding-top: 10px;
 }
-
 
 .userCard {
 	margin-top: 20px;
@@ -1317,10 +1328,16 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
-.tipUser{
+
+.tipUser {
 	color: #404040;
 }
-.tipUser:hover{
+
+.tipUser:hover {
 	color: #404040;
-    cursor:pointer;
+	cursor: pointer;
+}
+
+.rl-button-text {
+	text-align: center;
 }

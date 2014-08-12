@@ -13,7 +13,9 @@
 	<div class="regBody">
 		<div class="layer">
 			<div class="regTop">
-				<span>這個位置完本地Watch有什麼用</span> <span>這個Join呢</span>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>Back
+						to home page</span></a> <a href="#" class="btn btn-primary btn-sm"
+					role="button"><span>About us</span></a>
 			</div>
 			<div class="regTitle">Sign Up</div>
 			<div class="regTitle">這個是幹嘛的</div>
