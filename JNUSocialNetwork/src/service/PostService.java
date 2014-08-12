@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import model.CommunityOwner;
 import model.Member;
+import model.Post;
 import model.ServerSentEvent;
 import model.modelType.PostType;
 import security.helper.PostValidation;
@@ -25,6 +26,7 @@ import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
+import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
 import transaction.SSETransaction.SSECancelCollectPostTransaction;
 import transaction.SSETransaction.SSECancelLikePostTransaction;
 import transaction.SSETransaction.SSECollectPostTransaction;
@@ -428,6 +430,27 @@ public class PostService {
 		broadcaster.broadcast(sse);
 
 		return Response.ok().build();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Path("updateAttributes/{postID : \\d+}")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateAttributes(@PathParam("postID") Long postID,
+			Map attributes) throws Exception {
+		transaction = new UpdateAttributeTransaction();
+		Map<String, Object> result;
+		try {
+			result = (Map<String, Object>) transaction.execute(Post.class,
+					postID, attributes);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
 	}
 
 }
