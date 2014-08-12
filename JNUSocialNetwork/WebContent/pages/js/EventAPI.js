@@ -543,6 +543,27 @@ function LeaveCommunity(userID,communityID){
     });
 	return response;
 }
+
+function UpdateCommunity(communityID,json){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/community/updateAttributes/'+communityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
+        data:json,
+        async: false,
+    	contentType: "application/json",
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
 //fetch  输入： 开始index，数量  如：0/5 表示最新的5个;返回：postJson
 function FetchCommunity(startIndex,pageSize){
 	var response="";

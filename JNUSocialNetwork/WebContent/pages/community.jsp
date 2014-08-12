@@ -78,7 +78,7 @@
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <!-- The file input field used as target for the file upload widget -->
+										photos...</span> 
 									<input id="fileupload" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->

@@ -24,34 +24,60 @@
 		<div class="alert alert-success alertCust alertCustC">New Post!</div>
 		<div class="communityCard">
 			<div class="dropdown">
-				<div class="cardSetter glyphicon glyphicon-cog" id="dropdownMenu1"
+				<div class="cardSetter glyphicon glyphicon-cog" type="button" id="dropdownMenu1"
 					data-toggle="dropdown"></div>
-				<ul class="dropdown-menu pull-right " role="menu">
+				<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Invite people</a></li>
+						class="editCommunity" data-toggle='modal' data-target='#editCommunity'>Edit community</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Share community</a></li>
+						href="#">Manage members</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Edit community</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Manage menbers</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Leave community</a></li>
-					<li role="presentation" class="divider"></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Show posts in home stream </a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Amount:Standard</a>
-						<ul class="dropdown-menu" role="menu"
-							aria-labelledby="dropdownMenu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">...</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">...</a></li>
-						</ul></li>
-
+						href="#">Leave community</a></li>				
 				</ul>
-
+			</div>
+			<div class="modal fade" id="editCommunity" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
+						</div>
+						<form class="communityForm" enctype="multipart/form-data">
+							<div class="modal-body modalBody">
+								<!--  <div class="pubCreate" id="createBlock">Public</div>
+								<div class="priCreate" id="createBlock">Private</div>
+								-->
+								<p>
+									<span>社区名：</span> <input type="text" class="form-control"
+										placeholder="" id="communityName" required autofocus />
+								</p>
+								<p>
+									<span>社区介绍：</span> <input type="text" class="form-control"
+										placeholder="" id="communityIntro" required autofocus />
+								</p>
+								<span>社区名片</span> <span class="btn btn-success fileinput-button">
+									<i class="glyphicon glyphicon-plus"></i> <span>Add
+										photos...</span> 
+									<input id="fileupload" type="file" name="files[]">
+								</span>
+								<!-- The container for the uploaded files -->
+								<div id="files" class="files"></div>
+								<br>
+							</div>
+							<br></br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary"
+									id="saveCommunity" value="upload">Save</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
 			</div>
 			<div class=communityCardInfo>
 				<h1 class="cName">Joke of the Day</h1>

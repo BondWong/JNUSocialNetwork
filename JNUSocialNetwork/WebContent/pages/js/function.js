@@ -303,6 +303,28 @@ function clickEvent() {
 		var postID = $(this).find("input").attr("id");
 		DeleteComment(postID, commentID);
 	});
+	$('body').on("click", ".editCommunity", function() {
+		$('#communityName').val(community.attributes.name);
+		$('#communityIntro').val(community.attributes.introduct);
+	});
+	$('body').on("click", "#saveCommunity", function() {
+		var communityC;
+		if ($('#fileupload').val() != "") {
+			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
+		} else {
+			communityC = "";
+		}
+		var attributes = {
+				name : $('#communityName').val(),
+				introduct : $('#communityIntro').val(),
+				communityCard : communityC
+			};
+		var json = $.toJSON(attributes);
+		var c = UpdateCommunity(community.ID, json);
+		$('#editCommunity').modal('hide');
+		$('.cName').html(c.attributes.name);
+		$('.cIntro').html(c.attributes.introduct);
+	});
 }
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {
