@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
-import security.helper.CommentValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchCommentTransaction;
@@ -36,7 +35,6 @@ public class CommentService {
 	@Path("add/{ID : \\d+}/{postID : \\d+}")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@CommentValidation
 	public Response addComment(@PathParam("ID") String ID,
 			@PathParam("postID") Long postID, Map comment) throws Exception {
 		transaction = new SSECreateCommentTransaction();

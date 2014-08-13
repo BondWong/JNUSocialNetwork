@@ -49,13 +49,14 @@ public class AuthorizationCheckFilter implements Filter {
 		synchronized (session) {
 			userType = (UserType) session.getAttribute("userType");
 		}
-		if (ProtectedURLManager.isAuthorized(uri, userType))
+		System.out.println(uri + " " + userType);
+		if (ProtectedURLManager.isAuthorized(uri, userType)) {
 			chain.doFilter(request, response);
+		}
 		else {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			httpResponse.setStatus(401);
 		}
-		// pass the request along the filter chain
 	}
 
 	/**

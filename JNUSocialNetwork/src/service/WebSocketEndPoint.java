@@ -65,7 +65,6 @@ public class WebSocketEndPoint {
 		for (Map<String, Object> contact : contacts)
 			contact.put("online", false);
 
-		System.out.println(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
 			for (int i = 0; i < contacts.size(); i++) {

@@ -10,10 +10,10 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 @ApplicationPath("/app")
-public class JnuSocialNetwork extends Application{
-	public Set<Class<?>> getClasses(){
+public class JnuSocialNetwork extends Application {
+	public Set<Class<?>> getClasses() {
 		Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
-		
+
 		classes.add(ChatRoomService.class);
 		classes.add(CommunityService.class);
 		classes.add(PostService.class);
@@ -26,11 +26,11 @@ public class JnuSocialNetwork extends Application{
 		classes.add(ApplicationService.class);
 		return classes;
 	}
-	
-	public Set<Object> getSingletons(){
+
+	public Set<Object> getSingletons() {
 		Set<Object> singletons = new LinkedHashSet<Object>();
-		
+
 		return singletons;
 	}
-	
+
 }

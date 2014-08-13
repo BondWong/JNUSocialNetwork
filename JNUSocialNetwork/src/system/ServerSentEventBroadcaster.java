@@ -34,7 +34,6 @@ public class ServerSentEventBroadcaster {
 	}
 	
 	public void broadcast(ServerSentEvent serverSentEvent){
-		System.out.println(serverSentEvent.toRepresentation());
 		OutboundEvent event = builder.name(serverSentEvent.getName())
 				.mediaType(MediaType.APPLICATION_JSON_TYPE)
 				.data(String.class, serverSentEvent.getData())

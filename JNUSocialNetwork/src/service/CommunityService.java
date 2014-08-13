@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response;
 import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
-import security.helper.CommunityValidation;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
@@ -42,7 +41,6 @@ public class CommunityService {
 	@Path("add/{ID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@CommunityValidation
 	public Response addCommunity(@PathParam("ID") String ID, Map community)
 			throws Exception {
 		transaction = new CreateCommunityTransaction();

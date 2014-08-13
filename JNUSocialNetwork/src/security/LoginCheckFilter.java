@@ -47,13 +47,13 @@ public class LoginCheckFilter implements Filter {
 		if (ProtectedURLManager.needLoginProtection(uri)) {
 			// pass the request along the filter chain
 			log += " need";
-			System.out.println(log);
 			HttpSession session = httpRequest.getSession();
 			String ID = httpRequest.getHeader("ID");
 			String sessionID = "";
 			synchronized (session) {
 				sessionID = (String) session.getAttribute("ID");
 			}
+			System.out.println(log + " ID:" + ID);
 			if (ID != null && sessionID != null && ID.equals(sessionID)) {
 				chain.doFilter(request, response);
 			} else {

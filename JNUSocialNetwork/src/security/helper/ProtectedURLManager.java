@@ -66,6 +66,8 @@ public class ProtectedURLManager {
 		authorizationProtectionURLs.put("post/cancelCollect", UserType.MEMBER);
 		authorizationProtectionURLs.put("post/joinActivity", UserType.MEMBER);
 		authorizationProtectionURLs.put("post/leaveActivity", UserType.MEMBER);
+		authorizationProtectionURLs.put("post/updateAttributes",
+				UserType.MEMBER);
 
 		authorizationProtectionURLs.put("community/add",
 				UserType.COMMUNITYOWNER);
