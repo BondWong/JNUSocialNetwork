@@ -18,7 +18,7 @@ function FileUpload(formData){
     	data:formData,
     	async: false,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data){
 	    	for(var i=0;i<data.length;i++){
@@ -43,7 +43,7 @@ function AddPost(UserID,JsonData){
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -63,7 +63,7 @@ function AddPostToCommunity(UserID,communityID,userType,JsonData){
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -82,7 +82,7 @@ function DeletePost(postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/delete/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -100,7 +100,7 @@ function DeletePostFromCommunity(communityID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/delete/'+communityID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -119,7 +119,7 @@ function LikePost(userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/like/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -137,7 +137,7 @@ function CancelLikePost(userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/cancelLike/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -155,7 +155,7 @@ function CollectPost(userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/collect/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -173,7 +173,7 @@ function CancelCollectPost(userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/cancelCollect/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -190,7 +190,7 @@ function UpdateActivity(activityID,json){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/updateAttributes/'+activityID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", USERID);
         },
         data:json,
         async: false,
@@ -210,9 +210,6 @@ function FetchPostsByOwner(ownerID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByOwner/'+ownerID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -231,9 +228,6 @@ function FetchByCommunity(communityID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -251,9 +245,6 @@ function FetchActivitiesByCommunity(communityID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchActivitiesByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -273,7 +264,7 @@ function FetchPostsByFollowee(userID,startIndex,pageSize){
     	url:'../../JNUSocialNetwork/app/post/fetchByFollowee/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = data;
@@ -293,7 +284,7 @@ function FetchByFolloweeOrOwner(userID,startIndex,pageSize){
     	url:'../../JNUSocialNetwork/app/post/fetchByFolloweeOrOwner/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = data;
@@ -312,9 +303,6 @@ function FetchPostByID(postID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/post/fetchByID/'+postID,
     	async: false,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	success:function(data,status){
     		response = data;
     	},
@@ -343,7 +331,7 @@ function FetchPostByIDs(postID){
     	url:Urls,
     	async: false,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = data;
@@ -362,7 +350,7 @@ function JoinActivity (userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/joinActivity/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -380,7 +368,7 @@ function LeaveActivity (userID,postID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/post/leaveActivity/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -400,7 +388,7 @@ function AddComment(userID,postID,JsonData){
     	type:"POST",
     	url:'../../JNUSocialNetwork/app/comment/add/'+userID+'/'+postID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	data:JsonData,
     	contentType: "application/json",
@@ -420,7 +408,7 @@ function DeleteComment(postID,commentID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/delete/'+postID+'/'+commentID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -438,7 +426,7 @@ function LikeComment(userID,commentID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/like/'+userID+'/'+commentID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -456,7 +444,7 @@ function CancelLikeComment(userID,commentID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/comment/cancelLike/'+userID+'/'+commentID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -473,9 +461,6 @@ function FetchCommentByPost(postID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/comment/fetchByPost/'+postID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -496,7 +481,7 @@ function AddCommunity(userID,JsonData){
     	type:"POST",
     	url:'../../JNUSocialNetwork/app/community/add/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	data:JsonData,
     	async: false,
@@ -517,7 +502,7 @@ function DeleteCommunity(communityID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/delete/'+communityID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -535,7 +520,7 @@ function JoinCommunity(userID,communityID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/join/'+userID+'/'+communityID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -552,7 +537,7 @@ function LeaveCommunity(userID,communityID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/leave/'+userID+'/'+communityID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -570,7 +555,7 @@ function UpdateCommunity(communityID,json){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/community/updateAttributes/'+communityID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
         data:json,
         async: false,
@@ -591,9 +576,6 @@ function FetchCommunity(startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetch/'+startIndex+'/'+pageSize,
     	async: false,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	success:function(data,status){
     		response = data;
     	},
@@ -611,9 +593,6 @@ function FetchCommunityByID(communityID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetchByID/'+communityID,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -631,9 +610,6 @@ function FetchCommunityByType(communityType,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/community/fetchByType/'+communityType+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -654,7 +630,7 @@ function DeleteMember(userID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/deleteMember/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -672,7 +648,7 @@ function DeleteCommunityOwner(ownerID){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/deleteCommunityOwner/'+ownerID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -690,7 +666,7 @@ function Follow(followeeID,followerID){
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/follow/'+followeeID+'/'+followerID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -708,7 +684,7 @@ function CancelFollow(followeeID,followerID){
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/cancelFollow/'+followeeID+'/'+followerID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	success:function(data,status){
     		response = status;
@@ -726,7 +702,7 @@ function UpdateUserProfile(userID,JsonData){
 		type:"PUT",
     	url:'../../JNUSocialNetwork/app/user/updateProfile/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	data:JsonData,
     	async: false,
@@ -756,7 +732,7 @@ function AddImages(userID,imageLinks){
     	type:"PUT",
     	url:Urls,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -775,9 +751,6 @@ function FetchFollowees(userID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchFollowees/'+userID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -795,9 +768,6 @@ function FetchFollowers(userID,startIndex,pageSize){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchFollowers/'+userID+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -815,9 +785,6 @@ function FetchUserByID(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchByID/'+userID,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -836,7 +803,7 @@ function RecommendateViaFollowee(userID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaFollowee/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -856,7 +823,7 @@ function RecommendateViaCampus(userID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaCampus/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -876,7 +843,7 @@ function RecommendateViaMajor(userID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaMajor/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -896,7 +863,7 @@ function RecommendateViaSession(userID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaSession/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -916,7 +883,7 @@ function RecommendateViaClass(userID){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/recommendateViaClass/'+userID,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -936,7 +903,7 @@ function SearchMember(userID,key,startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/search/'+userID+'/'+key+'/'+startIndex+'/'+pageSize,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -959,7 +926,7 @@ function FetchChatRoom(userID1,userID2){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/chatRoom/fetch/'+userID1+'/'+userID2,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -979,7 +946,7 @@ function FetchMessages(chatRoomID,startIndex,pageSize){
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/chatRoom/fetchMessages/'+chatRoomID+'/'+startIndex+'/'+pageSize,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -999,7 +966,7 @@ function DeleteAbandoned(chatRoomID,year,month,date){
     	type:"PUT",
     	url:'../../JNUSocialNetwork/app/chatRoom/delete/'+chatRoomID+'/'+year+'/'+month+'/'+date,
     	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
     	async: false,
     	success:function(data,status){
@@ -1020,9 +987,6 @@ function GetDormInfo(campus){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/dormInfo/getInfo/'+campus,
-    	beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
-        },
     	async: false,
     	success:function(data,status){
     		response = data;
