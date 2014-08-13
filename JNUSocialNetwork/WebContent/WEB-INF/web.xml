@@ -60,5 +60,60 @@
   </filter-mapping>
   
   <!-- LoginCheckFilter -->
+  <filter>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<filter-class>
+  		security.LoginCheckFilter
+  	</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/post/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/comment/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/user/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/event/deleteUnhandledEvent/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/community/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/chatRoom/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/application/*
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>
+  		/app/fileUploader/*
+  	</url-pattern>
+  </filter-mapping>
   
 </web-app>

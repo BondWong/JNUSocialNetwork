@@ -40,10 +40,14 @@ public class LoginCheckFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
+		String log = "loginCheck";
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String uri = httpRequest.getRequestURI();
+		log += uri;
 		if (ProtectedURLManager.needLoginProtection(uri)) {
 			// pass the request along the filter chain
+			log += " need";
+			System.out.println(log);
 			HttpSession session = httpRequest.getSession();
 			String ID = httpRequest.getHeader("ID");
 			String sessionID = "";
@@ -57,6 +61,8 @@ public class LoginCheckFilter implements Filter {
 				httpResponse.setStatus(401);
 			}
 		} else {
+			log += " do not need";
+			System.out.println(log);
 			chain.doFilter(request, response);
 		}
 	}

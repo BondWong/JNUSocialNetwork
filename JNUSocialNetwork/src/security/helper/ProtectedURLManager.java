@@ -22,6 +22,7 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("post/cancelCollect");
 		loginProtectionURLs.add("post/joinActivity");
 		loginProtectionURLs.add("post/leaveActivity");
+		loginProtectionURLs.add("post/updateAttributes");
 
 		loginProtectionURLs.add("community/add");
 		loginProtectionURLs.add("community/delete");
