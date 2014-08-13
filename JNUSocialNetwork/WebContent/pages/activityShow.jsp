@@ -191,7 +191,7 @@
 				clickOffEvent();
 			}
 			var url = window.location.search;
-			activityID = url.substr(url.indexOf("&") + 1);
+			var activityID = url.substr(url.indexOf("&") + 1);
 			window.activity = FetchPostByID(activityID);
 			var communityID = url.substr(url.indexOf("?") + 1,url.indexOf("&")-url.indexOf("?")-1);
 			window.community = FetchCommunityByID(communityID);

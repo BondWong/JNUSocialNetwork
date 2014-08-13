@@ -1,6 +1,12 @@
 function activityClickEvent() {
 	$('body').on("click", "#activityCreate", function() {
 		var millisecond = Date.parse($('#activityTime').val())+"";
+		var activityC="";
+		if ($('#fileupload').val() != "") {
+			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
+		} else {
+			activityC = "";
+		}
 		var post = {
 			postType : 'ACTIVITY',
 			attributes : {
@@ -9,8 +15,9 @@ function activityClickEvent() {
 				activityTime:$('#activityTime').val(),
 				activityAddr : $('#activityAddr').val(),
 				activityMore : $('#activityMore').val(),
+				background:activityC
 			},
-			imageLinks : FileUpload(new FormData($('.activityForm')[0]))
+			imageLinks : []
 		};
 		var json = $.toJSON(post);
 		AddPostToCommunity("2011052405", community.ID, "COMMUNITYOWNER", json);

@@ -184,6 +184,26 @@ function CancelCollectPost(userID,postID){
     });
 	return response;
 }
+function UpdateActivity(activityID,json){
+	var response="";
+	$.ajax({
+    	type:"PUT",
+    	url:'../../JNUSocialNetwork/app/post/updateAttributes/'+activityID,
+    	beforeSend: function(request) {
+            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+        },
+        data:json,
+        async: false,
+    	contentType: "application/json",
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
 //fetchPostByOwner  输入：ownerID 开始index，数量  如：0/5 表示最新的5个;返回：postJson
 function FetchPostsByOwner(ownerID,startIndex,pageSize){
 	var response="";
