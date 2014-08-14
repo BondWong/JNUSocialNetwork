@@ -22,7 +22,7 @@
 			<div class="containerReg" style="display: block">
 				<div class="regBox">
 					<form class="form-signin" role="form" method="post"
-						action="../security/RegServlet">
+						action="https://localhost:8443/JNUSocialNetwork/security/RegServlet">
 						<p>
 							<input type="text" class="form-control"
 								placeholder="ID of academic affairs system" name="ID" required
@@ -37,7 +37,7 @@
 							<input type="text" class="form-control form-control-cust"
 								placeholder="validation Code" name="valCode" required />
 							<div class="form-cust-img">
-								<img src="../security/RegServlet" />
+								<img src="https://localhost:8443/JNUSocialNetwork/security/RegServlet" />
 							</div>
 						</div>
 						<input type="hidden" name="hiddenCode"

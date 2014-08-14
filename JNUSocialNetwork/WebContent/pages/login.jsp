@@ -23,7 +23,7 @@
 			<div class="containerReg" style="display: block">
 				<div class="regBox">
 					<form class="form-signin" role="form" method="post"
-						action="../security/Login">
+						action="https://localhost:8443/JNUSocialNetwork/security/Login">
 						<p>
 							<input type="text" class="form-control" placeholder="ID"
 								name="ID" required autofocus>

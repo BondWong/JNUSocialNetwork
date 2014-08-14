@@ -35,7 +35,7 @@ function login_initialization(ID) {
 	 */
 	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
 	window.ws = new WebSocket(
-			"ws://localhost:8080/JNUSocialNetwork/endpoint/connect/" + ID);
+			"wss://localhost:8443/JNUSocialNetwork/endpoint/connect/" + ID);
 	ws.onopen = function(e) {
 
 	};
