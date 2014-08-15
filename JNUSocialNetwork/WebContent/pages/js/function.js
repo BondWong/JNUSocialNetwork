@@ -1,7 +1,6 @@
 //function Msnry
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);
-	var msnry;
 	imagesLoaded(container, function() {
 		msnry = new Masonry(container, {
 			columnWidth : width,
@@ -44,7 +43,8 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 								+ jsonComment.ID
 								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
 								+ jsonComment.attributes.commentToComment
-								+ "</a>" +"&nbsp;"+ jsonComment.attributes.content
+								+ "</a>" + "&nbsp;"
+								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 						if (USERID != jsonComment.owner.ID) {
 							$('.deleteCommBtn').css("display", "none");
@@ -63,9 +63,12 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 			+ postID
 			+ " /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"
 			+ content
-			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="
+			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ ownerID
+			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
+			+ ">"
+			+ "<span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
 			+ likeNum
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
@@ -147,14 +150,10 @@ $(document).ready(function() {
 		tinyTip.css(nPos).fadeIn(300);
 		e.stopPropagation();
 	});
-	/**$(document).mousedown(function(e) {
-		if (e.which == 1) {
-			var divTip = 'div.mentionBody';
-			tinyTip = $(divTip);
-			tinyTip.fadeOut(300);
-
-		}
-	});**/
+	/***************************************************************************
+	 * $(document).mousedown(function(e) { if (e.which == 1) { var divTip =
+	 * 'div.mentionBody'; tinyTip = $(divTip); tinyTip.fadeOut(300); } });
+	 **************************************************************************/
 
 });
 // function clickFuntion
@@ -213,12 +212,14 @@ function clickEvent() {
 					'.post_like',
 					function() {
 						var id = $(this).find("input").attr("value");
+						var ownerID = $(this).find("p").attr("value");
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty") {
-							LikePost("2011052406", id);
+							LikePost(USERID, id);
 							var inputID = $("input[value='" + id
 									+ "'][id='likeID']");
 							inputID.next().attr("class",
 									"glyphicon glyphicon-heart");
+							oriented_like_post(ownerID, id);
 							return 0;
 						}
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart") {
@@ -234,32 +235,45 @@ function clickEvent() {
 	$('body').on("click", ".comment_reply", function() {
 		var postID = $(this).attr("id");
 		var commmentName = $(this).find("input[id='replyName']").attr("value");
-		// var commentID = $(this).find("input[id='replyID']").attr("value");
+		var commentID = $(this).find("input[id='replyID']").attr("value");
 		sessionStorage.setItem("commentOwnerName", commmentName);
+		sessionStorage.setItem("commentID", commentID);
 		var inputID = $("input[id='commentText" + postID + "']");
 		inputID.attr("placeholder", "@" + commmentName);
 		inputID.focus();
 	});
-	//function notifyItem 
-	$('body').on('click','.commentItem',function(){
-		$(this).fadeOut(300);
-		$('.mentionBody-appear').css("display","none");
-		var dataString = FetchPostByID("1408108100658");
-		notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs.length);
-		$(".arrowBack").append("<span class='glyphicon glyphicon-chevron-left' id='arrowBack' style='font-size:12px;'>&nbsp;</span>");
-	});
-	//function backarrow
-	$('body').on('click','.arrowBack',function(){
-		$('.mentionBody-new').css("display","none");
-		$(".arrowBack").css("display","none");
-		$('.mentionBody-appear').fadeIn(300);
-		var dataString = FetchPostByID("1408023566898");
-		notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs.length);
-	});
+	// function notifyItem
+	$('body')
+			.on(
+					'click',
+					'.commentItem',
+					function() {
+						$(this).fadeOut(300);
+						$('.mentionBody-appear').css("display", "none");
+						var dataString = FetchPostByID("1408108100658");
+						notifyItem(dataString.owner.ID,
+								dataString.owner.attributes.nickName,
+								dataString.publishDate,
+								dataString.attributes.content, dataString.ID,
+								dataString.likerIDs.length);
+						$(".arrowBack")
+								.append(
+										"<span class='glyphicon glyphicon-chevron-left' id='arrowBack' style='font-size:12px;'>&nbsp;</span>");
+					});
+	// function backarrow
+	$('body').on(
+			'click',
+			'.arrowBack',
+			function() {
+				$('.mentionBody-new').css("display", "none");
+				$(".arrowBack").css("display", "none");
+				$('.mentionBody-appear').fadeIn(300);
+				var dataString = FetchPostByID("1408023566898");
+				notifyItem(dataString.owner.ID,
+						dataString.owner.attributes.nickName,
+						dataString.publishDate, dataString.attributes.content,
+						dataString.ID, dataString.likerIDs.length);
+			});
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -297,12 +311,16 @@ function clickEvent() {
 		var comment = {
 			attributes : {
 				content : inputComm.val(),
-				commentToComment : sessionStorage.getItem("commentOwnerName")
+				commentToComment : sessionStorage.getItem("commentOwnerName"),
+				toCommentID : sessionStorage.getItem("commentID"),
+				fromID : USERID,
+				fromName : user.attributes.name
 			}
 		};
 		var commentJson = $.toJSON(comment);
 		AddComment(USERID, id, commentJson);
-		sessionStorage.setItem("commentOwnerName","");
+		sessionStorage.setItem("commentOwnerName", "");
+		sessionStorage.setItem("commentID", "");
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -334,10 +352,10 @@ function clickEvent() {
 			communityC = "";
 		}
 		var attributes = {
-				name : $('#communityName').val(),
-				introduct : $('#communityIntro').val(),
-				communityCard : communityC
-			};
+			name : $('#communityName').val(),
+			introduct : $('#communityIntro').val(),
+			communityCard : communityC
+		};
 		var json = $.toJSON(attributes);
 		var c = UpdateCommunity(community.ID, json);
 		$('#editCommunity').modal('hide');
@@ -483,7 +501,8 @@ function clickOffEvent() {
 						});
 	};
 })(jQuery);
-function notifyItem(ownerID, ownerNickName, publishDate, content, postID, likeNum){
+function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
+		likeNum) {
 	var response = FetchCommentByPost(postID, "0", "2");
 	var comment = "";
 	$
@@ -515,7 +534,8 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID, likeNu
 								+ jsonComment.ID
 								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
 								+ jsonComment.attributes.commentToComment
-								+ "</a>" +"&nbsp;"+ jsonComment.attributes.content
+								+ "</a>" + "&nbsp;"
+								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 						if (USERID != jsonComment.owner.ID) {
 							$('.deleteCommBtn').css("display", "none");
@@ -553,6 +573,9 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID, likeNu
 		$(this).attr("placeholder", "add a comment");
 	});
 }
-$('body').on("click",".mentionClose",function(){
-	$('.mentionBody').css("display","none");
+$('body').on("click", ".mentionClose", function() {
+	$('.mentionBody').css("display", "none");
 });
+function displayRemindItem() {
+
+}

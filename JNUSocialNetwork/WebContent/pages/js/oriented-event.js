@@ -18,7 +18,7 @@ function oriented_follow(toID) {
 	ws.send(JSON.stringify(event));
 }
 
-function add_comment(toID, commentID, postID) {
+function oriented_add_comment(toID, commentID, postID) {
 	// var user = sessionStorage.getItem("user");
 	// user = $.parseJSON(user);
 	var event = {};
@@ -37,7 +37,7 @@ function add_comment(toID, commentID, postID) {
 	ws.send(JSON.stringify(event));
 }
 
-function reply_comment(toID, commentID, toCommentID, postID) {
+function oriented_reply_comment(toID, commentID, toCommentID, postID) {
 	// var user = sessionStorage.getItem("user");
 	// user = $.parseJSON(user);
 	var event = {};
@@ -58,25 +58,26 @@ function reply_comment(toID, commentID, toCommentID, postID) {
 
 }
 
-function like_post(toID, postID) {
-	// var user = sessionStorage.getItem("user");
-	// user = $.parseJSON(user);
+function oriented_like_post(toID, postID) {
+	var user = sessionStorage.getItem("user");
+	user = $.parseJSON(user);
+	alert(toID);
+	alert(user.ID);
+	if (toID == user.ID)
+		return;
 	var event = {};
 	event.action = "EVENT";
 	event.toID = toID;
 	event.SSEType = "LIKEPOST";
 	event.data = {};
-	// event.data.ID = user.ID;
-	// event.data.name = user.attributes.name;
-	// event.data.avatar = user.attributes.avatar;
-	event.data.ID = "2011052408";
-	event.data.name = "Nobama";
-	event.data.avatar = "adsfldaa";
+	event.data.ID = user.ID;
+	event.data.name = user.attributes.name;
+	event.data.avatar = user.attributes.avatar;
 	event.data.postID = postID;
 	ws.send(JSON.stringify(event));
 }
 
-function like_comment(toID, commentID, postID) {
+function oriented_like_comment(toID, commentID, postID) {
 	// var user = sessionStorage.getItem("user");
 	// user = $.parseJSON(user);
 	var event = {};
@@ -108,19 +109,19 @@ function handle_unhandled_events(events) {
 function event_remind(event) {
 	switch (event.SSEType) {
 	case "CREATECOMMENT":
-		add_to_bell(event, "added comment to your post");
+		add_to_bell(event, "added comment to your post", "Add Comment");
 		break;
 	case "REPLYCOMMENT":
-		add_to_bell(event, "replied your comment");
+		add_to_bell(event, "replied your comment", "Reply Comment");
 		break;
 	case "LIKEPOST":
-		add_to_bell(event, "liked your post");
+		add_to_bell(event, "liked your post", "Like Post");
 		break;
 	case "LIKECOMMENT":
-		add_to_bell(event, "liked your comment");
+		add_to_bell(event, "liked your comment", "Like Comment");
 		break;
 	case "FOLLOW":
-		add_to_bell(event, "followed you");
+		add_to_bell(event, "followed you", "Follow");
 		break;
 	}
 }
@@ -128,19 +129,19 @@ function event_remind(event) {
 function off_line_event_remind(event) {
 	switch (event.name) {
 	case "CREATECOMMENT":
-		add_to_bell(event, "added comment to your post");
+		add_to_bell(event, "added comment to your post", "Add Comment");
 		break;
 	case "REPLYCOMMENT":
-		add_to_bell(event, "replied your comment");
+		add_to_bell(event, "replied your comment", "Reply Comment");
 		break;
 	case "LIKEPOST":
-		add_to_bell(event, "liked your post");
+		add_to_bell(event, "liked your post", "Like Post");
 		break;
 	case "LIKECOMMENT":
-		add_to_bell(event, "liked your comment");
+		add_to_bell(event, "liked your comment", "Like Comment");
 		break;
 	case "FOLLOW":
-		add_to_bell(event, "followed you");
+		add_to_bell(event, "followed you", "Follow");
 		break;
 	}
 }
@@ -155,13 +156,15 @@ function delete_event(eventID) {
 	});
 }
 
-function add_to_bell(event, description) {
+function add_to_bell(event, description, head) {
+	alert(event.data.name);
 	$("div.mentionBody-content").append(
 			'<div class="NotiItem" id="' + event.data.eventID
 					+ '"><div class="col-lg-3"><div><img src="'
 					+ event.data.avatar
-					+ '" /></div></div><div class="col-lg-6"><div>'
-					+ event.data.name + '<br />' + description + '</div></div><div>');
+					+ '" /></div></div><div class="col-lg-9"><h1>' + head
+					+ '</h1><div class="remindConent">' + event.data.name + ' '
+					+ description + '</div></div><div>');
 	var event_data = event.data;
 	$("#" + event.data.eventID).click(function(e) {
 		e.stopPropagation();

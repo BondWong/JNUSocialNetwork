@@ -148,7 +148,7 @@ function CREATECOMMENT() {
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
-									+ jsonComment.owner.attributes.nickName
+									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 									+ jsondata.postID
 									+ "' type='hidden' value='"
@@ -169,7 +169,8 @@ function CREATECOMMENT() {
 									+ jsonComment.ID
 									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
 									+ jsonComment.attributes.commentToComment
-									+ "</a>"+ "&nbsp;" + jsonComment.attributes.content
+									+ "</a>" + "&nbsp;"
+									+ jsonComment.attributes.content
 									+ "﻿</div></div>";
 							$(
 									"button[value='" + jsondata.postID

@@ -52,4 +52,3 @@ function on_friends_node_click() {
 		$("#contact-list .friends-tree-node .person").remove();
 	}
 }
-

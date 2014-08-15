@@ -1356,3 +1356,8 @@ body {
 	font-size:12px;
 	float:right;
 }
+.NotiItem h1{
+	font-size:16px;
+	font-weight:bolder;
+	color:#aaaaaa;
+}
