@@ -1345,3 +1345,10 @@ body {
 	margin-top:10px;
 	margin-left:10px;
 }
+.notifyItem{
+	width:300px;
+	background-color:#fff;
+}
+.arrowBack{
+	float:left;
+}
