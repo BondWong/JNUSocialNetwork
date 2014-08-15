@@ -106,24 +106,6 @@ $('.act_content')
 					});
 				});
 
-// function fetchPostsByUserID
-
-function fetchPostsByUserID() {
-	$.ajax({
-		url : '../../GuitarWebApp/app/post/fetchByUserID/' + userID + '/0/5',// /post/fetchByUserID/'+id
-		type : 'get',
-		success : function(data) {
-			// var jsondata = $.parseJSON(data);
-			var dataR = data.reverse();
-			$.each(dataR, function(index, jsonPostShortCut) {
-				addPost(jsonPostShortCut.ownerID,
-						jsonPostShortCut.ownerNickName,
-						jsonPostShortCut.publishDate, jsonPostShortCut.content,
-						jsonPostShortCut.id, jsonPostShortCut.likeNum);
-			});
-		}
-	});
-};
 // fetchPostByIDs
 function fetchPostByIDs(container) {
 	var response = FetchPostByIDs(container);
@@ -212,14 +194,12 @@ function clickEvent() {
 					'.post_like',
 					function() {
 						var id = $(this).find("input").attr("value");
-						var ownerID = $(this).find("p").attr("value");
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty") {
 							LikePost(USERID, id);
 							var inputID = $("input[value='" + id
 									+ "'][id='likeID']");
 							inputID.next().attr("class",
 									"glyphicon glyphicon-heart");
-							oriented_like_post(ownerID, id);
 							return 0;
 						}
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart") {
@@ -243,37 +223,22 @@ function clickEvent() {
 		inputID.focus();
 	});
 	// function notifyItem
-	$('body')
-			.on(
-					'click',
-					'.commentItem',
-					function() {
-						$(this).fadeOut(300);
-						$('.mentionBody-appear').css("display", "none");
-						var dataString = FetchPostByID("1408108100658");
-						notifyItem(dataString.owner.ID,
-								dataString.owner.attributes.nickName,
-								dataString.publishDate,
-								dataString.attributes.content, dataString.ID,
-								dataString.likerIDs.length);
-						$(".arrowBack")
-								.append(
-										"<span class='glyphicon glyphicon-chevron-left' id='arrowBack' style='font-size:12px;'>&nbsp;</span>");
-					});
+	/*
+	 * $('body') .on( 'click', '.commentItem', function() {
+	 * $(this).fadeOut(300); $('.mentionBody-appear').css("display", "none");
+	 * var dataString = FetchPostByID("1408108100658");
+	 * notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
+	 * dataString.publishDate, dataString.attributes.content, dataString.ID,
+	 * dataString.likerIDs.length); $(".arrowBack") .append( "<span
+	 * class='glyphicon glyphicon-chevron-left' id='arrowBack'
+	 * style='font-size:12px;'>&nbsp;</span>"); });
+	 */
 	// function backarrow
-	$('body').on(
-			'click',
-			'.arrowBack',
-			function() {
-				$('.mentionBody-new').css("display", "none");
-				$(".arrowBack").css("display", "none");
-				$('.mentionBody-appear').fadeIn(300);
-				var dataString = FetchPostByID("1408023566898");
-				notifyItem(dataString.owner.ID,
-						dataString.owner.attributes.nickName,
-						dataString.publishDate, dataString.attributes.content,
-						dataString.ID, dataString.likerIDs.length);
-			});
+	$('body').on('click', '.arrowBack', function() {
+		$('.mentionBody-new').css("display", "none");
+		$(".arrowBack").css("display", "none");
+		$('.mentionBody-appear').fadeIn(300);
+	});
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -311,10 +276,8 @@ function clickEvent() {
 		var comment = {
 			attributes : {
 				content : inputComm.val(),
-				commentToComment : sessionStorage.getItem("commentOwnerName"),
-				toCommentID : sessionStorage.getItem("commentID"),
-				fromID : USERID,
-				fromName : user.attributes.name
+				commentToComment : sessionStorage.getItem("commentOwnerName"), 
+				postID : id + ""
 			}
 		};
 		var commentJson = $.toJSON(comment);

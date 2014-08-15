@@ -87,6 +87,8 @@ function LIKEPOST() {
 		var inputID = $("input[value='" + postID + "'][id='likeID']");
 		var like = parseInt(inputID.next().text()) + 1;
 		inputID.next().text(like);
+		if (USERID == jsondata.ID)
+			oriented_like_post(jsondata.postOwnerID, postID);
 	});
 }
 function LIKECOMMENT() {
@@ -96,6 +98,8 @@ function LIKECOMMENT() {
 		var spanNum = $("div[class='likeComment likeCommentN" + postID + "']");
 		var like = parseInt(spanNum.find("span").text()) + 1;
 		spanNum.find('span').text(like);
+		if (USERID == jsondata.ID)
+			oriented_like_comment(jsondata.commentOwnerID, jsondata.commentID, postID);
 	});
 }
 function CANCELLIKEPOST() {
