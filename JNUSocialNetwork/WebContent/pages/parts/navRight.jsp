@@ -8,7 +8,7 @@
 <c:choose>
 	<c:when test="${sessionScope.ID eq null or sessionScope.ID eq ''}">
 		<form class="navbar-form navbar-costom" role="form" method="post"
-			action="https://localhost:8443/JNUSocialNetwork/security/Login">
+			action="../security/Login">
 			<div class="form-group">
 				<input type="text" placeholder="ID" class="form-control" name="ID"
 					required>
