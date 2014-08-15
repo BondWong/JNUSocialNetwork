@@ -166,7 +166,7 @@ public class Comment extends AttributeModel {
 		}
 
 		representation.put("likerIDs", likerIDs);
-
+		System.out.println(representation);
 		return representation;
 	}
 
