@@ -19,9 +19,10 @@
 </ul>
 <div class="mentionBody bottom">
 	<div class="arrow"></div>
-	<h2 class="mentionBody-title">Notifications</h2>
+	<div class="mentionBody-title"><div class="arrowBack"></div>Notifications</div>
 	<div class="mentionBody-content">
-		<!-- <div class="NotiItem">
+	   <div class="mentionBody-appear">
+		 <div class="NotiItem commentItem">
 			<div class="col-lg-3">
 				<div><img src="images/type.jpg" /></div>
 			</div>
@@ -44,6 +45,8 @@
 			<div class="col-lg-6">
 				<div>i want to fuck you!</div>
 			</div>
-		</div> -->
+		</div> 
 	</div>
+	<div class="mentionBody-new"></div>
+   </div>
 </div>
