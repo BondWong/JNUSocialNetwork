@@ -48,13 +48,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println(request.getRequestURL());
 		Account account = null;
 		String ID = request.getParameter("ID");
 		String password = request.getParameter("password");
 		String type = request.getParameter("userType");
 		UserType userType = UserType.valueOf(type);
 		String hiddenCode = request.getParameter("hiddenCode");
-		
+
 		HttpSession session = request.getSession();
 		String sessionHiddenCode = "";
 		synchronized (session) {

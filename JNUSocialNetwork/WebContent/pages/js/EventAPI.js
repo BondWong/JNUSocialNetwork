@@ -472,6 +472,22 @@ function FetchCommentByPost(postID,startIndex,pageSize){
     });
 	return response;
 }
+function FetchCommentByID(commentID){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/comment/fetchByID/'+commentID,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 //***********************************CommentService   end*********************************
 //***********************************CommunityService   begin*********************************
 //AddCommunity parameter:addcomment.pnd -d  response:success fail

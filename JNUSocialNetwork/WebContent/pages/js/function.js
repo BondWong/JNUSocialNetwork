@@ -1,7 +1,6 @@
 //function Msnry
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);
-	var msnry;
 	imagesLoaded(container, function() {
 		msnry = new Masonry(container, {
 			columnWidth : width,
@@ -64,12 +63,12 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 			+ postID
 			+ " /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"
 			+ content
-			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="
+			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ ownerID
+			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
 			+ ">"
-			+ "<p id='ownerID' style='display:none;' value="
-			+ ownerID
-			+ "></p><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
+			+ "<span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
 			+ likeNum
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
@@ -107,24 +106,6 @@ $('.act_content')
 					});
 				});
 
-// function fetchPostsByUserID
-
-function fetchPostsByUserID() {
-	$.ajax({
-		url : '../../GuitarWebApp/app/post/fetchByUserID/' + userID + '/0/5',// /post/fetchByUserID/'+id
-		type : 'get',
-		success : function(data) {
-			// var jsondata = $.parseJSON(data);
-			var dataR = data.reverse();
-			$.each(dataR, function(index, jsonPostShortCut) {
-				addPost(jsonPostShortCut.ownerID,
-						jsonPostShortCut.ownerNickName,
-						jsonPostShortCut.publishDate, jsonPostShortCut.content,
-						jsonPostShortCut.id, jsonPostShortCut.likeNum);
-			});
-		}
-	});
-};
 // fetchPostByIDs
 function fetchPostByIDs(container) {
 	var response = FetchPostByIDs(container);
@@ -153,8 +134,7 @@ $(document).ready(function() {
 	});
 	/***************************************************************************
 	 * $(document).mousedown(function(e) { if (e.which == 1) { var divTip =
-	 * 'div.mentionBody'; tinyTip = $(divTip); tinyTip.fadeOut(300);
-	 *  } });
+	 * 'div.mentionBody'; tinyTip = $(divTip); tinyTip.fadeOut(300); } });
 	 **************************************************************************/
 
 });
@@ -214,9 +194,8 @@ function clickEvent() {
 					'.post_like',
 					function() {
 						var id = $(this).find("input").attr("value");
-						var ownerID = $(this).find("p").attr("value");
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart-empty") {
-							LikePost("2011052406", id);
+							LikePost(USERID, id);
 							var inputID = $("input[value='" + id
 									+ "'][id='likeID']");
 							inputID.next().attr("class",
@@ -244,37 +223,22 @@ function clickEvent() {
 		inputID.focus();
 	});
 	// function notifyItem
-	$('body')
-			.on(
-					'click',
-					'.commentItem',
-					function() {
-						$(this).fadeOut(300);
-						$('.mentionBody-appear').css("display", "none");
-						var dataString = FetchPostByID("1408108100658");
-						notifyItem(dataString.owner.ID,
-								dataString.owner.attributes.nickName,
-								dataString.publishDate,
-								dataString.attributes.content, dataString.ID,
-								dataString.likerIDs.length);
-						$(".arrowBack")
-								.append(
-										"<span class='glyphicon glyphicon-chevron-left' id='arrowBack' style='font-size:12px;'>&nbsp;</span>");
-					});
+	/*
+	 * $('body') .on( 'click', '.commentItem', function() {
+	 * $(this).fadeOut(300); $('.mentionBody-appear').css("display", "none");
+	 * var dataString = FetchPostByID("1408108100658");
+	 * notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
+	 * dataString.publishDate, dataString.attributes.content, dataString.ID,
+	 * dataString.likerIDs.length); $(".arrowBack") .append( "<span
+	 * class='glyphicon glyphicon-chevron-left' id='arrowBack'
+	 * style='font-size:12px;'>&nbsp;</span>"); });
+	 */
 	// function backarrow
-	$('body').on(
-			'click',
-			'.arrowBack',
-			function() {
-				$('.mentionBody-new').css("display", "none");
-				$(".arrowBack").css("display", "none");
-				$('.mentionBody-appear').fadeIn(300);
-				var dataString = FetchPostByID("1408023566898");
-				notifyItem(dataString.owner.ID,
-						dataString.owner.attributes.nickName,
-						dataString.publishDate, dataString.attributes.content,
-						dataString.ID, dataString.likerIDs.length);
-			});
+	$('body').on('click', '.arrowBack', function() {
+		$('.mentionBody-new').css("display", "none");
+		$(".arrowBack").css("display", "none");
+		$('.mentionBody-appear').fadeIn(300);
+	});
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -312,10 +276,8 @@ function clickEvent() {
 		var comment = {
 			attributes : {
 				content : inputComm.val(),
-				commentToComment : sessionStorage.getItem("commentOwnerName"),
-				toCommentID : sessionStorage.getItem("commentID"),
-				fromID : USERID,
-				fromName : user.attributes.name
+				commentToComment : sessionStorage.getItem("commentOwnerName"), 
+				postID : id + ""
 			}
 		};
 		var commentJson = $.toJSON(comment);
@@ -502,9 +464,33 @@ function clickOffEvent() {
 						});
 	};
 })(jQuery);
+function notifyAddComment(ownerID, ownerNickName, publishDate, content, postID,likeNum){
+	var response = FetchCommentByPost(postID, "0", "2");
+	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
+			likeNum); 
+}
+function notifyLikeComment(commentID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+	var response = FetchCommentByID(commentID);
+	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
+			likeNum); 
+}
+function notifyReplyComment(commenterID,commentOwnerID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+	var response = [];
+	response.push(commenterID);
+	response.push(commentOwnerID);
+	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
+			likeNum); 
+}
+function notifyAddComment(commentID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+	var response = FetchCommentByID(commentID);
+	response.push(commenterID);
+	response.push(commentOwnerID);
+	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
+			likeNum); 
+}
+
 function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
 		likeNum) {
-	var response = FetchCommentByPost(postID, "0", "2");
 	var comment = "";
 	$
 			.each(

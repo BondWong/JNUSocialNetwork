@@ -26,7 +26,7 @@
 			<div class="col-lg-3">
 				<div><img src="images/type.jpg" /></div>
 			</div>
-			<div class="col-lg-9">
+			<div class="col-lg-6">
 				<div>i want to fuck you!</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 			<div class="col-lg-3">
 				<div><img src="images/type.jpg" /></div>
 			</div>
-			<div class="col-lg-9">
+			<div class="col-lg-6">
 				<div>i want to fuck you!</div>
 			</div>
 		</div>
@@ -42,9 +42,8 @@
 			<div class="col-lg-3">
 				<div><img src="images/type.jpg" /></div>
 			</div>
-			<div class="col-lg-9">
-				<h1>i want to fuck you!</h1>
-				<div class="remindConent">asdasd</div>
+			<div class="col-lg-6">
+				<div>i want to fuck you!</div>
 			</div>
 		</div> 
 	</div>
