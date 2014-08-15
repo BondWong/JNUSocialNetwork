@@ -234,8 +234,9 @@ function clickEvent() {
 	$('body').on("click", ".comment_reply", function() {
 		var postID = $(this).attr("id");
 		var commmentName = $(this).find("input[id='replyName']").attr("value");
-		// var commentID = $(this).find("input[id='replyID']").attr("value");
+		var commentID = $(this).find("input[id='replyID']").attr("value");
 		sessionStorage.setItem("commentOwnerName", commmentName);
+		sessionStorage.setItem("commentID", commentID);
 		var inputID = $("input[id='commentText" + postID + "']");
 		inputID.attr("placeholder", "@" + commmentName);
 		inputID.focus();
@@ -297,12 +298,16 @@ function clickEvent() {
 		var comment = {
 			attributes : {
 				content : inputComm.val(),
-				commentToComment : sessionStorage.getItem("commentOwnerName")
+				commentToComment : sessionStorage.getItem("commentOwnerName"),
+				toCommentID:sessionStorage.getItem("commentID"),
+				fromID:USERID,
+				fromName:user.attributes.name
 			}
 		};
 		var commentJson = $.toJSON(comment);
 		AddComment(USERID, id, commentJson);
 		sessionStorage.setItem("commentOwnerName","");
+		sessionStorage.setItem("commentID","");
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -556,3 +561,6 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID, likeNu
 $('body').on("click",".mentionClose",function(){
 	$('.mentionBody').css("display","none");
 });
+function displayRemindItem(){
+	
+}
