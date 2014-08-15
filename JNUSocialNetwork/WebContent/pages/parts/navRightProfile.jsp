@@ -19,7 +19,7 @@
 </ul>
 <div class="mentionBody bottom">
 	<div class="arrow"></div>
-	<div class="mentionBody-title"><div class="arrowBack"></div>Notifications</div>
+	<div class="mentionBody-title"><div class="arrowBack"></div>Notifications<div class="glyphicon glyphicon-remove mentionClose"></div></div>
 	<div class="mentionBody-content">
 	   <div class="mentionBody-appear">
 		 <div class="NotiItem commentItem">

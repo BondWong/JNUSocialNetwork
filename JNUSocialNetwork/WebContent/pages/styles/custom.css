@@ -1352,3 +1352,7 @@ body {
 .arrowBack{
 	float:left;
 }
+.mentionClose{
+	font-size:12px;
+	float:right;
+}

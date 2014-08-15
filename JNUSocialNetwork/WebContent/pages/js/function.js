@@ -244,7 +244,7 @@ function clickEvent() {
 	$('body').on('click','.commentItem',function(){
 		$(this).fadeOut(300);
 		$('.mentionBody-appear').css("display","none");
-		var dataString = FetchPostByID("1408023566898");
+		var dataString = FetchPostByID("1408108100658");
 		notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
 				dataString.publishDate, dataString.attributes.content,
 				dataString.ID, dataString.likerIDs.length);
@@ -553,4 +553,6 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID, likeNu
 		$(this).attr("placeholder", "add a comment");
 	});
 }
-
+$('body').on("click",".mentionClose",function(){
+	$('.mentionBody').css("display","none");
+});
