@@ -95,6 +95,14 @@ img.chat-avatar {
 	right: -200px;
 	position: fixed;
 	top: 150px;
+	border: 1px solid #BEBEBE;
+	background-color: #fff;
+	font-size: 12px;
+	box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+.contact-list-nav-bar li{
+	margin-left:0px;
+	background-color:#F4F4F4;
 }
 
 .contact-list-body {

@@ -5,10 +5,10 @@
 <c:if test='${sessionScope.ID != null && sessionScope.ID != ""}'>
 	<div class="panel panel-default contact-list" id="contact-list">
 		<div class="panel-body contact-list-body">
-			<ul class="nav nav-pills contact-list-nav-bar" role="tablist">
-				<li class="active" id="contact-button"><a href="#contact"
+			<ul class="nav nav-tabs contact-list-nav-bar" role="tablist">
+				<li role="presentation" class="active" id="contact-button"><a href="#contact"
 					role="tab" data-toggle="tab">Contact</a></li>
-				<li><a href="#history" role="tab" data-toggle="tab"
+				<li role="presentation"><a href="#history" role="tab" data-toggle="tab"
 					id="history-button">History</a></li>
 			</ul>
 			<div class="tab-content contact-list-content">

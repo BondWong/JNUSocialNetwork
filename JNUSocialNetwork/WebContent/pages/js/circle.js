@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('#fileupload').fileupload({
 		url:'../../JNUSocialNetwork/app/fileUploader',
 		beforeSend: function(request) {
-            request.setRequestHeader("hiddenCode", $('#hiddenCode').text());
+            request.setRequestHeader("ID", $('#security-code-user-ID').text());
         },
 	    success:function(data){
 	    	for(var i=0;i<data.length;i++){

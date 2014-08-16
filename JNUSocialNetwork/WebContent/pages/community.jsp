@@ -44,6 +44,10 @@
 			<div role="button" class="btn btn-sm btn-success createCom"
 				data-toggle='modal' data-target='#createCommunity'>Create
 				community</div>
+			<div role="button" class="btn btn-sm btn-success appCom"
+				data-toggle='modal' data-target='#appCommunity'>Apply to become a
+				community owner</div>
+				<div><a href="communitySignIn.jsp">I have a community account</a></div>
 			<div class="modal fade" id="createCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -60,15 +64,18 @@
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus />
+										placeholder="" id="communityName" required autofocus
+										autocomplete="off" />
 								</p>
 								<p>
 									<span>社区标签：</span> <input type="text" class="form-control"
-										placeholder="" id="communityTag" required autofocus />
+										placeholder="" id="communityTag" required autofocus
+										autocomplete="off" />
 								</p>
 								<p>
 									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus />
+										placeholder="" id="communityIntro" required autofocus
+										autocomplete="off" />
 								</p>
 								<p>
 									<span>社区类型：</span> <select id="communityType">
@@ -78,12 +85,63 @@
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> 
-									<input id="fileupload" type="file" name="files[]">
+										photos...</span> <input id="fileupload" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
 								<br>
+							</div>
+							<br></br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary"
+									id="communityCreate" value="upload">Create</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<div class="modal fade" id="appCommunity" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Apply for a community</h4>
+						</div>
+						<form class="appCommunityForm" enctype="multipart/form-data">
+							<div class="modal-body modalBody">
+								<!--  <div class="pubCreate" id="createBlock">Public</div>
+								<div class="priCreate" id="createBlock">Private</div>
+								-->
+								<p>
+									<span>登陆账号：</span> <input type="text" class="form-control"
+										placeholder="" id="ID"
+										autocomplete="off" required/>
+								</p>
+								<p>
+									<span>密码：</span> <input type="password" class="form-control"
+										placeholder="" id="password"  autocomplete="off" required/>
+								</p>
+								<p>
+									<span>联系电话：</span> <input type="text" class="form-control"
+										placeholder="" id="telephone"  
+										autocomplete="off" required/>
+								</p>
+								<p>
+									<span>联系邮箱：</span> <input type="text" class="form-control"
+										placeholder="" id="mail"  autofocus
+										autocomplete="off" required/>
+								</p>
+								<p>
+									<span>申请理由：</span> <textarea type="text" class="form-control"
+										placeholder="" id="reasons"  autofocus
+										autocomplete="off" required></textarea>
+								</p>
 							</div>
 							<br></br>
 							<div class="modal-footer">

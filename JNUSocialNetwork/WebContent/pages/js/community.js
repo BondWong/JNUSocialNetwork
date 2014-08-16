@@ -19,7 +19,7 @@ function communityClickEvent() {
 					communityType : $('#communityType').val()
 				};
 				var json = $.toJSON(community);
-				var community = AddCommunity("2011052405", json);
+				var community = AddCommunity(USERID, json);
 				fetchCommunityByID(community.ID);
 				$('#createCommunity').modal('hide');
 			});
@@ -71,6 +71,6 @@ $(document).ready(function() {
 	// funtion sessionID
 	$('body').on("click", ".img_container", function() {
 		var comm = $(this).find("input").attr("value");
-		window.location.href='http://localhost:8080/JNUSocialNetwork/pages/communityShow.jsp?'+comm;
+		window.location.href='communityShow.jsp?'+comm;
 	});
 });
