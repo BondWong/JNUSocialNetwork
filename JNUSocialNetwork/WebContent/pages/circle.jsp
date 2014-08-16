@@ -214,6 +214,8 @@
 					<div class="post_info">
 						This is not a new article in PNAS, but it details results from a
 						unique study and I have wanted to write about it for a while.
+						NOTE: this is aThis is not a new article in PNAS, but it details results from a
+						unique study and I have wanted to write about it for a while.
 						NOTE: this is a
 						<div class="post_more">
 							<a>read more...</a>

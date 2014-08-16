@@ -75,6 +75,11 @@
 	
 	$('body').on('click','.searchUser',function(){
 		$(this).replaceWith("<input class='searchInput' placeholder='name or id or sex ' >");
+		$('.searchInput').focus();
+		$('.searchInput').blur(function(){
+			$(this).replaceWith("<span class='searchUser'>Search for anyone</span>");
+		});
+		
 	});
 	$('body').on('click','.glyphicon-search-custom',function(){
 		var userInfo = encodeURI($('.searchInput').val());

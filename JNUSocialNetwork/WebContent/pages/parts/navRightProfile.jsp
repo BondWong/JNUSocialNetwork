@@ -12,7 +12,6 @@
 		</ul></li>
 	<li><a href="javaScript:void(0);" id="remind-bell"><span
 			class="glyphicon glyphicon-bell mentionBell" style="font-size: 18px"></span></a></li>
-	<li><button type="button" class="btn btn-success btn_cust">Share</button></li>
 	<li><img src="" class="img-circle img_cust" id="nav-bar-avatar"></li>
 
 </ul>
