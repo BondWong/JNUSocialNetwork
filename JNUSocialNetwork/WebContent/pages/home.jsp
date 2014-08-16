@@ -49,8 +49,7 @@
 					<div class="carousel-caption">
 
 						<p>
-							<a class="btn btn-lg btn-success" href="#" role="button">Learn
-								more</a>
+							<a class="btn btn-lg btn-success" href="community.jsp" role="button">Discover community</a>
 						</p>
 					</div>
 				</div>
@@ -61,8 +60,7 @@
 					<div class="carousel-caption">
 
 						<p>
-							<a class="btn btn-lg btn-success" href="#" role="button">Browse
-								gallery</a>
+							<a class="btn btn-lg btn-success" href="people.jsp" role="button">Find your friends</a>
 						</p>
 					</div>
 				</div>

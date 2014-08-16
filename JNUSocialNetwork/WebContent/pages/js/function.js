@@ -72,7 +72,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 			+ likeNum
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
 			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment
@@ -84,6 +84,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
+	$('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
 }
@@ -167,7 +168,7 @@ function clickEvent() {
 	$(document)
 			.ready(
 					function() {
-						$('img.userImg').userTips();
+
 						$('body')
 								.on(
 										"click",
@@ -276,7 +277,7 @@ function clickEvent() {
 		var comment = {
 			attributes : {
 				content : inputComm.val(),
-				commentToComment : sessionStorage.getItem("commentOwnerName"), 
+				toCommentID : sessionStorage.getItem("commentID"),
 				postID : id + ""
 			}
 		};
@@ -464,33 +465,47 @@ function clickOffEvent() {
 						});
 	};
 })(jQuery);
-function notifyAddComment(ownerID, ownerNickName, publishDate, content, postID,likeNum){
-	var response = FetchCommentByPost(postID, "0", "2");
-	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
-			likeNum); 
+function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,
+		likeNum) {
+	notifyItem([], ownerID, ownerNickName, publishDate, content, postID,
+			likeNum);
 }
-function notifyLikeComment(commentID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+function notifyLikeComment(commentID, ownerID, ownerNickName, publishDate,
+		content, postID, likeNum) {
 	var response = FetchCommentByID(commentID);
-	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
-			likeNum); 
+	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
+			postID, likeNum);
 }
-function notifyReplyComment(commenterID,commentOwnerID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
+		publishDate, content, postID, likeNum) {
 	var response = [];
-	response.push(commenterID);
-	response.push(commentOwnerID);
-	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
-			likeNum); 
+	var comment1 = FetchCommentByID(commentID);
+	var comment2 = FetchCommentByID(toCommentID);
+	response.push(comment1);
+	response.push(comment2);
+	notifyItem(response, ownerID, ownerNickName, publishDate, content, postID,
+			likeNum);
 }
-function notifyAddComment(commentID,ownerID, ownerNickName, publishDate, content, postID,likeNum){
+function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
+		content, postID, likeNum) {
 	var response = FetchCommentByID(commentID);
 	response.push(commenterID);
 	response.push(commentOwnerID);
-	notifyItem(response,ownerID, ownerNickName, publishDate, content, postID,
-			likeNum); 
+	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
+			postID, likeNum);
 }
 
-function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
-		likeNum) {
+function notifyFollow(followerID) {
+	var data = FetchUserByID(followerID);
+	var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
+			+ data.attributes.nickName
+			+ '</a></h1></p><p>'
+			+ data.attributes.lookingFor + '</p></div></div></div>';
+	$(".mentionBody-new").append(tipFrame);
+}
+
+function notifyItem(response, ownerID, ownerNickName, publishDate, content,
+		postID, likeNum) {
 	var comment = "";
 	$
 			.each(
@@ -500,7 +515,7 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 								+ postID
 								+ "' type='hidden' value='"
@@ -516,7 +531,7 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
 								+ postID
 								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "' /><input id='replyID' type='hidden' value='"
 								+ jsonComment.ID
 								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
@@ -528,7 +543,6 @@ function notifyItem(ownerID, ownerNickName, publishDate, content, postID,
 							$('.deleteCommBtn').css("display", "none");
 						}
 					});
-
 	var boarddiv = "<div class='post"
 			+ postID
 			+ " notifyItem'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"

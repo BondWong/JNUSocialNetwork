@@ -99,7 +99,8 @@ function LIKECOMMENT() {
 		var like = parseInt(spanNum.find("span").text()) + 1;
 		spanNum.find('span').text(like);
 		if (USERID == jsondata.ID)
-			oriented_like_comment(jsondata.commentOwnerID, jsondata.commentID, postID);
+			oriented_like_comment(jsondata.commentOwnerID, jsondata.commentID,
+					postID);
 	});
 }
 function CANCELLIKEPOST() {
@@ -192,7 +193,19 @@ function CREATECOMMENT() {
 									+ "</div></div></div>";
 							$(".commentBtn").after(comment);
 						}
-
+						if (USERID == jsondata.ID) {
+							alert(jsondata.comment.attributes.toCommentID);
+							if (jsondata.comment.attributes.toCommentID == null
+									|| jsondata.comment.attributes.toCommentID == "")
+								oriented_add_comment(jsondata.postOwnerID,
+										jsondata.commentID, jsondata.postID);
+							else
+								oriented_reply_comment(
+										jsondata.toCommentOwnerID,
+										jsondata.commentID,
+										jsondata.comment.attributes.toCommentID,
+										jsondata.postID);
+						}
 					});
 }
 function FOLLOW() {
@@ -200,6 +213,6 @@ function FOLLOW() {
 		var jsondata = $.parseJSON(event.data);
 		var followBtn = $("button[id='followBtn']");
 		followBtn.text("Following");
-
+		oriented_follow(jsondata.otherID);
 	});
 }
