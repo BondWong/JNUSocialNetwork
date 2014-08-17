@@ -173,4 +173,46 @@
   	</url-pattern>
   </filter-mapping>
   
+  <!-- security layer -->
+  <!-- login and register -->
+   <!-- <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>LoginPage</web-resource-name>
+  		<url-pattern>/pages/login.jsp</url-pattern>
+  	</web-resource-collection>
+  	<user-data-constraint>
+  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  	</user-data-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>RegisterPage</web-resource-name>
+  		<url-pattern>/pages/register.jsp</url-pattern>
+  	</web-resource-collection>
+  	<user-data-constraint>
+  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  	</user-data-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Login</web-resource-name>
+  		<url-pattern>/security/Login</url-pattern>
+  	</web-resource-collection>
+  	<user-data-constraint>
+  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  	</user-data-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Register</web-resource-name>
+  		<url-pattern>/security/RegServlet</url-pattern>
+  	</web-resource-collection>
+  	<user-data-constraint>
+  		<transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+  	</user-data-constraint>
+  </security-constraint> -->
+  
 </web-app>

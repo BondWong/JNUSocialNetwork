@@ -161,7 +161,7 @@ function showFollowers() {
 function fetchPostsByOwner() {
 	var response = FetchPostsByOwner(userID,"0", "5");
 	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
+		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
 				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
 	});
@@ -174,7 +174,7 @@ function fetchUserByID() {
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);
 	$('.Acampus').html(userInfo.attributes.campus);
-	$('.Anickname').html(userInfo.attributes.nickName);
+	$('.Anickname').html(userInfo.attributes.name);
 	$('.Aemail').html(userInfo.attributes.email);
 	$('.Arelationship').html(userInfo.attributes.relationship);
 	$('.Atelenum').html(userInfo.attributes.telenum);

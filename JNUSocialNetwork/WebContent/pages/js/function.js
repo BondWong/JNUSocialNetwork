@@ -195,8 +195,7 @@ function clickEvent() {
 										".glyphicon-home",
 										function() {
 											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
-													+ sessionStorage
-															.getItem("otherUserID");
+													+ USERID;
 										});
 					});
 	// function likePost and cancelLike
@@ -516,7 +515,7 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
 	var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
-			+ data.attributes.nickName
+			+ data.attributes.name
 			+ '</a></h1></p><p>'
 			+ data.attributes.lookingFor + '</p></div></div></div>';
 	$(".mentionBody-new").append(tipFrame);

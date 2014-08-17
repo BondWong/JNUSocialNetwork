@@ -85,6 +85,11 @@ function prepare_chat_room_load_more(data, fromID) {
 											+ clickCount
 											* 5
 											+ '/5',
+									beforeSend : function(request) {
+										request.setRequestHeader("ID", $(
+												'#security-code-user-ID')
+												.text());
+									},
 									success : function(messages) {
 										for (var i = 0; i < messages.length; i++) {
 											if (messages[i].fromID == fromID)
