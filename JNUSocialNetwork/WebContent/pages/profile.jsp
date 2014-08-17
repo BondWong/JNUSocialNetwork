@@ -65,6 +65,6 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<%@ include file="parts/profileJavaScript.jsp"%>
-	<%@ include file="parts/securityCode.jsp"%>
+	<%@ include file="parts/loginJavaScript.jsp"%>
 </body>
 </html>

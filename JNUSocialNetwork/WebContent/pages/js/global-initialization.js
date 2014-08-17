@@ -7,7 +7,7 @@ function login_initialization(ID) {
 				type : "GET",
 				url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
 				beforeSend: function(request) {
-		            request.setRequestHeader("ID", $('#security-code-user-ID').text());
+		            request.setRequestHeader("ID", USERID);
 		        },
 				success : function(data) {
 					sessionStorage.setItem("user", JSON.stringify(data));

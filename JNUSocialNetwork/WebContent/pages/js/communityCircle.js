@@ -7,7 +7,7 @@ $(document)
 									{
 										url : '../../JNUSocialNetwork/app/fileUploader',
 										beforeSend: function(request) {
-								            request.setRequestHeader("ID", $('#security-code-user-ID').text());
+								            request.setRequestHeader("ID", USERID);
 								        },
 										success : function(data) {
 											for (var i = 0; i < data.length; i++) {

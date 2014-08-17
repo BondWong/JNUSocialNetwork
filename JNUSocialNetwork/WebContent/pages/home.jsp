@@ -49,7 +49,8 @@
 					<div class="carousel-caption">
 
 						<p>
-							<a class="btn btn-lg btn-success" href="community.jsp" role="button">Discover community</a>
+							<a class="btn btn-lg btn-success" href="community.jsp"
+								role="button">Discover community</a>
 						</p>
 					</div>
 				</div>
@@ -60,7 +61,8 @@
 					<div class="carousel-caption">
 
 						<p>
-							<a class="btn btn-lg btn-success" href="people.jsp" role="button">Find your friends</a>
+							<a class="btn btn-lg btn-success" href="people.jsp" role="button">Find
+								your friends</a>
 						</p>
 					</div>
 				</div>
@@ -201,7 +203,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/global-initialization.js"></script>
-	<%@ include file="parts/securityCode.jsp"%>
+	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript" src="js/home-initialization.js"></script>
 </body>
 </html>

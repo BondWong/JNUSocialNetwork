@@ -24,15 +24,17 @@
 		<div class="alert alert-success alertCust alertCustC">New Post!</div>
 		<div class="communityCard">
 			<div class="dropdown">
-				<div class="cardSetter glyphicon glyphicon-cog" type="button" id="dropdownMenu1"
-					data-toggle="dropdown"></div>
-				<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+				<div class="cardSetter glyphicon glyphicon-cog" type="button"
+					id="dropdownMenu1" data-toggle="dropdown"></div>
+				<ul class="dropdown-menu pull-right" role="menu"
+					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						class="editCommunity" data-toggle='modal' data-target='#editCommunity'>Edit community</a></li>
+						class="editCommunity" data-toggle='modal'
+						data-target='#editCommunity'>Edit community</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						href="#">Manage members</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Leave community</a></li>				
+						href="#">Leave community</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"
@@ -59,8 +61,7 @@
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> 
-									<input id="fileupload" type="file" name="files[]">
+										photos...</span> <input id="fileupload" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -70,8 +71,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary"
-									id="saveCommunity" value="upload">Save</button>
+								<button type="button" class="btn btn-primary" id="saveCommunity"
+									value="upload">Save</button>
 							</div>
 						</form>
 					</div>
@@ -117,29 +118,35 @@
 						<form class="activityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
 								<div class="activityItem">
-									<span>活动名：</span> <input  type="text" class="form-control activityInput"
-										placeholder="" id="activityName" required autofocus />
+									<span>活动名：</span> <input type="text"
+										class="form-control activityInput" placeholder=""
+										id="activityName" required autofocus />
 								</div>
 								<div class="activityItem">
 									<span>活动时间：</span>
-									<div class="input-group date form_datetime col-lg-10" data-link-field="dtp_input1">
-									  <input type="text" class="form-control activityInput"  id="activityTime" readonly />
-									  <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+									<div class="input-group date form_datetime col-lg-10"
+										data-link-field="dtp_input1">
+										<input type="text" class="form-control activityInput"
+											id="activityTime" readonly /> <span
+											class="input-group-addon"><i
+											class="glyphicon glyphicon-th"></i></span>
 									</div>
 								</div>
 								<div class="activityItem">
-									<span>活动地点：</span>
-									 <input type="text" class="form-control activityInput" placeholder="" id="activityAddr" required autofocus />
+									<span>活动地点：</span> <input type="text"
+										class="form-control activityInput" placeholder=""
+										id="activityAddr" required autofocus />
 								</div>
 								<div class="activityItem">
-									<span>活动细节：</span> <input type="text" class="form-control activityInput"
-										placeholder="" id="activityMore" required autofocus />
+									<span>活动细节：</span> <input type="text"
+										class="form-control activityInput" placeholder=""
+										id="activityMore" required autofocus />
 								</div>
 								<div class="activityItem">
-									<span>活动图片</span> <span class="btn btn-success fileinput-button" style="width:auto;">
+									<span>活动图片</span> <span
+										class="btn btn-success fileinput-button" style="width: auto;">
 										<i class="glyphicon glyphicon-plus"></i> <span>Add
-											photos...</span> 
-									<!-- The file input field used as target for the file upload widget -->
+											photos...</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileupload" type="file" name="files[]">
 									</span>
 								</div>
@@ -230,7 +237,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/activity.js"></script>
-	<%@ include file="parts/securityCode.jsp"%>
+	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {

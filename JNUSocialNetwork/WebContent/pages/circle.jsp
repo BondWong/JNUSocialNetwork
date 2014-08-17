@@ -361,7 +361,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/circle.js"></script>
 	<script src="js/EventHandle.js"></script>
-	<%@ include file="parts/securityCode.jsp"%>
+	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			if (USERID != null && USERID != ""){
