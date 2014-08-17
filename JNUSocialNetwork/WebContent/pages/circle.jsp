@@ -159,7 +159,7 @@
 							<form class="photoForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" autocomplete="off"></textarea> 
+										type="text" style="resize: none;"></textarea> 
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -369,11 +369,17 @@
 				window.fileDri = [];
 				window.postIdContainer = [];
 				clickEvent();
+				if($.parseJSON(sessionStorage.getItem("user")).followeeIDs!=null){
+					fetchByFolloweeOrOwner();
+				}else{
+					fectchHeatPost();
+				}
 			}else{
 				clickOffEvent();
+				fectchHeatPost();
 			}
 		Msnry('.pro_body', '.post', 435);
-		fetchByFolloweeOrOwner();	
+		
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
