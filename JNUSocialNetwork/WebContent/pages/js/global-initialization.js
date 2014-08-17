@@ -121,12 +121,6 @@ function login_initialization(ID) {
 		on_remind_node_click();
 	});
 	$(".mentionBell").click(on_bell_click);
-	$('.glyphicon-home')
-			.click(
-					function() {
-						window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
-								+ USERID;
-					});
 	$('.mentionClose').click(function() {
 		$('.mentionBody').css("display", "none");
 		$('.mentionBody-content').empty();

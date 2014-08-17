@@ -6,7 +6,7 @@
 		data-toggle="dropdown"><span class="glyphicon glyphicon-user"
 			id="nav-bar-user"> User</span><b class="caret"></b></a>
 		<ul class="dropdown-menu">
-			<li><a href="javaScript:void(0);"><span
+			<li><a href="profile.jsp?nav=post&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-home">&nbsp;profile</span></a></li>
 			<li><a href="../security/UserLogoutServlet"><span
 					class="glyphicon glyphicon-th">&nbsp;Logout</span></a></li>
