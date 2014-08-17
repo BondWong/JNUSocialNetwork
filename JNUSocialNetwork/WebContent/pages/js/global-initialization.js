@@ -6,9 +6,10 @@ function login_initialization(ID) {
 			.ajax({
 				type : "GET",
 				url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
-				beforeSend: function(request) {
-		            request.setRequestHeader("ID", USERID);
-		        },
+				beforeSend : function(request) {
+					request.setRequestHeader("ID", USERID);
+				},
+				async: false,
 				success : function(data) {
 					sessionStorage.setItem("user", JSON.stringify(data));
 					sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
@@ -77,7 +78,6 @@ function login_initialization(ID) {
 			}
 		}
 	};
-	// sessionStorage.setItem("websocket", JSON.stringify(window.ws));
 
 	/*
 	 * initialize friend-list
@@ -119,6 +119,17 @@ function login_initialization(ID) {
 	});
 	$("#contact-list .remind-tree-node-button").click(function() {
 		on_remind_node_click();
+	});
+	$(".mentionBell").click(on_bell_click);
+	$('.glyphicon-home')
+			.click(
+					function() {
+						window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
+								+ USERID;
+					});
+	$('.mentionClose').click(function() {
+		$('.mentionBody').css("display", "none");
+		$('.mentionBody-content').empty();
 	});
 }
 

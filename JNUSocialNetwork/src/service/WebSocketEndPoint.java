@@ -161,6 +161,8 @@ public class WebSocketEndPoint {
 	private void handleEvent(Session session, Map<String, Object> param)
 			throws Exception {
 		System.out.println(param);
+		((Map<String, Object>) param.get("data")).put("eventID",
+				System.currentTimeMillis());
 		String toID = (String) param.get("toID");
 
 		int i = 0;
@@ -172,7 +174,7 @@ public class WebSocketEndPoint {
 		}
 
 		if (i == 0) {
-			SSEType sseType = SSEType.valueOf((String) param.get("SSEType"));
+			SSEType sseType = SSEType.valueOf((String) param.get("name"));
 			Map<String, Object> data = (Map<String, Object>) param.get("data");
 			Long eventID = System.currentTimeMillis();
 			data.put("eventID", eventID);
