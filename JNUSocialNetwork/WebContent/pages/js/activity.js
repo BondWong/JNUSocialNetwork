@@ -66,7 +66,7 @@ $('body')
 				"click",
 				".communityHref",
 				function() {
-					window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/communityShow.jsp?'
+					window.location.href = 'communityShow.jsp?'
 							+ community.ID;
 				});
 
@@ -76,7 +76,7 @@ $('body')
 				".activityHref",
 				function() {
 					var id = $(this).attr("id");
-					window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/activityShow.jsp?'+community.ID+'&'
+					window.location.href = 'activityShow.jsp?'+community.ID+'&'
 							+ id;
 				});
 

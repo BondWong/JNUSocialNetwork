@@ -7,6 +7,9 @@ function open_chatroom(fromID, toID, toName, online) {
 		type : "GET",
 		url : '../../JNUSocialNetwork/app/chatRoom/fetch/' + fromID + '/'
 				+ toID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", $('#security-code-user-ID').text());
+		},
 		success : function(data) {
 			var top = $("#contact-list").css("top");
 			var right = $("#contact-list").css("right");
@@ -82,6 +85,11 @@ function prepare_chat_room_load_more(data, fromID) {
 											+ clickCount
 											* 5
 											+ '/5',
+									beforeSend : function(request) {
+										request.setRequestHeader("ID", $(
+												'#security-code-user-ID')
+												.text());
+									},
 									success : function(messages) {
 										for (var i = 0; i < messages.length; i++) {
 											if (messages[i].fromID == fromID)

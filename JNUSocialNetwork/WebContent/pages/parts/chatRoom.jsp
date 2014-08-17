@@ -5,17 +5,17 @@
 <c:if test='${sessionScope.ID != null && sessionScope.ID != ""}'>
 	<div class="panel panel-default contact-list" id="contact-list">
 		<div class="panel-body contact-list-body">
-			<ul class="nav nav-pills contact-list-nav-bar" role="tablist">
-				<li class="active" id="contact-button"><a href="#contact"
-					role="tab" data-toggle="tab">Contact</a></li>
-				<li><a href="#history" role="tab" data-toggle="tab"
-					id="history-button">History</a></li>
+			<ul class="nav nav-tabs contact-list-nav-bar" role="tablist">
+				<li role="presentation" class="active" ><a id="contact-button" href="#contact"
+					role="tab" data-toggle="tab"><i></i></a></li>
+				<li role="presentation"><a href="#history" role="tab" data-toggle="tab"
+					id="history-button"><i></i></a></li>
 			</ul>
 			<div class="tab-content contact-list-content">
 				<div class="tab-pane active" id="contact">
 					<div class="friends-tree-node">
 						<a href="javaScript:void(0);" class="friends-tree-node-button"><span
-							class="glyphicon glyphicon-chevron-right">Contacts</span></a>
+							class="glyphicon glyphicon-chevron-right">&nbsp;Friends</span></a>
 					</div>
 				</div>
 				<div class="tab-pane" id="history"></div>

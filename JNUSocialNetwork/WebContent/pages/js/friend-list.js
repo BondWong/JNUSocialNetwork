@@ -7,7 +7,7 @@ function on_friends_node_click() {
 			"glyphicon-chevron-right") != -1) {
 		$("#contact-list .friends-tree-node span")
 				.replaceWith(
-						'<span class="glyphicon glyphicon-chevron-down">Friends</span>');
+						'<span class="glyphicon glyphicon-chevron-down">&nbsp;Friends</span>');
 		var chatRooms = sessionStorage.getItem("chatrooms");
 		chatRooms = $.parseJSON(chatRooms);
 		for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
@@ -48,7 +48,7 @@ function on_friends_node_click() {
 			.indexOf("glyphicon-chevron-down") != -1) {
 		$("#contact-list .friends-tree-node span")
 				.replaceWith(
-						'<span class="glyphicon glyphicon-chevron-right">Friends</span>');
+						'<span class="glyphicon glyphicon-chevron-right">&nbsp;Friends</span>');
 		$("#contact-list .friends-tree-node .person").remove();
 	}
 }

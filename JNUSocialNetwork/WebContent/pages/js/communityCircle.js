@@ -6,12 +6,9 @@ $(document)
 							.fileupload(
 									{
 										url : '../../JNUSocialNetwork/app/fileUploader',
-										beforeSend : function(request) {
-											request.setRequestHeader(
-													"hiddenCode", $(
-															'#hiddenCode')
-															.text());
-										},
+										beforeSend: function(request) {
+								            request.setRequestHeader("ID", $('#security-code-user-ID').text());
+								        },
 										success : function(data) {
 											for (var i = 0; i < data.length; i++) {
 												var dataString = data[i];
@@ -131,7 +128,7 @@ function fetchPostByCommunity() {
 		if (dataString.available == "true") {
 			addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
 					dataString.publishDate, dataString.attributes.content,
-					dataString.ID, dataString.likerIDs.length);
+					dataString.ID, dataString.likerIDs, dataString.collectorIDs);
 		}
 	});
 }
@@ -155,7 +152,9 @@ $('body')
 				"click",
 				".activityHref",
 				function() {
-					window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/activity.jsp?'
+					window.location.href = 'activity.jsp?'
 							+ community.ID;
 				});
-
+$('body').on('click','.leaveCommunity',function(){
+	
+});

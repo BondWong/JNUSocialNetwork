@@ -318,6 +318,7 @@ body {
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: #CDCDCD;
+	word-wrap:break-word;
 }
 
 .content_info {
@@ -1362,5 +1363,6 @@ body {
 	color:#aaaaaa;
 }
 .postContent{
-	width:100%
+	width:100%;
+	word-wrap:break-word;
 }

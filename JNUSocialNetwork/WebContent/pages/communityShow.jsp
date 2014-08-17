@@ -138,7 +138,7 @@
 						class="editCommunity" data-toggle='modal' data-target='#editCommunity'>Edit community</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						href="#">Manage members</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
+					<li role="presentation"><a class ="leaveCommunity" role="menuitem" tabindex="-1"
 						href="#">Leave community</a></li>				
 				</ul>
 			</div>

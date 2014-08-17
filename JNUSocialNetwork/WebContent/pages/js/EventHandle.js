@@ -194,7 +194,6 @@ function CREATECOMMENT() {
 							$(".commentBtn").after(comment);
 						}
 						if (USERID == jsondata.ID) {
-							alert(jsondata.comment.attributes.toCommentID);
 							if (jsondata.comment.attributes.toCommentID == null
 									|| jsondata.comment.attributes.toCommentID == "")
 								oriented_add_comment(jsondata.postOwnerID,

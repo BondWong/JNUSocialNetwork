@@ -18,6 +18,7 @@ public class CreateCommentTransaction extends DAOTransaction{
 		DAO dao = new DAO(em);
 		Member member = dao.get(Member.class, params[0]);
 		Post post = dao.get(Post.class, params[1]);
+		System.out.println(post == null);
 		Comment comment = ModelFactory.getInstance().create(Comment.class, params[2]);
 		member.createComment(post, comment);
 		dao.update(post);
