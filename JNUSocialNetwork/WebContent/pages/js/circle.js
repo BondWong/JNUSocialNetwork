@@ -83,7 +83,7 @@ $(document).ready(function(){
 	function fetchByFolloweeOrOwner(){
 		var response = FetchByFolloweeOrOwner(USERID,"0","5");
 		$.each(response.reverse(),function(n,dataString){
-			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs.length);
+			addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs,dataString.collectorIDs);
 		});
 	}
 	//function fetchPostsByIDs

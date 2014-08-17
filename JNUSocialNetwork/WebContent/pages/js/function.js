@@ -11,7 +11,7 @@ function Msnry(selectContain, item, width) {
 }
 
 // function addDiv
-function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) {
+function addPost(ownerID, ownerNickName, publishDate, content, postID, likers, collecters) {
 	var response = FetchCommentByPost(postID, "0", "2");
 	var comment = "";
 	$
@@ -50,7 +50,14 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 							$('.deleteCommBtn').css("display", "none");
 						}
 					});
-
+	var likeClass = "glyphicon glyphicon-heart-empty";
+	var collectClass = "glyphicon glyphicon-star-empty";
+	if ($.inArray(USERID, likers) != -1) {
+		likeClass = "glyphicon glyphicon-heart";
+	}
+	if ($.inArray(USERID, collecters) != -1) {
+		collectClass = "glyphicon glyphicon-star";
+	}
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
@@ -68,11 +75,15 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likeNum) 
 			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
 			+ ">"
-			+ "<span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
-			+ likeNum
+			+ "<span class='"
+			+ likeClass
+			+ "' style='font-size:20px'>"
+			+ likers.length
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+			+ "><span class='"
+			+ collectClass
+			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
 			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment
@@ -113,7 +124,7 @@ function fetchPostByIDs(container) {
 	$.each(response, function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
 				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs.length);
+				dataString.ID, dataString.likerIDs);
 	});
 }
 $(document).ready(function() {
@@ -431,6 +442,13 @@ function clickOffEvent() {
 							nPos.left = pos.left + 40;
 							var userid = $(this).next().val();
 							var data = FetchUserByID(userid);
+							var followTxt = "Follow";
+							if($.inArray(USERID,data.followerIDs) != -1){
+								followTxt = "Following";
+							}
+							if(USERID == userid){
+								followTxt="Yourself";
+							}
 							sessionStorage.setItem("otherUserID", data.ID);
 							if (data != "") {
 								var tipFrame = '<div id="'
@@ -439,7 +457,7 @@ function clickOffEvent() {
 										+ data.attributes.nickName
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
-										+ '</p><button id="followBtn">Follow</button></div></div></div>';
+										+ '</p><button id="followBtn">'+followTxt+'</button></div></div></div>';
 								$('body').append(tipFrame);
 								var divTip = 'div.popTip';
 								tinyTip = $(divTip);

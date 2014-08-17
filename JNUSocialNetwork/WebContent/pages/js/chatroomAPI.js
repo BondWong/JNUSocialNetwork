@@ -7,6 +7,9 @@ function open_chatroom(fromID, toID, toName, online) {
 		type : "GET",
 		url : '../../JNUSocialNetwork/app/chatRoom/fetch/' + fromID + '/'
 				+ toID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", $('#security-code-user-ID').text());
+		},
 		success : function(data) {
 			var top = $("#contact-list").css("top");
 			var right = $("#contact-list").css("right");
@@ -27,13 +30,13 @@ function create_chatroom(data, fromID, toID, toName, online, top, right) {
 	if (online) {
 		chatroom += '<span class="label label-success">'
 				+ toName
-				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
+				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="fromID" value="'
 				+ fromID + '"></div>';
 	} else {
 		chatroom += '<span class="label label-default">'
 				+ toName
-				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
+				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="fromID" value="'
 				+ fromID + '"></div>';
 	}
