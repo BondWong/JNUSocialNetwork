@@ -41,39 +41,6 @@
 			<h5 class="containBord">People you may know on Google+</h5>
 			<div class="userContainer">
 				<div class="recommendBord"></div>
-				<div class="userCard">
-					<img src="images/userRecomm.jpg" width="200px">
-					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University
-						of Mexico</p>
-					<div class="recommendBtn">
-						<button class="btn btn-default ">
-							+<span class="glyphicon glyphicon-user">&nbsp;Follow</span>
-						</button>
-					</div>
-				</div>
-				<div class="userCard">
-					<img src="images/userRecomm.jpg" width="200px">
-					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University
-						of Mexico</p>
-					<div class="recommendBtn">
-						<button class="btn btn-default ">
-							+<span class="glyphicon glyphicon-user">&nbsp;Follow</span>
-						</button>
-					</div>
-				</div>
-				<div class="userCard">
-					<img src="images/userRecomm.jpg" width="200px">
-					<p class="recommendName">Clars</p>
-					<p class="recommendLooking">(?), National Autonomous University
-						of Mexico</p>
-					<div class="recommendBtn">
-						<button class="btn btn-default ">
-							+<span class="glyphicon glyphicon-user" id="followBtn">&nbsp;Follow</span>
-						</button>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -100,7 +67,7 @@
 			} else {
 				clickOffEvent();
 			}
-			PinCommon();
+			pHot();
 			Msnry('.userContainer', '.userCard', 200);
 
 		});

@@ -812,6 +812,23 @@ function FetchUserByID(userID){
     });
 	return response;
 }
+//recommendate
+function Recommendate(startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/user/recommendate/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 //RecommendateViaFollowee  输入：userID;返回：userJson
 function RecommendateViaFollowee(userID){
 	var response="";

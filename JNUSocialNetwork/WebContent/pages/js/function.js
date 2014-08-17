@@ -392,7 +392,7 @@ function clickOffEvent() {
 		e.preventDefault();
 		alert("Sign In");
 	});
-	$('。pinCommon').click(function(e) {
+	$('.pinCommon').click(function(e) {
 		e.preventDefault();
 		alert("Sign In");
 	});
