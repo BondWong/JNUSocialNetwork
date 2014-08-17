@@ -9,6 +9,7 @@ function login_initialization(ID) {
 				beforeSend: function(request) {
 		            request.setRequestHeader("ID", USERID);
 		        },
+		        async: false,
 				success : function(data) {
 					sessionStorage.setItem("user", JSON.stringify(data));
 					sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));

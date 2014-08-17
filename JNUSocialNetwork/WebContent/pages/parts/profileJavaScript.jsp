@@ -7,6 +7,25 @@
 <script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="js/load-image.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="js/canvas-to-blob.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="js/jquery.fileupload-image.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="js/jquery.fileupload-validate.js"></script>
+<script src="js/layer.min.js"></script>
+<script src="js/layer.ext.js"></script>
 <script src="js/EventAPI.js"></script>
 <script src="js/function.js"></script>
 <script src="js/about.js"></script>
@@ -15,6 +34,8 @@
 <script type="text/javascript">
 	var url = window.location.search;
 	window.userID = url.substr(url.indexOf("&") + 1);
+	window.fileDri = [];
+	window.postIdContainer = [];
 	$('body').on('click', '.aboutNav', function() {
 		window.location.href = "profile.jsp?nav=about&" + userID;
 	});

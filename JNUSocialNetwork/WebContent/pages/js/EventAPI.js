@@ -1,9 +1,9 @@
 //***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe(){
-	/*if (!window.EventSource) {
+	if (!window.EventSource) {
 		 document.write('js/jquery.eventsource.js');
-	}*/
+	}
 	var source = new EventSource("../../JNUSocialNetwork/app/event/subscribe");
 	return source;
 }

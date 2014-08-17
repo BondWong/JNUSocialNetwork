@@ -44,7 +44,7 @@
 							</div>
 						</nav>
 					</div>
-					<div class="deletePostBtn"
+					<div class=""
 						style="margin-right: 10px; margin-top: 10px">
 						<a href="javascript:void(0)"
 							onclick="document.getElementById('light').style.display='none';"><input
@@ -222,10 +222,7 @@
 						</div>
 					</div>
 					<div class="post_img">
-						<a href="javascript:void(0)"
-							onclick="document.getElementById('light').style.display='block'">
-							<img src="images/2.jpg" />
-						</a>
+							<img class="postImg" src="images/2.jpg" />
 					</div>
 					<div class="row">
 						<div class="col-md-1">
@@ -357,6 +354,8 @@
 	<script src="js/jquery.fileupload-video.js"></script>
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
+	<script src="js/layer.min.js"></script>
+	<script src="js/layer.ext.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/circle.js"></script>

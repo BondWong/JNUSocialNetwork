@@ -1366,3 +1366,18 @@ body {
 	width:100%;
 	word-wrap:break-word;
 }
+.showPost{
+	padding:10px;
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.showPostInfo{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #DFDFDF;
+	padding-bottom:5px;
+}
+.cus-lg-10{
+	margin-left:10px;
+}
