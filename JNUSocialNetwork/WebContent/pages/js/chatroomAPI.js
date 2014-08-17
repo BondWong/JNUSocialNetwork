@@ -86,8 +86,7 @@ function prepare_chat_room_load_more(data, fromID) {
 											* 5
 											+ '/5',
 									beforeSend : function(request) {
-										request.setRequestHeader("ID", $(
-												'#security-code-user-ID')
+										request.setRequestHeader("ID", USERID
 												.text());
 									},
 									success : function(messages) {

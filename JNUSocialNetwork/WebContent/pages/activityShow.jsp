@@ -199,6 +199,6 @@
 		});
 			
 		</script>
-		<%@ include file="parts/securityCode.jsp"%>
+		<%@ include file="parts/loginJavaScript.jsp"%>
 </body>
 </html>

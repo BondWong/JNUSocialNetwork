@@ -26,4 +26,7 @@
 	media="screen">
 <style>
 </style>
+<script type="text/javascript">
+	window.USERID = '${sessionScope.ID}';
+</script>
 </head>

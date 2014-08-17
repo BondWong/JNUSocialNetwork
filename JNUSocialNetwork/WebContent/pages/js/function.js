@@ -11,7 +11,8 @@ function Msnry(selectContain, item, width) {
 }
 
 // function addDiv
-function addPost(ownerID, ownerNickName, publishDate, content, postID, likers, collecters) {
+function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
+		collecters) {
 	var response = FetchCommentByPost(postID, "0", "2");
 	var comment = "";
 	$
@@ -392,7 +393,7 @@ function clickOffEvent() {
 		e.preventDefault();
 		alert("Sign In");
 	});
-	$('。pinCommon').click(function(e) {
+	$('.pinCommon').click(function(e) {
 		e.preventDefault();
 		alert("Sign In");
 	});
@@ -442,11 +443,11 @@ function clickOffEvent() {
 							var userid = $(this).next().val();
 							var data = FetchUserByID(userid);
 							var followTxt = "Follow";
-							if($.inArray(USERID,data.followerIDs) != -1){
+							if ($.inArray(USERID, data.followerIDs) != -1) {
 								followTxt = "Following";
 							}
-							if(USERID == userid){
-								followTxt="Yourself";
+							if (USERID == userid) {
+								followTxt = "Yourself";
 							}
 							sessionStorage.setItem("otherUserID", data.ID);
 							if (data != "") {
@@ -456,7 +457,9 @@ function clickOffEvent() {
 										+ data.attributes.nickName
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
-										+ '</p><button id="followBtn">'+followTxt+'</button></div></div></div>';
+										+ '</p><button id="followBtn">'
+										+ followTxt
+										+ '</button></div></div></div>';
 								$('body').append(tipFrame);
 								var divTip = 'div.popTip';
 								tinyTip = $(divTip);
