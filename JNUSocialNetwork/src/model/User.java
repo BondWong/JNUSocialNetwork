@@ -2,10 +2,9 @@ package model;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import model.modelType.UserType;
 
@@ -15,7 +14,7 @@ public abstract class User extends AttributeModel{
 	@Id
 	protected String ID;
 	protected String password;
-	@Enumerated(EnumType.STRING)
+	@Transient
 	protected UserType userType;
 	
 	public abstract void createPost(Community community, Post post);
@@ -31,6 +30,10 @@ public abstract class User extends AttributeModel{
 		}
 		return false;
 	}
+	
+	public abstract void setUserType(UserType userType);
+	
+	public abstract UserType getUserType();
 	
 	@Override
 	public int hashCode(){

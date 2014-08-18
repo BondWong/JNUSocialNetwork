@@ -18,8 +18,7 @@
 					name="password" id="md5Password" required>
 			</div>
 			<input type="hidden" name="hiddenCode"
-				value="${sessionScope.hiddenCode }" /> <input type="hidden"
-				name="userType" value="MEMBER" />
+				value="${sessionScope.hiddenCode }" />
 			<button class="btn btn-success signInBtn" type="submit">Sign
 				in</button>
 			<script src="js/jquery-1.10.2.js"></script>

@@ -60,7 +60,7 @@
   </filter-mapping>
   
   <!-- LoginCheckFilter -->
-   <filter>
+  <filter>
   	<filter-name>LoginCheckFilter</filter-name>
   	<filter-class>
   		security.LoginCheckFilter
@@ -171,7 +171,7 @@
   	<url-pattern>
   		/app/fileUploader/*
   	</url-pattern>
-  </filter-mapping>
+  </filter-mapping> 
   
   <!-- security layer -->
   <!-- login and register -->

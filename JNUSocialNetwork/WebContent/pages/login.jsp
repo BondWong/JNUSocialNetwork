@@ -33,8 +33,7 @@
 								placeholder="Password" name="password" id="md5Password" required>
 						</p>
 						<input type="hidden" name="hiddenCode"
-							value="${sessionScope.hiddenCode }" /> <input type="hidden"
-							name="userType" value="MEMBER" />
+							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
 							type="submit">Sign in</button>
 						<h4>

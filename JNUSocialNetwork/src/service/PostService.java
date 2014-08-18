@@ -15,8 +15,6 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.CommunityOwner;
-import model.Member;
 import model.Post;
 import model.ServerSentEvent;
 import model.modelType.PostType;
@@ -50,7 +48,6 @@ public class PostService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addPost(@PathParam("ID") String ID, Map post)
 			throws Exception {
-		System.out.println("add post");
 		transaction = new SSECreatePostTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, PostType.NORMAL,
@@ -66,7 +63,7 @@ public class PostService {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}/{userType : [A-Z]+}")
+	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addPostToCommuniy(@PathParam("ID") String ID,
@@ -74,14 +71,7 @@ public class PostService {
 			@PathParam("userType") String userType, Map post) throws Exception {
 		transaction = new SSECreatePostInCommunityTransaction();
 		try {
-			Class type = null;
-			if (userType.equals("MEMBER"))
-				type = Member.class;
-			if (userType.equals("COMMUNITYOWNER"))
-				type = CommunityOwner.class;
-			if (type == null)
-				throw new Exception();
-			sse = (ServerSentEvent) transaction.execute(ID, communityID, type,
+			sse = (ServerSentEvent) transaction.execute(ID, communityID,
 					PostType.valueOf((String) post.get("postType")),
 					post.get("attributes"), post.get("imageLinks"));
 		} catch (Exception e) {

@@ -12,6 +12,8 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,8 +21,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import service.helper.DesertFileLinkMap;
+import model.communityOwnerFeature.CommunityOwner;
+import model.communityOwnerFeature.CommunityOwnerFeature;
+import model.communityOwnerFeature.NonCommunityOwner;
 import model.factory.AttributesFactory;
 import model.modelType.UserType;
 
@@ -42,6 +48,8 @@ public class Member extends User {
 	private Map<String, String> attributes;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "owner")
+	private Set<Community> createdCommunities;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "owner")
 	private Set<Post> createdPosts;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "MEMBER_COLLECTEDPOST", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "POST_ID"))
@@ -57,6 +65,8 @@ public class Member extends User {
 	private Set<Member> followees;
 	@ManyToMany(mappedBy = "followees", fetch = FetchType.LAZY)
 	private Set<Member> followers;
+	@Transient
+	private CommunityOwnerFeature communityOwnerFeature;
 
 	public Member() {
 	}
@@ -65,18 +75,30 @@ public class Member extends User {
 		this.available = true;
 		this.ID = (String) initParams[0];
 		this.password = (String) initParams[1];
-		this.userType = UserType.MEMBER;
-		this.attributes = AttributesFactory.getInstance().create(Member.class,
-				initParams[2]);
 		this.imageLinks = new LinkedHashSet<String>();
 		this.createdPosts = new LinkedHashSet<Post>();
+		this.createdCommunities = new LinkedHashSet<Community>();
 		this.collectedPosts = new LinkedHashSet<Post>();
 		this.joinedCommunities = new LinkedHashSet<Community>();
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
 		this.followees = new LinkedHashSet<Member>();
 		this.followers = new LinkedHashSet<Member>();
-
-		this.setAttribute("session", this.ID.substring(0, 4));
+		this.userType = (UserType) initParams[2];
+		switch (this.userType) {
+		case MEMBER:
+			this.attributes = AttributesFactory.getInstance().create(
+					Member.class, initParams[3]);
+			this.setAttribute("season", this.ID.substring(0, 4));
+			this.communityOwnerFeature = new NonCommunityOwner();
+			break;
+		case COMMUNITYOWNER:
+			this.attributes = AttributesFactory.getInstance().create(
+					CommunityOwner.class, initParams[3]);
+			this.communityOwnerFeature = new CommunityOwner();
+			break;
+		case GOD:
+			break;
+		}
 	}
 
 	public String getID() {
@@ -99,8 +121,18 @@ public class Member extends User {
 		this.available = false;
 	}
 
+	@Access(AccessType.PROPERTY)
+	@Enumerated(EnumType.STRING)
 	public UserType getUserType() {
 		return this.userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+		if (userType.equals(UserType.COMMUNITYOWNER))
+			this.communityOwnerFeature = new CommunityOwner();
+		else
+			this.communityOwnerFeature = new NonCommunityOwner();
 	}
 
 	public void addImageLink(String link) {
@@ -280,6 +312,23 @@ public class Member extends User {
 		this.followers.clear();
 	}
 
+	public Set<Community> getCreatedCommunities() {
+		return this.createdCommunities;
+	}
+
+	public void clearCommunities() {
+		this.createdCommunities.clear();
+	}
+	
+	public void createCommunity(Community community) {
+		this.communityOwnerFeature.createCommunity(this, community);
+	}
+	
+	public void removeMember(Community community, Member member) {
+		// TODO Auto-generated method stub
+		this.communityOwnerFeature.removeMember(community, member);
+	}
+
 	@Override
 	public String toString() {
 		return toRepresentation().toString();
@@ -306,6 +355,10 @@ public class Member extends User {
 
 		representation.put("followeeIDs", followeeIDs);
 		representation.put("followerIDs", followerIDs);
+
+		List<Long> communityIDs = new ArrayList<Long>();
+		for (Community community : this.createdCommunities)
+			communityIDs.add(community.getID());
 		return representation;
 	}
 

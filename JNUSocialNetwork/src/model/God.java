@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -13,22 +15,22 @@ import model.modelType.UserType;
 
 @Entity
 @Access(AccessType.FIELD)
-@NamedQueries(value = { @NamedQuery(name = "God.fetchByID",
-	query = "SELECT g FROM God g WHERE g.ID = ?1") })
-public class God extends User{
-	public God() {}
-	
-	public void init(Object...initParams) {
+@NamedQueries(value = { @NamedQuery(name = "God.fetchByID", query = "SELECT g FROM God g WHERE g.ID = ?1") })
+public class God extends User {
+	public God() {
+	}
+
+	public void init(Object... initParams) {
 		this.available = true;
 		this.ID = (String) initParams[0];
 		this.password = (String) initParams[1];
 		this.userType = UserType.GOD;
 	}
-	
+
 	public String getID() {
 		return this.ID;
 	}
-	
+
 	@Override
 	public String toString() {
 		return toRepresentation().toString();
@@ -45,7 +47,7 @@ public class God extends User{
 	@Override
 	public void clearAttributes() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -63,25 +65,39 @@ public class God extends User{
 	@Override
 	public void setAttribute(String name, String value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeAttribute(String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateAttributes(Map<String, String> attributes) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void createPost(Community community, Post post) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
+	@Override
+	public void setUserType(UserType userType) {
+		// TODO Auto-generated method stub
+		this.userType = userType;
+	}
+
+	@Access(AccessType.PROPERTY)
+	@Enumerated(EnumType.STRING)
+	@Override
+	public UserType getUserType() {
+		// TODO Auto-generated method stub
+		return this.userType;
+	}
+
 }

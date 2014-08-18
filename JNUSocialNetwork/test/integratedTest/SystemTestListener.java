@@ -1,4 +1,4 @@
-package system;
+package integratedTest;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -47,7 +47,7 @@ public class SystemTestListener implements ServletContextListener {
 		Transaction transaction;
 		try {
 			transaction = new RegisterCommunityOwnerTransaction();
-			transaction.execute("2011052405", "123456", null,
+			transaction.execute("2011052405", MD5.toMD5Code("123456"), new HashMap<String, Object>(),
 					UserType.COMMUNITYOWNER);
 			transaction = new RegisterMemberTransaction();
 			Map<String, Object> attributes = new HashMap<String, Object>();
@@ -85,6 +85,9 @@ public class SystemTestListener implements ServletContextListener {
 			transaction = new FollowTransaction();
 			transaction.execute("2011052408", "2011052406");
 			transaction.execute("2011052406", "2011052404");
+			transaction.execute("2011052404", "2011052405");
+			transaction.execute("2011052406", "2011052405");
+			transaction.execute("2011052408", "2011052405");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

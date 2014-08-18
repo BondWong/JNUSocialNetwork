@@ -11,6 +11,7 @@ import model.Member;
 import model.Message;
 import model.Post;
 import model.ServerSentEvent;
+import model.communityOwnerFeature.CommunityOwner;
 import model.modelType.PostType;
 
 public class AttributesFactory {
@@ -46,6 +47,18 @@ public class AttributesFactory {
 				attributes.put("birthday", "");
 				attributes.put("campus", "");
 				attributes.put("dorm", "");
+				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
+			}
+			if(params[0].equals(CommunityOwner.class)) {
+				attributes.put("avatarLink", "");
+				attributes.put("profileImageLink", "");
+				attributes.put("gender", "");
+				attributes.put("name", "");
+				attributes.put("lookingFor", "");
+				attributes.put("relationship", "");
+				attributes.put("telnum", "");
+				attributes.put("email", "");
+				attributes.put("campus", "");
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}
 			if(params[0].equals(Post.class)&&params[1].equals(PostType.ACTIVITY)) {

@@ -3,7 +3,6 @@ package model.factory;
 import model.ChatRoom;
 import model.Comment;
 import model.Community;
-import model.CommunityOwner;
 import model.God;
 import model.Member;
 import model.Message;
@@ -30,8 +29,6 @@ public class ModelFactory {
 		Model model = null;
 		if(params[0].equals(Member.class))
 			model = new Member();
-		if(params[0].equals(CommunityOwner.class))
-			model = new CommunityOwner();
 		if(params[0].equals(God.class))
 			model = new God();
 		if(params[0].equals(Community.class))

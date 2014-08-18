@@ -2,14 +2,16 @@ package security.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.modelType.UserType;
 
 public class ProtectedURLManager {
 	private static List<String> loginProtectionURLs;
-	private static Map<String, UserType> authorizationProtectionURLs;
+	private static Map<String, Set<UserType>> authorizationProtectionURLs;
 
 	static {
 		loginProtectionURLs = new ArrayList<String>();
@@ -37,16 +39,13 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("comment/like");
 		loginProtectionURLs.add("comment/cancelLike");
 
-		loginProtectionURLs.add("user/deleteMember");
-		loginProtectionURLs.add("user/deleteCommunityOwner");
+		loginProtectionURLs.add("user/delete");
 		loginProtectionURLs.add("user/follow");
 		loginProtectionURLs.add("user/cancelFollow");
 		loginProtectionURLs.add("user/updateProfile");
 		loginProtectionURLs.add("user/addImages");
 		loginProtectionURLs.add("user/removeImages");
 		loginProtectionURLs.add("user/fetchIDs");
-		loginProtectionURLs.add("user/fetchCommunityOwnerByID");
-		loginProtectionURLs.add("user/getIDStatus");
 
 		loginProtectionURLs.add("chatRoom");
 
@@ -56,62 +55,62 @@ public class ProtectedURLManager {
 
 		loginProtectionURLs.add("fileUploader");
 
-		authorizationProtectionURLs = new HashMap<String, UserType>();
-		authorizationProtectionURLs.put("post/add", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/addToCommunity", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/delete", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/like", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/cancelLike", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/collect", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/cancelCollect", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/joinActivity", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/leaveActivity", UserType.MEMBER);
-		authorizationProtectionURLs.put("post/updateAttributes",
-				UserType.MEMBER);
+		authorizationProtectionURLs = new HashMap<String, Set<UserType>>();
+		Set<UserType> userTypes = new LinkedHashSet<UserType>();
+		userTypes.add(UserType.MEMBER);
+		userTypes.add(UserType.COMMUNITYOWNER);
+		Set<UserType> member = new LinkedHashSet<UserType>();
+		member.add(UserType.MEMBER);
+		Set<UserType> communityOwner = new LinkedHashSet<UserType>();
+		communityOwner.add(UserType.COMMUNITYOWNER);
+		Set<UserType> god = new LinkedHashSet<UserType>();
+		god.add(UserType.GOD);
 
-		authorizationProtectionURLs.put("community/add",
-				UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/delete",
-				UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/join", UserType.MEMBER);
-		authorizationProtectionURLs.put("community/leave", UserType.MEMBER);
+		authorizationProtectionURLs.put("post/add", userTypes);
+		authorizationProtectionURLs.put("post/addToCommunity", userTypes);
+		authorizationProtectionURLs.put("post/delete", userTypes);
+		authorizationProtectionURLs.put("post/like", userTypes);
+		authorizationProtectionURLs.put("post/cancelLike", userTypes);
+		authorizationProtectionURLs.put("post/collect", userTypes);
+		authorizationProtectionURLs.put("post/cancelCollect", userTypes);
+		authorizationProtectionURLs.put("post/joinActivity", userTypes);
+		authorizationProtectionURLs.put("post/leaveActivity", userTypes);
+		authorizationProtectionURLs.put("post/updateAttributes", userTypes);
+
+		authorizationProtectionURLs.put("community/add", communityOwner);
+		authorizationProtectionURLs.put("community/delete", communityOwner);
+		authorizationProtectionURLs.put("community/join", userTypes);
+		authorizationProtectionURLs.put("community/leave", userTypes);
 		authorizationProtectionURLs.put("community/updateAttributes",
-				UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/addTags",
-				UserType.COMMUNITYOWNER);
-		authorizationProtectionURLs.put("community/removeTag",
-				UserType.COMMUNITYOWNER);
+				communityOwner);
+		authorizationProtectionURLs.put("community/addTags", communityOwner);
+		authorizationProtectionURLs.put("community/removeTag", communityOwner);
 
-		authorizationProtectionURLs.put("comment/add", UserType.MEMBER);
-		authorizationProtectionURLs.put("comment/delete", UserType.MEMBER);
-		authorizationProtectionURLs.put("comment/like", UserType.MEMBER);
-		authorizationProtectionURLs.put("comment/cancelLike", UserType.MEMBER);
+		authorizationProtectionURLs.put("comment/add", userTypes);
+		authorizationProtectionURLs.put("comment/delete", userTypes);
+		authorizationProtectionURLs.put("comment/like", userTypes);
+		authorizationProtectionURLs.put("comment/cancelLike", userTypes);
 
-		authorizationProtectionURLs.put("user/deleteMember", UserType.GOD);
-		authorizationProtectionURLs.put("user/deleteCommunityOwner",
-				UserType.GOD);
-		authorizationProtectionURLs.put("user/removeImages", UserType.MEMBER);
-		authorizationProtectionURLs.put("user/fetchIDs", UserType.GOD);
-		authorizationProtectionURLs.put("user/fetchCommunityOwnerByID",
-				UserType.GOD);
-		authorizationProtectionURLs.put("user/addImages", UserType.MEMBER);
-		authorizationProtectionURLs.put("user/updateProfile", UserType.MEMBER);
-		authorizationProtectionURLs.put("user/follow", UserType.MEMBER);
-		authorizationProtectionURLs.put("user/cancelFollow", UserType.MEMBER);
-		authorizationProtectionURLs.put("user/getIDStatus", UserType.GOD);
+		authorizationProtectionURLs.put("user/delete", god);
+		authorizationProtectionURLs.put("user/removeImages", userTypes);
+		authorizationProtectionURLs.put("user/fetchIDs", god);
 
-		authorizationProtectionURLs.put("chatRoom/fetch", UserType.MEMBER);
-		authorizationProtectionURLs.put("chatRoom/fetchMessages",
-				UserType.MEMBER);
-		authorizationProtectionURLs.put("chatRoom/delete", UserType.GOD);
+		authorizationProtectionURLs.put("user/addImages", userTypes);
+		authorizationProtectionURLs.put("user/updateProfile", userTypes);
+		authorizationProtectionURLs.put("user/follow", userTypes);
+		authorizationProtectionURLs.put("user/cancelFollow", userTypes);
 
-		authorizationProtectionURLs.put("application/create", UserType.MEMBER);
-		authorizationProtectionURLs.put("application/fetchIDs", UserType.GOD);
-		authorizationProtectionURLs.put("application/reject", UserType.GOD);
-		authorizationProtectionURLs.put("application/pass", UserType.GOD);
+		authorizationProtectionURLs.put("chatRoom/fetch", userTypes);
+		authorizationProtectionURLs.put("chatRoom/fetchMessages", userTypes);
+		authorizationProtectionURLs.put("chatRoom/delete", god);
+
+		authorizationProtectionURLs.put("application/create", member);
+		authorizationProtectionURLs.put("application/fetchIDs", god);
+		authorizationProtectionURLs.put("application/reject", god);
+		authorizationProtectionURLs.put("application/pass", god);
 
 		authorizationProtectionURLs.put("event/deleteUnhandledEvents",
-				UserType.MEMBER);
+				userTypes);
 
 	}
 
@@ -127,7 +126,7 @@ public class ProtectedURLManager {
 	public static boolean isAuthorized(String url, UserType userType) {
 		for (String u : authorizationProtectionURLs.keySet()) {
 			if (url.contains(u)) {
-				if (authorizationProtectionURLs.get(u).equals(userType))
+				if (authorizationProtectionURLs.get(u).contains(userType))
 					return true;
 				else
 					return false;
