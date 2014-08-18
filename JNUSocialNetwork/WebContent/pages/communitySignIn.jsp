@@ -88,6 +88,5 @@
 
 		</c:when>
 	</c:choose>
-	<%@ include file="parts/securityCode.jsp"%>
 </body>
 </html>

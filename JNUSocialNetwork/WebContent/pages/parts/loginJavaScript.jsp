@@ -6,4 +6,5 @@
 	<script src="js/friend-list.js"></script>
 	<script src="js/chatroomAPI.js"></script>
 	<script src="js/oriented-event.js"></script>
+	<script src="js/reminding-bell.js"></script>
 </c:if>

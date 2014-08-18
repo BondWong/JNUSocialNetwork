@@ -145,29 +145,7 @@ function fetchPostByIDs(container) {
 				dataString.ID, dataString.likerIDs);
 	});
 }
-$(document).ready(function() {
-	// function userTip
 
-	// Notification
-	$(".mentionBell").click(function(e) {
-		clearInterval(window.bellIntervalID);
-		var tinyTip;
-		var pos = $(this).offset();
-		var nPos = pos;
-		nPos.top = pos.top + 20;
-		nPos.left = pos.left - 250;
-		var divTip = 'div.mentionBody';
-		tinyTip = $(divTip);
-		tinyTip.hide();
-		tinyTip.css(nPos).fadeIn(300);
-		e.stopPropagation();
-	});
-	/***************************************************************************
-	 * $(document).mousedown(function(e) { if (e.which == 1) { var divTip =
-	 * 'div.mentionBody'; tinyTip = $(divTip); tinyTip.fadeOut(300); } });
-	 **************************************************************************/
-
-});
 // function clickFuntion
 function clickEvent() {
 	// function collectPost and cancelCollcet
@@ -206,14 +184,6 @@ function clickEvent() {
 											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
 													+ sessionStorage
 															.getItem("otherUserID");
-										});
-						$('body')
-								.on(
-										"click",
-										".glyphicon-home",
-										function() {
-											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
-													+ USERID;
 										});
 					});
 	// function likePost and cancelLike
@@ -263,11 +233,6 @@ function clickEvent() {
 	 * style='font-size:12px;'>&nbsp;</span>"); });
 	 */
 	// function backarrow
-	$('body').on('click', '.arrowBack', function() {
-		$('.mentionBody-new').css("display", "none");
-		$(".arrowBack").css("display", "none");
-		$('.mentionBody-appear').fadeIn(300);
-	});
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -511,44 +476,6 @@ function clickOffEvent() {
 						});
 	};
 })(jQuery);
-function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,
-		likeNum) {
-	notifyItem([], ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
-}
-function notifyLikeComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
-	var response = FetchCommentByID(commentID);
-	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
-}
-function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
-		publishDate, content, postID, likeNum) {
-	var response = [];
-	var comment1 = FetchCommentByID(commentID);
-	var comment2 = FetchCommentByID(toCommentID);
-	response.push(comment1);
-	response.push(comment2);
-	notifyItem(response, ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
-}
-function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
-	var response = FetchCommentByID(commentID);
-	response.push(commenterID);
-	response.push(commentOwnerID);
-	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
-}
-
-function notifyFollow(followerID) {
-	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
-			+ data.attributes.name
-			+ '</a></h1></p><p>'
-			+ data.attributes.lookingFor + '</p></div></div></div>';
-	$(".mentionBody-new").append(tipFrame);
-}
 
 function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 		postID, likeNum) {

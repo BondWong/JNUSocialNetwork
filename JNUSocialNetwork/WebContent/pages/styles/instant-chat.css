@@ -55,20 +55,19 @@ img.chat-avatar {
 
 .chat-content-self {
 	position: relative;
-	left: 25px;
-	top: -40px;
+	left: 40px;
+	top: -25px;
 	font-size: 15px;
 	background-color: #90EE90;
 	border-radius: 8px;
 	text-align: center;
-	width: 70%;
+	width: 100px;
 	word-wrap: break-word;
-	margin-left:20px;
 }
 
 .chat-content-other {
 	position: relative;
-	left: 25px;
+	left: 40px;
 	top: -25px;
 	font-size: 15px;
 	background-color: #ADD8E6;
@@ -91,7 +90,7 @@ img.chat-avatar {
 
 .contact-list {
 	width: 200px;
-	height: 500px;
+	height: 525px;
 	position: fixed;
 	right: -200px;
 	position: fixed;

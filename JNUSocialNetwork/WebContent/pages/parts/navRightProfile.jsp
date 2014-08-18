@@ -24,8 +24,7 @@
 		<div class="glyphicon glyphicon-remove mentionClose"></div>
 	</div>
 	<div class="mentionBody-content">
-		<div class="mentionBody-appear">
-			<!-- <div class="NotiItem commentItem">
+		<!-- <div class="NotiItem commentItem">
 			<div class="col-lg-3">
 				<div><img src="images/type.jpg" /></div>
 			</div>
@@ -49,7 +48,5 @@
 				<div>i want to fuck you!</div>
 			</div>
 		</div> -->
-		</div>
-		<div class="mentionBody-new"></div>
 	</div>
 </div>
