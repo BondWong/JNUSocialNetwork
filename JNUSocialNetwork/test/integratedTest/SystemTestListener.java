@@ -47,8 +47,8 @@ public class SystemTestListener implements ServletContextListener {
 		Transaction transaction;
 		try {
 			transaction = new RegisterCommunityOwnerTransaction();
-			transaction.execute("2011052405", MD5.toMD5Code("123456"), new HashMap<String, Object>(),
-					UserType.COMMUNITYOWNER);
+			transaction.execute("636645", MD5.toMD5Code("123456"),
+					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
 			transaction = new RegisterMemberTransaction();
 			Map<String, Object> attributes = new HashMap<String, Object>();
 			attributes.put("name", "Bond");
@@ -85,9 +85,9 @@ public class SystemTestListener implements ServletContextListener {
 			transaction = new FollowTransaction();
 			transaction.execute("2011052408", "2011052406");
 			transaction.execute("2011052406", "2011052404");
-			transaction.execute("2011052404", "2011052405");
-			transaction.execute("2011052406", "2011052405");
-			transaction.execute("2011052408", "2011052405");
+			transaction.execute("2011052404", "636645");
+			transaction.execute("2011052406", "636645");
+			transaction.execute("2011052408", "636645");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

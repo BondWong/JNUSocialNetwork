@@ -68,7 +68,7 @@ public class ApplicationService {
 	@Path("reject/{applicationID : \\d+}/{reason : [\\w|\\+]+}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response reject(@PathParam("applicationID") Long applicationID,
+	public Response reject(@PathParam("applicationID") String applicationID,
 			@PathParam("reason") String reason) throws Exception {
 		transaction = new RejectApplicationTransaction();
 		try {
@@ -83,7 +83,7 @@ public class ApplicationService {
 
 	@Path("pass/{applicationID : \\d+}")
 	@PUT
-	public Response pass(@PathParam("applicationID") Long applicationID)
+	public Response pass(@PathParam("applicationID") String applicationID)
 			throws Exception {
 		transaction = new PassApplicationTransaction();
 		try {

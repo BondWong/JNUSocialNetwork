@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.Application;
 import persistence.DAO;
+import service.helper.EmailSender;
 import transaction.DAOTransaction;
 
 public class RejectApplicationTransaction extends DAOTransaction {
@@ -14,8 +15,11 @@ public class RejectApplicationTransaction extends DAOTransaction {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Application application = dao.get(Application.class, params[0]);
-
-		System.out.println("email him:" + application.getAttribute("email"));
+		
+		String email = application.getAttribute("email");
+		String reason = (String) params[1];
+		
+		EmailSender.send("Sorry! Your application is rejected!", reason, email);
 
 		application.delete();
 		application.clearAttributes();
