@@ -1,9 +1,9 @@
 //***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe(){
-	/*if (!window.EventSource) {
+	if (!window.EventSource) {
 		 document.write('js/jquery.eventsource.js');
-	}*/
+	}
 	var source = new EventSource("../../JNUSocialNetwork/app/event/subscribe");
 	return source;
 }
@@ -203,6 +203,24 @@ function UpdateActivity(activityID,json){
     	}
     });
 	return response;
+}
+//fetchHeatPost  输入：ownerID 开始index，数量  如：0/5 表示最新的5个;返回：postJson
+function FetchHeatPost(startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/post/fetch/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+	
 }
 //fetchPostByOwner  输入：ownerID 开始index，数量  如：0/5 表示最新的5个;返回：postJson
 function FetchPostsByOwner(ownerID,startIndex,pageSize){
@@ -801,6 +819,23 @@ function FetchUserByID(userID){
 	$.ajax({
     	type:"GET",
     	url:'../../JNUSocialNetwork/app/user/fetchByID/'+userID,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
+//recommendate
+function Recommendate(startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/user/recommendate/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;

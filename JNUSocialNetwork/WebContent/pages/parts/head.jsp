@@ -24,8 +24,6 @@
 <link rel="stylesheet" href="styles/jquery.fileupload.css">
 <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet"
 	media="screen">
-<style>
-</style>
 <script type="text/javascript">
 	window.USERID = '${sessionScope.ID}';
 </script>
