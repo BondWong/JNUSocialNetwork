@@ -659,12 +659,19 @@ body {
 	margin-left: 10px;
 	margin-top: 30px;
 }
-
+#createCommunityBtn{
+	display:none;
+}
 .createCommunity h1 {
 	font-size: 18px;
 	float: left;
 }
-
+#editCommunityBtn{
+	display:none;
+}
+#editMembersBtn{
+	display:none;
+}
 .communityCardInfo {
 	margin-left: auto;
 	margin-rigt: auto;

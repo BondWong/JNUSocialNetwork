@@ -328,6 +328,10 @@ function clickEvent() {
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
 	});
+	if($.parseJSON(sessionStorage.getItem("user")).userType=='COMMUNITYOWNER'){
+		$('#editCommunityBtn').css("display","inline");
+		$('#editMembersBtn').css("display","inline");
+	}
 }
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {

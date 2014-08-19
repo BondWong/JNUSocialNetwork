@@ -23,6 +23,23 @@ function communityClickEvent() {
 				fetchCommunityByID(community.ID);
 				$('#createCommunity').modal('hide');
 			});
+	$('body').on(
+			'click',
+			'#appcommunityCreate',
+			function() {
+				var	attributes = {
+						ID : $('#appTele').val(),
+						password : $('#appPassword').val(),
+						email : $('#appEmail').val(),
+						reason : $('#appReasons').val(),
+					};
+				var json = $.toJSON(attributes);
+				var response = ApplicationCreate(json);
+				$('#appCommunity').modal('hide');
+				if(response=='success'){
+					alert("申请成功，请等待通知！");
+				}
+			});
 	// function joinCommunity
 	$('body').on('click', '.content_join', function() {
 		var id = $(this).find("input").attr("value");
@@ -73,4 +90,8 @@ $(document).ready(function() {
 		var comm = $(this).find("input").attr("value");
 		window.location.href='communityShow.jsp?'+comm;
 	});
+	if($.parseJSON(sessionStorage.getItem("user")).userType=='COMMUNITYOWNER'){
+		$('#createCommunityBtn').css("display","inline");
+		$('#appCommunityBtn').css("display","none");
+	}
 });
