@@ -47,7 +47,6 @@
 			<div role="button" class="btn btn-sm btn-success appCom"
 				data-toggle='modal' data-target='#appCommunity'>Apply to become a
 				community owner</div>
-				<div><a href="communitySignIn.jsp">I have a community account</a></div>
 			<div class="modal fade" id="createCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
