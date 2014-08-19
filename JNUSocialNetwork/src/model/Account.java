@@ -23,11 +23,12 @@ import model.modelType.UserType;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries({
+		@NamedQuery(name = "Account.fetchByID", query = "SELECT a FROM Account a WHERE a.ID = ?1 AND a.available = 1"),
 		@NamedQuery(name = "Account.fetchBySeriesNum", query = "SELECT a FROM Account a WHERE a.autoLoginSeriesNum = ?1 AND a.available = 1"),
 		@NamedQuery(name = "Account.fetchByIDAndUserType", query = "SELECT a FROM Account a WHERE a.ID = ?1 AND a.userType = ?2 AND a.available = 1"),
-		@NamedQuery(name = "Account.fetchUnavailableIDs", query = "SELECT a.ID FROM Account a WHERE a.available = 0"), 
-		@NamedQuery(name = "Account.deleteUnavailable", query = "DELETE FROM Account a WHERE a.available = 0")})
-public class Account extends Model{
+		@NamedQuery(name = "Account.fetchUnavailableIDs", query = "SELECT a.ID FROM Account a WHERE a.available = 0"),
+		@NamedQuery(name = "Account.deleteUnavailable", query = "DELETE FROM Account a WHERE a.available = 0") })
+public class Account extends Model {
 	@Id
 	@NotNull
 	@NotBlank
@@ -141,7 +142,7 @@ public class Account extends Model{
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

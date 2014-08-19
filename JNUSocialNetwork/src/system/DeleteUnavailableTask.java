@@ -4,7 +4,6 @@ import model.Account;
 import model.Application;
 import model.Comment;
 import model.Community;
-import model.CommunityOwner;
 import model.Member;
 import model.Message;
 import model.Post;
@@ -26,7 +25,6 @@ public class DeleteUnavailableTask implements Runnable{
 			transaction.execute("Comment.fetchUnavailableIDs", "Comment.deleteUnavailable", Comment.class);
 			transaction.execute("Post.fetchUnavailableIDs", "Post.deleteUnavailable", Post.class);
 			transaction.execute("Community.fetchUnavailableIDs", "Community.deleteUnavailable", Community.class);
-			transaction.execute("CommunityOwner.fetchUnavailableIDs", "CommunityOwner.deleteUnavailable", CommunityOwner.class);
 			transaction.execute("Member.fetchUnavailableIDs", "Member.deleteUnavailable", Member.class);
 			transaction.execute("Account.fetchUnavailableIDs", "Account.deleteUnavailable", Account.class);
 		} catch (Exception e) {

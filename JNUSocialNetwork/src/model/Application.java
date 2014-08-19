@@ -9,7 +9,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -19,14 +18,13 @@ import utils.DateTimeUtil;
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
 		@NamedQuery(name = "Application.fetch", query = "SELECT c FROM Application c WHERE c.available = 1 ORDER BY c.submitDate "),
+		@NamedQuery(name = "Application.fetchByID", query = "SELECT c FROM Application c WHERE c.ID = ?1"),
 		@NamedQuery(name = "Application.fetchIDs", query = "SELECT a.ID FROM Application a WHERE a.available = 1 ORDER BY a.submitDate"),
 		@NamedQuery(name = "Application.fetchUnavailableIDs", query = "SELECT a.ID FROM Application a WHERE a.available = 0"),
-		@NamedQuery(name = "Application.deleteUnavailable", query = "DELETE FROM Application a WHERE a.available = 0")})
+		@NamedQuery(name = "Application.deleteUnavailable", query = "DELETE FROM Application a WHERE a.available = 0") })
 public class Application extends AttributeModel {
 	@Id
-	private Long ID;
-	@ManyToOne
-	private Member applicant;
+	private String ID;
 	private String submitDate;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
@@ -38,21 +36,13 @@ public class Application extends AttributeModel {
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
-		this.ID = System.currentTimeMillis();
 		this.submitDate = DateTimeUtil.getCurrnetDateTime();
 		this.attributes = (Map<String, String>) initParams[0];
+		this.ID = this.attributes.get("ID");
 	}
 
-	public Long getID() {
+	public String getID() {
 		return this.ID;
-	}
-
-	public Member getApplicant() {
-		return applicant;
-	}
-
-	public void setApplicant(Member applicant) {
-		this.applicant = applicant;
 	}
 
 	public String getSubmitDate() {
@@ -103,12 +93,6 @@ public class Application extends AttributeModel {
 		representation.put("available", this.available);
 		representation.put("submiteDate", this.submitDate);
 		representation.put("attributes", this.attributes);
-		if(this.applicant != null) {
-			Map<String, Object> applicant = this.applicant.toRepresentation();
-			applicant.remove("followeeIDs");
-			applicant.remove("followerIDs");
-			representation.put("applicant", applicant);
-		}
 		return representation;
 	}
 

@@ -20,7 +20,7 @@ public class RegisterTransaction extends DAOTransaction{
 		String ID = (String) params[1];
 		String password = (String) params[2];
 		
-		User user = ModelFactory.getInstance().create((Class)params[0], ID, password, params[3]);
+		User user = ModelFactory.getInstance().create((Class)params[0], ID, password, (UserType)params[4], params[3]);
 		Account account = new Account();
 		account.setID(ID);
 		account.setPassword(password);

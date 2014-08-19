@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.Account;
 import model.Comment;
+import model.Community;
 import model.Member;
 import model.Post;
 import persistence.DAO;
@@ -38,6 +39,35 @@ public class DeleteMemberTransaction extends DAOTransaction {
 			post.setOwner(null);
 			dao.update(post);
 		}
+		for (Community community : member.getCreatedCommunities()) {
+			for (Post post : community.getPosts()) {
+				for (Comment comment : post.getComments()) {
+					comment.delete();
+					comment.clearAttributes();
+					comment.clearLikers();
+					comment.setOwner(null);
+					dao.update(comment);
+				}
+				post.delete();
+				post.clearAttributes();
+				post.clearCollectors();
+				post.clearComments();
+				post.clearImageLinks();
+				post.clearLikers();
+				post.clearParticipants();
+				post.setOwner(null);
+				dao.update(post);
+			}
+			community.setOwner(null);
+			community.clearAttributes();
+			community.clearMembers();
+			community.clearPosts();
+			community.clearTags();
+			community.setOwner(null);
+			community.delete();
+			dao.update(community);
+		}
+		member.clearCommunities();
 		member.clearAttributes();
 		member.clearCollectPost();
 		member.clearFollowees();

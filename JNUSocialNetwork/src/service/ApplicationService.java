@@ -28,14 +28,14 @@ public class ApplicationService {
 	private Transaction transaction;
 
 	@SuppressWarnings("rawtypes")
-	@Path("create/{ID : \\d+}")
+	@Path("create")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(@PathParam("ID") String ID, Map attributes)
+	public Response create(Map attributes)
 			throws Exception {
 		transaction = new CreateApplicationTransaction();
 		try {
-			transaction.execute(ID, attributes);
+			transaction.execute(attributes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

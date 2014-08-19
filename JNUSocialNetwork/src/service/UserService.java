@@ -16,20 +16,17 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import model.ServerSentEvent;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
 import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
-import transaction.DAOFetchTransaction.FetchCommunityOwnerTransaction;
-import transaction.DAOFetchTransaction.FetchCommunityOwnersTransaction;
+import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
-import transaction.DAOFetchTransaction.GetCommunityOwnerIDStatusTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
 import transaction.DAOFetchTransaction.SessionRecommendationTransaction;
@@ -37,7 +34,6 @@ import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
-import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteCommunityOwnerTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
 
@@ -48,7 +44,7 @@ public class UserService {
 	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
 			.getInstance();
 
-	@Path("deleteMember/{ID : \\d+}")
+	@Path("delete/{ID : \\d+}")
 	@PUT
 	public Response deleteMember(@PathParam("ID") String ID) throws Exception {
 		transaction = new DeleteMemberTransaction();
@@ -58,20 +54,6 @@ public class UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
-		}
-		return Response.ok().build();
-	}
-
-	@Path("deleteCommunityOwner/{ID : \\d+}")
-	@PUT
-	public Response deleteCommunityOwner(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new DeleteCommunityOwnerTransaction();
-		try {
-			transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return Response.ok().build();
 	}
@@ -169,21 +151,15 @@ public class UserService {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GET
-	@Path("fetchIDs/{userType : [A-Z]+}")
+	@Path("fetchIDs")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchIDs(@PathParam("userType") String userType)
 			throws Exception {
 		List results;
 		transaction = new FetchModelColumnTransaction();
 		try {
-			if (userType.equals("MEMBER")) {
-				results = (List) transaction.execute("Member.fetchIDs", null);
-			} else if (userType.equals("COMMUNITYOWNER")) {
-				results = (List) transaction.execute("CommunityOwner.fetchIDs",
-						null);
-			} else {
-				throw new Exception();
-			}
+
+			results = (List) transaction.execute("Member.fetchIDs", null);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -197,24 +173,17 @@ public class UserService {
 
 	@SuppressWarnings("unchecked")
 	@GET
-	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}/{userType : [A-Z]+}")
+	@Path("fetch/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetch(@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize,
 			@PathParam("userType") String userType) throws Exception {
 		List<Map<String, Object>> results;
 		try {
-			if (userType.equals("MEMBER")) {
-				transaction = new FetchMembersTransaction();
-				results = (List<Map<String, Object>>) transaction.execute(
-						"Member.fetch", null, startIndex, pageSize);
-			} else if (userType.equals("COMMUNITYOWNER")) {
-				transaction = new FetchCommunityOwnersTransaction();
-				results = (List<Map<String, Object>>) transaction.execute(
-						"CommunityOwner.fetch", null, startIndex, pageSize);
-			} else {
-				throw new Exception();
-			}
+
+			transaction = new FetchMembersTransaction();
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.fetch", null, startIndex, pageSize);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -279,26 +248,6 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByID(@PathParam("ID") String ID) throws Exception {
 		transaction = new FetchMemberTransaction();
-		Map<String, Object> result;
-		try {
-			result = (Map<String, Object>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-
-		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
-		}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("fetchCommunityOwnerByID/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchCommunityOwnerByID(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new FetchCommunityOwnerTransaction();
 		Map<String, Object> result;
 		try {
 			result = (Map<String, Object>) transaction.execute(ID);
@@ -456,23 +405,21 @@ public class UserService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 	}
-
-	@Path("getIDStatus/{communityOwnerID : \\d+}")
+	
+	@Path("doesIDExist/{ID : \\d+}")
 	@GET
-	public Response getIDStatus(
-			@PathParam("communityOwnerID") String applicationID)
-			throws Exception {
-		transaction = new GetCommunityOwnerIDStatusTransaction();
-		boolean result = false;
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response doesIDExist(@PathParam("ID") String ID) throws Exception {
+		transaction = new DoesIDExistTransaction();
+		boolean result;
 		try {
-			result = (boolean) transaction.execute(applicationID);
+			result = (boolean) transaction.execute(ID);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		if (result)
-			return Response.ok().build();
-		return Response.status(Status.BAD_REQUEST).build();
+		return Response.ok(result).build();
 	}
-
+	
 }

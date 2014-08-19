@@ -29,6 +29,7 @@ import model.modelType.CommunityType;
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1)"),
 		@NamedQuery(name = "Community.fetchByMember", query = "SELECT c FROM Member m JOIN m.joinedCommunities c WHERE m.ID = ?1"),
@@ -45,7 +46,7 @@ public class Community extends AttributeModel {
 	private Map<String, String> attributes;
 
 	@ManyToOne
-	private CommunityOwner owner;
+	private Member owner;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "joinedCommunities")
 	private Set<Member> members;
 	@OneToMany(fetch = FetchType.LAZY)
@@ -133,11 +134,11 @@ public class Community extends AttributeModel {
 		this.attributes.clear();
 	}
 
-	public CommunityOwner getOwner() {
+	public Member getOwner() {
 		return owner;
 	}
 
-	public void setOwner(CommunityOwner owner) {
+	public void setOwner(Member owner) {
 		this.owner = owner;
 	}
 

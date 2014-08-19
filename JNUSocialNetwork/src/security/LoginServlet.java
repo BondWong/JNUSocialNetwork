@@ -48,12 +48,24 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getRequestURL());
+		String type = request.getParameter("userType");
+		if (type == null)
+			type = "";
+		switch (type) {
+		case "GOD":
+			godLogin(request, response);
+			break;
+		default:
+			login(request, response);
+		}
+
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		Account account = null;
 		String ID = request.getParameter("ID");
 		String password = request.getParameter("password");
-		String type = request.getParameter("userType");
-		UserType userType = UserType.valueOf(type);
 		String hiddenCode = request.getParameter("hiddenCode");
 
 		HttpSession session = request.getSession();
@@ -67,8 +79,8 @@ public class LoginServlet extends HttpServlet {
 		else {
 			Transaction transaction = new FetchAccountTransaction();
 			try {
-				account = (Account) transaction.execute(
-						"Account.fetchByIDAndUserType", ID, userType);
+				account = (Account) transaction.execute("Account.fetchByID",
+						ID, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.setStatus(500);
@@ -79,15 +91,13 @@ public class LoginServlet extends HttpServlet {
 				if (password.equals(account.getPassword())) {
 					synchronized (session) {
 						session.setAttribute("ID", account.getID());
-						session.setAttribute("userType", userType);
-						if (userType.equals(UserType.MEMBER)) {
-							account.setAutoLoginSeriesNum(session.getId());
-							Cookie cookie = new Cookie("ALG", session.getId());
-							cookie.setHttpOnly(true);
-							cookie.setPath("/JNUSocialNetwork");
-							cookie.setMaxAge(15 * 24 * 60 * 60);
-							response.addCookie(cookie);
-						}
+						session.setAttribute("userType", account.getUserType());
+						account.setAutoLoginSeriesNum(session.getId());
+						Cookie cookie = new Cookie("ALG", session.getId());
+						cookie.setHttpOnly(true);
+						cookie.setPath("/JNUSocialNetwork");
+						cookie.setMaxAge(15 * 24 * 60 * 60);
+						response.addCookie(cookie);
 						response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
 					}
 				} else {
@@ -108,6 +118,59 @@ public class LoginServlet extends HttpServlet {
 
 			} else {
 				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
+			}
+		}
+	}
+
+	private void godLogin(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		Account account = null;
+		String ID = request.getParameter("ID");
+		String password = request.getParameter("password");
+		String hiddenCode = request.getParameter("hiddenCode");
+
+		HttpSession session = request.getSession();
+		String sessionHiddenCode = "";
+		synchronized (session) {
+			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
+		}
+		if (sessionHiddenCode == null || hiddenCode == null
+				|| !sessionHiddenCode.equals(hiddenCode))
+			response.sendError(401);
+		else {
+			Transaction transaction = new FetchAccountTransaction();
+			try {
+				account = (Account) transaction.execute(
+						"Account.fetchByIDAndUserType", ID, UserType.GOD);
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.setStatus(500);
+				return;
+			}
+
+			if (account != null && !account.isProtected(new Date())) {
+				if (password.equals(account.getPassword())) {
+					synchronized (session) {
+						response.setStatus(200);
+					}
+				} else {
+					account.setLastAccessDate(new Date());
+					account.setChance((account.getChance() - 1));
+					response.sendError(401);
+				}
+
+				Transaction t = new UpdateAccountTransaction();
+				try {
+					t.execute(account);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					response.sendError(500);
+					return;
+				}
+
+			} else {
+				response.sendError(401);
 			}
 		}
 	}
