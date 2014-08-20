@@ -7,19 +7,19 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import model.Member;
-import service.helper.MemberSearchMap;
+import model.Community;
+import service.helper.CommunitySearchMap;
 import transaction.DAOTransaction;
 
-public class SearchMemberTransaction extends DAOTransaction {
+public class SearchCommunitiesTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
-		MemberSearchMap.deserialize();
-		String[] IDs = MemberSearchMap.searchIDs((String) params[1]);
-		MemberSearchMap.serialize();
+		CommunitySearchMap.deserialize();
+		String[] IDs = CommunitySearchMap.searchIDs((String) params[1]);
+		CommunitySearchMap.serialize();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		if (IDs != null && IDs.length != 0) {
 			String query = "";
@@ -35,22 +35,16 @@ public class SearchMemberTransaction extends DAOTransaction {
 				}
 			}
 			if (!query.equals("")) {
-				query = "SELECT m FROM Member m WHERE m.ID IN (" + query;
+				query = "SELECT c FROM Community c WHERE c.ID IN (" + query;
 				System.out.println(query);
-				TypedQuery<Member> tq = em.createQuery(query, Member.class);
+				TypedQuery<Community> tq = em.createQuery(query,
+						Community.class);
 				tq.setFirstResult((int) params[2]);
 				tq.setMaxResults((int) params[3]);
-				List<Member> members = tq.getResultList();
-				for (Member member : members)
-					results.add(member.toRepresentation());
+				List<Community> communities = tq.getResultList();
+				for (Community community : communities)
+					results.add(community.toRepresentation());
 			}
-		} else {
-			System.out.println((String) params[1]);
-			TypedQuery<Member> tq = em.createNamedQuery("Member.fetchByID",
-					Member.class);
-			tq.setParameter(1, params[1]);
-			Member member = tq.getSingleResult();
-			results.add(member.toRepresentation());
 		}
 		return results;
 	}

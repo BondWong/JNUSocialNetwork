@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Post;
-import service.helper.ActivityMap;
+import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
 
 public class FetchRemindableActivitiesTransaction extends DAOTransaction {
@@ -19,12 +19,12 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-		ActivityMap.deserialize();
+		ActivitySearchMap.deserialize();
 		List<Long> IDs = new ArrayList<Long>();
-		IDs = ActivityMap.fecthRemindableIDs();
+		IDs = ActivitySearchMap.fecthRemindableIDs();
 		for (Long ID : IDs)
-			ActivityMap.removeRecord(ID);
-		ActivityMap.serialize();
+			ActivitySearchMap.removeRecord(ID);
+		ActivitySearchMap.serialize();
 
 		if (IDs.size() > 0) {
 			String query = "SELECT p FROM Post p WHERE p.ID IN(";

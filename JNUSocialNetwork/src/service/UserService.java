@@ -29,7 +29,7 @@ import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
-import transaction.DAOFetchTransaction.SessionRecommendationTransaction;
+import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
@@ -345,7 +345,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response recommendateViaSeason(@PathParam("ID") String ID)
 			throws Exception {
-		transaction = new SessionRecommendationTransaction();
+		transaction = new SeasonRecommendationTransaction();
 		List<Map<String, Object>> members;
 		try {
 			members = (List<Map<String, Object>>) transaction.execute(ID);

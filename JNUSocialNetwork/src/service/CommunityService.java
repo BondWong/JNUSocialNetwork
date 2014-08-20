@@ -23,6 +23,7 @@ import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
+import transaction.DAOFetchTransaction.SearchCommunitiesTransaction;
 import transaction.DAOUpdateTransaction.CommunityAddTagTransaction;
 import transaction.DAOUpdateTransaction.CommunityRemoveTagTransaction;
 import transaction.DAOUpdateTransaction.JoinCommunityTransaction;
@@ -260,6 +261,25 @@ public class CommunityService {
 
 		return Response.ok(new GenericEntity<Map<String, Object>>(community) {
 		}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("search/{key}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response search(@PathParam("key") String key) throws Exception {
+		transaction = new SearchCommunitiesTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(key);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
 
 }
