@@ -33,6 +33,28 @@ function FileUpload(formData){
 	return fileDri;
 }
 //***********************************FileService   end*********************************
+//***********************************ApplicationService  begin*********************************
+function ApplicationCreate(JsonData){
+	var response="";
+	$.ajax({
+    	type:"POST",
+    	url:'../../JNUSocialNetwork/app/application/create',
+    	data:JsonData,
+    	contentType: "application/json",
+    	beforeSend: function(request) {
+            request.setRequestHeader("ID", USERID);
+        },
+        async: false,
+    	success:function(data,status){
+    		response = status;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    });
+	return response;
+}
+//***********************************ApplicationService  end*******************************
 //***********************************PostService   begin*******************************
 //AddPost parameter:addpost.pnd -d  response:success fail
 function AddPost(UserID,JsonData){

@@ -1,28 +1,39 @@
 function communityClickEvent() {
-	$('body').on(
-			'click',
-			'#communityCreate',
-			function() {
-				var communityC;
-				if($('#fileupload').val()!=""){
-					communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
-				}else{
-					communityC="";
-				}
-				var community = {
-					tags : [],
-					attributes : {
-						name : $('#communityName').val(),
-						introduct : $('#communityIntro').val(),
-						communityCard : communityC
-					},
-					communityType : $('#communityType').val()
-				};
-				var json = $.toJSON(community);
-				var community = AddCommunity(USERID, json);
-				fetchCommunityByID(community.ID);
-				$('#createCommunity').modal('hide');
-			});
+	$('body').on('click', '#communityCreate', function() {
+		var communityC;
+		if ($('#fileupload').val() != "") {
+			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
+		} else {
+			communityC = "";
+		}
+		var community = {
+			tags : [],
+			attributes : {
+				name : $('#communityName').val(),
+				introduct : $('#communityIntro').val(),
+				communityCard : communityC
+			},
+			communityType : $('#communityType').val()
+		};
+		var json = $.toJSON(community);
+		var community = AddCommunity(USERID, json);
+		fetchCommunityByID(community.ID);
+		$('#createCommunity').modal('hide');
+	});
+	$('body').on('click', '#appcommunityCreate', function() {
+		var attributes = {
+			ID : $('#appTele').val(),
+			password : $('#appPassword').val(),
+			email : $('#appEmail').val(),
+			reason : $('#appReasons').val(),
+		};
+		var json = $.toJSON(attributes);
+		var response = ApplicationCreate(json);
+		$('#appCommunity').modal('hide');
+		if (response == 'success') {
+			alert("申请成功，请等待通知！");
+		}
+	});
 	// function joinCommunity
 	$('body').on('click', '.content_join', function() {
 		var id = $(this).find("input").attr("value");
@@ -67,10 +78,17 @@ function addCommunity(id, name, memberNum) {
 	$(".communityBord").after(boarddiv);
 	Msnry('.containerDiscovery', '.content_container', 265);
 }
-$(document).ready(function() {
-	// funtion sessionID
-	$('body').on("click", ".img_container", function() {
-		var comm = $(this).find("input").attr("value");
-		window.location.href='communityShow.jsp?'+comm;
-	});
-});
+$(document)
+		.ready(
+				function() {
+					// funtion sessionID
+					$('body').on("click", ".img_container", function() {
+						var comm = $(this).find("input").attr("value");
+						window.location.href = 'communityShow.jsp?' + comm;
+					});
+					if ($.parseJSON(sessionStorage.getItem("user")) != null
+							&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+						$('#createCommunityBtn').css("display", "inline");
+						$('#appCommunityBtn').css("display", "none");
+					}
+				});

@@ -42,11 +42,11 @@
 		</div>
 		<div class="createCommunity">
 			<div role="button" class="btn btn-sm btn-success createCom"
-				data-toggle='modal' data-target='#createCommunity'>Create
-				community</div>
+				data-toggle='modal' data-target='#createCommunity'
+				id="createCommunityBtn">Create community</div>
 			<div role="button" class="btn btn-sm btn-success appCom"
-				data-toggle='modal' data-target='#appCommunity'>Apply to become a
-				community owner</div>
+				data-toggle='modal' data-target='#appCommunity' id="appCommunityBtn">Apply
+				to become a community owner</div>
 			<div class="modal fade" id="createCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -103,14 +103,15 @@
 				</div>
 				<!-- /.modal-dialog -->
 			</div>
-			<div class="modal fade" id="appCommunity" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="appCommunity" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Apply for a community</h4>
+							<h4 class="modal-title" id="myModalLabel">Apply for a
+								community</h4>
 						</div>
 						<form class="appCommunityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
@@ -118,28 +119,23 @@
 								<div class="priCreate" id="createBlock">Private</div>
 								-->
 								<p>
-									<span>登陆账号：</span> <input type="text" class="form-control"
-										placeholder="" id="ID"
-										autocomplete="off" required/>
+									<span>手机：</span> <input type="text" pattern="[0-9]{11}"
+										class="form-control" placeholder="" id="appTele"
+										autocomplete="off" required />
 								</p>
 								<p>
 									<span>密码：</span> <input type="password" class="form-control"
-										placeholder="" id="password"  autocomplete="off" required/>
+										placeholder="" id="appPassword" autocomplete="off" required />
 								</p>
 								<p>
-									<span>联系电话：</span> <input type="text" class="form-control"
-										placeholder="" id="telephone"  
-										autocomplete="off" required/>
+									<span>联系邮箱：</span> <input type="email" class="form-control"
+										placeholder="" id="appMail" autofocus autocomplete="off"
+										required />
 								</p>
 								<p>
-									<span>联系邮箱：</span> <input type="text" class="form-control"
-										placeholder="" id="mail"  autofocus
-										autocomplete="off" required/>
-								</p>
-								<p>
-									<span>申请理由：</span> <textarea type="text" class="form-control"
-										placeholder="" id="reasons"  autofocus
-										autocomplete="off" required></textarea>
+									<span>申请理由：</span>
+									<textarea type="text" class="form-control" placeholder=""
+										id="appReasons" autofocus required maxLength="200"></textarea>
 								</p>
 							</div>
 							<br></br>
@@ -147,7 +143,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="button" class="btn btn-primary"
-									id="communityCreate" value="upload">Create</button>
+									id="appcommunityCreate" value="upload">Create</button>
 							</div>
 						</form>
 					</div>

@@ -31,8 +31,7 @@ public class ApplicationService {
 	@Path("create")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Map attributes)
-			throws Exception {
+	public Response create(Map attributes) throws Exception {
 		transaction = new CreateApplicationTransaction();
 		try {
 			transaction.execute(attributes);
@@ -59,7 +58,7 @@ public class ApplicationService {
 			throw e;
 		}
 		List<String> r = new ArrayList<String>();
-		for(Object o : results) 
+		for (Object o : results)
 			r.add(o + "");
 		return Response.ok(new GenericEntity<List<String>>(r) {
 		}).build();
@@ -95,5 +94,5 @@ public class ApplicationService {
 		}
 		return Response.ok().build();
 	}
-
+	
 }
