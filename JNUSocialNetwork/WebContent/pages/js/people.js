@@ -1,37 +1,37 @@
 function pHot() {
 	var users = Recommendate("0", "5");
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function PinCommon() {
 	var users = RecommendateViaFollowee(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function pCampus() {
 	var users = RecommendateViaCampus(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function pMajor() {
 	var users = RecommendateViaMajor(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function pSeason() {
 	var users = RecommendateViaSession(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function pClass() {
 	var users = RecommendateViaClass(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.nickName, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor);
 	});
 }
 function peopleClickEvent() {

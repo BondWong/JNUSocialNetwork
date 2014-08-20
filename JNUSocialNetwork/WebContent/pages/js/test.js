@@ -31,5 +31,5 @@ function fetchPostByIDs(){
 		dataString = $.parseJSON(value);
 	});
 		
-	addPost(dataString.owner.ID,dataString.owner.attributes.nickName,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs,dataString.collectorIDs);
+	addPost(dataString.owner.ID,dataString.owner.attributes.name,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs,dataString.collectorIDs);
 }

@@ -171,7 +171,7 @@ function aboutClickEvent() {
 		// function saveProfileInfro
 		$('body').on('click', '.aSavebtn', function() {
 			var datajson = {
-				nickName : $('.nicknameE').val(),
+				name : $('.nicknameE').val(),
 				lookingFor : $('.lookingforE').val(),
 				relationship : $('.relationshipnE').val(),
 				telenum : $('.telenumE').val(),

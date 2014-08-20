@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 
 import transaction.DAOTransaction;
 
-public class SessionRecommendationTransaction extends DAOTransaction {
+public class SeasonRecommendationTransaction extends DAOTransaction {
 	static final int STARTINDEX = 0;
 	static final int TOINDEX = 10;
 	DAOTransaction transaction;
@@ -34,10 +34,10 @@ public class SessionRecommendationTransaction extends DAOTransaction {
 					.get("attributes");
 			if (mattributes != null
 					&& memberAttributes != null
-					&& mattributes.get("session") != ""
-					&& mattributes.get("session") != null
-					&& mattributes.get("session").equals(
-							memberAttributes.get("session")))
+					&& mattributes.get("season") != ""
+					&& mattributes.get("season") != null
+					&& mattributes.get("season").equals(
+							memberAttributes.get("season")))
 				recommendations.add(m);
 		}
 

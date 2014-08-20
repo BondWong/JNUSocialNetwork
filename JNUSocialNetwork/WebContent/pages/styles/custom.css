@@ -570,6 +570,12 @@ body {
 	margin-right: auto;
 	margin-left: 400px;
 }
+.containerApp{
+	margin-top: 20px;
+	width: 20%;
+	margin-right: auto;
+	margin-left: auto;
+	}
 
 .containerSign {
 	width: 25%;
@@ -650,11 +656,12 @@ body {
 .pro_body_community {
 	float: left;
 }
-
-.containerDiscovery {
-	
+.titleMy{
+	display:none;
 }
-
+.containerMy{
+	display:none;
+}
 .createCommunity {
 	margin-left: 10px;
 	margin-top: 30px;
@@ -960,7 +967,17 @@ body {
 	padding: 20px;
 	text-align: center;
 }
-
+.appBox{
+	padding: 20px;
+	text-align: center;
+	
+}
+#chatCreate{
+	cursor:pointer;
+}
+.userInImg img{
+	border-radius:50%;
+}
 .deletePostBtn:hover {
 	color: #5A5A5A;
 	float: right;
@@ -1387,4 +1404,8 @@ body {
 }
 .cus-lg-10{
 	margin-left:10px;
+}
+
+.communityGroupTitle a{
+	float:left;
 }

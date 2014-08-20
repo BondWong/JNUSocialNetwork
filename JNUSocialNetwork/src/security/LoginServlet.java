@@ -127,51 +127,40 @@ public class LoginServlet extends HttpServlet {
 		Account account = null;
 		String ID = request.getParameter("ID");
 		String password = request.getParameter("password");
-		String hiddenCode = request.getParameter("hiddenCode");
-
-		HttpSession session = request.getSession();
-		String sessionHiddenCode = "";
-		synchronized (session) {
-			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
+		Transaction transaction = new FetchAccountTransaction();
+		try {
+			account = (Account) transaction.execute(
+					"Account.fetchByIDAndUserType", ID, UserType.GOD);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(500);
+			return;
 		}
-		if (sessionHiddenCode == null || hiddenCode == null
-				|| !sessionHiddenCode.equals(hiddenCode))
-			response.sendError(401);
-		else {
-			Transaction transaction = new FetchAccountTransaction();
+
+		if (account != null && !account.isProtected(new Date())) {
+			if (password.equals(account.getPassword())) {
+				HttpSession session = request.getSession();
+				session.setAttribute("ID", account.getID());
+				session.setAttribute("userType", account.getUserType());
+				response.setStatus(200);
+			} else {
+				account.setLastAccessDate(new Date());
+				account.setChance((account.getChance() - 1));
+				response.sendError(401);
+			}
+
+			Transaction t = new UpdateAccountTransaction();
 			try {
-				account = (Account) transaction.execute(
-						"Account.fetchByIDAndUserType", ID, UserType.GOD);
+				t.execute(account);
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-				response.setStatus(500);
+				response.sendError(500);
 				return;
 			}
 
-			if (account != null && !account.isProtected(new Date())) {
-				if (password.equals(account.getPassword())) {
-					synchronized (session) {
-						response.setStatus(200);
-					}
-				} else {
-					account.setLastAccessDate(new Date());
-					account.setChance((account.getChance() - 1));
-					response.sendError(401);
-				}
-
-				Transaction t = new UpdateAccountTransaction();
-				try {
-					t.execute(account);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					response.sendError(500);
-					return;
-				}
-
-			} else {
-				response.sendError(401);
-			}
+		} else {
+			response.sendError(401);
 		}
 	}
 

@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import service.helper.SearchMap;
+import service.helper.MemberSearchMap;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
@@ -16,7 +16,7 @@ import transaction.DAOCreateTransaction.RegisterMemberTransaction;
 public class RegisterTransactionTest {
 	@BeforeClass
 	public static void classSetUp() throws IOException {
-		SearchMap.initializeEnvironment();
+		MemberSearchMap.initializeEnvironment();
 	}
 	
 	@SuppressWarnings("unchecked")

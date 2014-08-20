@@ -123,7 +123,7 @@ $(document)
 function fetchByFolloweeOrOwner() {
 	var response = FetchByFolloweeOrOwner(USERID, "0", "5");
 	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
+		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
 				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
 	});
@@ -132,7 +132,7 @@ function fetchByFolloweeOrOwner() {
 function fectchHeatPost() {
 	var response = FetchHeatPost("0", "5");
 	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
+		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
 				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
 	});

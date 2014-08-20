@@ -181,12 +181,12 @@ function CREATECOMMENT() {
 									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
 									+ jsondata.postID
 									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.nickName
+									+ jsonComment.owner.attributes.name
 									+ "' /><input id='replyID' type='hidden' value='"
 									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><a class='commentHead'>"
+									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
 									+ atComment
-									+ "</a>" + "&nbsp;"
+									+ "</span>" + "&nbsp;"
 									+ jsonComment.attributes.content
 									+ "﻿</div></div>";
 							$(
@@ -206,7 +206,7 @@ function CREATECOMMENT() {
 						}
 						if (type == "ACTIVITY") {
 							var comment = "<div class='aBodyComment'><div class='aCommentItem'><img alt=''  src='images/user_img.jpg'><div class='user_name'><strong>"
-									+ jsonComment.owner.attributes.nickName
+									+ jsonComment.owner.attributes.name
 									+ "</strong></div><div class='user_info'>"
 									+ jsonComment.publishDate
 									+ "</div><br><div>"

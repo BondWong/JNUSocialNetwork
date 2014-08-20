@@ -10,7 +10,7 @@ import model.Member;
 import model.Post;
 import model.factory.ModelFactory;
 import model.modelType.PostType;
-import service.helper.ActivityMap;
+import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
 
 public class CreatePostInCommunityTransaction extends DAOTransaction {
@@ -28,11 +28,11 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 		user.createPost(community, post);
 		dao.update(community);
 		if (params[2].equals(PostType.ACTIVITY)) {
-			ActivityMap.deserialize();
-			ActivityMap.addRecord(post.getID(), Long
+			ActivitySearchMap.deserialize();
+			ActivitySearchMap.addRecord(post.getID(), Long
 					.parseLong((String) ((Map<String, Object>) params[3])
 							.get("startDate")));
-			ActivityMap.serialize();
+			ActivitySearchMap.serialize();
 		}
 
 		return post.toRepresentation();

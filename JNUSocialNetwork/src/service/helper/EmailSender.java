@@ -12,7 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
-	final static String PASSWORD = ")(78!@34^5";
+	final static String PASSWORD = "OOPScampus";
 	final static String GREETING = "Dear User";
 	final static String COMPANYNAME = "CampuSite";
 	static Properties props = new Properties();
@@ -27,14 +27,14 @@ public class EmailSender {
 		Session session = Session.getInstance(props);
 		MimeMessage msg = new MimeMessage(session);
 		try {
-			Address campusite = new InternetAddress("kingkong_webber@outlook.com",
+			Address campusite = new InternetAddress("campusite@outlook.com",
 					COMPANYNAME);
 			Address toAddress = new InternetAddress(to, GREETING);
 			msg.setText(test);
 			msg.setFrom(campusite);
 			msg.setRecipient(Message.RecipientType.TO, toAddress);
 			msg.setSubject(subject);
-			Transport.send(msg, "kingkong_webber@outlook.com", PASSWORD);
+			Transport.send(msg, "campusite@outlook.com", PASSWORD);
 		} catch (MessagingException | UnsupportedEncodingException ex) {
 			ex.printStackTrace();
 		}
