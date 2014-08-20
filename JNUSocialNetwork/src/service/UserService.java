@@ -153,14 +153,11 @@ public class UserService {
 	@GET
 	@Path("fetchIDs")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchIDs(@PathParam("userType") String userType)
-			throws Exception {
+	public Response fetchIDs() throws Exception {
 		List results;
 		transaction = new FetchModelColumnTransaction();
 		try {
-
 			results = (List) transaction.execute("Member.fetchIDs", null);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -405,7 +402,7 @@ public class UserService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 	}
-	
+
 	@Path("doesIDExist/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -421,5 +418,5 @@ public class UserService {
 		}
 		return Response.ok(result).build();
 	}
-	
+
 }
