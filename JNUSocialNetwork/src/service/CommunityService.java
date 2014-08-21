@@ -248,6 +248,29 @@ public class CommunityService {
 				}).build();
 	}
 
+	@Path("fetchJoined/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@SuppressWarnings("unchecked")
+	public Response fetchJoined(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchCommunitiesTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Community.fetchJoined", ID, null, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Path("updateAttributes/{communityID : \\d+}")
 	@PUT
