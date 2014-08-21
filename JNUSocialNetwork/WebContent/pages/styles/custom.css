@@ -160,15 +160,26 @@ body {
 	width: 1270px;
 }
 .communitySideBar{
-	margin-top: 18px;
-	margin-left:20px;
+	margin-top: 150px;
+	margin-left:10px;
 	float:left;
-	
 	width:100px;
-	height:300px;
+	height:280px;
 }
-.communitySideBar ui{
-	
+.communitySideBar li a{
+	display: block;
+	padding: 4px 20px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #aaa;
+	cursor:pointer;
+}
+.communitySideBar li a:hover{
+padding-left: 18px;
+font-weight: 700;
+color: #563d7c;
+background-color: transparent;
+border-left: 2px solid #563d7c;
 }
 .content_container {
 	background-color: #FFF;
@@ -1424,4 +1435,7 @@ body {
 
 .communityGroupTitle a{
 	float:left;
+}
+#myCommunityBtn{
+	display:none;
 }

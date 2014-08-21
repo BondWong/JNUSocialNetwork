@@ -22,7 +22,13 @@
 	<!-- /.navbar -->
 	<div class="communitySideBar">
 		<ul class="nav nav-pills nav-stacked" role="tablist">
-			<li><a>asd</a>></li>
+			<li id="myCommunityBtn"><a class="myCommunityBtn">我的社区</a></li>
+			<li><a href="community.jsp">所有社区</a></li>
+			<li><a class="officalCommunityBtn">官方社区</a></li>
+			<li><a class="studentUnionCommunityBtn">社团组织</a></li>
+			<li><a class="folkCommunityBtn">个人社区</a></li>
+			<li><a class="discoverCommunityBtn">热门社区</a></li>
+			<li><a class="searchCommunityBtn">搜索社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -122,7 +128,9 @@
 				id="createCommunityBtn">Create community</div>
 			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">Apply
 				to become a community owner</a>
-			<div class="modal fade" id="createCommunity" tabindex="-1"
+		</div>
+	</div>
+	<div class="modal fade" id="createCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -179,9 +187,6 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<!-- /.modal -->
-		</div>
-
-	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
 
@@ -205,6 +210,7 @@
 				login_initialization(USERID);
 				clickEvent();
 				communityClickEvent();
+				fetchCommunityByOwner();
 			} else {
 				clickOffEvent();
 			}

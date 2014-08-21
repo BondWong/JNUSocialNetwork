@@ -1,3 +1,4 @@
+RawBlameHistory
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -44,8 +45,7 @@
 							</div>
 						</nav>
 					</div>
-					<div class=""
-						style="margin-right: 10px; margin-top: 10px">
+					<div class="" style="margin-right: 10px; margin-top: 10px">
 						<a href="javascript:void(0)"
 							onclick="document.getElementById('light').style.display='none';"><input
 							id="deleteImg" type='hidden' value="1405950973690" /><span
@@ -159,7 +159,7 @@
 							<form class="photoForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" style="resize: none;"></textarea> 
+										type="text" style="resize: none;"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -214,15 +214,15 @@
 					<div class="post_info">
 						This is not a new article in PNAS, but it details results from a
 						unique study and I have wanted to write about it for a while.
-						NOTE: this is aThis is not a new article in PNAS, but it details results from a
-						unique study and I have wanted to write about it for a while.
-						NOTE: this is a
+						NOTE: this is aThis is not a new article in PNAS, but it details
+						results from a unique study and I have wanted to write about it
+						for a while. NOTE: this is a
 						<div class="post_more">
 							<a>read more...</a>
 						</div>
 					</div>
 					<div class="post_img">
-							<img class="postImg" src="images/2.jpg" />
+						<img class="postImg" src="images/2.jpg" />
 					</div>
 					<div class="row">
 						<div class="col-md-1">
@@ -309,10 +309,9 @@
 									</div>
 									<div class="col-lg-2">
 										<div class="comment_reply" style="cursor: pointer">
-											<a><input id="replyName" type='hidden' value="1405950973690" />
-											   <input id="replyID" type='hidden' value="1405950973690" />
-											reply<span
-												style="font-size: 8px"></span></a>
+											<a><input id="replyName" type='hidden'
+												value="1405950973690" /> <input id="replyID" type='hidden'
+												value="1405950973690" /> reply<span style="font-size: 8px"></span></a>
 										</div>
 									</div>
 								</div>
@@ -328,7 +327,7 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -362,24 +361,27 @@
 	<script src="js/EventHandle.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			if (USERID != null && USERID != ""){
-				login_initialization(USERID);
-				window.fileDri = [];
-				window.postIdContainer = [];
-				clickEvent();
-				if($.parseJSON(sessionStorage.getItem("user")).followeeIDs!=null){
-					fetchByFolloweeOrOwner();
-				}else{
-					fectchHeatPost();
-				}
-			}else{
-				clickOffEvent();
-				fectchHeatPost();
-			}
-		Msnry('.pro_body', '.post', 435);
-		
-		});
+		$(document)
+				.ready(
+						function() {
+							if (USERID != null && USERID != "") {
+								login_initialization(USERID);
+								window.fileDri = [];
+								window.postIdContainer = [];
+								clickEvent();
+								if ($.parseJSON(sessionStorage.getItem("user")).followeeIDs != null) {
+									fetchByFolloweeOrOwner();
+								} else {
+									fectchHeatPost();
+									fetchCommunityByOwner();
+								}
+							} else {
+								clickOffEvent();
+								fectchHeatPost();
+							}
+							Msnry('.pro_body', '.post', 435);
+
+						});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
 	<script src="js/global-initialization.js"></script>
