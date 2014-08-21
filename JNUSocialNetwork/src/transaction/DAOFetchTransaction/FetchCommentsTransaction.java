@@ -1,6 +1,7 @@
 package transaction.DAOFetchTransaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class FetchCommentsTransaction extends DAOTransaction {
 			results.add(comment.toRepresentation());
 		}
 
-		results.sort(new Comparator<Map<String, Object>>() {
+		Collections.sort(results, new Comparator<Map<String, Object>>() {
 
 			@Override
 			public int compare(Map<String, Object> o1, Map<String, Object> o2) {

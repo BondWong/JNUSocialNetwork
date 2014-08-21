@@ -660,6 +660,40 @@ function FetchCommunityByID(communityID){
     });
 	return response;
 }
+//FetchByOwner  输入：communityID;返回：postJson
+function FetchCommunityByOwner(userID,startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/community/fetchByOwner/'+userID+'/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
+//FetchByJoin  输入：communityID;返回：postJson
+function FetchCommunityByJoin(userID,startIndex,pageSize){
+	var response="";
+	$.ajax({
+    	type:"GET",
+    	url:'../../JNUSocialNetwork/app/community/fetchJoined/'+userID+'/'+startIndex+'/'+pageSize,
+    	async: false,
+    	success:function(data,status){
+    		response = data;
+    	},
+    	error:function(data,status){
+    		response = status;
+    	}
+    	
+    });
+	return response;
+}
 //FetchByType  输入：communityID;返回：postJson
 function FetchCommunityByType(communityType,startIndex,pageSize){
 	var response="";

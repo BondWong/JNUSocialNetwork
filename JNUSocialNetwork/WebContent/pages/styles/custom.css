@@ -153,7 +153,23 @@ body {
 	margin-left: auto;
 	width: 1270px;
 }
-
+.container.container_community {
+	background-color: #EEEEEE;
+	margin-top: 70px;
+	margin-left: 120px;
+	width: 1270px;
+}
+.communitySideBar{
+	margin-top: 18px;
+	margin-left:20px;
+	float:left;
+	
+	width:100px;
+	height:300px;
+}
+.communitySideBar ui{
+	
+}
 .content_container {
 	background-color: #FFF;
 	display: block;
