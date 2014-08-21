@@ -121,18 +121,18 @@ $('body')
 					$('.searchInput')
 							.blur(
 									function() {
+										search_user_input_value = $(this).val();
 										$(this)
 												.replaceWith(
 														"<span class='searchUser'>Search for anyone</span>");
 									});
-
 				});
 $('body')
 		.on(
 				'click',
 				'.glyphicon-search-custom',
 				function() {
-					var userInfo = encodeURI($('.searchInput').val());
+					var userInfo = encodeURI(search_user_input_value);
 					$('.userContainer').remove();
 					var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
 					$('.containBord').after(borddiv);
