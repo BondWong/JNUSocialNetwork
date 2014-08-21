@@ -77,11 +77,11 @@ function AddPost(UserID,JsonData){
 	return response;
 }
 //AddPostToCommunity parameter:addpost.pnd -d  response:success fail
-function AddPostToCommunity(UserID,communityID,userType,JsonData){
+function AddPostToCommunity(UserID,communityID,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/post/addToCommunity/'+UserID+'/'+communityID+'/'+userType,
+    	url:'../../JNUSocialNetwork/app/post/addToCommunity/'+UserID+'/'+communityID,
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {

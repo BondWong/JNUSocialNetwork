@@ -20,7 +20,7 @@ function activityClickEvent() {
 			imageLinks : []
 		};
 		var json = $.toJSON(post);
-		AddPostToCommunity("2011052405", community.ID, "COMMUNITYOWNER", json);
+		AddPostToCommunity(USERID, community.ID, json);
 		$('#activityCommunity').modal('hide');
 	});
 }
@@ -76,6 +76,7 @@ $('body')
 				".activityHref",
 				function() {
 					var id = $(this).attr("id");
+					alert(id);
 					window.location.href = 'activityShow.jsp?'+community.ID+'&'
 							+ id;
 				});
