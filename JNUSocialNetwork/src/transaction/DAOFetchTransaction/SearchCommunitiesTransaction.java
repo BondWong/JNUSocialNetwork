@@ -18,7 +18,7 @@ public class SearchCommunitiesTransaction extends DAOTransaction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		CommunitySearchMap.deserialize();
-		String[] IDs = CommunitySearchMap.searchIDs((String) params[1]);
+		String[] IDs = CommunitySearchMap.searchIDs((String) params[0]);
 		CommunitySearchMap.serialize();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		if (IDs != null && IDs.length != 0) {
@@ -39,8 +39,8 @@ public class SearchCommunitiesTransaction extends DAOTransaction {
 				System.out.println(query);
 				TypedQuery<Community> tq = em.createQuery(query,
 						Community.class);
-				tq.setFirstResult((int) params[2]);
-				tq.setMaxResults((int) params[3]);
+				tq.setFirstResult((int) params[1]);
+				tq.setMaxResults((int) params[2]);
 				List<Community> communities = tq.getResultList();
 				for (Community community : communities)
 					results.add(community.toRepresentation());

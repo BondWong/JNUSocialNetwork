@@ -9,6 +9,7 @@ import model.Member;
 import model.factory.ModelFactory;
 import model.modelType.UserType;
 import persistence.DAO;
+import service.helper.CommunitySearchMap;
 import transaction.DAOTransaction;
 
 public class CreateCommunityTransaction extends DAOTransaction {
@@ -25,6 +26,10 @@ public class CreateCommunityTransaction extends DAOTransaction {
 				Community.class, params[1], params[2], params[3]);
 		co.createCommunity(community);
 		dao.update(co);
+		CommunitySearchMap.deserialize();
+		CommunitySearchMap.addRecord(community.getAttribute("name"),
+				community.getID() + "");
+		CommunitySearchMap.serialize();
 		return community.toRepresentation();
 	}
 

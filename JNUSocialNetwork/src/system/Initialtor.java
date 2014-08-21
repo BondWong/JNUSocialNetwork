@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
 import service.helper.ActivitySearchMap;
 import service.helper.CommunitySearchMap;
@@ -22,7 +21,7 @@ import utils.MD5;
  * Application Lifecycle Listener implementation class Boostrap
  * 
  */
-@WebListener
+// @WebListener
 public class Initialtor implements ServletContextListener {
 	private static final int ACTIVITYREMINDTIME = 30 * 60;
 	private static final int DELETEFILETIME = 12 * 60 * 60;

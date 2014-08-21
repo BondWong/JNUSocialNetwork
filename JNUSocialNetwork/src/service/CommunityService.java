@@ -175,7 +175,7 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchByType/{ID : \\d+}{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByType/{ID : \\d+}/{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByType(@PathParam("ID") String ID,
@@ -186,8 +186,57 @@ public class CommunityService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Community.fetchByType", ID,
+					"Community.signInFetchByType", ID,
 					CommunityType.valueOf(communityType), startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchByType/{communityType : [A-Z]+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchByType(
+			@PathParam("communityType") String communityType,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchCommunitiesTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Community.fetchByType",
+					CommunityType.valueOf(communityType), null, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@Path("fetchByOwner/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@SuppressWarnings("unchecked")
+	public Response fetchByOwner(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchCommunitiesTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Community.fetchByOwner", ID, null, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -264,14 +313,17 @@ public class CommunityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("search/{key}")
+	@Path("search/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response search(@PathParam("key") String key) throws Exception {
+	public Response search(@PathParam("key") String key,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
 		transaction = new SearchCommunitiesTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute(key);
+			results = (List<Map<String, Object>>) transaction.execute(key,
+					startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

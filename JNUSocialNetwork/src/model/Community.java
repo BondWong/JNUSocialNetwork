@@ -31,7 +31,8 @@ import model.modelType.CommunityType;
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
-		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1) ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.signInFetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1) ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?1 ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchByMember", query = "SELECT c FROM Member m JOIN m.joinedCommunities c WHERE m.ID = ?1 ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchUnavailableIDs", query = "SELECT c.ID FROM Community c WHERE c.available = 0"),
 		@NamedQuery(name = "Community.deleteUnavailable", query = "DELETE FROM Community c WHERE c.available = 0") })
