@@ -373,6 +373,7 @@ RawBlameHistory
 									fetchByFolloweeOrOwner();
 								} else {
 									fectchHeatPost();
+									fetchCommunityByOwner();
 								}
 							} else {
 								clickOffEvent();

@@ -45,7 +45,7 @@ function fetchCommunityByID(communityID) {
 			community.memberIDs.length, "myCommunity");
 }
 function fetchCommunityByOwner() {
-	var communities = FetchCommunityByOwner(USERID,"0", "5");
+	var communities = FetchCommunityByOwner(USERID, "0", "5");
 	$.each(communities, function(n, community) {
 		addCommunity(community.ID, community.attributes.name,
 				community.memberIDs.length, "myCommunity");
@@ -67,12 +67,11 @@ function fetchCommunityByType(communityType) {
 	});
 }
 function fetchCommunitys() {
-	fetchCommunityByOwner();
 	fetchHotCommunity();
 	fetchCommunityByType("FOLK");
 	fetchCommunityByType("SCHOOLUNION");
 	fetchCommunityByType("OFFICIAL");
-	
+
 }
 // 增加社区
 function addCommunity(id, name, memberNum, communityType) {
@@ -107,6 +106,15 @@ function addCommunity(id, name, memberNum, communityType) {
 		break;
 	}
 }
+function fetchByType(communityType, communityTypeName,containerName) {
+	$('.container_community').remove();
+	var communityContainer = '<div class="container container_community"><div class="communityGroupTitle"><h3>'
+			+ communityTypeName
+			+ '</h3></div><div class="container '+containerName+'"><div class="'
+			+ communityType
+			+ '"></div></div></div>';
+	$('.communitySideBar').after(communityContainer);
+}
 $(document)
 		.ready(
 				function() {
@@ -121,5 +129,29 @@ $(document)
 						$('.appCom').css("display", "none");
 						$('.titleMy').css("display", "block");
 						$('.containerMy').css("display", "block");
+						$('#myCommunityBtn').css("display", "block");
+						
 					}
+					$('body').on("click", ".myCommunityBtn", function() {
+						fetchByType("myCommunity","我的社区","containerMy");
+						$('.titleMy').css("display", "block");
+						$('.containerMy').css("display", "block");
+						fetchCommunityByOwner();
+					});
+					$('body').on("click", ".officalCommunityBtn", function() {
+						fetchByType("officalCommunity","Offical Community","containerOffical");
+						fetchCommunityByType("OFFICIAL");	
+					});
+					$('body').on("click", ".studentUnionCommunityBtn", function() {
+						fetchByType("schoolUnionCommunity","StudentUnion Community","containerSchool");
+						fetchCommunityByType("SCHOOLUNION");	
+					});
+					$('body').on("click", ".folkCommunityBtn", function() {
+						fetchByType("folkCommunity","Folk Community","containerFolk");
+						fetchCommunityByType("FOLK");	
+					});
+					$('body').on("click", ".discoverCommunityBtn", function() {
+						fetchByType("communityDiscovery","Divercovery Community","containerDiscovery");
+						fetchHotCommunity();	
+					});
 				});
