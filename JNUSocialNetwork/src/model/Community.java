@@ -29,7 +29,7 @@ import model.modelType.CommunityType;
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
-		@NamedQuery(name = "Community.fetchJoined", query = "SELETE jc FROM Member m JOIN m.joinedCommunities jc WHERE m.ID = ?1"),
+		@NamedQuery(name = "Community.fetchJoined", query = "SELECT jc FROM Member m JOIN m.joinedCommunities jc WHERE m.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
 		@NamedQuery(name = "Community.signInFetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1) ORDER BY SIZE(c.members) DESC"),
