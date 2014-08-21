@@ -36,7 +36,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
 								+ "</div></div><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
@@ -50,11 +50,11 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
 								+ postID
 								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "' /><input id='replyID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><a class='commentHead'>"
-								+ atComment + "</a>" + "&nbsp;"
+								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 					});
@@ -140,7 +140,7 @@ $('.act_content')
 function fetchPostByIDs(container) {
 	var response = FetchPostByIDs(container);
 	$.each(response, function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
+		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
 				dataString.ID, dataString.likerIDs);
 	});
@@ -328,6 +328,10 @@ function clickEvent() {
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
 	});
+	if($.parseJSON(sessionStorage.getItem("user")).userType=='COMMUNITYOWNER'){
+		$('#editCommunityBtn').css("display","inline");
+		$('#editMembersBtn').css("display","inline");
+	}
 }
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {
@@ -444,8 +448,8 @@ function clickOffEvent() {
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
-										+ data.attributes.nickName
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><div class="userInImg"><img src="images/user_img4.jpg" /></div><p><h1><a class="tipUser">'
+										+ data.attributes.name
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
 										+ '</p><button id="followBtn">'
@@ -465,6 +469,15 @@ function clickOffEvent() {
 										$(this).remove();
 									});
 								});
+								var chat = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color: rgb(255, 140, 60);"></span>';
+								$('.userInImg').after(chat);
+								
+								/*$('.userInImg').hover(function(){
+									$('#chatCreate').fadeIn(300);
+									$('#chatCreate').css("display","inline");
+								},function(){
+									$('#chatCreate').fadeOut(300);
+								});*/
 							}
 						}, function() {
 							window.timer = setTimeout(function() {
@@ -474,6 +487,7 @@ function clickOffEvent() {
 							}, 200);
 
 						});
+		
 	};
 })(jQuery);
 
@@ -563,7 +577,7 @@ function showPost(postID) {
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 								+ postID
 								+ "' type='hidden' value='"
@@ -579,7 +593,7 @@ function showPost(postID) {
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
 								+ postID
 								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.nickName
+								+ jsonComment.owner.attributes.name
 								+ "' /><input id='replyID' type='hidden' value='"
 								+ jsonComment.ID
 								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
@@ -605,7 +619,7 @@ function showPost(postID) {
 				html : "<div class='showPost'><div class='row showPostInfo'><div class='col-md-3'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-9'><div class='user_name'><strong>"
-						+ dataString.owner.attributes.nickName
+						+ dataString.owner.attributes.name
 						+ "</strong></div><div class='user_info'>"
 						+ dataString.publishDate
 						+ "</div></div></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="

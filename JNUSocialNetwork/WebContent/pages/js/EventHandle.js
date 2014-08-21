@@ -22,15 +22,18 @@ function SSEHandle() {
 function CREATEPOST() {
 	source.addEventListener("CREATEPOST", function(event) {
 		var jsondata = $.parseJSON(event.data);
-		postIdContainer.push(jsondata.post.ID);
-		if (jsondata.post.owner.ID == USERID) {
-			fetchPostByIDs(postIdContainer);
-			postIdContainer = [];
+		var usersQ = $.parseJSON(sessionStorage.getItem("user")).followeeIDs;
+		usersQ.push(USERID);
+		if ($.inArray(jsondata.post.owner.ID, usersQ) != -1) {
+			postIdContainer.push(jsondata.post.ID);
+			if (jsondata.post.owner.ID == USERID) {
+				fetchPostByIDs(postIdContainer);
+				postIdContainer = [];
+			}
+			if (jsondata.post.owner.ID != USERID) {
+				$('.alertCust').css("display", "block");
+			}
 		}
-		if (jsondata.post.owner.ID != USERID) {
-			$('.alertCust').css("display", "block");
-		}
-
 	});
 }
 function CREATEPOSTINCOMMUNITY() {
@@ -46,6 +49,7 @@ function CREATEPOSTINCOMMUNITY() {
 				$('.alertCustC').css("display", "block");
 			}
 		}
+
 		if (jsondata.post.postType == "ACTIVITY") {
 			addActivity(jsondata.communityID,
 					jsondata.post.attributes.activityName,
@@ -94,7 +98,7 @@ function LIKEPOST() {
 function LIKECOMMENT() {
 	source.addEventListener('LIKECOMMENT', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		var postID = jsondata.postID;
+		var postID = jsondata.commentID;
 		var spanNum = $("div[class='likeComment likeCommentN" + postID + "']");
 		var like = parseInt(spanNum.find("span").text()) + 1;
 		spanNum.find('span').text(like);
@@ -150,15 +154,23 @@ function CREATECOMMENT() {
 						var jsonComment = jsondata.comment;
 						var type = FetchPostByID(jsondata.postID).postType;
 						if (type == "NORMAL") {
+							var atComment="";
+							if(jsonComment.attributes.commentToComment!=""){
+								atComment = "@" + jsonComment.attributes.commentToComment;
+							}
+							var removeBtn = "";
+							if (USERID == jsonComment.owner.ID) {
+								removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
+										+ jsondata.postID
+										+ "' type='hidden' value='"
+										+ jsonComment.ID
+										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
-									+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+									+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
-									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
-									+ jsondata.postID
-									+ "' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
+									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"+removeBtn+"</div></div><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
 									+ jsonComment.publishDate
 									+ "</div></div><div class='col-lg-5 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 									+ jsonComment.ID
@@ -169,23 +181,32 @@ function CREATECOMMENT() {
 									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
 									+ jsondata.postID
 									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.nickName
+									+ jsonComment.owner.attributes.name
 									+ "' /><input id='replyID' type='hidden' value='"
 									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
-									+ jsonComment.attributes.commentToComment
-									+ "</a>" + "&nbsp;"
+									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+									+ atComment
+									+ "</span>" + "&nbsp;"
 									+ jsonComment.attributes.content
 									+ "﻿</div></div>";
 							$(
 									"button[value='" + jsondata.postID
 											+ "'][id='addComment']").parent()
 									.parent().after(boarddiv);
+							$('.act_content').find('a').hide();
+							$('.act_content')
+							.hover(
+									function() {
+										
+										$(this).find('a').fadeIn(300);
+									}, function() {
+										$(this).find('a').fadeOut(300);
+									});
 							Msnry('.pro_body', '.post', 435);
 						}
 						if (type == "ACTIVITY") {
 							var comment = "<div class='aBodyComment'><div class='aCommentItem'><img alt=''  src='images/user_img.jpg'><div class='user_name'><strong>"
-									+ jsonComment.owner.attributes.nickName
+									+ jsonComment.owner.attributes.name
 									+ "</strong></div><div class='user_info'>"
 									+ jsonComment.publishDate
 									+ "</div><br><div>"

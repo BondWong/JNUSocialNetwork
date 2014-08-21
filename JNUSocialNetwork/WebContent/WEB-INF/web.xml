@@ -2,217 +2,170 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>JNUSocialNetwork</display-name>
   
-  <!-- AutoLoginFilter -->
+   <listener>
+      <listener-class>system.Initialtor</listener-class>
+   </listener>
+  
   <filter>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<filter-class>
+    <filter-name>AutoLoginFilter</filter-name>
+    <filter-class>
   		security.AutoLoginFilter
   	</filter-class>
   </filter>
-  
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/activity.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/activityShow.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/circle.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/community.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/communityShow.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/home.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/people.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/profile.jsp
   	</url-pattern>
   </filter-mapping>
-  
-  <!-- LoginCheckFilter -->
-  <filter>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<filter-class>
+   <filter>
+     <filter-name>LoginCheckFilter</filter-name>
+    <filter-class>
   		security.LoginCheckFilter
   	</filter-class>
   </filter>
-  
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/post/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/comment/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/user/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/event/deleteUnhandledEvent/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/community/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/chatRoom/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/application/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
   		/app/fileUploader/*
   	</url-pattern>
-  </filter-mapping> 
-  
-  <!-- AuthorizationCheckFilter -->
+  </filter-mapping>
   <filter>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<filter-class>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <filter-class>
   		security.AuthorizationCheckFilter
   	</filter-class>
   </filter>
-  
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/post/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/comment/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/user/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/event/deleteUnhandledEvent/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/community/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/chatRoom/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/application/*
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>AuthorizationCheckFilter</filter-name>
-  	<url-pattern>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
   		/app/fileUploader/*
   	</url-pattern>
   </filter-mapping> 
-  
-  <!-- security layer -->
-  <!-- login and register -->
-   <!-- <security-constraint>
-  	<web-resource-collection>
-  		<web-resource-name>LoginPage</web-resource-name>
-  		<url-pattern>/pages/login.jsp</url-pattern>
-  	</web-resource-collection>
-  	<user-data-constraint>
-  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-  	</user-data-constraint>
-  </security-constraint>
-  
-  <security-constraint>
-  	<web-resource-collection>
-  		<web-resource-name>RegisterPage</web-resource-name>
-  		<url-pattern>/pages/register.jsp</url-pattern>
-  	</web-resource-collection>
-  	<user-data-constraint>
-  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-  	</user-data-constraint>
-  </security-constraint>
-  
-  <security-constraint>
-  	<web-resource-collection>
-  		<web-resource-name>Login</web-resource-name>
-  		<url-pattern>/security/Login</url-pattern>
-  	</web-resource-collection>
-  	<user-data-constraint>
-  		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-  	</user-data-constraint>
-  </security-constraint>
-  
-  <security-constraint>
-  	<web-resource-collection>
-  		<web-resource-name>Register</web-resource-name>
-  		<url-pattern>/security/RegServlet</url-pattern>
-  	</web-resource-collection>
-  	<user-data-constraint>
-  		<transport-guarantee>CONFIDENTIAL</transport-guarantee> 
-  	</user-data-constraint>
-  </security-constraint> -->
-  
 </web-app>

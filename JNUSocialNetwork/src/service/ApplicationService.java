@@ -19,6 +19,7 @@ import org.glassfish.grizzly.http.util.URLDecoder;
 
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateApplicationTransaction;
+import transaction.DAOFetchTransaction.FetchApplicationTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOUpdateTransaction.PassApplicationTransaction;
 import transaction.DAOUpdateTransaction.RejectApplicationTransaction;
@@ -31,8 +32,7 @@ public class ApplicationService {
 	@Path("create")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Map attributes)
-			throws Exception {
+	public Response create(Map attributes) throws Exception {
 		transaction = new CreateApplicationTransaction();
 		try {
 			transaction.execute(attributes);
@@ -59,9 +59,28 @@ public class ApplicationService {
 			throw e;
 		}
 		List<String> r = new ArrayList<String>();
-		for(Object o : results) 
+		for (Object o : results)
 			r.add(o + "");
 		return Response.ok(new GenericEntity<List<String>>(r) {
+		}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchByID/{applicationID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchByID(@PathParam("applicationID") String applicationID)
+			throws Exception {
+		transaction = new FetchApplicationTransaction();
+		Map<String, Object> result;
+		try {
+			result = (Map<String, Object>) transaction.execute(applicationID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
 	}
 

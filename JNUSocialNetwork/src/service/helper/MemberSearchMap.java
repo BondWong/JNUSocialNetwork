@@ -8,8 +8,8 @@ import java.util.Map;
 
 import utils.JsonUtil;
 
-public class SearchMap {
-	private final static String PATH = "searchmap.txt";
+public class MemberSearchMap {
+	private final static String PATH = "membersearchmap.txt";
 	private static Map<String, String> searchMap = new HashMap<String, String>();
 
 	public static void initializeEnvironment() throws IOException {
@@ -20,7 +20,7 @@ public class SearchMap {
 		if(key == null)
 			return;
 		String IDs = null;
-		synchronized (SearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			IDs = searchMap.get(key);
 		}
 		if (IDs != null) {
@@ -34,14 +34,14 @@ public class SearchMap {
 			ID = IDs.trim();
 
 		}
-		synchronized (SearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			searchMap.put(key, ID);
 		}
 	}
 
 	public static void removeRecord(String key, String ID) {
 		String IDs = null;
-		synchronized (SearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			IDs = searchMap.get(key);
 		}
 
@@ -55,7 +55,7 @@ public class SearchMap {
 					IDs += " " + tempIDs[i];
 			}
 			IDs = IDs.trim();
-			synchronized (SearchMap.class) {
+			synchronized (MemberSearchMap.class) {
 				searchMap.put(key, IDs);
 			}
 		}
@@ -64,7 +64,7 @@ public class SearchMap {
 
 	public static String[] searchIDs(String key) {
 		String IDs = "";
-		synchronized (SearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			IDs = searchMap.get(key);
 		}
 		if (IDs == null)

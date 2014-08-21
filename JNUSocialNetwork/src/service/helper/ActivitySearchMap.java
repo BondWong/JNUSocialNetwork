@@ -13,8 +13,8 @@ import com.google.gson.reflect.TypeToken;
 
 import utils.JsonUtil;
 
-public class ActivityMap {
-	private final static String PATH = "activitymap.txt";
+public class ActivitySearchMap {
+	private final static String PATH = "activitysearchmap.txt";
 	private final static Type TYPE = new TypeToken<Map<Long, Long>>() {
 	}.getType();
 	private static Map<Long, Long> activityMap = new HashMap<Long, Long>();
@@ -33,7 +33,7 @@ public class ActivityMap {
 
 	public static List<Long> fecthRemindableIDs() {
 		List<Long> IDs = new ArrayList<Long>();
-		synchronized (ActivityMap.class) {
+		synchronized (ActivitySearchMap.class) {
 			for (Map.Entry<Long, Long> entrySet : activityMap.entrySet())
 				if (System.currentTimeMillis() - entrySet.getValue() <= 30 * 60 * 1000)
 					IDs.add(entrySet.getKey());

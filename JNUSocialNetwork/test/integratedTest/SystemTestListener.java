@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebListener;
 import model.modelType.PostType;
 import model.modelType.UserType;
 import transaction.Transaction;
+import transaction.DAOCreateTransaction.CreateApplicationTransaction;
 import transaction.DAOCreateTransaction.CreatePostTransaction;
 import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
@@ -88,6 +89,15 @@ public class SystemTestListener implements ServletContextListener {
 			transaction.execute("2011052404", "636645");
 			transaction.execute("2011052406", "636645");
 			transaction.execute("2011052408", "636645");
+
+			transaction = new CreateApplicationTransaction();
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put("ID", "13750046645");
+			parameters.put("password", "123456");
+			parameters.put("email", "wongzeonbong@gmail.com");
+			transaction.execute(parameters);
+			parameters.put("ID", "787878787878");
+			transaction.execute(parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Member;
-import service.helper.SearchMap;
+import service.helper.MemberSearchMap;
 import transaction.DAOTransaction;
 
 public class SearchMemberTransaction extends DAOTransaction {
@@ -17,9 +17,9 @@ public class SearchMemberTransaction extends DAOTransaction {
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
-		SearchMap.deserialize();
-		String[] IDs = SearchMap.searchIDs((String) params[1]);
-		SearchMap.serialize();
+		MemberSearchMap.deserialize();
+		String[] IDs = MemberSearchMap.searchIDs((String) params[1]);
+		MemberSearchMap.serialize();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		if (IDs != null && IDs.length != 0) {
 			String query = "";

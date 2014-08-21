@@ -38,22 +38,81 @@
 			<c:otherwise>
 				<div class="pro_body">
 					<div class="share post">
-						<form enctype="multipart/form-data">
-							<input class="form-control" id="share_txt" type="text"
-								placeholder="share anything you what to share" />
-							<div class="share_button_group btn-group">
+				<form enctype="multipart/form-data">
+					<input class="form-control share_txt" type="text"
+						placeholder="share anything you what to share" data-toggle='modal'
+						data-target='#addPostModal' />
+					<div class="shareBtnGroup">
+						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
+							data-target='#addPostModal'>
+							<div class="Iconshare"
+								style="background-image: url(images/motion.png);"></div>
+							<div>Motion</div>
+						</div>
+						<div role="button" class="Btnshare btnPhoto" data-toggle='modal'
+							data-target='#addPostModal'>
+							<div class="Iconshare"
+								style="background-image: url(images/photo.png);"></div>
+							<div>Photos</div>
+						</div>
+						<div role="button" class="Btnshare btnVideo" data-toggle='modal'
+							data-target='#addPostModal'>
+							<div class="Iconshare"
+								style="background-image: url(images/video.png);"></div>
+							<div>Videos</div>
+						</div>
+						<div role="button" class="Btnshare btnShare" data-toggle='modal'
+							data-target='#addPostModal'>
+							<div class="Iconshare"
+								style="background-image: url(images/share.png);"></div>
+							<div class="Fontshare">Share</div>
+						</div>
 
-								<button type="button" class="btn btn-default" id="btn_motion">表情</button>
-								<button type="button" class="btn btn-default" id="btn_pic"
-									data-toggle="popover" data-placement="bottom"
-									data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">图片</button>
-								<button type="button" class="btn btn-default" id="btn_video">视频</button>
-								<button type="button" class="btn btn-success" value="upload">分享</button>
-								<input type="file" name="file" />
-
-							</div>
-						</form>
 					</div>
+				</form>
+				<!-- Modal -->
+				<div class="modal fade" id="addPostModal" tabindex="-1"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Share Post</h4>
+							</div>
+							<form class="photoForm" enctype="multipart/form-data">
+								<div class="modal-body modalBody">
+									<textarea class="form-control share_txt2" id="share_txt2"
+										type="text" style="resize: none;"></textarea> 
+									<br>
+									<!-- The fileinput-button span is used to style the file input field as button -->
+									<span class="btn btn-success fileinput-button"> <i
+										class="glyphicon glyphicon-plus"></i> <span>Add
+											photos...</span> <!-- The file input field used as target for the file upload widget -->
+										<input id="fileupload" type="file" name="files[]" multiple>
+									</span> <br> <br>
+									<!-- The global progress bar -->
+									<div id="progress" class="progress progressCust">
+										<div class="progress-bar progress-bar-success"></div>
+									</div>
+									<!-- The container for the uploaded files -->
+									<div id="files" class="files"></div>
+									<br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" id="btn_share"
+										value="upload">Share</button>
+								</div>
+							</form>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
 
 				</div>
 	</div>

@@ -126,7 +126,7 @@ function fetchPostByCommunity() {
 	var response = FetchByCommunity(community.ID, "0", "5");
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == "true") {
-			addPost(dataString.owner.ID, dataString.owner.attributes.nickName,
+			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
 					dataString.ID, dataString.likerIDs, dataString.collectorIDs);
 		}

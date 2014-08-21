@@ -8,11 +8,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
-import service.helper.ActivityMap;
+import service.helper.ActivitySearchMap;
+import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
-import service.helper.SearchMap;
+import service.helper.MemberSearchMap;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import utils.MD5;
@@ -21,7 +21,7 @@ import utils.MD5;
  * Application Lifecycle Listener implementation class Boostrap
  * 
  */
-@WebListener
+// @WebListener
 public class Initialtor implements ServletContextListener {
 	private static final int ACTIVITYREMINDTIME = 30 * 60;
 	private static final int DELETEFILETIME = 12 * 60 * 60;
@@ -75,9 +75,10 @@ public class Initialtor implements ServletContextListener {
 
 		Transaction transaction = new RegisterGodTransaction();
 		try {
-			transaction.execute("WongZeonbong", MD5.toMD5Code("1901103390"));
-			SearchMap.initializeEnvironment();
-			ActivityMap.initializeEnvironment();
+			transaction.execute("Admin", MD5.toMD5Code("123456"));
+			MemberSearchMap.initializeEnvironment();
+			ActivitySearchMap.initializeEnvironment();
+			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

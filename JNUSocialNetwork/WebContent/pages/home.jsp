@@ -38,7 +38,7 @@
 
 						<p>
 							<a class="btn btn-lg btn-success" href="register.jsp"
-								role="button">Sign up today</a>
+								role="button" id="showBtn">Sign up today</a>
 						</p>
 					</div>
 				</div>
@@ -205,5 +205,10 @@
 	<script src="js/global-initialization.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript" src="js/home-initialization.js"></script>
+	<script type="text/javascript">
+	if (USERID != "") {
+		$('#showBtn').css("display", "none");
+	}
+	</script>
 </body>
 </html>

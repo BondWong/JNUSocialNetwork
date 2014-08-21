@@ -343,6 +343,7 @@ public class Member extends User {
 		representation.put("available", this.available);
 		representation.put("imageLinks", this.imageLinks);
 		representation.put("attributes", this.attributes);
+		representation.put("userType", this.userType);
 
 		List<String> followeeIDs = new ArrayList<String>();
 		for (Member followee : this.followees) {

@@ -153,7 +153,23 @@ body {
 	margin-left: auto;
 	width: 1270px;
 }
-
+.container.container_community {
+	background-color: #EEEEEE;
+	margin-top: 70px;
+	margin-left: 120px;
+	width: 1270px;
+}
+.communitySideBar{
+	margin-top: 18px;
+	margin-left:20px;
+	float:left;
+	
+	width:100px;
+	height:300px;
+}
+.communitySideBar ui{
+	
+}
 .content_container {
 	background-color: #FFF;
 	display: block;
@@ -570,6 +586,12 @@ body {
 	margin-right: auto;
 	margin-left: 400px;
 }
+.containerApp{
+	margin-top: 20px;
+	width: 20%;
+	margin-right: auto;
+	margin-left: auto;
+	}
 
 .containerSign {
 	width: 25%;
@@ -650,21 +672,29 @@ body {
 .pro_body_community {
 	float: left;
 }
-
-.containerDiscovery {
-	
+.titleMy{
+	display:none;
 }
-
+.containerMy{
+	display:none;
+}
 .createCommunity {
 	margin-left: 10px;
 	margin-top: 30px;
 }
-
+#createCommunityBtn{
+	display:none;
+}
 .createCommunity h1 {
 	font-size: 18px;
 	float: left;
 }
-
+#editCommunityBtn{
+	display:none;
+}
+#editMembersBtn{
+	display:none;
+}
 .communityCardInfo {
 	margin-left: auto;
 	margin-rigt: auto;
@@ -953,7 +983,17 @@ body {
 	padding: 20px;
 	text-align: center;
 }
-
+.appBox{
+	padding: 20px;
+	text-align: center;
+	
+}
+#chatCreate{
+	cursor:pointer;
+}
+.userInImg img{
+	border-radius:50%;
+}
 .deletePostBtn:hover {
 	color: #5A5A5A;
 	float: right;
@@ -1365,4 +1405,23 @@ body {
 .postContent{
 	width:100%;
 	word-wrap:break-word;
+}
+.showPost{
+	padding:10px;
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.showPostInfo{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #DFDFDF;
+	padding-bottom:5px;
+}
+.cus-lg-10{
+	margin-left:10px;
+}
+
+.communityGroupTitle a{
+	float:left;
 }
