@@ -30,7 +30,8 @@
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
-						data-target='#editCommunity' id="editCommunityBtn">Edit community</a></li>
+						data-target='#editCommunity' id="editCommunityBtn">Edit
+							community</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						href="#" id="editMembersBtn">Manage members</a></li>
 					<li role="presentation"><a class="leaveCommunity"

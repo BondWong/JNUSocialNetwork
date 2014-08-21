@@ -6,10 +6,9 @@ $(document)
 							.fileupload(
 									{
 										url : '../../JNUSocialNetwork/app/fileUploader',
-										beforeSend : function(request) {
-											request.setRequestHeader("ID",
-													USERID);
-										},
+										beforeSend: function(request) {
+								            request.setRequestHeader("ID", USERID);
+								        },
 										success : function(data) {
 											for (var i = 0; i < data.length; i++) {
 												var dataString = data[i];
@@ -101,49 +100,61 @@ $(document)
 							.parent().addClass(
 									$.support.fileInput ? undefined
 											: 'disabled');
-					// function addPost
-					$('#btn_share').click(function(e) {
-						e.preventDefault();
-						// var formData = new FormData($('.photofom'));
+					// function addPostToCommunity
 
-						var post = {
-							postType : 'NORMAL',
-							attributes : {
-								content : $('#share_txt2').val()
-							},
-							imageLinks : fileDri
-						};
-						var json = $.toJSON(post);
-						AddPost(USERID, json);
-						$('#addPostModal').modal('hide');
+					$('#btn_shareC').click(
+							function(e) {
+								e.preventDefault();
+								// var formData = new FormData($('.photofom'));
 
-					});
+								var post = {
+									postType : 'NORMAL',
+									attributes : {
+										content : $('#share_txt2').val()
+									},
+									imageLinks : fileDri
+								};
+								var json = $.toJSON(post);
+								AddPostToCommunity(USERID, community.ID,
+										"MEMBER", json);
+								$('#addPostModal').modal('hide');
+							});
 				});
 // function fectchPostByFollowee
-function fetchByFolloweeOrOwner() {
-	var response = FetchByFolloweeOrOwner(USERID, "0", "5");
+
+function fetchPostByCommunity() {
+	var response = FetchByCommunity(community.ID, "0", "5");
 	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+		if (dataString.available == "true") {
+			addPost(dataString.owner.ID, dataString.owner.attributes.name,
+					dataString.publishDate, dataString.attributes.content,
+					dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+		}
 	});
 }
-// function fectchHeatPost
-function fectchHeatPost() {
-	var response = FetchHeatPost("0", "5");
-	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
-	});
+function showCommunityInfo() {
+	$('.cName').html(community.attributes.name);
+	$('.cIntro').html(community.attributes.introduct);
 }
-// function fetchPostsByIDs
-$('body').on('click', '.alertCust', function() {
-	fetchPostByIDs(postIdContainer);
+$('body').on('click', '.alertCustC', function() {
+	fetchPostByIDs(communityPostIdContainer);
 	$(this).css("display", "none");
-	postIdContainer = [];
+	communityPostIdContainer = [];
 });
 $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
-	DeletePost(id);
+	DeletePostFromCommunity(community.ID, id);
+});
+
+// funtion sessionID
+$('body')
+		.on(
+				"click",
+				".activityHref",
+				function() {
+					window.location.href = 'activity.jsp?'
+							+ community.ID;
+				});
+$('body').on('click','.leaveCommunity',function(){
+	
 });
