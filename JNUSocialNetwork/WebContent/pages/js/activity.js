@@ -98,7 +98,7 @@ $('.form_datetime').datetimepicker({
 $(window).scroll(
 		function() {
 			if ($(window).scrollTop() == $(document).height()
-					- $(window).height()) {
+					- window.windowHeight) {
 				$('div#infinite_loader').show();
 				var startIndex = $('.activity').length;
 				var response = FetchActivitiesByCommunity(community.ID,  startIndex, "15");
