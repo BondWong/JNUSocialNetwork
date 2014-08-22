@@ -121,7 +121,7 @@ $(document)
 				});
 // function fectchPostByFollowee
 function fetchByFolloweeOrOwner() {
-	var response = FetchByFolloweeOrOwner(USERID, "0", "5");
+	var response = FetchByFolloweeOrOwner(USERID, "0", "15");
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
@@ -147,3 +147,21 @@ $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePost(id);
 });
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- $(window).height()) {
+				$('div#infinite_loader').show();
+				winsdow.startIndex = $('.post').length-1;
+				
+				if(startIndex >= 15){
+					var response = FetchByFolloweeOrOwner(USERID, startIndex, "15");
+					$.each(response.reverse(), function(n, dataString) {
+						addPost(dataString.owner.ID, dataString.owner.attributes.name,
+								dataString.publishDate, dataString.attributes.content,
+								dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+					});
+					startIndex += response.length;
+				}
+			}
+		});

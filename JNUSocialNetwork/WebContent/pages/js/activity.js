@@ -95,3 +95,22 @@ $('.form_datetime').datetimepicker({
     showMeridian: 1,
     pickerPosition: "bottom-left"
 });
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- $(window).height()) {
+				$('div#infinite_loader').show();
+				var startIndex = $('.activity').length;
+				var response = FetchActivitiesByCommunity(community.ID,  startIndex, "15");
+				if(response.length != 0){
+					var response = FetchActivitiesByCommunity(community.ID,  startIndex, "15");
+					$.each(response.reverse(), function(n, dataString) {
+						addActivity(dataString.ID, dataString.attributes.activityName,
+								dataString.attributes.activityTime,
+								dataString.attributes.activityAddr,
+								dataString.attributes.activityMore, dataString.imageLinks);
+					});
+					startIndex += response.length;
+				}
+			}
+		});

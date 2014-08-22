@@ -111,30 +111,26 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 		$(this).attr("placeholder", "add a comment");
 	});
 	$('.act_content').find('a').hide();
-	$('.act_content')
-	.hover(
-			function() {
-				
-				$(this).find('a').fadeIn(300);
-			}, function() {
-				$(this).find('a').fadeOut(300);
-			});
+	$('.act_content').hover(function() {
+
+		$(this).find('a').fadeIn(300);
+	}, function() {
+		$(this).find('a').fadeOut(300);
+	});
 	$('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
 }
 // function hovercommentDeleteBtn
 
-$('.act_content')
-		.hover(
-				function() {
-					$('.changeBtnGroup').hide();
-					$('.changeBtnGroup').fadeIn(300);
-				}, function() {
-					$('.changeBtnGroup').fadeOut(300, function() {
-						$(this).remove();
-					});
-				});
+$('.act_content').hover(function() {
+	$('.changeBtnGroup').hide();
+	$('.changeBtnGroup').fadeIn(300);
+}, function() {
+	$('.changeBtnGroup').fadeOut(300, function() {
+		$(this).remove();
+	});
+});
 
 // fetchPostByIDs
 function fetchPostByIDs(container) {
@@ -328,9 +324,9 @@ function clickEvent() {
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
 	});
-	if($.parseJSON(sessionStorage.getItem("user")).userType=='COMMUNITYOWNER'){
-		$('#editCommunityBtn').css("display","inline");
-		$('#editMembersBtn').css("display","inline");
+	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+		$('#editCommunityBtn').css("display", "inline");
+		$('#editMembersBtn').css("display", "inline");
 	}
 }
 function clickOffEvent() {
@@ -471,13 +467,23 @@ function clickOffEvent() {
 								});
 								var chat = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color: rgb(255, 140, 60);"></span>';
 								$('.userInImg').after(chat);
-								
-								/*$('.userInImg').hover(function(){
-									$('#chatCreate').fadeIn(300);
-									$('#chatCreate').css("display","inline");
-								},function(){
-									$('#chatCreate').fadeOut(300);
-								});*/
+								if (USERID != null && USERID != "") {
+									$("span#chatCreate")
+											.click(
+													function() {
+														open_chatroom(
+																USERID,
+																sessionStorage
+																		.getItem("otherUserID"));
+													});
+								}
+								/*
+								 * $('.userInImg').hover(function(){
+								 * $('#chatCreate').fadeIn(300);
+								 * $('#chatCreate').css("display","inline");
+								 * },function(){ $('#chatCreate').fadeOut(300);
+								 * });
+								 */
 							}
 						}, function() {
 							window.timer = setTimeout(function() {
@@ -487,7 +493,7 @@ function clickOffEvent() {
 							}, 200);
 
 						});
-		
+
 	};
 })(jQuery);
 
@@ -605,7 +611,7 @@ function showPost(postID) {
 							$('.deleteCommBtn').css("display", "none");
 						}
 					});
-	
+
 	var likeClass = "glyphicon glyphicon-heart-empty";
 	var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, dataString.likerIDs) != -1) {

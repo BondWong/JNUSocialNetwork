@@ -2,7 +2,7 @@
  * 
  */
 
-function open_chatroom(fromID, toID, toName, online) {
+function open_chatroom(fromID, toID) {
 	$.ajax({
 		type : "GET",
 		url : '../../JNUSocialNetwork/app/chatRoom/fetch/' + fromID + '/'
@@ -18,8 +18,16 @@ function open_chatroom(fromID, toID, toName, online) {
 			right = parseInt(right);
 			width = width.substring(0, width.indexOf("px"));
 			width = parseInt(width);
-			create_chatroom(data, fromID, toID, toName, online, top, right
-					+ width);
+			var online = false;
+			var IDs = sessionStorage.getItem("onlineUserIDs");
+			IDs = $.parseJSON(IDs);
+			for (var i = 0; i < IDs.length; i++)
+				if (IDs[i] == toID) {
+					online = true;
+					break;
+				}
+			create_chatroom(data, fromID, toID, $.parseJSON(sessionStorage
+					.getItem("userNameID"))[toID], online, top, right + width);
 		}
 	});
 }
@@ -86,8 +94,7 @@ function prepare_chat_room_load_more(data, fromID) {
 											* 5
 											+ '/5',
 									beforeSend : function(request) {
-										request.setRequestHeader("ID", USERID
-												.text());
+										request.setRequestHeader("ID", USERID);
 									},
 									success : function(messages) {
 										for (var i = 0; i < messages.length; i++) {
