@@ -190,7 +190,7 @@ RawBlameHistory
 				<!-- /.modal -->
 			</div>
 
-			<div class="post">
+			<!-- <div class="post">
 				<div class="post_body">
 					<div class="row">
 						<div class="col-md-2">
@@ -320,7 +320,7 @@ RawBlameHistory
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 
 		</div>

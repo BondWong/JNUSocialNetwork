@@ -260,7 +260,7 @@ function showPhotos() {
 }
 // show followees
 function showFollowees() {
-	var response = FetchFollowees(userID,"0","5");
+	var response = FetchFollowees(userID,"0","10");
 	$.each(response, function(index, followee) {
 		var followeeDiv = "<img src='" + followee.attributes.avatarLink
 				+ "'></img>";
@@ -269,7 +269,7 @@ function showFollowees() {
 }
 // show followers
 function showFollowers() {
-	var response = FetchFollowers(userID, "0","5");
+	var response = FetchFollowers(userID, "0","10");
 	$.each(response, function(index, follower) {
 		var followerDiv = "<img src='" + follower.attributes.avatarLink
 				+ "'></img>";
@@ -279,7 +279,7 @@ function showFollowers() {
 
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
-	var response = FetchPostsByOwner(userID,"0", "5");
+	var response = FetchPostsByOwner(userID,"0", "15");
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,

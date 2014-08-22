@@ -120,8 +120,9 @@ $(document)
 					});
 				});
 // function fectchPostByFollowee
+var pageSize = 5; 
 function fetchByFolloweeOrOwner() {
-	var response = FetchByFolloweeOrOwner(USERID, "0", "5");
+	var response = FetchByFolloweeOrOwner(USERID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
@@ -129,6 +130,7 @@ function fetchByFolloweeOrOwner() {
 	});
 }
 // function fectchHeatPost
+
 function fectchHeatPost() {
 	var response = FetchHeatPost("0", "5");
 	$.each(response.reverse(), function(n, dataString) {
@@ -147,3 +149,23 @@ $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePost(id);
 });
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- window.windowHeight) {
+				var startIndex = $('.post').length;
+				$('div#infinite_loader').show();
+				var response = FetchByFolloweeOrOwner(USERID, startIndex, pageSize);
+				$.each(response.reverse(), function(n, dataString) {
+					addPost(dataString.owner.ID, dataString.owner.attributes.name,
+							dataString.publishDate, dataString.attributes.content,
+							dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+				});
+				if( response.length == pageSize){
+					$('div#infinite_loader').hide();
+				}else{
+					$('div#infinite_loader').replaceWith("<span>no more</span>");
+					$(window).unbind("scroll");
+				}
+			}
+		});

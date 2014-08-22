@@ -123,7 +123,7 @@ $(document)
 // function fectchPostByFollowee
 
 function fetchPostByCommunity() {
-	var response = FetchByCommunity(community.ID, "0", "5");
+	var response = FetchByCommunity(community.ID, "0", "15");
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == "true") {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
@@ -158,3 +158,22 @@ $('body')
 $('body').on('click','.leaveCommunity',function(){
 	
 });
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- $(window).height()) {
+				$('div#infinite_loader').show();
+				var startIndex = $('.post').length-1;
+				var response = FetchByCommunity(community.ID, startIndex, "15");
+				if(response.length != 0){
+					$.each(response.reverse(), function(n, dataString) {
+						if (dataString.available == "true") {
+							addPost(dataString.owner.ID, dataString.owner.attributes.name,
+									dataString.publishDate, dataString.attributes.content,
+									dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+						}
+					});
+					startIndex += response.length;
+				}
+			}
+		});

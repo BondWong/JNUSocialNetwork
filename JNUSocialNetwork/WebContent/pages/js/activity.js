@@ -20,7 +20,7 @@ function activityClickEvent() {
 			imageLinks : []
 		};
 		var json = $.toJSON(post);
-		AddPostToCommunity("2011052405", community.ID, "COMMUNITYOWNER", json);
+		AddPostToCommunity(USERID, community.ID, json);
 		$('#activityCommunity').modal('hide');
 	});
 }
@@ -76,6 +76,7 @@ $('body')
 				".activityHref",
 				function() {
 					var id = $(this).attr("id");
+					alert(id);
 					window.location.href = 'activityShow.jsp?'+community.ID+'&'
 							+ id;
 				});
@@ -94,3 +95,22 @@ $('.form_datetime').datetimepicker({
     showMeridian: 1,
     pickerPosition: "bottom-left"
 });
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- window.windowHeight) {
+				$('div#infinite_loader').show();
+				var startIndex = $('.activity').length;
+				var response = FetchActivitiesByCommunity(community.ID,  startIndex, "15");
+				if(response.length != 0){
+					var response = FetchActivitiesByCommunity(community.ID,  startIndex, "15");
+					$.each(response.reverse(), function(n, dataString) {
+						addActivity(dataString.ID, dataString.attributes.activityName,
+								dataString.attributes.activityTime,
+								dataString.attributes.activityAddr,
+								dataString.attributes.activityMore, dataString.imageLinks);
+					});
+					startIndex += response.length;
+				}
+			}
+		});
