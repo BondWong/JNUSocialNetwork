@@ -26,5 +26,7 @@
 	media="screen">
 <script type="text/javascript">
 	window.USERID = '${sessionScope.ID}';
+	window.windowHeight = "innerHeight" in window ? window.innerHeight
+			: document.documentElement.offsetHeight;
 </script>
 </head>
