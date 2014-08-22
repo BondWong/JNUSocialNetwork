@@ -5,14 +5,17 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var pos = $(this).offset();
-	var nPos = pos;
-	nPos.top = pos.top + 20;
-	nPos.left = pos.left - 250;
+	var t = $(this).position().top;
+	var l = $(this).offset().left;
+	t += 20;
+	l -= 250;
 	var divTip = 'div.mentionBody';
 	tinyTip = $(divTip);
 	tinyTip.hide();
-	tinyTip.css(nPos).fadeIn(300);
+	tinyTip.css({
+		top : t,
+		left : l
+	}).fadeIn(300);
 	e.stopPropagation();
 	show_remind_content();
 }
