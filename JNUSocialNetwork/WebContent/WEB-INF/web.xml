@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>JNUSocialNetwork</display-name>
-  
-   <listener>
-      <listener-class>system.Initialtor</listener-class>
-   </listener>
-  
+  <listener>
+    <listener-class>system.Initialtor</listener-class>
+  </listener>
   <filter>
     <filter-name>AutoLoginFilter</filter-name>
     <filter-class>
@@ -60,8 +58,8 @@
   		/profile.jsp
   	</url-pattern>
   </filter-mapping>
-   <filter>
-     <filter-name>LoginCheckFilter</filter-name>
+  <filter>
+    <filter-name>LoginCheckFilter</filter-name>
     <filter-class>
   		security.LoginCheckFilter
   	</filter-class>
@@ -167,5 +165,5 @@
     <url-pattern>
   		/app/fileUploader/*
   	</url-pattern>
-  </filter-mapping> 
+  </filter-mapping>
 </web-app>

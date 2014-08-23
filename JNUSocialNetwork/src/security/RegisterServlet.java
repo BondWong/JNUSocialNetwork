@@ -159,8 +159,7 @@ public class RegisterServlet extends HttpServlet {
 		String sessionHiddenCode = "";
 		synchronized (session) {
 			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
-			System.out.println("hiddenCode:" + hiddenCode);
-			System.out.println("sessionHiddenCode:" + sessionHiddenCode);
+			session.removeAttribute("hiddenCode");
 		}
 		if (hiddenCode == null || sessionHiddenCode == null
 				|| !hiddenCode.equals(sessionHiddenCode))

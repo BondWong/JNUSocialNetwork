@@ -19,36 +19,34 @@
 			</div>
 			<div class="containerApp" style="display: block">
 				<div class="appBox">
-					<form onsubmit="appcommunityCreate();">
+					<form action="../security/CORegServlet" role="form" method="post"
+						class="form-signin">
 						<p>
-							<input type="text" pattern="[0-9]{11}"
-								class="form-control" placeholder="请输入手机作为ID" id="appTele"
+							<input type="text" pattern="[0-9]{11}" class="form-control"
+								name="applicationID" placeholder="请输入手机作为ID" id="appTele"
 								autocomplete="off" required />
 						</p>
 						<p>
-							<input type="password" class="form-control"
-								placeholder="请输入密码" id="appPassword" autocomplete="off" required />
+							<input type="password" class="form-control" name="password"
+								pattern="[A-Za-z0-9]{8,16}" placeholder="请输入密码" id="appPassword"
+								autocomplete="off" required />
 						</p>
 						<p>
-							<input type="email" class="form-control"
-								placeholder="请输入联系邮箱" id="appMail" autofocus autocomplete="off"
-								required />
+							<input type="email" class="form-control" placeholder="请输入联系邮箱"
+								name="email" id="appMail" autofocus autocomplete="off" required />
 						</p>
 						<p>
-							<textarea type="text" class="form-control" placeholder="倾输入申请理由"
-								id="appReasons" autofocus required maxLength="200"
+							<textarea type="text" class="form-control" placeholder="请输申请理由"
+								name="reason" id="appReasons" autofocus required maxLength="200"
 								style="resize: none;"></textarea>
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
-						<button class="btn btn-lg btn-success btn-block" id="appcommunityCreate" type="submit">Apply</button>
-						<h4>
-							Have a account?<span class="btn" id="">Sign
-								in</span>
-						</h4>
-				</form>
-					<div id="register_fail" class="alert alert-danger"
-						style="display: none"></div>
+						<button class="btn btn-lg btn-success btn-block"
+							id="appcommunityCreate" type="submit">Apply</button>
+					</form>
+					<div class="alert alert-success" id="coregister_success"
+						style="display: none">申请成功，请留意邮箱批准信息</div>
 				</div>
 			</div>
 		</div>
@@ -63,39 +61,11 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
-	<script src="js/md5.js"></script>
-	<script>
-		 function appcommunityCreate() {
-			var attributes = {
-				ID : $('#appTele').val(),
-				password : $('#appPassword').val(),
-				email : $('#appEmail').val(),
-				reason : $('#appReasons').val(),
-			};
-			var json = $.toJSON(attributes);
-			var response = ApplicationCreate(json);
-			$('#appCommunity').modal('hide');
-			if (response == 'success') {
-				alert("申请成功，请等待通知！");
-			}
-		}
-		$("h4 span.signIn").click(function() {
-			location.href = "login.jsp";
-		});
-	</script>
 	<c:choose>
-		<c:when test='${param.error == "VALCODEERROR"}'>
+		<c:when test='${param.success == "true"}'>
 			<script type="text/javascript">
-				$("#register_fail").text("Validation Code Error!");
-				$("#register_fail").fadeIn("fast");
-				setTimeout('$("#regiter_fail").fadeOut("slow")', 3000);
-			</script>
-		</c:when>
-		<c:when test='${param.error == "IDORPAERROR"}'>
-			<script type="text/javascript">
-				$("#register_fail").text("ID or Password Error!");
-				$("#register_fail").fadeIn("fast");
-				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+				$("#coregister_success").fadeIn("fast");
+				setTimeout('$("#coregister_success").fadeOut("slow")', 5000);
 			</script>
 		</c:when>
 	</c:choose>

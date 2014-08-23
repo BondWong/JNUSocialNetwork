@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 		String sessionHiddenCode = "";
 		synchronized (session) {
 			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
+			session.removeAttribute("hiddenCode");
 		}
 		if (sessionHiddenCode == null || hiddenCode == null
 				|| !sessionHiddenCode.equals(hiddenCode))
