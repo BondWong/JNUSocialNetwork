@@ -45,9 +45,9 @@ import utils.MD5;
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String JWCURL = "http://202.116.0.176/login.aspx";
+	private static final String JWCURL = "http://202.116.0.176";
 	private static final String VALIDATIONCODE = "http://202.116.0.176/ValidateCode.aspx";
-	private static final String LOGINURL = "http://202.116.0.176/login.aspx";
+	private static final String LOGINURL = "http://202.116.0.176";
 	private static final String btnLogin = "登  录";
 	private static final String __EVENTVALIDATION = "/wEWBwKh6Oq+DwKDnbD2DALVp9zJDAKi+6bHDgKC3IeGDAKt86PwBQLv3aq9Bw==";
 	private static final String __VIEWSTATE = "/wEPDwUKMjA1ODgwODUwMg9kFgJmD2QWAgIBDw8WAh4EVGV4dAUk5pqo5Y2X5aSn5a2m57u85ZCI5pWZ5Yqh566h55CG57O757ufZGRk";
@@ -164,7 +164,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 		if (hiddenCode == null || sessionHiddenCode == null
 				|| !hiddenCode.equals(sessionHiddenCode))
-			response.sendRedirect("/JNUSocialNetwork/pages/register.jsp");
+			response.sendRedirect("/pages/register.jsp");
 		else {
 			CloseableHttpClient httpClient = null;
 			synchronized (session) {
@@ -204,15 +204,16 @@ public class RegisterServlet extends HttpServlet {
 								new HashMap<String, String>());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
+						System.out.println(1);
 						e.printStackTrace();
 						response.sendError(500);
 						return;
 					}
 
-					response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?register=true");
+					response.sendRedirect("/pages/login.jsp?register=true");
 
 				} else {
-					response.sendRedirect("/JNUSocialNetwork/pages/register.jsp?error="
+					response.sendRedirect("/pages/register.jsp?error="
 							+ findErrorMessage(httpResponse));
 				}
 			} finally {

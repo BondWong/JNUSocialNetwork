@@ -26,7 +26,7 @@ $(document).ready(function() {
 		if (USERID != null && USERID != ""){
 			login_initialization(USERID);
 			$('body').on("click",".glyphicon-home",function(){
-				window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'+sessionStorage.getItem("otherUserID");
+				window.location.href = 'profile.jsp?nav=post&'+sessionStorage.getItem("otherUserID");
 			});
 		}
 	};

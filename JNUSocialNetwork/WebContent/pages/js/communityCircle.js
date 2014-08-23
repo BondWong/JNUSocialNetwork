@@ -5,7 +5,7 @@ $(document)
 					$('#fileupload')
 							.fileupload(
 									{
-										url : '../../JNUSocialNetwork/app/fileUploader',
+										url : '../../app/fileUploader',
 										beforeSend: function(request) {
 								            request.setRequestHeader("ID", USERID);
 								        },

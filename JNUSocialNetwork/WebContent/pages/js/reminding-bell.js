@@ -192,7 +192,7 @@ function events_remind(event) {
 							$
 									.ajax({
 										type : "PUT",
-										url : '../../JNUSocialNetwork/app/event/deleteUnhandledEvent/'
+										url : '../../app/event/deleteUnhandledEvent/'
 												+ USERID + '/' + eventID,
 										beforeSend : function(request) {
 											request.setRequestHeader("ID",

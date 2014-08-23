@@ -33,19 +33,19 @@ import model.modelType.PostType;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Post.fetchPostsByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.NORMAL ORDER BY p.publishDate DESC"),
-		@NamedQuery(name = "Post.fetchActivitiesByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.publishDate DESC"),
-		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchPostsByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.NORMAL ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchActivitiesByCommunity", query = "SELECT p FROM Community c JOIN Post p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
 				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
-				+ "m.ID = ?1 ) ORDER BY p.publishDate DESC"),
+				+ "m.ID = ?1 ) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByJoinedCommunity", query = "SELECT p FROM Community c JOIN c.posts p WHERE c IN "
-				+ "(SELECT cs FROM Member m JOIN m.joinedCommunities cs WHERE m.ID = ?1) ORDER BY p.publishDate"),
+				+ "(SELECT cs FROM Member m JOIN m.joinedCommunities cs WHERE m.ID = ?1) ORDER BY p.ID"),
 		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1"),
-		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.publishDate"),
-		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID"),
+		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.ID = ?1"),
-		@NamedQuery(name = "Post.fetchHeat", query = "SELECT p FROM Post p ORDER BY SIZE(p.comments) DESC, p.publishDate DESC"),
+		@NamedQuery(name = "Post.fetchHeat", query = "SELECT p FROM Post p ORDER BY SIZE(p.comments) DESC, p.ID DESC"),
 		@NamedQuery(name = "Post.fetchUnavailableIDs", query = "SELECT p.ID FROM Post p WHERE p.available = 0"),
 		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0") })
 public class Post extends AttributeModel {

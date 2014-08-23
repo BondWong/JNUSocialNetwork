@@ -5,7 +5,7 @@
 function open_chatroom(fromID, toID) {
 	$.ajax({
 		type : "GET",
-		url : '../../JNUSocialNetwork/app/chatRoom/fetch/' + fromID + '/'
+		url : '../../app/chatRoom/fetch/' + fromID + '/'
 				+ toID,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
@@ -87,7 +87,7 @@ function prepare_chat_room_load_more(data, fromID) {
 						$
 								.ajax({
 									type : "GET",
-									url : '../../JNUSocialNetwork/app/chatRoom/fetchMessages/'
+									url : '../../app/chatRoom/fetchMessages/'
 											+ data.ID
 											+ '/'
 											+ clickCount

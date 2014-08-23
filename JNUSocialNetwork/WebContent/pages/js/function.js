@@ -177,7 +177,7 @@ function clickEvent() {
 										"click",
 										".tipUser",
 										function() {
-											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
+											window.location.href = 'profile.jsp?nav=post&'
 													+ sessionStorage
 															.getItem("otherUserID");
 										});

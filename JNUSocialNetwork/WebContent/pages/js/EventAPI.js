@@ -4,7 +4,7 @@ function Subscribe(){
 	if (!window.EventSource) {
 		 document.write('js/jquery.eventsource.js');
 	}
-	var source = new EventSource("../../JNUSocialNetwork/app/event/subscribe");
+	var source = new EventSource("../../app/event/subscribe");
 	return source;
 }
 //***********************************SSES   end*********************************
@@ -14,7 +14,7 @@ function FileUpload(formData){
 	var fileDri = [];
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/fileUploader',
+    	url:'../../app/fileUploader',
     	data:formData,
     	async: false,
     	beforeSend: function(request) {
@@ -38,7 +38,7 @@ function ApplicationCreate(JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/application/create',
+    	url:'../../app/application/create',
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {
@@ -61,7 +61,7 @@ function AddPost(UserID,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/post/add/'+UserID,
+    	url:'../../app/post/add/'+UserID,
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {
@@ -81,7 +81,7 @@ function AddPostToCommunity(UserID,communityID,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/post/addToCommunity/'+UserID+'/'+communityID,
+    	url:'../../app/post/addToCommunity/'+UserID+'/'+communityID,
     	data:JsonData,
     	contentType: "application/json",
     	beforeSend: function(request) {
@@ -102,7 +102,7 @@ function DeletePost(postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/delete/'+postID,
+    	url:'../../app/post/delete/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -120,7 +120,7 @@ function DeletePostFromCommunity(communityID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/delete/'+communityID+'/'+postID,
+    	url:'../../app/post/delete/'+communityID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -139,7 +139,7 @@ function LikePost(userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/like/'+userID+'/'+postID,
+    	url:'../../app/post/like/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -157,7 +157,7 @@ function CancelLikePost(userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/cancelLike/'+userID+'/'+postID,
+    	url:'../../app/post/cancelLike/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -175,7 +175,7 @@ function CollectPost(userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/collect/'+userID+'/'+postID,
+    	url:'../../app/post/collect/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -193,7 +193,7 @@ function CancelCollectPost(userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/cancelCollect/'+userID+'/'+postID,
+    	url:'../../app/post/cancelCollect/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -210,7 +210,7 @@ function UpdateActivity(activityID,json){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/updateAttributes/'+activityID,
+    	url:'../../app/post/updateAttributes/'+activityID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -231,7 +231,7 @@ function FetchHeatPost(startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetch/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetch/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -249,7 +249,7 @@ function FetchPostsByOwner(ownerID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchByOwner/'+ownerID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetchByOwner/'+ownerID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -267,7 +267,7 @@ function FetchByCommunity(communityID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetchByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -284,7 +284,7 @@ function FetchActivitiesByCommunity(communityID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchActivitiesByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetchActivitiesByCommunity/'+communityID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -301,7 +301,7 @@ function FetchPostsByFollowee(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchByFollowee/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetchByFollowee/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
@@ -321,7 +321,7 @@ function FetchByFolloweeOrOwner(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchByFolloweeOrOwner/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/post/fetchByFolloweeOrOwner/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
@@ -341,7 +341,7 @@ function FetchPostByID(postID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/post/fetchByID/'+postID,
+    	url:'../../app/post/fetchByID/'+postID,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -356,7 +356,7 @@ function FetchPostByID(postID){
 //FetchPostsByIDs  输入：数组postID[];返回：postJson
 function FetchPostByIDs(postID){
 	var response="";
-	var Urls = '../../JNUSocialNetwork/app/post/fetchByPostIDs?';
+	var Urls = '../../app/post/fetchByPostIDs?';
 	$.each(postID,function(n,value){
 		if(n != postID.length-1){
 			Urls = Urls +'postIDs='+ value+'&';
@@ -388,7 +388,7 @@ function JoinActivity (userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/joinActivity/'+userID+'/'+postID,
+    	url:'../../app/post/joinActivity/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -406,7 +406,7 @@ function LeaveActivity (userID,postID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/post/leaveActivity/'+userID+'/'+postID,
+    	url:'../../app/post/leaveActivity/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -426,7 +426,7 @@ function AddComment(userID,postID,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/comment/add/'+userID+'/'+postID,
+    	url:'../../app/comment/add/'+userID+'/'+postID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -446,7 +446,7 @@ function DeleteComment(postID,commentID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/comment/delete/'+postID+'/'+commentID,
+    	url:'../../app/comment/delete/'+postID+'/'+commentID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -464,7 +464,7 @@ function LikeComment(userID,commentID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/comment/like/'+userID+'/'+commentID,
+    	url:'../../app/comment/like/'+userID+'/'+commentID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -482,7 +482,7 @@ function CancelLikeComment(userID,commentID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/comment/cancelLike/'+userID+'/'+commentID,
+    	url:'../../app/comment/cancelLike/'+userID+'/'+commentID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -500,7 +500,7 @@ function FetchCommentByPost(postID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/comment/fetchByPost/'+postID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/comment/fetchByPost/'+postID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -516,7 +516,7 @@ function FetchCommentByID(commentID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/comment/fetchByID/'+commentID,
+    	url:'../../app/comment/fetchByID/'+commentID,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -535,7 +535,7 @@ function AddCommunity(userID,JsonData){
 	var response="";
 	$.ajax({
     	type:"POST",
-    	url:'../../JNUSocialNetwork/app/community/add/'+userID,
+    	url:'../../app/community/add/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -556,7 +556,7 @@ function DeleteCommunity(communityID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/community/delete/'+communityID,
+    	url:'../../app/community/delete/'+communityID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -574,7 +574,7 @@ function JoinCommunity(userID,communityID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/community/join/'+userID+'/'+communityID,
+    	url:'../../app/community/join/'+userID+'/'+communityID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -591,7 +591,7 @@ function LeaveCommunity(userID,communityID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/community/leave/'+userID+'/'+communityID,
+    	url:'../../app/community/leave/'+userID+'/'+communityID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -609,7 +609,7 @@ function UpdateCommunity(communityID,json){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/community/updateAttributes/'+communityID,
+    	url:'../../app/community/updateAttributes/'+communityID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -630,7 +630,7 @@ function FetchCommunity(startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/community/fetch/'+startIndex+'/'+pageSize,
+    	url:'../../app/community/fetch/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -648,7 +648,7 @@ function FetchCommunityByID(communityID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/community/fetchByID/'+communityID,
+    	url:'../../app/community/fetchByID/'+communityID,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -665,7 +665,7 @@ function FetchCommunityByOwner(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/community/fetchByOwner/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/community/fetchByOwner/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -682,7 +682,7 @@ function FetchCommunityByJoin(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/community/fetchJoined/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/community/fetchJoined/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -699,7 +699,7 @@ function FetchCommunityByType(communityType,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/community/fetchByType/'+communityType+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/community/fetchByType/'+communityType+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -718,7 +718,7 @@ function DeleteMember(userID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/user/deleteMember/'+userID,
+    	url:'../../app/user/deleteMember/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -736,7 +736,7 @@ function DeleteCommunityOwner(ownerID){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/user/deleteCommunityOwner/'+ownerID,
+    	url:'../../app/user/deleteCommunityOwner/'+ownerID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -754,7 +754,7 @@ function Follow(followeeID,followerID){
 	var response="";
 	$.ajax({
 		type:"PUT",
-    	url:'../../JNUSocialNetwork/app/user/follow/'+followeeID+'/'+followerID,
+    	url:'../../app/user/follow/'+followeeID+'/'+followerID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -772,7 +772,7 @@ function CancelFollow(followeeID,followerID){
 	var response="";
 	$.ajax({
 		type:"PUT",
-    	url:'../../JNUSocialNetwork/app/user/cancelFollow/'+followeeID+'/'+followerID,
+    	url:'../../app/user/cancelFollow/'+followeeID+'/'+followerID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -790,7 +790,7 @@ function UpdateUserProfile(userID,JsonData){
 	var response="";
 	$.ajax({
 		type:"PUT",
-    	url:'../../JNUSocialNetwork/app/user/updateProfile/'+userID,
+    	url:'../../app/user/updateProfile/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -809,7 +809,7 @@ function UpdateUserProfile(userID,JsonData){
 //addImages  输入：数组ImageLinks[];返回：postJson
 function AddImages(userID,imageLinks){
 	var response="";
-	var Urls = '../../JNUSocialNetwork/app/user/addImages/'+userID+'?';
+	var Urls = '../../app/user/addImages/'+userID+'?';
 	$.each(imageLinks,function(n,value){
 		if(n != imageLinks.length-1){
 			Urls = Urls +'imageLinks='+ value+'&';
@@ -840,7 +840,7 @@ function FetchFollowees(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/fetchFollowees/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/user/fetchFollowees/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -857,7 +857,7 @@ function FetchFollowers(userID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/fetchFollowers/'+userID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/user/fetchFollowers/'+userID+'/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -874,7 +874,7 @@ function FetchUserByID(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/fetchByID/'+userID,
+    	url:'../../app/user/fetchByID/'+userID,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -891,7 +891,7 @@ function Recommendate(startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendate/'+startIndex+'/'+pageSize,
+    	url:'../../app/user/recommendate/'+startIndex+'/'+pageSize,
     	async: false,
     	success:function(data,status){
     		response = data;
@@ -908,7 +908,7 @@ function RecommendateViaFollowee(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendateViaFollowee/'+userID,
+    	url:'../../app/user/recommendateViaFollowee/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -928,7 +928,7 @@ function RecommendateViaCampus(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendateViaCampus/'+userID,
+    	url:'../../app/user/recommendateViaCampus/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -948,7 +948,7 @@ function RecommendateViaMajor(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendateViaMajor/'+userID,
+    	url:'../../app/user/recommendateViaMajor/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -968,7 +968,7 @@ function RecommendateViaSession(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendateViaSession/'+userID,
+    	url:'../../app/user/recommendateViaSession/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -988,7 +988,7 @@ function RecommendateViaClass(userID){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/recommendateViaClass/'+userID,
+    	url:'../../app/user/recommendateViaClass/'+userID,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -1008,7 +1008,7 @@ function SearchMember(userID,key,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/user/search/'+userID+'/'+key+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/user/search/'+userID+'/'+key+'/'+startIndex+'/'+pageSize,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -1031,7 +1031,7 @@ function FetchChatRoom(userID1,userID2){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/chatRoom/fetch/'+userID1+'/'+userID2,
+    	url:'../../app/chatRoom/fetch/'+userID1+'/'+userID2,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -1051,7 +1051,7 @@ function FetchMessages(chatRoomID,startIndex,pageSize){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/chatRoom/fetchMessages/'+chatRoomID+'/'+startIndex+'/'+pageSize,
+    	url:'../../app/chatRoom/fetchMessages/'+chatRoomID+'/'+startIndex+'/'+pageSize,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -1071,7 +1071,7 @@ function DeleteAbandoned(chatRoomID,year,month,date){
 	var response="";
 	$.ajax({
     	type:"PUT",
-    	url:'../../JNUSocialNetwork/app/chatRoom/delete/'+chatRoomID+'/'+year+'/'+month+'/'+date,
+    	url:'../../app/chatRoom/delete/'+chatRoomID+'/'+year+'/'+month+'/'+date,
     	beforeSend: function(request) {
             request.setRequestHeader("ID", USERID);
         },
@@ -1093,7 +1093,7 @@ function GetDormInfo(campus){
 	var response="";
 	$.ajax({
     	type:"GET",
-    	url:'../../JNUSocialNetwork/app/dormInfo/getInfo/'+campus,
+    	url:'../../app/dormInfo/getInfo/'+campus,
     	async: false,
     	success:function(data,status){
     		response = data;
