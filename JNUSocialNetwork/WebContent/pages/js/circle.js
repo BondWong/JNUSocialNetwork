@@ -120,7 +120,7 @@ $(document)
 					});
 				});
 // function fectchPostByFollowee
-var pageSize = 5; 
+var pageSize = 5;
 function fetchByFolloweeOrOwner() {
 	var response = FetchByFolloweeOrOwner(USERID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
@@ -155,16 +155,24 @@ $(window).scroll(
 					- window.windowHeight) {
 				var startIndex = $('.post').length;
 				$('div#infinite_loader').show();
-				var response = FetchByFolloweeOrOwner(USERID, startIndex, pageSize);
+				var response = [];
+				if (USERID == null || USERID == "")
+					response = FetchHeatPost(startIndex, pageSize);
+				else
+					response = FetchByFolloweeOrOwner(USERID, startIndex,
+							pageSize);
 				$.each(response.reverse(), function(n, dataString) {
-					addPost(dataString.owner.ID, dataString.owner.attributes.name,
-							dataString.publishDate, dataString.attributes.content,
-							dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+					addPost(dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publishDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs, dataString.collectorIDs);
 				});
-				if( response.length == pageSize){
+				if (response.length == pageSize) {
 					$('div#infinite_loader').hide();
-				}else{
-					$('div#infinite_loader').replaceWith("<span>no more</span>");
+				} else {
+					$('div#infinite_loader')
+							.replaceWith('<div id="no_more_infinite_load"><span>no more</span></div>');
 					$(window).unbind("scroll");
 				}
 			}
