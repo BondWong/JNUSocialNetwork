@@ -982,6 +982,19 @@ body {
 	background-size: 100% 100%;
 }
 
+.coRegBody {
+	margin-top: 0px;
+	width: 100%;
+	background-image: url('../images/band-bg.jpg');
+	height: 700px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	filter:
+		"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
 .regTitle {
 	width: 60%;
 	text-align: center;

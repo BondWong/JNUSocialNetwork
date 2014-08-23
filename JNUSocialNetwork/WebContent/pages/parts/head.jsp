@@ -29,4 +29,5 @@
 	window.windowHeight = "innerHeight" in window ? window.innerHeight
 			: document.documentElement.offsetHeight;
 </script>
+<script type="text/javascript" src="js/civem.js"></script>
 </head>

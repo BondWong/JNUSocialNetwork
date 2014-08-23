@@ -10,12 +10,13 @@
 		<form class="navbar-form navbar-costom" role="form" method="post"
 			action="../security/Login">
 			<div class="form-group">
-				<input type="text" placeholder="ID" class="form-control" name="ID"
-					required>
+				<input type="text" placeholder="请输入ID" class="form-control" name="ID"
+					data-errormessage-value-missing="请输入ID" required>
 			</div>
 			<div class="form-group">
-				<input type="password" placeholder="password" class="form-control"
-					name="password" id="md5Password" required>
+				<input type="password" placeholder="请输入密码" class="form-control"
+					name="password" id="md5Password"
+					data-errormessage-value-missing="请输入密码" required>
 			</div>
 			<input type="hidden" name="hiddenCode"
 				value="${sessionScope.hiddenCode }" />
