@@ -64,7 +64,6 @@ function DELETEPOST() {
 	source.addEventListener('DELETEPOST', function(event) {
 		var jsondata = $.parseJSON(event.data);
 		$("div[class='post " + jsondata.ID + "']").remove();
-		fetchByFolloweeOrOwner();
 		Msnry('.pro_body', '.post', 435);
 	});
 }

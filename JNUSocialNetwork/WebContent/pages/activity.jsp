@@ -21,7 +21,7 @@
 	</div>
 	<!-- /.navbar -->
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust alertCustC">New Post!</div>
+		<div class="alert alert-success alertCust alertCustC">新消息！</div>
 		<div class="communityCard">
 			<div class="dropdown">
 				<div class="cardSetter glyphicon glyphicon-cog" type="button"
@@ -30,11 +30,11 @@
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
-						data-target='#editCommunity'>Edit community</a></li>
+						data-target='#editCommunity'>管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Manage members</a></li>
+						href="#">管理成员</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Leave community</a></li>
+						href="#">离开社区</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"

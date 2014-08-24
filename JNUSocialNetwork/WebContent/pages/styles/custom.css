@@ -8,6 +8,7 @@
 body {
 	padding-bottom: 40px;
 	color: #5a5a5a;
+	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 
 /* CUSTOMIZE THE NAVBAR
@@ -174,6 +175,7 @@ body {
 	float: left;
 	width: 100px;
 	height: 280px;
+	position:fixed;
 }
 
 .communitySideBar li a {
@@ -219,7 +221,6 @@ body {
 
 .img_cust {
 	margin-top: 7px;
-	margin-left: 20px;
 }
 
 .profile_nav {
@@ -268,6 +269,8 @@ body {
 }
 
 .post {
+	padding-top:10px;
+	padding-bottom:10px;
 	background-color: #FFF;
 	margin-top: 0px;
 	margin-right: 0px;
@@ -287,8 +290,8 @@ body {
 	width: 95%;
 }
 
-.pro_body .post_info {
-	
+.post_info {
+	margin-bottom:5px;
 }
 
 .row.row_custu {
@@ -307,7 +310,7 @@ body {
 	border-bottom-color: #DFDFDF;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	max-height:250px;
 	overflow:hidden;
 	text-align:center;
@@ -598,8 +601,8 @@ body {
 
 .changeBtnGroup {
 	float: right;
-	margin-top: 255px;
 	margin-right: 5px;
+	margin-top:-40px;
 }
 
 .photo {
@@ -1363,9 +1366,13 @@ body {
 	margin-left: 20px;
 	color: #c5c5c5;
 }
-
+.searchCommunityInput{
+	font-size: 14px;
+	margin-left: 20px;
+	color: #c5c5c5;
+}
 .searchBody {
-	height: 40px;
+	height:40px;
 }
 
 .peopeleTypeHover {
@@ -1383,7 +1390,9 @@ body {
 .searchInput {
 	margin-left: 20px;
 }
-
+.searchCommunityInput h3{
+	font-size:14px;
+}
 .peopleType a {
 	color: #404040;
 	text-decoration: none;

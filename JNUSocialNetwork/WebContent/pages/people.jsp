@@ -26,19 +26,18 @@
 			<div class="peopleType">
 				<div class="searchBody">
 					<span class="glyphicon glyphicon-search glyphicon-search-custom"
-						style="cursor: pointer;"></span> <span class="searchUser">Search
-						for anyone</span>
+						style="cursor: pointer;"></span> <span class="searchUser">寻找小伙伴</span>
 				</div>
-				<span class="peopeleType peopeleTypeHover pinCommon">People
-					in common</span> <span class="peopeleType pCampus">People in the
-					same campus</span> <span class="peopeleType pMajor">People in the
-					same major</span> <span class="peopeleType pSeason">People in the
-					same season</span> <span class="peopeleType pClass">Find classmates</span>
+				<span class="peopeleType peopeleTypeHover pinCommon">同兴趣伙伴</span>
+				 <span class="peopeleType pCampus">同学院伙伴</span> 
+					<span class="peopeleType pMajor">同专业伙伴</span> 
+					<span class="peopeleType pSeason">同年级伙伴</span>
+					 <span class="peopeleType pClass">同班同学</span>
 			</div>
 		</div>
 		<div class="col-lg-9">
-			<h4>Suggestions</h4>
-			<h5 class="containBord">People you may know on Campusite</h5>
+			<h4>推荐</h4>
+			<h5 class="containBord">给你推荐可能认识的小伙伴</h5>
 			<div class="userContainer">
 				<div class="recommendBord"></div>
 			</div>

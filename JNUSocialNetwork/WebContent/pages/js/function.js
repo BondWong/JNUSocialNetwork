@@ -27,18 +27,25 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 				+ postID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 	}
+	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
-	$
-			.each(
-					srcImage,
-					function(n, image) {
-						imageDiv = imageDiv
-								+ "<img onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
-								+ postID + ")' src='" + image + "' />";
-					});
+	if (srcImage.length != 0) {
+		$
+				.each(
+						srcImage,
+						function(n, image) {
+							imageDiv = imageDiv
+									+ "<img onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
+									+ postID + ")' src='" + image + "' />";
+						});
+		postImgDiv = postImgDiv + imageDiv + "</div>";
+	} else {
+		postImgDiv = "";
+	}
+
 	var boarddiv = "<div class='post "
 			+ postID
-			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ ownerImage
 			+ "' /><input type='hidden' value='"
 			+ ownerID
@@ -50,11 +57,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
 			+ content
-			+ "</span><div class='post_more'><a>read more...</a></div></div><div class='post_img' id='postImg"
-			+ postID
-			+ "'>"
-			+ imageDiv
-			+ "</div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ "</span><div class='post_more'><a>read more...</a></div></div>"
+			+ postImgDiv
+			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 			+ ownerID
 			+ "></p><input id='likeID' type='hidden' value="
 			+ postID

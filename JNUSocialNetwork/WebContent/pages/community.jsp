@@ -39,25 +39,25 @@
 			<div class="myCommunity"></div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>Offical Community</h3>
+			<h3>官方社区</h3>
 		</div>
 		<div class="container containerOffical">
 			<div class="officalCommunity"></div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>SchoolUnion Community</h3>
+			<h3>社团组织</h3>
 		</div>
 		<div class="container containerSchool">
 			<div class="schoolUnionCommunity"></div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>Folk Community</h3>
+			<h3>个人社区</h3>
 		</div>
 		<div class="container containerFolk">
 			<div class="folkCommunity"></div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>发现社区</h3>
+			<h3>热门社区</h3>
 		</div>
 		<div class="container containerDiscovery ">
 			<div class="communityDiscovery"></div>
@@ -66,9 +66,8 @@
 		<div class="createCommunity">
 			<div role="button" class="btn btn-sm btn-success createCom"
 				data-toggle='modal' data-target='#createCommunity'
-				id="createCommunityBtn">Create community</div>
-			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">Apply
-				to become a community owner</a>
+				id="createCommunityBtn">创建社区</div>
+			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">申请成为创建社区</a>
 		</div>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"
@@ -78,7 +77,7 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Create community</h4>
+							<h4 class="modal-title" id="myModalLabel">创建社区</h4>
 						</div>
 						<form class="communityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
@@ -119,7 +118,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="button" class="btn btn-primary"
-									id="communityCreate" value="upload">Create</button>
+									id="communityCreate" value="upload">创建</button>
 							</div>
 						</form>
 					</div>

@@ -47,25 +47,25 @@
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/motion.png);"></div>
-							<div>Motion</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnPhoto" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/photo.png);"></div>
-							<div>Photos</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnVideo" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/video.png);"></div>
-							<div>Videos</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnShare" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/share.png);"></div>
-							<div class="Fontshare">Share</div>
+							<div class="Fontshare"></div>
 						</div>
 
 					</div>

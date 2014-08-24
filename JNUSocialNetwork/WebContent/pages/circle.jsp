@@ -21,126 +21,38 @@
 	</div>
 	<!-- /.navbar -->
 
-	<div id="light" class="white_content">
-		<div class="row">
-			<div class="col-xs-9" style="background-color: #222222;">
-				<div class="row" style="height: 30px; margin-bottom: 0px;">
-					<div class="col-md-5"></div>
-					<div class="col-md-5">
-						<nav class="navbar navbar-inverse" role="navigation"
-							style="border: none;">
-							<div>
-								<ul class="nav navbar-nav">
-									<li><a href="#">分 享</a></li>
-									<li><a href="#">幻灯片</a></li>
-									<li class="dropdown"><a href="#" class="dropdown-toggle"
-										data-toggle="dropdown"> 更多 <b class="caret"></b>
-									</a>
-										<ul class="dropdown-menu">
-											<li><a href="#">举报图片</a></li>
-											<li><a href="#">......</a></li>
-										</ul></li>
-								</ul>
-							</div>
-						</nav>
-					</div>
-					<div class="" style="margin-right: 10px; margin-top: 10px">
-						<a href="javascript:void(0)"
-							onclick="document.getElementById('light').style.display='none';"><input
-							id="deleteImg" type='hidden' value="1405950973690" /><span
-							class="glyphicon glyphicon-remove" style="font-size: 14px"></span></a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="imgBox">
-						<img src="images/2.jpg"
-							style="max-width: 1000px; min-height: 500px;" />
-					</div>
-				</div>
-				<div class="row"
-					style="height: 30px; margin: o auto; text-align: center;">
-					<input type="button" value="信息中的照片" class="btn btn-link"
-						style="color: white;"> <input type="button" value="被查看次数"
-						class="btn btn-link" style="color: white;"><span>111</span>
-				</div>
-			</div>
-			<div class="col-xs-3">
-				<div class="row">
-					<div class="col-md-2">
-						<div class="user_img">
-							<img class="userImg" src="images/user_img.jpg" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="user_name">
-							<strong>Winson_Lau</strong>
-						</div>
-						<div class="user_info">Yesterday 21:23pm</div>
-					</div>
-				</div>
-				<p>This is not a new article in PNAS, but it details results
-					from a unique study and I have wanted to write about it for a
-					while.</p>
-				<div class="row">
-					<input type="button" value="赞" class="btn btn-default"
-						style="margin-left: 10px;"> <input type="button"
-						value="转发" class="btn btn-default">
-				</div>
-				<div class="act_content">
-					<div class="row">
-						<div class="col-lg-1">
-							<img src="images/user_img2.jpg" />
-						</div>
-						<div class="col-lg-11">
-							<div class="ures_name">
-								<strong>Winson_Lau</strong>
-							</div>
-							<div class="user_info">Yesterday 21:23pm</div>
-						</div>
-					</div>
-					<div class="act_comment">There's an extension that whenever
-						you choose something that has a shortcut it has a toast popup that
-						tells you what the shortcut would have been. I used it briefly a
-						long time ago. But it turned out to be really annoying. Still it
-						was a great idea.﻿</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Pop-up layer -->
-
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust">New Post!</div>
+		<div class="alert alert-success alertCust">新消息!</div>
 		<div class="pro_body">
 			<div class="share post">
 				<form enctype="multipart/form-data">
 					<input class="form-control share_txt" type="text"
-						placeholder="share anything you what to share" data-toggle='modal'
+						placeholder="分享你所想、所见" data-toggle='modal'
 						data-target='#addPostModal' />
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/motion.png);"></div>
-							<div>Motion</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnPhoto" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/photo.png);"></div>
-							<div>Photos</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnVideo" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/video.png);"></div>
-							<div>Videos</div>
+							<div></div>
 						</div>
 						<div role="button" class="Btnshare btnShare" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/share.png);"></div>
-							<div class="Fontshare">Share</div>
+							<div class="Fontshare"></div>
 						</div>
 
 					</div>
@@ -153,7 +65,7 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">Share Post</h4>
+								<h4 class="modal-title" id="myModalLabel">分享有趣事儿</h4>
 							</div>
 							<form class="photoForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
@@ -162,8 +74,7 @@
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
-										class="glyphicon glyphicon-plus"></i> <span>Add
-											photos...</span> <!-- The file input field used as target for the file upload widget -->
+										class="glyphicon glyphicon-plus"></i> <span>添加照片</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileupload" type="file" name="files[]" multiple>
 									</span> <br> <br>
 									<!-- The global progress bar -->
@@ -176,9 +87,9 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
+										data-dismiss="modal">关闭</button>
 									<button type="button" class="btn btn-primary" id="btn_share"
-										value="upload">Share</button>
+										value="upload">分享</button>
 								</div>
 							</form>
 						</div>
@@ -372,7 +283,6 @@
 									fetchByFolloweeOrOwner();
 								} else {
 									fectchHeatPost();
-									fetchCommunityByOwner();
 								}
 							} else {
 								clickOffEvent();
