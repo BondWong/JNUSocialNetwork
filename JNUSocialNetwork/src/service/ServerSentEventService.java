@@ -26,6 +26,7 @@ public class ServerSentEventService {
 	public EventOutput subscribe() {
 		final EventOutput eventoutput = new EventOutput();
 		this.broadcaster.subscribe(eventoutput);
+		System.out.println(eventoutput);
 		return eventoutput;
 	}
 

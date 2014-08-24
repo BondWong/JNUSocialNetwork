@@ -20,8 +20,7 @@ function login_initialization(ID) {
 							.text(
 									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
 					$("#nav-bar-avatar")
-							.text(
-									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+							.attr("src",$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 				}
 			});
 
@@ -29,13 +28,19 @@ function login_initialization(ID) {
 	 * SSE Handle
 	 */
 	SSEHandle();
-
 	/*
 	 * initialize websocket
 	 */
 	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
-	window.ws = new WebSocket(
-			"ws://localhost:8080/endpoint/connect/" + ID);
+	var loc = window.location;
+	var wsurl = "";
+	if (loc.protocol === "https:") {
+		wsurl = "wss:";
+	} else {
+		wsurl = "ws:";
+	}
+	wsurl += "//" + loc.host + "/endpoint/connect/" + ID;
+	window.ws = new WebSocket(wsurl);
 	ws.onopen = function(e) {
 
 	};

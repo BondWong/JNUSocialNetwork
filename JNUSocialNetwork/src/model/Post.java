@@ -41,7 +41,7 @@ import model.modelType.PostType;
 				+ "m.ID = ?1 ) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByJoinedCommunity", query = "SELECT p FROM Community c JOIN c.posts p WHERE c IN "
 				+ "(SELECT cs FROM Member m JOIN m.joinedCommunities cs WHERE m.ID = ?1) ORDER BY p.ID"),
-		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1"),
+		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID"),
 		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.ID = ?1"),
