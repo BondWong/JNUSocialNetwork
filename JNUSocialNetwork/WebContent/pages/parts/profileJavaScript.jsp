@@ -47,7 +47,9 @@
 	});
 	$('body').on('click', '.circleNav', function() {
 		window.location.href = "profile.jsp?nav=circle&" + userID;
+		
 	});
+	fetchUserByID();
 </script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
@@ -60,8 +62,7 @@
 				} else {
 					clickOffEvent();
 				}
-				Msnry('.pro_body', '.post', 435);
-				fetchUserByID();
+				Msnry('.about_body', '.post', 435);
 			});
 		</script>
 	</c:when>
@@ -105,6 +106,9 @@
 					login_initialization(USERID);
 					aboutClickEvent();
 					clickEvent();
+					if(USERID == userID){
+						$('.sharePro').css("display","block");
+					}
 				} else {
 					clickOffEvent();
 				}
@@ -113,5 +117,6 @@
 
 			});
 		</script>
+		<%@ include file="contentScroll.jsp"%>
 	</c:otherwise>
 </c:choose>

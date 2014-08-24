@@ -1,37 +1,37 @@
 function pHot() {
 	var users = Recommendate("0", "5");
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function PinCommon() {
 	var users = RecommendateViaFollowee(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function pCampus() {
 	var users = RecommendateViaCampus(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function pMajor() {
 	var users = RecommendateViaMajor(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function pSeason() {
 	var users = RecommendateViaSession(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function pClass() {
 	var users = RecommendateViaClass(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
 	});
 }
 function peopleClickEvent() {
@@ -137,18 +137,32 @@ $('body')
 					var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
 					$('.containBord').after(borddiv);
 					var users = SearchMember(USERID, userInfo, "0", "5");
-					$.each(users, function(n, user) {
-						AddUser(user.attributes.name,
-								user.attributes.lookingFor);
-					});
+					if(users.length != 0){
+						$.each(users, function(n, user) {
+							AddUser(user.attributes.name,
+									user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+						});
+					}
 				});
 
-function AddUser(name, looking) {
-	var boarddiv = "<div class='userCard'><img src='images/userRecomm.jpg' width='200px'><p class='recommendName'>"
+function AddUser(name, looking, id,avatarLink) {
+	var boarddiv = "<div class='userCard'><img onload='javascript:auto_resize(170, 150, this)' src='"+avatarLink+"' ><p class='recommendName'>"
 			+ name
 			+ "</p><p class='recommendLooking'>"
 			+ looking
-			+ "</p><div class='recommendBtn'><button class='btn btn-default recommendAdd'  id='followBtn'>+<span class='glyphicon glyphicon-user' >&nbsp;Follow</span></button></div></div>";
+			+ "</p><div class='recommendBtn'><button  id="
+			+ id
+			+ " class='btn btn-danger followBtn'>Follow</button></div></div>";
 	$(".recommendBord").after(boarddiv);
 	Msnry('.userContainer', '.userCard', 200);
 }
+$('body').on("click", ".recommendBtn", function(){
+	var id = $(this).find('button').attr('id');
+	if ($(this).find('button').text() == "Follow") {
+		Follow(USERID, id);
+	}
+	if ($(this).find('button').text() == "Following") {
+		CancelFollow(USERID, id);
+		$("button[id='"+id+"']").text("Follow");
+	}
+});

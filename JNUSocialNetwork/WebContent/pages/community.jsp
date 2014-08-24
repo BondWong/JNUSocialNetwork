@@ -37,90 +37,31 @@
 		</div>
 		<div class="container containerMy">
 			<div class="myCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
 			<h3>Offical Community</h3>
 		</div>
 		<div class="container containerOffical">
 			<div class="officalCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
 			<h3>SchoolUnion Community</h3>
 		</div>
 		<div class="container containerSchool">
 			<div class="schoolUnionCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
 			<h3>Folk Community</h3>
 		</div>
 		<div class="container containerFolk">
 			<div class="folkCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
 			<h3>发现社区</h3>
 		</div>
 		<div class="container containerDiscovery ">
 			<div class="communityDiscovery"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
+			
 		</div>
 		<div class="createCommunity">
 			<div role="button" class="btn btn-sm btn-success createCom"

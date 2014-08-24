@@ -1,6 +1,7 @@
 package transaction.DAOFetchTransaction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +50,11 @@ public class SearchMemberTransaction extends DAOTransaction {
 			TypedQuery<Member> tq = em.createNamedQuery("Member.fetchByID",
 					Member.class);
 			tq.setParameter(1, params[1]);
-			Member member = tq.getSingleResult();
-			results.add(member.toRepresentation());
+			List<Member> r = tq.getResultList();
+			if (r.iterator().hasNext())
+				results.add(r.iterator().next().toRepresentation());
+			else
+				results.add(new HashMap<String, Object>());
 		}
 		return results;
 	}

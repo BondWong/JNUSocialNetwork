@@ -72,10 +72,11 @@ public class LoginServlet extends HttpServlet {
 		String sessionHiddenCode = "";
 		synchronized (session) {
 			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
+			session.removeAttribute("hiddenCode");
 		}
 		if (sessionHiddenCode == null || hiddenCode == null
 				|| !sessionHiddenCode.equals(hiddenCode))
-			response.sendRedirect("/JNUSocialNetwork/pages/login.jsp");
+			response.sendRedirect("/pages/login.jsp");
 		else {
 			Transaction transaction = new FetchAccountTransaction();
 			try {
@@ -95,15 +96,15 @@ public class LoginServlet extends HttpServlet {
 						account.setAutoLoginSeriesNum(session.getId());
 						Cookie cookie = new Cookie("ALG", session.getId());
 						cookie.setHttpOnly(true);
-						cookie.setPath("/JNUSocialNetwork");
+						cookie.setPath("/");
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 						response.addCookie(cookie);
-						response.sendRedirect("/JNUSocialNetwork/pages/circle.jsp");
+						response.sendRedirect("/pages/circle.jsp");
 					}
 				} else {
 					account.setLastAccessDate(new Date());
 					account.setChance((account.getChance() - 1));
-					response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
+					response.sendRedirect("/pages/login.jsp?success=false");
 				}
 
 				Transaction t = new UpdateAccountTransaction();
@@ -117,7 +118,7 @@ public class LoginServlet extends HttpServlet {
 				}
 
 			} else {
-				response.sendRedirect("/JNUSocialNetwork/pages/login.jsp?success=false");
+				response.sendRedirect("/pages/login.jsp?success=false");
 			}
 		}
 	}

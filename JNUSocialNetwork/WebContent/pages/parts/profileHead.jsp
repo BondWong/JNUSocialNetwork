@@ -4,7 +4,7 @@
 	<div class="profile_info">
 		<div class="profile_container">
 			<div class="profile_user_img">
-				<img class="img-circle" src="images/user_img4.jpg"
+				<img class="img-circle" onload="javascript:auto_resize(120, 120, this)" src="images/user_img4.jpg"
 					alt="Generic placeholder image">
 			</div>
 			<div class="profile_user_name">
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="profile_img"></div>
+	<div class="profile_img"><img src="images/about2.jpg" onload="javascript:auto_resize( 620, 300, this)"/></div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

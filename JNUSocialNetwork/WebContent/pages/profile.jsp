@@ -37,7 +37,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="pro_body">
-					<div class="share post">
+					<div class="share post sharePro">
 				<form enctype="multipart/form-data">
 					<input class="form-control share_txt" type="text"
 						placeholder="share anything you what to share" data-toggle='modal'

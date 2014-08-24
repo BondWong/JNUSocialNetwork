@@ -20,9 +20,9 @@
 		<!-- /.container -->
 	</div>
 	<!-- /.navbar -->
-	<div class="container container_custom">
+	<div class="container container_actvity">
 		<div class="activityHead">
-			<img alt="" width="100%" src="images/activityHead.jpg">
+			<img alt="" width="100%" onload="javascript:auto_resize(1170, 300, this)" src="images/activityHead.jpg">
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
@@ -166,7 +166,7 @@
 					</select>
 				</div>
 			</div>
-		</div>
+		</div></div>
 		<!-- CHATROOM -->
 		<%@ include file="parts/chatRoom.jsp"%>
 		<!-- Bootstrap core JavaScript

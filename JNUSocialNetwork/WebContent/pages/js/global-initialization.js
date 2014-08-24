@@ -5,7 +5,7 @@ function login_initialization(ID) {
 	$
 			.ajax({
 				type : "GET",
-				url : '../../JNUSocialNetwork/app/user/fetchByID/' + ID,
+				url : '../../app/user/fetchByID/' + ID,
 				beforeSend : function(request) {
 					request.setRequestHeader("ID", USERID);
 				},
@@ -20,8 +20,7 @@ function login_initialization(ID) {
 							.text(
 									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
 					$("#nav-bar-avatar")
-							.text(
-									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+							.attr("src",$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 				}
 			});
 
@@ -29,13 +28,12 @@ function login_initialization(ID) {
 	 * SSE Handle
 	 */
 	SSEHandle();
-
 	/*
 	 * initialize websocket
 	 */
 	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
 	window.ws = new WebSocket(
-			"ws://localhost:8080/JNUSocialNetwork/endpoint/connect/" + ID);
+			"ws://localhost:8080/endpoint/connect/" + ID);
 	ws.onopen = function(e) {
 
 	};

@@ -42,13 +42,13 @@ function communityClickEvent() {
 function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
 	addCommunity(community.ID, community.attributes.name,
-			community.memberIDs.length, "myCommunity");
+			community.memberIDs.length, "myCommunity",community.attributes.communityCard);
 }
 function fetchCommunityByOwner() {
 	var communities = FetchCommunityByOwner(USERID, "0", "5");
 	$.each(communities, function(n, community) {
 		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "myCommunity");
+				community.memberIDs.length, "myCommunity",community.attributes.communityCard);
 	});
 }
 // fetchCommunity()
@@ -56,14 +56,14 @@ function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "5");
 	$.each(communities, function(n, community) {
 		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "discoverCommunity");
+				community.memberIDs.length, "discoverCommunity",community.attributes.communityCard);
 	});
 }
 function fetchCommunityByType(communityType) {
 	var communities = FetchCommunityByType(communityType, "0", "5");
 	$.each(communities, function(n, community) {
 		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, community.communityType);
+				community.memberIDs.length, community.communityType,community.attributes.communityCard);
 	});
 }
 function fetchCommunitys() {
@@ -74,10 +74,10 @@ function fetchCommunitys() {
 
 }
 // 增加社区
-function addCommunity(id, name, memberNum, communityType) {
+function addCommunity(id, name, memberNum, communityType,communityImg) {
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
-			+ "'><img src='images/i2.jpg' /></div></a><div class='content_info'><div class='conten_head'>"
+			+ "'><img src='"+communityImg+"' onload='javascript:auto_resize(267, 267, this)' /></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum

@@ -85,7 +85,7 @@
 				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
 					humor!</p>
 			</div>
-			<div class="communityPic"></div>
+			<div class="communityPic"><img onload="javascript:auto_resize(221, 267, this)" src="" /></div>
 			<div class="cardA">
 				<span class="communityHref">All posts</span> <span>Activities</span>
 			</div>
@@ -147,7 +147,7 @@
 										class="btn btn-success fileinput-button" style="width: auto;">
 										<i class="glyphicon glyphicon-plus"></i> <span>Add
 											photos...</span> <!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload" type="file" name="files[]">
+										<input id="fileuploadA" type="file" name="files[]">
 									</span>
 								</div>
 								<!-- The container for the uploaded files -->
@@ -169,39 +169,6 @@
 			</div>
 			<div class="activityBody">
 				<div class="activityBord"></div>
-				<div class="activity">
-					<div class="activityHref">
-						<div class="activityBg">
-							<img src="images/activityBgS.jpg" />
-						</div>
-						<div class="user_img activityAvatar">
-							<img class="userImg" src="images/user_img.jpg" />
-						</div>
-						<div class="activityName">
-							<span>Activity</span>
-						</div>
-						<div class="activityTime">
-							<span class="glyphicon glyphicon-time">&nbsp;Fri,Aug
-								1,4:00 AM - 5:00 AM</span>
-						</div>
-						<div class="activityaddre">
-							<span class="glyphicon glyphicon-flag">&nbsp;Hangouts On
-								Air</span>
-						</div>
-						<div class="activityD">
-							<span>asd</span>
-						</div>
-					</div>
-					<div class="activityAsk">
-						<span>Are you going to join in?</span> <select
-							class="btn btn-default">
-							<option>Maybe</option>
-							<option class="activityJoin">Yes</option>
-							<option class="leaveactivityJoin">No</option>
-						</select>
-
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -256,5 +223,6 @@
 			showCommunityInfo();
 		});
 	</script>
+	<%@ include file="parts/contentScroll.jsp"%>
 </body>
 </html>

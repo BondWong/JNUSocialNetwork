@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-lg-9">
 			<h4>Suggestions</h4>
-			<h5 class="containBord">People you may know on Google+</h5>
+			<h5 class="containBord">People you may know on Campusite</h5>
 			<div class="userContainer">
 				<div class="recommendBord"></div>
 			</div>

@@ -4,6 +4,7 @@
 		$('.activityShowTime').html("&nbsp;"+activity.attributes.activityTime);
 		$('.activityShowAddre').html("&nbsp;"+activity.attributes.activityAddr);
 		$('.activityShowD').html("&nbsp;"+activity.attributes.activityMore);
+		$('.activityHead').find('img').attr("src",activity.attributes.background);
 		$('#addComment').attr("value",activity.ID);
 		$('.acBtn').attr("id","commentText"+activity.ID);
 		$('.communityName').html(community.memberIDs.length);
