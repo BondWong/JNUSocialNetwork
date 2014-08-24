@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div class="pro_body">
-			<div class="post">
+<div class="about_body">
+			<div class="post about">
 				<div class="aboutBlue followerShow">
 					<div>
 						<span class="aboutTitle">Followers</span>
@@ -14,7 +14,7 @@
 						src="images/follower_img.jpg"></img>
 				</div>
 			</div>
-			<div class="post">
+			<div class="post about">
 				<div class="aboutRed followeeShow">
 					<div>
 						<span class="aboutTitle">Followees</span>

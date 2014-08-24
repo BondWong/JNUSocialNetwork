@@ -92,7 +92,7 @@
 				} else {
 					clickOffEvent();
 				}
-				Msnry('.pro_body', '.post', 435);
+				Msnry('.about_body', '.post', 435);
 				showFollowees();
 				showFollowers();
 

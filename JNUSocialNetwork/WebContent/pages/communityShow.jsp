@@ -30,12 +30,11 @@
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
-						data-target='#editCommunity' id="editCommunityBtn">Edit
-							community</a></li>
+						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#" id="editMembersBtn">Manage members</a></li>
+						href="#" id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a class="leaveCommunity"
-						role="menuitem" tabindex="-1" href="#">Leave community</a></li>
+						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"
@@ -204,6 +203,8 @@
 	<script src="js/jquery.fileupload-video.js"></script>
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
+	<script src="js/layer.min.js"></script>
+	<script src="js/layer.ext.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/communityCircle.js"></script>

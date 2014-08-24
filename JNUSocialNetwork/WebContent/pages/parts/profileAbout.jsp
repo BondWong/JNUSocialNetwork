@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="about_body">
-			<div class="post">
+			<div class="post about">
 				<div class="aboutBlue">
 					<div>
 						<span class="aboutTitle">Basic Information</span>
@@ -24,7 +24,7 @@
 					</div>
 				  </div>
 				</div>
-			<div class="post">
+			<div class="post about">
 					<div class="aboutRed">
 						<div>
 							<span class="aboutTitle">Profile</span>

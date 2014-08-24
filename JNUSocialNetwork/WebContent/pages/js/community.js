@@ -53,6 +53,14 @@ function fetchCommunityByOwner() {
 				community.attributes.communityCard);
 	});
 }
+function fetchCommunityByJoin() {
+	var communities = FetchCommunityByJoin(USERID, "0", "5");
+	$.each(communities, function(n, community) {
+		addCommunity(community.ID, community.attributes.name,
+				community.memberIDs.length, "myCommunity",
+				community.attributes.communityCard);
+	});
+}
 // fetchCommunity()
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "5");
@@ -148,6 +156,7 @@ $(document)
 						fetchByType("myCommunity", "我的社区", "containerMy");
 						$('.titleMy').css("display", "block");
 						$('.containerMy').css("display", "block");
+						fetchCommunityByJoin();
 						fetchCommunityByOwner();
 					});
 					$('body').on(
