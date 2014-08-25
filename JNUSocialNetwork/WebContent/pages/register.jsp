@@ -13,9 +13,8 @@
 	<div class="regBody">
 		<div class="layer">
 			<div class="regTop">
-				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>Back
-						to home page</span></a> <a href="#" class="btn btn-primary btn-sm"
-					role="button"><span>About us</span></a>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到首页</span></a>
+				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">注册</div>
 			<div class="containerReg" style="display: block">
@@ -44,9 +43,9 @@
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signUpBtn"
-							type="submit">Sign up</button>
+							type="submit">注册</button>
 						<h4>
-							Have a account?<span class="btn signIn">Sign in</span>
+							已有账号？<span class="btn signIn">登录</span>
 						</h4>
 					</form>
 					<div id="register_fail" class="alert alert-danger"
