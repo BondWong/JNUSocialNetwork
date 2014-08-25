@@ -91,8 +91,7 @@
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
-				<a>see all</a>
-
+				<span class="memberHref">see all</span>
 			</div>
 		</div>
 		<div class="pro_body pro_body_community">

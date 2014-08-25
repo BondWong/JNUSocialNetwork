@@ -286,10 +286,12 @@ function clickEvent() {
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
 	});
+	$('body').on("click", "#leaveCommunityBtn", function() {
+		LeaveCommunity(USERID,communityID);
+	});
 	$('body').on("click", "#deleteCommunityBtn", function() {
 		var id = communityID;
 		DeleteCommunity(id);
-		window.location.href = 'community.jsp';
 	});
 	
 	$('body').on("click", "#saveCommunity", function() {
@@ -314,7 +316,6 @@ function clickEvent() {
 		$('#editCommunityBtn').css("display", "inline");
 		$('#editMembersBtn').css("display", "inline");
 		$('#deleteCommunityBtn').css("display", "inline");
-		$('#leaveCommunityBtn').css("display", "none");
 	}
 }
 function clickOffEvent() {
@@ -671,6 +672,23 @@ function showPost(postID) {
 				}
 			});
 }
+//funtion sessionID
+$('body')
+		.on(
+				"click",
+				".activityHref",
+				function() {
+					window.location.href = 'activity.jsp?'
+							+ community.ID;
+				});
+$('body')
+.on(
+		"click",
+		".memberHref",
+		function() {
+			window.location.href = 'communityMember.jsp?'
+					+ community.ID;
+		});
 /**
  * auto_resize
  */

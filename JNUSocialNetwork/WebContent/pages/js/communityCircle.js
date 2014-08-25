@@ -120,7 +120,7 @@ $(document)
 							});
 				});
 // function fetchPostByCommunity
-var pageSize = 5;
+var pageSize = 20;
 function fetchPostByCommunity() {
 	var response = FetchByCommunity(community.ID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
@@ -146,18 +146,7 @@ $('body').on('click', '.deletePostBtn', function() {
 	DeletePostFromCommunity(community.ID, id);
 });
 
-// funtion sessionID
-$('body')
-		.on(
-				"click",
-				".activityHref",
-				function() {
-					window.location.href = 'activity.jsp?'
-							+ community.ID;
-				});
-$('body').on('click','.leaveCommunity',function(){
-	
-});
+
 $(window).scroll(
 		function() {
 			if ($(window).scrollTop() == $(document).height()

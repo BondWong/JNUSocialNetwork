@@ -33,9 +33,6 @@
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						href="#" id="editMembersBtn">管理成员</a></li>
-					<li role="presentation"><a class="leaveCommunity"
-						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
-						href="#" id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -90,15 +87,18 @@
 				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
 					humor!</p>
 			</div>
-			<div class="communityPic"><img onload="javascript:auto_resize(221, 267, this)" src="" /></div>
+			<div class="communityPic">
+				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+			</div>
 			<div class="cardA">
-				<span>All posts</span> <span class="activityHref">Activities</span>
+				<span>All posts</span>
+				<span class="activityHref">Activities</span>
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
-				<a>see all</a>
-
+				<span class="memberHref">see all</span>
 			</div>
+			
 		</div>
 		<div class="pro_body pro_body_community">
 			<div class="share post">
@@ -177,7 +177,7 @@
 				</div>
 				<!-- /.modal -->
 			</div>
-			
+
 		</div>
 	</div>
 	<!-- CHATROOM -->
@@ -218,20 +218,23 @@
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				window.fileDri = [];
-				window.communityPostIdContainer = [];
-				clickEvent();
-			} else {
-				clickOffEvent();
-			}
 			var url = window.location.search;
 			window.communityID = url.substr(url.indexOf("?") + 1);
 			window.community = FetchCommunityByID(communityID);
 			Msnry('.pro_body', '.post', 435);
 			fetchPostByCommunity();
 			showCommunityInfo();
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				window.fileDri = [];
+				window.communityPostIdContainer = [];
+				clickEvent();
+				if ($.inArray(USERID, community.memberIDs) != -1) {
+					$('#leaveCommunityBtn').css("display", "inline");
+				}
+			} else {
+				clickOffEvent();
+			}
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>

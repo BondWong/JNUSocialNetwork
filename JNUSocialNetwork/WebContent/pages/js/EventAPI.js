@@ -578,6 +578,7 @@ function DeleteCommunity(communityID) {
 		},
 		success : function(data, status) {
 			response = status;
+			window.location.href = 'community.jsp';
 		},
 		error : function(data, status) {
 			response = status;
