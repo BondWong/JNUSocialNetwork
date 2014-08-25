@@ -224,13 +224,13 @@ function aboutClickEvent() {
 					function() {
 						$("span[class='Anickname']")
 								.html(
-										"<input id='focusedInput' class='nicknameE' type='text' value='Winson_Lau' />");
+										"<input id='focusedInput' class='nicknameE' type='text' value='' />");
 						$("span[class='Alooking']")
 								.html(
-										"<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
+										"<input class='lookingforE' id='focusedInput' type='text' value='' />");
 						$("span[class='Atelenum']")
 								.html(
-										"<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
+										"<input class='telenumE' id='focusedInput' type='text' value='' />");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
@@ -259,7 +259,7 @@ function aboutClickEvent() {
 										+ "</select>");
 						$("span[class='Aemail']")
 								.html(
-										"<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
+										"<input class='emailE' id='focusedInput' type='text' value='' />");
 
 						$(this).text("Save");
 						$(this).attr("class", "btn btn-primary aSavebtn");

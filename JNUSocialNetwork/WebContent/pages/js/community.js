@@ -41,7 +41,7 @@ function communityClickEvent() {
 // fetchCommunityByID
 function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
-	if (community.available != false) {
+	if (community.available != "false") {
 		addCommunity(community.ID, community.attributes.name,
 				community.memberIDs.length, "myCommunity",
 				community.attributes.communityCard);
@@ -50,7 +50,7 @@ function fetchCommunityByID(communityID) {
 function fetchCommunityByOwner() {
 	var communities = FetchCommunityByOwner(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != false) {
+		if (community.available != "false") {
 			addCommunity(community.ID, community.attributes.name,
 					community.memberIDs.length, "myCommunity",
 					community.attributes.communityCard);
@@ -60,7 +60,7 @@ function fetchCommunityByOwner() {
 function fetchCommunityByJoin() {
 	var communities = FetchCommunityByJoin(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != false) {
+		if (community.available != "false") {
 			addCommunity(community.ID, community.attributes.name,
 					community.memberIDs.length, "myCommunity",
 					community.attributes.communityCard);
@@ -71,7 +71,7 @@ function fetchCommunityByJoin() {
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != false) {
+		if (community.available != "false") {
 			addCommunity(community.ID, community.attributes.name,
 					community.memberIDs.length, "discoverCommunity",
 					community.attributes.communityCard);
@@ -81,7 +81,7 @@ function fetchHotCommunity() {
 function fetchCommunityByType(communityType) {
 	var communities = FetchCommunityByType(communityType, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != false) {
+		if (community.available != "false") {
 			addCommunity(community.ID, community.attributes.name,
 					community.memberIDs.length, community.communityType,
 					community.attributes.communityCard);
