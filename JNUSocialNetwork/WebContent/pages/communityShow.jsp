@@ -33,8 +33,10 @@
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						href="#" id="editMembersBtn">管理成员</a></li>
-					<li role="presentation"><a class="leaveCommunity"
+					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
+					<li role="presentation"><a id="deleteCommunityBtn"
+						role="menuitem" tabindex="-1" href="#">删除社区</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"
@@ -44,7 +46,7 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
+							<h4 class="modal-title" id="myModalLabel">管理社区</h4>
 						</div>
 						<form class="communityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
@@ -85,7 +87,9 @@
 				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
 					humor!</p>
 			</div>
-			<div class="communityPic"><img onload="javascript:auto_resize(221, 267, this)" src="" /></div>
+			<div class="communityPic">
+				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+			</div>
 			<div class="cardA">
 				<span>All posts</span> <span class="activityHref">Activities</span>
 			</div>
@@ -172,7 +176,7 @@
 				</div>
 				<!-- /.modal -->
 			</div>
-			
+
 		</div>
 	</div>
 	<!-- CHATROOM -->

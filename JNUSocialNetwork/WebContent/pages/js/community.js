@@ -41,41 +41,51 @@ function communityClickEvent() {
 // fetchCommunityByID
 function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
-	addCommunity(community.ID, community.attributes.name,
-			community.memberIDs.length, "myCommunity",
-			community.attributes.communityCard);
+	if (community.available != false) {
+		addCommunity(community.ID, community.attributes.name,
+				community.memberIDs.length, "myCommunity",
+				community.attributes.communityCard);
+	}
 }
 function fetchCommunityByOwner() {
 	var communities = FetchCommunityByOwner(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "myCommunity",
-				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "myCommunity",
+					community.attributes.communityCard);
+		}
 	});
 }
 function fetchCommunityByJoin() {
 	var communities = FetchCommunityByJoin(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "myCommunity",
-				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "myCommunity",
+					community.attributes.communityCard);
+		}
 	});
 }
 // fetchCommunity()
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "5");
 	$.each(communities, function(n, community) {
-		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "discoverCommunity",
-				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "discoverCommunity",
+					community.attributes.communityCard);
+		}
 	});
 }
 function fetchCommunityByType(communityType) {
 	var communities = FetchCommunityByType(communityType, "0", "5");
 	$.each(communities, function(n, community) {
-		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, community.communityType,
-				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, community.communityType,
+					community.attributes.communityCard);
+		}
 	});
 }
 function fetchCommunitys() {
@@ -223,12 +233,19 @@ $(document)
 									'.glyphicon-search-custom',
 									function() {
 										var communityInfo = encodeURI(search_user_input_value);
-										var communities = SearchCommunity(communityInfo, "0", "5");
-										$.each(communities, function(n, community) {
-											addCommunity(community.ID, community.attributes.name,
-													community.memberIDs.length, "searchCommunity",
-													community.attributes.communityCard);
-										});
+										var communities = SearchCommunity(
+												communityInfo, "0", "5");
+										$
+												.each(
+														communities,
+														function(n, community) {
+															addCommunity(
+																	community.ID,
+																	community.attributes.name,
+																	community.memberIDs.length,
+																	"searchCommunity",
+																	community.attributes.communityCard);
+														});
 									});
 
 				});

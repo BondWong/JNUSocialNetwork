@@ -741,6 +741,10 @@ body {
 #editMembersBtn {
 	display: none;
 }
+#deleteCommunityBtn {
+	display: none;
+}
+
 
 .communityCardInfo {
 	margin-left: auto;
