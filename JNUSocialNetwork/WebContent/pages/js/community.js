@@ -44,6 +44,11 @@ function fetchCommunityByID(communityID) {
 	addCommunity(community.ID, community.attributes.name,
 			community.memberIDs.length, "myCommunity",
 			community.attributes.communityCard);
+	if (community.available != false) {
+		addCommunity(community.ID, community.attributes.name,
+				community.memberIDs.length, "myCommunity",
+				community.attributes.communityCard);
+	}
 }
 function fetchCommunityByOwner() {
 	var communities = FetchCommunityByOwner(USERID, "0", "5");
@@ -59,6 +64,21 @@ function fetchCommunityByJoin() {
 		addCommunity(community.ID, community.attributes.name,
 				community.memberIDs.length, "myCommunity",
 				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "myCommunity",
+					community.attributes.communityCard);
+		}
+	});
+}
+function fetchCommunityByJoin() {
+	var communities = FetchCommunityByJoin(USERID, "0", "5");
+	$.each(communities, function(n, community) {
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "myCommunity",
+					community.attributes.communityCard);
+		}
 	});
 }
 // fetchCommunity()
@@ -68,6 +88,11 @@ function fetchHotCommunity() {
 		addCommunity(community.ID, community.attributes.name,
 				community.memberIDs.length, "discoverCommunity",
 				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, "discoverCommunity",
+					community.attributes.communityCard);
+		}
 	});
 }
 function fetchCommunityByType(communityType) {
@@ -76,6 +101,11 @@ function fetchCommunityByType(communityType) {
 		addCommunity(community.ID, community.attributes.name,
 				community.memberIDs.length, community.communityType,
 				community.attributes.communityCard);
+		if (community.available != false) {
+			addCommunity(community.ID, community.attributes.name,
+					community.memberIDs.length, community.communityType,
+					community.attributes.communityCard);
+		}
 	});
 }
 function fetchCommunitys() {
@@ -229,6 +259,65 @@ $(document)
 													community.memberIDs.length, "searchCommunity",
 													community.attributes.communityCard);
 										});
+									});
+
+					$('body').on(
+							"click",
+							".discoverCommunityBtn",
+							function() {
+								fetchByType("communityDiscovery", "热门社区",
+										"containerDiscovery");
+								fetchHotCommunity();
+							});
+					$('body')
+							.on(
+									"click",
+									".searchCommunityBtn",
+									function() {
+										fetchByType(
+												"searchCommunity",
+												"<div class='searchCommunityBody'><span class='glyphicon glyphicon-search glyphicon-search-custom' style='cursor: pointer;'></span> <span class='searchCommunityInput'>搜索社区</span></div> ",
+												"containerSearch");
+
+									});
+					$('body')
+							.on(
+									'click',
+									'.searchCommunityInput',
+									function() {
+										$(this)
+												.replaceWith(
+														"<input style='font-size:14px;' class='searchInput' placeholder='请输入社区名' >");
+										$('.searchInput').focus();
+										$('.searchInput')
+												.blur(
+														function() {
+															search_user_input_value = $(
+																	this).val();
+															$(this)
+																	.replaceWith(
+																			"<span class='searchCommunityInput'>搜索社区</span>");
+														});
+									});
+					$('body')
+							.on(
+									'click',
+									'.glyphicon-search-custom',
+									function() {
+										var communityInfo = encodeURI(search_user_input_value);
+										var communities = SearchCommunity(
+												communityInfo, "0", "5");
+										$
+												.each(
+														communities,
+														function(n, community) {
+															addCommunity(
+																	community.ID,
+																	community.attributes.name,
+																	community.memberIDs.length,
+																	"searchCommunity",
+																	community.attributes.communityCard);
+														});
 									});
 
 				});

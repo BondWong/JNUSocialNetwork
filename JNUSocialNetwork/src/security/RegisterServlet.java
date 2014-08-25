@@ -7,11 +7,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +39,7 @@ import utils.MD5;
  * Servlet implementation class LoginServlet
  */
 @SuppressWarnings("deprecation")
-@WebServlet(urlPatterns = "/security/RegServlet", asyncSupported = true)
+@WebServlet(urlPatterns = "/security/RegServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -78,7 +76,8 @@ public class RegisterServlet extends HttpServlet {
 				int status = response.getStatusLine().getStatusCode();
 				if ((status >= 200 && status < 300) || status == 302) {
 					HttpEntity entity = response.getEntity();
-					return entity != null ? EntityUtils.toString(entity) : null;
+					return entity != null ? EntityUtils.toString(entity,
+							"gb2312") : null;
 				} else {
 					throw new ClientProtocolException(
 							"Unexpected response status: " + status);
@@ -189,21 +188,15 @@ public class RegisterServlet extends HttpServlet {
 				if (isOK(httpResponse)) {
 
 					post.abort();
-					request.setAttribute("responseHandler", responseHandler);
-					request.setAttribute("httpClient", httpClient);
-					AsyncContext asyncCtx = request.startAsync();
-					asyncCtx.setTimeout(10000);
-					ThreadPoolExecutor executor = (ThreadPoolExecutor) request
-							.getServletContext().getAttribute("executor");
-					executor.execute(new UserInfoCrawler(asyncCtx));
-
 					Transaction transaction = new RegisterMemberTransaction();
 					try {
 						transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM),
 								new HashMap<String, String>());
+						new UserInfoCrawler().crawl(httpClient,
+								responseHandler, txtYHBS);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						System.out.println(1);
+
 						e.printStackTrace();
 						response.sendError(500);
 						return;

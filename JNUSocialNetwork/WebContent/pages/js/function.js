@@ -286,6 +286,12 @@ function clickEvent() {
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
 	});
+	$('body').on("click", "#deleteCommunityBtn", function() {
+		var id = communityID;
+		DeleteCommunity(id);
+		window.location.href = 'community.jsp';
+	});
+	
 	$('body').on("click", "#saveCommunity", function() {
 		var communityC;
 		if ($('#fileupload').val() != "") {
@@ -307,6 +313,8 @@ function clickEvent() {
 	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 		$('#editCommunityBtn').css("display", "inline");
 		$('#editMembersBtn').css("display", "inline");
+		$('#deleteCommunityBtn').css("display", "inline");
+		$('#leaveCommunityBtn').css("display", "none");
 	}
 }
 function clickOffEvent() {

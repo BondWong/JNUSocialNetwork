@@ -319,11 +319,11 @@ public class Member extends User {
 	public void clearCommunities() {
 		this.createdCommunities.clear();
 	}
-	
+
 	public void createCommunity(Community community) {
 		this.communityOwnerFeature.createCommunity(this, community);
 	}
-	
+
 	public void removeMember(Community community, Member member) {
 		// TODO Auto-generated method stub
 		this.communityOwnerFeature.removeMember(community, member);
