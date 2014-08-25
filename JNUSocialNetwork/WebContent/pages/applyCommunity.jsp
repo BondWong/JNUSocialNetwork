@@ -13,9 +13,8 @@
 	<div class="coRegBody">
 		<div class="layer">
 			<div class="regTop">
-				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>Back
-						to home page</span></a> <a href="#" class="btn btn-primary btn-sm"
-					role="button"><span>About us</span></a>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a> <a href="#" class="btn btn-primary btn-sm"
+					role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">社区账号注册</div>
 			<div class="containerApp" style="display: block">
@@ -53,7 +52,7 @@
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block"
-							id="appcommunityCreate" type="submit">Apply</button>
+							id="appcommunityCreate" type="submit">申请</button>
 					</form>
 					<div class="alert alert-success" id="coregister_success"
 						style="display: none">申请成功，请留意邮箱批准信息</div>
