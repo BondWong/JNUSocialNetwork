@@ -56,7 +56,8 @@ function CREATEPOSTINCOMMUNITY() {
 					jsondata.post.attributes.activityTime,
 					jsondata.post.attributes.activityAddr,
 					jsondata.post.attributes.activityMore,
-					jsondata.post.imageLinks);
+					jsondata.post.attributes.background,jsondata.post.owner.attributes.avatarLink);
+			
 		}
 	});
 }
