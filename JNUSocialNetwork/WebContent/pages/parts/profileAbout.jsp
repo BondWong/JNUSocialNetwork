@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div class="pro_body">
-			<div class="post">
+<div class="about_body">
+			<div class="post about">
 				<div class="aboutBlue">
 					<div>
 						<span class="aboutTitle">Basic Information</span>
@@ -24,7 +24,7 @@
 					</div>
 				  </div>
 				</div>
-			<div class="post">
+			<div class="post about">
 					<div class="aboutRed">
 						<div>
 							<span class="aboutTitle">Profile</span>

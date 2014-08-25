@@ -8,6 +8,7 @@
 body {
 	padding-bottom: 40px;
 	color: #5a5a5a;
+	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 
 /* CUSTOMIZE THE NAVBAR
@@ -153,6 +154,13 @@ body {
 	margin-left: auto;
 	width: 1270px;
 }
+.container.container_activity {
+	background-color: #EEEEEE;
+	margin-top: 70px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1170px;
+}
 
 .container.container_community {
 	background-color: #EEEEEE;
@@ -167,6 +175,7 @@ body {
 	float: left;
 	width: 100px;
 	height: 280px;
+	position:fixed;
 }
 
 .communitySideBar li a {
@@ -212,7 +221,6 @@ body {
 
 .img_cust {
 	margin-top: 7px;
-	margin-left: 20px;
 }
 
 .profile_nav {
@@ -247,6 +255,12 @@ body {
 	width: 900px;
 	margin-top: 20px;
 }
+.about_body{
+	margin-right: auto;
+	margin-left: auto;
+	width: 900px;
+	margin-top: 20px;
+}
 
 .nav-tabs>li {
 	float: left;
@@ -255,6 +269,8 @@ body {
 }
 
 .post {
+	padding-top:10px;
+	padding-bottom:10px;
 	background-color: #FFF;
 	margin-top: 0px;
 	margin-right: 0px;
@@ -263,7 +279,10 @@ body {
 	float: left;
 	width: 435px;
 }
-
+.about{
+	padding-top:0px;
+	padding-bottom:0px;
+}
 .pro_body .user_img {
 	
 }
@@ -274,8 +293,8 @@ body {
 	width: 95%;
 }
 
-.pro_body .post_info {
-	
+.post_info {
+	margin-bottom:5px;
 }
 
 .row.row_custu {
@@ -294,7 +313,10 @@ body {
 	border-bottom-color: #DFDFDF;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
+	max-height:250px;
+	overflow:hidden;
+	text-align:center;
 }
 
 .media_show {
@@ -422,7 +444,6 @@ body {
 	float: left;
 	width: 620px;
 	height: 300px;
-	background-image: url(../images/about2.jpg);
 }
 
 .profile_user_name {
@@ -475,7 +496,7 @@ body {
 .popTip {
 	width: 240px;
 	background-color: #FFF;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 }
 
 .popTip.ursNameShort {
@@ -583,8 +604,8 @@ body {
 
 .changeBtnGroup {
 	float: right;
-	margin-top: 255px;
 	margin-right: 5px;
+	margin-top:-40px;
 }
 
 .photo {
@@ -594,6 +615,7 @@ body {
 	margin-bottom: 20px;
 	margin-left: 0px;
 	float: left;
+	text-align:center;
 }
 
 .containerReg {
@@ -753,7 +775,6 @@ body {
 .communityPic {
 	width: 100%;
 	height: 260px;
-	background-image: url(../images/communityCard.jpg);
 }
 
 .cardA {
@@ -805,6 +826,7 @@ body {
 .activityHead {
 	width: 100%;
 	height: 365px;
+	overflow:hidden;
 }
 
 .activityInfo {
@@ -1029,6 +1051,13 @@ body {
 
 #chatCreate {
 	cursor: pointer;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
+	text-align:center;
+	background-color:#f5f5f5;
+	margin-top:20px;
 }
 
 .userInImg img {
@@ -1340,9 +1369,13 @@ body {
 	margin-left: 20px;
 	color: #c5c5c5;
 }
-
+.searchCommunityInput{
+	font-size: 14px;
+	margin-left: 20px;
+	color: #c5c5c5;
+}
 .searchBody {
-	height: 40px;
+	height:40px;
 }
 
 .peopeleTypeHover {
@@ -1360,7 +1393,9 @@ body {
 .searchInput {
 	margin-left: 20px;
 }
-
+.searchCommunityInput h3{
+	font-size:14px;
+}
 .peopleType a {
 	color: #404040;
 	text-decoration: none;
@@ -1377,7 +1412,6 @@ body {
 	margin-top: 20px;
 	float: left;
 	width: 200px;
-	height: 300px;
 	background-color: #fff;
 }
 
@@ -1462,8 +1496,8 @@ body {
 }
 
 .showPost {
-	padding: 10px;
-	width: 90%;
+	padding-top: 10px;
+	width: 95%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -1476,7 +1510,7 @@ body {
 }
 
 .cus-lg-10 {
-	margin-left: 10px;
+	margin-left: 15px;
 }
 
 .communityGroupTitle a {
@@ -1485,4 +1519,7 @@ body {
 
 #myCommunityBtn {
 	display: none;
+}
+.sharePro{
+	display:none;
 }

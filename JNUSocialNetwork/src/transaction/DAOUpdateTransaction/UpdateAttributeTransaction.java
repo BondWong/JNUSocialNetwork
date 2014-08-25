@@ -17,6 +17,7 @@ public class UpdateAttributeTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		AttributeModel model = dao.get((Class)params[0], params[1]);
+		System.out.println((Map<String, String>)params[2]);
 		model.updateAttributes((Map<String, String>)params[2]);
 		dao.create(model);
 		return model.toRepresentation();
