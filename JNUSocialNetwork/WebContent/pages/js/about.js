@@ -1,25 +1,121 @@
 $(document)
 		.ready(
 				function() {
+					photosfileDri = [];
 					// funtion fileupload
-					$('#fileupload')
-							.fileupload(
-									{
-										url : '../../app/fileUploader',
-										beforeSend : function(request) {
-											request.setRequestHeader("ID",
-													USERID);
-										},
-										success : function(data) {
-											for (var i = 0; i < data.length; i++) {
-												var dataString = data[i];
-												fileDri.push(dataString);
-											}
-										},
-										acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-										maxFileSize : 5000000
-									// 5 MB
+					$('#fileuploadPhoto')
+							.fileupload({
+								url : '../../app/fileUploader',
+								beforeSend : function(request) {
+									request.setRequestHeader("ID", USERID);
+								},
+								success : function(data) {
+									for (var i = 0; i < data.length; i++) {
+										var dataString = data[i];
+										photosfileDri.push(dataString);
+									}
+								},
+								acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+								maxFileSize : 5000000
+							// 5 MB
+							})
+							.on(
+									'fileuploadadd',
+									function(e, data) {
+										data.context = $('<div/>').appendTo(
+												'#files')
+												.addClass('myfileItem');
+										$
+												.each(
+														data.files,
+														function(index, file) {
+															var node = $('<p/>')
+																	.append(
+																			$(
+																					'<span/>')
+																					.text(
+																							file.name));
+															if (!index) {
+																node
+																		.append('<br>');
+															}
+															node
+																	.appendTo(data.context);
+														});
 									})
+							.on(
+									'fileuploadprocessalways',
+									function(e, data) {
+										var index = data.index, file = data.files[index], node = $(data.context
+												.children()[index]);
+										if (file.preview) {
+											node.prepend('<br>').prepend(
+													file.preview);
+										}
+										if (file.error) {
+											node
+													.append('<br>')
+													.append(
+															$(
+																	'<span class="text-danger"/>')
+																	.text(
+																			file.error));
+										}
+										if (index + 1 === data.files.length) {
+											data.context.find('button').text(
+													'Upload').prop('disabled',
+													!!data.files.error);
+										}
+									})
+							.on(
+									'fileuploadprogressall',
+									function(e, data) {
+										$('#progress .progress-bar').css(
+												'width', '0%');
+										var progress = parseInt(data.loaded
+												/ data.total * 100, 10);
+										$('#progress .progress-bar').css(
+												'width', progress + '%');
+									})
+							.on(
+									'fileuploadfail',
+									function(e, data) {
+										$
+												.each(
+														data.files,
+														function(index, file) {
+															var error = $(
+																	'<span class="text-danger"/>')
+																	.text(
+																			'File upload failed.');
+															$(
+																	data.context
+																			.children()[index])
+																	.append(
+																			'<br>')
+																	.append(
+																			error);
+														});
+									}).prop('disabled', !$.support.fileInput)
+							.parent().addClass(
+									$.support.fileInput ? undefined
+											: 'disabled');
+					$('#fileupload')
+							.fileupload({
+								url : '../../app/fileUploader',
+								beforeSend : function(request) {
+									request.setRequestHeader("ID", USERID);
+								},
+								success : function(data) {
+									for (var i = 0; i < data.length; i++) {
+										var dataString = data[i];
+										fileDri.push(dataString);
+									}
+								},
+								acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+								maxFileSize : 5000000
+							// 5 MB
+							})
 							.on(
 									'fileuploadadd',
 									function(e, data) {
@@ -121,111 +217,114 @@ $(document)
 				});
 function aboutClickEvent() {
 	// function editProfileInfro
-		$('body')
-				.on(
-						'click',
-						'.aEditbtn',
-						function() {
-							$("span[class='Anickname']")
-									.html(
-											"<input id='focusedInput' class='nicknameE' type='text' value='Winson_Lau' />");
-							$("span[class='Alooking']")
-									.html(
-											"<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
-							$("span[class='Atelenum']")
-									.html(
-											"<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
-							$("span[class='Arelationship']")
-									.html(
-											"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-							var campus = "";
-							if ($('.Acampus').html() == "珠海校区") {
-								campus = "ZhuhaiCampus";
-							}
-							if ($('.Acampus').html() == "华文校区") {
-								campus = "HuawenCampus";
-							}
-							if ($('.Acampus').html() == "深圳校区") {
-								campus = "ShenzhenCampus";
-							}
-							if ($('.Acampus').html() == "校本部") {
-								campus = "GuangzhouCampus";
-							}
+	$('body')
+			.on(
+					'click',
+					'.aEditbtn',
+					function() {
+						$("span[class='Anickname']")
+								.html(
+										"<input id='focusedInput' class='nicknameE' type='text' value='Winson_Lau' />");
+						$("span[class='Alooking']")
+								.html(
+										"<input class='lookingforE' id='focusedInput' type='text' value='Make friends' />");
+						$("span[class='Atelenum']")
+								.html(
+										"<input class='telenumE' id='focusedInput' type='text' value='13750046461' />");
+						$("span[class='Arelationship']")
+								.html(
+										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
+						var campus = "";
+						if ($('.Acampus').html() == "珠海校区") {
+							campus = "ZhuhaiCampus";
+						}
+						if ($('.Acampus').html() == "华文校区") {
+							campus = "HuawenCampus";
+						}
+						if ($('.Acampus').html() == "深圳校区") {
+							campus = "ShenzhenCampus";
+						}
+						if ($('.Acampus').html() == "校本部") {
+							campus = "GuangzhouCampus";
+						}
 
-							var dormInfo = GetDormInfo("HuawenCampus");
-							var option = "";
-							$.each(dormInfo, function(index, dorm) {
-								option = option + "<option value='" + dorm
-										+ "'>" + dorm + "</option>";
-							});
-							$("span[class='Aaddress']").html(
-									"<select class='addressE'>" + option
-											+ "</select>");
-							$("span[class='Aemail']")
-									.html(
-											"<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
-
-							$(this).text("Save");
-							$(this).attr("class", "btn btn-primary aSavebtn");
+						var dormInfo = GetDormInfo("HuawenCampus");
+						var option = "";
+						$.each(dormInfo, function(index, dorm) {
+							option = option + "<option value='" + dorm + "'>"
+									+ dorm + "</option>";
 						});
-		// function saveProfileInfro
-		$('body').on('click', '.aSavebtn', function() {
-			var datajson = {
-				name : $('.nicknameE').val(),
-				lookingFor : $('.lookingforE').val(),
-				relationship : $('.relationshipnE').val(),
-				telenum : $('.telenumE').val(),
-				email : $('.emailE').val(),
-				dorm : $('.addressE').val()
-			};
-			var json = $.toJSON(datajson);
-			UpdateUserProfile(userID, json);
-			fetchUserByID();
-			$(this).text("Edit");
-			$(this).attr("class", "btn btn-primary aEditbtn");
-		});
-		// function avatarImgBtn
-		$('body').on("click", ".avatarImgBtn", function() {
-			var datajson = {
-				avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
-			};
-			var json = $.toJSON(datajson);
-			UpdateUserProfile(userID, json);
-			fetchUserByID();
-			$('#myModal').modal('hide');
-		});
-		// change Background
-		$('body').on(
-				"click",
-				".changeBg",
-				function() {
-					var datajson = {
-						profileImageLink : FileUpload(new FormData(
-								$('.changBgForm')[0])),
-					};
-					var json = $.toJSON(datajson);
-					UpdateUserProfile(userID, json);
-					fetchUserByID();
-					$('#myModalB').modal('hide');
-				});
-		// function addPhoto
-		$('body').on("click", ".addPhoto", function() {
-			var photoLinks = FileUpload(new FormData($('.photoForm')[0]));
-			AddImages(userID, photoLinks);
-			$('#myModal2').modal('hide');
-		});
-	}
+						$("span[class='Aaddress']").html(
+								"<select class='addressE'>" + option
+										+ "</select>");
+						$("span[class='Aemail']")
+								.html(
+										"<input class='emailE' id='focusedInput' type='text' value='306941426@qq.com' />");
 
+						$(this).text("Save");
+						$(this).attr("class", "btn btn-primary aSavebtn");
+					});
+	// function saveProfileInfro
+	$('body').on('click', '.aSavebtn', function() {
+		var datajson = {
+			name : $('.nicknameE').val(),
+			lookingFor : $('.lookingforE').val(),
+			relationship : $('.relationshipnE').val(),
+			telenum : $('.telenumE').val(),
+			email : $('.emailE').val(),
+			dorm : $('.addressE').val()
+		};
+		var json = $.toJSON(datajson);
+		UpdateUserProfile(userID, json);
+		fetchUserByID();
+		$(this).text("Edit");
+		$(this).attr("class", "btn btn-primary aEditbtn");
+	});
+	// function avatarImgBtn
+	$('body').on("click", ".avatarImgBtn", function() {
+		var datajson = {
+			avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
+		};
+		var json = $.toJSON(datajson);
+		UpdateUserProfile(userID, json);
+		fetchUserByID();
+		$('#myModal').modal('hide');
+	});
+	// change Background
+	$('body').on("click", ".changeBg", function() {
+		var datajson = {
+			profileImageLink : FileUpload(new FormData($('.changBgForm')[0])),
+		};
+		var json = $.toJSON(datajson);
+		UpdateUserProfile(userID, json);
+		fetchUserByID();
+		$('#myModalB').modal('hide');
+	});
+	// function addPhoto
+	$('body').on(
+			"click",
+			".addPhoto",
+			function() {
+				AddImages(userID, photosfileDri);
+				$('#myModalPhoto').modal('hide');
+				$.each(photosfileDri, function(index, imageLink) {
+					var photoContainer = "<div class='photo'><img src='"
+							+ imageLink + "' /></div>";
+					$('.photoAddBtn').after(photoContainer);
+					Msnry('.pro_body', '.photo', 280);
+				});
+			});
+}
 
 // function profileBg
 $('.profile_img')
 		.hover(
 				function() {
 					var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";// <button
-																																																																					// class='btn
-																																																																					// btn-success
-																																																																					// avatarImgBtn'>Change
-																																																																					// Avatar</button>
+					// class='btn
+					// btn-success
+					// avatarImgBtn'>Change
+					// Avatar</button>
 					$('.profile_img').append(changeBtn);
 					$('.changeBtnGroup').hide();
 					$('.changeBtnGroup').fadeIn(300);
@@ -260,7 +359,7 @@ function showPhotos() {
 }
 // show followees
 function showFollowees() {
-	var response = FetchFollowees(userID,"0","10");
+	var response = FetchFollowees(userID, "0", "10");
 	$.each(response, function(index, followee) {
 		var followeeDiv = "<img src='" + followee.attributes.avatarLink
 				+ "'></img>";
@@ -269,27 +368,34 @@ function showFollowees() {
 }
 // show followers
 function showFollowers() {
-	var response = FetchFollowers(userID, "0","10");
+	var response = FetchFollowers(userID, "0", "10");
 	$.each(response, function(index, follower) {
 		var followerDiv = "<img src='" + follower.attributes.avatarLink
 				+ "'></img>";
 		$('.followerShow').append(followerDiv);
 	});
 }
-
+var pageSize = 5;
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
-	var response = FetchPostsByOwner(userID,"0", "15");
-	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
-	});
+	var response = FetchPostsByOwner(userID, 0, pageSize);
+	$.each(response.reverse(),
+			function(n, dataString) {
+				if (dataString.postType == "NORMAL") {
+					addPost(dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publishDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+				}
+			});
 }
 
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
+	$('.profile_user_img').find('img').attr("src",userInfo.attributes.avatarLink);
+	$('.profile_img').find('img').attr("src",userInfo.attributes.profileImageLink);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);
@@ -306,3 +412,38 @@ function fetchUserByID() {
 				d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate());
 	}
 }
+$(window)
+		.scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- window.windowHeight) {
+						var startIndex = 0;
+						if (USERID == userID)
+							startIndex = $('.post').length - 1;
+						else
+							startIndex = $('.post').length;
+
+						$('div#infinite_loader').show();
+						var response = [];
+						response = FetchPostsByOwner(userID, startIndex,
+								pageSize);
+						$.each(response, function(n, dataString) {
+							var boarddiv = post(dataString.owner.ID,
+									dataString.owner.attributes.name,
+									dataString.publishDate,
+									dataString.attributes.content,
+									dataString.ID, dataString.likerIDs,
+									dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+							$(".pro_body").append(boarddiv);
+							Msnry('.pro_body', '.post', 435);
+						});
+						if (response.length == pageSize) {
+							$('div#infinite_loader').hide();
+						} else {
+							$('div#infinite_loader')
+									.replaceWith(
+											'<div id="no_more_infinite_load"><span>no more</span></div>');
+							$(window).unbind("scroll");
+						}
+					}
+				});

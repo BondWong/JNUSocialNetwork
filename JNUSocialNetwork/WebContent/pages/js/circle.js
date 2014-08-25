@@ -120,23 +120,25 @@ $(document)
 					});
 				});
 // function fectchPostByFollowee
-var pageSize = 5;
+var pageSize = 15;
 function fetchByFolloweeOrOwner() {
 	var response = FetchByFolloweeOrOwner(USERID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+		if(dataString.postType=="NORMAL"){
+			addPost(dataString.owner.ID, dataString.owner.attributes.name,
+					dataString.publishDate, dataString.attributes.content,
+					dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+		}
 	});
 }
 // function fectchHeatPost
 
 function fectchHeatPost() {
-	var response = FetchHeatPost("0", "5");
+	var response = FetchHeatPost(0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+				dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
 	});
 }
 // function fetchPostsByIDs
@@ -153,7 +155,7 @@ $(window).scroll(
 		function() {
 			if ($(window).scrollTop() == $(document).height()
 					- window.windowHeight) {
-				var startIndex = $('.post').length;
+				var startIndex = $('.post').length-1;
 				$('div#infinite_loader').show();
 				var response = [];
 				if (USERID == null || USERID == "")
@@ -161,12 +163,14 @@ $(window).scroll(
 				else
 					response = FetchByFolloweeOrOwner(USERID, startIndex,
 							pageSize);
-				$.each(response.reverse(), function(n, dataString) {
-					addPost(dataString.owner.ID,
+				$.each(response, function(n, dataString) {
+					var boarddiv = post(dataString.owner.ID,
 							dataString.owner.attributes.name,
 							dataString.publishDate,
 							dataString.attributes.content, dataString.ID,
-							dataString.likerIDs, dataString.collectorIDs);
+							dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+					$(".pro_body").append(boarddiv);
+					Msnry('.pro_body', '.post', 435);
 				});
 				if (response.length == pageSize) {
 					$('div#infinite_loader').hide();

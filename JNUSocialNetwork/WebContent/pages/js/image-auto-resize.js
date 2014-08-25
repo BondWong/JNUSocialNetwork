@@ -1,5 +1,5 @@
 /**
- * 
+ * auto_resize
  */
 function auto_resize(maxWidth, maxHeight, srcImage) {
 	var image = new Image();

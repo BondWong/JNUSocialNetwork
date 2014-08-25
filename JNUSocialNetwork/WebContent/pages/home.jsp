@@ -38,7 +38,7 @@
 
 						<p>
 							<a class="btn btn-lg btn-success" href="register.jsp"
-								role="button" id="showBtn">Sign up today</a>
+								role="button" id="showBtn">快速注册</a>
 						</p>
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 
 						<p>
 							<a class="btn btn-lg btn-success" href="community.jsp"
-								role="button">Discover community</a>
+								role="button">发现社区</a>
 						</p>
 					</div>
 				</div>
@@ -61,8 +61,7 @@
 					<div class="carousel-caption">
 
 						<p>
-							<a class="btn btn-lg btn-success" href="people.jsp" role="button">Find
-								your friends</a>
+							<a class="btn btn-lg btn-success" href="people.jsp" role="button">寻找伙伴</a>
 						</p>
 					</div>
 				</div>

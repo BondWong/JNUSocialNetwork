@@ -39,7 +39,7 @@ function login_initialization(ID) {
 	} else {
 		wsurl = "ws:";
 	}
-	wsurl += "//" + loc.host + "/endpoint/connect/" + ID;
+	wsurl += "//" + loc.hostname + ":8080/endpoint/connect/" + ID;
 	window.ws = new WebSocket(wsurl);
 	ws.onopen = function(e) {
 

@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.media.sse.EventOutput;
 import org.glassfish.jersey.media.sse.SseFeature;
 
+import service.helper.SSE;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteUnhandledEventTransaction;
@@ -23,6 +24,7 @@ public class ServerSentEventService {
 	@GET
 	@Path("subscribe")
 	@Produces(SseFeature.SERVER_SENT_EVENTS)
+	@SSE
 	public EventOutput subscribe() {
 		final EventOutput eventoutput = new EventOutput();
 		this.broadcaster.subscribe(eventoutput);
