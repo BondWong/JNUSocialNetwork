@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.AsyncContext;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -14,7 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import transaction.CrawAttributesTransaction;
 import transaction.Transaction;
 
-public class UserInfoCrawler implements Runnable {
+public class UserInfoCrawler {
 	private static String URL = "http://202.116.0.176/Secure/Xjgl/Xjgl_Xsxxgl_Xjxxxg_XS.aspx";
 	private static String CAMPUSPATTERN = "name=\"txtXQ\" type=\"text\" value=\"(.+)\" readonly=\"readonly\"";
 	private static String INSTITUTIONPATTERN = "name=\"txtXY_X\" type=\"text\" value=\"(.+)\" readonly=\"readonly\"";
@@ -37,24 +35,17 @@ public class UserInfoCrawler implements Runnable {
 		patternMap.put("emailPattern", EMAILPATTERN);
 	}
 
-	private AsyncContext asyncContext;
-
-	public UserInfoCrawler(AsyncContext asyncCtx) {
-		this.asyncContext = asyncCtx;
+	public UserInfoCrawler() {
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		CloseableHttpClient httpClient = (CloseableHttpClient) asyncContext
-				.getRequest().getAttribute("httpClient");
+	public void crawl(CloseableHttpClient httpClient,
+			ResponseHandler<String> responseHandler, String ID) {
 		HttpGet get = new HttpGet(URL);
-		@SuppressWarnings("unchecked")
-		ResponseHandler<String> responseHandler = (ResponseHandler<String>) asyncContext
-				.getRequest().getAttribute("responseHandler");
 		String response = "";
 		try {
 			response = httpClient.execute(get, responseHandler);
+			response = new String(response.getBytes(), "utf8");
+			System.out.println(response);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +54,6 @@ public class UserInfoCrawler implements Runnable {
 			e.printStackTrace();
 		}
 
-		String ID = asyncContext.getRequest().getParameter("ID");
 		Transaction transaction = new CrawAttributesTransaction();
 		try {
 			transaction.execute(response, patternMap, ID);
@@ -71,8 +61,6 @@ public class UserInfoCrawler implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		asyncContext.complete();
 
 	}
 

@@ -32,8 +32,15 @@ function login_initialization(ID) {
 	 * initialize websocket
 	 */
 	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
-	window.ws = new WebSocket(
-			"ws://localhost:8080/endpoint/connect/" + ID);
+	var loc = window.location;
+	var wsurl = "";
+	if (loc.protocol === "https:") {
+		wsurl = "wss:";
+	} else {
+		wsurl = "ws:";
+	}
+	wsurl += "//" + loc.hostname + ":8080/endpoint/connect/" + ID;
+	window.ws = new WebSocket(wsurl);
 	ws.onopen = function(e) {
 
 	};

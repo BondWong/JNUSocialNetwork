@@ -28,7 +28,6 @@ public class RegisterTransaction extends DAOTransaction{
 		
 		dao.create(user);
 		dao.create(account);
-		
 		return user.toRepresentation();
 	}
 

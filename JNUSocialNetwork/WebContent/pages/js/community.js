@@ -41,29 +41,29 @@ function communityClickEvent() {
 // fetchCommunityByID
 function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
-	if (community.available != "false") {
+	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
-				community.memberIDs.length, "myCommunity",
-				community.attributes.communityCard);
+				community.members.length, "myCommunity",
+				community.attributes.communityCard,community.members);
 	}
 }
 function fetchCommunityByOwner() {
 	var communities = FetchCommunityByOwner(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != "false") {
+		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.memberIDs.length, "myCommunity",
-					community.attributes.communityCard);
+					community.members.length, "myCommunity",
+					community.attributes.communityCard,community.members);
 		}
 	});
 }
 function fetchCommunityByJoin() {
 	var communities = FetchCommunityByJoin(USERID, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != "false") {
+		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.memberIDs.length, "myCommunity",
-					community.attributes.communityCard);
+					community.members.length, "myCommunity",
+					community.attributes.communityCard,community.members);
 		}
 	});
 }
@@ -71,20 +71,20 @@ function fetchCommunityByJoin() {
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != "false") {
+		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.memberIDs.length, "discoverCommunity",
-					community.attributes.communityCard);
+					community.members.length, "discoverCommunity",
+					community.attributes.communityCard,community.members);
 		}
 	});
 }
 function fetchCommunityByType(communityType) {
 	var communities = FetchCommunityByType(communityType, "0", "5");
 	$.each(communities, function(n, community) {
-		if (community.available != "false") {
+		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.memberIDs.length, community.communityType,
-					community.attributes.communityCard);
+					community.members.length, community.communityType,
+					community.attributes.communityCard,community.members);
 		}
 	});
 }
@@ -96,7 +96,15 @@ function fetchCommunitys() {
 
 }
 // 增加社区
-function addCommunity(id, name, memberNum, communityType, communityImg) {
+function addCommunity(id, name, memberNum, communityType, communityImg,members) {
+	var memberIDs=[];
+	$.each(members,function(n,member){
+		memberIDs.push(member.ID);
+	});
+	var joinClass= "";
+	if ($.inArray(USERID, memberIDs) != -1) {
+		joinClass="style='color: #FFF;background-color: #428BCA;'";
+	}
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
@@ -105,7 +113,7 @@ function addCommunity(id, name, memberNum, communityType, communityImg) {
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div><a><div class='content_join style='cursor:pointer;'><input type='hidden' value='"
+			+ " members</div><a><div "+joinClass+" class='content_join' ><input type='hidden' value='"
 			+ id + "'>Join</div></a></div></div>";
 	switch (communityType) {
 	case "discoverCommunity":

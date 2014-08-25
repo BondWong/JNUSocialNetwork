@@ -201,6 +201,7 @@ body {
 	height: 375px;
 	width: 265px;
 	margin-top: 10px;
+	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
 }
 
 .img_container {
@@ -255,6 +256,12 @@ body {
 	width: 900px;
 	margin-top: 20px;
 }
+.member_body{
+	margin-right: auto;
+	margin-left: auto;
+	width: 1000px;
+	margin-top: 20px;
+}
 .about_body{
 	margin-right: auto;
 	margin-left: auto;
@@ -278,6 +285,7 @@ body {
 	margin-left: 0px;
 	float: left;
 	width: 435px;
+	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
 }
 .about{
 	padding-top:0px;
@@ -393,6 +401,7 @@ body {
 	padding: 5px;
 	float: right;
 	background-color: #fff;
+	cursor:pointer;
 }
 
 .act_time {
@@ -706,6 +715,7 @@ body {
 	float: left;
 	width: 220px;
 	height: 600px;
+	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
 }
 
 .pro_body_community {
@@ -737,7 +747,9 @@ body {
 #editCommunityBtn {
 	display: none;
 }
-
+#leaveCommunityBtn {
+	display: none;
+}
 #editMembersBtn {
 	display: none;
 }
@@ -783,7 +795,6 @@ body {
 
 .cardA {
 	width: 100%;
-	height: 90px;
 	margin-top: 10px;
 	padding-bottom: 10px;
 	color: #404040;
@@ -811,18 +822,41 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+.members{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:10px;
+}
+.members img{
+	float:left;
+}
 
 .memberList h1 {
 	float: left;
 	color: #aaa;
 	font-size: 14px;
 }
-
-.memberList a {
+.member{
+	margin-top:10px;
+	width:215px;
+	height:80px;
+	background-color:#fff;
+	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
+}
+.membersContainer{
+	width:1000px;
+	float: left;
+}
+.memberList span {
 	margin-top: 18px;
 	float: right;
+	cursor:pointer;
+	color:#427fed;
 }
-
+.memberList span:hover{
+	text-decoration:underline;
+}
 .memberPic {
 	width: 200px;
 }
@@ -1526,4 +1560,24 @@ body {
 }
 .sharePro{
 	display:none;
+}
+.memberName{
+	font-size:16px;
+	color:#404040;
+	font-weight:bolder;
+	width:50%;
+	margin-left:10px;
+	display:block;
+	float:left;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-top:20px
+}
+.userMember{
+	float:left;
+}
+.memberRemoveBtn{
+	float:right;
+	display:none;
+
 }
