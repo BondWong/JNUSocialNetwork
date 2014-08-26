@@ -316,6 +316,7 @@ function clickEvent() {
 		$('#editCommunityBtn').css("display", "inline");
 		$('#editMembersBtn').css("display", "inline");
 		$('#deleteCommunityBtn').css("display", "inline");
+		$('.editActivity').css("display", "inline");
 	}
 }
 function clickOffEvent() {
@@ -437,7 +438,7 @@ function clickOffEvent() {
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this) src="'
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
 										+ data.attributes.profileImageLink
 										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
 										+ data.attributes.avatarLink

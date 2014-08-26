@@ -87,7 +87,9 @@
 				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
 					humor!</p>
 			</div>
-			<div class="communityPic"></div>
+			<div class="communityPic">
+				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+			</div>
 			<div class="cardA">
 				<span>All posts</span> <span class="activityHref">Activities</span>
 			</div>

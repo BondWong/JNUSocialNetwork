@@ -5,7 +5,7 @@ function activityClickEvent() {
 		if ($('#fileuploadA').val() != "") {
 			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
 		} else {
-			activityC = "";
+			activityC = 'images/default/default-activity-background.jpg';
 		}
 		var post = {
 			postType : 'ACTIVITY',
@@ -32,13 +32,13 @@ function fetchActivitiesByCommunity() {
 		addActivity(dataString.ID, dataString.attributes.activityName,
 				dataString.attributes.activityTime,
 				dataString.attributes.activityAddr,
-				dataString.attributes.activityMore, dataString.attributes.background);
+				dataString.attributes.activityMore, dataString.attributes.background,dataString.owner.attributes.avatarLink);
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink) {
+function activity(activityID, name, time, addre, more, imagelink,avatarLink) {
 	var boarddiv = "<div class='activity' ><div class='activityHref' id='"
 			+ activityID
-			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"+imagelink+"' /></div><div class='user_img activityAvatar'><img class='userImg' src='images/user_img.jpg' /></div><div class='activityName'><span>"
+			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"+imagelink+"' /></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"+avatarLink+"' /></div><div class='activityName'><span>"
 			+ name
 			+ "</span></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;"
 			+ time
@@ -53,8 +53,8 @@ function activity(activityID, name, time, addre, more, imagelink) {
 	return boarddiv;
 }
 // function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink) {
-	var boarddiv = activity(activityID, name, time, addre, more, imagelink);
+function addActivity(activityID, name, time, addre, more, imagelink,avatarLink) {
+	var boarddiv = activity(activityID, name, time, addre, more, imagelink,avatarLink);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }

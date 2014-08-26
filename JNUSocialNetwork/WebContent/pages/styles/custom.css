@@ -154,7 +154,7 @@ body {
 	margin-left: auto;
 	width: 1270px;
 }
-.container.container_activity {
+.container.container_actvity {
 	background-color: #EEEEEE;
 	margin-top: 70px;
 	margin-right: auto;
@@ -738,7 +738,11 @@ body {
 #createCommunityBtn {
 	display: none;
 }
-
+.editActivity {
+	display: none;
+	margin-left:20px;
+	margin-top:-15px;
+}
 .createCommunity h1 {
 	font-size: 18px;
 	float: left;
@@ -1142,6 +1146,16 @@ body {
 	padding-right: 2px;
 	color: #5A5A5A;
 	margin-left: 5px;
+	text-decoration: none;
+}
+.replyaComment{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DFDFDF;
+	padding-left: 2px;
+	color: #5A5A5A;
+	margin-left: 420px;
+	font-size:14px;
 	text-decoration: none;
 }
 
@@ -1580,4 +1594,7 @@ body {
 	float:right;
 	display:none;
 
+}
+#activityLike{
+	cursor:pointer;
 }
