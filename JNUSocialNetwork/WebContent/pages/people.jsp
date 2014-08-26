@@ -67,7 +67,7 @@
 				clickOffEvent();
 			}
 			pHot();
-			Msnry('.userContainer', '.userCard', 200);
+			Msnry('.userContainer', '.userCard', 170);
 
 		});
 	</script>

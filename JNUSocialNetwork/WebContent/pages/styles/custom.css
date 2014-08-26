@@ -1463,7 +1463,7 @@ body {
 .userCard {
 	margin-top: 20px;
 	float: left;
-	width: 200px;
+	width: 170px;
 	background-color: #fff;
 }
 
@@ -1597,4 +1597,9 @@ body {
 }
 #activityLike{
 	cursor:pointer;
+}
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #FFF;
 }

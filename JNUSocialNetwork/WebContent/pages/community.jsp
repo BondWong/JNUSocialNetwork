@@ -29,6 +29,10 @@
 			<li><a class="folkCommunityBtn">个人社区</a></li>
 			<li><a class="discoverCommunityBtn">热门社区</a></li>
 			<li><a class="searchCommunityBtn">搜索社区</a></li>
+			<li><a  class="appCom" href="applyCommunity.jsp">申请社区</a></li>
+			<li><a  role="button" class="createCom"
+				data-toggle='modal' data-target='#createCommunity'
+				id="createCommunityBtn">创建社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -67,7 +71,7 @@
 			<div role="button" class="btn btn-sm btn-success createCom"
 				data-toggle='modal' data-target='#createCommunity'
 				id="createCommunityBtn">创建社区</div>
-			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">申请成为创建社区</a>
+			
 		</div>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"

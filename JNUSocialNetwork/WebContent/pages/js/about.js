@@ -222,15 +222,13 @@ function aboutClickEvent() {
 					'click',
 					'.aEditbtn',
 					function() {
-						$("span[class='Anickname']")
-								.html(
-										"<input id='focusedInput' class='nicknameE' type='text' value='' />");
+						var userInfo = FetchUserByID(userID);
 						$("span[class='Alooking']")
 								.html(
-										"<input class='lookingforE' id='focusedInput' type='text' value='' />");
+										"<input class='lookingforE' id='focusedInput' type='text' value='"+userInfo.attributes.lookingFor+"' />");
 						$("span[class='Atelenum']")
 								.html(
-										"<input class='telenumE' id='focusedInput' type='text' value='' />");
+										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telenum+"' />");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
@@ -259,7 +257,7 @@ function aboutClickEvent() {
 										+ "</select>");
 						$("span[class='Aemail']")
 								.html(
-										"<input class='emailE' id='focusedInput' type='text' value='' />");
+										"<input class='emailE' id='focusedInput' type='text' value='"+userInfo.attributes.email+"' />");
 
 						$(this).text("Save");
 						$(this).attr("class", "btn btn-primary aSavebtn");
@@ -267,7 +265,6 @@ function aboutClickEvent() {
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
 		var datajson = {
-			name : $('.nicknameE').val(),
 			lookingFor : $('.lookingforE').val(),
 			relationship : $('.relationshipnE').val(),
 			telenum : $('.telenumE').val(),
@@ -396,6 +393,7 @@ function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
 	$('.profile_user_img').find('img').attr("src",userInfo.attributes.avatarLink);
 	$('.profile_img').find('img').attr("src",userInfo.attributes.profileImageLink);
+	$('.profileAvatar').attr("src",userInfo.attributes.avatarLink);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);
@@ -412,38 +410,3 @@ function fetchUserByID() {
 				d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate());
 	}
 }
-$(window)
-		.scroll(
-				function() {
-					if ($(window).scrollTop() == $(document).height()
-							- window.windowHeight) {
-						var startIndex = 0;
-						if (USERID == userID)
-							startIndex = $('.post').length - 1;
-						else
-							startIndex = $('.post').length;
-
-						$('div#infinite_loader').show();
-						var response = [];
-						response = FetchPostsByOwner(userID, startIndex,
-								pageSize);
-						$.each(response, function(n, dataString) {
-							var boarddiv = post(dataString.owner.ID,
-									dataString.owner.attributes.name,
-									dataString.publishDate,
-									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs,
-									dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
-							$(".pro_body").append(boarddiv);
-							Msnry('.pro_body', '.post', 435);
-						});
-						if (response.length == pageSize) {
-							$('div#infinite_loader').hide();
-						} else {
-							$('div#infinite_loader')
-									.replaceWith(
-											'<div id="no_more_infinite_load"><span>no more</span></div>');
-							$(window).unbind("scroll");
-						}
-					}
-				});

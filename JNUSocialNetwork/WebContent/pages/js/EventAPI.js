@@ -1141,12 +1141,11 @@ function RecommendateViaClass(userID) {
 	return response;
 }
 // RecommendateViaClass 输入：userID;返回：userJson
-function SearchMember(userID, key, startIndex, pageSize) {
+function SearchMember( key, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/search/' + userID + '/' + key + '/' + startIndex
-				+ '/' + pageSize,
+		url : '../../app/user/search/'  + key + '/' + startIndex + '/' + pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},

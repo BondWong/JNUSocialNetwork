@@ -56,7 +56,7 @@ public class AttributesFactory {
 				attributes.put("avatarLink",
 						"images/default/default-user-avartar.png");
 				attributes.put("profileImageLink",
-						"images/default/default-profile-background.png");
+						"images/default/default-profile-background.jpg");
 				attributes.put("gender", "");
 				attributes.put("name", "");
 				attributes.put("lookingFor", "");

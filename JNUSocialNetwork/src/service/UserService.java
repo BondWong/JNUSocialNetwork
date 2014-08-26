@@ -403,6 +403,29 @@ public class UserService {
 				}).build();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Path("search/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response searchMember(@PathParam("key") String key,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		key = URLDecoder.decode(key, "utf-8");
+		transaction = new SearchMemberTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(null, key,
+					startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
 	@Path("doesIDExist/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

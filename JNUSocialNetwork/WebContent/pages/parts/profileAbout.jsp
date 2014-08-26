@@ -8,6 +8,9 @@
 						<span class="aboutTitle">Basic Information</span>
 					</div>
 					<div class="InforItem">
+							<span class="Atitle">Name</span><span class="Anickname"></span>
+						</div>
+					<div class="InforItem">
 							<span class="Atitle">Gender</span><span class="Agender"></span>
 					</div>
 					<div class="InforItem">
@@ -29,9 +32,7 @@
 						<div>
 							<span class="aboutTitle">Profile</span>
 						</div>
-						<div class="InforItem">
-							<span class="Atitle">Nickname</span><span class="Anickname"></span>
-						</div>
+						
 						<div class="InforItem">
 							<span class="Atitle">Relationship</span><span class="Arelationship"></span>
 						</div>
