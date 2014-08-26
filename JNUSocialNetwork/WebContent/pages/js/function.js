@@ -316,6 +316,7 @@ function clickEvent() {
 		$('#editCommunityBtn').css("display", "inline");
 		$('#editMembersBtn').css("display", "inline");
 		$('#deleteCommunityBtn').css("display", "inline");
+		$('.editActivity').css("display", "inline");
 	}
 }
 function clickOffEvent() {

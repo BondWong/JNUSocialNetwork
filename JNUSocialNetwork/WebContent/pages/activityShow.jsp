@@ -27,9 +27,8 @@
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
 					
-					<span class="glyphicon glyphicon-heart-empty"
-						style="font-size: 20px"></span> <span
-						class="glyphicon glyphicon-share-alt" style="font-size: 20px"></span>
+					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
+						style="font-size: 20px"></span>
 						<button class="btn btn-default editActivity"  data-toggle='modal'
 					data-target='#editActivity'>edit</button>
 				</div>
