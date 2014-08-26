@@ -12,7 +12,7 @@
 		var comments = FetchCommentByPost(activity.ID,"0","5");
 		var comment="";
 		$.each(comments.reverse(),function(index,jsonComment){
-			comment = comment + "<div class='aBodyComment'><div class='aCommentItem'><img alt=''  src='images/user_img.jpg'><div class='user_name'><strong>"+jsonComment.owner.attributes.name+"</strong></div><div class='user_info'><span>"+jsonComment.publishDate+"</span><span class='replyaComment'>reply</span><span class='glyphicon glyphicon-remove deleteCommBtn'><input type='hidden' id='"+activity.ID+"' value='"+jsonComment.ID+"' /></span></div><br><div>"+jsonComment.attributes.content+"</div></div></div>";
+			comment = comment + "<div class='aBodyComment'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"+jsonComment.owner.attributes.avatarLink+"'><div class='user_name'><strong>"+jsonComment.owner.attributes.name+"</strong></div><div class='user_info'><span>"+jsonComment.publishDate+"</span><span class='replyaComment'>reply</span><span class='glyphicon glyphicon-remove deleteCommBtn'><input type='hidden' id='"+activity.ID+"' value='"+jsonComment.ID+"' /></span></div><br><div>"+jsonComment.attributes.content+"</div></div></div>";
 		 });
 		$(".commentBtn").after(comment); 
 		$('.communityBS').find('img').attr("src",'images/default/default-community-card.png');
