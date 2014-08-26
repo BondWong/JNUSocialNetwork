@@ -14,36 +14,36 @@
 		<div class="layer">
 			<div class="regTop">
 				<a href="home.jsp" class="btn btn-primary btn-sm rl-button-span"
-					role="button"><span>Back to home page</span></a> <a href="#"
-					class="btn btn-primary btn-sm rl-button-text" role="button"><span>About
-						us</span></a>
+					role="button"><span>回到首页</span></a> <a href="#"
+					class="btn btn-primary btn-sm rl-button-text" role="button"><span>关于我们</span></a>
 			</div>
-			<div class="regTitle">Sign In</div>
-			<div class="regTitle">這個是幹嘛的</div>
+			<div class="regTitle">登录</div>
 			<div class="containerReg" style="display: block">
 				<div class="regBox">
 					<form class="form-signin" role="form" method="post"
 						action="../security/Login">
 						<p>
-							<input type="text" class="form-control" placeholder="ID"
-								name="ID" required autofocus>
+							<input type="text" class="form-control" placeholder="请输入ID"
+								name="ID" data-errormessage-value-missing="请输入ID" required
+								autofocus>
 						</p>
 						<p>
-							<input type="password" class="form-control"
-								placeholder="Password" name="password" id="md5Password" required>
+							<input type="password" class="form-control" placeholder="请输入密码"
+								name="password" id="md5Password"
+								data-errormessage-value-missing="请输入密码" required autofocus>
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
-							type="submit">Sign in</button>
+							type="submit">登录</button>
 						<h4>
-							Have no account?<span class="btn signUp">Sign up</span>
+							没有账号？<span class="btn signUp">注册</span>
 						</h4>
 					</form>
 					<div id="login_fail_popover" class="alert alert-danger"
-						style="display: none">Sign In Unsuccessfully</div>
+						style="display: none">登录失败</div>
 					<div class="alert alert-success" id="register_success"
-						style="display: none">Sign Up Successfully, Please Sign In</div>
+						style="display: none">注册成功，请登录</div>
 				</div>
 			</div>
 			<!-- /container -->

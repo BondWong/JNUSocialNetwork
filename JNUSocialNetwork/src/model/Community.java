@@ -210,12 +210,16 @@ public class Community extends AttributeModel {
 		representation.put("attributes", this.attributes);
 		representation.put("communityType", this.communityType);
 
-		List<String> memberIDs = new ArrayList<String>();
+		List<Map<String, String>> members = new ArrayList<Map<String, String>>();
 		for (Member member : this.members) {
-			memberIDs.add(member.getID());
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("ID", member.getID());
+			m.put("name", member.getAttribute("name"));
+			m.put("avatarLink", member.getAttribute("avatarLink"));
+			members.add(m);
 		}
 
-		representation.put("memberIDs", memberIDs);
+		representation.put("members", members);
 		return representation;
 	}
 

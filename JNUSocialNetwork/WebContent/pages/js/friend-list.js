@@ -10,9 +10,10 @@ function on_friends_node_click() {
 						'<span class="glyphicon glyphicon-chevron-down">&nbsp;Friends</span>');
 		var chatRooms = sessionStorage.getItem("chatrooms");
 		chatRooms = $.parseJSON(chatRooms);
+		var names = {};
 		for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
-			var chatRoom = chatRooms[i];
 			if (chatRooms[i].m1ID == USERID) {
+				names[chatRooms[i].m2ID] = chatRooms[i].m2.name;
 				var info = '<div class="person" id="' + chatRooms[i].m2ID
 						+ '"><img src="' + chatRooms[i].m2.avatarLink
 						+ '" class="person-img" /><p class="person-info">'
@@ -22,12 +23,11 @@ function on_friends_node_click() {
 				else
 					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></div>';
 				$("#contact-list .friends-tree-node").append(info);
-				$("#contact-list #" + chatRoom.m2ID).click(
-						function() {
-							open_chatroom(USERID, chatRoom.m2ID,
-									chatRoom.m2.name, chatRoom.online);
-						});
+				$("#contact-list #" + chatRooms[i].m2ID).click(function() {
+					open_chatroom(USERID, $(this).attr("id"));
+				});
 			} else {
+				names[chatRooms[i].m1ID] = chatRooms[i].m1.name;
 				var info = '<div class="person" id="' + chatRooms[i].m1ID
 						+ '"><img src="' + chatRooms[i].m1.avatarLink
 						+ '" class="person-img" /><p class="person-info">'
@@ -37,13 +37,12 @@ function on_friends_node_click() {
 				else
 					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></div>';
 				$("#contact-list .friends-tree-node").append(info);
-				$("#contact-list #" + chatRoom.m1ID).click(
-						function() {
-							open_chatroom(USERID, chatRoom.m1ID,
-									chatRoom.m1.name, chatRoom.online);
-						});
+				$("#contact-list #" + chatRooms[i].m1ID).click(function() {
+					open_chatroom(USERID, $(this).attr("id"));
+				});
 			}
 		}
+		sessionStorage.setItem("userNameID", JSON.stringify(names));
 	} else if ($("#contact-list .friends-tree-node span").attr("class")
 			.indexOf("glyphicon-chevron-down") != -1) {
 		$("#contact-list .friends-tree-node span")

@@ -9,6 +9,8 @@ import javax.ws.rs.core.Application;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
+import service.helper.AccessControlAllowOriginReponseFilter;
+
 @ApplicationPath("/app")
 public class JnuSocialNetwork extends Application {
 	public Set<Class<?>> getClasses() {
@@ -24,6 +26,7 @@ public class JnuSocialNetwork extends Application {
 		classes.add(JacksonFeature.class);
 		classes.add(MultiPartFeature.class);
 		classes.add(ApplicationService.class);
+		classes.add(AccessControlAllowOriginReponseFilter.class);
 		return classes;
 	}
 

@@ -10,54 +10,9 @@ function Msnry(selectContain, item, width) {
 	});
 }
 
-// function addDiv
-function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
-		collecters) {
-	var response = FetchCommentByPost(postID, "0", "2");
-	var comment = "";
-	$
-			.each(
-					response,
-					function(index, jsonComment) {
-						var atComment = "";
-						if (jsonComment.attributes.commentToComment != "") {
-							atComment = "@"
-									+ jsonComment.attributes.commentToComment;
-						}
-						var removeBtn = "";
-						if (USERID == jsonComment.owner.ID) {
-							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
-									+ postID
-									+ "' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
-						}
-						comment = comment
-								+ "<div class='act_content' id='"
-								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
-								+ jsonComment.owner.attributes.name
-								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
-								+ removeBtn
-								+ "</div></div><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
-								+ jsonComment.publishDate
-								+ "</div></div><div class='col-lg-5 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
-								+ jsonComment.ID
-								+ "'>+<span>"
-								+ jsonComment.likerIDs.length
-								+ "</span></div><a><input id='likeID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-								+ postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
-								+ atComment + "</span>" + "&nbsp;"
-								+ jsonComment.attributes.content
-								+ "﻿</div></div>";
-					});
+function post(ownerID, ownerNickName, publishDate, content, postID, likers,
+		collecters, srcImage, ownerImage) {
+
 	var likeClass = "glyphicon glyphicon-heart-empty";
 	var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, likers) != -1) {
@@ -72,9 +27,27 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 				+ postID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 	}
+	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
+	var imageDiv = "";
+	if (srcImage.length != 0) {
+		$
+				.each(
+						srcImage,
+						function(n, image) {
+							imageDiv = imageDiv
+									+ "<img onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
+									+ postID + ")' src='" + image + "' />";
+						});
+		postImgDiv = postImgDiv + imageDiv + "</div>";
+	} else {
+		postImgDiv = "";
+	}
+
 	var boarddiv = "<div class='post "
 			+ postID
-			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
+			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+			+ ownerImage
+			+ "' /><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -84,16 +57,14 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
 			+ content
-			+ "</span><div class='post_more'><a>read more...</a></div></div><div class='post_img' id='postImg"
-			+ postID
-			+ "'><img onclick='showPost("
-			+ postID
-			+ ")' src='images/9.jpg' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ "</span><div class='post_more'><a>read more...</a></div></div>"
+			+ postImgDiv
+			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 			+ ownerID
 			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
 			+ ">"
-			+ "<span class='"
+			+ "<span id='likeShow' class='"
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likers.length
@@ -101,40 +72,41 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "><span class='"
 			+ collectClass
-			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
-			+ postID
-			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
-			+ postID + ">Submit</button></div></div>" + comment
-			+ "</div></div></div>";
-	$(".share").after(boarddiv);
+			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div></div></div>";
+
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
 	$('.act_content').find('a').hide();
-	$('.act_content')
-	.hover(
-			function() {
-				
-				$(this).find('a').fadeIn(300);
-			}, function() {
-				$(this).find('a').fadeOut(300);
-			});
+	$('.act_content').hover(function() {
+
+		$(this).find('a').fadeIn(300);
+	}, function() {
+		$(this).find('a').fadeOut(300);
+	});
+
+	return boarddiv;
+}
+// function addDiv
+function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
+		collecters, srcImage, ownerImage) {
+	var boarddiv = post(ownerID, ownerNickName, publishDate, content, postID,
+			likers, collecters, srcImage, ownerImage);
+	$(".share").after(boarddiv);
 	$('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
 }
 // function hovercommentDeleteBtn
 
-$('.act_content')
-		.hover(
-				function() {
-					$('.changeBtnGroup').hide();
-					$('.changeBtnGroup').fadeIn(300);
-				}, function() {
-					$('.changeBtnGroup').fadeOut(300, function() {
-						$(this).remove();
-					});
-				});
+$('.act_content').hover(function() {
+	$('.changeBtnGroup').hide();
+	$('.changeBtnGroup').fadeIn(300);
+}, function() {
+	$('.changeBtnGroup').fadeOut(300, function() {
+		$(this).remove();
+	});
+});
 
 // fetchPostByIDs
 function fetchPostByIDs(container) {
@@ -142,7 +114,8 @@ function fetchPostByIDs(container) {
 	$.each(response, function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs);
+				dataString.ID, dataString.likerIDs, dataString.collectorIDs,
+				dataString.imageLinks, dataString.owner.attributes.avatarLink);
 	});
 }
 
@@ -172,20 +145,23 @@ function clickEvent() {
 							return 0;
 						}
 					});
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(
+			function() {
+				$('.act_content').find('a').hide();
+				$('.act_content').hover(function() {
 
-						$('body')
-								.on(
-										"click",
-										".tipUser",
-										function() {
-											window.location.href = 'http://localhost:8080/JNUSocialNetwork/pages/profile.jsp?nav=post&'
-													+ sessionStorage
-															.getItem("otherUserID");
-										});
-					});
+					$(this).find('a').fadeIn(300);
+				}, function() {
+					$(this).find('a').fadeOut(300);
+				});
+				$('body').on(
+						"click",
+						".tipUser",
+						function() {
+							window.location.href = 'profile.jsp?nav=post&'
+									+ sessionStorage.getItem("otherUserID");
+						});
+			});
 	// function likePost and cancelLike
 	$('body')
 			.on(
@@ -310,6 +286,14 @@ function clickEvent() {
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
 	});
+	$('body').on("click", "#leaveCommunityBtn", function() {
+		LeaveCommunity(USERID,communityID);
+	});
+	$('body').on("click", "#deleteCommunityBtn", function() {
+		var id = communityID;
+		DeleteCommunity(id);
+	});
+	
 	$('body').on("click", "#saveCommunity", function() {
 		var communityC;
 		if ($('#fileupload').val() != "") {
@@ -328,9 +312,11 @@ function clickEvent() {
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
 	});
-	if($.parseJSON(sessionStorage.getItem("user")).userType=='COMMUNITYOWNER'){
-		$('#editCommunityBtn').css("display","inline");
-		$('#editMembersBtn').css("display","inline");
+	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+		$('#editCommunityBtn').css("display", "inline");
+		$('#editMembersBtn').css("display", "inline");
+		$('#deleteCommunityBtn').css("display", "inline");
+		$('.editActivity').css("display", "inline");
 	}
 }
 function clickOffEvent() {
@@ -445,16 +431,24 @@ function clickOffEvent() {
 								followTxt = "Yourself";
 							}
 							sessionStorage.setItem("otherUserID", data.ID);
+							var chatSpan = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color:#d7d7d7;"></span>';
+							if (data.ID == USERID) {
+								chatSpan = "";
+							}
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><div class="userInImg"><img src="images/user_img4.jpg" /></div><p><h1><a class="tipUser">'
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
+										+ data.attributes.profileImageLink
+										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
+										+ data.attributes.avatarLink
+										+ '" /></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
-										+ '</p><button id="followBtn">'
-										+ followTxt
-										+ '</button></div></div></div>';
+										+ '</p><button class="btn btn-danger" id="followBtn">'
+										+ followTxt + '</button></div>'
+										+ chatSpan + '</div></div>';
 								$('body').append(tipFrame);
 								var divTip = 'div.popTip';
 								tinyTip = $(divTip);
@@ -469,25 +463,35 @@ function clickOffEvent() {
 										$(this).remove();
 									});
 								});
-								var chat = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color: rgb(255, 140, 60);"></span>';
+								var chat = '';
 								$('.userInImg').after(chat);
-								
-								/*$('.userInImg').hover(function(){
-									$('#chatCreate').fadeIn(300);
-									$('#chatCreate').css("display","inline");
-								},function(){
-									$('#chatCreate').fadeOut(300);
-								});*/
+								if (USERID != null && USERID != "") {
+									$("span#chatCreate")
+											.click(
+													function() {
+														open_chatroom(
+																USERID,
+																sessionStorage
+																		.getItem("otherUserID"));
+													});
+								}
+								/*
+								 * $('.userInImg').hover(function(){
+								 * $('#chatCreate').fadeIn(300);
+								 * $('#chatCreate').css("display","inline");
+								 * },function(){ $('#chatCreate').fadeOut(300);
+								 * });
+								 */
 							}
 						}, function() {
 							window.timer = setTimeout(function() {
-								tinyTip.fadeOut(animSpeed, function() {
+								tinyTip.fadeOut(300, function() {
 									$(this).remove();
 								});
 							}, 200);
 
 						});
-		
+
 	};
 })(jQuery);
 
@@ -501,7 +505,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 								+ postID
@@ -534,7 +538,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ postID
 			+ " notifyItem'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
 			+ ownerID
-			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
+			+ "' name='userID'/></div></div><div class='col-md-5'><div class='user_name'><strong>"
 			+ ownerNickName
 			+ "</strong></div><div class='user_info'>"
 			+ publishDate
@@ -566,25 +570,37 @@ $('body').on("click", ".mentionClose", function() {
 });
 
 function showPost(postID) {
-	var dataString = FetchPostByID(postID, comment);
-	var response = FetchCommentByPost(postID, "0", "2");
+	var response = FetchCommentByPost(postID, "0", "20");
 	var comment = "";
 	$
 			.each(
 					response,
 					function(index, jsonComment) {
+						var atComment = "";
+						if (jsonComment.attributes.commentToComment != "") {
+							atComment = "@"
+									+ jsonComment.attributes.commentToComment;
+						}
+						var removeBtn = "";
+						if (USERID == jsonComment.owner.ID) {
+							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
+									+ postID
+									+ "' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+						}
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ jsonComment.owner.attributes.avatarLink
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
-								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
-								+ postID
-								+ "' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
+								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
+								+ removeBtn
+								+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
 								+ jsonComment.publishDate
-								+ "</div></div></div><div class='row'><div class='col-lg-5 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
+								+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 								+ jsonComment.ID
 								+ "'>+<span>"
 								+ jsonComment.likerIDs.length
@@ -596,55 +612,109 @@ function showPost(postID) {
 								+ jsonComment.owner.attributes.name
 								+ "' /><input id='replyID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
-								+ jsonComment.attributes.commentToComment
-								+ "</a>" + "&nbsp;"
+								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
-						if (USERID != jsonComment.owner.ID) {
-							$('.deleteCommBtn').css("display", "none");
-						}
 					});
-	
+
+	var dataString = FetchPostByID(postID);
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty";
+	var collectClass = "glyphicon glyphicon-star-empty ";
 	if ($.inArray(USERID, dataString.likerIDs) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
 	if ($.inArray(USERID, dataString.collectorIDs) != -1) {
 		collectClass = "glyphicon glyphicon-star";
 	}
+	$('.act_content').find('a').hide();
+	$('.act_content').hover(function() {
+
+		$(this).find('a').fadeIn(300);
+	}, function() {
+		$(this).find('a').fadeOut(300);
+	});
 	layer
 			.photos({
-				html : "<div class='showPost'><div class='row showPostInfo'><div class='col-md-3'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
+				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+						+ dataString.owner.attributes.avatarLink
+						+ "'/><input type='hidden' value='"
 						+ dataString.owner.ID
-						+ "' name='userID'/></div></div><div class='col-md-9'><div class='user_name'><strong>"
+						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 						+ dataString.owner.attributes.name
 						+ "</strong></div><div class='user_info'>"
 						+ dataString.publishDate
-						+ "</div></div></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+						+ "</div></div></div><div class='post_info'><span class='postContent'>"
+						+ dataString.attributes.content
+						+ "</span></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID
 						+ "></p><input id='likeID' type='hidden' value="
-						+ dataString.ID
+						+ postID
 						+ ">"
-						+ "<span class='"
+						+ "<span id='likeShow' class='"
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
 						+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
-						+ dataString.ID
-						+ "><span class=' "
+						+ postID
+						+ "><span class='"
 						+ collectClass
 						+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
-						+ dataString.ID
+						+ postID
 						+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
-						+ dataString.ID
+						+ postID
 						+ ">Submit</button></div></div>"
-						+ comment + "</div></div>",
+						+ comment
+						+ "</div></div>",
 				page : {
 					parent : '#postImg' + postID,
 					title : '',
 					start : 0
 				}
 			});
+}
+//funtion sessionID
+$('body')
+		.on(
+				"click",
+				".activityHref",
+				function() {
+					window.location.href = 'activity.jsp?'
+							+ community.ID;
+				});
+$('body')
+.on(
+		"click",
+		".memberHref",
+		function() {
+			window.location.href = 'communityMember.jsp?'
+					+ community.ID;
+		});
+/**
+ * auto_resize
+ */
+function auto_resize(maxWidth, maxHeight, srcImage) {
+	var image = new Image();
+	image.src = srcImage.src;
+
+	if (image.width > maxWidth && image.height <= maxHeight) {
+		image.width = maxWidth;
+		image.height = (maxHeight / maxWidth) * image.width;
+	} else if (image.height > maxHeight && image.width <= maxWidth) {
+		image.height = maxHeight;
+		image.width = (maxWidth / maxHeight) * image.height;
+	} else if (image.height > maxHeight && image.width > maxWidth) {
+		var intervalWidth = image.width - maxWidth;
+		var intervalHeight = image.height - maxHeight;
+		if (intervalWidth >= intervalHeight) {
+			image.width = maxWidth;
+			image.height = (maxHeight / maxWidth) * image.width;
+		} else {
+			image.height = maxHeight;
+			image.width = (maxWidth / maxHeight) * image.height;
+		}
+	}
+
+	srcImage.width = image.width;
+	srcImage.height = image.height;
 }

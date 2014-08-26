@@ -20,16 +20,15 @@
 		<!-- /.container -->
 	</div>
 	<!-- /.navbar -->
-	<div class="container container_custom">
+	<div class="container container_actvity">
 		<div class="activityHead">
-			<img alt="" width="100%" src="images/activityHead.jpg">
+			<img alt="" width="100%" onload="javascript:auto_resize(1170, 300, this)" src="images/activityHead.jpg">
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
 					
-					<span class="glyphicon glyphicon-heart-empty"
-						style="font-size: 20px"></span> <span
-						class="glyphicon glyphicon-share-alt" style="font-size: 20px"></span>
+					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
+						style="font-size: 20px"></span>
 						<button class="btn btn-default editActivity"  data-toggle='modal'
 					data-target='#editActivity'>edit</button>
 				</div>
@@ -148,25 +147,25 @@
 			<div class="aBodyRight">
 				<div class="aBodyCard">
 					<div class="communityBS">
-						<img alt="" src="images/communityBgSm.jpg">
+						<img onload="javascript:auto_resize(437, 160, this)" alt="" src="images/communityBgSm.jpg">
 					</div>
 					<div class="cBcontent">
 						<p>Hosted by:</p>
 						<h1 class="communityName">Hubble Space Telescope</h1>
 						<p class="communityNum">2,569,262 have them in circles</p>
-						<button class="btn btn-danger">Add community</button>
+						<!--<button class="btn btn-danger addcommunityA" id="">Add community</button>  -->
 					</div>
 				</div>
 				<div class="aBodyAsk">
 					<h1>Are you going to join in?</h1>
 					<select class="btn btn-default">
 						<option>Maybe</option>
-						<option class="activityJoin">Yes</option>
-						<option class="leaveactivityJoin">No</option>
+						<option class="activityJoin" id="">Yes</option>
+						<option class="leaveactivityJoin" id="">No</option>
 					</select>
 				</div>
 			</div>
-		</div>
+		</div></div>
 		<!-- CHATROOM -->
 		<%@ include file="parts/chatRoom.jsp"%>
 		<!-- Bootstrap core JavaScript

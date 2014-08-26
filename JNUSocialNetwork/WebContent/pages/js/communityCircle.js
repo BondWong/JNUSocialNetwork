@@ -5,7 +5,7 @@ $(document)
 					$('#fileupload')
 							.fileupload(
 									{
-										url : '../../JNUSocialNetwork/app/fileUploader',
+										url : '../../app/fileUploader',
 										beforeSend: function(request) {
 								            request.setRequestHeader("ID", USERID);
 								        },
@@ -115,26 +115,26 @@ $(document)
 									imageLinks : fileDri
 								};
 								var json = $.toJSON(post);
-								AddPostToCommunity(USERID, community.ID,
-										"MEMBER", json);
+								AddPostToCommunity(USERID, community.ID, json);
 								$('#addPostModal').modal('hide');
 							});
 				});
-// function fectchPostByFollowee
-
+// function fetchPostByCommunity
+var pageSize = 20;
 function fetchPostByCommunity() {
-	var response = FetchByCommunity(community.ID, "0", "5");
+	var response = FetchByCommunity(community.ID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		if (dataString.available == "true") {
+		if (dataString.available == true) {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
-					dataString.ID, dataString.likerIDs, dataString.collectorIDs);
+					dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
 		}
 	});
 }
 function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
+	$('.communityPic').find('img').attr("src", community.attributes.communityCard);
 }
 $('body').on('click', '.alertCustC', function() {
 	fetchPostByIDs(communityPostIdContainer);
@@ -146,15 +146,30 @@ $('body').on('click', '.deletePostBtn', function() {
 	DeletePostFromCommunity(community.ID, id);
 });
 
-// funtion sessionID
-$('body')
-		.on(
-				"click",
-				".activityHref",
-				function() {
-					window.location.href = 'activity.jsp?'
-							+ community.ID;
+
+$(window).scroll(
+		function() {
+			if ($(window).scrollTop() == $(document).height()
+					- window.windowHeight) {
+				var startIndex = $('.post').length-1;
+				$('div#infinite_loader').show();
+				var response = FetchByCommunity(communityID, startIndex, pageSize);
+				$.each(response.reverse(), function(n, dataString) {
+					if (dataString.available == true) {
+						var boarddiv = post(dataString.owner.ID, dataString.owner.attributes.name,
+								dataString.publishDate, dataString.attributes.content,
+								dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+						$(".pro_body").append(boarddiv);
+						$('img.userImg').userTips();
+						Msnry('.pro_body', '.post', 435);
+					}
 				});
-$('body').on('click','.leaveCommunity',function(){
-	
-});
+				if (response.length == pageSize) {
+					$('div#infinite_loader').hide();
+				} else {
+					$('div#infinite_loader')
+							.replaceWith('<div id="no_more_infinite_load"><span>no more</span></div>');
+					$(window).unbind("scroll");
+				}
+			}
+		});

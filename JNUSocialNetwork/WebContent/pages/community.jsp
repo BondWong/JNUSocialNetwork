@@ -22,7 +22,13 @@
 	<!-- /.navbar -->
 	<div class="communitySideBar">
 		<ul class="nav nav-pills nav-stacked" role="tablist">
-			<li><a>asd</a>></li>
+			<li id="myCommunityBtn"><a class="myCommunityBtn">我的社区</a></li>
+			<li><a href="community.jsp">所有社区</a></li>
+			<li><a class="officalCommunityBtn">官方社区</a></li>
+			<li><a class="studentUnionCommunityBtn">社团组织</a></li>
+			<li><a class="folkCommunityBtn">个人社区</a></li>
+			<li><a class="discoverCommunityBtn">热门社区</a></li>
+			<li><a class="searchCommunityBtn">搜索社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -31,105 +37,47 @@
 		</div>
 		<div class="container containerMy">
 			<div class="myCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>Offical Community</h3>
+			<h3>官方社区</h3>
 		</div>
 		<div class="container containerOffical">
 			<div class="officalCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>SchoolUnion Community</h3>
+			<h3>社团组织</h3>
 		</div>
 		<div class="container containerSchool">
 			<div class="schoolUnionCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>Folk Community</h3>
+			<h3>个人社区</h3>
 		</div>
 		<div class="container containerFolk">
 			<div class="folkCommunity"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
 		</div>
 		<div class="communityGroupTitle">
-			<h3>发现社区</h3>
+			<h3>热门社区</h3>
 		</div>
 		<div class="container containerDiscovery ">
 			<div class="communityDiscovery"></div>
-			<div class="content_container">
-				<a href="show.jsp"><div class="img_container">
-						<img src="images/i1.jpg" />
-					</div></a>
-				<div class="content_info">
-					<div class="conten_head">Joke of the Day</div>
-					<div class="content_count">268,123 members</div>
-					<a><div class="content_join" style="cursor: pointer;">
-							<input type="hidden" value="1407168802526">Join
-						</div></a>
-				</div>
-			</div>
+			
 		</div>
 		<div class="createCommunity">
 			<div role="button" class="btn btn-sm btn-success createCom"
 				data-toggle='modal' data-target='#createCommunity'
-				id="createCommunityBtn">Create community</div>
-			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">Apply
-				to become a community owner</a>
-			<div class="modal fade" id="createCommunity" tabindex="-1"
+				id="createCommunityBtn">创建社区</div>
+			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">申请成为创建社区</a>
+		</div>
+	</div>
+	<div class="modal fade" id="createCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Create community</h4>
+							<h4 class="modal-title" id="myModalLabel">创建社区</h4>
 						</div>
 						<form class="communityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
@@ -170,7 +118,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="button" class="btn btn-primary"
-									id="communityCreate" value="upload">Create</button>
+									id="communityCreate" value="upload">创建</button>
 							</div>
 						</form>
 					</div>
@@ -179,9 +127,6 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<!-- /.modal -->
-		</div>
-
-	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
 
@@ -205,6 +150,7 @@
 				login_initialization(USERID);
 				clickEvent();
 				communityClickEvent();
+				fetchCommunityByOwner();
 			} else {
 				clickOffEvent();
 			}

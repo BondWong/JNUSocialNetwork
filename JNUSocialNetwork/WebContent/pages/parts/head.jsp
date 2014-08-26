@@ -3,7 +3,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JNU Social Network</title>
+<title>CampuSite</title>
 <!-- Bootstrap core CSS -->
 <link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
 	rel="stylesheet">
@@ -26,5 +26,8 @@
 	media="screen">
 <script type="text/javascript">
 	window.USERID = '${sessionScope.ID}';
+	window.windowHeight = "innerHeight" in window ? window.innerHeight
+			: document.documentElement.offsetHeight;
 </script>
+<script type="text/javascript" src="js/civem.js"></script>
 </head>

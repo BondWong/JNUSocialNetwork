@@ -40,9 +40,9 @@ public class LogoutServlet extends HttpServlet {
 		}
 		Cookie newCookie = new Cookie("ALG", null);
 		newCookie.setMaxAge(0);
-		newCookie.setPath("/JNUSocialNetwork");
+		newCookie.setPath("/");
 		response.addCookie(newCookie);
-		response.sendRedirect("/JNUSocialNetwork/pages/home.jsp");
+		response.sendRedirect("/pages/home.jsp");
 	}
 
 	/**

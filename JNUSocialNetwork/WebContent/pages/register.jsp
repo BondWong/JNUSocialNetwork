@@ -13,29 +13,29 @@
 	<div class="regBody">
 		<div class="layer">
 			<div class="regTop">
-				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>Back
-						to home page</span></a> <a href="#" class="btn btn-primary btn-sm"
-					role="button"><span>About us</span></a>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到首页</span></a>
+				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
-			<div class="regTitle">Sign Up</div>
-			<div class="regTitle">這個是幹嘛的</div>
+			<div class="regTitle">注册</div>
 			<div class="containerReg" style="display: block">
 				<div class="regBox">
 					<form class="form-signin" role="form" method="post"
 						action="../security/RegServlet">
 						<p>
-							<input type="text" class="form-control"
-								placeholder="ID of academic affairs system" name="ID" required
+							<input type="text" class="form-control" placeholder="请输入教务系统ID"
+								name="ID" data-errormessage-value-missing="请输入教务处学号" required
 								autofocus />
 						</p>
 						<p>
 							<input type="password" class="form-control"
-								placeholder="Password of academic affairs system"
-								name="password" required />
+								placeholder="请输入教务系统密码" name="password"
+								data-errormessage-value-missing="请输入教务处密码" required />
 						</p>
 						<div class="form-cust">
 							<input type="text" class="form-control form-control-cust"
-								placeholder="validation Code" name="valCode" required />
+								placeholder="请输入验证码" name="valCode" pattern="[A-Za-z0-9]{4}"
+								data-errormessage-value-missing="请输入验证码"
+								data-errormessage-pattern-mismatch="验证码错误" required />
 							<div class="form-cust-img">
 								<img src="../security/RegServlet" />
 							</div>
@@ -43,9 +43,9 @@
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signUpBtn"
-							type="submit">Sign up</button>
+							type="submit">注册</button>
 						<h4>
-							Have a account?<span class="btn signIn">Sign in</span>
+							已有账号？<span class="btn signIn">登录</span>
 						</h4>
 					</form>
 					<div id="register_fail" class="alert alert-danger"
@@ -71,14 +71,14 @@
 	<c:choose>
 		<c:when test='${param.error == "VALCODEERROR"}'>
 			<script type="text/javascript">
-				$("#register_fail").text("Validation Code Error!");
+				$("#register_fail").text("验证码错误");
 				$("#register_fail").fadeIn("fast");
 				setTimeout('$("#regiter_fail").fadeOut("slow")', 3000);
 			</script>
 		</c:when>
 		<c:when test='${param.error == "IDORPAERROR"}'>
 			<script type="text/javascript">
-				$("#register_fail").text("ID or Password Error!");
+				$("#register_fail").text("ID或者密码错误");
 				$("#register_fail").fadeIn("fast");
 				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
 			</script>
