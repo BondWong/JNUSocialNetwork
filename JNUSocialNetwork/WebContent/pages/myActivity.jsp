@@ -79,7 +79,6 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	<%@ include file="parts/footer.jsp"%>
 	
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery.json.min.js"></script>

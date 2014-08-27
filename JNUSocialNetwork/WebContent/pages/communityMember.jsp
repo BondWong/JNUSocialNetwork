@@ -115,7 +115,6 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	<%@ include file="parts/footer.jsp"%>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

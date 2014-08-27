@@ -16,11 +16,41 @@ body {
 	padding: 0;
 }
 
-p {
-	margin: 0 0 20px 0;
+ul {
+	font-family: "Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica,
+		sans-serif;
+	font-style: normal;
+	float: left;
 }
 
-p,ul {
+ul.short {
+	width: 33%;
+	text-align: center;
+}
+
+li {
+	font-weight: 200;
+	font-size: 18px;
+}
+
+li.list-group-heading {
+	font-size: 25px;
+}
+
+li.blue {
+	background-color: CornflowerBlue;
+}
+
+li.green {
+	background-color: Aquamarine;
+}
+
+li.red {
+	background-color: IndianRed;
+}
+
+p {
+	margin: 0 0 20px 0;
 	font-family: "Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica,
 		sans-serif;
 	font-style: normal;
@@ -75,6 +105,13 @@ h2 {
 	font-family: "Beau Sans Pro Book", Verdana, sans-serif;
 	font-size: 40px;
 	font-weight: 1000;
+	font-style: normal;
+}
+
+h3 {
+	font-family: "Beau Sans Pro Book", Verdana, sans-serif;
+	font-size: 30px;
+	font-weight: 800;
 	font-style: normal;
 }
 
@@ -151,7 +188,6 @@ h2 {
 }
 
 #fifth {
-	height: 500px;
 	margin: 0 auto;
 	padding: 40px 0 0 0;
 }

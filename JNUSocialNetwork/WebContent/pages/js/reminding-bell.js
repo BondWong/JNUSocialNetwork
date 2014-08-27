@@ -77,7 +77,7 @@ function messages_remind(message) {
 				function(e) {
 					e.stopPropagation();
 					show_messages("message_" + tempFromID, tempToID,
-							tempFromID, tempFrom, true, 30, 30);
+							tempFromID, tempFrom);
 					$(this).remove();
 				});
 	} else {
@@ -186,23 +186,22 @@ function events_remind(event) {
 									$(".arrowBack").replaceWith(
 											'<div class="arrowBack"></div>');
 									$(".mentionBody-content").empty();
-									add_messages_to_bell();
+									show_remind_content();
 								});
 						if (!isOnline) {
-							$
-									.ajax({
-										type : "PUT",
-										url : '../../app/event/deleteUnhandledEvent/'
-												+ USERID + '/' + eventID,
-										beforeSend : function(request) {
-											request.setRequestHeader("ID",
-													USERID);
-										},
-										success : function(data) {
-										}
-									});
+							$.ajax({
+								type : "PUT",
+								url : '../../app/event/deleteUnhandledEvent/'
+										+ USERID + '/' + eventID,
+								beforeSend : function(request) {
+									request.setRequestHeader("ID", USERID);
+								},
+								success : function(data) {
+								}
+							});
 						}
 					});
+
 }
 
 function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,

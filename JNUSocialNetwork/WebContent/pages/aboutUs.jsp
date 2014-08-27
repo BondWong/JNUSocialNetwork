@@ -8,8 +8,7 @@
 <title>CampuSite</title>
 <link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
 	rel="stylesheet">
-<link href="styles/parallex-scrolling.css" rel="stylesheet"
-	type="text/css" />
+<link href="styles/about-us.css" rel="stylesheet" type="text/css" />
 <link href="styles/custom.css" rel="stylesheet">
 <script type="text/javascript"
 	src="//upcdn.b0.upaiyun.com/libs/jquery/jquery-1.8.2.min.js"></script>
@@ -62,7 +61,7 @@
 		<div class="story">
 			<div class="bg"></div>
 			<div class="float-right">
-				<h2 class="palegreen">团队</h2>
+				<h2 class="palegreen">Team</h2>
 				<div>
 					<img src="images/default/default-user-avartar.png"
 						class="round icon-like" />
@@ -122,8 +121,10 @@
 	<div id="third">
 		<div class="story">
 			<div class="float-left">
-				<h2 class="lightgrey">我们在做什么？</h2>
-				<p class="intro lightgrey">不告诉你</p>
+				<h2 class="lightgrey">Who We Are</h2>
+				<p class="intro lightgrey">我们来自暨南大学</p>
+				<p class="intro lightgrey">我们追求优质应用</p>
+				<p class="intro lightgrey">我们致力于服务大学生</p>
 			</div>
 		</div>
 		<!--.story-->
@@ -132,17 +133,29 @@
 
 	<div id="fifth">
 		<div class="story">
-			<h2>加入我们</h2>
+			<h2>Join Us</h2>
+			<h3>
+				发简历到<a href="mailto:campusite@outlook.com" stype="">官方邮箱</a>，并注明申请职位
+			</h3>
 
-			<ul>
-				<li class="">IOS开发</li>
-				<li class="">Android开发</li>
-				<li class="">Web前端开发</li>
-				<li class="">服务端开发</li>
+			<ul class="list-group short">
+				<li class="list-group-item list-group-heading blue">技术类</li>
+				<li class="list-group-item">IOS开发</li>
+				<li class="list-group-item">Android开发</li>
+				<li class="list-group-item">Web前端开发</li>
+				<li class="list-group-item">服务端开发</li>
+				<li class="list-group-item">平面设计师</li>
 			</ul>
-			<h2>
-				发简历到<a href="mailto:campusite@outlook.com">官方邮箱</a>，并注明申请职位
-			</h2>
+
+			<ul class="list-group short">
+				<li class="list-group-item list-group-heading green">市场类</li>
+			</ul>
+
+			<ul class="list-group short">
+				<li class="list-group-item list-group-heading red">文书类</li>
+				<li class="list-group-item">秘书</li>
+			</ul>
+
 		</div>
 		<!--.story-->
 	</div>
