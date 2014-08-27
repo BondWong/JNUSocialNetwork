@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="profile_img"><img src="images/about2.jpg" onload="javascript:auto_resize( 620, 300, this)"/></div>
+	<div class="profile_img"><img src="" onload="javascript:auto_resize( 620, 300, this)"/></div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

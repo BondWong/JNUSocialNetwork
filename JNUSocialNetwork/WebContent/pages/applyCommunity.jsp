@@ -13,8 +13,8 @@
 	<div class="coRegBody">
 		<div class="layer">
 			<div class="regTop">
-				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a> <a href="#" class="btn btn-primary btn-sm"
-					role="button"><span>关于我们</span></a>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a>
+				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">社区账号注册</div>
 			<div class="containerApp" style="display: block">
@@ -60,6 +60,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="parts/footer.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript

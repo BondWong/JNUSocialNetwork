@@ -22,73 +22,80 @@
 	<!-- /.navbar -->
 	<div class="container container_actvity">
 		<div class="activityHead">
-			<img alt="" width="100%" onload="javascript:auto_resize(1170, 300, this)" src="images/activityHead.jpg">
+			<img alt="" width="100%"
+				onload="javascript:auto_resize(1170, 300, this)"
+				src="images/activityHead.jpg">
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
-					
+
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
-						<button class="btn btn-default editActivity"  data-toggle='modal'
-					data-target='#editActivity'>edit</button>
+					<button class="btn btn-default editActivity" data-toggle='modal'
+						data-target='#editActivity'>edit</button>
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="editActivity" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Edit Activity</h4>
-						</div>
-						<form class="activityForm" enctype="multipart/form-data">
-							<div class="modal-body modalBody">
-								<div class="activityItem">
-									<span>活动名：</span> <input  type="text" class="form-control activityInput"
-										placeholder="" id="activityName" required autofocus />
-								</div>
-								<div class="activityItem">
-									<span>活动时间：</span>
-									<div class="input-group date form_datetime col-lg-10" data-link-field="dtp_input1">
-									  <input type="text" class="form-control activityInput"  id="activityTime" readonly />
-									  <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-									</div>
-								</div>
-								<div class="activityItem">
-									<span>活动地点：</span>
-									 <input type="text" class="form-control activityInput" placeholder="" id="activityAddr" required autofocus />
-								</div>
-								<div class="activityItem">
-									<span>活动细节：</span> <input type="text" class="form-control activityInput"
-										placeholder="" id="activityMore" required autofocus />
-								</div>
-								<div class="activityItem">
-									<span>活动图片</span> <span class="btn btn-success fileinput-button" style="width:auto;">
-										<i class="glyphicon glyphicon-plus"></i> <span>Add
-											photos...</span> 
-									<!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload" type="file" name="files[]">
-									</span>
-								</div>
-								<!-- The container for the uploaded files -->
-								<div id="files" class="files"></div>
-								<br>
-							</div>
-							<br></br>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary"
-									id="saveActivity" value="upload">Save</button>
-							</div>
-						</form>
+		<div class="modal fade" id="editActivity" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Edit Activity</h4>
 					</div>
-					<!-- /.modal-content -->
+					<form class="activityForm" enctype="multipart/form-data">
+						<div class="modal-body modalBody">
+							<div class="activityItem">
+								<span>活动名：</span> <input type="text"
+									class="form-control activityInput" placeholder=""
+									id="activityName" required autofocus />
+							</div>
+							<div class="activityItem">
+								<span>活动时间：</span>
+								<div class="input-group date form_datetime col-lg-10"
+									data-link-field="dtp_input1">
+									<input type="text" class="form-control activityInput"
+										id="activityTime" readonly /> <span class="input-group-addon"><i
+										class="glyphicon glyphicon-th"></i></span>
+								</div>
+							</div>
+							<div class="activityItem">
+								<span>活动地点：</span> <input type="text"
+									class="form-control activityInput" placeholder=""
+									id="activityAddr" required autofocus />
+							</div>
+							<div class="activityItem">
+								<span>活动细节：</span> <input type="text"
+									class="form-control activityInput" placeholder=""
+									id="activityMore" required autofocus />
+							</div>
+							<div class="activityItem">
+								<span>活动图片</span> <span class="btn btn-success fileinput-button"
+									style="width: auto;"> <i
+									class="glyphicon glyphicon-plus"></i> <span>Add
+										photos...</span> <!-- The file input field used as target for the file upload widget -->
+									<input id="fileupload" type="file" name="files[]">
+								</span>
+							</div>
+							<!-- The container for the uploaded files -->
+							<div id="files" class="files"></div>
+							<br>
+						</div>
+						<br></br>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="saveActivity"
+								value="upload">Save</button>
+						</div>
+					</form>
 				</div>
-				<!-- /.modal-dialog -->
+				<!-- /.modal-content -->
 			</div>
+			<!-- /.modal-dialog -->
+		</div>
 		<div class="activityBody">
 			<div class="aBodyLeft">
 				<div class="activityDetail">
@@ -165,39 +172,43 @@
 					</select>
 				</div>
 			</div>
-		</div></div>
-		<!-- CHATROOM -->
-		<%@ include file="parts/chatRoom.jsp"%>
-		<!-- Bootstrap core JavaScript
+		</div>
+	</div>
+	<!-- CHATROOM -->
+	<%@ include file="parts/chatRoom.jsp"%>
+	<%@ include file="parts/footer.jsp"%>
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="js/jquery-1.10.2.js"></script>
-		<script src="js/jquery.json.min.js"></script>
-		<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-		<script src="js/masonry.pkgd.min.js"></script>
-		<script src="js/imagesloaded.pkgd.min.js"></script>
-		<script src="js/function.js"></script>
-		<script src="js/EventHandle.js"></script>
-		<script src="js/EventAPI.js"></script>
-		<script src="js/activityShow.js"></script>
-		<script src="js/global-initialization.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				clickEvent();
-			} else {
-				clickOffEvent();
-			}
-			var url = window.location.search;
-			var activityID = url.substr(url.indexOf("&") + 1);
-			window.activity = FetchPostByID(activityID);
-			var communityID = url.substr(url.indexOf("?") + 1,url.indexOf("&")-url.indexOf("?")-1);
-			window.community = FetchCommunityByID(communityID);
-			showActivityDetail(activity,community);
-		});
-			
-		</script>
-		<%@ include file="parts/loginJavaScript.jsp"%>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery.json.min.js"></script>
+	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/function.js"></script>
+	<script src="js/EventHandle.js"></script>
+	<script src="js/EventAPI.js"></script>
+	<script src="js/activityShow.js"></script>
+	<script src="js/global-initialization.js"></script>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					if (USERID != null && USERID != "") {
+						login_initialization(USERID);
+						clickEvent();
+					} else {
+						clickOffEvent();
+					}
+					var url = window.location.search;
+					var activityID = url.substr(url.indexOf("&") + 1);
+					window.activity = FetchPostByID(activityID);
+					var communityID = url.substr(url.indexOf("?") + 1, url
+							.indexOf("&")
+							- url.indexOf("?") - 1);
+					window.community = FetchCommunityByID(communityID);
+					showActivityDetail(activity, community);
+				});
+	</script>
+	<%@ include file="parts/loginJavaScript.jsp"%>
 </body>
 </html>

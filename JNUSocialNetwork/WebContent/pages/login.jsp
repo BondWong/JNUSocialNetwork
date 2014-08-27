@@ -50,6 +50,7 @@
 			<div class="containerSign" style="display: none"></div>
 		</div>
 	</div>
+	<%@ include file="parts/footer.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript

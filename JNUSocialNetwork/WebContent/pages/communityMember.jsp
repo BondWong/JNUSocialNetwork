@@ -105,16 +105,17 @@
 			<div class="membersContainer">
 				<div class="membersBord"></div>
 				<div class="member">
-					<img class="userMember" src="images/member.jpg" />
-					<span class="glyphicon glyphicon-remove memberRemoveBtn" style="font-size:10px"></span>
-					<span class="memberName">Winson_Lau</span>
+					<img class="userMember" src="images/member.jpg" /> <span
+						class="glyphicon glyphicon-remove memberRemoveBtn"
+						style="font-size: 10px"></span> <span class="memberName">Winson_Lau</span>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
+	<%@ include file="parts/footer.jsp"%>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -161,7 +162,6 @@
 			} else {
 				clickOffEvent();
 			}
-			
 
 		});
 	</script>

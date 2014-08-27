@@ -391,9 +391,13 @@ function fetchPostsByOwner() {
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
+	if(userID == USERID){
+		$('.aEditbtn').css("display","inline");
+	}
 	$('.profile_user_img').find('img').attr("src",userInfo.attributes.avatarLink);
 	$('.profile_img').find('img').attr("src",userInfo.attributes.profileImageLink);
 	$('.profileAvatar').attr("src",userInfo.attributes.avatarLink);
+	$('.profile_user_name').html("<strong>"+userInfo.attributes.name+"</strong>");
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);
