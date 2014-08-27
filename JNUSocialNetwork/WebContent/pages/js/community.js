@@ -212,7 +212,7 @@ $(document)
 									function() {
 										fetchByType(
 												"searchCommunity",
-												"<div class='searchCommunityBody'><span class='glyphicon glyphicon-search glyphicon-search-custom' style='cursor: pointer;'></span> <span class='searchCommunityInput'>搜索社区</span></div> ",
+												"<div class='searchCommunityBody'><span class='glyphicon glyphicon-search glyphicon-search-custom communitySearch' style='cursor: pointer;'></span> <span class='searchCommunityInput'>搜索社区</span></div> ",
 												"containerSearch");
 
 									});
@@ -238,7 +238,7 @@ $(document)
 					$('body')
 							.on(
 									'click',
-									'.glyphicon-search-custom',
+									'.communitySearch',
 									function() {
 										var communityInfo = encodeURI(search_user_input_value);
 										var communities = SearchCommunity(
@@ -250,9 +250,9 @@ $(document)
 															addCommunity(
 																	community.ID,
 																	community.attributes.name,
-																	community.memberIDs.length,
+																	community.members.length,
 																	"searchCommunity",
-																	community.attributes.communityCard);
+																	community.attributes.communityCard,community.members);
 														});
 									});
 

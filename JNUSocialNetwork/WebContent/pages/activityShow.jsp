@@ -147,21 +147,21 @@
 			<div class="aBodyRight">
 				<div class="aBodyCard">
 					<div class="communityBS">
-						<img onload="javascript:auto_resize(437, 160, this)" alt="" src="images/communityBgSm.jpg">
+						<img alt="" src="images/communityBgSm.jpg">
 					</div>
 					<div class="cBcontent">
 						<p>Hosted by:</p>
 						<h1 class="communityName">Hubble Space Telescope</h1>
 						<p class="communityNum">2,569,262 have them in circles</p>
-						<!--<button class="btn btn-danger addcommunityA" id="">Add community</button>  -->
+						<button class="btn btn-danger">Add community</button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
 					<h1>Are you going to join in?</h1>
 					<select class="btn btn-default">
 						<option>Maybe</option>
-						<option class="activityJoin" id="">Yes</option>
-						<option class="leaveactivityJoin" id="">No</option>
+						<option class="activityJoin">Yes</option>
+						<option class="leaveactivityJoin">No</option>
 					</select>
 				</div>
 			</div>

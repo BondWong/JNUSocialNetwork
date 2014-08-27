@@ -37,7 +37,6 @@ public class SearchMemberTransaction extends DAOTransaction {
 			}
 			if (!query.equals("")) {
 				query = "SELECT m FROM Member m WHERE m.ID IN (" + query;
-				System.out.println(query);
 				TypedQuery<Member> tq = em.createQuery(query, Member.class);
 				tq.setFirstResult((int) params[2]);
 				tq.setMaxResults((int) params[3]);
@@ -45,8 +44,7 @@ public class SearchMemberTransaction extends DAOTransaction {
 				for (Member member : members)
 					results.add(member.toRepresentation());
 			}
-		} else {
-			System.out.println((String) params[1]);
+		} else if (params[0] != null && params[0].equals(params[1])) {
 			TypedQuery<Member> tq = em.createNamedQuery("Member.fetchByID",
 					Member.class);
 			tq.setParameter(1, params[1]);
