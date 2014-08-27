@@ -1,37 +1,43 @@
 function pHot() {
 	var users = Recommendate("0", "5");
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function PinCommon() {
 	var users = RecommendateViaFollowee(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function pCampus() {
 	var users = RecommendateViaCampus(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function pMajor() {
 	var users = RecommendateViaMajor(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function pSeason() {
 	var users = RecommendateViaSession(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function pClass() {
 	var users = RecommendateViaClass(USERID);
 	$.each(users, function(n, user) {
-		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
+		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
+				user.attributes.avatarLink);
 	});
 }
 function peopleClickEvent() {
@@ -108,7 +114,7 @@ function peopleClickEvent() {
 						PinCommon();
 					});
 }
-
+var search_user_input_value="";
 $('body')
 		.on(
 				'click',
@@ -128,25 +134,31 @@ $('body')
 									});
 				});
 $('body')
-		.on(
-				'click',
-				'.glyphicon-search-custom',
-				function() {
-					var userInfo = encodeURI(search_user_input_value);
-					$('.userContainer').remove();
-					var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
-					$('.containBord').after(borddiv);
-					var users = SearchMember(USERID, userInfo, "0", "5");
-					if(users.length != 0){
-						$.each(users, function(n, user) {
-							AddUser(user.attributes.name,
-									user.attributes.lookingFor, user.ID,user.attributes.avatarLink);
-						});
-					}
-				});
+.on(
+		'click',
+		'.userSearch',
+		function() {
+			if(search_user_input_value!=""){
+				var userInfo = encodeURI(search_user_input_value);
+				$('.userContainer').remove();
+				var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
+				$('.containBord').after(borddiv);
+				var users = SearchMember( userInfo, "0", "5");
+				if (users.length != 0) {
+					$.each(users, function(n, user) {
+						AddUser(user.attributes.name,
+								user.attributes.lookingFor, user.ID,
+								user.attributes.avatarLink);
+					});
+				}
+			}
 
-function AddUser(name, looking, id,avatarLink) {
-	var boarddiv = "<div class='userCard'><img onload='javascript:auto_resize(170, 150, this)' src='"+avatarLink+"' ><p class='recommendName'>"
+		});
+
+function AddUser(name, looking, id, avatarLink) {
+	var boarddiv = "<div class='userCard'><img onload='javascript:auto_resize(170, 170, this)' src='"
+			+ avatarLink
+			+ "' ><p class='recommendName'>"
 			+ name
 			+ "</p><p class='recommendLooking'>"
 			+ looking
@@ -156,13 +168,13 @@ function AddUser(name, looking, id,avatarLink) {
 	$(".recommendBord").after(boarddiv);
 	Msnry('.userContainer', '.userCard', 200);
 }
-$('body').on("click", ".recommendBtn", function(){
+$('body').on("click", ".recommendBtn", function() {
 	var id = $(this).find('button').attr('id');
 	if ($(this).find('button').text() == "Follow") {
 		Follow(USERID, id);
 	}
 	if ($(this).find('button').text() == "Following") {
 		CancelFollow(USERID, id);
-		$("button[id='"+id+"']").text("Follow");
+		$("button[id='" + id + "']").text("Follow");
 	}
 });

@@ -29,6 +29,10 @@
 			<li><a class="folkCommunityBtn">个人社区</a></li>
 			<li><a class="discoverCommunityBtn">热门社区</a></li>
 			<li><a class="searchCommunityBtn">搜索社区</a></li>
+			<li><a  class="appCom" href="applyCommunity.jsp">申请社区</a></li>
+			<li><a  role="button" class="createCom"
+				data-toggle='modal' data-target='#createCommunity'
+				id="createCommunityBtn">创建社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -61,75 +65,73 @@
 		</div>
 		<div class="container containerDiscovery ">
 			<div class="communityDiscovery"></div>
-			
+
 		</div>
 		<div class="createCommunity">
 			<div role="button" class="btn btn-sm btn-success createCom"
 				data-toggle='modal' data-target='#createCommunity'
 				id="createCommunityBtn">创建社区</div>
-			<a  class="btn btn-sm btn-success appCom" href="applyCommunity.jsp">申请成为创建社区</a>
 		</div>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">创建社区</h4>
-						</div>
-						<form class="communityForm" enctype="multipart/form-data">
-							<div class="modal-body modalBody">
-								<!--  <div class="pubCreate" id="createBlock">Public</div>
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">创建社区</h4>
+				</div>
+				<form class="communityForm" enctype="multipart/form-data">
+					<div class="modal-body modalBody">
+						<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
 								-->
-								<p>
-									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus
-										autocomplete="off" />
-								</p>
-								<p>
-									<span>社区标签：</span> <input type="text" class="form-control"
-										placeholder="" id="communityTag" required autofocus
-										autocomplete="off" />
-								</p>
-								<p>
-									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus
-										autocomplete="off" />
-								</p>
-								<p>
-									<span>社区类型：</span> <select id="communityType">
-										<option value="SCHOOLUNION">SchoolUnion</option>
-										<option value="FOLK">Folk</option>
-									</select>
-								</p>
-								<span>社区名片</span> <span class="btn btn-success fileinput-button">
-									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileupload" type="file" name="files[]">
-								</span>
-								<!-- The container for the uploaded files -->
-								<div id="files" class="files"></div>
-								<br>
-							</div>
-							<br></br>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary"
-									id="communityCreate" value="upload">创建</button>
-							</div>
-						</form>
+						<p>
+							<span>社区名：</span> <input type="text" class="form-control"
+								placeholder="" id="communityName" required autofocus
+								autocomplete="off" />
+						</p>
+						<p>
+							<span>社区标签：</span> <input type="text" class="form-control"
+								placeholder="" id="communityTag" required autofocus
+								autocomplete="off" />
+						</p>
+						<p>
+							<span>社区介绍：</span> <input type="text" class="form-control"
+								placeholder="" id="communityIntro" required autofocus
+								autocomplete="off" />
+						</p>
+						<p>
+							<span>社区类型：</span> <select id="communityType">
+								<option value="SCHOOLUNION">SchoolUnion</option>
+								<option value="FOLK">Folk</option>
+							</select>
+						</p>
+						<span>社区名片</span> <span class="btn btn-success fileinput-button">
+							<i class="glyphicon glyphicon-plus"></i> <span>Add
+								photos...</span> <input id="fileupload" type="file" name="files[]">
+						</span>
+						<!-- The container for the uploaded files -->
+						<div id="files" class="files"></div>
+						<br>
 					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
+					<br></br>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="communityCreate"
+							value="upload">创建</button>
+					</div>
+				</form>
 			</div>
-			<!-- /.modal -->
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-
+	<%@ include file="parts/footer.jsp"%>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

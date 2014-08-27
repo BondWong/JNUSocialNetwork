@@ -31,6 +31,7 @@
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
 <script src="js/global-initialization.js"></script>
+
 <script type="text/javascript">
 	var url = window.location.search;
 	window.userID = url.substr(url.indexOf("&") + 1);
@@ -81,6 +82,7 @@
 
 			});
 		</script>
+		<script src="js/image-auto-resize.js"></script>
 	</c:when>
 	<c:when test="${param.nav eq 'circle' }">
 		<script type="text/javascript">
@@ -117,6 +119,7 @@
 
 			});
 		</script>
+		<script src="js/image-auto-resize.js"></script>
 		<%@ include file="contentScroll.jsp"%>
 	</c:otherwise>
 </c:choose>

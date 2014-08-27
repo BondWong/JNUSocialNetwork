@@ -8,7 +8,8 @@
 body {
 	padding-bottom: 40px;
 	color: #5a5a5a;
-	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
+	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 
 /* CUSTOMIZE THE NAVBAR
@@ -154,6 +155,7 @@ body {
 	margin-left: auto;
 	width: 1270px;
 }
+
 .container.container_actvity {
 	background-color: #EEEEEE;
 	margin-top: 70px;
@@ -175,7 +177,7 @@ body {
 	float: left;
 	width: 100px;
 	height: 280px;
-	position:fixed;
+	position: fixed;
 }
 
 .communitySideBar li a {
@@ -201,7 +203,7 @@ body {
 	height: 375px;
 	width: 265px;
 	margin-top: 10px;
-	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
+	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
 }
 
 .img_container {
@@ -256,13 +258,15 @@ body {
 	width: 900px;
 	margin-top: 20px;
 }
-.member_body{
+
+.member_body {
 	margin-right: auto;
 	margin-left: auto;
 	width: 1000px;
 	margin-top: 20px;
 }
-.about_body{
+
+.about_body {
 	margin-right: auto;
 	margin-left: auto;
 	width: 900px;
@@ -276,8 +280,8 @@ body {
 }
 
 .post {
-	padding-top:10px;
-	padding-bottom:10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: #FFF;
 	margin-top: 0px;
 	margin-right: 0px;
@@ -285,12 +289,14 @@ body {
 	margin-left: 0px;
 	float: left;
 	width: 435px;
-	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
+	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
 }
-.about{
-	padding-top:0px;
-	padding-bottom:0px;
+
+.about {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
+
 .pro_body .user_img {
 	
 }
@@ -302,7 +308,7 @@ body {
 }
 
 .post_info {
-	margin-bottom:5px;
+	margin-bottom: 5px;
 }
 
 .row.row_custu {
@@ -322,9 +328,9 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-bottom: 5px;
-	max-height:250px;
-	overflow:hidden;
-	text-align:center;
+	max-height: 250px;
+	overflow: hidden;
+	text-align: center;
 }
 
 .media_show {
@@ -401,7 +407,7 @@ body {
 	padding: 5px;
 	float: right;
 	background-color: #fff;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .act_time {
@@ -614,7 +620,7 @@ body {
 .changeBtnGroup {
 	float: right;
 	margin-right: 5px;
-	margin-top:-40px;
+	margin-top: -40px;
 }
 
 .photo {
@@ -624,7 +630,7 @@ body {
 	margin-bottom: 20px;
 	margin-left: 0px;
 	float: left;
-	text-align:center;
+	text-align: center;
 }
 
 .containerReg {
@@ -715,7 +721,7 @@ body {
 	float: left;
 	width: 220px;
 	height: 600px;
-	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
+	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
 }
 
 .pro_body_community {
@@ -738,11 +744,13 @@ body {
 #createCommunityBtn {
 	display: none;
 }
+
 .editActivity {
 	display: none;
-	margin-left:20px;
-	margin-top:-15px;
+	margin-left: 20px;
+	margin-top: -15px;
 }
+
 .createCommunity h1 {
 	font-size: 18px;
 	float: left;
@@ -751,16 +759,18 @@ body {
 #editCommunityBtn {
 	display: none;
 }
+
 #leaveCommunityBtn {
 	display: none;
 }
+
 #editMembersBtn {
 	display: none;
 }
+
 #deleteCommunityBtn {
 	display: none;
 }
-
 
 .communityCardInfo {
 	margin-left: auto;
@@ -826,14 +836,16 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
-.members{
+
+.members {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top:10px;
+	margin-top: 10px;
 }
-.members img{
-	float:left;
+
+.members img {
+	float: left;
 }
 
 .memberList h1 {
@@ -841,26 +853,31 @@ body {
 	color: #aaa;
 	font-size: 14px;
 }
-.member{
-	margin-top:10px;
-	width:215px;
-	height:80px;
-	background-color:#fff;
-	box-shadow: 1px 2px 0 rgba(0,0,0,.05);
+
+.member {
+	margin-top: 10px;
+	width: 215px;
+	height: 80px;
+	background-color: #fff;
+	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
 }
-.membersContainer{
-	width:1000px;
+
+.membersContainer {
+	width: 1000px;
 	float: left;
 }
+
 .memberList span {
 	margin-top: 18px;
 	float: right;
-	cursor:pointer;
-	color:#427fed;
+	cursor: pointer;
+	color: #427fed;
 }
-.memberList span:hover{
-	text-decoration:underline;
+
+.memberList span:hover {
+	text-decoration: underline;
 }
+
 .memberPic {
 	width: 200px;
 }
@@ -868,7 +885,7 @@ body {
 .activityHead {
 	width: 100%;
 	height: 365px;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .activityInfo {
@@ -1093,13 +1110,13 @@ body {
 
 #chatCreate {
 	cursor: pointer;
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	width:100%;
-	text-align:center;
-	background-color:#f5f5f5;
-	margin-top:20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	text-align: center;
+	background-color: #f5f5f5;
+	margin-top: 20px;
 }
 
 .userInImg img {
@@ -1148,14 +1165,15 @@ body {
 	margin-left: 5px;
 	text-decoration: none;
 }
-.replyaComment{
+
+.replyaComment {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #DFDFDF;
 	padding-left: 2px;
 	color: #5A5A5A;
 	margin-left: 420px;
-	font-size:14px;
+	font-size: 14px;
 	text-decoration: none;
 }
 
@@ -1421,13 +1439,15 @@ body {
 	margin-left: 20px;
 	color: #c5c5c5;
 }
-.searchCommunityInput{
+
+.searchCommunityInput {
 	font-size: 14px;
 	margin-left: 20px;
 	color: #c5c5c5;
 }
+
 .searchBody {
-	height:40px;
+	height: 40px;
 }
 
 .peopeleTypeHover {
@@ -1445,9 +1465,11 @@ body {
 .searchInput {
 	margin-left: 20px;
 }
-.searchCommunityInput h3{
-	font-size:14px;
+
+.searchCommunityInput h3 {
+	font-size: 14px;
 }
+
 .peopleType a {
 	color: #404040;
 	text-decoration: none;
@@ -1572,29 +1594,63 @@ body {
 #myCommunityBtn {
 	display: none;
 }
-.sharePro{
-	display:none;
-}
-.memberName{
-	font-size:16px;
-	color:#404040;
-	font-weight:bolder;
-	width:50%;
-	margin-left:10px;
-	display:block;
-	float:left;
-	padding-top:5px;
-	padding-bottom:5px;
-	margin-top:20px
-}
-.userMember{
-	float:left;
-}
-.memberRemoveBtn{
-	float:right;
-	display:none;
 
+.sharePro {
+	display: none;
 }
-#activityLike{
-	cursor:pointer;
+
+.memberName {
+	font-size: 16px;
+	color: #404040;
+	font-weight: bolder;
+	width: 50%;
+	margin-left: 10px;
+	display: block;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 20px
+}
+
+.userMember {
+	float: left;
+}
+
+.memberRemoveBtn {
+	float: right;
+	display: none;
+}
+
+#activityLike {
+	cursor: pointer;
+}
+
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #FFF;
+}
+
+a.footer-cname:link {
+	color: black;
+	text-decoration: none;
+}
+
+a.footer-cname:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a.footer-cname:hover {
+	color: black;
+	text-decoration: none;
+}
+
+a.footer-cname:active {
+	color: black;
+	text-decoration: none;
+}
+
+footer {
+	text-align: center;
 }

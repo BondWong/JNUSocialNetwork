@@ -3,23 +3,21 @@ $(document)
 				function() {
 					// funtion fileupload
 					$('#fileupload')
-							.fileupload(
-									{
-										url : '../../app/fileUploader',
-										beforeSend : function(request) {
-											request.setRequestHeader("ID",
-													USERID);
-										},
-										success : function(data) {
-											for (var i = 0; i < data.length; i++) {
-												var dataString = data[i];
-												fileDri.push(dataString);
-											}
-										},
-										acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-										maxFileSize : 5000000
-									// 5 MB
-									})
+							.fileupload({
+								url : '../../app/fileUploader',
+								beforeSend : function(request) {
+									request.setRequestHeader("ID", USERID);
+								},
+								success : function(data) {
+									for (var i = 0; i < data.length; i++) {
+										var dataString = data[i];
+										fileDri.push(dataString);
+									}
+								},
+								acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+								maxFileSize : 5000000
+							// 5 MB
+							})
 							.on(
 									'fileuploadadd',
 									function(e, data) {
@@ -124,10 +122,12 @@ var pageSize = 15;
 function fetchByFolloweeOrOwner() {
 	var response = FetchByFolloweeOrOwner(USERID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		if(dataString.postType=="NORMAL"){
+		if (dataString.postType == "NORMAL") {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
-					dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+					dataString.ID, dataString.likerIDs,
+					dataString.collectorIDs, dataString.imageLinks,
+					dataString.owner.attributes.avatarLink);
 		}
 	});
 }
@@ -138,7 +138,8 @@ function fectchHeatPost() {
 	$.each(response.reverse(), function(n, dataString) {
 		addPost(dataString.owner.ID, dataString.owner.attributes.name,
 				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
+				dataString.ID, dataString.likerIDs, dataString.collectorIDs,
+				dataString.imageLinks, dataString.owner.attributes.avatarLink);
 	});
 }
 // function fetchPostsByIDs
@@ -151,33 +152,42 @@ $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePost(id);
 });
-$(window).scroll(
-		function() {
-			if ($(window).scrollTop() == $(document).height()
-					- window.windowHeight) {
-				var startIndex = $('.post').length-1;
-				$('div#infinite_loader').show();
-				var response = [];
-				if (USERID == null || USERID == "")
-					response = FetchHeatPost(startIndex, pageSize);
-				else
-					response = FetchByFolloweeOrOwner(USERID, startIndex,
-							pageSize);
-				$.each(response, function(n, dataString) {
-					var boarddiv = post(dataString.owner.ID,
-							dataString.owner.attributes.name,
-							dataString.publishDate,
-							dataString.attributes.content, dataString.ID,
-							dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
-					$(".pro_body").append(boarddiv);
-					Msnry('.pro_body', '.post', 435);
+$('body').on("click", ".post_more", function() {
+	var id = $(this).attr('id');
+	$("div[id='postImg"+id+"']").find('img').click();
+});
+$(window)
+		.scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- window.windowHeight) {
+						var startIndex = $('.post').length - 1;
+						$('div#infinite_loader').show();
+						var response = [];
+						if (USERID == null || USERID == "")
+							response = FetchHeatPost(startIndex, pageSize);
+						else
+							response = FetchByFolloweeOrOwner(USERID,
+									startIndex, pageSize);
+						$.each(response, function(n, dataString) {
+							var boarddiv = post(dataString.owner.ID,
+									dataString.owner.attributes.name,
+									dataString.publishDate,
+									dataString.attributes.content,
+									dataString.ID, dataString.likerIDs,
+									dataString.collectorIDs,
+									dataString.imageLinks,
+									dataString.owner.attributes.avatarLink);
+							$(".pro_body").append(boarddiv);
+							Msnry('.pro_body', '.post', 435);
+						});
+						if (response.length == pageSize) {
+							$('div#infinite_loader').hide();
+						} else {
+							$('div#infinite_loader')
+									.replaceWith(
+											'<div id="no_more_infinite_load"><span>no more</span></div>');
+							$(window).unbind("scroll");
+						}
+					}
 				});
-				if (response.length == pageSize) {
-					$('div#infinite_loader').hide();
-				} else {
-					$('div#infinite_loader')
-							.replaceWith('<div id="no_more_infinite_load"><span>no more</span></div>');
-					$(window).unbind("scroll");
-				}
-			}
-		});

@@ -12,7 +12,6 @@ function Msnry(selectContain, item, width) {
 
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
-
 	var likeClass = "glyphicon glyphicon-heart-empty";
 	var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, likers) != -1) {
@@ -35,14 +34,19 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						srcImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
+									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
 									+ postID + ")' src='" + image + "' />";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
 		postImgDiv = "";
 	}
-
+	var readmore = "";
+	var contentD= content;
+	if(content.length > 200){
+		readmore = "<div class='post_more' id='"+postID+"' ><a style='cursor:pointer'>read more</a></div>";
+		contentD = content.substr(0,200)+"......";
+	}
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
@@ -56,8 +60,8 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ "</div></div><div class='col-md-4'>"
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
-			+ content
-			+ "</span><div class='post_more'><a>read more...</a></div></div>"
+			+ contentD
+			+ "</span>"+readmore+"</div>"
 			+ postImgDiv
 			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 			+ ownerID
@@ -79,7 +83,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	});
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
-
+		
 		$(this).find('a').fadeIn(300);
 	}, function() {
 		$(this).find('a').fadeOut(300);
@@ -404,6 +408,7 @@ function clickOffEvent() {
 		$(this).attr("data-toggle", "");
 		alert("Sign In");
 	});
+	$('.share_txt').attr("readonly","readonly");
 
 }
 (function($) {
@@ -690,6 +695,7 @@ $('body')
 			window.location.href = 'communityMember.jsp?'
 					+ community.ID;
 		});
+
 /**
  * auto_resize
  */
