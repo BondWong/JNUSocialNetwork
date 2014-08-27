@@ -2,11 +2,39 @@
  * 
  */
 
+function open_chatroom(fromID, toID, name) {
+	$.ajax({
+		type : "GET",
+		url : '../../app/chatRoom/fetch/' + fromID + '/' + toID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data) {
+			var top = $("#contact-list").css("top");
+			var right = $("#contact-list").css("right");
+			var width = $("#contact-list").css("width");
+			right = right.substring(0, right.indexOf("px"));
+			right = parseInt(right);
+			width = width.substring(0, width.indexOf("px"));
+			width = parseInt(width);
+			var online = false;
+			var IDs = sessionStorage.getItem("onlineUserIDs");
+			IDs = $.parseJSON(IDs);
+			for (var i = 0; i < IDs.length; i++)
+				if (IDs[i] == toID) {
+					online = true;
+					break;
+				}
+			create_chatroom(data, fromID, toID, name, online, top, right
+					+ width);
+		}
+	});
+}
+
 function open_chatroom(fromID, toID) {
 	$.ajax({
 		type : "GET",
-		url : '../../app/chatRoom/fetch/' + fromID + '/'
-				+ toID,
+		url : '../../app/chatRoom/fetch/' + fromID + '/' + toID,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -88,10 +116,7 @@ function prepare_chat_room_load_more(data, fromID) {
 								.ajax({
 									type : "GET",
 									url : '../../app/chatRoom/fetchMessages/'
-											+ data.ID
-											+ '/'
-											+ clickCount
-											* 5
+											+ data.ID + '/' + clickCount * 5
 											+ '/5',
 									beforeSend : function(request) {
 										request.setRequestHeader("ID", USERID);
@@ -209,11 +234,11 @@ function append_to_content_panel(data, who) {
 
 	$("#chatroom .panel-body").append(message);
 	if (data.attributes.content.length > 10
-			&& data.attributes.content.length <= 18)
+			&& data.attributes.content.length <= 25)
 		$("#" + data.ID + ' .chat-content-' + who).css("width",
 				100 + (data.attributes.content.length - 10) * 10 + "px");
 	if (data.attributes.content.length > 18)
-		$("#" + data.ID + ' .chat-content-' + who).css("width", "180px");
+		$("#" + data.ID + ' .chat-content-' + who).css("width", "250px");
 	$("#chatroom .panel-body").scrollTop(10000000);
 }
 
@@ -240,11 +265,12 @@ function prepend_to_content_panel(data, who) {
 
 	$("#chatroom .chat-room-load-histroy").after(message);
 	if (data.attributes.content.length > 10
-			&& data.attributes.content.length <= 18)
+			&& data.attributes.content.length <= 25)
 		$("#" + data.ID + ' .chat-content-' + who).css("width",
 				100 + (data.attributes.content.length - 10) * 10 + "px");
-	if (data.attributes.content.length > 18)
-		$("#" + data.ID + ' .chat-content-' + who).css("width", "180px");
+	if (data.attributes.content.length > 25)
+		$("#" + data.ID + ' .chat-content-' + who).css("width", "250px");
+
 }
 
 function save_message(data) {
@@ -346,8 +372,8 @@ function save_offline_remind_messages(message) {
 			.setItem("offline_messages", JSON.stringify(offline_messages));
 }
 
-function show_messages(messagesID, toID, fromID, toName, online) {
-	open_chatroom(toID, fromID, toName, online);
+function show_messages(messagesID, toID, fromID, toName) {
+	open_chatroom(toID, fromID, toName);
 
 	var online_messages = sessionStorage.getItem("online_messages");
 	if (online_messages == null)

@@ -20,7 +20,9 @@ function login_initialization(ID) {
 							.text(
 									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
 					$("#nav-bar-avatar")
-							.attr("src",$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+							.attr(
+									"src",
+									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 				}
 			});
 
@@ -129,6 +131,7 @@ function login_initialization(ID) {
 		$('.mentionBody').css("display", "none");
 		$('.mentionBody-content').empty();
 	});
+
 }
 
 function handle_message(data) {

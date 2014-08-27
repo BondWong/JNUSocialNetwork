@@ -13,7 +13,7 @@ function oriented_follow(toID) {
 	event.data = {};
 	event.data.ID = user.ID;
 	event.data.name = user.attributes.name;
-	event.data.avatar = user.attributes.avatar;
+	event.data.avatar = user.attributes.avatarLink;
 	ws.send(JSON.stringify(event));
 }
 
@@ -29,7 +29,7 @@ function oriented_add_comment(toID, commentID, postID) {
 	event.data = {};
 	event.data.ID = user.ID;
 	event.data.name = user.attributes.name;
-	event.data.avatar = user.attributes.avatar;
+	event.data.avatar = user.attributes.avatarLink;
 	event.data.commentID = commentID + "";
 	event.data.postID = postID + "";
 	ws.send(JSON.stringify(event));
@@ -47,7 +47,7 @@ function oriented_reply_comment(toID, commentID, toCommentID, postID) {
 	event.data = {};
 	event.data.ID = user.ID;
 	event.data.name = user.attributes.name;
-	event.data.avatar = user.attributes.avatar;
+	event.data.avatar = user.attributes.avatarLink;
 	event.data.toCommentID = toCommentID + "";
 	event.data.commentID = commentID + "";
 	event.data.postID = postID + "";
@@ -67,7 +67,7 @@ function oriented_like_post(toID, postID) {
 	event.data = {};
 	event.data.ID = user.ID;
 	event.data.name = user.attributes.name;
-	event.data.avatar = user.attributes.avatar;
+	event.data.avatar = user.attributes.avatarLink;
 	event.data.postID = postID + "";
 	ws.send(JSON.stringify(event));
 }
@@ -84,7 +84,7 @@ function oriented_like_comment(toID, commentID, postID) {
 	event.data = {};
 	event.data.ID = user.ID;
 	event.data.name = user.attributes.name;
-	event.data.avatar = user.attributes.avatar;
+	event.data.avatar = user.attributes.avatarLink;
 	event.data.postID = postID + "";
 	event.data.commentID = commentID + "";
 	ws.send(JSON.stringify(event));

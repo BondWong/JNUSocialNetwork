@@ -24,7 +24,7 @@
 		<div class="activityHead">
 			<img alt="" width="100%"
 				onload="javascript:auto_resize(1170, 300, this)"
-				src="images/activityHead.jpg">
+				src="">
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
@@ -128,7 +128,7 @@
 				</div>
 				<div class="aBodyComment">
 					<div class="aCommentItem">
-						<img alt="" src="images/user_img.jpg">
+						<img alt="" src="">
 						<div class="user_name">
 							<strong>Winson_Lau</strong>
 						</div>
@@ -154,7 +154,7 @@
 			<div class="aBodyRight">
 				<div class="aBodyCard">
 					<div class="communityBS">
-						<img alt="" src="images/communityBgSm.jpg">
+						<img alt="" src="">
 					</div>
 					<div class="cBcontent">
 						<p>Hosted by:</p>
@@ -176,7 +176,6 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-	<%@ include file="parts/footer.jsp"%>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

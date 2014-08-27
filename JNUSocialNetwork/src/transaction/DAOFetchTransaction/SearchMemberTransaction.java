@@ -53,6 +53,15 @@ public class SearchMemberTransaction extends DAOTransaction {
 				results.add(r.iterator().next().toRepresentation());
 			else
 				results.add(new HashMap<String, Object>());
+		} else if (params[0] == null) {
+			TypedQuery<Member> tq = em.createNamedQuery("Member.fetchByID",
+					Member.class);
+			tq.setParameter(1, params[1]);
+			List<Member> r = tq.getResultList();
+			if (r.iterator().hasNext())
+				results.add(r.iterator().next().toRepresentation());
+			else
+				results.add(new HashMap<String, Object>());
 		}
 		return results;
 	}
