@@ -1559,6 +1559,7 @@ body {
 .mentionClose {
 	font-size: 12px;
 	float: right;
+	cursor:pointer;
 }
 
 .NotiItem h1 {
