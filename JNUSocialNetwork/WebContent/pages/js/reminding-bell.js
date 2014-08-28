@@ -77,7 +77,7 @@ function messages_remind(message) {
 				function(e) {
 					e.stopPropagation();
 					show_messages("message_" + tempFromID, tempToID,
-							tempFromID, tempFrom, true, 30, 30);
+							tempFromID, tempFrom);
 					$(this).remove();
 				});
 	} else {
@@ -186,23 +186,22 @@ function events_remind(event) {
 									$(".arrowBack").replaceWith(
 											'<div class="arrowBack"></div>');
 									$(".mentionBody-content").empty();
-									add_messages_to_bell();
+									show_remind_content();
 								});
 						if (!isOnline) {
-							$
-									.ajax({
-										type : "PUT",
-										url : '../../app/event/deleteUnhandledEvent/'
-												+ USERID + '/' + eventID,
-										beforeSend : function(request) {
-											request.setRequestHeader("ID",
-													USERID);
-										},
-										success : function(data) {
-										}
-									});
+							$.ajax({
+								type : "PUT",
+								url : '../../app/event/deleteUnhandledEvent/'
+										+ USERID + '/' + eventID,
+								beforeSend : function(request) {
+									request.setRequestHeader("ID", USERID);
+								},
+								success : function(data) {
+								}
+							});
 						}
 					});
+
 }
 
 function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,
@@ -255,7 +254,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 								+ postID

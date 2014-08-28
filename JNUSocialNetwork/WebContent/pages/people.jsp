@@ -28,11 +28,11 @@
 					<span class="glyphicon glyphicon-search glyphicon-search-custom userSearch"
 						style="cursor: pointer;"></span> <span class="searchUser">寻找小伙伴</span>
 				</div>
-				<span class="peopeleType peopeleTypeHover pinCommon">同兴趣伙伴</span>
-				 <span class="peopeleType pCampus">同学院伙伴</span> 
-					<span class="peopeleType pMajor">同专业伙伴</span> 
-					<span class="peopeleType pSeason">同年级伙伴</span>
-					 <span class="peopeleType pClass">同班同学</span>
+				<span class="peopeleType peopeleTypeHover pinCommon">同兴趣伙伴</span> <span
+					class="peopeleType pCampus">同学院伙伴</span> <span
+					class="peopeleType pMajor">同专业伙伴</span> <span
+					class="peopeleType pSeason">同年级伙伴</span> <span
+					class="peopeleType pClass">同班同学</span>
 			</div>
 		</div>
 		<div class="col-lg-9">
@@ -45,7 +45,7 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-
+	
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery.json.min.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>

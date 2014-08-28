@@ -13,8 +13,8 @@
 	<div class="coRegBody">
 		<div class="layer">
 			<div class="regTop">
-				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a> <a href="#" class="btn btn-primary btn-sm"
-					role="button"><span>关于我们</span></a>
+				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a>
+				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">社区账号注册</div>
 			<div class="containerApp" style="display: block">
@@ -54,12 +54,13 @@
 						<button class="btn btn-lg btn-success btn-block"
 							id="appcommunityCreate" type="submit">申请</button>
 					</form>
-					<div class="alert alert-success" id="coregister_success"
-						style="display: none">申请成功，请留意邮箱批准信息</div>
+					<br />
+					<div id="coregister_status" style="display: none"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<%@ include file="parts/footer.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
@@ -73,8 +74,20 @@
 	<c:choose>
 		<c:when test='${param.success == "true"}'>
 			<script type="text/javascript">
-				$("#coregister_success").fadeIn("fast");
-				setTimeout('$("#coregister_success").fadeOut("slow")', 5000);
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-success" id="coregister_status" style="display: none">申请成功，请留意邮箱批准信息</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
+			</script>
+		</c:when>
+		<c:when test='${param.ID == "exist"}'>
+			<script type="text/javascript">
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-warning" id="coregister_status" style="display: none">ID已经存在</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
 			</script>
 		</c:when>
 	</c:choose>

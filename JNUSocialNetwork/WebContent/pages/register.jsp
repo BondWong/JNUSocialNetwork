@@ -54,6 +54,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="parts/footer.jsp"%>
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript

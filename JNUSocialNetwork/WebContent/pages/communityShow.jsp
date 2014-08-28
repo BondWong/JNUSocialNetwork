@@ -91,14 +91,13 @@
 				<img onload="javascript:auto_resize(221, 267, this)" src="" />
 			</div>
 			<div class="cardA">
-				<span>All posts</span>
-				<span class="activityHref">Activities</span>
+				<span>All posts</span> <span class="activityHref">Activities</span>
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
 				<span class="memberHref">see all</span>
 			</div>
-			
+
 		</div>
 		<div class="pro_body pro_body_community">
 			<div class="share post">
@@ -182,7 +181,6 @@
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

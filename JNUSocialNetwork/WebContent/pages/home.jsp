@@ -183,13 +183,7 @@
 		<!-- CHATROOM -->
 		<%@ include file="parts/chatRoom.jsp"%>
 		<!-- FOOTER -->
-		<footer>
-			<div class="back_to_top_button"></div>
-			<p>
-				&copy; 2014 11软工, Bond and Winson. &middot; <a href="#">Privacy</a>
-				&middot; <a href="#">Terms</a>
-			</p>
-		</footer>
+		<%@ include file="parts/footer.jsp"%>
 	</div>
 	<!-- /.container -->
 
@@ -205,9 +199,9 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<script type="text/javascript">
-	if (USERID != "") {
-		$('#showBtn').css("display", "none");
-	}
+		if (USERID != "") {
+			$('#showBtn').css("display", "none");
+		}
 	</script>
 </body>
 </html>

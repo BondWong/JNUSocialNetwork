@@ -313,37 +313,7 @@ function aboutClickEvent() {
 			});
 }
 
-// function profileBg
-$('.profile_img')
-		.hover(
-				function() {
-					var changeBtn = "<div class='changeBtnGroup'><form><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button><input type='file' name='file' class='btn_file' style='display:none'/></form></div>";// <button
-					// class='btn
-					// btn-success
-					// avatarImgBtn'>Change
-					// Avatar</button>
-					$('.profile_img').append(changeBtn);
-					$('.changeBtnGroup').hide();
-					$('.changeBtnGroup').fadeIn(300);
-				}, function() {
-					$('.changeBtnGroup').fadeOut(300, function() {
-						$(this).remove();
-					});
-				});
 
-// function profileImg
-$('.profile_user_img')
-		.hover(
-				function() {
-					var changeBtn = "<button class='btn btn-success profileImg' data-toggle='modal' data-target='#myModal'>Change</button>";
-					$(this).append(changeBtn);
-					$('.profileImg').hide();
-					$('.profileImg').fadeIn(300);
-				}, function() {
-					$('.profileImg').fadeOut(300, function() {
-						$(this).remove();
-					});
-				});
 
 // show photos
 function showPhotos() {
@@ -358,8 +328,9 @@ function showPhotos() {
 function showFollowees() {
 	var response = FetchFollowees(userID, "0", "10");
 	$.each(response, function(index, followee) {
-		var followeeDiv = "<img src='" + followee.attributes.avatarLink
-				+ "'></img>";
+		var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + followee.attributes.avatarLink
+				+ "'></img><input type='hidden' name='userID' value='"+followee.ID+"'/>";
+		$('.userImgA').userTips();
 		$('.followeeShow').append(followeeDiv);
 	});
 }
@@ -367,9 +338,11 @@ function showFollowees() {
 function showFollowers() {
 	var response = FetchFollowers(userID, "0", "10");
 	$.each(response, function(index, follower) {
-		var followerDiv = "<img src='" + follower.attributes.avatarLink
-				+ "'></img>";
+		var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + follower.attributes.avatarLink
+				+ "'></img><input type='hidden' name='userID' value='"+follower.ID+"'/>";
+		
 		$('.followerShow').append(followerDiv);
+		$('.userImgA').userTips();
 	});
 }
 var pageSize = 5;
@@ -391,9 +364,45 @@ function fetchPostsByOwner() {
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
+	if(userID == USERID){
+		$('.aEditbtn').css("display","inline");
+		// function profileBg
+		$('.profile_img')
+				.hover(
+						function() {
+							var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button></div>";
+							$('.profileImgDiv').after(changeBtn);
+							$('.changeBtnGroup').hide();
+							$('.changeBtnGroup').fadeIn(300);
+						}, function() {
+							$('.changeBtnGroup').fadeOut(300, function() {
+								$(this).remove();
+							});
+						});
+
+		// function profileImg
+		$('.profile_user_img')
+				.hover(
+						function() {
+							var pos = $(this).offset();
+							var nPos = pos;
+							nPos.top = pos.top ;
+							nPos.left = pos.left +10;
+							var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#myModal'></span></div>";
+							$(this).append(changeBtn);
+							$('.profileImg').css(nPos);
+							$('.profileImg').hide();
+							$('.profileImg').fadeIn(300);
+						}, function() {
+							$('.profileImg').fadeOut(1, function() {
+								$(this).remove();
+							});
+						});
+	}
 	$('.profile_user_img').find('img').attr("src",userInfo.attributes.avatarLink);
 	$('.profile_img').find('img').attr("src",userInfo.attributes.profileImageLink);
 	$('.profileAvatar').attr("src",userInfo.attributes.avatarLink);
+	$('.profile_user_name').html(userInfo.attributes.name);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);

@@ -20,7 +20,7 @@
 	<div class="arrow"></div>
 	<div class="mentionBody-title">
 		<div class="arrowBack"></div>
-		Notifications
+		消息提醒
 		<div class="glyphicon glyphicon-remove mentionClose"></div>
 	</div>
 	<div class="mentionBody-content">

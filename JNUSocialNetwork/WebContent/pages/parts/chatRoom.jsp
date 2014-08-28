@@ -15,7 +15,7 @@
 				<div class="tab-pane active" id="contact">
 					<div class="friends-tree-node">
 						<a href="javaScript:void(0);" class="friends-tree-node-button"><span
-							class="glyphicon glyphicon-chevron-right">&nbsp;Friends</span></a>
+							class="glyphicon glyphicon-chevron-right">&nbsp;好友</span></a>
 					</div>
 				</div>
 				<div class="tab-pane" id="history"></div>
