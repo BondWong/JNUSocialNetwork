@@ -414,8 +414,8 @@ public class UserService {
 		transaction = new SearchMemberTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute(null, key,
-					startIndex, pageSize);
+			results = (List<Map<String, Object>>) transaction.execute(null,
+					key, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

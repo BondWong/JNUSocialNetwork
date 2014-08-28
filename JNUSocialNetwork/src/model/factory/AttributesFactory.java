@@ -58,7 +58,7 @@ public class AttributesFactory {
 				attributes.put("profileImageLink",
 						"images/default/default-profile-background.jpg");
 				attributes.put("gender", "");
-				attributes.put("name", "");
+				attributes.put("name", "社区用户");
 				attributes.put("lookingFor", "");
 				attributes.put("relationship", "");
 				attributes.put("telnum", "");
