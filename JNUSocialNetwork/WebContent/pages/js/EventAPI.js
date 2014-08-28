@@ -560,6 +560,7 @@ function AddCommunity(userID, JsonData) {
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
+			window.location.href = 'community.jsp';
 		},
 		error : function(data, status) {
 			response = status;
