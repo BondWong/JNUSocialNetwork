@@ -126,7 +126,7 @@ function login_initialization(ID) {
 	$("#contact-list .remind-tree-node-button").click(function() {
 		on_remind_node_click();
 	});
-	$(".mentionBell").click(on_bell_click);
+	$("#remind-bell").click(on_bell_click);
 	$('.mentionClose').click(function() {
 		$('.mentionBody').css("display", "none");
 		$('.mentionBody-content').empty();

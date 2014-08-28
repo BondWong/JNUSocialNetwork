@@ -5,11 +5,11 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var t = $(this).position().top;
+	var t = $(this).offset().top;
 	var l = $(this).offset().left;
-	t += 20;
+	t += 30;
 	l -= 250;
-	var divTip = 'div.mentionBody';
+	var divTip = '.mentionBody';
 	tinyTip = $(divTip);
 	tinyTip.hide();
 	tinyTip.css({
@@ -21,8 +21,15 @@ function on_bell_click(e) {
 }
 
 function show_remind_content() {
-	add_messages_to_bell();
-	add_events_to_bell();
+	var hasItem = false;
+	hasItem = add_messages_to_bell();
+	hasItem = add_events_to_bell();
+	if (!hasItem) {
+		$(".mentionBody-content").empty();
+		$(".mentionBody-content").append(
+				'<div id="mentionBody-no-content-item">没有消息</div>');
+	}
+
 }
 
 function add_messages_to_bell() {
@@ -48,6 +55,20 @@ function add_messages_to_bell() {
 			messages_remind(val[i]);
 		}
 	});
+
+	var online_messages_length = 0;
+	var offline_messages_length = 0;
+	for (key in online_messages) {
+		if (online_messages.hasOwnProperty(key))
+			online_messages_length++;
+	}
+	for (key in offline_messages) {
+		if (offline_messages.hasOwnProperty(key))
+			offline_messages_length++;
+	}
+	if (online_messages_length != 0 || offline_messages_length != 0)
+		return true;
+	return false;
 }
 
 function add_events_to_bell() {
@@ -60,6 +81,15 @@ function add_events_to_bell() {
 	$.each(incomingEvents, function(index, event) {
 		events_remind(event);
 	});
+
+	var incomingEvents_length = 0;
+	for (key in incomingEvents)
+		if (incomingEvents.hasOwnProperty(key))
+			incomingEvents_length++;
+	if (incomingEvents_length != 0)
+		return true;
+	return false;
+
 }
 
 function messages_remind(message) {
@@ -139,12 +169,15 @@ function events_remind(event) {
 						switch (type) {
 						case "CREATECOMMENT":
 							var dataString = FetchPostByID(event.data.postID);
-							notifyLikeComment(event.data.commentID,
+							notifyAddComment(event.data.commentID,
 									dataString.owner.ID,
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs,
+									dataString.owner.attributes.avatarLink,
+									dataString.imageLinks,
+									dataString.collectorIDs);
 							break;
 						case "FOLLOW":
 							notifyFollow(event.data.ID);
@@ -156,7 +189,10 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs,
+									dataString.owner.attributes.avatarLink,
+									dataString.imageLinks,
+									dataString.collectorIDs);
 							break;
 						case "LIKEPOST":
 							var dataString = FetchPostByID(event.data.postID);
@@ -164,7 +200,10 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs,
+									dataString.owner.attributes.avatarLink,
+									dataString.imageLinks,
+									dataString.collectorIDs);
 							break;
 						case "REPLYCOMMENT":
 							var dataString = FetchPostByID(event.data.postID);
@@ -174,7 +213,10 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publicDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs,
+									dataString.owner.attributes.avatarLink,
+									dataString.imageLinks,
+									dataString.collectorIDs);
 							break;
 						}
 
@@ -205,38 +247,43 @@ function events_remind(event) {
 }
 
 function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,
-		likeNum) {
+		likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	notifyItem([], ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
+			likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 function notifyLikeComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
+		content, postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	var response = FetchCommentByID(commentID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
+			postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
-		publishDate, content, postID, likeNum) {
+		publishDate, content, postID, likerIDs, postOwnerAvatar, postImage,
+		colloctorIDs) {
 	var response = [];
 	var comment1 = FetchCommentByID(commentID);
 	var comment2 = FetchCommentByID(toCommentID);
 	response.push(comment1);
 	response.push(comment2);
 	notifyItem(response, ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
+			likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
+		content, postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	var response = FetchCommentByID(commentID);
-	response.push(commenterID);
-	response.push(commentOwnerID);
+	// response.push(commenterID);
+	// response.push(commentOwnerID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
+			postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img src="'
+			+ data.attributes.profileImageLink
+			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img src="'
+			+ data.attributes.avatarLink
+			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
 			+ data.attributes.lookingFor + '</p></div></div></div>';
@@ -245,24 +292,37 @@ function notifyFollow(followerID) {
 }
 
 function notifyItem(response, ownerID, ownerNickName, publishDate, content,
-		postID, likeNum) {
+		postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	var comment = "";
 	$
 			.each(
 					response,
 					function(index, jsonComment) {
+						var atComment = "";
+						if (jsonComment.attributes.commentToComment != "") {
+							atComment = "@"
+									+ jsonComment.attributes.commentToComment;
+						}
+						var removeBtn = "";
+						if (USERID == jsonComment.owner.ID) {
+							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
+									+ postID
+									+ "' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+						}
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ jsonComment.owner.attributes.avatarLink
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
-								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
-								+ postID
-								+ "' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div></div><div class='col-lg-5 custom_lg-6'><div class='user_info'>"
+								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
+								+ removeBtn
+								+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
 								+ jsonComment.publishDate
-								+ "</div></div><div class='col-lg-5 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
+								+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 								+ jsonComment.ID
 								+ "'>+<span>"
 								+ jsonComment.likerIDs.length
@@ -274,41 +334,79 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ jsonComment.owner.attributes.name
 								+ "' /><input id='replyID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div><div class='act_comment'><a class='commentHead'>@"
-								+ jsonComment.attributes.commentToComment
-								+ "</a>" + "&nbsp;"
+								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 						if (USERID != jsonComment.owner.ID) {
 							$('.deleteCommBtn').css("display", "none");
 						}
 					});
-	var boarddiv = "<div class='post"
-			+ postID
-			+ " notifyItem'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
+	var likeClass = "glyphicon glyphicon-heart-empty";
+	var collectClass = "glyphicon glyphicon-star-empty";
+	if ($.inArray(USERID, likerIDs) != -1) {
+		likeClass = "glyphicon glyphicon-heart";
+	}
+	if ($.inArray(USERID, colloctorIDs) != -1) {
+		collectClass = "glyphicon glyphicon-star";
+	}
+	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
+	var imageDiv = "";
+	if (postImage.length != 0) {
+		$
+				.each(
+						postImage,
+						function(n, image) {
+							imageDiv = imageDiv
+									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' onclick='showPost("
+									+ postID + ")' src='" + image + "' />";
+						});
+		postImgDiv = postImgDiv + imageDiv + "</div>";
+	} else {
+		postImgDiv = "";
+	}
+	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+			+ postOwnerAvatar
+			+ "'/><input type='hidden' value='"
 			+ ownerID
-			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
+			+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 			+ ownerNickName
 			+ "</strong></div><div class='user_info'>"
 			+ publishDate
-			+ "</div></div><div class='col-md-4'><div class='deletePostBtn'><a><input id='deleteID' type='hidden' value="
-			+ postID
-			+ " /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"
+			+ "</div></div></div><div class='post_info'><span class='postContent'>"
 			+ content
-			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="
+			+ "</span></div>"
+			+ postImgDiv
+			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ ownerID
+			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
-			+ likeNum
+			+ ">"
+			+ "<span id='likeShow' class='"
+			+ likeClass
+			+ "' style='font-size:20px'>"
+			+ likerIDs.length
 			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
-			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+			+ "><span class='"
+			+ collectClass
+			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ " autocomplete='off''></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
-			+ postID + ">Submit</button></div></div>" + comment
-			+ "</div></div></div>";
-	if (USERID != ownerID) {
-		$('.deletePostBtn').css("display", "none");
-	}
+			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ postID + ">Submit</button></div></div>" + comment + "</div>";
+
+	$("#commentText" + postID).blur(function() {
+		$(this).attr("placeholder", "add a comment");
+	});
+	$('.act_content').find('a').hide();
+	$('.act_content').hover(function() {
+
+		$(this).find('a').fadeIn(300);
+	}, function() {
+		$(this).find('a').fadeOut(300);
+	});
+
+	$('.deletePostBtn').css("display", "none");
 	$(".mentionBody-content").empty();
 	$(".mentionBody-content").append(boarddiv);
 	$("#commentText" + postID).blur(function() {

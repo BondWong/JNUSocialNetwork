@@ -54,8 +54,8 @@
 						<button class="btn btn-lg btn-success btn-block"
 							id="appcommunityCreate" type="submit">申请</button>
 					</form>
-					<div class="alert alert-success" id="coregister_success"
-						style="display: none">申请成功，请留意邮箱批准信息</div>
+					<br />
+					<div id="coregister_status" style="display: none"></div>
 				</div>
 			</div>
 		</div>
@@ -74,8 +74,20 @@
 	<c:choose>
 		<c:when test='${param.success == "true"}'>
 			<script type="text/javascript">
-				$("#coregister_success").fadeIn("fast");
-				setTimeout('$("#coregister_success").fadeOut("slow")', 5000);
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-success" id="coregister_status" style="display: none">申请成功，请留意邮箱批准信息</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
+			</script>
+		</c:when>
+		<c:when test='${param.ID == "exist"}'>
+			<script type="text/javascript">
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-warning" id="coregister_status" style="display: none">ID已经存在</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
 			</script>
 		</c:when>
 	</c:choose>

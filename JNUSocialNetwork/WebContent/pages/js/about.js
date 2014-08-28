@@ -328,8 +328,9 @@ function showPhotos() {
 function showFollowees() {
 	var response = FetchFollowees(userID, "0", "10");
 	$.each(response, function(index, followee) {
-		var followeeDiv = "<img src='" + followee.attributes.avatarLink
-				+ "'></img>";
+		var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + followee.attributes.avatarLink
+				+ "'></img><input type='hidden' name='userID' value='"+followee.ID+"'/>";
+		$('.userImgA').userTips();
 		$('.followeeShow').append(followeeDiv);
 	});
 }
@@ -337,9 +338,11 @@ function showFollowees() {
 function showFollowers() {
 	var response = FetchFollowers(userID, "0", "10");
 	$.each(response, function(index, follower) {
-		var followerDiv = "<img src='" + follower.attributes.avatarLink
-				+ "'></img>";
+		var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + follower.attributes.avatarLink
+				+ "'></img><input type='hidden' name='userID' value='"+follower.ID+"'/>";
+		
 		$('.followerShow').append(followerDiv);
+		$('.userImgA').userTips();
 	});
 }
 var pageSize = 5;

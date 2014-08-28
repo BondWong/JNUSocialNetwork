@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import transaction.DAOTransaction;
 import transaction.DAOCreateTransaction.CreateApplicationTransaction;
+import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 
 /**
  * Servlet implementation class CommunityOwnerRegisterServlet
@@ -57,6 +58,20 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 			response.sendRedirect("/pages/applyCommunity.jsp");
 		else {
 			String applicationID = request.getParameter("applicationID");
+
+			DAOTransaction transaction = new DoesIDExistTransaction();
+			boolean result = false;
+			try {
+				result = (boolean) transaction.execute(applicationID);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (!result) {
+				response.sendRedirect("/pages/applyCommunity.jsp?ID=exist");
+				return;
+			}
+
 			String password = request.getParameter("password");
 			String email = request.getParameter("email");
 			String reason = request.getParameter("reason");
@@ -67,7 +82,7 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 			parameters.put("email", email);
 			parameters.put("reason", new String(reason.getBytes("ISO-8859-1")));
 
-			DAOTransaction transaction = new CreateApplicationTransaction();
+			transaction = new CreateApplicationTransaction();
 			try {
 				transaction.execute(parameters);
 			} catch (Exception e) {

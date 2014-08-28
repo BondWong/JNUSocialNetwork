@@ -1266,7 +1266,7 @@ body {
 
 .mentionBody {
 	z-index: 1010;
-	width: 345px;
+	width: 380px;
 	padding: 1px;
 	text-align: left;
 	white-space: normal;
@@ -1277,10 +1277,13 @@ body {
 	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	background-clip: padding-box;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	display: none;
+	max-height:600px;
+	overflow:scroll;
+	overflow-x: hidden;
 }
 
 .mentionBody.bottom {
@@ -1559,6 +1562,7 @@ body {
 .mentionClose {
 	font-size: 12px;
 	float: right;
+	cursor:pointer;
 }
 
 .NotiItem h1 {
@@ -1669,6 +1673,9 @@ a.footer-cname:active {
 	opacity: .80;
 	filter: alpha(opacity = 93);
 }
-footer {
+.footer {
 	text-align: center;
+}
+.userImgA{
+	margin-left:10px;
 }

@@ -322,6 +322,8 @@ function clickEvent() {
 		$('#deleteCommunityBtn').css("display", "inline");
 		$('.editActivity').css("display", "inline");
 	}
+	
+
 }
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {
@@ -570,9 +572,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 		$(this).attr("placeholder", "add a comment");
 	});
 }
-$('body').on("click", ".mentionClose", function() {
-	$('.mentionBody').css("display", "none");
-});
+
 
 function showPost(postID) {
 	var response = FetchCommentByPost(postID, "0", "20");
@@ -695,7 +695,14 @@ $('body')
 			window.location.href = 'communityMember.jsp?'
 					+ community.ID;
 		});
-
+$(document).click(function (e) {
+    var drag = $(".mentionBody"),
+        dragel = $(".mentionBody")[0],
+        target = e.target;
+    if (dragel !== target && !$.contains(dragel, target)) {
+        drag.fadeOut(300);
+    }
+});
 /**
  * auto_resize
  */
