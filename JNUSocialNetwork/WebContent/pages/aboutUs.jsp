@@ -84,10 +84,9 @@
 					</p>
 				</div>
 				<div>
-					<img src="images/default/default-user-avartar.png"
-						class="round icon-like" />
+					<img src="images/founder-avatar/hzy.JPG" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>帅哥</span>
+						<span>黄子阳</span>
 					</p>
 					<p class="palegreen rank">
 						<span>联合创始人</span>

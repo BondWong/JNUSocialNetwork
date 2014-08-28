@@ -13,40 +13,16 @@
 		</ul></li>
 	<li><a href="javaScript:void(0);" id="remind-bell"><span
 			class="glyphicon glyphicon-bell mentionBell" style="font-size: 18px"></span></a></li>
-	<li><img src="" onload="javascript:auto_resize(30, 30, this)" class="img-circle img_cust" id="nav-bar-avatar"></li>
+	<li><img src="" onload="javascript:auto_resize(30, 30, this)"
+		class="img-circle img_cust" id="nav-bar-avatar"></li>
 
 </ul>
-<div class="mentionBody bottom">
+<div class="mentionBody bottom" id="onclickMentionBody">
 	<div class="arrow"></div>
 	<div class="mentionBody-title">
 		<div class="arrowBack"></div>
 		消息提醒
 		<div class="glyphicon glyphicon-remove mentionClose"></div>
 	</div>
-	<div class="mentionBody-content">
-		<!-- <div class="NotiItem commentItem">
-			<div class="col-lg-3">
-				<div><img src="images/type.jpg" /></div>
-			</div>
-			<div class="col-lg-6">
-				<div>i want to fuck you!</div>
-			</div>
-		</div>
-		<div class="NotiItem">
-			<div class="col-lg-3">
-				<div><img src="images/type.jpg" /></div>
-			</div>
-			<div class="col-lg-6">
-				<div>i want to fuck you!</div>
-			</div>
-		</div>
-		<div class="NotiItem">
-			<div class="col-lg-3">
-				<div><img src="images/type.jpg" /></div>
-			</div>
-			<div class="col-lg-6">
-				<div>i want to fuck you!</div>
-			</div>
-		</div> -->
-	</div>
+	<div class="mentionBody-content"></div>
 </div>

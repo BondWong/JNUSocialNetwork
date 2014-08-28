@@ -1669,6 +1669,9 @@ a.footer-cname:active {
 	opacity: .80;
 	filter: alpha(opacity = 93);
 }
-footer {
+.footer {
 	text-align: center;
+}
+.userImgA{
+	margin-left:10px;
 }

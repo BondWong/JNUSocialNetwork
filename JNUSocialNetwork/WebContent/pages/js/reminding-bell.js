@@ -21,8 +21,15 @@ function on_bell_click(e) {
 }
 
 function show_remind_content() {
-	add_messages_to_bell();
-	add_events_to_bell();
+	var hasItem = false;
+	hasItem = add_messages_to_bell();
+	hasItem = add_events_to_bell();
+	if (!hasItem) {
+		$(".mentionBody-content").empty();
+		$(".mentionBody-content").append(
+				'<div id="mentionBody-no-content-item">没有消息</div>');
+	}
+
 }
 
 function add_messages_to_bell() {
@@ -48,6 +55,20 @@ function add_messages_to_bell() {
 			messages_remind(val[i]);
 		}
 	});
+
+	var online_messages_length = 0;
+	var offline_messages_length = 0;
+	for (key in online_messages) {
+		if (online_messages.hasOwnProperty(key))
+			online_messages_length++;
+	}
+	for (key in offline_messages) {
+		if (offline_messages.hasOwnProperty(key))
+			offline_messages_length++;
+	}
+	if (online_messages_length != 0 || offline_messages_length != 0)
+		return true;
+	return false;
 }
 
 function add_events_to_bell() {
@@ -60,6 +81,15 @@ function add_events_to_bell() {
 	$.each(incomingEvents, function(index, event) {
 		events_remind(event);
 	});
+
+	var incomingEvents_length = 0;
+	for (key in incomingEvents)
+		if (incomingEvents.hasOwnProperty(key))
+			incomingEvents_length++;
+	if (incomingEvents_length != 0)
+		return true;
+	return false;
+
 }
 
 function messages_remind(message) {
@@ -139,12 +169,13 @@ function events_remind(event) {
 						switch (type) {
 						case "CREATECOMMENT":
 							var dataString = FetchPostByID(event.data.postID);
-							notifyLikeComment(event.data.commentID,
+							notifyAddComment(event.data.commentID,
 									dataString.owner.ID,
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs.length,
+									data.attributes.avatarLink, data.imageLinks);
 							break;
 						case "FOLLOW":
 							notifyFollow(event.data.ID);
@@ -156,7 +187,8 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs.length,
+									data.attributes.avatarLink, data.imageLinks);
 							break;
 						case "LIKEPOST":
 							var dataString = FetchPostByID(event.data.postID);
@@ -164,7 +196,8 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publishDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs.length,
+									data.attributes.avatarLink, data.imageLinks);
 							break;
 						case "REPLYCOMMENT":
 							var dataString = FetchPostByID(event.data.postID);
@@ -174,7 +207,8 @@ function events_remind(event) {
 									dataString.owner.attributes.name,
 									dataString.publicDate,
 									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs.length);
+									dataString.ID, dataString.likerIDs.length,
+									data.attributes.avatarLink, data.imageLinks);
 							break;
 						}
 
@@ -205,47 +239,69 @@ function events_remind(event) {
 }
 
 function notifyLikePost(ownerID, ownerNickName, publishDate, content, postID,
-		likeNum) {
+		likeNum, postOwnerAvatar, postImage) {
 	notifyItem([], ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
+			likeNum, postOwnerAvatar, postImage);
 }
 function notifyLikeComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
+		content, postID, likeNum, postOwnerAvatar, postImage) {
 	var response = FetchCommentByID(commentID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
+			postID, likeNum, postOwnerAvatar, postImage);
 }
 function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
-		publishDate, content, postID, likeNum) {
+		publishDate, content, postID, likeNum, postOwnerAvatar, postImage) {
 	var response = [];
 	var comment1 = FetchCommentByID(commentID);
 	var comment2 = FetchCommentByID(toCommentID);
 	response.push(comment1);
 	response.push(comment2);
 	notifyItem(response, ownerID, ownerNickName, publishDate, content, postID,
-			likeNum);
+			likeNum, postOwnerAvatar, postImage);
 }
 function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
-		content, postID, likeNum) {
+		content, postID, likeNum, postOwnerAvatar, postImage) {
 	var response = FetchCommentByID(commentID);
 	response.push(commenterID);
 	response.push(commentOwnerID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
-			postID, likeNum);
+			postID, likeNum, postOwnerAvatar, postImage);
 }
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip"><div class="content"><div class="urserBgShort"><img src="images/urseBgShort.jpg" /></div><div class="urserInfShort"><img src="images/user_img4.jpg" /><p><h1><a class="tipUser">'
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img src="'
+			+ data.attributes.profileImageLink
+			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img src="'
+			+ data.attributes.avatarLink
+			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
 			+ data.attributes.lookingFor + '</p></div></div></div>';
 	$(".mentionBody-content").empty();
 	$(".mentionBody-content").append(tipFrame);
+	// $("#remind-bell-profileImg").load(auto_resize(300, 150, this));
+	/*
+	 * $("#remind-bell-profileImg").load(function() { var maxWidth = 310; var
+	 * maxHeight = 150; var image = new Image(); image.src = this.src;
+	 * 
+	 * if (image.width > maxWidth && image.height <= maxHeight) { image.width =
+	 * maxWidth; image.height = (maxHeight / maxWidth) * image.width; } else if
+	 * (image.height > maxHeight && image.width <= maxWidth) { image.height =
+	 * maxHeight; image.width = (maxWidth / maxHeight) * image.height; } else if
+	 * (image.height > maxHeight && image.width > maxWidth) { var intervalWidth =
+	 * image.width - maxWidth; var intervalHeight = image.height - maxHeight; if
+	 * (intervalWidth >= intervalHeight) { image.width = maxWidth; image.height =
+	 * (maxHeight / maxWidth) * image.width; } else { image.height = maxHeight;
+	 * image.width = (maxWidth / maxHeight) * image.height; } }
+	 * 
+	 * this.width = image.width; this.height = image.height; });
+	 */
+	// $("#remind-bell-avatarImg")
 }
 
 function notifyItem(response, ownerID, ownerNickName, publishDate, content,
-		postID, likeNum) {
+		postID, likeNum, postOwnerAvatar, postImage) {
 	var comment = "";
 	$
 			.each(
@@ -254,7 +310,9 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img src='images/user_img3.jpg' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+								+ "'><div class='row'><div class='col-lg-1'><img src='"
+								+ jsonComment.owner.attributes.avatarLink
+								+ "' /></div><div class='col-lg-10'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'><div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 								+ postID
@@ -283,29 +341,34 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 							$('.deleteCommBtn').css("display", "none");
 						}
 					});
-	var boarddiv = "<div class='post"
+	var boarddiv = '<div class="post"'
 			+ postID
-			+ " notifyItem'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' src='images/user_img.jpg' /><input type='hidden' value='"
+			+ '" notifyItem"><div class="post_body"><div class="row"><div class="col-md-2"><div class="user_img">';
+	if (postImage.length != 0)
+		boarddiv += '<img class="userImg" src="' + postOwnerAvatar + '" />';
+	boarddiv += '<input type="hidden" value="'
 			+ ownerID
-			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
+			+ '" name="userID"/></div></div><div class="col-md-6"><div class="user_name"><strong>'
 			+ ownerNickName
-			+ "</strong></div><div class='user_info'>"
+			+ '</strong></div><div class="user_info">'
 			+ publishDate
-			+ "</div></div><div class='col-md-4'><div class='deletePostBtn'><a><input id='deleteID' type='hidden' value="
+			+ '</div></div><div class="col-md-4"><div class="deletePostBtn"><a><input id="deleteID" type="hidden" value="'
 			+ postID
-			+ " /><span class='glyphicon glyphicon-remove'></span></a></div></div></div><div class='post_info'>"
+			+ '" /><span class="glyphicon glyphicon-remove"></span></a></div></div></div><div class="post_info">'
 			+ content
-			+ "<div class='post_more'><a>read more...</a></div></div><div class='post_img'><img src='' /></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><input id='likeID' type='hidden' value="
+			+ '<div class="post_more"><a>read more...</a></div></div><div class="post_img"><img src="'
+			+ postImage
+			+ '" /></div><div class="row"><div class="col-md-1"><div class="post_like" style="cursor:pointer"><a><input id="likeID" type="hidden" value="'
 			+ postID
-			+ "><span class='glyphicon glyphicon-heart-empty' style='font-size:20px'>"
+			+ '"><span class="glyphicon glyphicon-heart-empty" style="font-size:20px">'
 			+ likeNum
-			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+			+ '</span></a></div></div><div class="col-md-1"><div class="post_collect" style="cursor:pointer"><a><input id="collectID" type="hidden" value="'
 			+ postID
-			+ "><span class='glyphicon glyphicon-star-empty' style='font-size:20px'></span></a></div></div><div class='col-md-1'><div class='post_share' style='cursor:pointer'><a><span class='glyphicon glyphicon-share-alt' style='font-size:20px'></span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+			+ '"><span class="glyphicon glyphicon-star-empty" style="font-size:20px"></span></a></div></div><div class="col-md-1"><div class="post_share" style="cursor:pointer"><a><span class="glyphicon glyphicon-share-alt" style="font-size:20px"></span></a></div></div></div><div class="media_comm"><div class="row addCommentBtn"><div class="col-lg-8"><div class="form-group"><input type="text" placeholder="Add a comment" class="form-control  commentTxt" id="commentText"'
 			+ postID
-			+ " autocomplete='off''></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
-			+ postID + ">Submit</button></div></div>" + comment
-			+ "</div></div></div>";
+			+ '" autocomplete="off"></div></div><div class="col-lg-4"><button type="submit" class="btn btn-success" id="addComment" value="'
+			+ postID + '">Submit</button></div></div>' + comment
+			+ '"</div></div></div>';
 	if (USERID != ownerID) {
 		$('.deletePostBtn').css("display", "none");
 	}
