@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
 						cookie.setPath("/");
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 						response.addCookie(cookie);
-						response.sendRedirect("/pages/circle.jsp");
+						response.sendRedirect("/pages/community.jsp");
 					}
 				} else {
 					account.setLastAccessDate(new Date());
