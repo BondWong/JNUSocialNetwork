@@ -279,7 +279,7 @@ function aboutClickEvent() {
 	// function avatarImgBtn
 	$('body').on("click", ".avatarImgBtn", function() {
 		var datajson = {
-			avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
+			avatarLink : FileUpload(new FormData($('.avatarForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
@@ -289,7 +289,7 @@ function aboutClickEvent() {
 	// change Background
 	$('body').on("click", ".changeBg", function() {
 		var datajson = {
-			profileImageLink : FileUpload(new FormData($('.changBgForm')[0])),
+			profileImageLink : FileUpload(new FormData($('.changBgForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);

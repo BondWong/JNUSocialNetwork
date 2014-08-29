@@ -481,7 +481,8 @@ function clickOffEvent() {
 														open_chatroom(
 																USERID,
 																sessionStorage
-																		.getItem("otherUserID"));
+																		.getItem("otherUserID"),
+																data.attributes.name);
 													});
 								}
 								/*

@@ -5,8 +5,9 @@
 function on_friends_node_click() {
 	if ($("#contact-list .friends-tree-node span").attr("class").indexOf(
 			"glyphicon-chevron-right") != -1) {
-		$("#contact-list .friends-tree-node span").replaceWith(
-				'<span class="glyphicon glyphicon-chevron-down">&nbsp;好友</span>');
+		$("#contact-list .friends-tree-node span")
+				.replaceWith(
+						'<span class="glyphicon glyphicon-chevron-down">&nbsp;好友</span>');
 		var chatRooms = sessionStorage.getItem("chatrooms");
 		chatRooms = $.parseJSON(chatRooms);
 		var names = {};
@@ -25,7 +26,10 @@ function on_friends_node_click() {
 					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRooms[i].m2ID).click(function() {
-					open_chatroom(USERID, $(this).attr("id"));
+					var name = sessionStorage.getItem("userNameID");
+					name = $.parseJSON(name);
+					name = name[$(this).attr("id")];
+					open_chatroom(USERID, $(this).attr("id"), name);
 				});
 			} else {
 				names[chatRooms[i].m1ID] = chatRooms[i].m1.name;
@@ -41,7 +45,11 @@ function on_friends_node_click() {
 					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRooms[i].m1ID).click(function() {
-					open_chatroom(USERID, $(this).attr("id"));
+					var name = sessionStorage.getItem("userNameID");
+					name = $.parseJSON(name);
+					name = name[$(this).attr("id")];
+					open_chatroom(USERID, $(this).attr("id"), name);
+					open_chatroom(USERID, $(this).attr("id"), name);
 				});
 			}
 		}
