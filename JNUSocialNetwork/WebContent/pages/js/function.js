@@ -42,10 +42,11 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		postImgDiv = "";
 	}
 	var readmore = "";
-	var contentD= content;
-	if(content.length > 200){
-		readmore = "<div class='post_more' id='"+postID+"' ><a style='cursor:pointer'>read more</a></div>";
-		contentD = content.substr(0,200)+"......";
+	var contentD = content;
+	if (content.length > 200) {
+		readmore = "<div class='post_more' id='" + postID
+				+ "' ><a style='cursor:pointer'>read more</a></div>";
+		contentD = content.substr(0, 200) + "......";
 	}
 	var boarddiv = "<div class='post "
 			+ postID
@@ -61,7 +62,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
 			+ contentD
-			+ "</span>"+readmore+"</div>"
+			+ "</span>"
+			+ readmore
+			+ "</div>"
 			+ postImgDiv
 			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 			+ ownerID
@@ -83,7 +86,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	});
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
-		
+
 		$(this).find('a').fadeIn(300);
 	}, function() {
 		$(this).find('a').fadeOut(300);
@@ -291,13 +294,13 @@ function clickEvent() {
 		$('#communityIntro').val(community.attributes.introduct);
 	});
 	$('body').on("click", "#leaveCommunityBtn", function() {
-		LeaveCommunity(USERID,communityID);
+		LeaveCommunity(USERID, communityID);
 	});
 	$('body').on("click", "#deleteCommunityBtn", function() {
 		var id = communityID;
 		DeleteCommunity(id);
 	});
-	
+
 	$('body').on("click", "#saveCommunity", function() {
 		var communityC;
 		if ($('#fileupload').val() != "") {
@@ -322,6 +325,7 @@ function clickEvent() {
 		$('#deleteCommunityBtn').css("display", "inline");
 		$('.editActivity').css("display", "inline");
 	}
+
 }
 function clickOffEvent() {
 	$('.Btnshare').click(function(e) {
@@ -408,7 +412,7 @@ function clickOffEvent() {
 		$(this).attr("data-toggle", "");
 		alert("Sign In");
 	});
-	$('.share_txt').attr("readonly","readonly");
+	$('.share_txt').attr("readonly", "readonly");
 
 }
 (function($) {
@@ -570,9 +574,6 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 		$(this).attr("placeholder", "add a comment");
 	});
 }
-$('body').on("click", ".mentionClose", function() {
-	$('.mentionBody').css("display", "none");
-});
 
 function showPost(postID) {
 	var response = FetchCommentByPost(postID, "0", "20");
@@ -678,24 +679,21 @@ function showPost(postID) {
 				}
 			});
 }
-//funtion sessionID
-$('body')
-		.on(
-				"click",
-				".activityHref",
-				function() {
-					window.location.href = 'activity.jsp?'
-							+ community.ID;
+// funtion sessionID
+$('body').on("click", ".activityHref", function() {
+	window.location.href = 'activity.jsp?' + community.ID;
+});
+$('body').on("click", ".memberHref", function() {
+	window.location.href = 'communityMember.jsp?' + community.ID;
+});
+$(document)
+		.click(
+				function(e) {
+					var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+					if (dragel !== target && !$.contains(dragel, target)) {
+						drag.fadeOut(300);
+					}
 				});
-$('body')
-.on(
-		"click",
-		".memberHref",
-		function() {
-			window.location.href = 'communityMember.jsp?'
-					+ community.ID;
-		});
-
 /**
  * auto_resize
  */

@@ -14,7 +14,7 @@
 		<div class="layer">
 			<div class="regTop">
 				<a href="home.jsp" class="btn btn-primary btn-sm rl-button-span"
-					role="button"><span>回到首页</span></a> <a href="#"
+					role="button"><span>回到首页</span></a> <a href="aboutUs.jsp"
 					class="btn btn-primary btn-sm rl-button-text" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">登录</div>

@@ -239,7 +239,7 @@ function aboutClickEvent() {
 						if ($('.Acampus').html() == "华文校区") {
 							campus = "HuawenCampus";
 						}
-						if ($('.Acampus').html() == "深圳校区") {
+						if ($('.Acampus').html() == "深圳旅游学院") {
 							campus = "ShenzhenCampus";
 						}
 						if ($('.Acampus').html() == "校本部") {

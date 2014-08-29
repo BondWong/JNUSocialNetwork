@@ -5,12 +5,19 @@
   <listener>
     <listener-class>system.Initialtor</listener-class>
   </listener>
+  
   <filter>
     <filter-name>AutoLoginFilter</filter-name>
     <filter-class>
   		security.AutoLoginFilter
   	</filter-class>
   </filter>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
+  		/aboutUs.jsp
+  	</url-pattern>
+  </filter-mapping>
   <filter-mapping>
     <filter-name>AutoLoginFilter</filter-name>
     <url-pattern>
@@ -44,7 +51,19 @@
   <filter-mapping>
     <filter-name>AutoLoginFilter</filter-name>
     <url-pattern>
+  		/communityMember.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
   		/home.jsp
+  	</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
+  		/myActivity.jsp
   	</url-pattern>
   </filter-mapping>
   <filter-mapping>
@@ -59,6 +78,7 @@
   		/profile.jsp
   	</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>LoginCheckFilter</filter-name>
     <filter-class>
@@ -113,7 +133,8 @@
   		/app/fileUploader/*
   	</url-pattern>
   </filter-mapping>
-  <filter>
+  
+   <filter>
     <filter-name>AuthorizationCheckFilter</filter-name>
     <filter-class>
   		security.AuthorizationCheckFilter
@@ -167,4 +188,5 @@
   		/app/fileUploader/*
   	</url-pattern>
   </filter-mapping>
+  
 </web-app>

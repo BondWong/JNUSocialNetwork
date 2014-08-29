@@ -39,6 +39,7 @@ import model.modelType.UserType;
 		@NamedQuery(name = "Member.fetch", query = "SELECT m FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 ORDER BY SIZE(m.followers) DESC"),
+		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 AND m NOT IN (SELECT f FROM Member o JOIN o.followees f WHERE o.ID = ?1) ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {

@@ -58,6 +58,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("lookingFor", "girls");
 			attributes.put("中文", "测试");
 			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("major", "SE");
+			attributes.put("season", "2012");
+			attributes.put("campus", "珠海校区");
 			transaction.execute("2011052404", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			attributes.put("name", "Obama");
@@ -65,6 +68,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("relationship", "married");
 			attributes.put("lookingFor", "geeks");
 			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("major", "SE");
+			attributes.put("season", "2011");
+			attributes.put("campus", "珠海校区");
 			transaction.execute("2011052406", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			attributes.put("name", "黃俊邦");
@@ -72,6 +78,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("relationship", "available");
 			attributes.put("lookingFor", "girls");
 			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("major", "Math");
+			attributes.put("season", "2011");
+			attributes.put("campus", "珠海校区");
 			transaction.execute("2011052408", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			transaction = new FetchChatRoomTransaction();

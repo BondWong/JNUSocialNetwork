@@ -26,18 +26,20 @@ public class SeasonRecommendationTransaction extends DAOTransaction {
 		transaction = new FetchMemberTransaction();
 		Map<String, Object> member = (Map<String, Object>) transaction
 				.execute(params);
-
+		Map<String, String> memberAttributes = (Map<String, String>) member
+				.get("attributes");
+		
 		for (Map<String, Object> m : members) {
 			Map<String, String> mattributes = (Map<String, String>) m
-					.get("attributes");
-			Map<String, String> memberAttributes = (Map<String, String>) member
 					.get("attributes");
 			if (mattributes != null
 					&& memberAttributes != null
 					&& mattributes.get("season") != ""
 					&& mattributes.get("season") != null
 					&& mattributes.get("season").equals(
-							memberAttributes.get("season")))
+							memberAttributes.get("season"))
+					&& !((List<String>) member.get("followeeIDs")).contains(m
+							.get("ID")))
 				recommendations.add(m);
 		}
 
