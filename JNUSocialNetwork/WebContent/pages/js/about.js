@@ -228,11 +228,10 @@ function aboutClickEvent() {
 										"<input class='lookingforE' id='focusedInput' type='text' value='"+userInfo.attributes.lookingFor+"' />");
 						$("span[class='Atelenum']")
 								.html(
-										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telenum+"' />");
+										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telnum+"' />");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-						var campus = "";
 						if ($('.Acampus').html() == "珠海校区") {
 							campus = "ZhuhaiCampus";
 						}
@@ -410,7 +409,7 @@ function fetchUserByID() {
 	$('.Anickname').html(userInfo.attributes.name);
 	$('.Aemail').html(userInfo.attributes.email);
 	$('.Arelationship').html(userInfo.attributes.relationship);
-	$('.Atelenum').html(userInfo.attributes.telenum);
+	$('.Atelenum').html(userInfo.attributes.telnum);
 	$('.Aaddress').html(userInfo.attributes.dorm);
 	$('.Alooking').html(userInfo.attributes.lookingFor);
 	if (userInfo.attributes.birthday != "") {

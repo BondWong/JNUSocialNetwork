@@ -44,6 +44,8 @@
 						style="display: none">登录失败</div>
 					<div class="alert alert-success" id="register_success"
 						style="display: none">注册成功，请登录</div>
+					<div class="alert alert-success" id="register_exist"
+						style="display: none">已有账号，请登录</div>
 				</div>
 			</div>
 			<!-- /container -->
@@ -83,6 +85,14 @@
 
 			<script type="text/javascript">
 				$('#register_success').fadeIn("fast");
+				setTimeout('$("#register_success").fadeOut("slow")', 3000);
+			</script>
+
+		</c:when>
+		<c:when test="${param.registerExist}">
+
+			<script type="text/javascript">
+				$('#register_exist').fadeIn("fast");
 				setTimeout('$("#register_success").fadeOut("slow")', 3000);
 			</script>
 

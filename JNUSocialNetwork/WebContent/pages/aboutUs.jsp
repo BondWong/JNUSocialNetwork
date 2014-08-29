@@ -101,7 +101,7 @@
 				<div>
 					<img src="images/founder-avatar/del.JPG" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>帅哥</span>
+						<span>邓恩临</span>
 					<p class="palegreen rank">
 						<span>联合创始人</span>
 					</p>
