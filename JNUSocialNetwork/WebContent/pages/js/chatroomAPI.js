@@ -27,6 +27,7 @@ function open_chatroom(fromID, toID, name) {
 				}
 			create_chatroom(data, fromID, toID, name, online, top, right
 					+ width);
+			add_chatroom(data);
 		}
 	});
 }
