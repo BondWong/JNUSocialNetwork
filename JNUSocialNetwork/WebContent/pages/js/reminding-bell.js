@@ -279,9 +279,9 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img src="'
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(350, 180, this)" src="'
 			+ data.attributes.profileImageLink
-			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img src="'
+			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img onload="javascript:auto_resize(50, 50, this)" src="'
 			+ data.attributes.avatarLink
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
