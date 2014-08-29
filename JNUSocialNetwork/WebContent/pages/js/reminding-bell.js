@@ -5,7 +5,7 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var t = $(this).offset().top;
+	var t = $(this).position().top;
 	var l = $(this).offset().left;
 	t += 30;
 	l -= 250;
@@ -21,6 +21,7 @@ function on_bell_click(e) {
 }
 
 function show_remind_content() {
+	$(".mentionBody-content").empty();
 	var hasItem = false;
 	hasItem = add_messages_to_bell();
 	hasItem = add_events_to_bell();
@@ -94,12 +95,16 @@ function add_events_to_bell() {
 
 function messages_remind(message) {
 	if ($("div.mentionBody-content #" + message.fromID).length == 0) {
-		$("div.mentionBody-content").append(
-				'<div class="NotiItem" id="' + message.fromID
-						+ '"><div class="col-lg-3"><div><img src="'
-						+ message.attributes.avatarLink + '"/></div></div>'
-						+ '<div class="col-lg-9"><div>' + message.from
-						+ '<span class="badge">1</span></div></div></div>');
+		$("div.mentionBody-content")
+				.append(
+						'<div class="NotiItem" id="'
+								+ message.fromID
+								+ '"><div class="col-lg-3"><div><img src="'
+								+ message.attributes.avatarLink
+								+ '" onload="javascript:auto_resize(50, 50, this)"/></div></div>'
+								+ '<div class="col-lg-9"><div>'
+								+ message.from
+								+ '<span class="badge">1</span></div></div></div>');
 		var tempToID = message.toID;
 		var tempFromID = message.fromID;
 		var tempFrom = message.from;
@@ -145,13 +150,16 @@ function events_remind(event) {
 		description = "Follow";
 		break;
 	}
-	$("div.mentionBody-content").append(
-			'<div class="NotiItem" id="' + event.data.eventID
-					+ '"><div class="col-lg-3"><div><img src="'
-					+ event.data.avatar
-					+ '" /></div></div><div class="col-lg-9"><h1>' + head
-					+ '</h1><div class="remindConent">' + event.data.name + ' '
-					+ description + '</div></div><div>');
+	$("div.mentionBody-content")
+			.append(
+					'<div class="NotiItem" id="'
+							+ event.data.eventID
+							+ '"><div class="col-lg-3"><div><img src="'
+							+ event.data.avatar
+							+ '" onload="javascript:auto_resize(50, 50, this)"/></div></div><div class="col-lg-9"><h1>'
+							+ head + '</h1><div class="remindConent">'
+							+ event.data.name + ' ' + description
+							+ '</div></div><div>');
 	var type = event.name;
 	var eventID = event.data.eventID;
 	var isOnline = event.action == null ? false : true;
@@ -271,17 +279,15 @@ function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
 function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 		content, postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	var response = FetchCommentByID(commentID);
-	// response.push(commenterID);
-	// response.push(commentOwnerID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
 			postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img src="'
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(350, 180, this)" src="'
 			+ data.attributes.profileImageLink
-			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img src="'
+			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img onload="javascript:auto_resize(50, 50, this)" src="'
 			+ data.attributes.avatarLink
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name

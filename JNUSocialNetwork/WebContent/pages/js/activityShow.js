@@ -64,7 +64,7 @@ function showActivityDetail(activity, community) {
 					});
 	$(".commentBtn").after(comment);
 	$('.communityBS').find('img').attr("src",
-			'images/default/default-community-card.png');
+			community.attributes.communityCard);
 	$('.addcommunityA').attr("id", community.ID);
 	$('.activityJoin').attr("id", activity.ID);
 	$('.leaveactivityJoin').attr("id", activity.ID);
@@ -111,4 +111,7 @@ $('body').on("click", "#saveActivity", function() {
 	$('.activityShowTime').html("&nbsp;" + aup.attributes.activityTime);
 	$('.activityShowAddre').html("&nbsp;" + aup.attributes.activityAddr);
 	$('.activityShowD').html("&nbsp;" + aup.attributes.activityMore);
+	$('.activityHead').find('img').attr("src",
+			activityC);
+	$('.activityForm').get(0).reset();
 });

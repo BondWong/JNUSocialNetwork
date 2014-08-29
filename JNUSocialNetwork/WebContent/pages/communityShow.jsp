@@ -26,13 +26,13 @@
 			<div class="dropdown">
 				<div class="cardSetter glyphicon glyphicon-cog" type="button"
 					id="dropdownMenu1" data-toggle="dropdown"></div>
-				<ul class="dropdown-menu pull-right" role="menu"
+				<ul class="dropdown-menu pull-right ul" role="menu"
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#" id="editMembersBtn">管理成员</a></li>
+						href="" id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -48,7 +48,7 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">管理社区</h4>
 						</div>
-						<form class="communityForm" enctype="multipart/form-data">
+						<form class="editCommunityForm" enctype="multipart/form-data">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
@@ -63,10 +63,10 @@
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileupload" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
-								<div id="files" class="files"></div>
+								
 								<br>
 							</div>
 							<br></br>
@@ -143,7 +143,7 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title" id="myModalLabel">Share Post</h4>
 							</div>
-							<form class="photoForm" enctype="multipart/form-data">
+							<form class="postForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
 									<input class="form-control share_txt2" id="share_txt2"
 										type="text" placeholder="share anything you what to share" />
@@ -227,7 +227,11 @@
 				window.fileDri = [];
 				window.communityPostIdContainer = [];
 				clickEvent();
-				if ($.inArray(USERID, community.memberIDs) != -1) {
+				var memberIDs =[];
+				$.each(community.members,function(n,member){
+					memberIDs.push(member.ID);
+				});
+				if ($.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}
 			} else {

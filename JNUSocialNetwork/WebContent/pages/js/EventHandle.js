@@ -196,7 +196,7 @@ function CREATECOMMENT() {
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 									+ removeBtn
-									+ "</div></div><div class='row'><div class='col-lg-8 custom_lg-6'><div class='user_info'>"
+									+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
 									+ jsonComment.publishDate
 									+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 									+ jsonComment.ID

@@ -228,18 +228,17 @@ function aboutClickEvent() {
 										"<input class='lookingforE' id='focusedInput' type='text' value='"+userInfo.attributes.lookingFor+"' />");
 						$("span[class='Atelenum']")
 								.html(
-										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telenum+"' />");
+										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telnum+"' />");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-						var campus = "";
 						if ($('.Acampus').html() == "珠海校区") {
 							campus = "ZhuhaiCampus";
 						}
 						if ($('.Acampus').html() == "华文校区") {
 							campus = "HuawenCampus";
 						}
-						if ($('.Acampus').html() == "深圳校区") {
+						if ($('.Acampus').html() == "深圳旅游学院") {
 							campus = "ShenzhenCampus";
 						}
 						if ($('.Acampus').html() == "校本部") {
@@ -280,22 +279,24 @@ function aboutClickEvent() {
 	// function avatarImgBtn
 	$('body').on("click", ".avatarImgBtn", function() {
 		var datajson = {
-			avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
+			avatarLink : FileUpload(new FormData($('.avatarForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
 		fetchUserByID();
 		$('#myModal').modal('hide');
+		$('.avatarForm').get(0).reset();
 	});
 	// change Background
 	$('body').on("click", ".changeBg", function() {
 		var datajson = {
-			profileImageLink : FileUpload(new FormData($('.changBgForm')[0])),
+			profileImageLink : FileUpload(new FormData($('.changBgForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
 		fetchUserByID();
 		$('#myModalB').modal('hide');
+		$('.changBgForm').get(0).reset();
 	});
 	// function addPhoto
 	$('body').on(
@@ -319,7 +320,7 @@ function aboutClickEvent() {
 function showPhotos() {
 	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {
-		var photoContainer = "<div class='photo'><img src='" + imageLink
+		var photoContainer = "<div class='photo'><img onload='javascript:auto_resize(280, 150, this)' src='" + imageLink
 				+ "' /></div>";
 		$('.photoAddBtn').after(photoContainer);
 	});
@@ -410,7 +411,7 @@ function fetchUserByID() {
 	$('.Anickname').html(userInfo.attributes.name);
 	$('.Aemail').html(userInfo.attributes.email);
 	$('.Arelationship').html(userInfo.attributes.relationship);
-	$('.Atelenum').html(userInfo.attributes.telenum);
+	$('.Atelenum').html(userInfo.attributes.telnum);
 	$('.Aaddress').html(userInfo.attributes.dorm);
 	$('.Alooking').html(userInfo.attributes.lookingFor);
 	if (userInfo.attributes.birthday != "") {

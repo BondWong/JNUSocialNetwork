@@ -26,11 +26,11 @@ public class ClassRecommendationTransaction extends DAOTransaction {
 		transaction = new FetchMemberTransaction();
 		Map<String, Object> member = (Map<String, Object>) transaction
 				.execute(params);
+		Map<String, String> memberAttributes = (Map<String, String>) member
+				.get("attributes");
 
 		for (Map<String, Object> m : members) {
 			Map<String, String> mattributes = (Map<String, String>) m
-					.get("attributes");
-			Map<String, String> memberAttributes = (Map<String, String>) member
 					.get("attributes");
 			if (mattributes != null
 					&& memberAttributes != null
@@ -38,10 +38,12 @@ public class ClassRecommendationTransaction extends DAOTransaction {
 					&& mattributes.get("major") != null
 					&& mattributes.get("major").equals(
 							memberAttributes.get("major"))
-					&& mattributes.get("session") != ""
-					&& mattributes.get("session") != null
-					&& mattributes.get("session").equals(
-							memberAttributes.get("session")))
+					&& mattributes.get("season") != ""
+					&& mattributes.get("season") != null
+					&& mattributes.get("season").equals(
+							memberAttributes.get("season"))
+					&& !((List<String>) member.get("followeeIDs")).contains(m
+							.get("ID")))
 				recommendations.add(m);
 		}
 

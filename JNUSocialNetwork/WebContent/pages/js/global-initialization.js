@@ -13,6 +13,7 @@ function login_initialization(ID) {
 				success : function(data) {
 					sessionStorage.setItem("user", JSON.stringify(data));
 					sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
+					sessionStorage.setItem("userNameID", JSON.stringify({}));
 					/*
 					 * initialize nav bar
 					 */

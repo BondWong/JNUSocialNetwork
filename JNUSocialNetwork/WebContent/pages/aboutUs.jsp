@@ -42,8 +42,8 @@
 				src="images/about-us/dot.png" alt="Link" /></a></li>
 		<li><a href="#fifth" title="Next Section"><img
 				src="images/about-us/dot.png" alt="Link" /></a></li>
-		<li><a href="home.jsp"><span class="glyphicon glyphicon-home"></span>
-		</a></li>
+		<li><a href="home.jsp" class="white"><span
+				class="glyphicon glyphicon-home"></span> </a></li>
 	</ul>
 
 	<div id="intro">
@@ -63,8 +63,7 @@
 			<div class="float-right">
 				<h2 class="palegreen">Team</h2>
 				<div>
-					<img src="images/default/default-user-avartar.png"
-						class="round icon-like" />
+					<img src="images/founder-avatar/hjb.JPG" class="round icon-like" />
 					<p class="palegreen intro">
 						<span>黃俊邦</span>
 					</p>
@@ -73,8 +72,7 @@
 					</p>
 				</div>
 				<div>
-					<img src="images/default/default-user-avartar.png"
-						class="round icon-like" />
+					<img src="images/founder-avatar/lwx.jpg" class="round icon-like" />
 					<p class="palegreen intro">
 						<span>刘威雄</span>
 					</p>
@@ -93,19 +91,17 @@
 					</p>
 				</div>
 				<div>
-					<img src="images/default/default-user-avartar.png"
-						class="round icon-like" />
+					<img src="images/founder-avatar/hhc.jpeg" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>帅哥</span>
+						<span>胡海城</span>
 					<p class="palegreen rank">
 						<span>联合创始人</span>
 					</p>
 				</div>
 				<div>
-					<img src="images/default/default-user-avartar.png"
-						class="round icon-like" />
+					<img src="images/founder-avatar/del.JPG" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>帅哥</span>
+						<span>邓恩临</span>
 					<p class="palegreen rank">
 						<span>联合创始人</span>
 					</p>

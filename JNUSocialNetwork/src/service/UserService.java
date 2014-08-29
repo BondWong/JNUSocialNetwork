@@ -280,6 +280,28 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Path("recommendate/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendate(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchMembersTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.loginFetchFamous", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Path("recommendateViaFollowee/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

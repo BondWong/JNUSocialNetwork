@@ -13,13 +13,14 @@ function Msnry(selectContain, item, width) {
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty";
+	
 	if ($.inArray(USERID, likers) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
+	/*var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, collecters) != -1) {
 		collectClass = "glyphicon glyphicon-star";
-	}
+	}*/
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn'><input id='deleteID' type='hidden' value="
@@ -42,10 +43,11 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		postImgDiv = "";
 	}
 	var readmore = "";
-	var contentD= content;
-	if(content.length > 200){
-		readmore = "<div class='post_more' id='"+postID+"' ><a style='cursor:pointer'>read more</a></div>";
-		contentD = content.substr(0,200)+"......";
+	var contentD = content;
+	if (content.length > 200) {
+		readmore = "<div class='post_more' id='" + postID
+				+ "' ><a style='cursor:pointer'>read more</a></div>";
+		contentD = content.substr(0, 200) + "......";
 	}
 	var boarddiv = "<div class='post "
 			+ postID
@@ -61,7 +63,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
 			+ contentD
-			+ "</span>"+readmore+"</div>"
+			+ "</span>"
+			+ readmore
+			+ "</div>"
 			+ postImgDiv
 			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 			+ ownerID
@@ -72,18 +76,18 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likers.length
-			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div></div></div>";
+	/*<div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
 			+ "><span class='"
 			+ collectClass
-			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div></div></div>";
-
+			+ "' style='font-size:20px'></span></a></div>*/
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
-		
+
 		$(this).find('a').fadeIn(300);
 	}, function() {
 		$(this).find('a').fadeOut(300);
@@ -235,7 +239,10 @@ function clickEvent() {
 	// function Activity
 	$('body').on('click', '.activityJoin', function() {
 		var activityID = $(this).attr("id");
-		JoinActivity(USERID, activityID);
+		var response = JoinActivity(USERID, activityID);
+		if(response=='success'){
+			alert("参加成功！");
+		}
 	});
 	$('body').on('click', '.leaveactivityJoin', function() {
 		var activityID = $(this).attr("id");
@@ -267,6 +274,7 @@ function clickEvent() {
 		AddComment(USERID, id, commentJson);
 		sessionStorage.setItem("commentOwnerName", "");
 		sessionStorage.setItem("commentID", "");
+		inputComm.val("");
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -289,32 +297,34 @@ function clickEvent() {
 	$('body').on("click", ".editCommunity", function() {
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
+		
 	});
 	$('body').on("click", "#leaveCommunityBtn", function() {
-		LeaveCommunity(USERID,communityID);
+		LeaveCommunity(USERID, communityID);
 	});
 	$('body').on("click", "#deleteCommunityBtn", function() {
-		var id = communityID;
-		DeleteCommunity(id);
+		DeleteCommunity(communityID);
 	});
-	
+
 	$('body').on("click", "#saveCommunity", function() {
-		var communityC;
-		if ($('#fileupload').val() != "") {
-			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
+		var card= community.attributes.communityCard;
+		if ($('#fileuploadEdit').val() != "") {
+			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
 		} else {
-			communityC = "";
+			
 		}
 		var attributes = {
-			name : $('#communityName').val(),
-			introduct : $('#communityIntro').val(),
-			communityCard : communityC
-		};
+				name : $('#communityName').val(),
+				introduct : $('#communityIntro').val(),
+				communityCard : card
+			};
 		var json = $.toJSON(attributes);
 		var c = UpdateCommunity(community.ID, json);
 		$('#editCommunity').modal('hide');
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
+		$('.communityPic').find('img').attr("src", card);
+		$('.editCommunityForm').get(0).reset();
 	});
 	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 		$('#editCommunityBtn').css("display", "inline");
@@ -323,6 +333,17 @@ function clickEvent() {
 		$('.editActivity').css("display", "inline");
 	}
 	
+	$(document)
+	.click(
+			function(e) {
+				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+				if (dragel !== target && !$.contains(dragel, target)) {
+					drag.fadeOut(300);
+				}
+			});
+	$('body').on("click", "#editMembersBtn", function() {
+		window.location.href = 'communityMember.jsp?' + community.ID;
+	});
 
 }
 function clickOffEvent() {
@@ -410,7 +431,7 @@ function clickOffEvent() {
 		$(this).attr("data-toggle", "");
 		alert("Sign In");
 	});
-	$('.share_txt').attr("readonly","readonly");
+	$('.share_txt').attr("readonly", "readonly");
 
 }
 (function($) {
@@ -479,7 +500,8 @@ function clickOffEvent() {
 														open_chatroom(
 																USERID,
 																sessionStorage
-																		.getItem("otherUserID"));
+																		.getItem("otherUserID"),
+																data.attributes.name);
 													});
 								}
 								/*
@@ -573,7 +595,6 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	});
 }
 
-
 function showPost(postID) {
 	var response = FetchCommentByPost(postID, "0", "20");
 	var comment = "";
@@ -625,13 +646,20 @@ function showPost(postID) {
 
 	var dataString = FetchPostByID(postID);
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty ";
+	
 	if ($.inArray(USERID, dataString.likerIDs) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
+	/*var collectClass = "glyphicon glyphicon-star-empty ";
 	if ($.inArray(USERID, dataString.collectorIDs) != -1) {
 		collectClass = "glyphicon glyphicon-star";
 	}
+	<div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+						+ postID
+						+ "><span class='"
+						+ collectClass
+						+ "' style='font-size:20px'></span></a></div>
+	*/
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
 
@@ -660,11 +688,7 @@ function showPost(postID) {
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
-						+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
-						+ postID
-						+ "><span class='"
-						+ collectClass
-						+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+						+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 						+ postID
 						+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID
@@ -678,31 +702,14 @@ function showPost(postID) {
 				}
 			});
 }
-//funtion sessionID
-$('body')
-		.on(
-				"click",
-				".activityHref",
-				function() {
-					window.location.href = 'activity.jsp?'
-							+ community.ID;
-				});
-$('body')
-.on(
-		"click",
-		".memberHref",
-		function() {
-			window.location.href = 'communityMember.jsp?'
-					+ community.ID;
-		});
-$(document).click(function (e) {
-    var drag = $(".mentionBody"),
-        dragel = $(".mentionBody")[0],
-        target = e.target;
-    if (dragel !== target && !$.contains(dragel, target)) {
-        drag.fadeOut(300);
-    }
+// funtion sessionID
+$('body').on("click", ".activityHref", function() {
+	window.location.href = 'activity.jsp?' + community.ID;
 });
+$('body').on("click", ".memberHref", function() {
+	window.location.href = 'communityMember.jsp?' + community.ID;
+});
+
 /**
  * auto_resize
  */

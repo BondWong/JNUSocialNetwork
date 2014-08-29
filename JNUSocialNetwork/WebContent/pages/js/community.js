@@ -20,6 +20,7 @@ function communityClickEvent() {
 		var community = AddCommunity(USERID, json);
 		fetchCommunityByID(community.ID);
 		$('#createCommunity').modal('hide');
+		$('.communityForm').get(0).reset();
 	});
 
 	// function joinCommunity
@@ -27,13 +28,13 @@ function communityClickEvent() {
 		var id = $(this).find("input").attr("value");
 		if ($(this).css("background-color") == "rgb(255, 255, 255)") {
 			JoinCommunity(USERID, id);
-			$(this).css("color", "rgb(255, 255, 255)");
-			$(this).css("background-color", "rgb(66,139,202)");
+			$("div[id='"+id+"']").css("color", "rgb(255, 255, 255)");
+			$("div[id='"+id+"']").css("background-color", "rgb(66,139,202)");
 			return 0;
 		} else {
 			LeaveCommunity(USERID, id);
-			$(this).css("color", "rgb(66,139,202)");
-			$(this).css("background-color", "rgb(255, 255, 255)");
+			$("div[id='"+id+"']").css("color", "rgb(66,139,202)");
+			$("div[id='"+id+"']").css("background-color", "rgb(255, 255, 255)");
 			return 0;
 		}
 	});
@@ -48,7 +49,7 @@ function fetchCommunityByID(communityID) {
 	}
 }
 function fetchCommunityByOwner() {
-	var communities = FetchCommunityByOwner(USERID, "0", "5");
+	var communities = FetchCommunityByOwner(USERID, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
@@ -58,7 +59,7 @@ function fetchCommunityByOwner() {
 	});
 }
 function fetchCommunityByJoin() {
-	var communities = FetchCommunityByJoin(USERID, "0", "5");
+	var communities = FetchCommunityByJoin(USERID, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
@@ -69,7 +70,7 @@ function fetchCommunityByJoin() {
 }
 // fetchCommunity()
 function fetchHotCommunity() {
-	var communities = FetchCommunity("0", "5");
+	var communities = FetchCommunity("0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
@@ -79,7 +80,7 @@ function fetchHotCommunity() {
 	});
 }
 function fetchCommunityByType(communityType) {
-	var communities = FetchCommunityByType(communityType, "0", "5");
+	var communities = FetchCommunityByType(communityType, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
@@ -113,7 +114,7 @@ function addCommunity(id, name, memberNum, communityType, communityImg,members) 
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div><a><div "+joinClass+" class='content_join' ><input type='hidden' value='"
+			+ " members</div><a><div "+joinClass+" class='content_join' id='"+id+"'><input type='hidden' value='"
 			+ id + "'>Join</div></a></div></div>";
 	switch (communityType) {
 	case "discoverCommunity":

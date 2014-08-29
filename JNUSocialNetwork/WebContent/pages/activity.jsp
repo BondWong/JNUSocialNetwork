@@ -30,11 +30,13 @@
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
-						data-target='#editCommunity'>管理社区</a></li>
+						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">管理成员</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">离开社区</a></li>
+						href="" id="editMembersBtn">管理成员</a></li>
+					<li role="presentation"><a id="leaveCommunityBtn"
+						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
+					<li role="presentation"><a id="deleteCommunityBtn"
+						role="menuitem" tabindex="-1" href="#">删除社区</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"
@@ -61,7 +63,7 @@
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileupload" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -209,19 +211,26 @@
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				activityClickEvent();
-				clickEvent();
-			} else {
-				clickOffEvent();
-			}
 			var url = window.location.search;
 			window.communityID = url.substr(url.indexOf("?") + 1);
 			window.community = FetchCommunityByID(communityID);
 			Msnry('.activityBody', '.activity', 435);
 			fetchActivitiesByCommunity();
 			showCommunityInfo();
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				activityClickEvent();
+				clickEvent();
+				var memberIDs =[];
+				$.each(community.members,function(n,member){
+					memberIDs.push(member.ID);
+				});
+				if ($.inArray(USERID, memberIDs) != -1) {
+					$('#leaveCommunityBtn').css("display", "inline");
+				}
+			} else {
+				clickOffEvent();
+			}
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>

@@ -27,35 +27,7 @@ function open_chatroom(fromID, toID, name) {
 				}
 			create_chatroom(data, fromID, toID, name, online, top, right
 					+ width);
-		}
-	});
-}
-
-function open_chatroom(fromID, toID) {
-	$.ajax({
-		type : "GET",
-		url : '../../app/chatRoom/fetch/' + fromID + '/' + toID,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		success : function(data) {
-			var top = $("#contact-list").css("top");
-			var right = $("#contact-list").css("right");
-			var width = $("#contact-list").css("width");
-			right = right.substring(0, right.indexOf("px"));
-			right = parseInt(right);
-			width = width.substring(0, width.indexOf("px"));
-			width = parseInt(width);
-			var online = false;
-			var IDs = sessionStorage.getItem("onlineUserIDs");
-			IDs = $.parseJSON(IDs);
-			for (var i = 0; i < IDs.length; i++)
-				if (IDs[i] == toID) {
-					online = true;
-					break;
-				}
-			create_chatroom(data, fromID, toID, $.parseJSON(sessionStorage
-					.getItem("userNameID"))[toID], online, top, right + width);
+			add_chatroom(data);
 		}
 	});
 }

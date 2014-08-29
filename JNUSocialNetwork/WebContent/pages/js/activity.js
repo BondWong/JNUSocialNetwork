@@ -22,6 +22,7 @@ function activityClickEvent() {
 		var json = $.toJSON(post);
 		AddPostToCommunity(USERID, community.ID, json);
 		$('#activityCommunity').modal('hide');
+		$('.activityForm').get(0).reset();
 	});
 }
 var pageSize = 15;
@@ -80,7 +81,7 @@ $('.form_datetime').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",
 	startDate : date,
-	todayBtn : 1,
+	todayBtn : 0,
 	autoclose : 1,
 	startView : 2,
 	Integer : 1,
