@@ -82,7 +82,6 @@
 
 			});
 		</script>
-		<script src="js/image-auto-resize.js"></script>
 	</c:when>
 	<c:when test="${param.nav eq 'circle' }">
 		<script type="text/javascript">
@@ -119,7 +118,6 @@
 
 			});
 		</script>
-		<script src="js/image-auto-resize.js"></script>
 		<%@ include file="contentScroll.jsp"%>
 	</c:otherwise>
 </c:choose>

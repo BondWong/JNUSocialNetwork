@@ -24,20 +24,26 @@ function communityClickEvent() {
 	});
 
 	// function joinCommunity
-	$('body').on('click', '.content_join', function() {
-		var id = $(this).find("input").attr("value");
-		if ($(this).css("background-color") == "rgb(255, 255, 255)") {
-			JoinCommunity(USERID, id);
-			$("div[id='"+id+"']").css("color", "rgb(255, 255, 255)");
-			$("div[id='"+id+"']").css("background-color", "rgb(66,139,202)");
-			return 0;
-		} else {
-			LeaveCommunity(USERID, id);
-			$("div[id='"+id+"']").css("color", "rgb(66,139,202)");
-			$("div[id='"+id+"']").css("background-color", "rgb(255, 255, 255)");
-			return 0;
-		}
-	});
+	$('body').on(
+			'click',
+			'.content_join',
+			function() {
+				var id = $(this).find("input").attr("value");
+				if ($(this).css("background-color") == "rgb(255, 255, 255)") {
+					JoinCommunity(USERID, id);
+					$("div[id='" + id + "']")
+							.css("color", "rgb(255, 255, 255)");
+					$("div[id='" + id + "']").css("background-color",
+							"rgb(66,139,202)");
+					return 0;
+				} else {
+					LeaveCommunity(USERID, id);
+					$("div[id='" + id + "']").css("color", "rgb(66,139,202)");
+					$("div[id='" + id + "']").css("background-color",
+							"rgb(255, 255, 255)");
+					return 0;
+				}
+			});
 }
 // fetchCommunityByID
 function fetchCommunityByID(communityID) {
@@ -45,7 +51,8 @@ function fetchCommunityByID(communityID) {
 	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
 				community.members.length, "myCommunity",
-				community.attributes.communityCard, community.members);
+				community.attributes.communityCard, community.members,
+				community.attributes.userID);
 	}
 }
 function fetchCommunityByOwner() {
@@ -54,7 +61,8 @@ function fetchCommunityByOwner() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard, community.members);
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
@@ -64,7 +72,8 @@ function fetchCommunityByJoin() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard, community.members);
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
@@ -75,7 +84,8 @@ function fetchHotCommunity() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
-					community.attributes.communityCard, community.members);
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
@@ -85,7 +95,8 @@ function fetchCommunityByType(communityType) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, community.communityType,
-					community.attributes.communityCard, community.members);
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
@@ -97,14 +108,21 @@ function fetchCommunitys() {
 
 }
 // 增加社区
-function addCommunity(id, name, memberNum, communityType, communityImg, members) {
+function addCommunity(id, name, memberNum, communityType, communityImg,
+		members, ownerID) {
 	var memberIDs = [];
 	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
+
 	var joinClass = "";
 	if ($.inArray(USERID, memberIDs) != -1) {
 		joinClass = "style='color: #FFF;background-color: #428BCA;'";
+	}
+	var join = "<a><div " + joinClass + " class='content_join' id='" + id
+			+ "'><input type='hidden' value='" + id + "'>Join</div></a>";
+	if (ownerID == USERID) {
+		join = '';
 	}
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
@@ -114,8 +132,7 @@ function addCommunity(id, name, memberNum, communityType, communityImg, members)
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div><a><div "+joinClass+" class='content_join' id='"+id+"'><input type='hidden' value='"
-			+ id + "'>Join</div></a></div></div>";
+			+ " members</div>" + join + "</div></div>";
 	switch (communityType) {
 	case "discoverCommunity":
 		$(".communityDiscovery").after(boarddiv);
@@ -162,7 +179,7 @@ $(document)
 						var comm = $(this).find("input").attr("value");
 						window.location.href = 'communityShow.jsp?' + comm;
 					});
-					
+
 					$('body').on("click", ".myCommunityBtn", function() {
 						fetchByType("myCommunity", "我的社区", "containerMy");
 						$('.titleMy').css("display", "block");
