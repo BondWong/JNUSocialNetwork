@@ -25,12 +25,13 @@
 						<p>
 							<input type="text" class="form-control" placeholder="请输入ID"
 								name="ID" data-errormessage-value-missing="请输入ID" required
-								autofocus>
+								autofocus maxLength="20" />
 						</p>
 						<p>
 							<input type="password" class="form-control" placeholder="请输入密码"
 								name="password" id="md5Password"
-								data-errormessage-value-missing="请输入密码" required autofocus>
+								data-errormessage-value-missing="请输入密码" required autofocus
+								maxLength="20" />
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />

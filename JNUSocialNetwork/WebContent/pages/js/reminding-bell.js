@@ -5,7 +5,7 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var t = $(this).position().top;
+	var t = $(this).offset().top;
 	var l = $(this).offset().left;
 	t += 30;
 	l -= 250;
@@ -310,12 +310,20 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 									+ jsonComment.attributes.commentToComment;
 						}
 						var removeBtn = "";
+						var commentReply = "<div class='comment_reply' id="
+								+ postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.name
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div>";
 						if (USERID == jsonComment.owner.ID) {
 							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 									+ postID
 									+ "' type='hidden' value='"
 									+ jsonComment.ID
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							commentReply = "";
 						}
 						comment = comment
 								+ "<div class='act_content' id='"
@@ -334,13 +342,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-								+ postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
@@ -372,7 +374,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	} else {
 		postImgDiv = "";
 	}
-	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ postOwnerAvatar
 			+ "' style='display: none'/><input type='hidden' value='"
 			+ ownerID
@@ -393,13 +395,9 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likerIDs.length
-			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "><span class='"
-			+ collectClass
-			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
-			+ postID
-			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment + "</div>";
 
 	$("#commentText" + postID).blur(function() {

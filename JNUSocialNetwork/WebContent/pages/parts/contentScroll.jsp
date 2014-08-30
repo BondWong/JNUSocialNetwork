@@ -4,7 +4,3 @@
 <div id="infinite_loader">
 	<img src="images/contentScroll.GIF" />
 </div>
-
-<script type="text/javascript">
-	
-</script>
