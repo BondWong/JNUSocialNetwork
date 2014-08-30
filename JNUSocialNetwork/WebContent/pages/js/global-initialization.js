@@ -26,7 +26,15 @@ function login_initialization(ID) {
 									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 				}
 			});
+	if ($.parseJSON(sessionStorage.getItem("user")) != null
+			&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+		$('#createCommunityBtn').css("display", "inline");
+		$('.appCom').css("display", "none");
+		$('.titleMy').css("display", "block");
+		$('.containerMy').css("display", "block");
+		$('#myCommunityBtn').css("display", "block");
 
+	}
 	/*
 	 * SSE Handle
 	 */

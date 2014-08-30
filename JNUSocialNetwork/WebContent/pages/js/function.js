@@ -525,7 +525,7 @@ function clickOffEvent() {
 	};
 })(jQuery);
 
-function notifyItem(response, ownerID, ownerNickName, publishDate, content,
+/*function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 		postID, likeNum) {
 	var comment = "";
 	$
@@ -594,7 +594,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
-}
+}*/
 
 function showPost(postID) {
 	var response = FetchCommentByPost(postID, "0", "20");

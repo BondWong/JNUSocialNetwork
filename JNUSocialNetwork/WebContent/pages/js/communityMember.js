@@ -7,7 +7,10 @@ function addMember(avatarLink, id, name) {
 	var memberDiv = "<div class='member'><img onload='javascript:auto_resize(80, 80, this)'  class='userMember' src='"
 			+ avatarLink
 			+ "' style='display: none'/><span class='glyphicon glyphicon-remove memberRemoveBtn' style='font-size:10px'></span><input type='hidden' value='"
-			+ id + "' /><span class='memberName'>" + name + "</span></div>";
+			+ id + "' /><span class='memberName'>" + name 
+			+ "</span><input type='hidden' value='"
+			+ id 
+			+ "' name='userID'/></div>";
 	$('.membersBord').after(memberDiv);
 	Msnry('.membersContainer', '.member', 215);
 }
@@ -17,3 +20,6 @@ function showCommunityInfo() {
 	$('.communityPic').find('img').attr("src",
 			community.attributes.communityCard);
 }
+$(document).ready(function(){
+	
+});

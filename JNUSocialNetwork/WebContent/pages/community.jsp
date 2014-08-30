@@ -156,6 +156,7 @@
 				clickOffEvent();
 			}
 			fetchCommunitys();
+			
 		});
 	</script>
 </body>

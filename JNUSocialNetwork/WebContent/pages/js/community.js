@@ -162,15 +162,7 @@ $(document)
 						var comm = $(this).find("input").attr("value");
 						window.location.href = 'communityShow.jsp?' + comm;
 					});
-					if ($.parseJSON(sessionStorage.getItem("user")) != null
-							&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-						$('#createCommunityBtn').css("display", "inline");
-						$('.appCom').css("display", "none");
-						$('.titleMy').css("display", "block");
-						$('.containerMy').css("display", "block");
-						$('#myCommunityBtn').css("display", "block");
-
-					}
+					
 					$('body').on("click", ".myCommunityBtn", function() {
 						fetchByType("myCommunity", "我的社区", "containerMy");
 						$('.titleMy').css("display", "block");
