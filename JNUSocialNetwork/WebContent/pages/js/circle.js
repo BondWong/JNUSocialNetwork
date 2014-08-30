@@ -114,7 +114,7 @@ $(document)
 						var json = $.toJSON(post);
 						AddPost(USERID, json);
 						$('#addPostModal').modal('hide');
-
+						$('.postForm').get(0).reset();
 					});
 				});
 // function fectchPostByFollowee

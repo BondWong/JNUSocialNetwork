@@ -13,13 +13,14 @@ function Msnry(selectContain, item, width) {
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty";
+	
 	if ($.inArray(USERID, likers) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
+	/*var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, collecters) != -1) {
 		collectClass = "glyphicon glyphicon-star";
-	}
+	}*/
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn'><input id='deleteID' type='hidden' value="
@@ -35,7 +36,8 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						function(n, image) {
 							imageDiv = imageDiv
 									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
-									+ postID + ")' src='" + image + "' />";
+									+ postID + ")' src='" + image
+									+ "' style='display: none'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
@@ -52,7 +54,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ ownerImage
-			+ "' /><input type='hidden' value='"
+			+ "' style='display: none'/><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -75,12 +77,12 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likers.length
-			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div></div></div>";
+	/*<div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
 			+ postID
 			+ "><span class='"
 			+ collectClass
-			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div></div></div>";
-
+			+ "' style='font-size:20px'></span></a></div>*/
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
@@ -238,7 +240,10 @@ function clickEvent() {
 	// function Activity
 	$('body').on('click', '.activityJoin', function() {
 		var activityID = $(this).attr("id");
-		JoinActivity(USERID, activityID);
+		var response = JoinActivity(USERID, activityID);
+		if(response=='success'){
+			alert("参加成功！");
+		}
 	});
 	$('body').on('click', '.leaveactivityJoin', function() {
 		var activityID = $(this).attr("id");
@@ -270,6 +275,7 @@ function clickEvent() {
 		AddComment(USERID, id, commentJson);
 		sessionStorage.setItem("commentOwnerName", "");
 		sessionStorage.setItem("commentID", "");
+		inputComm.val("");
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -292,32 +298,34 @@ function clickEvent() {
 	$('body').on("click", ".editCommunity", function() {
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
+		
 	});
 	$('body').on("click", "#leaveCommunityBtn", function() {
 		LeaveCommunity(USERID, communityID);
 	});
 	$('body').on("click", "#deleteCommunityBtn", function() {
-		var id = communityID;
-		DeleteCommunity(id);
+		DeleteCommunity(communityID);
 	});
 
 	$('body').on("click", "#saveCommunity", function() {
-		var communityC;
-		if ($('#fileupload').val() != "") {
-			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
+		var card= community.attributes.communityCard;
+		if ($('#fileuploadEdit').val() != "") {
+			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
 		} else {
-			communityC = "";
+			
 		}
 		var attributes = {
-			name : $('#communityName').val(),
-			introduct : $('#communityIntro').val(),
-			communityCard : communityC
-		};
+				name : $('#communityName').val(),
+				introduct : $('#communityIntro').val(),
+				communityCard : card
+			};
 		var json = $.toJSON(attributes);
 		var c = UpdateCommunity(community.ID, json);
 		$('#editCommunity').modal('hide');
 		$('.cName').html(c.attributes.name);
 		$('.cIntro').html(c.attributes.introduct);
+		$('.communityPic').find('img').attr("src", card);
+		$('.editCommunityForm').get(0).reset();
 	});
 	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 		$('#editCommunityBtn').css("display", "inline");
@@ -325,6 +333,18 @@ function clickEvent() {
 		$('#deleteCommunityBtn').css("display", "inline");
 		$('.editActivity').css("display", "inline");
 	}
+	
+	$(document)
+	.click(
+			function(e) {
+				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+				if (dragel !== target && !$.contains(dragel, target)) {
+					drag.fadeOut(300);
+				}
+			});
+	$('body').on("click", "#editMembersBtn", function() {
+		window.location.href = 'communityMember.jsp?' + community.ID;
+	});
 
 }
 function clickOffEvent() {
@@ -449,9 +469,9 @@ function clickOffEvent() {
 										+ data.ID
 										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
 										+ data.attributes.profileImageLink
-										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
+										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
 										+ data.attributes.avatarLink
-										+ '" /></div><p><h1><a class="tipUser">'
+										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
@@ -601,7 +621,7 @@ function showPost(postID) {
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
 								+ jsonComment.owner.attributes.avatarLink
-								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -627,13 +647,20 @@ function showPost(postID) {
 
 	var dataString = FetchPostByID(postID);
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty ";
+	
 	if ($.inArray(USERID, dataString.likerIDs) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
+	/*var collectClass = "glyphicon glyphicon-star-empty ";
 	if ($.inArray(USERID, dataString.collectorIDs) != -1) {
 		collectClass = "glyphicon glyphicon-star";
 	}
+	<div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+						+ postID
+						+ "><span class='"
+						+ collectClass
+						+ "' style='font-size:20px'></span></a></div>
+	*/
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
 
@@ -645,7 +672,7 @@ function showPost(postID) {
 			.photos({
 				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 						+ dataString.owner.attributes.avatarLink
-						+ "'/><input type='hidden' value='"
+						+ "' style='display: none'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 						+ dataString.owner.attributes.name
@@ -662,11 +689,7 @@ function showPost(postID) {
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
-						+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
-						+ postID
-						+ "><span class='"
-						+ collectClass
-						+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+						+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 						+ postID
 						+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID
@@ -687,14 +710,7 @@ $('body').on("click", ".activityHref", function() {
 $('body').on("click", ".memberHref", function() {
 	window.location.href = 'communityMember.jsp?' + community.ID;
 });
-$(document)
-		.click(
-				function(e) {
-					var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-					if (dragel !== target && !$.contains(dragel, target)) {
-						drag.fadeOut(300);
-					}
-				});
+
 /**
  * auto_resize
  */
@@ -722,4 +738,5 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 
 	srcImage.width = image.width;
 	srcImage.height = image.height;
+	$(srcImage).fadeIn("fast");
 }

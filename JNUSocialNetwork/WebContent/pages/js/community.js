@@ -20,6 +20,7 @@ function communityClickEvent() {
 		var community = AddCommunity(USERID, json);
 		fetchCommunityByID(community.ID);
 		$('#createCommunity').modal('hide');
+		$('.communityForm').get(0).reset();
 	});
 
 	// function joinCommunity
@@ -27,13 +28,13 @@ function communityClickEvent() {
 		var id = $(this).find("input").attr("value");
 		if ($(this).css("background-color") == "rgb(255, 255, 255)") {
 			JoinCommunity(USERID, id);
-			$(this).css("color", "rgb(255, 255, 255)");
-			$(this).css("background-color", "rgb(66,139,202)");
+			$("div[id='"+id+"']").css("color", "rgb(255, 255, 255)");
+			$("div[id='"+id+"']").css("background-color", "rgb(66,139,202)");
 			return 0;
 		} else {
 			LeaveCommunity(USERID, id);
-			$(this).css("color", "rgb(66,139,202)");
-			$(this).css("background-color", "rgb(255, 255, 255)");
+			$("div[id='"+id+"']").css("color", "rgb(66,139,202)");
+			$("div[id='"+id+"']").css("background-color", "rgb(255, 255, 255)");
 			return 0;
 		}
 	});
@@ -44,47 +45,47 @@ function fetchCommunityByID(communityID) {
 	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
 				community.members.length, "myCommunity",
-				community.attributes.communityCard,community.members);
+				community.attributes.communityCard, community.members);
 	}
 }
 function fetchCommunityByOwner() {
-	var communities = FetchCommunityByOwner(USERID, "0", "5");
+	var communities = FetchCommunityByOwner(USERID, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
 function fetchCommunityByJoin() {
-	var communities = FetchCommunityByJoin(USERID, "0", "5");
+	var communities = FetchCommunityByJoin(USERID, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
 // fetchCommunity()
 function fetchHotCommunity() {
-	var communities = FetchCommunity("0", "5");
+	var communities = FetchCommunity("0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
 function fetchCommunityByType(communityType) {
-	var communities = FetchCommunityByType(communityType, "0", "5");
+	var communities = FetchCommunityByType(communityType, "0", "8");
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, community.communityType,
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
@@ -96,24 +97,24 @@ function fetchCommunitys() {
 
 }
 // 增加社区
-function addCommunity(id, name, memberNum, communityType, communityImg,members) {
-	var memberIDs=[];
-	$.each(members,function(n,member){
+function addCommunity(id, name, memberNum, communityType, communityImg, members) {
+	var memberIDs = [];
+	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	var joinClass= "";
+	var joinClass = "";
 	if ($.inArray(USERID, memberIDs) != -1) {
-		joinClass="style='color: #FFF;background-color: #428BCA;'";
+		joinClass = "style='color: #FFF;background-color: #428BCA;'";
 	}
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
 			+ communityImg
-			+ "' onload='javascript:auto_resize(267, 267, this)' /></div></a><div class='content_info'><div class='conten_head'>"
+			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div><a><div "+joinClass+" class='content_join' ><input type='hidden' value='"
+			+ " members</div><a><div "+joinClass+" class='content_join' id='"+id+"'><input type='hidden' value='"
 			+ id + "'>Join</div></a></div></div>";
 	switch (communityType) {
 	case "discoverCommunity":
@@ -252,7 +253,8 @@ $(document)
 																	community.attributes.name,
 																	community.members.length,
 																	"searchCommunity",
-																	community.attributes.communityCard,community.members);
+																	community.attributes.communityCard,
+																	community.members);
 														});
 									});
 

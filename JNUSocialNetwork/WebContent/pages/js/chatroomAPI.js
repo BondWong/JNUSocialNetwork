@@ -186,10 +186,12 @@ function do_send(data) {
 }
 
 function append_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="' + data.ID
-			+ '" ><img class="chat-avatar" src="' + data.attributes.avatarLink
-			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
-			+ data.attributes.content;
+	var message = '<div class="chat-bubble" id="'
+			+ data.ID
+			+ '" ><img class="chat-avatar" src="'
+			+ data.attributes.avatarLink
+			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
+			+ who + '" >' + data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
@@ -215,10 +217,12 @@ function append_to_content_panel(data, who) {
 }
 
 function prepend_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="' + data.ID
-			+ '" ><img class="chat-avatar" src="' + data.attributes.avatarLink
-			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
-			+ data.attributes.content;
+	var message = '<div class="chat-bubble" id="'
+			+ data.ID
+			+ '" ><img class="chat-avatar" src="'
+			+ data.attributes.avatarLink
+			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
+			+ who + '" >' + data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';

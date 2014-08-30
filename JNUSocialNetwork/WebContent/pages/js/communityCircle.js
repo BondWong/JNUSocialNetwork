@@ -117,6 +117,7 @@ $(document)
 								var json = $.toJSON(post);
 								AddPostToCommunity(USERID, community.ID, json);
 								$('#addPostModal').modal('hide');
+								$('.postForm').get(0).reset();
 							});
 				});
 // function fetchPostByCommunity

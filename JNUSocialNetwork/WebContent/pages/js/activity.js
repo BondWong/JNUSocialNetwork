@@ -22,6 +22,7 @@ function activityClickEvent() {
 		var json = $.toJSON(post);
 		AddPostToCommunity(USERID, community.ID, json);
 		$('#activityCommunity').modal('hide');
+		$('.activityForm').get(0).reset();
 	});
 }
 var pageSize = 15;
@@ -32,13 +33,19 @@ function fetchActivitiesByCommunity() {
 		addActivity(dataString.ID, dataString.attributes.activityName,
 				dataString.attributes.activityTime,
 				dataString.attributes.activityAddr,
-				dataString.attributes.activityMore, dataString.attributes.background,dataString.owner.attributes.avatarLink);
+				dataString.attributes.activityMore,
+				dataString.attributes.background,
+				dataString.owner.attributes.avatarLink);
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink,avatarLink) {
+function activity(activityID, name, time, addre, more, imagelink, avatarLink) {
 	var boarddiv = "<div class='activity' ><div class='activityHref' id='"
 			+ activityID
-			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"+imagelink+"' /></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"+avatarLink+"' /></div><div class='activityName'><span>"
+			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
+			+ imagelink
+			+ "' style='display: none'/></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
+			+ avatarLink
+			+ "' style='display: none'/></div><div class='activityName'><span>"
 			+ name
 			+ "</span></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;"
 			+ time
@@ -53,8 +60,9 @@ function activity(activityID, name, time, addre, more, imagelink,avatarLink) {
 	return boarddiv;
 }
 // function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink,avatarLink) {
-	var boarddiv = activity(activityID, name, time, addre, more, imagelink,avatarLink);
+function addActivity(activityID, name, time, addre, more, imagelink, avatarLink) {
+	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
+			avatarLink);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -62,7 +70,8 @@ function addActivity(activityID, name, time, addre, more, imagelink,avatarLink) 
 function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
-	$('.communityPic').find('img').attr("src", community.attributes.communityCard);
+	$('.communityPic').find('img').attr("src",
+			community.attributes.communityCard);
 }
 // funtion sessionID
 $('body').on("click", ".communityHref", function() {
@@ -80,7 +89,7 @@ $('.form_datetime').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",
 	startDate : date,
-	todayBtn : 1,
+	todayBtn : 0,
 	autoclose : 1,
 	startView : 2,
 	Integer : 1,

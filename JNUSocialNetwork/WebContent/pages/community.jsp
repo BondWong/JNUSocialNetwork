@@ -90,17 +90,17 @@
 						<p>
 							<span>社区名：</span> <input type="text" class="form-control"
 								placeholder="" id="communityName" required autofocus
-								autocomplete="off" />
+								autocomplete="off" required/>
 						</p>
 						<p>
 							<span>社区标签：</span> <input type="text" class="form-control"
 								placeholder="" id="communityTag" required autofocus
-								autocomplete="off" />
+								autocomplete="off" required="required"/>
 						</p>
 						<p>
 							<span>社区介绍：</span> <input type="text" class="form-control"
 								placeholder="" id="communityIntro" required autofocus
-								autocomplete="off" />
+								autocomplete="off" required="required"/>
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">

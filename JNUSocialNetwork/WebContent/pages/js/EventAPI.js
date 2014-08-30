@@ -403,6 +403,7 @@ function JoinActivity(userID, postID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
+		async : false,
 		success : function(data, status) {
 			response = status;
 		},
@@ -615,6 +616,7 @@ function LeaveCommunity(userID, communityID) {
 		},
 		success : function(data, status) {
 			response = status;
+			window.location.href='community.jsp';
 		},
 		error : function(data, status) {
 			response = status;

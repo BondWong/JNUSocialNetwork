@@ -14,7 +14,7 @@
 	<li><a href="javaScript:void(0);" id="remind-bell"><span
 			class="glyphicon glyphicon-bell mentionBell" style="font-size: 18px"></span></a></li>
 	<li><img src="" onload="javascript:auto_resize(30, 30, this)"
-		class="img-circle img_cust" id="nav-bar-avatar"></li>
+		class="img-circle img_cust" id="nav-bar-avatar" style="display: none"></li>
 
 </ul>
 <div class="mentionBody bottom" id="onclickMentionBody">
