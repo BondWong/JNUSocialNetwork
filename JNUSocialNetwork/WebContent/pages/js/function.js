@@ -299,7 +299,7 @@ function clickEvent() {
 		if ($('#fileuploadEdit').val() != "") {
 			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
 		} else {
-
+			
 		}
 		var attributes = {
 			name : $('#communityName').val(),
@@ -322,14 +322,13 @@ function clickEvent() {
 	}
 
 	$(document)
-			.click(
-					function(e) {
-						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target, arrow = $("#arrowBack")[0];
-						if (dragel != target && !$.contains(dragel, target)
-								&& arrow != target) {
-							drag.fadeOut(300);
-						}
-					});
+	.click(
+			function(e) {
+				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target,arrow = $("#arrowBack")[0];
+				if (dragel != target && !$.contains(dragel, target) && arrow != target) {
+					drag.fadeOut(300);
+				}
+			});
 	$('body').on("click", "#editMembersBtn", function() {
 		window.location.href = 'communityMember.jsp?' + community.ID;
 	});
