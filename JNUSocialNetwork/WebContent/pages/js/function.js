@@ -207,18 +207,6 @@ function clickEvent() {
 		inputID.attr("placeholder", "@" + commmentName);
 		inputID.focus();
 	});
-	// function notifyItem
-	/*
-	 * $('body') .on( 'click', '.commentItem', function() {
-	 * $(this).fadeOut(300); $('.mentionBody-appear').css("display", "none");
-	 * var dataString = FetchPostByID("1408108100658");
-	 * notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
-	 * dataString.publishDate, dataString.attributes.content, dataString.ID,
-	 * dataString.likerIDs.length); $(".arrowBack") .append( "<span
-	 * class='glyphicon glyphicon-chevron-left' id='arrowBack'
-	 * style='font-size:12px;'>&nbsp;</span>"); });
-	 */
-	// function backarrow
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -251,7 +239,6 @@ function clickEvent() {
 		LeaveActivity(USERID, activityID);
 	});
 
-	//
 	// function addComment
 	$('body').on('click', '#addComment', function() {
 		var id = this.getAttribute("value");
@@ -640,7 +627,6 @@ $('body').on("click", ".memberHref", function() {
 function auto_resize(maxWidth, maxHeight, srcImage) {
 	var image = new Image();
 	image.src = srcImage.src;
-
 	if (image.width > maxWidth && image.height <= maxHeight) {
 		image.width = maxWidth;
 		image.height = (maxHeight / maxWidth) * image.width;

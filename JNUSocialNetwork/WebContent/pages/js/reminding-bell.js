@@ -22,10 +22,11 @@ function on_bell_click(e) {
 
 function show_remind_content() {
 	$(".mentionBody-content").empty();
-	var hasItem = false;
-	hasItem = add_messages_to_bell();
-	hasItem = add_events_to_bell();
-	if (!hasItem) {
+	var hasMessageItem = false;
+	var hasEventItem = false;
+	hasMessageItem = add_messages_to_bell();
+	hasEventItem = add_events_to_bell();
+	if (!hasMessageItem && !hasEventItem) {
 		$(".mentionBody-content").empty();
 		$(".mentionBody-content").append(
 				'<div id="mentionBody-no-content-item">没有消息</div>');
@@ -51,12 +52,6 @@ function add_messages_to_bell() {
 		}
 	});
 
-	$.each(online_messages, function(index, val) {
-		for (var i = 0; i < val.length; i++) {
-			messages_remind(val[i]);
-		}
-	});
-
 	var online_messages_length = 0;
 	var offline_messages_length = 0;
 	for (key in online_messages) {
@@ -67,9 +62,16 @@ function add_messages_to_bell() {
 		if (offline_messages.hasOwnProperty(key))
 			offline_messages_length++;
 	}
-	if (online_messages_length != 0 || offline_messages_length != 0)
-		return true;
-	return false;
+	if (online_messages_length == 0 && offline_messages_length == 0)
+		return false;
+
+	$.each(online_messages, function(index, val) {
+		for (var i = 0; i < val.length; i++) {
+			messages_remind(val[i]);
+		}
+	});
+
+	return true;
 }
 
 function add_events_to_bell() {

@@ -154,7 +154,7 @@ $('body').on('click', '.deletePostBtn', function() {
 });
 $('body').on("click", ".post_more", function() {
 	var id = $(this).attr('id');
-	$("div[id='postImg"+id+"']").find('img').click();
+	$("div[id='postImg" + id + "']").find('img').click();
 });
 $(window)
 		.scroll(
