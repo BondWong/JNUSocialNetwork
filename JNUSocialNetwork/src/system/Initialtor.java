@@ -13,6 +13,7 @@ import service.helper.ActivitySearchMap;
 import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
 import service.helper.MemberSearchMap;
+import service.helper.OnlineUserIDArray;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import utils.MD5;
@@ -80,6 +81,7 @@ public class Initialtor implements ServletContextListener {
 			ActivitySearchMap.initializeEnvironment();
 			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
+			OnlineUserIDArray.initializeEnvironment();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

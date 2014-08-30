@@ -37,8 +37,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						function(n, image) {
 							imageDiv = imageDiv
 									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
-									+ postID + ")' src='" + image
-									+ "'/>";
+									+ postID + ")' src='" + image + "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
@@ -526,7 +525,7 @@ function showPost(postID) {
 									+ jsonComment.attributes.commentToComment;
 						}
 						var removeBtn = "";
-						var commentReply="<div class='comment_reply' id="
+						var commentReply = "<div class='comment_reply' id="
 								+ postID
 								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
 								+ jsonComment.owner.attributes.name
@@ -558,7 +557,9 @@ function showPost(postID) {
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
+								+ commentReply
+								+ "</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";

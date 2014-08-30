@@ -155,7 +155,13 @@
 			} else {
 				clickOffEvent();
 			}
+			if(FetchCommunityByJoin(USERID,"0","1").length!=0){
+				$('.titleMy').css("display", "block");
+				$('.containerMy').css("display", "block");
+				$('#myCommunityBtn').css("display", "block");
+			}
 			fetchCommunitys();
+			
 
 		});
 	</script>

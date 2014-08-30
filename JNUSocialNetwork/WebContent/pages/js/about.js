@@ -227,6 +227,13 @@ function aboutClickEvent() {
 								"<input class='lookingforE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.lookingFor
 										+ "' maxLength='20'/>");
+						if(userInfo.userType=='COMMUNITYOWNER'){
+							$("span[class='Anickname']").html(
+									"<input class='nameE' id='focusedInput' type='text' value='"
+											+ userInfo.attributes.name
+											+ "' maxLength='20'/>");
+						}
+						
 						$("span[class='Atelenum']").html(
 								"<input class='telenumE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.telnum
@@ -266,12 +273,23 @@ function aboutClickEvent() {
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
 		var datajson = {
-			lookingFor : $('.lookingforE').val(),
-			relationship : $('.relationshipnE').val(),
-			telenum : $('.telenumE').val(),
-			email : $('.emailE').val(),
-			dorm : $('.addressE').val()
-		};
+				lookingFor : $('.lookingforE').val(),
+				relationship : $('.relationshipnE').val(),
+				telenum : $('.telenumE').val(),
+				email : $('.emailE').val(),
+				dorm : $('.addressE').val(),
+			};
+		if($('.nameE').val()!=null){
+			datajson = {
+					lookingFor : $('.lookingforE').val(),
+					relationship : $('.relationshipnE').val(),
+					telenum : $('.telenumE').val(),
+					email : $('.emailE').val(),
+					dorm : $('.addressE').val(),
+					name : $('.nameE').val()
+				};
+		}
+		
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
 		fetchUserByID();

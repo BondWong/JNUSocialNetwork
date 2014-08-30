@@ -24,6 +24,7 @@ import service.helper.MapEncoder;
 import service.helper.ListEncoder;
 import service.helper.MapDecoder;
 import service.helper.MessageStorage;
+import service.helper.OnlineUserIDArray;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateMessagesTransaction;
 import transaction.DAOCreateTransaction.CreateUnhandledEventsTransaction;
@@ -86,9 +87,17 @@ public class WebSocketEndPoint {
 		info.put("unhandledEvents",
 				(List<Map<String, Object>>) transaction.execute(ID));
 		info.put("action", "OFFLINEREMIND");
+
+		Map<String, Object> onlineIDs = new HashMap<String, Object>();
+		OnlineUserIDArray.deserialize();
+		onlineIDs.put("onlineUserIDs", OnlineUserIDArray.getOnline());
+		onlineIDs.put("action", "ONLINEUSERIDS");
 		try {
 			session.getBasicRemote().sendObject(info);
 			session.getBasicRemote().sendObject(contactsMap);
+			session.getBasicRemote().sendObject(onlineIDs);
+			OnlineUserIDArray.add(ID);
+			OnlineUserIDArray.serialize();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,6 +109,10 @@ public class WebSocketEndPoint {
 	@OnClose
 	public void close(@PathParam("ID") String ID, Session session,
 			CloseReason respn) throws Exception {
+		OnlineUserIDArray.deserialize();
+		OnlineUserIDArray.remove(ID);
+		OnlineUserIDArray.serialize();
+
 		transaction = new SSEDisconnectTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID);
@@ -108,7 +121,6 @@ public class WebSocketEndPoint {
 			e.printStackTrace();
 			throw e;
 		}
-		System.out.println(sse.toRepresentation());
 		for (Session sess : session.getOpenSessions()) {
 			sess.getBasicRemote().sendObject(sse.toRepresentation());
 		}
