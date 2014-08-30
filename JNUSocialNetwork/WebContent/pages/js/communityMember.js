@@ -1,10 +1,10 @@
 function fetchMembers() {
 	$.each(community.members, function(n, member) {
-		addMember(member.avatarLink, member.id, member.name);
+		addMember(member.avatarLink, member.ID, member.name);
 	});
 }
 function addMember(avatarLink, id, name) {
-	var memberDiv = "<div class='member'><img onload='javascript:auto_resize(80, 80, this)'  class='userMember' src='"
+	var memberDiv = "<div class='member' id='"+id+"'><img onload='javascript:auto_resize(80, 80, this)'  class='userMember' src='"
 			+ avatarLink
 			+ "' style='display: none'/><span class='glyphicon glyphicon-remove memberRemoveBtn' style='font-size:10px'></span><input type='hidden' value='"
 			+ id + "' /><span class='memberName'>" + name 
@@ -22,4 +22,7 @@ function showCommunityInfo() {
 }
 $('body').on("click", ".communityHref", function() {
 	window.location.href = 'communityShow.jsp?' + community.ID;
+});
+$('body').on("click", ".memberRemoveBtn", function() {
+	
 });
