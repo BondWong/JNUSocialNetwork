@@ -299,7 +299,7 @@ function clickEvent() {
 		if ($('#fileuploadEdit').val() != "") {
 			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
 		} else {
-			
+
 		}
 		var attributes = {
 			name : $('#communityName').val(),
@@ -322,13 +322,14 @@ function clickEvent() {
 	}
 
 	$(document)
-	.click(
-			function(e) {
-				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target,arrow = $("#arrowBack")[0];
-				if (dragel != target && !$.contains(dragel, target) && arrow != target) {
-					drag.fadeOut(300);
-				}
-			});
+			.click(
+					function(e) {
+						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target, arrow = $("#arrowBack")[0];
+						if (dragel != target && !$.contains(dragel, target)
+								&& arrow != target) {
+							drag.fadeOut(300);
+						}
+					});
 	$('body').on("click", "#editMembersBtn", function() {
 		window.location.href = 'communityMember.jsp?' + community.ID;
 	});
@@ -648,5 +649,15 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 
 	srcImage.width = image.width;
 	srcImage.height = image.height;
+	$(srcImage).fadeIn("fast");
+}
+
+function fixed_width_auto_resize(width, srcImage) {
+	var image = new Image();
+	image.src = srcImage.src;
+	var originalWidth = srcImage.width;
+	var originalHeight = srcImage.height;
+	srcImage.width = width;
+	srcImage.height = (width / originalWidth) * originalHeight;
 	$(srcImage).fadeIn("fast");
 }
