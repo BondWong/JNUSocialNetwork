@@ -1569,8 +1569,13 @@ body {
 
 .arrowBack {
 	float: left;
+	margin-top:5px;
+	margin-left:5px;
+	cursor:pointer;
 }
-
+#arrowBack{
+	display:none;
+}
 .mentionClose {
 	font-size: 12px;
 	float: right;

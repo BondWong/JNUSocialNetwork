@@ -37,8 +37,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						function(n, image) {
 							imageDiv = imageDiv
 									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
-									+ postID + ")' src='" + image
-									+ "'/>";
+									+ postID + ")' src='" + image + "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
@@ -46,10 +45,10 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}
 	var readmore = "";
 	var contentD = content;
-	if (content.length > 200) {
+	if (content.length > 100) {
 		readmore = "<div class='post_more' id='" + postID
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
-		contentD = content.substr(0, 200) + "......";
+		contentD = content.substr(0, 100) + "......";
 	}
 	var boarddiv = "<div class='post "
 			+ postID
@@ -300,7 +299,7 @@ function clickEvent() {
 		if ($('#fileuploadEdit').val() != "") {
 			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
 		} else {
-
+			
 		}
 		var attributes = {
 			name : $('#communityName').val(),
@@ -323,13 +322,13 @@ function clickEvent() {
 	}
 
 	$(document)
-			.click(
-					function(e) {
-						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-						if (dragel !== target && !$.contains(dragel, target)) {
-							drag.fadeOut(300);
-						}
-					});
+	.click(
+			function(e) {
+				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target,arrow = $("#arrowBack")[0];
+				if (dragel != target && !$.contains(dragel, target) && arrow != target) {
+					drag.fadeOut(300);
+				}
+			});
 	$('body').on("click", "#editMembersBtn", function() {
 		window.location.href = 'communityMember.jsp?' + community.ID;
 	});
@@ -526,7 +525,7 @@ function showPost(postID) {
 									+ jsonComment.attributes.commentToComment;
 						}
 						var removeBtn = "";
-						var commentReply="<div class='comment_reply' id="
+						var commentReply = "<div class='comment_reply' id="
 								+ postID
 								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
 								+ jsonComment.owner.attributes.name
@@ -558,7 +557,9 @@ function showPost(postID) {
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
+								+ commentReply
+								+ "</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";

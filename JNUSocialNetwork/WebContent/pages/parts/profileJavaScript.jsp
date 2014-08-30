@@ -78,7 +78,6 @@
 					clickOffEvent();
 				}
 				showPhotos();
-
 			});
 		</script>
 	</c:when>

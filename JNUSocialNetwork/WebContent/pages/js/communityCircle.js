@@ -118,6 +118,11 @@ $(document)
 								AddPostToCommunity(USERID, community.ID, json);
 								$('#addPostModal').modal('hide');
 								$('.postForm').get(0).reset();
+								fileDri = [];
+								$('.progress-bar').remove();
+								$('.files').remove();
+								$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+								$('.progress').after("<div id='files' class='files'></div>");
 							});
 				});
 // function fetchPostByCommunity

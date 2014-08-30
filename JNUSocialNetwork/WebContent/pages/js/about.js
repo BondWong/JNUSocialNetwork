@@ -316,6 +316,11 @@ function aboutClickEvent() {
 					$('.photoAddBtn').after(photoContainer);
 					Msnry('.pro_body', '.photo', 280);
 				});
+				photosfileDri = [];
+				$('.progress-bar').remove();
+				$('.files').remove();
+				$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+				$('.progress').after("<div id='files' class='files'></div>");
 			});
 }
 

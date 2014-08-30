@@ -8,7 +8,7 @@
 		<ul class="dropdown-menu">
 			<li><a href="profile.jsp?nav=post&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-home">&nbsp;个人中心</span></a></li>
-			<li><a href="../security/UserLogoutServlet"><span
+			<li><a href="../security/UserLogoutServlet" id="lougout_button"><span
 					class="glyphicon glyphicon-th">&nbsp;退出</span></a></li>
 		</ul></li>
 	<li><a href="javaScript:void(0);" id="remind-bell"><span
@@ -18,7 +18,7 @@
 
 </ul>
 <div class="mentionBody bottom" id="onclickMentionBody">
-	<div class="arrow"></div>
+	<div class="arrowBack"><span class="glyphicon glyphicon-chevron-left" id="arrowBack" style="font-size:12px;">&nbsp;</span></div>
 	<div class="mentionBody-title">
 		<div class="arrowBack"></div>
 		消息提醒
