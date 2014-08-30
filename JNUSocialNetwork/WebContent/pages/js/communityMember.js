@@ -22,6 +22,6 @@ function showCommunityInfo() {
 	$('.communityPic').find('img').attr("src",
 			community.attributes.communityCard);
 }
-$(document).ready(function(){
+$('body').on('click','.memberRemoveBtn',function(){
 	
 });

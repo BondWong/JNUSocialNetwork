@@ -226,7 +226,7 @@
 				$.each(community.members,function(n,member){
 					memberIDs.push(member.ID);
 				});
-				if ($.inArray(USERID, memberIDs) != -1) {
+				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}
 			} else {

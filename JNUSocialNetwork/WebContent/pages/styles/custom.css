@@ -1628,6 +1628,9 @@ body {
 .memberRemoveBtn {
 	float: right;
 	display: none;
+	margin-right:5px;
+	margin-top:5px;
+	cursor:pointer;
 }
 
 #activityLike {

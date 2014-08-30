@@ -163,7 +163,7 @@
 				$.each(community.members,function(n,member){
 					memberIDs.push(member.ID);
 				});
-				if ($.inArray(USERID, memberIDs) != -1) {
+				if ( $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}
 				var communities = FetchCommunityByOwner(USERID,"0","5");
@@ -171,8 +171,7 @@
 				$.each(communities,function(n,c){
 					communityIDs.push(c.ID);
 				});
-				alert($.inArray(communityIDs,communityID));
-				if ($.inArray(communityIDs,communityID) != -1
+				if (communityID == communityIDs
 						&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 					$('.memberRemoveBtn').css("display", "inline");
 				}
