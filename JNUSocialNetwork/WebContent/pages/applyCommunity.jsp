@@ -33,7 +33,7 @@
 								pattern="[A-Za-z0-9]{8,16}" placeholder="请输入密码" id="appPassword"
 								autocomplete="off" data-errormessage-value-missing="请输入密码"
 								data-errormessage-pattern-mismatch="请输入密码，长度：8-16，内容可谓为英文大写或小写或数字"
-								required maxLength="16" />
+								required maxLength="40" />
 						</p>
 						<p>
 							<input type="email" class="form-control" placeholder="请输入联系邮箱"

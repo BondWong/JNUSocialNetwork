@@ -1,10 +1,8 @@
 function communityClickEvent() {
 	$('body').on('click', '#communityCreate', function() {
-		var communityC;
+		var communityC = 'images/default/default-community-card.png';
 		if ($('#fileupload').val() != "") {
 			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
-		} else {
-			communityC = 'images/default/default-community-card.png';
 		}
 		var community = {
 			tags : [],

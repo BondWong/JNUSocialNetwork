@@ -17,7 +17,7 @@
 			<div class="form-group">
 				<input type="password" placeholder="请输入密码" class="form-control"
 					name="password" id="md5Password"
-					data-errormessage-value-missing="请输入密码" required maxLength="20" />
+					data-errormessage-value-missing="请输入密码" required maxLength="40" />
 			</div>
 			<input type="hidden" name="hiddenCode"
 				value="${sessionScope.hiddenCode }" />

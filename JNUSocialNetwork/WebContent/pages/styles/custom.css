@@ -637,12 +637,8 @@ body {
 
 .photo {
 	background-color: #FFF;
-	margin-top: 0px;
-	margin-right: 0px;
 	margin-bottom: 20px;
-	margin-left: 0px;
 	float: left;
-	text-align: center;
 	width:280px;
 }
 
@@ -783,6 +779,10 @@ body {
 .photoAddBtn{
 	display:none;
 	width:90px;
+}
+.photoAdd{
+	float:left;
+	margin-top:0px;
 }
 #deleteCommunityBtn {
 	display: none;
@@ -1143,13 +1143,11 @@ body {
 .deletePostBtn:hover {
 	color: #5A5A5A;
 	float: right;
-	margin-top: 5px;
 }
 
 .deletePostBtn {
 	color: #CCC;
 	float: right;
-	margin-top: 5px;
 	cursor: pointer;
 }
 .deleteActivity{

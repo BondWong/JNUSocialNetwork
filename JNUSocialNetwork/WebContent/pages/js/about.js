@@ -212,6 +212,12 @@ $(document)
 						var json = $.toJSON(post);
 						AddPost(USERID, json);
 						$('#addPostModal').modal('hide');
+						$('.postForm').get(0).reset();
+						fileDri = [];
+						$('.progress-bar').remove();
+						$('.files').remove();
+						$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+						$('.progress').after("<div id='files' class='files'></div>");
 
 					});
 				});
@@ -383,7 +389,7 @@ function showFollowers() {
 						$('.userImgA').userTips();
 					});
 }
-var pageSize = 5;
+var pageSize = 15;
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
 	var response = FetchPostsByOwner(userID, 0, pageSize);

@@ -17,9 +17,9 @@
 							</div>
 							<form class="photoForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
-									<br>
+								
 									<!-- The fileinput-button span is used to style the file input field as button -->
-									<span class="btn btn-success fileinput-button"> <i
+									<span class="btn btn-success fileinput-button photoAdd"> <i
 										class="glyphicon glyphicon-plus"></i> <span>Add
 											photos...</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileuploadPhoto" type="file" name="files[]" multiple>
