@@ -28,6 +28,7 @@ import transaction.DAOUpdateTransaction.CommunityAddTagTransaction;
 import transaction.DAOUpdateTransaction.CommunityRemoveTagTransaction;
 import transaction.DAOUpdateTransaction.JoinCommunityTransaction;
 import transaction.DAOUpdateTransaction.LeaveCommunityTransaction;
+import transaction.DAOUpdateTransaction.RemoveCommunityMemberTransaction;
 import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
 import transaction.SSETransaction.SSEDeleteCommunityTransaction;
 
@@ -106,6 +107,22 @@ public class CommunityService {
 			throw e;
 		}
 
+		return Response.ok().build();
+	}
+
+	@Path("leave/{ID : \\d+}/{memberID : \\d+}/{communityID : \\d+}")
+	@PUT
+	public Response removeMember(@PathParam("ID") String ID,
+			@PathParam("memberID") String memberID,
+			@PathParam("communityID") Long communityID) throws Exception {
+		transaction = new RemoveCommunityMemberTransaction();
+		try {
+			transaction.execute(ID, memberID, communityID);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 		return Response.ok().build();
 	}
 

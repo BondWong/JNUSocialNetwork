@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -26,6 +27,7 @@ public class Application extends AttributeModel {
 	@Id
 	private String ID;
 	private String submitDate;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
 

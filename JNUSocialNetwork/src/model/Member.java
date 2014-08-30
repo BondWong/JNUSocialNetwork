@@ -17,6 +17,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -45,6 +46,7 @@ import model.modelType.UserType;
 public class Member extends User {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
 

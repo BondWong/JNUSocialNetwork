@@ -33,10 +33,18 @@ public class ActivitySearchMap {
 
 	public static List<Long> fecthRemindableIDs() {
 		List<Long> IDs = new ArrayList<Long>();
+		List<Long> finishIDs = new ArrayList<Long>();
 		synchronized (ActivitySearchMap.class) {
-			for (Map.Entry<Long, Long> entrySet : activityMap.entrySet())
-				if (System.currentTimeMillis() - entrySet.getValue() <= 30 * 60 * 1000)
+			for (Map.Entry<Long, Long> entrySet : activityMap.entrySet()) {
+				if (entrySet.getValue() - System.currentTimeMillis() <= 30 * 60 * 1000)
 					IDs.add(entrySet.getKey());
+				if (entrySet.getValue() - System.currentTimeMillis() <= 0)
+					finishIDs.add(entrySet.getKey());
+			}
+
+			for (Long ID : finishIDs)
+				removeRecord(ID);
+
 		}
 		return IDs;
 	}

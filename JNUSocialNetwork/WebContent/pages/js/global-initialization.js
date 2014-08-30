@@ -28,12 +28,17 @@ function login_initialization(ID) {
 			});
 	if ($.parseJSON(sessionStorage.getItem("user")) != null
 			&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-		$('#createCommunityBtn').css("display", "inline");
+		if(FetchCommunityByOwner(USERID,"0","5").length==0){
+			$('#createCommunityBtn').css("display", "inline");
+		}
 		$('.appCom').css("display", "none");
 		$('.titleMy').css("display", "block");
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
 
+	}
+	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $('#leaveCommunityBtn').css("display")=="none") {
+		$('.cardSetter').hide();
 	}
 	/*
 	 * SSE Handle
