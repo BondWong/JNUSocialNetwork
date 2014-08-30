@@ -65,7 +65,7 @@ function CREATEPOSTINCOMMUNITY() {
 function DELETEPOST() {
 	source.addEventListener('DELETEPOST', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		$(".post"+jsondata.ID+"").remove();
+		$("."+jsondata.ID+"").remove();
 		Msnry('.pro_body', '.post', 435);
 	});
 }
@@ -190,12 +190,20 @@ function CREATECOMMENT() {
 										+ jsonComment.attributes.commentToComment;
 							}
 							var removeBtn = "";
+							var commentReply="<div class='comment_reply' id="
+									+ jsondata.postID
+									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+									+ jsonComment.owner.attributes.name
+									+ "' /><input id='replyID' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' />reply<span style='font-size: 8px'></span></a></div>";
 							if (USERID == jsonComment.owner.ID) {
 								removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 										+ jsondata.postID
 										+ "' type='hidden' value='"
 										+ jsonComment.ID
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+								commentReply = "";
 							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
@@ -213,13 +221,7 @@ function CREATECOMMENT() {
 									+ jsonComment.likerIDs.length
 									+ "</span></div><a><input id='likeID' type='hidden' value='"
 									+ jsonComment.ID
-									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-									+ jsondata.postID
-									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.name
-									+ "' /><input id='replyID' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 									+ atComment + "</span>" + "&nbsp;"
 									+ jsonComment.attributes.content
 									+ "﻿</div></div>";

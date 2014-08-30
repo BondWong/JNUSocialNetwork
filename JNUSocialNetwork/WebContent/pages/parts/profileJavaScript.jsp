@@ -77,7 +77,6 @@
 				} else {
 					clickOffEvent();
 				}
-				Msnry('.pro_body', '.photo', 280);
 				showPhotos();
 
 			});

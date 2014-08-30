@@ -643,6 +643,7 @@ body {
 	margin-left: 0px;
 	float: left;
 	text-align: center;
+	width:280px;
 }
 
 .containerReg {
@@ -779,7 +780,10 @@ body {
 #editMembersBtn {
 	display: none;
 }
-
+.photoAddBtn{
+	display:none;
+	width:90px;
+}
 #deleteCommunityBtn {
 	display: none;
 }

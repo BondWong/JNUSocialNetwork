@@ -64,16 +64,6 @@ function on_friends_node_click() {
 }
 
 function add_chatroom(data) {
-	var online = false;
-	var IDs = sessionStorage.getItem("onlineUserIDs");
-	IDs = $.parseJSON(IDs);
-	for (var i = 0; i < IDs.length; i++)
-		if (IDs[i] == toID) {
-			online = true;
-			break;
-		}
-	data.online = online;
-
 	var has = false;
 	var chatRooms = sessionStorage.getItem("chatrooms");
 	chatRooms = $.parseJSON(chatRooms);
@@ -133,7 +123,6 @@ function add_to_friend_list() {
 				var name = sessionStorage.getItem("userNameID");
 				name = $.parseJSON(name);
 				name = name[$(this).attr("id")];
-				open_chatroom(USERID, $(this).attr("id"), name);
 				open_chatroom(USERID, $(this).attr("id"), name);
 			});
 		}

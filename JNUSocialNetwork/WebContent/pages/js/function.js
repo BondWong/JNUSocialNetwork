@@ -38,7 +38,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 							imageDiv = imageDiv
 									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
 									+ postID + ")' src='" + image
-									+ "' style='display: none'/>";
+									+ "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
@@ -207,18 +207,6 @@ function clickEvent() {
 		inputID.attr("placeholder", "@" + commmentName);
 		inputID.focus();
 	});
-	// function notifyItem
-	/*
-	 * $('body') .on( 'click', '.commentItem', function() {
-	 * $(this).fadeOut(300); $('.mentionBody-appear').css("display", "none");
-	 * var dataString = FetchPostByID("1408108100658");
-	 * notifyItem(dataString.owner.ID, dataString.owner.attributes.nickName,
-	 * dataString.publishDate, dataString.attributes.content, dataString.ID,
-	 * dataString.likerIDs.length); $(".arrowBack") .append( "<span
-	 * class='glyphicon glyphicon-chevron-left' id='arrowBack'
-	 * style='font-size:12px;'>&nbsp;</span>"); });
-	 */
-	// function backarrow
 	// function likecomment and cancelLike
 	$('body').on('click', '.comment_like', function() {
 		var id = $(this).find("input").attr("value");
@@ -251,7 +239,6 @@ function clickEvent() {
 		LeaveActivity(USERID, activityID);
 	});
 
-	//
 	// function addComment
 	$('body').on('click', '#addComment', function() {
 		var id = this.getAttribute("value");
@@ -539,12 +526,20 @@ function showPost(postID) {
 									+ jsonComment.attributes.commentToComment;
 						}
 						var removeBtn = "";
+						var commentReply="<div class='comment_reply' id="
+								+ postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.name
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div>";
 						if (USERID == jsonComment.owner.ID) {
 							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 									+ postID
 									+ "' type='hidden' value='"
 									+ jsonComment.ID
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							commentReply = "";
 						}
 						comment = comment
 								+ "<div class='act_content' id='"
@@ -563,13 +558,7 @@ function showPost(postID) {
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-								+ postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
@@ -612,7 +601,7 @@ function showPost(postID) {
 						+ dataString.likerIDs.length
 						+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 						+ postID
-						+ "' maxLength=20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+						+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID
 						+ ">Submit</button></div></div>"
 						+ comment
@@ -638,7 +627,6 @@ $('body').on("click", ".memberHref", function() {
 function auto_resize(maxWidth, maxHeight, srcImage) {
 	var image = new Image();
 	image.src = srcImage.src;
-
 	if (image.width > maxWidth && image.height <= maxHeight) {
 		image.width = maxWidth;
 		image.height = (maxHeight / maxWidth) * image.width;

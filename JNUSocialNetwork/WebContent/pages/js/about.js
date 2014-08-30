@@ -226,11 +226,11 @@ function aboutClickEvent() {
 						$("span[class='Alooking']").html(
 								"<input class='lookingforE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.lookingFor
-										+ "' maxLength=20'/>");
+										+ "' maxLength='20'/>");
 						$("span[class='Atelenum']").html(
 								"<input class='telenumE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.telnum
-										+ "' maxLength=20'/>");
+										+ "' maxLength='20'/>");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
@@ -311,7 +311,7 @@ function aboutClickEvent() {
 				AddImages(userID, photosfileDri);
 				$('#myModalPhoto').modal('hide');
 				$.each(photosfileDri, function(index, imageLink) {
-					var photoContainer = "<div class='photo'><img src='"
+					var photoContainer = "<div class='photo'><img onload='javascript:auto_resize(280, 150, this)' src='"
 							+ imageLink + "' /></div>";
 					$('.photoAddBtn').after(photoContainer);
 					Msnry('.pro_body', '.photo', 280);
@@ -323,9 +323,10 @@ function aboutClickEvent() {
 function showPhotos() {
 	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {
-		var photoContainer = "<div class='photo'><img src='" + imageLink
+		var photoContainer = "<div class='photo'><img onload='javascript:auto_resize(280, 150, this)' src='" + imageLink
 				+ "' /></div>";
 		$('.photoAddBtn').after(photoContainer);
+		Msnry('.pro_body', '.photo', 280);
 	});
 }
 // show followees
@@ -378,6 +379,7 @@ function fetchPostsByOwner() {
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
 	if (userID == USERID) {
+		$('.photoAddBtn').css("display", "inline");
 		$('.aEditbtn').css("display", "inline");
 		// function profileBg
 		$('.profile_img')
