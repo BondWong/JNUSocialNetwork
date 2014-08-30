@@ -7,12 +7,13 @@ function addMember(avatarLink, id, name) {
 	var memberDiv = "<div class='member' id='"+id+"'><img onload='javascript:auto_resize(80, 80, this)'  class='userMember' src='"
 			+ avatarLink
 			+ "' style='display: none'/><span class='glyphicon glyphicon-remove memberRemoveBtn' style='font-size:10px'></span><input type='hidden' value='"
-			+ id + "' /><span class='memberName'>" + name 
-			+ "</span><input type='hidden' value='"
+			+ id + "' /><span class='memberName'><a style='cursor:pointer;color:#404040'>" + name 
+			+ "</a></span><input type='hidden' value='"
 			+ id 
 			+ "' name='userID'/></div>";
 	$('.membersBord').after(memberDiv);
 	Msnry('.membersContainer', '.member', 215);
+	$('.memberName').userTips();
 }
 function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);

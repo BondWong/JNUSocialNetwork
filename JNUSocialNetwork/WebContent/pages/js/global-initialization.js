@@ -35,7 +35,6 @@ function login_initialization(ID) {
 		$('.titleMy').css("display", "block");
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
-
 	}
 
 	/*

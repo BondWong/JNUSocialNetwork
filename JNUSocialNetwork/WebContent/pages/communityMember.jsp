@@ -105,11 +105,7 @@
 			<h5 class="containBord">Members in this community</h5>
 			<div class="membersContainer">
 				<div class="membersBord"></div>
-				<div class="member">
-					<img class="userMember" src="images/member.jpg" /> <span
-						class="glyphicon glyphicon-remove memberRemoveBtn"
-						style="font-size: 10px"></span> <span class="memberName">Winson_Lau</span>
-				</div>
+				
 
 			</div>
 		</div>
