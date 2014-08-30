@@ -70,20 +70,29 @@ function DELETEPOST() {
 	});
 }
 function DELETECOMMENT() {
-	source.addEventListener('DELETECOMMENT', function(event) {
-		var jsondata = $.parseJSON(event.data);
-		var tem = $("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']");
-		if($("div[class='act_content'][id='" + jsondata.comment + "']").length!=0){
-			$("div[class='act_content'][id='" + jsondata.comment + "']").remove();
-			FetchCommentByPost(jsondata.postID, "0", "2");
-			Msnry('.pro_body', '.post', 435);
-		}
-		if($("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']").length!=0){
-			$("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']").remove();
-		}
-		
-		
-	});
+	source
+			.addEventListener(
+					'DELETECOMMENT',
+					function(event) {
+						var jsondata = $.parseJSON(event.data);
+						var tem = $("div[class='aBodyComment'][id='commentTxt"
+								+ jsondata.comment + "']");
+						if ($("div[class='act_content'][id='"
+								+ jsondata.comment + "']").length != 0) {
+							$(
+									"div[class='act_content'][id='"
+											+ jsondata.comment + "']").remove();
+							FetchCommentByPost(jsondata.postID, "0", "2");
+							Msnry('.pro_body', '.post', 435);
+						}
+						if ($("div[class='aBodyComment'][id='commentTxt"
+								+ jsondata.comment + "']").length != 0) {
+							$(
+									"div[class='aBodyComment'][id='commentTxt"
+											+ jsondata.comment + "']").remove();
+						}
+
+					});
 }
 function DELETEPOSTFROMCOMMUNITY() {
 	source.addEventListener('DELETEPOSTFROMCOMMUNITY', function(event) {
@@ -192,7 +201,7 @@ function CREATECOMMENT() {
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
 									+ jsonComment.owner.attributes.avatarLink
-									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+									+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 									+ removeBtn
@@ -241,9 +250,11 @@ function CREATECOMMENT() {
 										+ jsonComment.ID
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 							}
-							var comment = "<div class='aBodyComment' id='commentTxt"+jsonComment.ID+"'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+							var comment = "<div class='aBodyComment' id='commentTxt"
+									+ jsonComment.ID
+									+ "'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
 									+ jsonComment.owner.attributes.avatarLink
-									+ "'><div class='user_name'><strong>"
+									+ "' style='display: none'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div><div class='user_info'><span>"
 									+ jsonComment.publishDate

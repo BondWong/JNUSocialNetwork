@@ -45,8 +45,11 @@ public class PassApplicationTransaction extends DAOTransaction {
 		dao.create(communityOwner);
 		dao.create(account);
 
-		String content = "ID:" + id + "\npassword:" + password
-				+ "\nPlease login using this link: www.campusite.com";
+		String content = "ID:"
+				+ id
+				+ "\npassword:"
+				+ password
+				+ "\nPlease login using this link: www.campusite.com.cn/login.jsp";
 		EmailSender.send("Your application passed!", content, email);
 
 		return null;

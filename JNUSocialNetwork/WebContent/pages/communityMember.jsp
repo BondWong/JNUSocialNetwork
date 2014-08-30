@@ -32,7 +32,7 @@
 						class="editCommunity" data-toggle='modal'
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="" id="editMembersBtn">管理成员</a></li>
+						 id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -88,7 +88,8 @@
 					humor!</p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+				<img onload="javascript:auto_resize(221, 267, this)" src="" 
+					style="display: none"/>
 			</div>
 			<div class="cardA">
 				<span>All posts</span> <span class="activityHref">Activities</span>
@@ -165,10 +166,20 @@
 				if ($.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}
+				var communities = FetchCommunityByOwner(USERID,"0","5");
+				var communityIDs = [];
+				$.each(communities,function(n,c){
+					communityIDs.push(c.ID);
+				});
+				alert($.inArray(communityIDs,communityID));
+				if ($.inArray(communityIDs,communityID) != -1
+						&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+					$('.memberRemoveBtn').css("display", "inline");
+				}
 			} else {
 				clickOffEvent();
 			}
-
+			
 		});
 	</script>
 </body>

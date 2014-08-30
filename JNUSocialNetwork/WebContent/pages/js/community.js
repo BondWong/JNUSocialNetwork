@@ -45,7 +45,7 @@ function fetchCommunityByID(communityID) {
 	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
 				community.members.length, "myCommunity",
-				community.attributes.communityCard,community.members);
+				community.attributes.communityCard, community.members);
 	}
 }
 function fetchCommunityByOwner() {
@@ -54,7 +54,7 @@ function fetchCommunityByOwner() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
@@ -64,7 +64,7 @@ function fetchCommunityByJoin() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
@@ -75,7 +75,7 @@ function fetchHotCommunity() {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
@@ -85,7 +85,7 @@ function fetchCommunityByType(communityType) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, community.communityType,
-					community.attributes.communityCard,community.members);
+					community.attributes.communityCard, community.members);
 		}
 	});
 }
@@ -97,20 +97,20 @@ function fetchCommunitys() {
 
 }
 // 增加社区
-function addCommunity(id, name, memberNum, communityType, communityImg,members) {
-	var memberIDs=[];
-	$.each(members,function(n,member){
+function addCommunity(id, name, memberNum, communityType, communityImg, members) {
+	var memberIDs = [];
+	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	var joinClass= "";
+	var joinClass = "";
 	if ($.inArray(USERID, memberIDs) != -1) {
-		joinClass="style='color: #FFF;background-color: #428BCA;'";
+		joinClass = "style='color: #FFF;background-color: #428BCA;'";
 	}
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
 			+ communityImg
-			+ "' onload='javascript:auto_resize(267, 267, this)' /></div></a><div class='content_info'><div class='conten_head'>"
+			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
@@ -162,15 +162,7 @@ $(document)
 						var comm = $(this).find("input").attr("value");
 						window.location.href = 'communityShow.jsp?' + comm;
 					});
-					if ($.parseJSON(sessionStorage.getItem("user")) != null
-							&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-						$('#createCommunityBtn').css("display", "inline");
-						$('.appCom').css("display", "none");
-						$('.titleMy').css("display", "block");
-						$('.containerMy').css("display", "block");
-						$('#myCommunityBtn').css("display", "block");
-
-					}
+					
 					$('body').on("click", ".myCommunityBtn", function() {
 						fetchByType("myCommunity", "我的社区", "containerMy");
 						$('.titleMy').css("display", "block");
@@ -253,7 +245,8 @@ $(document)
 																	community.attributes.name,
 																	community.members.length,
 																	"searchCommunity",
-																	community.attributes.communityCard,community.members);
+																	community.attributes.communityCard,
+																	community.members);
 														});
 									});
 

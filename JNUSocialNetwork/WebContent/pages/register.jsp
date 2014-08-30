@@ -37,7 +37,11 @@
 								data-errormessage-value-missing="请输入验证码"
 								data-errormessage-pattern-mismatch="验证码错误" required />
 							<div class="form-cust-img">
-								<img src="../security/RegServlet" />
+								<img src="../security/RegServlet"
+									onload="javascript:finish_loading_valcode();"
+									id="register_valcode_image" style="display: none" /> <img
+									src="images/register_loading_valcode.gif"
+									id="register_loadingvalcode_image" />
 							</div>
 						</div>
 						<input type="hidden" name="hiddenCode"
@@ -64,6 +68,12 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 	<script src="js/md5.js"></script>
+	<script>
+		function finish_loading_valcode() {
+			$("#register_loadingvalcode_image").hide();
+			$("#register_valcode_image").show();
+		}
+	</script>
 	<script>
 		$("h4 span.signIn").click(function() {
 			location.href = "login.jsp";

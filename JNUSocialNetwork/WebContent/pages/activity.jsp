@@ -32,7 +32,7 @@
 						class="editCommunity" data-toggle='modal'
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="" id="editMembersBtn">管理成员</a></li>
+						 id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -88,7 +88,8 @@
 					humor!</p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+				<img onload="javascript:auto_resize(221, 267, this)" src=""
+					style="display: none" />
 			</div>
 			<div class="cardA">
 				<span class="communityHref">All posts</span> <span>Activities</span>

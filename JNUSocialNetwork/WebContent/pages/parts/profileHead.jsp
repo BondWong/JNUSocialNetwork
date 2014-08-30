@@ -4,15 +4,20 @@
 	<div class="profile_info">
 		<div class="profile_container">
 			<div class="profile_user_img">
-				<img class="img-circle profileAvatar" onload="javascript:auto_resize(120, 120, this)" src=""
-					alt="Generic placeholder image">
+				<img class="img-circle profileAvatar"
+					onload="javascript:auto_resize(120, 120, this)" src=""
+					alt="Generic placeholder image" style="display: none">
 			</div>
 			<div class="profile_user_name">
 				<strong></strong>
 			</div>
 		</div>
 	</div>
-	<div class="profile_img"><img class="profileImgDiv" src="" onload="javascript:auto_resize( 620, 300, this)"/></div>
+	<div class="profile_img">
+		<img class="profileImgDiv" src=""
+			onload="javascript:auto_resize( 620, 300, this)"
+			style="display: none" />
+	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

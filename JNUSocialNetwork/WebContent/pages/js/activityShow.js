@@ -30,30 +30,35 @@ function showActivityDetail(activity, community) {
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 						}
 						comment = comment
-								+ "<div class='aBodyComment' id='commentTxt"+jsonComment.ID+"'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
-									+ jsonComment.owner.attributes.avatarLink
-									+ "'><div class='user_name'><strong>"
-									+ jsonComment.owner.attributes.name
-									+ "</strong></div><div class='user_info'><span>"
-									+ jsonComment.publishDate
-									+ "</span>"+removeBtn+"<div class='comment_reply replyaComment' id="
-									+ jsonComment.attributes.postID
-									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.name
-									+ "' /><input id='replyID' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
-									+ activity.ID
-									+ "' value='"
-									+ jsonComment.ID
-									+ "' /></span></div><br><div>"
-									+ "<span class='commentHead'>"
-									+ atComment + "</span>" + "&nbsp;"
-									+ jsonComment.attributes.content
-									+ "</div></div></div>";
-						$("#commentText" + jsonComment.attributes.postID).blur(function() {
-							$(this).attr("placeholder", "add a comment");
-						});
+								+ "<div class='aBodyComment' id='commentTxt"
+								+ jsonComment.ID
+								+ "'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+								+ jsonComment.owner.attributes.avatarLink
+								+ "'style='display: none'><div class='user_name'><strong>"
+								+ jsonComment.owner.attributes.name
+								+ "</strong></div><div class='user_info'><span>"
+								+ jsonComment.publishDate
+								+ "</span>"
+								+ removeBtn
+								+ "<div class='comment_reply replyaComment' id="
+								+ jsonComment.attributes.postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.name
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
+								+ activity.ID + "' value='" + jsonComment.ID
+								+ "' /></span></div><br><div>"
+								+ "<span class='commentHead'>" + atComment
+								+ "</span>" + "&nbsp;"
+								+ jsonComment.attributes.content
+								+ "</div></div></div>";
+						$("#commentText" + jsonComment.attributes.postID).blur(
+								function() {
+									$(this)
+											.attr("placeholder",
+													"add a comment");
+								});
 						$('.aBodyComment').find('a').hide();
 						$('.aBodyComment').hover(function() {
 
