@@ -5,9 +5,9 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var t = $(this).offset().top;
+	var t = $(this).position().top;
 	var l = $(this).offset().left;
-	t += 30;
+	t += 50;
 	l -= 250;
 	var divTip = '.mentionBody';
 	tinyTip = $(divTip);
@@ -230,13 +230,10 @@ function events_remind(event) {
 							break;
 						}
 
-						$(".arrowBack")
-								.replaceWith(
-										'<div class="arrowBack"><a href="javascript:void(0);"><span class="glyphicon glyphicon-chevron-left" id="arrowBack" style="font-size:12px;">&nbsp;</span></a></div>');
+						$("#arrowBack").css("display","inline");
 						$('.arrowBack').click(
 								function() {
-									$(".arrowBack").replaceWith(
-											'<div class="arrowBack"></div>');
+									$("#arrowBack").css("display","none");
 									$(".mentionBody-content").empty();
 									show_remind_content();
 								});
@@ -287,9 +284,9 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(350, 180, this)" src="'
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img  onload="javascript:auto_resize(350, 180, this)" src="'
 			+ data.attributes.profileImageLink
-			+ '" id="remind-bell-profileImg" style="display: none"/></div><div class="urserInfShort"><img onload="javascript:auto_resize(50, 50, this)" src="'
+			+ '" id="remind-bell-profileImg" style="display: none"/></div><div class="urserInfShort"><img class="img-circle" onload="javascript:auto_resize(120, 120, this)" src="'
 			+ data.attributes.avatarLink
 			+ '" id="remind-bell-avatarImg" style="display: none"/><p><h1><a class="tipUser">'
 			+ data.attributes.name

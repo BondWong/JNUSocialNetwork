@@ -36,6 +36,11 @@ function login_initialization(ID) {
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
 	}
+	if(FetchCommunityByJoin(USERID,"0","1").length!=0){
+		$('.titleMy').css("display", "block");
+		$('.containerMy').css("display", "block");
+		$('#myCommunityBtn').css("display", "block");
+	}
 
 	/*
 	 * SSE Handle

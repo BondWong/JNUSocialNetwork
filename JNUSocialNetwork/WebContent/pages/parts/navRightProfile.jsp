@@ -18,7 +18,7 @@
 
 </ul>
 <div class="mentionBody bottom" id="onclickMentionBody">
-	<div class="arrow"></div>
+	<div class="arrowBack"><span class="glyphicon glyphicon-chevron-left" id="arrowBack" style="font-size:12px;">&nbsp;</span></div>
 	<div class="mentionBody-title">
 		<div class="arrowBack"></div>
 		消息提醒
