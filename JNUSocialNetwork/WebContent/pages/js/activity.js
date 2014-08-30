@@ -45,7 +45,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,own
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 	}
-	var boarddiv = "<div class='activity' >"+pRemoveBtn+"<div class='activityHref' id='"
+	var boarddiv = "<div class='activity' ><div class='activityHref' id='"
 			+ activityID
 			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
 			+ imagelink
