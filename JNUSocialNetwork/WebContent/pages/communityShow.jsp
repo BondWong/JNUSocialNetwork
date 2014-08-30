@@ -32,7 +32,7 @@
 						class="editCommunity" data-toggle='modal'
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						 id="editMembersBtn">管理成员</a></li>
+						id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -55,18 +55,22 @@
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus />
+										placeholder="" id="communityName" required autofocus
+										maxLength="20" />
 								</p>
 								<p>
-									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus />
+									<span>社区介绍：</span>
+									<textarea type="text" class="form-control" placeholder=""
+										id="communityIntro" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file"
+									name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
-								
+
 								<br>
 							</div>
 							<br></br>
@@ -103,9 +107,9 @@
 		<div class="pro_body pro_body_community">
 			<div class="share post">
 				<form enctype="multipart/form-data">
-					<input class="form-control share_txt" type="text"
+					<textarea class="form-control share_txt"
 						placeholder="share anything you what to share" data-toggle='modal'
-						data-target='#addPostModal' />
+						data-target='#addPostModal' maxLength="200" style="resize: none;"></textarea>
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
 							data-target='#addPostModal'>
@@ -146,8 +150,9 @@
 							</div>
 							<form class="postForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
-									<input class="form-control share_txt2" id="share_txt2"
-										type="text" placeholder="share anything you what to share" />
+									<textarea class="form-control share_txt2" id="share_txt2"
+										placeholder="share anything you what to share" maxLength="200"
+										style="resize: none;"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -232,6 +237,9 @@
 				$.each(community.members,function(n,member){
 					memberIDs.push(member.ID);
 				});
+				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
+					$('.cardSetter').css("display", "inline");
+				}
 				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}

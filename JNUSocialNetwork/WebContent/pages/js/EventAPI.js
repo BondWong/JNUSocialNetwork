@@ -624,6 +624,23 @@ function LeaveCommunity(userID, communityID) {
 	});
 	return response;
 }
+function LeaveMember(userID, memberID, communityID) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/community/leave/' + userID + '/'+ memberID + '/'+ communityID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			response = status;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+	});
+	return response;
+}
 
 function UpdateCommunity(communityID, json) {
 	var response = "";

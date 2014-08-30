@@ -28,7 +28,7 @@
 				<form enctype="multipart/form-data">
 					<input class="form-control share_txt" type="text"
 						placeholder="分享你所想、所见" data-toggle='modal'
-						data-target='#addPostModal' />
+						data-target='#addPostModal' maxLength="200" />
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
 							data-target='#addPostModal'>
@@ -70,12 +70,12 @@
 							<form class="postForm" enctype="multipart/form-data">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" style="resize: none;"></textarea>
+										type="text" style="resize: none;" maxLength="200"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
 										class="glyphicon glyphicon-plus"></i> <span>添加照片</span> <!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload" type="file" name="files[]"  multiple>
+										<input id="fileupload" type="file" name="files[]" multiple>
 									</span> <br> <br>
 									<!-- The global progress bar -->
 									<div id="progress" class="progress progressCust">

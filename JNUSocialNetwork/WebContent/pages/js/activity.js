@@ -36,16 +36,20 @@ function fetchActivitiesByCommunity() {
 					dataString.attributes.activityAddr,
 					dataString.attributes.activityMore,
 					dataString.attributes.background,
-					dataString.owner.attributes.avatarLink,dataString.owner.ID);
+					dataString.owner.attributes.avatarLink,dataString.owner.ID,dataString.participantIDs);
 		}
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID) {
+function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
+	}
+	var select = "";
+	if($.inArray(USERID,joinIDs) != -1){
+		select = "selected";
 	}
 	var boarddiv = "<div class='activity post"+activityID+"' >"+pRemoveBtn+"<div class='activityHref' id='"
 			+ activityID
@@ -63,14 +67,14 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,own
 			+ more
 			+ "</span></div></div><div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
 			+ activityID
-			+ "'>Yes</option><option class='leaveactivityJoin' id='"
+			+ "' "+select+">Yes</option><option class='leaveactivityJoin' id='"
 			+ activityID + "'>No</option></select></div></div>";
 	return boarddiv;
 }
 // function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID) {
+function addActivity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink,ownerID);
+			avatarLink,ownerID,joinIDs);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -123,7 +127,7 @@ $(window)
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
-									dataString.attributes.background,dataString.owner.ID);
+									dataString.attributes.background,dataString.owner.ID,dataString.participantIDs);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});

@@ -226,10 +226,11 @@ function aboutClickEvent() {
 						$("span[class='Alooking']").html(
 								"<input class='lookingforE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.lookingFor
-										+ "' />");
+										+ "' maxLength=20'/>");
 						$("span[class='Atelenum']").html(
 								"<input class='telenumE' id='focusedInput' type='text' value='"
-										+ userInfo.attributes.telnum + "' />");
+										+ userInfo.attributes.telnum
+										+ "' maxLength=20'/>");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");

@@ -808,6 +808,7 @@ body {
 	margin-top: 23px;
 	margin-right: 15px;
 	color: #aaa;
+	display:none;
 }
 
 .cardSetter:hover {
@@ -1635,6 +1636,7 @@ body {
 	display: none;
 	margin-top:5px;
 	margin-right:5px;
+	cursor:pointer;
 }
 
 #activityLike {

@@ -24,18 +24,20 @@
 						<p>
 							<input type="text" class="form-control" placeholder="请输入教务系统ID"
 								name="ID" data-errormessage-value-missing="请输入教务处学号" required
-								autofocus />
+								autofocus maxLength="20" />
 						</p>
 						<p>
 							<input type="password" class="form-control"
 								placeholder="请输入教务系统密码" name="password"
-								data-errormessage-value-missing="请输入教务处密码" required />
+								data-errormessage-value-missing="请输入教务处密码" required
+								maxLength="20" />
 						</p>
 						<div class="form-cust">
 							<input type="text" class="form-control form-control-cust"
 								placeholder="请输入验证码" name="valCode" pattern="[A-Za-z0-9]{4}"
 								data-errormessage-value-missing="请输入验证码"
-								data-errormessage-pattern-mismatch="验证码错误" required />
+								data-errormessage-pattern-mismatch="验证码错误" required
+								maxLength="4" />
 							<div class="form-cust-img">
 								<img src="../security/RegServlet"
 									onload="javascript:finish_loading_valcode();"

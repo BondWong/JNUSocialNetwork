@@ -35,11 +35,8 @@ function login_initialization(ID) {
 		$('.titleMy').css("display", "block");
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
+	}
 
-	}
-	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $('#leaveCommunityBtn').css("display")=="none") {
-		$('.cardSetter').hide();
-	}
 	/*
 	 * SSE Handle
 	 */

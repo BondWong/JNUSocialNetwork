@@ -50,7 +50,7 @@
 							<div class="activityItem">
 								<span>活动名：</span> <input type="text"
 									class="form-control activityInput" placeholder=""
-									id="activityName" required autofocus />
+									id="activityName" required autofocus maxLength="30" />
 							</div>
 							<div class="activityItem">
 								<span>活动时间：</span>
@@ -62,14 +62,16 @@
 								</div>
 							</div>
 							<div class="activityItem">
-								<span>活动地点：</span> <input type="text"
-									class="form-control activityInput" placeholder=""
-									id="activityAddr" required autofocus />
+								<span>活动地点：</span>
+								<textarea class="form-control activityInput" placeholder=""
+									id="activityAddr" required autofocus maxLength="150"
+									style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
-								<span>活动细节：</span> <input type="text"
-									class="form-control activityInput" placeholder=""
-									id="activityMore" required autofocus />
+								<span>活动细节：</span>
+								<textarea type="text" class="form-control activityInput"
+									placeholder="" id="activityMore" required autofocus
+									maxLength="200" style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"

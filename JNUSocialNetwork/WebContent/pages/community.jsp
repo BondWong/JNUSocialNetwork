@@ -29,10 +29,9 @@
 			<li><a class="folkCommunityBtn">个人社区</a></li>
 			<li><a class="discoverCommunityBtn">热门社区</a></li>
 			<li><a class="searchCommunityBtn">搜索社区</a></li>
-			<li><a  class="appCom" href="applyCommunity.jsp">申请社区</a></li>
-			<li><a  role="button" class="createCom"
-				data-toggle='modal' data-target='#createCommunity'
-				id="createCommunityBtn">创建社区</a></li>
+			<li><a class="appCom" href="applyCommunity.jsp">申请社区</a></li>
+			<li><a role="button" class="createCom" data-toggle='modal'
+				data-target='#createCommunity' id="createCommunityBtn">创建社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -90,17 +89,18 @@
 						<p>
 							<span>社区名：</span> <input type="text" class="form-control"
 								placeholder="" id="communityName" required autofocus
-								autocomplete="off" required/>
+								autocomplete="off" required maxLength="20" />
 						</p>
 						<p>
 							<span>社区标签：</span> <input type="text" class="form-control"
 								placeholder="" id="communityTag" required autofocus
-								autocomplete="off" required="required"/>
+								required="required" maxLength="20" />
 						</p>
 						<p>
-							<span>社区介绍：</span> <input type="text" class="form-control"
-								placeholder="" id="communityIntro" required autofocus
-								autocomplete="off" required="required"/>
+							<span>社区介绍：</span>
+							<textarea class="form-control" placeholder="" id="communityIntro"
+								required autofocus required="required" maxLength="100"
+								style="resize: none;"></textarea>
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
@@ -156,7 +156,7 @@
 				clickOffEvent();
 			}
 			fetchCommunitys();
-			
+
 		});
 	</script>
 </body>

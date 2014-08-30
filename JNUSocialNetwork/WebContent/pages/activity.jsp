@@ -32,7 +32,7 @@
 						class="editCommunity" data-toggle='modal'
 						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						 id="editMembersBtn">管理成员</a></li>
+						id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
@@ -55,15 +55,19 @@
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus />
+										placeholder="" id="communityName" required autofocus
+										maxLength="20" />
 								</p>
 								<p>
-									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus />
+									<span>社区介绍：</span>
+									<textarea class="form-control" placeholder=""
+										id="communityIntro" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file"
+									name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -124,7 +128,7 @@
 								<div class="activityItem">
 									<span>活动名：</span> <input type="text"
 										class="form-control activityInput" placeholder=""
-										id="activityName" required autofocus />
+										id="activityName" required autofocus maxLength="30" />
 								</div>
 								<div class="activityItem">
 									<span>活动时间：</span>
@@ -137,14 +141,16 @@
 									</div>
 								</div>
 								<div class="activityItem">
-									<span>活动地点：</span> <input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityAddr" required autofocus />
+									<span>活动地点：</span>
+									<textarea class="form-control activityInput" placeholder=""
+										id="activityAddr" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</div>
 								<div class="activityItem">
-									<span>活动细节：</span> <input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityMore" required autofocus />
+									<span>活动细节：</span>
+									<textarea class="form-control activityInput" placeholder=""
+										id="activityMore" required autofocus maxLength="200"
+										style="resize: none;"></textarea>
 								</div>
 								<div class="activityItem">
 									<span>活动图片</span> <span

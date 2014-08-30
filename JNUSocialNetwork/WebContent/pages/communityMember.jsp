@@ -55,15 +55,19 @@
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus />
+										placeholder="" id="communityName" required autofocus
+										maxLength="20" />
 								</p>
 								<p>
-									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus />
+									<span>社区介绍：</span>
+									<textarea class="form-control" placeholder=""
+										id="communityIntro" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file"
+									name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -105,11 +109,7 @@
 			<h5 class="containBord">Members in this community</h5>
 			<div class="membersContainer">
 				<div class="membersBord"></div>
-				<div class="member">
-					<img class="userMember" src="images/member.jpg" /> <span
-						class="glyphicon glyphicon-remove memberRemoveBtn"
-						style="font-size: 10px"></span> <span class="memberName">Winson_Lau</span>
-				</div>
+				
 
 			</div>
 		</div>
@@ -149,7 +149,7 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+$(document).ready(function() {
 			var url = window.location.search;
 			window.communityID = url.substr(url.indexOf("?") + 1);
 			window.community = FetchCommunityByID(communityID);

@@ -122,7 +122,7 @@ $('body')
 				function() {
 					$(this)
 							.replaceWith(
-									"<input class='searchInput' placeholder='name or id or sex ' >");
+									"<input class='searchInput' placeholder='name or id or sex ' maxLength=20'>");
 					$('.searchInput').focus();
 					$('.searchInput')
 							.blur(
