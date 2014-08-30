@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,6 +34,7 @@ public class Message extends AttributeModel {
 	@Enumerated(EnumType.STRING)
 	private MessageStatus messageStatus;
 	private String publishDate;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
 

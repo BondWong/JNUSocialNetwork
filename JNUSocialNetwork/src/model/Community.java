@@ -16,6 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -44,6 +45,7 @@ public class Community extends AttributeModel {
 	private CommunityType communityType;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> tages;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
 

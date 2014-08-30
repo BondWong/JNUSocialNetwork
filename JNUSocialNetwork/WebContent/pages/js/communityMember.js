@@ -24,5 +24,8 @@ $('body').on("click", ".communityHref", function() {
 	window.location.href = 'communityShow.jsp?' + community.ID;
 });
 $('body').on("click", ".memberRemoveBtn", function() {
-	
+	var userID = $(this).next().attr("value");
+	LeaveMember(USERID, userID,community.ID);
+	$("#"+userID+"").remove();
+	Msnry('.membersContainer', '.member', 215);
 });

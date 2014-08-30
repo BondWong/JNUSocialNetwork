@@ -808,6 +808,7 @@ body {
 	margin-top: 23px;
 	margin-right: 15px;
 	color: #aaa;
+	display:none;
 }
 
 .cardSetter:hover {

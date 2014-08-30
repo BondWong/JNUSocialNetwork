@@ -47,6 +47,10 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,own
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 	}
+	var select = "";
+	if($.inArray(USERID,joinIDs) != 1){
+		select = "selected";
+	}
 	var boarddiv = "<div class='activity post"+activityID+"' >"+pRemoveBtn+"<div class='activityHref' id='"
 			+ activityID
 			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
@@ -63,7 +67,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,own
 			+ more
 			+ "</span></div></div><div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
 			+ activityID
-			+ "'>Yes</option><option class='leaveactivityJoin' id='"
+			+ "' "+select+">Yes</option><option class='leaveactivityJoin' id='"
 			+ activityID + "'>No</option></select></div></div>";
 	return boarddiv;
 }

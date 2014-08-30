@@ -232,6 +232,9 @@
 				$.each(community.members,function(n,member){
 					memberIDs.push(member.ID);
 				});
+				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
+					$('.cardSetter').css("display", "inline");
+				}
 				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}
