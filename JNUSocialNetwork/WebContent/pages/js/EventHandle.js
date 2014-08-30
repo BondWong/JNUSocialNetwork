@@ -57,7 +57,7 @@ function CREATEPOSTINCOMMUNITY() {
 					jsondata.post.attributes.activityAddr,
 					jsondata.post.attributes.activityMore,
 					jsondata.post.attributes.background,
-					jsondata.post.owner.attributes.avatarLink);
+					jsondata.post.owner.attributes.avatarLink,jsondata.post.owner.ID);
 
 		}
 	});
@@ -65,7 +65,7 @@ function CREATEPOSTINCOMMUNITY() {
 function DELETEPOST() {
 	source.addEventListener('DELETEPOST', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		$("div[class='post " + jsondata.ID + "']").remove();
+		$(".post"+jsondata.ID+"").remove();
 		Msnry('.pro_body', '.post', 435);
 	});
 }

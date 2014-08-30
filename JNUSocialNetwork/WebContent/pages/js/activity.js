@@ -30,12 +30,14 @@ var pageSize = 15;
 function fetchActivitiesByCommunity() {
 	var response = FetchActivitiesByCommunity(community.ID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		addActivity(dataString.ID, dataString.attributes.activityName,
-				dataString.attributes.activityTime,
-				dataString.attributes.activityAddr,
-				dataString.attributes.activityMore,
-				dataString.attributes.background,
-				dataString.owner.attributes.avatarLink,dataString.owner.ID);
+		if(dataString.available == true){
+			addActivity(dataString.ID, dataString.attributes.activityName,
+					dataString.attributes.activityTime,
+					dataString.attributes.activityAddr,
+					dataString.attributes.activityMore,
+					dataString.attributes.background,
+					dataString.owner.attributes.avatarLink,dataString.owner.ID);
+		}
 	});
 }
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID) {
@@ -45,7 +47,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,own
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 	}
-	var boarddiv = "<div class='activity' ><div class='activityHref' id='"
+	var boarddiv = "<div class='activity post"+activityID+"' >"+pRemoveBtn+"<div class='activityHref' id='"
 			+ activityID
 			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
 			+ imagelink
@@ -88,7 +90,10 @@ $('body').on("click", ".activityHref", function() {
 	var id = $(this).attr("id");
 	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
 });
-
+$('body').on('click', '.deletePostBtn', function() {
+	var id = $(this).find("input").attr("value");
+	DeletePost(id);
+});
 var date = new Date();
 date.setDate(date.getDate() + 1);
 $('.form_datetime').datetimepicker({
