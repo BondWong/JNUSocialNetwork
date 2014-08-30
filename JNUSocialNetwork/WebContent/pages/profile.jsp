@@ -80,7 +80,7 @@
 											aria-hidden="true">&times;</button>
 										<h4 class="modal-title" id="myModalLabel">Share Post</h4>
 									</div>
-									<form class="photoForm" enctype="multipart/form-data">
+									<form class="postForm" enctype="multipart/form-data">
 										<div class="modal-body modalBody">
 											<textarea class="form-control share_txt2" id="share_txt2"
 												type="text" style="resize: none;" maxLength="200"></textarea>

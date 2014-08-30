@@ -1,9 +1,6 @@
 //***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe() {
-	if (!window.EventSource) {
-		document.write('js/jquery.eventsource.js');
-	}
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";

@@ -28,6 +28,13 @@ public class PassApplicationTransaction extends DAOTransaction {
 		String password = application.getAttribute("password");
 		String email = application.getAttribute("email");
 
+		String content = "ID:"
+				+ id
+				+ "\npassword:"
+				+ password
+				+ "\nPlease login using this link: www.campusite.com.cn/login.jsp";
+		EmailSender.send("Your application passed!", content, email);
+
 		account.setID(id);
 		account.setPassword(MD5.toMD5Code(password));
 		account.setUserType(UserType.COMMUNITYOWNER);
@@ -42,15 +49,11 @@ public class PassApplicationTransaction extends DAOTransaction {
 		application.delete();
 		application.clearAttributes();
 		dao.update(application);
+		System.out.println("deleted");
 		dao.create(communityOwner);
+		System.out.println("created communityOwner");
 		dao.create(account);
-
-		String content = "ID:"
-				+ id
-				+ "\npassword:"
-				+ password
-				+ "\nPlease login using this link: www.campusite.com.cn/login.jsp";
-		EmailSender.send("Your application passed!", content, email);
+		System.out.println("created account");
 
 		return null;
 	}

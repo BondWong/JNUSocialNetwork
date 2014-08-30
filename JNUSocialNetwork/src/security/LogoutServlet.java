@@ -36,6 +36,7 @@ public class LogoutServlet extends HttpServlet {
 		synchronized (session) {
 			session.removeAttribute("ID");
 			session.removeAttribute("userType");
+			session.removeAttribute("isIE");
 			session.invalidate();
 		}
 		Cookie newCookie = new Cookie("ALG", null);

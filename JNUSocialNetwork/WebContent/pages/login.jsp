@@ -31,7 +31,7 @@
 							<input type="password" class="form-control" placeholder="请输入密码"
 								name="password" id="md5Password"
 								data-errormessage-value-missing="请输入密码" required autofocus
-								maxLength="20" />
+								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
