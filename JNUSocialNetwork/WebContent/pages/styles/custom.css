@@ -1147,7 +1147,11 @@ body {
 	margin-top: 5px;
 	cursor: pointer;
 }
-
+.deleteActivity{
+	position:absolute;
+	left:410px;
+	top:2px;
+}
 .deleteCommBtn {
 	float: right;
 }

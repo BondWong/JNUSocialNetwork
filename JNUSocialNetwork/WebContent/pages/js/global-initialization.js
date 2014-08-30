@@ -37,6 +37,9 @@ function login_initialization(ID) {
 		$('#myCommunityBtn').css("display", "block");
 
 	}
+	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $('#leaveCommunityBtn').css("display")=="none") {
+		$('.cardSetter').hide();
+	}
 	/*
 	 * SSE Handle
 	 */

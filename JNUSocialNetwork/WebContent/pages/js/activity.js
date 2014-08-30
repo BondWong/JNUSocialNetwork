@@ -35,11 +35,17 @@ function fetchActivitiesByCommunity() {
 				dataString.attributes.activityAddr,
 				dataString.attributes.activityMore,
 				dataString.attributes.background,
-				dataString.owner.attributes.avatarLink);
+				dataString.owner.attributes.avatarLink,dataString.owner.ID);
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink, avatarLink) {
-	var boarddiv = "<div class='activity' ><div class='activityHref' id='"
+function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID) {
+	var pRemoveBtn = "";
+	if (USERID == ownerID) {
+		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
+				+ activityID
+				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
+	}
+	var boarddiv = "<div class='activity' >"+pRemoveBtn+"<div class='activityHref' id='"
 			+ activityID
 			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
 			+ imagelink
@@ -60,9 +66,9 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink) {
 	return boarddiv;
 }
 // function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink, avatarLink) {
+function addActivity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink);
+			avatarLink,ownerID);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -112,7 +118,7 @@ $(window)
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
-									dataString.attributes.background);
+									dataString.attributes.background,dataString.owner.ID);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});

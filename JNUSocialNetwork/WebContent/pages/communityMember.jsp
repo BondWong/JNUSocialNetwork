@@ -92,7 +92,7 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span>All posts</span> <span class="activityHref">Activities</span>
+				<span class="communityHref">All posts</span> <span class="activityHref">Activities</span>
 			</div>
 			<div class="memberList">
 				<h1>Members</h1>
