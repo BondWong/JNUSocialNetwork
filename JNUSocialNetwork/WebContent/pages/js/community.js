@@ -19,9 +19,6 @@ function communityClickEvent() {
 		fetchCommunityByID(community.ID);
 		$('#createCommunity').modal('hide');
 		$('.communityForm').get(0).reset();
-		if(EventSource.isPolyfill !=undefined) { 
-			window.location.reload(true);
-		}  
 	});
 
 	// function joinCommunity
