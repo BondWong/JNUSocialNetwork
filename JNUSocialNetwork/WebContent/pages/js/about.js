@@ -312,6 +312,9 @@ function aboutClickEvent() {
 		fetchUserByID();
 		$('#myModal').modal('hide');
 		$('.avatarForm').get(0).reset();
+		if(EventSource.isPolyfill !=undefined) { 
+			window.location.reload(true);
+		}  
 	});
 	// change Background
 	$('body').on(
@@ -327,6 +330,9 @@ function aboutClickEvent() {
 				fetchUserByID();
 				$('#myModalB').modal('hide');
 				$('.changBgForm').get(0).reset();
+				if(EventSource.isPolyfill !=undefined) { 
+					window.location.reload(true);
+				} 
 			});
 	// function addPhoto
 	$('body').on(

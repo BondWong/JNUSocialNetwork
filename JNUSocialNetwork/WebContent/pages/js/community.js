@@ -101,7 +101,6 @@ function fetchCommunityByType(communityType) {
 	});
 }
 function fetchCommunitys() {
-	fetchCommunityByJoin();
 	fetchCommunityByType("FOLK");
 	fetchCommunityByType("SCHOOLUNION");
 	fetchCommunityByType("OFFICIAL");
