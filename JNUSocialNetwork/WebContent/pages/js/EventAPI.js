@@ -566,8 +566,6 @@ function AddCommunity(userID, JsonData) {
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
-			window.location.href = 'community.jsp'+"?jsredirect=true";
-			window.location.reload(true);
 		},
 		error : function(data, status) {
 			response = status;
@@ -588,7 +586,6 @@ function DeleteCommunity(communityID) {
 		success : function(data, status) {
 			response = status;
 			window.location.href = 'community.jsp'+"?jsredirect=true";
-			
 		},
 		error : function(data, status) {
 			response = status;
