@@ -562,13 +562,11 @@ function AddCommunity(userID, JsonData) {
 		},
 		data : JsonData,
 		async : false,
+		cache :false,
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
-			var loc = window.location;
-			var url = "";
-			url = loc.protocol + "//" + loc.hostname + ":8080";
-			window.location.href = url + "/pages/community.jsp";
+			window.location.href = 'community.jsp';
 		},
 		error : function(data, status) {
 			response = status;
@@ -585,12 +583,10 @@ function DeleteCommunity(communityID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
+		cache :false,
 		success : function(data, status) {
 			response = status;
-			var loc = window.location;
-			var url = "";
-			url = loc.protocol + "//" + loc.hostname + ":8080";
-			window.location.href = url + "/pages/community.jsp";
+			window.location.href = 'community.jsp';
 		},
 		error : function(data, status) {
 			response = status;

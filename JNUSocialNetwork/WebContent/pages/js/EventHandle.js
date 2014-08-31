@@ -138,8 +138,9 @@ function CANCELLIKEPOST() {
 function LIKECOMMENT() {
 	source.addEventListener('LIKECOMMENT', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		var postID = jsondata.commentID;
-		var spanNum = $("div[class='likeComment likeCommentN" + postID + "']");
+		var commentID = jsondata.commentID;
+		var postID = jsondata.postID;
+		var spanNum = $("div[class='likeComment likeCommentN" + commentID + "']");
 		var like = parseInt(spanNum.find("span").text()) + 1;
 		spanNum.find('span').text(like);
 		if (USERID == jsondata.ID)

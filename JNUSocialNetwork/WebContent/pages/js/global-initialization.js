@@ -151,6 +151,7 @@ function login_initialization(ID) {
 	});
 	$("#lougout_button").click(function() {
 		sessionStorage.clear();
+		ws.close("logout");
 	});
 }
 
