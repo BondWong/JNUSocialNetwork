@@ -335,7 +335,7 @@ function aboutClickEvent() {
 				AddImages(userID, photosfileDri);
 				$('#myModalPhoto').modal('hide');
 				$.each(photosfileDri, function(index, imageLink) {
-					var photoContainer = "<div class='photo'><img onload='javascript:auto_resize(280, 150, this)' src='"
+					var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
 							+ imageLink + "' /></div>";
 					$('.photoAddBtn').after(photoContainer);
 					Msnry('.pro_body', '.photo', 280);
@@ -352,7 +352,7 @@ function aboutClickEvent() {
 function showPhotos() {
 	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {
-		var photoContainer = "<div class='photo'><img onload='javascript:auto_resize(280, 150, this)' src='" + imageLink
+		var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='" + imageLink
 				+ "' /></div>";
 		$('.photoAddBtn').after(photoContainer);
 		Msnry('.pro_body', '.photo', 280);

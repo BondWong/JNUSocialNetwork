@@ -31,9 +31,39 @@
 </script>
 <script type="text/javascript" src="js/civem.js"></script>
 <c:if test="${sessionScope.isIE }">
-	<script type="text/javascript">
-		alert("Is IE !!!!!");
-	</script>
 	<script type="text/javascript" src="js/jquery.eventsource.js"></script>
+	<script type="text/javascript">
+		var loc = window.location;
+		var url = "";
+		url = loc.protocol + "//" + loc.hostname + ":8080";
+		$.eventsource({
+
+			// Assign a label to this event source
+
+			label : "event-source-label",
+
+			// Set the file to receive data from the server
+
+			url : url,
+
+			// Set the type of data you expect to be returned
+			// text, json supported
+
+			dataType : "json",
+
+			// Set a callback to fire when the event source is opened
+			// `onopen`
+			open : function(data) {
+				alert(data);
+			},
+
+			// Set a callback to fire when a message is received
+			// `onmessage`
+			message : function(data) {
+				alert(data);
+				console.log(data);
+			}
+		});
+	</script>
 </c:if>
 </head>

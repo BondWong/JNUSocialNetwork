@@ -96,7 +96,6 @@ public class LoginServlet extends HttpServlet {
 						session.setAttribute("ID", account.getID());
 						session.setAttribute("userType", account.getUserType());
 						session.setAttribute("isIE", uai.detectMSIE());
-						System.out.println(uai.detectMSIE());
 						account.setAutoLoginSeriesNum(session.getId());
 						Cookie cookie = new Cookie("ALG", session.getId());
 						cookie.setHttpOnly(true);

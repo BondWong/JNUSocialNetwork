@@ -36,7 +36,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						srcImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
+									+ "<img class='postimg' onload='javascript:fixed_width_auto_resize(400, this)' onclick='showPost("
 									+ postID + ")' src='" + image + "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";

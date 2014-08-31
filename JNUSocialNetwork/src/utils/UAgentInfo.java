@@ -148,6 +148,8 @@ public class UAgentInfo {
 	public static final String msie7 = "msie 7.0";
 	public static final String msie8 = "msie 8.0";
 	public static final String msie9 = "msie 9.0";
+	public static final String msie10 = "msie 10.0";
+	public static final String msie11 = "trident";
 	public static final String firefox = "firefox";
 	public static final String safari = "apple";
 	public static final String chrome = "chrome";
@@ -516,7 +518,7 @@ public class UAgentInfo {
 	// For Desktop Browsers
 	// *****************************
 	public boolean detectMSIE() {
-		return userAgent.indexOf(msie) != -1;
+		return userAgent.indexOf(msie) != -1 || userAgent.indexOf(msie11) != -1;
 	}
 
 	public boolean detectMSIE6() {
@@ -534,6 +536,14 @@ public class UAgentInfo {
 
 	public boolean detectMSIE9() {
 		return userAgent.indexOf(msie9) != -1;
+	}
+
+	public boolean detectMSIE10() {
+		return userAgent.indexOf(msie10) != -1;
+	}
+
+	public boolean detectMSIE11() {
+		return userAgent.indexOf(msie11) != -1;
 	}
 
 	public boolean detectFirefox() {
