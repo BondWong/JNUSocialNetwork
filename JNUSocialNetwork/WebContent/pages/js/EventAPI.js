@@ -1,12 +1,6 @@
 //***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe() {
-	if (!window.EventSource) {
-		new Element("script", {src: "jquery.eventsource.js", type: "text/javascript"});
-		if (iNeedSomeMore){
-			  Script.load("jquery.eventsource.js");  // includes code for myFancyMethod();
-			}
-	}
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";

@@ -36,7 +36,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						srcImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img class='postimg' onload='javascript:auto_resize(400, 250, this)' onclick='showPost("
+									+ "<img class='postimg' onload='javascript:fixed_width_auto_resize(400, this)' onclick='showPost("
 									+ postID + ")' src='" + image + "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
@@ -648,5 +648,15 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 
 	srcImage.width = image.width;
 	srcImage.height = image.height;
+	$(srcImage).fadeIn("fast");
+}
+
+function fixed_width_auto_resize(width, srcImage) {
+	var image = new Image();
+	image.src = srcImage.src;
+	var originalWidth = srcImage.width;
+	var originalHeight = srcImage.height;
+	srcImage.width = width;
+	srcImage.height = (width / originalWidth) * originalHeight;
 	$(srcImage).fadeIn("fast");
 }
