@@ -4,13 +4,15 @@ function Subscribe() {
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";
-	var source;
 	if (EventSource.isPolyfill !== undefined) {
+		var options = {};
 		options['bufferSizeLimit'] = 1024 * 1024; // 1mb in bytes...
-		source = new EventSource(url + "/app/event/IE/subscribe", options);
+		var source = new EventSource(url + "/app/event/IE/subscribe", options);
+		return source;
+	} else {
+		var source = new EventSource(url + "/app/event/subscribe");
+		return source;
 	}
-	source = new EventSource(url + "/app/event/subscribe");
-	return source;
 }
 // ***********************************SSES end*********************************
 // ***********************************FileService begin************************
