@@ -388,7 +388,11 @@ body {
 	border-top-color: #CDCDCD;
 	word-wrap: break-word;
 }
-
+.commentArea{
+	max-height:300px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
 .deletCa {
 	float: right;
 	position: relative;
@@ -1692,10 +1696,16 @@ a.footer-cname:active {
 	filter: alpha(opacity = 93);
 }
 
-footer {
+.footer {
 	text-align: center;
 }
 
 .userImgA {
 	margin-left: 10px;
+}
+.col-lg-1-cust{
+	padding:  0px;
+	margin-left: -15px;
+	font-size:30px;
+	margin-top:-3px;
 }

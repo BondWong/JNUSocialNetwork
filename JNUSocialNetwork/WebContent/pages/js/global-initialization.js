@@ -35,7 +35,7 @@ function login_initialization(ID) {
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
 	}
-	if(FetchCommunityByJoin(USERID,"0","1").length!=0){
+	if (FetchCommunityByJoin(USERID, "0", "1").length != 0) {
 		$('.titleMy').css("display", "block");
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
@@ -190,9 +190,11 @@ function handle_connect(data) {
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span>');
-	$("#chatroom span.label-default").replaceWidth(
-			'<span class="label label-success">'
-					+ $("#chatroom span.label-default").text() + '</span>');
+	if ($("#chatroom span.label-default").length != 0) {
+		$("#chatroom span.label-default").replaceWidth(
+				'<span class="label label-success">'
+						+ $("#chatroom span.label-default").text() + '</span>');
+	}
 	var IDs = sessionStorage.getItem("onlineUserIDs");
 	IDs = $.parseJSON(IDs);
 	var has = false;
@@ -217,9 +219,11 @@ function handle_disconnect(data) {
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span>');
-	$("#chatroom span.label-success").replaceWidth(
-			'<span class="label label-default">'
-					+ $("#chatroom span.label-success").text() + '</span>');
+	if ($("#chatroom span.label-success").length != 0) {
+		$("#chatroom span.label-success").replaceWidth(
+				'<span class="label label-default">'
+						+ $("#chatroom span.label-success").text() + '</span>');
+	}
 	var IDs = sessionStorage.getItem("onlineUserIDs");
 	IDs = $.parseJSON(IDs);
 	for (var i = 0; i < IDs.length; i++)
