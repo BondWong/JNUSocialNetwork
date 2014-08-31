@@ -311,6 +311,7 @@ function aboutClickEvent() {
 		UpdateUserProfile(userID, json);
 		fetchUserByID();
 		$('#myModal').modal('hide');
+		$('.avatarForm').get(0).reset();
 	});
 	// change Background
 	$('body').on(

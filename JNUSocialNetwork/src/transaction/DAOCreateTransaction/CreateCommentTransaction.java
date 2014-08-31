@@ -20,7 +20,7 @@ public class CreateCommentTransaction extends DAOTransaction {
 		Post post = dao.get(Post.class, params[1]);
 		Comment comment = ModelFactory.getInstance().create(Comment.class,
 				params[2]);
-		comment.setAttribute("postID", post.getID() + "");
+		comment.setAttribute("postID", params[1] + "");
 		member.createComment(post, comment);
 		dao.update(post);
 		return comment.toRepresentation();

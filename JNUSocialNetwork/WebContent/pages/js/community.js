@@ -33,12 +33,14 @@ function communityClickEvent() {
 							.css("color", "rgb(255, 255, 255)");
 					$("div[id='" + id + "']").css("background-color",
 							"rgb(66,139,202)");
+					$("div[id='" + id + "']").find('span').text("Joined");
 					return 0;
 				} else {
 					LeaveCommunity(USERID, id);
 					$("div[id='" + id + "']").css("color", "rgb(66,139,202)");
 					$("div[id='" + id + "']").css("background-color",
 							"rgb(255, 255, 255)");
+					$("div[id='" + id + "']").find('span').text("Join");
 					return 0;
 				}
 			});
@@ -113,12 +115,12 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 		memberIDs.push(member.ID);
 	});
 
-	var joinClass = "";
+	var join = "<a><div class='content_join' id='" + id
+			+ "'><input type='hidden' value='" + id + "'><span>Join</span></div></a>";
 	if ($.inArray(USERID, memberIDs) != -1) {
-		joinClass = "style='color: #FFF;background-color: #428BCA;'";
+		join = "<a><div style='color: #FFF;background-color: #428BCA;' class='content_join' id='" + id
+		+ "'><input type='hidden' value='" + id + "'><span>Joined</span></div></a>";
 	}
-	var join = "<a><div " + joinClass + " class='content_join' id='" + id
-			+ "'><input type='hidden' value='" + id + "'>Join</div></a>";
 	if (ownerID == USERID) {
 		join = '';
 	}

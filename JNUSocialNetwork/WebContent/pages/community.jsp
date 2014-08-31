@@ -104,6 +104,7 @@
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
+								<option value="default">请选择</option>
 								<option value="SCHOOLUNION">SchoolUnion</option>
 								<option value="FOLK">Folk</option>
 							</select>
@@ -116,7 +117,7 @@
 						<div id="files" class="files"></div>
 						<br>
 					</div>
-					<br></br>
+					<br />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary" id="communityCreate"
