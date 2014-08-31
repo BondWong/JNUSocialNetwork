@@ -104,6 +104,7 @@
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
+								<option value="default">请选择</option>
 								<option value="SCHOOLUNION">SchoolUnion</option>
 								<option value="FOLK">Folk</option>
 							</select>

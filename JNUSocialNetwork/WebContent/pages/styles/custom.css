@@ -609,7 +609,10 @@ body {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-
+.InforItem input {
+	float: left;
+	width:150px;
+}
 .aEditbtn {
 	margin-left: 50px;
 	display: none;

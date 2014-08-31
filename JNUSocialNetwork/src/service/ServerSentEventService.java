@@ -32,6 +32,17 @@ public class ServerSentEventService {
 		return eventoutput;
 	}
 
+	@GET
+	@Path("IE/subscribe")
+	@Produces(SseFeature.SERVER_SENT_EVENTS)
+	@SSE
+	public EventOutput ieSubscribe() {
+		final EventOutput eventoutput = new EventOutput();
+		this.broadcaster.subscribe(eventoutput);
+		System.out.println(eventoutput);
+		return eventoutput;
+	}
+
 	@Path("deleteUnhandledEvent/{ID : \\d+}/{eventID : \\d+}")
 	@PUT
 	public Response deleteUnhandledEvent(@PathParam("ID") String ID,

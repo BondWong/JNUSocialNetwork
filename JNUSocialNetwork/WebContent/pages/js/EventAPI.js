@@ -4,8 +4,15 @@ function Subscribe() {
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";
-	var source = new EventSource(url + "/app/event/subscribe");
-	return source;
+	if (EventSource.isPolyfill !== undefined) {
+		var options = {};
+		options['bufferSizeLimit'] = 1024 * 1024; // 1mb in bytes...
+		var source = new EventSource(url + "/app/event/IE/subscribe", options);
+		return source;
+	} else {
+		var source = new EventSource(url + "/app/event/subscribe");
+		return source;
+	}
 }
 // ***********************************SSES end*********************************
 // ***********************************FileService begin************************
@@ -558,7 +565,10 @@ function AddCommunity(userID, JsonData) {
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
-			window.location.href = 'community.jsp';
+			var loc = window.location;
+			var url = "";
+			url = loc.protocol + "//" + loc.hostname + ":8080";
+			window.location.href = url + "/pages/community.jsp";
 		},
 		error : function(data, status) {
 			response = status;
@@ -577,7 +587,10 @@ function DeleteCommunity(communityID) {
 		},
 		success : function(data, status) {
 			response = status;
-			window.location.href = 'community.jsp';
+			var loc = window.location;
+			var url = "";
+			url = loc.protocol + "//" + loc.hostname + ":8080";
+			window.location.href = url + "/pages/community.jsp";
 		},
 		error : function(data, status) {
 			response = status;
@@ -613,7 +626,7 @@ function LeaveCommunity(userID, communityID) {
 		},
 		success : function(data, status) {
 			response = status;
-			window.location.href='community.jsp';
+			window.location.href = 'community.jsp';
 		},
 		error : function(data, status) {
 			response = status;
@@ -625,7 +638,8 @@ function LeaveMember(userID, memberID, communityID) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
-		url : '../../app/community/leave/' + userID + '/'+ memberID + '/'+ communityID,
+		url : '../../app/community/leave/' + userID + '/' + memberID + '/'
+				+ communityID,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},

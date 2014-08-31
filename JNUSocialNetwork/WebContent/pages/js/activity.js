@@ -1,6 +1,7 @@
 function activityClickEvent() {
 	$('body').on("click", "#activityCreate", function() {
-		var millisecond = Date.parse($('#activityTime').val()) + "";
+		
+		var millisecond = Date.parse($('#activityTime').val() ).toString();
 		var activityC = "";
 		if ($('#fileuploadA').val() != "") {
 			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
@@ -97,12 +98,13 @@ $('body').on("click", ".activityHref", function() {
 $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePost(id);
+	$(".post"+id+"").remove();
 });
 var date = new Date();
 date.setDate(date.getDate() + 1);
 $('.form_datetime').datetimepicker({
 	// language: 'fr',
-	format : "MM dd,yyyy - hh:ii",
+	format : "MM dd,yyyy hh:ii",
 	startDate : date,
 	todayBtn : 0,
 	autoclose : 1,

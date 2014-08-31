@@ -180,8 +180,6 @@
 
 		<!-- /END THE FEATURETTES -->
 
-		<!-- CHATROOM -->
-		<%@ include file="parts/chatRoom.jsp"%>
 		<!-- FOOTER -->
 		<%@ include file="parts/footer.jsp"%>
 	</div>

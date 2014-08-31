@@ -63,7 +63,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
 					});
-	var likeClass = "glyphicon glyphicon-heart-empty postLike";
+	var likeClass = "glyphicon glyphicon-heart-empty postCLike";
 
 	if ($.inArray(USERID, likers) != -1) {
 		likeClass = "glyphicon glyphicon-heart postCLike";
@@ -242,13 +242,14 @@ function clickEvent() {
 							return 0;
 						}
 					});
-	$('body').on("click", ".postLike", function() {
-		LikePost(USERID, $(this).attr("id"));
-		$(this).attr("class", "glyphicon glyphicon-heart postLike");
-	});
 	$('body').on("click", ".postCLike", function() {
-		CancelLikePost(USERID, $(this).attr("id"));
-		$(this).attr("class", "glyphicon glyphicon-heart-empty postCLike");
+		if($(this).attr("class") == "glyphicon glyphicon-heart-empty postCLike"){
+			LikePost(USERID, $(this).attr("id"));
+			$(this).attr("class", "glyphicon glyphicon-heart postCLike");
+		}else{
+			CancelLikePost(USERID, $(this).attr("id"));
+			$(this).attr("class", "glyphicon glyphicon-heart-empty postCLike");
+		}
 	});
 	// reply comment
 	$('body').on("click", ".comment_reply", function() {
@@ -647,7 +648,7 @@ function showPost(postID) {
 						+ dataString.publishDate
 						+ "</div></div></div><div class='post_info'><span class='postContent'>"
 						+ dataString.attributes.content
-						+ "</span></div><div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+						+ "</span></div><div class='row'><div class='col-md-6'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID
 						+ "></p><input id='likeID' type='hidden' value="
 						+ postID
@@ -656,7 +657,7 @@ function showPost(postID) {
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
-						+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 						+ postID
 						+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID

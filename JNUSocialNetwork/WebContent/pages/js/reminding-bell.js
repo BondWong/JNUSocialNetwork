@@ -284,6 +284,7 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
+	sessionStorage.setItem("otherUserID", data.ID);
 	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img  onload="javascript:auto_resize(350, 180, this)" src="'
 			+ data.attributes.profileImageLink
 			+ '" id="remind-bell-profileImg" style="display: none"/></div><div class="urserInfShort"><img class="img-circle" onload="javascript:auto_resize(120, 120, this)" src="'
