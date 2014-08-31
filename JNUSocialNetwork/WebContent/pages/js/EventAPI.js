@@ -562,6 +562,7 @@ function AddCommunity(userID, JsonData) {
 		},
 		data : JsonData,
 		async : false,
+		cache :false,
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
@@ -582,6 +583,7 @@ function DeleteCommunity(communityID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
+		cache :false,
 		success : function(data, status) {
 			response = status;
 			window.location.href = 'community.jsp';
