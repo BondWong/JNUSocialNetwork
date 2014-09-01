@@ -562,11 +562,16 @@ function AddCommunity(userID, JsonData) {
 		},
 		data : JsonData,
 		async : false,
-		cache :false,
+		cache : false,
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
-			window.location.href = 'community.jsp';
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
 		},
 		error : function(data, status) {
 			response = status;
@@ -583,10 +588,16 @@ function DeleteCommunity(communityID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
-		cache :false,
+		cache : false,
 		success : function(data, status) {
 			response = status;
-			window.location.href = 'community.jsp';
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
+
 		},
 		error : function(data, status) {
 			response = status;
@@ -622,7 +633,12 @@ function LeaveCommunity(userID, communityID) {
 		},
 		success : function(data, status) {
 			response = status;
-			window.location.href = 'community.jsp';
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
 		},
 		error : function(data, status) {
 			response = status;

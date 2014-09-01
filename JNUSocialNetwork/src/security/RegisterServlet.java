@@ -77,8 +77,7 @@ public class RegisterServlet extends HttpServlet {
 				int status = response.getStatusLine().getStatusCode();
 				if ((status >= 200 && status < 300) || status == 302) {
 					HttpEntity entity = response.getEntity();
-					return entity != null ? EntityUtils.toString(entity,
-							"gb2312") : null;
+					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
 					throw new ClientProtocolException(
 							"Unexpected response status: " + status);

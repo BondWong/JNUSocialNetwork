@@ -74,6 +74,7 @@ function fetchCommunityByJoin() {
 					community.members.length, "myCommunity",
 					community.attributes.communityCard, community.members,
 					community.attributes.userID);
+			
 		}
 	});
 }
@@ -101,7 +102,6 @@ function fetchCommunityByType(communityType) {
 	});
 }
 function fetchCommunitys() {
-	fetchCommunityByJoin();
 	fetchCommunityByType("FOLK");
 	fetchCommunityByType("SCHOOLUNION");
 	fetchCommunityByType("OFFICIAL");

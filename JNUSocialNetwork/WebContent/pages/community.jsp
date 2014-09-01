@@ -7,6 +7,7 @@
 <%@ include file="parts/head.jsp"%>
 
 <body>
+	<%@ include file="parts/ieReload.jsp"%>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
@@ -153,16 +154,11 @@
 				clickEvent();
 				communityClickEvent();
 				fetchCommunityByOwner();
+				fetchCommunityByJoin();
 			} else {
 				clickOffEvent();
 			}
-			if(FetchCommunityByJoin(USERID,"0","1").length!=0){
-				$('.titleMy').css("display", "block");
-				$('.containerMy').css("display", "block");
-				$('#myCommunityBtn').css("display", "block");
-			}
 			fetchCommunitys();
-			
 
 		});
 	</script>
