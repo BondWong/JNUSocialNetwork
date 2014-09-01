@@ -106,7 +106,7 @@
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
 				<span>Community Activities</span>
-				<button role="button" class="btn btn-primary" data-toggle='modal'
+				<button role="button" id="createActivityBtn" class="btn btn-primary" data-toggle='modal'
 					data-target='#activityCommunity'>Create Activity</button>
 			</div>
 			<div

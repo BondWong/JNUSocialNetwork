@@ -122,7 +122,7 @@
 								var startIndex = $('.post').length - 1;
 								$('div#infinite_loader').show();
 								var response = [];
-								response = FetchPostsByOwner(USERID,
+								response = FetchPostsByOwner(sessionStorage.getItem("otherUserID"),
 											startIndex, pageSize);
 								$.each(response, function(n, dataString) {
 									var boarddiv = post(dataString.owner.ID,

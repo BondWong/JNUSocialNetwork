@@ -308,13 +308,13 @@ function aboutClickEvent() {
 			avatarLink : FileUpload(new FormData($('.avatarForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(userID, json);
-		fetchUserByID();
+		var userNew = UpdateUserProfile(userID, json);
+		$('.profile_user_img').find('img').attr("src",
+				userNew.attributes.avatarLink);
 		$('#myModal').modal('hide');
 		$('.avatarForm').get(0).reset();
-		if(EventSource.isPolyfill !=undefined) { 
-			window.location.reload(true);
-		}  
+		
+		
 	});
 	// change Background
 	$('body').on(
@@ -326,13 +326,11 @@ function aboutClickEvent() {
 							$('.changBgForm')[0]))[0],
 				};
 				var json = $.toJSON(datajson);
-				UpdateUserProfile(userID, json);
-				fetchUserByID();
+				var userNew = UpdateUserProfile(userID, json);;
 				$('#myModalB').modal('hide');
+				$('.profile_img').find('img').attr("src",
+						userNew.attributes.profileImageLink);
 				$('.changBgForm').get(0).reset();
-				if(EventSource.isPolyfill !=undefined) { 
-					window.location.reload(true);
-				} 
 			});
 	// function addPhoto
 	$('body').on(

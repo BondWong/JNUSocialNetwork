@@ -446,7 +446,10 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
-
+.profileImgDiv{
+	width:620px;
+	height:300px;
+}
 .profile_info {
 	background-color: #A2A2A2;
 	height: 300px;
@@ -465,7 +468,10 @@ body {
 	margin-left: auto;
 	text-align: center;
 }
-
+.profileAvatar{
+	width:120px;
+	height:120px;
+}
 .profile_img {
 	float: left;
 	width: 620px;
@@ -1711,4 +1717,7 @@ footer {
 	margin-left: -15px;
 	font-size:30px;
 	margin-top:-3px;
+}
+#createActivityBtn{
+	display:none;
 }

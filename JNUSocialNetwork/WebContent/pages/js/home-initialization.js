@@ -30,14 +30,6 @@ $(document).ready(function() {
 			});
 		}
 	};
-	$(document)
-	.click(
-			function(e) {
-				var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-				if (dragel !== target && !$.contains(dragel, target)) {
-					drag.fadeOut(300);
-				}
-			});
 
 });
 

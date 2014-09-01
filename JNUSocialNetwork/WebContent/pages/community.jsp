@@ -7,6 +7,7 @@
 <%@ include file="parts/head.jsp"%>
 
 <body>
+	<%@ include file="parts/ieReload.jsp"%>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
@@ -158,7 +159,6 @@
 				clickOffEvent();
 			}
 			fetchCommunitys();
-			
 
 		});
 	</script>
