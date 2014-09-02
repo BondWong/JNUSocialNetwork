@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
+import utils.UAgentInfo;
 import model.Account;
 import model.modelType.UserType;
 
@@ -90,16 +91,19 @@ public class LoginServlet extends HttpServlet {
 
 			if (account != null && !account.isProtected(new Date())) {
 				if (password.equals(account.getPassword())) {
+					UAgentInfo uai = new UAgentInfo(request);
 					synchronized (session) {
 						session.setAttribute("ID", account.getID());
 						session.setAttribute("userType", account.getUserType());
+						session.setAttribute("isIE", uai.detectMSIE());
+						System.out.println("is it IE: " + uai.detectMSIE());
 						account.setAutoLoginSeriesNum(session.getId());
 						Cookie cookie = new Cookie("ALG", session.getId());
 						cookie.setHttpOnly(true);
 						cookie.setPath("/");
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 						response.addCookie(cookie);
-						response.sendRedirect("/pages/circle.jsp");
+						response.sendRedirect("/pages/community.jsp");
 					}
 				} else {
 					account.setLastAccessDate(new Date());

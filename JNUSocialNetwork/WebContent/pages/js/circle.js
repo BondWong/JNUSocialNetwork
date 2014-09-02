@@ -114,7 +114,12 @@ $(document)
 						var json = $.toJSON(post);
 						AddPost(USERID, json);
 						$('#addPostModal').modal('hide');
-
+						$('.postForm').get(0).reset();
+						fileDri = [];
+						$('.progress-bar').remove();
+						$('.files').remove();
+						$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+						$('.progress').after("<div id='files' class='files'></div>");
 					});
 				});
 // function fectchPostByFollowee
@@ -148,13 +153,10 @@ $('body').on('click', '.alertCust', function() {
 	$(this).css("display", "none");
 	postIdContainer = [];
 });
-$('body').on('click', '.deletePostBtn', function() {
-	var id = $(this).find("input").attr("value");
-	DeletePost(id);
-});
+
 $('body').on("click", ".post_more", function() {
 	var id = $(this).attr('id');
-	$("div[id='postImg"+id+"']").find('img').click();
+	$("div[id='postImg" + id + "']").find('img').click();
 });
 $(window)
 		.scroll(

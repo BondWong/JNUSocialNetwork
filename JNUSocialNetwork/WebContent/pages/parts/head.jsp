@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- <meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate">
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"> -->
+
 <title>CampuSite</title>
 <!-- Bootstrap core CSS -->
 <link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
@@ -30,4 +35,33 @@
 			: document.documentElement.offsetHeight;
 </script>
 <script type="text/javascript" src="js/civem.js"></script>
+<script type="text/javascript" src="js/eventsource.js"></script>
+<!-- <script>
+	// detect what kind of EventSource we have
+	var isPolyfill = EventSource.isPolyfill;
+
+	switch (isPolyfill) {
+
+	case undefined:
+
+		alert("Browser supports EventSource natively");
+		break;
+
+	case "XHR":
+
+		// IE >= 10, Android, old IPhone...
+		alert("Browser loaded polyfill EventSource...");
+		break;
+
+	case "IE_8-9":
+
+		// IE8, IE9
+		alert("Browser loaded polyfill EventSource for IE8-9");
+		break;
+
+	default:
+
+		alert("Browser loaded unexpected EventSource...");
+	}
+</script> -->
 </head>

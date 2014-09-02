@@ -19,6 +19,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -56,6 +57,7 @@ public class Post extends AttributeModel {
 	private String publishDate;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, String> attributes;
 

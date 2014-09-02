@@ -14,7 +14,7 @@
 		<div class="layer">
 			<div class="regTop">
 				<a href="home.jsp" class="btn btn-primary btn-sm rl-button-span"
-					role="button"><span>回到首页</span></a> <a href="#"
+					role="button"><span>回到首页</span></a> <a href="aboutUs.jsp"
 					class="btn btn-primary btn-sm rl-button-text" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">登录</div>
@@ -25,12 +25,13 @@
 						<p>
 							<input type="text" class="form-control" placeholder="请输入ID"
 								name="ID" data-errormessage-value-missing="请输入ID" required
-								autofocus>
+								autofocus maxLength="20" />
 						</p>
 						<p>
 							<input type="password" class="form-control" placeholder="请输入密码"
 								name="password" id="md5Password"
-								data-errormessage-value-missing="请输入密码" required autofocus>
+								data-errormessage-value-missing="请输入密码" required autofocus
+								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
@@ -44,6 +45,8 @@
 						style="display: none">登录失败</div>
 					<div class="alert alert-success" id="register_success"
 						style="display: none">注册成功，请登录</div>
+					<div class="alert alert-success" id="register_exist"
+						style="display: none">已有账号，请登录</div>
 				</div>
 			</div>
 			<!-- /container -->
@@ -83,6 +86,14 @@
 
 			<script type="text/javascript">
 				$('#register_success').fadeIn("fast");
+				setTimeout('$("#register_success").fadeOut("slow")', 3000);
+			</script>
+
+		</c:when>
+		<c:when test="${param.registerExist}">
+
+			<script type="text/javascript">
+				$('#register_exist').fadeIn("fast");
 				setTimeout('$("#register_success").fadeOut("slow")', 3000);
 			</script>
 

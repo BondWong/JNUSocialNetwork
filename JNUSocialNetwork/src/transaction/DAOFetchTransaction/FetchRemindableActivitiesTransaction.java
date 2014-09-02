@@ -27,7 +27,7 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 		ActivitySearchMap.serialize();
 
 		if (IDs.size() > 0) {
-			String query = "SELECT p FROM Post p WHERE p.ID IN(";
+			String query = "SELECT p FROM Post p WHERE p.available = 1 AND p.ID IN(";
 			Iterator<Long> iter = IDs.iterator();
 			while (iter.hasNext()) {
 				query += iter.next();

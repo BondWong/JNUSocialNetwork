@@ -5,9 +5,9 @@ function on_bell_click(e) {
 	clearInterval(window.bellIntervalID);
 	window.bellIntervalID = null;
 	var tinyTip;
-	var t = $(this).offset().top;
+	var t = $(this).position().top;
 	var l = $(this).offset().left;
-	t += 30;
+	t += 50;
 	l -= 250;
 	var divTip = '.mentionBody';
 	tinyTip = $(divTip);
@@ -21,10 +21,12 @@ function on_bell_click(e) {
 }
 
 function show_remind_content() {
-	var hasItem = false;
-	hasItem = add_messages_to_bell();
-	hasItem = add_events_to_bell();
-	if (!hasItem) {
+	$(".mentionBody-content").empty();
+	var hasMessageItem = false;
+	var hasEventItem = false;
+	hasMessageItem = add_messages_to_bell();
+	hasEventItem = add_events_to_bell();
+	if (!hasMessageItem && !hasEventItem) {
 		$(".mentionBody-content").empty();
 		$(".mentionBody-content").append(
 				'<div id="mentionBody-no-content-item">没有消息</div>');
@@ -50,12 +52,6 @@ function add_messages_to_bell() {
 		}
 	});
 
-	$.each(online_messages, function(index, val) {
-		for (var i = 0; i < val.length; i++) {
-			messages_remind(val[i]);
-		}
-	});
-
 	var online_messages_length = 0;
 	var offline_messages_length = 0;
 	for (key in online_messages) {
@@ -66,9 +62,16 @@ function add_messages_to_bell() {
 		if (offline_messages.hasOwnProperty(key))
 			offline_messages_length++;
 	}
-	if (online_messages_length != 0 || offline_messages_length != 0)
-		return true;
-	return false;
+	if (online_messages_length == 0 && offline_messages_length == 0)
+		return false;
+
+	$.each(online_messages, function(index, val) {
+		for (var i = 0; i < val.length; i++) {
+			messages_remind(val[i]);
+		}
+	});
+
+	return true;
 }
 
 function add_events_to_bell() {
@@ -94,12 +97,16 @@ function add_events_to_bell() {
 
 function messages_remind(message) {
 	if ($("div.mentionBody-content #" + message.fromID).length == 0) {
-		$("div.mentionBody-content").append(
-				'<div class="NotiItem" id="' + message.fromID
-						+ '"><div class="col-lg-3"><div><img src="'
-						+ message.attributes.avatarLink + '"/></div></div>'
-						+ '<div class="col-lg-9"><div>' + message.from
-						+ '<span class="badge">1</span></div></div></div>');
+		$("div.mentionBody-content")
+				.append(
+						'<div class="NotiItem" id="'
+								+ message.fromID
+								+ '"><div class="col-lg-3"><div><img src="'
+								+ message.attributes.avatarLink
+								+ '" onload="javascript:auto_resize(50, 50, this)" style="display: none"/></div></div>'
+								+ '<div class="col-lg-9"><div>'
+								+ message.from
+								+ '<span class="badge">1</span></div></div></div>');
 		var tempToID = message.toID;
 		var tempFromID = message.fromID;
 		var tempFrom = message.from;
@@ -145,13 +152,16 @@ function events_remind(event) {
 		description = "Follow";
 		break;
 	}
-	$("div.mentionBody-content").append(
-			'<div class="NotiItem" id="' + event.data.eventID
-					+ '"><div class="col-lg-3"><div><img src="'
-					+ event.data.avatar
-					+ '" /></div></div><div class="col-lg-9"><h1>' + head
-					+ '</h1><div class="remindConent">' + event.data.name + ' '
-					+ description + '</div></div><div>');
+	$("div.mentionBody-content")
+			.append(
+					'<div class="NotiItem" id="'
+							+ event.data.eventID
+							+ '"><div class="col-lg-3"><div><img src="'
+							+ event.data.avatar
+							+ '" onload="javascript:auto_resize(50, 50, this)" style="display: none"/></div></div><div class="col-lg-9"><h1>'
+							+ head + '</h1><div class="remindConent">'
+							+ event.data.name + ' ' + description
+							+ '</div></div><div>');
 	var type = event.name;
 	var eventID = event.data.eventID;
 	var isOnline = event.action == null ? false : true;
@@ -220,13 +230,10 @@ function events_remind(event) {
 							break;
 						}
 
-						$(".arrowBack")
-								.replaceWith(
-										'<div class="arrowBack"><a href="javascript:void(0);"><span class="glyphicon glyphicon-chevron-left" id="arrowBack" style="font-size:12px;">&nbsp;</span></a></div>');
+						$("#arrowBack").css("display","inline");
 						$('.arrowBack').click(
 								function() {
-									$(".arrowBack").replaceWith(
-											'<div class="arrowBack"></div>');
+									$("#arrowBack").css("display","none");
 									$(".mentionBody-content").empty();
 									show_remind_content();
 								});
@@ -271,19 +278,18 @@ function notifyReplyComment(commentID, toCommentID, ownerID, ownerNickName,
 function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 		content, postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs) {
 	var response = FetchCommentByID(commentID);
-	// response.push(commenterID);
-	// response.push(commentOwnerID);
 	notifyItem([ response ], ownerID, ownerNickName, publishDate, content,
 			postID, likerIDs, postOwnerAvatar, postImage, colloctorIDs);
 }
 
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
-	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(350, 180, this)" src="'
+	sessionStorage.setItem("otherUserID", data.ID);
+	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img  onload="javascript:auto_resize(350, 180, this)" src="'
 			+ data.attributes.profileImageLink
-			+ '" id="remind-bell-profileImg"/></div><div class="urserInfShort"><img onload="javascript:auto_resize(50, 50, this)" src="'
+			+ '" id="remind-bell-profileImg" style="display: none"/></div><div class="urserInfShort"><img class="img-circle" onload="javascript:auto_resize(120, 120, this)" src="'
 			+ data.attributes.avatarLink
-			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
+			+ '" id="remind-bell-avatarImg" style="display: none"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
 			+ data.attributes.lookingFor + '</p></div></div></div>';
@@ -304,19 +310,27 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 									+ jsonComment.attributes.commentToComment;
 						}
 						var removeBtn = "";
+						var commentReply = "<div class='comment_reply' id="
+								+ postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.name
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div>";
 						if (USERID == jsonComment.owner.ID) {
 							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 									+ postID
 									+ "' type='hidden' value='"
 									+ jsonComment.ID
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							commentReply = "";
 						}
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
 								+ jsonComment.owner.attributes.avatarLink
-								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -328,13 +342,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-								+ postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
@@ -359,15 +367,16 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 						function(n, image) {
 							imageDiv = imageDiv
 									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' onclick='showPost("
-									+ postID + ")' src='" + image + "' />";
+									+ postID + ")' src='" + image
+									+ "' style='display: none'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
 		postImgDiv = "";
 	}
-	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ postOwnerAvatar
-			+ "'/><input type='hidden' value='"
+			+ "' style='display: none'/><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -386,13 +395,9 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likerIDs.length
-			+ "</span></a></div></div><div class='col-md-1'><div class='post_collect' style='cursor:pointer'><a><input id='collectID' type='hidden' value="
+			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "><span class='"
-			+ collectClass
-			+ "' style='font-size:20px'></span></a></div></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
-			+ postID
-			+ "'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment + "</div>";
 
 	$("#commentText" + postID).blur(function() {

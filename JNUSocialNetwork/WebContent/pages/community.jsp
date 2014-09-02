@@ -7,6 +7,7 @@
 <%@ include file="parts/head.jsp"%>
 
 <body>
+	<%@ include file="parts/ieReload.jsp"%>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
@@ -29,10 +30,9 @@
 			<li><a class="folkCommunityBtn">个人社区</a></li>
 			<li><a class="discoverCommunityBtn">热门社区</a></li>
 			<li><a class="searchCommunityBtn">搜索社区</a></li>
-			<li><a  class="appCom" href="applyCommunity.jsp">申请社区</a></li>
-			<li><a  role="button" class="createCom"
-				data-toggle='modal' data-target='#createCommunity'
-				id="createCommunityBtn">创建社区</a></li>
+			<li><a class="appCom" href="applyCommunity.jsp">申请社区</a></li>
+			<li><a role="button" class="createCom" data-toggle='modal'
+				data-target='#createCommunity' id="createCommunityBtn">创建社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
@@ -90,20 +90,22 @@
 						<p>
 							<span>社区名：</span> <input type="text" class="form-control"
 								placeholder="" id="communityName" required autofocus
-								autocomplete="off" />
+								autocomplete="off" required maxLength="20" />
 						</p>
 						<p>
 							<span>社区标签：</span> <input type="text" class="form-control"
 								placeholder="" id="communityTag" required autofocus
-								autocomplete="off" />
+								required="required" maxLength="20" />
 						</p>
 						<p>
-							<span>社区介绍：</span> <input type="text" class="form-control"
-								placeholder="" id="communityIntro" required autofocus
-								autocomplete="off" />
+							<span>社区介绍：</span>
+							<textarea class="form-control" placeholder="" id="communityIntro"
+								required autofocus required="required" maxLength="100"
+								style="resize: none;"></textarea>
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
+								<option value="default">请选择</option>
 								<option value="SCHOOLUNION">SchoolUnion</option>
 								<option value="FOLK">Folk</option>
 							</select>
@@ -116,7 +118,7 @@
 						<div id="files" class="files"></div>
 						<br>
 					</div>
-					<br></br>
+					<br />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary" id="communityCreate"
@@ -152,10 +154,12 @@
 				clickEvent();
 				communityClickEvent();
 				fetchCommunityByOwner();
+				fetchCommunityByJoin();
 			} else {
 				clickOffEvent();
 			}
 			fetchCommunitys();
+
 		});
 	</script>
 </body>

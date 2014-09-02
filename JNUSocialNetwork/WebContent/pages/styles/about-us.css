@@ -49,6 +49,22 @@ li.red {
 	background-color: IndianRed;
 }
 
+a.white:hover {
+	color: white;
+}
+
+a.white:visited {
+	color: white;
+}
+
+a.white:active {
+	color: white;
+}
+
+a.white:link {
+	color: white;
+}
+
 p {
 	margin: 0 0 20px 0;
 	font-family: "Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica,

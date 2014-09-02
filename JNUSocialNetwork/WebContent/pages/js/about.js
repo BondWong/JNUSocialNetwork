@@ -212,6 +212,12 @@ $(document)
 						var json = $.toJSON(post);
 						AddPost(USERID, json);
 						$('#addPostModal').modal('hide');
+						$('.postForm').get(0).reset();
+						fileDri = [];
+						$('.progress-bar').remove();
+						$('.files').remove();
+						$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+						$('.progress').after("<div id='files' class='files'></div>");
 
 					});
 				});
@@ -223,23 +229,31 @@ function aboutClickEvent() {
 					'.aEditbtn',
 					function() {
 						var userInfo = FetchUserByID(userID);
-						$("span[class='Alooking']")
-								.html(
-										"<input class='lookingforE' id='focusedInput' type='text' value='"+userInfo.attributes.lookingFor+"' />");
-						$("span[class='Atelenum']")
-								.html(
-										"<input class='telenumE' id='focusedInput' type='text' value='"+userInfo.attributes.telenum+"' />");
+						$("span[class='Alooking']").html(
+								"<input class='lookingforE' id='focusedInput' type='text' value='"
+										+ userInfo.attributes.lookingFor
+										+ "' maxLength='20'/>");
+						if(userInfo.userType=='COMMUNITYOWNER'){
+							$("span[class='Anickname']").html(
+									"<input class='nameE' id='focusedInput' type='text' value='"
+											+ userInfo.attributes.name
+											+ "' maxLength='20'/>");
+						}
+						
+						$("span[class='Atelenum']").html(
+								"<input class='telenumE' id='focusedInput' type='text' value='"
+										+ userInfo.attributes.telnum
+										+ "' maxLength='20'/>");
 						$("span[class='Arelationship']")
 								.html(
 										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-						var campus = "";
 						if ($('.Acampus').html() == "珠海校区") {
 							campus = "ZhuhaiCampus";
 						}
 						if ($('.Acampus').html() == "华文校区") {
 							campus = "HuawenCampus";
 						}
-						if ($('.Acampus').html() == "深圳校区") {
+						if ($('.Acampus').html() == "深圳旅游学院") {
 							campus = "ShenzhenCampus";
 						}
 						if ($('.Acampus').html() == "校本部") {
@@ -255,9 +269,9 @@ function aboutClickEvent() {
 						$("span[class='Aaddress']").html(
 								"<select class='addressE'>" + option
 										+ "</select>");
-						$("span[class='Aemail']")
-								.html(
-										"<input class='emailE' id='focusedInput' type='text' value='"+userInfo.attributes.email+"' />");
+						$("span[class='Aemail']").html(
+								"<input class='emailE' id='focusedInput' type='text' value='"
+										+ userInfo.attributes.email + "' />");
 
 						$(this).text("Save");
 						$(this).attr("class", "btn btn-primary aSavebtn");
@@ -265,12 +279,23 @@ function aboutClickEvent() {
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
 		var datajson = {
-			lookingFor : $('.lookingforE').val(),
-			relationship : $('.relationshipnE').val(),
-			telenum : $('.telenumE').val(),
-			email : $('.emailE').val(),
-			dorm : $('.addressE').val()
-		};
+				lookingFor : $('.lookingforE').val(),
+				relationship : $('.relationshipnE').val(),
+				telenum : $('.telenumE').val(),
+				email : $('.emailE').val(),
+				dorm : $('.addressE').val(),
+			};
+		if($('.nameE').val()!=null){
+			datajson = {
+					lookingFor : $('.lookingforE').val(),
+					relationship : $('.relationshipnE').val(),
+					telenum : $('.telenumE').val(),
+					email : $('.emailE').val(),
+					dorm : $('.addressE').val(),
+					name : $('.nameE').val()
+				};
+		}
+		
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
 		fetchUserByID();
@@ -280,23 +305,33 @@ function aboutClickEvent() {
 	// function avatarImgBtn
 	$('body').on("click", ".avatarImgBtn", function() {
 		var datajson = {
-			avatarLink : FileUpload(new FormData($('.avatarForm')[0])),
+			avatarLink : FileUpload(new FormData($('.avatarForm')[0]))[0],
 		};
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(userID, json);
-		fetchUserByID();
+		var userNew = UpdateUserProfile(userID, json);
+		$('.profile_user_img').find('img').attr("src",
+				userNew.attributes.avatarLink);
 		$('#myModal').modal('hide');
+		$('.avatarForm').get(0).reset();
+		
+		
 	});
 	// change Background
-	$('body').on("click", ".changeBg", function() {
-		var datajson = {
-			profileImageLink : FileUpload(new FormData($('.changBgForm')[0])),
-		};
-		var json = $.toJSON(datajson);
-		UpdateUserProfile(userID, json);
-		fetchUserByID();
-		$('#myModalB').modal('hide');
-	});
+	$('body').on(
+			"click",
+			".changeBg",
+			function() {
+				var datajson = {
+					profileImageLink : FileUpload(new FormData(
+							$('.changBgForm')[0]))[0],
+				};
+				var json = $.toJSON(datajson);
+				var userNew = UpdateUserProfile(userID, json);;
+				$('#myModalB').modal('hide');
+				$('.profile_img').find('img').attr("src",
+						userNew.attributes.profileImageLink);
+				$('.changBgForm').get(0).reset();
+			});
 	// function addPhoto
 	$('body').on(
 			"click",
@@ -305,67 +340,81 @@ function aboutClickEvent() {
 				AddImages(userID, photosfileDri);
 				$('#myModalPhoto').modal('hide');
 				$.each(photosfileDri, function(index, imageLink) {
-					var photoContainer = "<div class='photo'><img src='"
+					var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
 							+ imageLink + "' /></div>";
 					$('.photoAddBtn').after(photoContainer);
 					Msnry('.pro_body', '.photo', 280);
 				});
+				photosfileDri = [];
+				$('.progress-bar').remove();
+				$('.files').remove();
+				$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+				$('.progress').after("<div id='files' class='files'></div>");
 			});
 }
-
-
 
 // show photos
 function showPhotos() {
 	var response = FetchUserByID(userID);
 	$.each(response.imageLinks, function(index, imageLink) {
-		var photoContainer = "<div class='photo'><img src='" + imageLink
+		var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='" + imageLink
 				+ "' /></div>";
 		$('.photoAddBtn').after(photoContainer);
+		Msnry('.pro_body', '.photo', 280);
 	});
 }
 // show followees
 function showFollowees() {
 	var response = FetchFollowees(userID, "0", "10");
-	$.each(response, function(index, followee) {
-		var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + followee.attributes.avatarLink
-				+ "'></img><input type='hidden' name='userID' value='"+followee.ID+"'/>";
-		$('.userImgA').userTips();
-		$('.followeeShow').append(followeeDiv);
-	});
+	$
+			.each(
+					response,
+					function(index, followee) {
+						var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
+								+ followee.attributes.avatarLink
+								+ "' style='display: none'></img><input type='hidden' name='userID' value='"
+								+ followee.ID + "'/>";
+						$('.userImgA').userTips();
+						$('.followeeShow').append(followeeDiv);
+					});
 }
 // show followers
 function showFollowers() {
 	var response = FetchFollowers(userID, "0", "10");
-	$.each(response, function(index, follower) {
-		var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='" + follower.attributes.avatarLink
-				+ "'></img><input type='hidden' name='userID' value='"+follower.ID+"'/>";
-		
-		$('.followerShow').append(followerDiv);
-		$('.userImgA').userTips();
-	});
+	$
+			.each(
+					response,
+					function(index, follower) {
+						var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
+								+ follower.attributes.avatarLink
+								+ "'style='display: none'></img><input type='hidden' name='userID' value='"
+								+ follower.ID + "'/>";
+
+						$('.followerShow').append(followerDiv);
+						$('.userImgA').userTips();
+					});
 }
-var pageSize = 5;
+var pageSize = 15;
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
 	var response = FetchPostsByOwner(userID, 0, pageSize);
-	$.each(response.reverse(),
-			function(n, dataString) {
-				if (dataString.postType == "NORMAL") {
-					addPost(dataString.owner.ID,
-							dataString.owner.attributes.name,
-							dataString.publishDate,
-							dataString.attributes.content, dataString.ID,
-							dataString.likerIDs, dataString.collectorIDs,dataString.imageLinks,dataString.owner.attributes.avatarLink);
-				}
-			});
+	$.each(response.reverse(), function(n, dataString) {
+		if (dataString.postType == "NORMAL") {
+			addPost(dataString.owner.ID, dataString.owner.attributes.name,
+					dataString.publishDate, dataString.attributes.content,
+					dataString.ID, dataString.likerIDs,
+					dataString.collectorIDs, dataString.imageLinks,
+					dataString.owner.attributes.avatarLink);
+		}
+	});
 }
 
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
-	if(userID == USERID){
-		$('.aEditbtn').css("display","inline");
+	if (userID == USERID) {
+		$('.photoAddBtn').css("display", "inline");
+		$('.aEditbtn').css("display", "inline");
 		// function profileBg
 		$('.profile_img')
 				.hover(
@@ -386,8 +435,8 @@ function fetchUserByID() {
 						function() {
 							var pos = $(this).offset();
 							var nPos = pos;
-							nPos.top = pos.top ;
-							nPos.left = pos.left +10;
+							nPos.top = pos.top;
+							nPos.left = pos.left + 10;
 							var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#myModal'></span></div>";
 							$(this).append(changeBtn);
 							$('.profileImg').css(nPos);
@@ -399,9 +448,11 @@ function fetchUserByID() {
 							});
 						});
 	}
-	$('.profile_user_img').find('img').attr("src",userInfo.attributes.avatarLink);
-	$('.profile_img').find('img').attr("src",userInfo.attributes.profileImageLink);
-	$('.profileAvatar').attr("src",userInfo.attributes.avatarLink);
+	$('.profile_user_img').find('img').attr("src",
+			userInfo.attributes.avatarLink);
+	$('.profile_img').find('img').attr("src",
+			userInfo.attributes.profileImageLink);
+	$('.profileAvatar').attr("src", userInfo.attributes.avatarLink);
 	$('.profile_user_name').html(userInfo.attributes.name);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
@@ -410,7 +461,7 @@ function fetchUserByID() {
 	$('.Anickname').html(userInfo.attributes.name);
 	$('.Aemail').html(userInfo.attributes.email);
 	$('.Arelationship').html(userInfo.attributes.relationship);
-	$('.Atelenum').html(userInfo.attributes.telenum);
+	$('.Atelenum').html(userInfo.attributes.telnum);
 	$('.Aaddress').html(userInfo.attributes.dorm);
 	$('.Alooking').html(userInfo.attributes.lookingFor);
 	if (userInfo.attributes.birthday != "") {

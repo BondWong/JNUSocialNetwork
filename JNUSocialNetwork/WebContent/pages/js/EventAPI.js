@@ -1,14 +1,18 @@
 //***********************************SSES   begin*********************************
 //subscribe 事件源
 function Subscribe() {
-	if (!window.EventSource) {
-		document.write('js/jquery.eventsource.js');
-	}
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";
-	var source = new EventSource(url + "/app/event/subscribe");
-	return source;
+	if (EventSource.isPolyfill !== undefined) {
+		var options = {};
+		options['bufferSizeLimit'] = 1024 * 1024; // 1mb in bytes...
+		var source = new EventSource(url + "/app/event/IE/subscribe", options);
+		return source;
+	} else {
+		var source = new EventSource(url + "/app/event/subscribe");
+		return source;
+	}
 }
 // ***********************************SSES end*********************************
 // ***********************************FileService begin************************
@@ -403,6 +407,7 @@ function JoinActivity(userID, postID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
+		async : false,
 		success : function(data, status) {
 			response = status;
 		},
@@ -557,10 +562,16 @@ function AddCommunity(userID, JsonData) {
 		},
 		data : JsonData,
 		async : false,
+		cache : false,
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;
-			window.location.href = 'community.jsp';
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
 		},
 		error : function(data, status) {
 			response = status;
@@ -577,9 +588,16 @@ function DeleteCommunity(communityID) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
+		cache : false,
 		success : function(data, status) {
 			response = status;
-			window.location.href = 'community.jsp';
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
+
 		},
 		error : function(data, status) {
 			response = status;
@@ -610,6 +628,30 @@ function LeaveCommunity(userID, communityID) {
 	$.ajax({
 		type : "PUT",
 		url : '../../app/community/leave/' + userID + '/' + communityID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			response = status;
+			if (EventSource.isPolyfill != undefined) {
+				window.location.href = 'ieSuccess.jsp'
+						+ "?target=community.jsp";
+			} else {
+				window.location.href = 'community.jsp';
+			}
+		},
+		error : function(data, status) {
+			response = status;
+		}
+	});
+	return response;
+}
+function LeaveMember(userID, memberID, communityID) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/community/leave/' + userID + '/' + memberID + '/'
+				+ communityID,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -678,118 +720,124 @@ function FetchCommunityByID(communityID) {
 	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
-function SearchCommunity(key,startIndex,pageSize){
-	var response="";
+function SearchCommunity(key, startIndex, pageSize) {
+	var response = "";
 	$.ajax({
-    	type:"GET",
-    	url:'../../app/community/search/'+key+'/'+startIndex+'/'+pageSize,
-    	beforeSend: function(request) {
-            request.setRequestHeader("ID", USERID);
-        },
-    	async: false,
-    	success:function(data,status){
-    		response = data;
-    	},
-    	error:function(data,status){
-    		response = status;
-    	}
-    	
-    });
+		type : "GET",
+		url : '../../app/community/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
 	return response;
 }
 // FetchByOwner 输入：communityID;返回：postJson
@@ -1027,9 +1075,15 @@ function FetchUserByID(userID) {
 // recommendate
 function Recommendate(startIndex, pageSize) {
 	var response = "";
+	var url = "";
+	if (USERID != "" && USERID != null)
+		url = '../../app/user/recommendate/' + USERID + '/' + startIndex + '/'
+				+ pageSize;
+	else
+		url = '../../app/user/recommendate/' + startIndex + '/' + pageSize;
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/recommendate/' + startIndex + '/' + pageSize,
+		url : url,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -1142,11 +1196,12 @@ function RecommendateViaClass(userID) {
 	return response;
 }
 // RecommendateViaClass 输入：userID;返回：userJson
-function SearchMember( key, startIndex, pageSize) {
+function SearchMember(key, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/search/'  + key + '/' + startIndex + '/' + pageSize,
+		url : '../../app/user/search/' + key + '/' + startIndex + '/'
+				+ pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},

@@ -114,7 +114,7 @@ function peopleClickEvent() {
 						PinCommon();
 					});
 }
-var search_user_input_value="";
+var search_user_input_value = "";
 $('body')
 		.on(
 				'click',
@@ -122,7 +122,7 @@ $('body')
 				function() {
 					$(this)
 							.replaceWith(
-									"<input class='searchInput' placeholder='name or id or sex ' >");
+									"<input class='searchInput' placeholder='name or id or sex ' maxLength='20'>");
 					$('.searchInput').focus();
 					$('.searchInput')
 							.blur(
@@ -134,33 +134,34 @@ $('body')
 									});
 				});
 $('body')
-.on(
-		'click',
-		'.userSearch',
-		function() {
-			if(search_user_input_value!=""){
-				var userInfo = encodeURI(search_user_input_value);
-				$('.userContainer').remove();
-				var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
-				$('.containBord').after(borddiv);
-				var users = SearchMember( userInfo, "0", "5");
-				if (users.length != 0) {
-					$.each(users, function(n, user) {
-						AddUser(user.attributes.name,
-								user.attributes.lookingFor, user.ID,
-								user.attributes.avatarLink);
-					});
-				}
-			}
+		.on(
+				'click',
+				'.userSearch',
+				function() {
+					if (search_user_input_value != "") {
+						var userInfo = encodeURI(search_user_input_value);
+						$('.userContainer').remove();
+						var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
+						$('.containBord').after(borddiv);
+						var users = SearchMember(userInfo, "0", "5");
+						if (users.length != 0) {
+							$.each(users, function(n, user) {
+								AddUser(user.attributes.name,
+										user.attributes.lookingFor, user.ID,
+										user.attributes.avatarLink);
+							});
+						}
+					}
 
-		});
+				});
 
 function AddUser(name, looking, id, avatarLink) {
+	sessionStorage.setItem("otherUserID", id);
 	var boarddiv = "<div class='userCard'><img onload='javascript:auto_resize(170, 170, this)' src='"
 			+ avatarLink
-			+ "' ><p class='recommendName'>"
+			+ "' style='display: none'><p class='recommendName'><a class='tipUser'>"
 			+ name
-			+ "</p><p class='recommendLooking'>"
+			+ "</a></p><p class='recommendLooking'>"
 			+ looking
 			+ "</p><div class='recommendBtn'><button  id="
 			+ id

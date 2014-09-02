@@ -30,11 +30,13 @@
 					aria-labelledby="dropdownMenu1">
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						class="editCommunity" data-toggle='modal'
-						data-target='#editCommunity'>管理社区</a></li>
+						data-target='#editCommunity' id="editCommunityBtn">管理社区</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">管理成员</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">离开社区</a></li>
+						id="editMembersBtn">管理成员</a></li>
+					<li role="presentation"><a id="leaveCommunityBtn"
+						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
+					<li role="presentation"><a id="deleteCommunityBtn"
+						role="menuitem" tabindex="-1" href="#">删除社区</a></li>
 				</ul>
 			</div>
 			<div class="modal fade" id="editCommunity" tabindex="-1"
@@ -53,15 +55,19 @@
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus />
+										placeholder="" id="communityName" required autofocus
+										maxLength="20" />
 								</p>
 								<p>
-									<span>社区介绍：</span> <input type="text" class="form-control"
-										placeholder="" id="communityIntro" required autofocus />
+									<span>社区介绍：</span>
+									<textarea class="form-control" placeholder=""
+										id="communityIntro" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
 									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileupload" type="file" name="files[]">
+										photos...</span> <input id="fileuploadEdit" type="file"
+									name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -86,7 +92,8 @@
 					humor!</p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src="" />
+				<img onload="javascript:auto_resize(221, 267, this)" src=""
+					style="display: none" />
 			</div>
 			<div class="cardA">
 				<span class="communityHref">All posts</span> <span>Activities</span>
@@ -99,7 +106,7 @@
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
 				<span>Community Activities</span>
-				<button role="button" class="btn btn-primary" data-toggle='modal'
+				<button role="button" id="createActivityBtn" class="btn btn-primary" data-toggle='modal'
 					data-target='#activityCommunity'>Create Activity</button>
 			</div>
 			<div
@@ -121,7 +128,7 @@
 								<div class="activityItem">
 									<span>活动名：</span> <input type="text"
 										class="form-control activityInput" placeholder=""
-										id="activityName" required autofocus />
+										id="activityName" required autofocus maxLength="30" />
 								</div>
 								<div class="activityItem">
 									<span>活动时间：</span>
@@ -134,14 +141,16 @@
 									</div>
 								</div>
 								<div class="activityItem">
-									<span>活动地点：</span> <input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityAddr" required autofocus />
+									<span>活动地点：</span>
+									<textarea class="form-control activityInput" placeholder=""
+										id="activityAddr" required autofocus maxLength="100"
+										style="resize: none;"></textarea>
 								</div>
 								<div class="activityItem">
-									<span>活动细节：</span> <input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityMore" required autofocus />
+									<span>活动细节：</span>
+									<textarea class="form-control activityInput" placeholder=""
+										id="activityMore" required autofocus maxLength="200"
+										style="resize: none;"></textarea>
 								</div>
 								<div class="activityItem">
 									<span>活动图片</span> <span
@@ -209,19 +218,26 @@
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				activityClickEvent();
-				clickEvent();
-			} else {
-				clickOffEvent();
-			}
 			var url = window.location.search;
 			window.communityID = url.substr(url.indexOf("?") + 1);
 			window.community = FetchCommunityByID(communityID);
 			Msnry('.activityBody', '.activity', 435);
 			fetchActivitiesByCommunity();
 			showCommunityInfo();
+			if (USERID != null && USERID != "") {
+				login_initialization(USERID);
+				activityClickEvent();
+				clickEvent();
+				var memberIDs =[];
+				$.each(community.members,function(n,member){
+					memberIDs.push(member.ID);
+				});
+				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
+					$('#leaveCommunityBtn').css("display", "inline");
+				}
+			} else {
+				clickOffEvent();
+			}
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>

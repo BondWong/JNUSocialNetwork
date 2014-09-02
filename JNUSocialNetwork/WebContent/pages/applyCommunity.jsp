@@ -14,7 +14,7 @@
 		<div class="layer">
 			<div class="regTop">
 				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到主页</span></a>
-				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
+				<a href="aboutUs.jsp" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">社区账号注册</div>
 			<div class="containerApp" style="display: block">
@@ -26,14 +26,14 @@
 								name="applicationID" placeholder="请输入手机号码作为ID" id="appTele"
 								autocomplete="off" data-errormessage-value-missing="请输入手机好吗作为ID"
 								data-errormessage-pattern-mismatch="请输入手机号码作为ID" required
-								autofocus />
+								autofocus maxLength="11" />
 						</p>
 						<p>
 							<input type="password" class="form-control" name="password"
 								pattern="[A-Za-z0-9]{8,16}" placeholder="请输入密码" id="appPassword"
 								autocomplete="off" data-errormessage-value-missing="请输入密码"
 								data-errormessage-pattern-mismatch="请输入密码，长度：8-16，内容可谓为英文大写或小写或数字"
-								required />
+								required maxLength="40" />
 						</p>
 						<p>
 							<input type="email" class="form-control" placeholder="请输入联系邮箱"

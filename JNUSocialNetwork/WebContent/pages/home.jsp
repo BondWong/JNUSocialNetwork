@@ -180,8 +180,6 @@
 
 		<!-- /END THE FEATURETTES -->
 
-		<!-- CHATROOM -->
-		<%@ include file="parts/chatRoom.jsp"%>
 		<!-- FOOTER -->
 		<%@ include file="parts/footer.jsp"%>
 	</div>
@@ -201,6 +199,14 @@
 	<script type="text/javascript">
 		if (USERID != "") {
 			$('#showBtn').css("display", "none");
+			$(document)
+			.click(
+					function(e) {
+						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+						if (dragel !== target && !$.contains(dragel, target)) {
+							drag.fadeOut(300);
+						}
+					});
 		}
 	</script>
 </body>

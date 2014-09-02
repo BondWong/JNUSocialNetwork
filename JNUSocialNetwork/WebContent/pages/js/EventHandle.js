@@ -57,7 +57,7 @@ function CREATEPOSTINCOMMUNITY() {
 					jsondata.post.attributes.activityAddr,
 					jsondata.post.attributes.activityMore,
 					jsondata.post.attributes.background,
-					jsondata.post.owner.attributes.avatarLink);
+					jsondata.post.owner.attributes.avatarLink,jsondata.post.owner.ID);
 
 		}
 	});
@@ -65,25 +65,34 @@ function CREATEPOSTINCOMMUNITY() {
 function DELETEPOST() {
 	source.addEventListener('DELETEPOST', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		$("div[class='post " + jsondata.ID + "']").remove();
+		$("."+jsondata.ID+"").remove();
 		Msnry('.pro_body', '.post', 435);
 	});
 }
 function DELETECOMMENT() {
-	source.addEventListener('DELETECOMMENT', function(event) {
-		var jsondata = $.parseJSON(event.data);
-		var tem = $("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']");
-		if($("div[class='act_content'][id='" + jsondata.comment + "']").length!=0){
-			$("div[class='act_content'][id='" + jsondata.comment + "']").remove();
-			FetchCommentByPost(jsondata.postID, "0", "2");
-			Msnry('.pro_body', '.post', 435);
-		}
-		if($("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']").length!=0){
-			$("div[class='aBodyComment'][id='commentTxt" + jsondata.comment + "']").remove();
-		}
-		
-		
-	});
+	source
+			.addEventListener(
+					'DELETECOMMENT',
+					function(event) {
+						var jsondata = $.parseJSON(event.data);
+						var tem = $("div[class='aBodyComment'][id='commentTxt"
+								+ jsondata.comment + "']");
+						if ($("div[class='act_content'][id='"
+								+ jsondata.comment + "']").length != 0) {
+							$(
+									"div[class='act_content'][id='"
+											+ jsondata.comment + "']").remove();
+							FetchCommentByPost(jsondata.postID, "0", "2");
+							Msnry('.pro_body', '.post', 435);
+						}
+						if ($("div[class='aBodyComment'][id='commentTxt"
+								+ jsondata.comment + "']").length != 0) {
+							$(
+									"div[class='aBodyComment'][id='commentTxt"
+											+ jsondata.comment + "']").remove();
+						}
+
+					});
 }
 function DELETEPOSTFROMCOMMUNITY() {
 	source.addEventListener('DELETEPOSTFROMCOMMUNITY', function(event) {
@@ -129,8 +138,9 @@ function CANCELLIKEPOST() {
 function LIKECOMMENT() {
 	source.addEventListener('LIKECOMMENT', function(event) {
 		var jsondata = $.parseJSON(event.data);
-		var postID = jsondata.commentID;
-		var spanNum = $("div[class='likeComment likeCommentN" + postID + "']");
+		var commentID = jsondata.commentID;
+		var postID = jsondata.postID;
+		var spanNum = $("div[class='likeComment likeCommentN" + commentID + "']");
 		var like = parseInt(spanNum.find("span").text()) + 1;
 		spanNum.find('span').text(like);
 		if (USERID == jsondata.ID)
@@ -181,22 +191,30 @@ function CREATECOMMENT() {
 										+ jsonComment.attributes.commentToComment;
 							}
 							var removeBtn = "";
+							var commentReply="<div class='comment_reply' id="
+									+ jsondata.postID
+									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+									+ jsonComment.owner.attributes.name
+									+ "' /><input id='replyID' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' />reply<span style='font-size: 8px'></span></a></div>";
 							if (USERID == jsonComment.owner.ID) {
 								removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
 										+ jsondata.postID
 										+ "' type='hidden' value='"
 										+ jsonComment.ID
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+								commentReply = "";
 							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
 									+ jsonComment.owner.attributes.avatarLink
-									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+									+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 									+ removeBtn
-									+ "</div></div><div class='row'><div class='col-lg-8 custom_lg-6'><div class='user_info'>"
+									+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
 									+ jsonComment.publishDate
 									+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 									+ jsonComment.ID
@@ -204,13 +222,7 @@ function CREATECOMMENT() {
 									+ jsonComment.likerIDs.length
 									+ "</span></div><a><input id='likeID' type='hidden' value='"
 									+ jsonComment.ID
-									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'><div class='comment_reply' id="
-									+ jsondata.postID
-									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.name
-									+ "' /><input id='replyID' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div></div></div></div></div><div class='act_comment'><span class='commentHead'>"
+									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 									+ atComment + "</span>" + "&nbsp;"
 									+ jsonComment.attributes.content
 									+ "﻿</div></div>";
@@ -241,9 +253,11 @@ function CREATECOMMENT() {
 										+ jsonComment.ID
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 							}
-							var comment = "<div class='aBodyComment' id='commentTxt"+jsonComment.ID+"'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+							var comment = "<div class='aBodyComment' id='commentTxt"
+									+ jsonComment.ID
+									+ "'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
 									+ jsonComment.owner.attributes.avatarLink
-									+ "'><div class='user_name'><strong>"
+									+ "' style='display: none'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div><div class='user_info'><span>"
 									+ jsonComment.publishDate

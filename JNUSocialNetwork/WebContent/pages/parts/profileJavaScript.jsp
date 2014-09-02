@@ -77,12 +77,10 @@
 				} else {
 					clickOffEvent();
 				}
-				Msnry('.pro_body', '.photo', 280);
 				showPhotos();
-
+				Msnry('.pro_body', '.photo', 280);
 			});
 		</script>
-		<script src="js/image-auto-resize.js"></script>
 	</c:when>
 	<c:when test="${param.nav eq 'circle' }">
 		<script type="text/javascript">
@@ -116,10 +114,42 @@
 				}
 				Msnry('.pro_body', '.post', 435);
 				fetchPostsByOwner();
-
+				$(window)
+				.scroll(
+						function() {
+							if ($(window).scrollTop() == $(document).height()
+									- window.windowHeight) {
+								var startIndex = $('.post').length - 1;
+								$('div#infinite_loader').show();
+								var url = window.location.search;
+								var otherUserID = url.substr(url.indexOf("&") + 1);
+								var response = [];
+								response = FetchPostsByOwner(otherUserID,
+											startIndex, pageSize);
+								$.each(response, function(n, dataString) {
+									var boarddiv = post(dataString.owner.ID,
+											dataString.owner.attributes.name,
+											dataString.publishDate,
+											dataString.attributes.content,
+											dataString.ID, dataString.likerIDs,
+											dataString.collectorIDs,
+											dataString.imageLinks,
+											dataString.owner.attributes.avatarLink);
+									$(".pro_body").append(boarddiv);
+									Msnry('.pro_body', '.post', 435);
+								});
+								if (response.length == pageSize) {
+									$('div#infinite_loader').hide();
+								} else {
+									$('div#infinite_loader')
+											.replaceWith(
+													'<div id="no_more_infinite_load"><span>no more</span></div>');
+									$(window).unbind("scroll");
+								}
+							}
+						});
 			});
 		</script>
-		<script src="js/image-auto-resize.js"></script>
 		<%@ include file="contentScroll.jsp"%>
 	</c:otherwise>
 </c:choose>

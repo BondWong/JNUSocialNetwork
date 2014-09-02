@@ -12,7 +12,7 @@ function login_initialization(ID) {
 				async : false,
 				success : function(data) {
 					sessionStorage.setItem("user", JSON.stringify(data));
-					sessionStorage.setItem("onlineUserIDs", JSON.stringify([]));
+					sessionStorage.setItem("userNameID", JSON.stringify({}));
 					/*
 					 * initialize nav bar
 					 */
@@ -25,6 +25,23 @@ function login_initialization(ID) {
 									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 				}
 			});
+	if ($.parseJSON(sessionStorage.getItem("user")) != null
+			&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+		if (FetchCommunityByOwner(USERID, "0", "5").length == 0) {
+			$('#createCommunityBtn').css("display", "inline");
+		}
+		$('.appCom').css("display", "none");
+		$('.titleMy').css("display", "block");
+		$('.containerMy').css("display", "block");
+		$('#myCommunityBtn').css("display", "block");
+		$('#createActivityBtn').css("display", "block");
+	}
+	if (FetchCommunityByJoin(USERID, "0", "1").length != 0) {
+		$('.titleMy').css("display", "block");
+		$('.containerMy').css("display", "block");
+		$('#myCommunityBtn').css("display", "block");
+	}
+	
 
 	/*
 	 * SSE Handle
@@ -71,6 +88,9 @@ function login_initialization(ID) {
 				break;
 			case "SENDCONTACT":
 				handle_contact($.parseJSON(e.data));
+				break;
+			case "ONLINEUSERIDS":
+				handle_online_user_ID($.parseJSON(e.data));
 				break;
 			}
 		} else if ($.parseJSON(e.data).name != null) {
@@ -131,7 +151,10 @@ function login_initialization(ID) {
 		$('.mentionBody').css("display", "none");
 		$('.mentionBody-content').empty();
 	});
-
+	$("#lougout_button").click(function() {
+		sessionStorage.clear();
+		ws.close("logout");
+	});
 }
 
 function handle_message(data) {
@@ -170,9 +193,21 @@ function handle_connect(data) {
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span>');
+	if ($("#chatroom span.label-default").length != 0) {
+		$("#chatroom span.label-default").replaceWidth(
+				'<span class="label label-success">'
+						+ $("#chatroom span.label-default").text() + '</span>');
+	}
 	var IDs = sessionStorage.getItem("onlineUserIDs");
 	IDs = $.parseJSON(IDs);
-	IDs[IDs.length] = data.ID;
+	var has = false;
+	for (var i = 0; i < IDs.length; i++)
+		if (IDs[i] == data.ID) {
+			has = true;
+			break;
+		}
+	if (!has)
+		IDs[IDs.length] = data.ID;
 	sessionStorage.setItem("onlineUserIDs", JSON.stringify(IDs));
 }
 
@@ -187,4 +222,22 @@ function handle_disconnect(data) {
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span>');
+	if ($("#chatroom span.label-success").length != 0) {
+		$("#chatroom span.label-success").replaceWidth(
+				'<span class="label label-default">'
+						+ $("#chatroom span.label-success").text() + '</span>');
+	}
+	var IDs = sessionStorage.getItem("onlineUserIDs");
+	IDs = $.parseJSON(IDs);
+	for (var i = 0; i < IDs.length; i++)
+		if (IDs[i] == data.ID) {
+			IDs[i] = "";
+			break;
+		}
+	sessionStorage.setItem("onlineUserIDs", JSON.stringify(IDs));
+}
+
+function handle_online_user_ID(data) {
+
+	sessionStorage.setItem("onlineUserIDs", JSON.stringify(data.onlineUserIDs));
 }

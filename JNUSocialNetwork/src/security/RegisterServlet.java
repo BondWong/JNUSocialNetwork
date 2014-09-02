@@ -31,8 +31,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import transaction.Transaction;
+import transaction.DAOTransaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
+import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import utils.MD5;
 
 /**
@@ -76,8 +77,7 @@ public class RegisterServlet extends HttpServlet {
 				int status = response.getStatusLine().getStatusCode();
 				if ((status >= 200 && status < 300) || status == 302) {
 					HttpEntity entity = response.getEntity();
-					return entity != null ? EntityUtils.toString(entity,
-							"gb2312") : null;
+					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
 					throw new ClientProtocolException(
 							"Unexpected response status: " + status);
@@ -164,6 +164,20 @@ public class RegisterServlet extends HttpServlet {
 				|| !hiddenCode.equals(sessionHiddenCode))
 			response.sendRedirect("/pages/register.jsp");
 		else {
+
+			DAOTransaction transaction = new DoesIDExistTransaction();
+			boolean result = false;
+			try {
+				result = (boolean) transaction.execute(txtYHBS);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (!result) {
+				response.sendRedirect("/pages/login.jsp?registerExist=true");
+				return;
+			}
+
 			CloseableHttpClient httpClient = null;
 			synchronized (session) {
 				httpClient = (CloseableHttpClient) session
@@ -188,7 +202,7 @@ public class RegisterServlet extends HttpServlet {
 				if (isOK(httpResponse)) {
 
 					post.abort();
-					Transaction transaction = new RegisterMemberTransaction();
+					transaction = new RegisterMemberTransaction();
 					try {
 						transaction.execute(txtYHBS, MD5.toMD5Code(txtYHMM),
 								new HashMap<String, String>());

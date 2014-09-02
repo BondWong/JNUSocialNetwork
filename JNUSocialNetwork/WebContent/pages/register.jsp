@@ -14,7 +14,7 @@
 		<div class="layer">
 			<div class="regTop">
 				<a href="home.jsp" class="btn btn-primary btn-sm" role="button"><span>回到首页</span></a>
-				<a href="#" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
+				<a href="aboutUs.jsp" class="btn btn-primary btn-sm" role="button"><span>关于我们</span></a>
 			</div>
 			<div class="regTitle">注册</div>
 			<div class="containerReg" style="display: block">
@@ -24,20 +24,26 @@
 						<p>
 							<input type="text" class="form-control" placeholder="请输入教务系统ID"
 								name="ID" data-errormessage-value-missing="请输入教务处学号" required
-								autofocus />
+								autofocus maxLength="20" />
 						</p>
 						<p>
 							<input type="password" class="form-control"
 								placeholder="请输入教务系统密码" name="password"
-								data-errormessage-value-missing="请输入教务处密码" required />
+								data-errormessage-value-missing="请输入教务处密码" required
+								maxLength="20" />
 						</p>
 						<div class="form-cust">
 							<input type="text" class="form-control form-control-cust"
 								placeholder="请输入验证码" name="valCode" pattern="[A-Za-z0-9]{4}"
 								data-errormessage-value-missing="请输入验证码"
-								data-errormessage-pattern-mismatch="验证码错误" required />
+								data-errormessage-pattern-mismatch="验证码错误" required
+								maxLength="4" />
 							<div class="form-cust-img">
-								<img src="../security/RegServlet" />
+								<img src="../security/RegServlet"
+									onload="javascript:finish_loading_valcode();"
+									id="register_valcode_image" style="display: none" /> <img
+									src="images/register_loading_valcode.gif"
+									id="register_loadingvalcode_image" />
 							</div>
 						</div>
 						<input type="hidden" name="hiddenCode"
@@ -64,6 +70,12 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 	<script src="js/md5.js"></script>
+	<script>
+		function finish_loading_valcode() {
+			$("#register_loadingvalcode_image").hide();
+			$("#register_valcode_image").show();
+		}
+	</script>
 	<script>
 		$("h4 span.signIn").click(function() {
 			location.href = "login.jsp";

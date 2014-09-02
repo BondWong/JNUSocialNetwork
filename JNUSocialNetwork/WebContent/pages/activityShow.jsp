@@ -23,8 +23,8 @@
 	<div class="container container_actvity">
 		<div class="activityHead">
 			<img alt="" width="100%"
-				onload="javascript:auto_resize(1170, 300, this)"
-				src="">
+				onload="javascript:auto_resize(1170, 300, this)" src=""
+				style="display: none">
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
@@ -41,8 +41,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title" id="myModalLabel">Edit Activity</h4>
 					</div>
 					<form class="activityForm" enctype="multipart/form-data">
@@ -50,7 +49,7 @@
 							<div class="activityItem">
 								<span>活动名：</span> <input type="text"
 									class="form-control activityInput" placeholder=""
-									id="activityName" required autofocus />
+									id="activityName" required autofocus maxLength="30" />
 							</div>
 							<div class="activityItem">
 								<span>活动时间：</span>
@@ -62,14 +61,16 @@
 								</div>
 							</div>
 							<div class="activityItem">
-								<span>活动地点：</span> <input type="text"
-									class="form-control activityInput" placeholder=""
-									id="activityAddr" required autofocus />
+								<span>活动地点：</span>
+								<textarea class="form-control activityInput" placeholder=""
+									id="activityAddr" required autofocus maxLength="150"
+									style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
-								<span>活动细节：</span> <input type="text"
-									class="form-control activityInput" placeholder=""
-									id="activityMore" required autofocus />
+								<span>活动细节：</span>
+								<textarea type="text" class="form-control activityInput"
+									placeholder="" id="activityMore" required autofocus
+									maxLength="200" style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"
