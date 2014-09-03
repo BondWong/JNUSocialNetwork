@@ -213,7 +213,7 @@
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
-	<script src="js/activity.js"></script>
+	<script src="js/activityCommunity.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">

@@ -125,7 +125,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postImgDiv
 			+ "<div class='row'></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "' maxLength='20'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='100'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID
 			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"+postID+"' class='" + likeClass
 			+ "' style='font-size:30px'></span></a></div></div></div><div class='commentArea'>" + comment + "</div></div></div></div>";
@@ -667,7 +667,7 @@ function showPost(postID) {
 						+ dataString.likerIDs.length
 						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 						+ postID
-						+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID
 						+ ">Submit</button></div></div>"
 						+ comment
@@ -681,7 +681,7 @@ function showPost(postID) {
 }
 // funtion sessionID
 $('body').on("click", ".activityHref", function() {
-	window.location.href = 'activity.jsp?' + community.ID;
+	window.location.href = 'activityCommunity.jsp?' + community.ID;
 });
 $('body').on("click", ".memberHref", function() {
 	window.location.href = 'communityMember.jsp?' + community.ID;

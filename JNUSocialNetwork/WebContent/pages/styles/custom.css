@@ -209,6 +209,7 @@ body {
 .img_container {
 	height: 265px;
 	width: 265px;
+	cursor:pointer;
 }
 
 .btn_cust {
@@ -1749,6 +1750,9 @@ footer {
 .aC{
 	font-size:16px;
 	width:90%
+}
+ul.nav li.dropdown:hover ul.dropdown-menu{ 
+display: block; 
 }
 #createActivityBtn{
 	display:none;

@@ -310,6 +310,23 @@ function FetchActivitiesByCommunity(communityID, startIndex, pageSize) {
 	});
 	return response;
 }
+//fetchActivity
+function FetchActivities(startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchActivities/' + startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // FetchPostsByFollowee 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchPostsByFollowee(userID, startIndex, pageSize) {
 	var response = "";
