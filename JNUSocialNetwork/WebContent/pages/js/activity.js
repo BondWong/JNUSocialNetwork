@@ -1,7 +1,7 @@
 function activityClickEvent() {
 	$('body').on("click", "#activityCreate", function() {
-		
-		var millisecond = Date.parse($('#activityTime').val() ).toString();
+
+		var millisecond = Date.parse($('#activityTime').val()).toString();
 		var activityC = "";
 		if ($('#fileuploadA').val() != "") {
 			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
@@ -31,51 +31,60 @@ var pageSize = 15;
 function fetchActivitiesByCommunity() {
 	var response = FetchActivitiesByCommunity(community.ID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		if(dataString.available == true){
+		if (dataString.available == true) {
 			addActivity(dataString.ID, dataString.attributes.activityName,
 					dataString.attributes.activityTime,
 					dataString.attributes.activityAddr,
 					dataString.attributes.activityMore,
 					dataString.attributes.background,
-					dataString.owner.attributes.avatarLink,dataString.owner.ID,dataString.participantIDs);
+					dataString.owner.attributes.avatarLink,
+					dataString.owner.ID, dataString.participantIDs);
 		}
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
+function activity(activityID, name, time, addre, more, imagelink, avatarLink,
+		ownerID, joinIDs) {
+	var select = "";
+	if ($.inArray(USERID, joinIDs) != -1) {
+		select = "selected";
+	}
+	var askActivity = "<div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
+			+ activityID
+			+ "' "
+			+ select
+			+ ">Yes</option><option class='leaveactivityJoin' id='"
+			+ activityID + "'>No</option></select></div>";
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
+		askActivity = "";
 	}
-	var select = "";
-	if($.inArray(USERID,joinIDs) != -1){
-		select = "selected";
-	}
-	var boarddiv = "<div class='activity post"+activityID+"' >"+pRemoveBtn+"<div class='activityHref' id='"
+	var boarddiv = "<div class='activity post"
 			+ activityID
-			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
+			+ "' >"
+			+ pRemoveBtn
+			+ "<div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
 			+ imagelink
 			+ "' style='display: none'/></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
 			+ avatarLink
-			+ "' style='display: none'/></div><div class='activityName'><span>"
-			+ name
-			+ "</span></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;"
-			+ time
-			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;"
-			+ addre
-			+ "</span></div><div class='activityD'><span>"
-			+ more
-			+ "</span></div></div><div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
+			+ "' style='display: none'/></div><div class='activityName activityHref' id='"
 			+ activityID
-			+ "' "+select+">Yes</option><option class='leaveactivityJoin' id='"
-			+ activityID + "'>No</option></select></div></div>";
+			+ "'><a><span>"
+			+ name
+			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
+			+ time
+			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
+			+ addre + "</span></div><div class='activityD'><span>" + more
+			+ "</span></div>" + askActivity + "</div>";
 	return boarddiv;
 }
 // function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
+function addActivity(activityID, name, time, addre, more, imagelink,
+		avatarLink, ownerID, joinIDs) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink,ownerID,joinIDs);
+			avatarLink, ownerID, joinIDs);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -98,13 +107,13 @@ $('body').on("click", ".activityHref", function() {
 $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePost(id);
-	$(".post"+id+"").remove();
+	$(".post" + id + "").remove();
 });
 var date = new Date();
 date.setDate(date.getDate() + 1);
 $('.form_datetime').datetimepicker({
 	// language: 'fr',
-	format : "MM dd,yyyy hh:ii",
+	format : "MM dd,yyyy - hh:ii",
 	startDate : date,
 	todayBtn : 0,
 	autoclose : 1,
@@ -129,7 +138,9 @@ $(window)
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
-									dataString.attributes.background,dataString.owner.ID,dataString.participantIDs);
+									dataString.attributes.background,
+									dataString.owner.ID,
+									dataString.participantIDs);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});

@@ -102,10 +102,10 @@
 				<div class="activityDetail">
 					<span class="activityTitle">Detail</span>
 					<div class="detailBody">
-						<span class="glyphicon glyphicon-time activityShowTime">&nbsp;Fri,
-							Aug 1, 4:00 AM - 5:00 AM</span> <span
-							class="glyphicon glyphicon-flag activityShowAddre">&nbsp;Hangouts
-							On Air</span>
+						<div><span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span class = "aT">Fri,
+							Aug 1, 4:00 AM - 5:00 AM</span></div><div><span
+							class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span class='aA'>Hangouts
+							On Air</span></div>
 						<div class="detailTxt activityShowD">Please join +Tony
 							Darnell as he discusses an amazing technique developed by Dr.
 							Rémi Soummer and his team at STScI to extract hidden planetary
@@ -125,30 +125,6 @@
 							<button type="button" class="btn btn-success" id="addComment"
 								value="">Submit</button>
 						</div>
-					</div>
-				</div>
-				<div class="aBodyComment">
-					<div class="aCommentItem">
-						<img alt="" src="">
-						<div class="user_name">
-							<strong>Winson_Lau</strong>
-						</div>
-						<div class="user_info">Yesterday 21:23pm</div>
-						<br>
-						<div>Please join +Tony Darnell as he discusses an amazing
-							technique developed by</div>
-					</div>
-				</div>
-				<div class="aBodyComment">
-					<div class="aCommentItem">
-						<img alt="" src="images/user_img.jpg">
-						<div class="user_name">
-							<strong>Winson_Lau</strong>
-						</div>
-						<div class="user_info">Yesterday 21:23pm</div>
-						<br>
-						<div>Please join +Tony Darnell as he discusses an amazing
-							technique developed by</div>
 					</div>
 				</div>
 			</div>

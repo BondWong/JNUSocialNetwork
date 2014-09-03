@@ -1018,13 +1018,13 @@ body {
 }
 
 .detailBody span {
-	display: block;
-	font-size: 12px;
+	font-size: 16px;
 	margin-top: 5px;
 }
 
 .detailTxt {
 	margin-top: 20px;
+	font-size:16px;
 }
 
 .aBodyCard img {
@@ -1200,6 +1200,7 @@ body {
 
 .replyaComment {
 	float: right;
+	margin-top:40px;
 }
 
 .likeComment {
@@ -1252,28 +1253,51 @@ body {
 }
 
 .activityName {
-	margin-right: auto;
-	margin-left: auto;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:-20px;
 	width: 90%;
-	font-size: 16px;
+	font-size: 24px;
+	cursor:pointer;
+	color:#5A5A5A;
+}
+.activityName a{
+	color:#5A5A5A;
+}
+.activityName a:hover{
+	color:#428BCA;
 }
 
 .activityTime {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
+	margin-top:5px;
+	font-size:16px;
+}
+.activityShowTime{
+	margin-top:5px;
+	font-size:16px;
+}
+.activityShowAddre{
+	margin-top:5px;
+	font-size:16px;
 }
 
 .activityaddre {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
+	margin-top:5px;
+	font-size:16px;
 }
 
 .activityD {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
+	margin-top:10px;
+	word-wrap: break-word;
 }
 
 .activityAsk {
@@ -1717,6 +1741,14 @@ footer {
 	margin-left: -15px;
 	font-size:30px;
 	margin-top:-3px;
+}
+.col-lg-2-cust{
+	width: 12%;
+	padding-left:0px;
+}
+.aC{
+	font-size:16px;
+	width:90%
 }
 #createActivityBtn{
 	display:none;

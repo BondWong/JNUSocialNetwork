@@ -171,6 +171,9 @@ $(document).ready(function() {
 				$.each(communities,function(n,c){
 					communityIDs.push(c.ID);
 				});
+				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
+					$('.cardSetter').css("display", "inline");
+				}
 				if (communityIDs == communityID
 						&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 					$('.memberRemoveBtn').css("display", "inline");

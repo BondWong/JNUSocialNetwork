@@ -23,6 +23,10 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 							atComment = "@"
 									+ jsonComment.attributes.commentToComment;
 						}
+						var likeCommentClass = "";
+						if ($.inArray(USERID, jsonComment.likerIDs) != -1) {
+							likeCommentClass = "style='color:rgb(255, 255, 255);background-color: rgb(66,139,202);'";
+						}
 						var removeBtn = "";
 						var commentReply = "<div class='comment_reply' id="
 								+ postID
@@ -52,9 +56,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ jsonComment.publishDate
 								+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
 								+ jsonComment.ID
-								+ "'>+<span>"
+								+ "' >+<span>"
 								+ jsonComment.likerIDs.length
-								+ "</span></div><a><input id='likeID' type='hidden' value='"
+								+ "</span></div><a "+likeCommentClass+"><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
 								+ commentReply
@@ -388,6 +392,10 @@ function clickEvent() {
 					});
 	$('body').on("click", "#editMembersBtn", function() {
 		window.location.href = 'communityMember.jsp?' + community.ID;
+	});
+	$('body').on('click', '.deletePostBtn', function() {
+		var id = $(this).find("input").attr("value");
+		DeletePost(id);
 	});
 
 }
