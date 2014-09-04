@@ -15,7 +15,9 @@ public class FetchPostTransaction extends DAOTransaction{
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(params[0]);
 		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction.execute("Post.fetchByID", params[0], 0, 1);
+		System.out.println(results);
 		return results.get(0);
 	}
 

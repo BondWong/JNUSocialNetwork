@@ -63,6 +63,7 @@ public class AttributesFactory {
 				attributes.put("relationship", "");
 				attributes.put("telnum", "");
 				attributes.put("email", "");
+				attributes.put("institution", "");
 				attributes.put("campus", "");
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}

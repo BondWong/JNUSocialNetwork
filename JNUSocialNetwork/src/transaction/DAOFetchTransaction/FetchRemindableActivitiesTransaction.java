@@ -22,8 +22,6 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 		ActivitySearchMap.deserialize();
 		List<Long> IDs = new ArrayList<Long>();
 		IDs = ActivitySearchMap.fecthRemindableIDs();
-		for (Long ID : IDs)
-			ActivitySearchMap.removeRecord(ID);
 		ActivitySearchMap.serialize();
 
 		if (IDs.size() > 0) {
