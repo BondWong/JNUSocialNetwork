@@ -22,7 +22,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import transaction.Transaction;
-import transaction.DAOFetchTransaction.FetchMemberTransaction;
+import transaction.DAOFetchTransaction.FetchMembersByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 
 /**
@@ -164,11 +164,11 @@ public class FileDownloadService extends HttpServlet {
 				16 // last column (0-based)
 		));
 
-		transaction = new FetchMemberTransaction();
+		transaction = new FetchMembersByIDsTransaction();
 		List<String> IDs = (List<String>) activity.get("participantIDs");
-		for (int i = 0; i < IDs.size(); i++) {
-			Map<String, Object> participant = (Map<String, Object>) transaction
-					.execute(IDs.get(i));
+		List<Map<String, Object>> participants = (List<Map<String, Object>>) transaction
+				.execute(IDs);
+		for (int i = 0; i < participants.size(); i++) {
 
 			sheet.addMergedRegion(new CellRangeAddress(i + 1, // first row
 																// (0-based)
@@ -222,23 +222,23 @@ public class FileDownloadService extends HttpServlet {
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(1);
-			cell.setCellValue((String) participant.get("ID"));
+			cell.setCellValue((String) participants.get(i).get("ID"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(3);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("name"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("name"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(4);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("gender"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("gender"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(5);
-			String major = (String) ((Map<String, String>) participant
+			String major = (String) ((Map<String, String>) participants.get(i)
 					.get("attributes")).get("major");
-			String season = (String) ((Map<String, String>) participant
+			String season = (String) ((Map<String, String>) participants.get(i)
 					.get("attributes")).get("season");
 			if (major != null && season != null && major != "" && season != "") {
 				season = season.substring(season.lastIndexOf("0") + 1);
@@ -248,23 +248,23 @@ public class FileDownloadService extends HttpServlet {
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(8);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("institution"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("institution"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(10);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("campus"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("campus"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(12);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("telnum"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("telnum"));
 			cell.setCellStyle(cs);
 
 			cell = row.createCell(14);
-			cell.setCellValue((String) ((Map<String, String>) participant
-					.get("attributes")).get("email"));
+			cell.setCellValue((String) ((Map<String, String>) participants.get(
+					i).get("attributes")).get("email"));
 			cell.setCellStyle(cs);
 		}
 
