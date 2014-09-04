@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  
-  
   <display-name>CampuSite</display-name>
-  
-  
   <listener>
     <listener-class>system.Initialtor</listener-class>
   </listener>
-  
-  
-  <!-- <filter>
-  	<filter-name>NoCacheFilter</filter-name>
-  	<filter-class>security.NoCacheFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>NoCacheFilter</filter-name>
-  	<url-pattern>
-  		*.jsp
-  	</url-pattern>
-  </filter-mapping> -->
-  
-  
   <filter>
     <filter-name>AutoLoginFilter</filter-name>
     <filter-class>
@@ -94,8 +76,6 @@
   		/profile.jsp
   	</url-pattern>
   </filter-mapping>
-  
-  
   <filter>
     <filter-name>LoginCheckFilter</filter-name>
     <filter-class>
@@ -150,8 +130,12 @@
   		/app/fileUploader/*
   	</url-pattern>
   </filter-mapping>
-  
-  
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>
+  		/app/fileDownloader/*
+  	</url-pattern>
+  </filter-mapping>
   <filter>
     <filter-name>AuthorizationCheckFilter</filter-name>
     <filter-class>
@@ -206,6 +190,10 @@
   		/app/fileUploader/*
   	</url-pattern>
   </filter-mapping>
-  
-  
+  <filter-mapping>
+    <filter-name>AuthorizationCheckFilter</filter-name>
+    <url-pattern>
+  		/app/fileDownloader/*
+  	</url-pattern>
+  </filter-mapping>
 </web-app>

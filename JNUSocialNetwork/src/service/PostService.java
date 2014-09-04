@@ -242,7 +242,7 @@ public class PostService {
 		List<Map<String, Object>> activities;
 		try {
 			activities = (List<Map<String, Object>>) transaction.execute(
-					"Post.fetchByTypeASC", PostType.ACTIVITY, startIndex,
+					"Post.fetchByTypeDESC", PostType.ACTIVITY, startIndex,
 					pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

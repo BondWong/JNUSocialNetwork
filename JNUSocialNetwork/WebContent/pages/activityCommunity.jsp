@@ -132,10 +132,20 @@
 								</div>
 								<div class="activityItem">
 									<span>活动时间：</span>
-									<div class="input-group date form_datetime col-lg-10"
+									<div class="input-group date form_datetime1 col-lg-10"
 										data-link-field="dtp_input1">
 										<input type="text" class="form-control activityInput"
 											id="activityTime" readonly /> <span
+											class="input-group-addon"><i
+											class="glyphicon glyphicon-th"></i></span>
+									</div>
+								</div>
+								<div class="activityItem">
+									<span>提醒时间：</span>
+									<div class="input-group date form_datetime2 col-lg-10"
+										data-link-field="dtp_input1">
+										<input type="text" class="form-control activityInput"
+											id="activityRemind" readonly /> <span
 											class="input-group-addon"><i
 											class="glyphicon glyphicon-th"></i></span>
 									</div>

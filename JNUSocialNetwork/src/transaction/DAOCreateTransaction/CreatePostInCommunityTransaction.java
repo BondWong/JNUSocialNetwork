@@ -31,7 +31,7 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 			ActivitySearchMap.deserialize();
 			ActivitySearchMap.addRecord(post.getID(), Long
 					.parseLong((String) ((Map<String, Object>) params[3])
-							.get("startDate")));
+							.get("remindDate")));
 			ActivitySearchMap.serialize();
 		}
 

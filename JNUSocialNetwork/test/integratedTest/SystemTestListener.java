@@ -61,6 +61,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("major", "SE");
 			attributes.put("season", "2012");
 			attributes.put("campus", "珠海校区");
+			attributes.put("institution", "电气信息学院");
+			attributes.put("telnum", "13750046645");
+			attributes.put("email", "wongzeonbong@gmail.com");
 			transaction.execute("2011052404", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			attributes.put("name", "Obama");
@@ -71,6 +74,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("major", "SE");
 			attributes.put("season", "2011");
 			attributes.put("campus", "珠海校区");
+			attributes.put("institution", "电气信息学院");
+			attributes.put("telnum", "13750046645");
+			attributes.put("email", "wongzeonbong@gmail.com");
 			transaction.execute("2011052406", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			attributes.put("name", "黃俊邦");
@@ -81,6 +87,9 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("major", "Math");
 			attributes.put("season", "2011");
 			attributes.put("campus", "珠海校区");
+			attributes.put("institution", "电气信息学院");
+			attributes.put("telnum", "13750046645");
+			attributes.put("email", "wongzeonbong@gmail.com");
 			transaction.execute("2011052408", MD5.toMD5Code("123456"),
 					attributes, UserType.MEMBER);
 			transaction = new FetchChatRoomTransaction();
@@ -107,6 +116,7 @@ public class SystemTestListener implements ServletContextListener {
 			transaction.execute(parameters);
 			parameters.put("ID", "787878787878");
 			transaction.execute(parameters);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
