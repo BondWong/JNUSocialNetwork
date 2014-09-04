@@ -2,19 +2,16 @@ package integratedTest;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import model.modelType.CommunityType;
 import model.modelType.PostType;
 import model.modelType.UserType;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateApplicationTransaction;
-import transaction.DAOCreateTransaction.CreateCommunityTransaction;
 import transaction.DAOCreateTransaction.CreatePostTransaction;
 import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
@@ -119,11 +116,6 @@ public class SystemTestListener implements ServletContextListener {
 			transaction.execute(parameters);
 			parameters.put("ID", "787878787878");
 			transaction.execute(parameters);
-
-			transaction = new CreateCommunityTransaction();
-			parameters.clear();
-			transaction.execute("636645", parameters, new LinkedList<String>(),
-					CommunityType.valueOf("SCHOOLUNION"));
 
 		} catch (Exception e) {
 			e.printStackTrace();

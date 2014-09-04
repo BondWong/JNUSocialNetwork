@@ -28,7 +28,7 @@
 		$('.bg').parallax("50%", 0.4);
 		$('#third').parallax("50%", 0.3);
 
-	})
+	});
 </script>
 </head>
 
@@ -84,10 +84,10 @@
 				<div>
 					<img src="images/founder-avatar/hzy.JPG" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>黄子阳</span>
+						<span>黄子阳</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
 					</p>
 					<p class="palegreen rank">
-						<span>联合创始人</span>
+						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 				<div>
@@ -95,7 +95,7 @@
 					<p class="palegreen intro">
 						<span>胡海城</span>
 					<p class="palegreen rank">
-						<span>联合创始人</span>
+						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 				<div>
@@ -103,7 +103,7 @@
 					<p class="palegreen intro">
 						<span>邓恩临</span>
 					<p class="palegreen rank">
-						<span>联合创始人</span>
+						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 			</div>
@@ -130,7 +130,7 @@
 		<div class="story">
 			<h2>Join Us</h2>
 			<h3>
-				发简历到<a href="mailto:campusite@outlook.com" stype="">官方邮箱</a>，并注明申请职位
+				发简历到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>，并注明申请职位
 			</h3>
 
 			<ul class="list-group short">
@@ -138,8 +138,8 @@
 				<li class="list-group-item">IOS开发</li>
 				<li class="list-group-item">Android开发</li>
 				<li class="list-group-item">Web前端开发</li>
-				<li class="list-group-item">服务端开发</li>
-				<li class="list-group-item">平面设计师</li>
+				<li class="list-group-item">Java服务端开发</li>
+				<li class="list-group-item">平面设计</li>
 			</ul>
 
 			<ul class="list-group short">

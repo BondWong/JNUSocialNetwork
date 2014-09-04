@@ -32,7 +32,14 @@
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
-						data-target='#editActivity'>edit</button>
+						data-target='#editActivity'>编辑</button>
+					<a class="btn btn-default downLoadList" target="_blank"
+						id="download-name-list-button">下载活动名单</a>
+					<script type="text/javascript">
+						var activityID = url.substr(url.indexOf("&") + 1);
+						document.getElementById("download-name-list-button").href = "app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
+								+ activityID;
+					</script>
 				</div>
 			</div>
 		</div>
@@ -41,8 +48,9 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Edit Activity</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">编辑活动</h4>
 					</div>
 					<form class="activityForm" enctype="multipart/form-data">
 						<div class="modal-body modalBody">
@@ -102,10 +110,14 @@
 				<div class="activityDetail">
 					<span class="activityTitle">Detail</span>
 					<div class="detailBody">
-						<div><span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span class = "aT">Fri,
-							Aug 1, 4:00 AM - 5:00 AM</span></div><div><span
-							class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span class='aA'>Hangouts
-							On Air</span></div>
+						<div>
+							<span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span
+								class="aT">Fri, Aug 1, 4:00 AM - 5:00 AM</span>
+						</div>
+						<div>
+							<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span
+								class='aA'>Hangouts On Air</span>
+						</div>
 						<div class="detailTxt activityShowD">Please join +Tony
 							Darnell as he discusses an amazing technique developed by Dr.
 							Rémi Soummer and his team at STScI to extract hidden planetary
@@ -166,7 +178,7 @@
 	<script src="js/EventAPI.js"></script>
 	<script src="js/activityShow.js"></script>
 	<script src="js/global-initialization.js"></script>
-	<script>
+	<script type="text/javascript">
 		$(document).ready(
 				function() {
 					if (USERID != null && USERID != "") {
