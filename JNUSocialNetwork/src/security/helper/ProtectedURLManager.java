@@ -54,7 +54,6 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("event/deleteUnhandledEvent");
 
 		loginProtectionURLs.add("fileUploader");
-		loginProtectionURLs.add("fileDownloader");
 
 		authorizationProtectionURLs = new HashMap<String, Set<UserType>>();
 		Set<UserType> userTypes = new LinkedHashSet<UserType>();
@@ -114,7 +113,6 @@ public class ProtectedURLManager {
 				userTypes);
 
 		authorizationProtectionURLs.put("fileUploader", userTypes);
-		authorizationProtectionURLs.put("fileDownloader", userTypes);
 
 	}
 

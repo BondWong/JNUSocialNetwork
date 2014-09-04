@@ -1,7 +1,5 @@
 function activityClickEvent() {
 	$('body').on("click", "#activityCreate", function() {
-
-		var millisecond = Date.parse($('#activityTime').val()).toString();
 		var activityC = "";
 		if ($('#fileuploadA').val() != "") {
 			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
@@ -12,12 +10,13 @@ function activityClickEvent() {
 			postType : 'ACTIVITY',
 			attributes : {
 				activityName : $('#activityName').val(),
-				startDate : millisecond,
+				startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
+				remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
 				activityTime : $('#activityTime').val(),
 				activityAddr : $('#activityAddr').val(),
 				activityMore : $('#activityMore').val(),
 				background : activityC
-			},
+				},
 			imageLinks : []
 		};
 		var json = $.toJSON(post);
@@ -109,19 +108,35 @@ $('body').on('click', '.deletePostBtn', function() {
 	DeletePost(id);
 	$(".post" + id + "").remove();
 });
-var date = new Date();
-date.setDate(date.getDate() + 1);
-$('.form_datetime').datetimepicker({
-	// language: 'fr',
-	format : "MM dd,yyyy - hh:ii",
-	startDate : date,
-	todayBtn : 0,
-	autoclose : 1,
-	startView : 2,
-	Integer : 1,
-	forceParse : 0,
-	showMeridian : 1,
-	pickerPosition : "bottom-left"
+var date1 = new Date();
+date1.setDate(date1.getDate() + 1);
+$('.form_datetime1').datetimepicker({
+// language: 'fr',
+format : "MM dd,yyyy - hh:ii",
+startDate : date1,
+todayBtn : 0,
+autoclose : 1,
+startView : 2,
+Integer : 1,
+forceParse : 0,
+showMeridian : 1,
+pickerPosition : "bottom-left"
+});
+var date2 = new Date();
+var date3 = $('#activityTime').val();
+date2.setDate(date2.getDate() + 0.5);
+$('.form_datetime2').datetimepicker({
+// language: 'fr',
+format : "MM dd,yyyy - hh:ii",
+startDate : date2,
+endDate : date3,
+todayBtn : 0,
+autoclose : 1,
+startView : 2,
+Integer : 1,
+forceParse : 0,
+showMeridian : 1,
+pickerPosition : "bottom-left"
 });
 $(window)
 		.scroll(

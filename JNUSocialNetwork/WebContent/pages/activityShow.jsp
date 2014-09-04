@@ -36,8 +36,9 @@
 					<a class="btn btn-default downLoadList" target="_blank"
 						id="download-name-list-button">下载活动名单</a>
 					<script type="text/javascript">
+						var url = window.location.search;
 						var activityID = url.substr(url.indexOf("&") + 1);
-						document.getElementById("download-name-list-button").href = "app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
+						document.getElementById("download-name-list-button").href = "../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
 								+ activityID;
 					</script>
 				</div>
