@@ -28,11 +28,12 @@
 			<div class="activityInfo">
 				<p class="activityShowName">草地吉他弹唱会</p>
 				<div class="activityShare">
-
+					
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
-						data-target='#editActivity'>edit</button>
+						data-target='#editActivity'>编辑</button>
+					<a class="btn btn-default downLoadList">下载活动名单</a>
 				</div>
 			</div>
 		</div>
