@@ -147,11 +147,6 @@ $('body').on('click', '.alertCustC', function() {
 	$(this).css("display", "none");
 	communityPostIdContainer = [];
 });
-$('body').on('click', '.deletePostBtn', function() {
-	var id = $(this).find("input").attr("value");
-	DeletePostFromCommunity(community.ID, id);
-});
-
 
 $(window).scroll(
 		function() {

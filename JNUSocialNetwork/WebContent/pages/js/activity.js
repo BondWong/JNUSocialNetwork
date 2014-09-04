@@ -1,145 +1,270 @@
-function activityClickEvent() {
-	$('body').on("click", "#activityCreate", function() {
-		
-		var millisecond = Date.parse($('#activityTime').val() ).toString();
-		var activityC = "";
-		if ($('#fileuploadA').val() != "") {
-			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
-		} else {
-			activityC = 'images/default/default-activity-background.jpg';
+function communityClickEvent() {
+	$('body').on('click', '#communityCreate', function() {
+		var communityC = 'images/default/default-community-card.png';
+		if ($('#fileupload').val() != "") {
+			communityC = FileUpload(new FormData($('.communityForm')[0]))[0];
 		}
-		var post = {
-			postType : 'ACTIVITY',
+		var community = {
+			tags : [],
 			attributes : {
-				activityName : $('#activityName').val(),
-				startDate : millisecond,
-				activityTime : $('#activityTime').val(),
-				activityAddr : $('#activityAddr').val(),
-				activityMore : $('#activityMore').val(),
-				background : activityC
+				name : $('#communityName').val(),
+				introduct : $('#communityIntro').val(),
+				communityCard : communityC,
+				userID : USERID
 			},
-			imageLinks : []
+			communityType : $('#communityType').val()
 		};
-		var json = $.toJSON(post);
-		AddPostToCommunity(USERID, community.ID, json);
-		$('#activityCommunity').modal('hide');
-		$('.activityForm').get(0).reset();
+		var json = $.toJSON(community);
+		var community = AddCommunity(USERID, json);
+		fetchCommunityByID(community.ID);
+		$('#createCommunity').modal('hide');
+		$('.communityForm').get(0).reset();
 	});
+
+	// function joinCommunity
+	$('body').on(
+			'click',
+			'.content_join',
+			function() {
+				var id = $(this).find("input").attr("value");
+				if ($(this).css("background-color") == "rgb(255, 255, 255)") {
+					JoinCommunity(USERID, id);
+					$("div[id='" + id + "']")
+							.css("color", "rgb(255, 255, 255)");
+					$("div[id='" + id + "']").css("background-color",
+							"rgb(66,139,202)");
+					$("div[id='" + id + "']").find('span').text("Joined");
+					return 0;
+				} else {
+					LeaveCommunity(USERID, id);
+					$("div[id='" + id + "']").css("color", "rgb(66,139,202)");
+					$("div[id='" + id + "']").css("background-color",
+							"rgb(255, 255, 255)");
+					$("div[id='" + id + "']").find('span').text("Join");
+					return 0;
+				}
+			});
 }
-var pageSize = 15;
-// function fetchActivitiesByCommunity()
-function fetchActivitiesByCommunity() {
-	var response = FetchActivitiesByCommunity(community.ID, 0, pageSize);
-	$.each(response.reverse(), function(n, dataString) {
-		if(dataString.available == true){
-			addActivity(dataString.ID, dataString.attributes.activityName,
-					dataString.attributes.activityTime,
-					dataString.attributes.activityAddr,
-					dataString.attributes.activityMore,
-					dataString.attributes.background,
-					dataString.owner.attributes.avatarLink,dataString.owner.ID,dataString.participantIDs);
+// fetchCommunityByID
+function fetchCommunityByID(communityID) {
+	var community = FetchCommunityByID(communityID);
+	if (community.available == true) {
+		addCommunity(community.ID, community.attributes.name,
+				community.members.length, "myCommunity",
+				community.attributes.communityCard, community.members,
+				community.attributes.userID);
+	}
+}
+function fetchCommunityByOwner() {
+	var communities = FetchCommunityByOwner(USERID, "0", "8");
+	$.each(communities, function(n, community) {
+		if (community.available == true) {
+			addCommunity(community.ID, community.attributes.name,
+					community.members.length, "myCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
-function activity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
-	var pRemoveBtn = "";
-	if (USERID == ownerID) {
-		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
-				+ activityID
-				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
+function fetchCommunityByJoin() {
+	var communities = FetchCommunityByJoin(USERID, "0", "8");
+	$.each(communities, function(n, community) {
+		if (community.available == true) {
+			addCommunity(community.ID, community.attributes.name,
+					community.members.length, "myCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
+			
+		}
+	});
+}
+// fetchCommunity()
+function fetchHotCommunity() {
+	var communities = FetchCommunity("0", "8");
+	$.each(communities, function(n, community) {
+		if (community.available == true) {
+			addCommunity(community.ID, community.attributes.name,
+					community.members.length, "discoverCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
+		}
+	});
+}
+function fetchCommunityByType(communityType) {
+	var communities = FetchCommunityByType(communityType, "0", "8");
+	$.each(communities, function(n, community) {
+		if (community.available == true) {
+			addCommunity(community.ID, community.attributes.name,
+					community.members.length, community.communityType,
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
+		}
+	});
+}
+function fetchCommunitys() {
+	fetchCommunityByType("FOLK");
+	fetchCommunityByType("SCHOOLUNION");
+	fetchCommunityByType("OFFICIAL");
+
+}
+// 增加社区
+function addCommunity(id, name, memberNum, communityType, communityImg,
+		members, ownerID) {
+	var memberIDs = [];
+	$.each(members, function(n, member) {
+		memberIDs.push(member.ID);
+	});
+
+	var join = "<a><div class='content_join' id='" + id
+			+ "'><input type='hidden' value='" + id + "'><span>Join</span></div></a>";
+	if ($.inArray(USERID, memberIDs) != -1) {
+		join = "<a><div style='color: #FFF;background-color: #428BCA;' class='content_join' id='" + id
+		+ "'><input type='hidden' value='" + id + "'><span>Joined</span></div></a>";
 	}
-	var select = "";
-	if($.inArray(USERID,joinIDs) != -1){
-		select = "selected";
+	if (ownerID == USERID) {
+		join = '';
 	}
-	var boarddiv = "<div class='activity post"+activityID+"' >"+pRemoveBtn+"<div class='activityHref' id='"
-			+ activityID
-			+ "'><div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
-			+ imagelink
-			+ "' style='display: none'/></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
-			+ avatarLink
-			+ "' style='display: none'/></div><div class='activityName'><span>"
+	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
+			+ id
+			+ "'><img src='"
+			+ communityImg
+			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
-			+ "</span></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;"
-			+ time
-			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;"
-			+ addre
-			+ "</span></div><div class='activityD'><span>"
-			+ more
-			+ "</span></div></div><div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
-			+ activityID
-			+ "' "+select+">Yes</option><option class='leaveactivityJoin' id='"
-			+ activityID + "'>No</option></select></div></div>";
-	return boarddiv;
+			+ "</div><div class='content_count'>"
+			+ memberNum
+			+ " members</div>" + join + "</div></div>";
+	switch (communityType) {
+	case "discoverCommunity":
+		$(".communityDiscovery").after(boarddiv);
+		Msnry('.containerDiscovery', '.content_container', 265);
+		break;
+	case "myCommunity":
+		$(".myCommunity").after(boarddiv);
+		Msnry('.containerMy', '.content_container', 265);
+		break;
+	case "OFFICIAL":
+		$(".officalCommunity").after(boarddiv);
+		Msnry('.containerOffical', '.content_container', 265);
+		break;
+	case "SCHOOLUNION":
+		$(".schoolUnionCommunity").after(boarddiv);
+		Msnry('.containerSchool', '.content_container', 265);
+		break;
+	case "FOLK":
+		$(".folkCommunity").after(boarddiv);
+		Msnry('.containerFolk', '.content_container', 265);
+		break;
+	case "searchCommunity":
+		$(".searchCommunity").after(boarddiv);
+		Msnry('.containerSearch', '.content_container', 265);
+		break;
+	}
 }
-// function addActivity
-function addActivity(activityID, name, time, addre, more, imagelink, avatarLink,ownerID,joinIDs) {
-	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink,ownerID,joinIDs);
-	$(".activityBord").after(boarddiv);
-	Msnry('.activityBody', '.activity', 435);
+function fetchByType(communityType, communityTypeName, containerName) {
+	$('.container_community').remove();
+	var communityContainer = '<div class="container container_community"><div class="communityGroupTitle"><h3>'
+			+ communityTypeName
+			+ '</h3></div><div class="container '
+			+ containerName
+			+ '"><div class="'
+			+ communityType
+			+ '"></div></div></div>';
+	$('.communitySideBar').after(communityContainer);
 }
-
-function showCommunityInfo() {
-	$('.cName').html(community.attributes.name);
-	$('.cIntro').html(community.attributes.introduct);
-	$('.communityPic').find('img').attr("src",
-			community.attributes.communityCard);
-}
-// funtion sessionID
-$('body').on("click", ".communityHref", function() {
-	window.location.href = 'communityShow.jsp?' + community.ID;
-});
-
-$('body').on("click", ".activityHref", function() {
-	var id = $(this).attr("id");
-	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
-});
-$('body').on('click', '.deletePostBtn', function() {
-	var id = $(this).find("input").attr("value");
-	DeletePost(id);
-	$(".post"+id+"").remove();
-});
-var date = new Date();
-date.setDate(date.getDate() + 1);
-$('.form_datetime').datetimepicker({
-	// language: 'fr',
-	format : "MM dd,yyyy hh:ii",
-	startDate : date,
-	todayBtn : 0,
-	autoclose : 1,
-	startView : 2,
-	Integer : 1,
-	forceParse : 0,
-	showMeridian : 1,
-	pickerPosition : "bottom-left"
-});
-$(window)
-		.scroll(
+$(document)
+		.ready(
 				function() {
-					if ($(window).scrollTop() == $(document).height()
-							- window.windowHeight) {
-						var startIndex = $('.activity').length;
-						$('div#infinite_loader').show();
-						var response = FetchActivitiesByCommunity(communityID,
-								startIndex, pageSize);
-						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID,
-									dataString.attributes.activityName,
-									dataString.attributes.activityTime,
-									dataString.attributes.activityAddr,
-									dataString.attributes.activityMore,
-									dataString.attributes.background,dataString.owner.ID,dataString.participantIDs);
-							$(".activityBord").after(boarddiv);
-							Msnry('.activityBody', '.activity', 435);
-						});
-						if (response.length == pageSize) {
-							$('div#infinite_loader').hide();
-						} else {
-							$('div#infinite_loader')
-									.replaceWith(
-											'<div id="no_more_infinite_load"><span>no more</span></div>');
-							$(window).unbind("scroll");
-						}
-					}
+					// funtion sessionID
+					$('body').on("click", ".img_container", function() {
+						var comm = $(this).find("input").attr("value");
+						window.location.href = 'communityShow.jsp?' + comm;
+					});
+
+					$('body').on("click", ".myCommunityBtn", function() {
+						fetchByType("myCommunity", "我的社区", "containerMy");
+						$('.titleMy').css("display", "block");
+						$('.containerMy').css("display", "block");
+						fetchCommunityByJoin();
+						fetchCommunityByOwner();
+					});
+					$('body').on(
+							"click",
+							".officalCommunityBtn",
+							function() {
+								fetchByType("officalCommunity", "官方社区",
+										"containerOffical");
+								fetchCommunityByType("OFFICIAL");
+							});
+					$('body').on(
+							"click",
+							".studentUnionCommunityBtn",
+							function() {
+								fetchByType("schoolUnionCommunity", "社团组织",
+										"containerSchool");
+								fetchCommunityByType("SCHOOLUNION");
+							});
+					$('body').on("click", ".folkCommunityBtn", function() {
+						fetchByType("folkCommunity", "个人社区", "containerFolk");
+						fetchCommunityByType("FOLK");
+					});
+					$('body').on(
+							"click",
+							".discoverCommunityBtn",
+							function() {
+								fetchByType("communityDiscovery", "热门社区",
+										"containerDiscovery");
+								fetchHotCommunity();
+							});
+					$('body')
+							.on(
+									"click",
+									".searchCommunityBtn",
+									function() {
+										fetchByType(
+												"searchCommunity",
+												"<div class='searchCommunityBody'><span class='glyphicon glyphicon-search glyphicon-search-custom communitySearch' style='cursor: pointer;'></span> <span class='searchCommunityInput'>搜索社区</span></div> ",
+												"containerSearch");
+
+									});
+					$('body')
+							.on(
+									'click',
+									'.searchCommunityInput',
+									function() {
+										$(this)
+												.replaceWith(
+														"<input style='font-size:14px;' class='searchInput' placeholder='请输入社区名' maxLength='30'>");
+										$('.searchInput').focus();
+										$('.searchInput')
+												.blur(
+														function() {
+															search_user_input_value = $(
+																	this).val();
+															$(this)
+																	.replaceWith(
+																			"<span class='searchCommunityInput'>搜索社区</span>");
+														});
+									});
+					$('body')
+							.on(
+									'click',
+									'.communitySearch',
+									function() {
+										var communityInfo = encodeURI(search_user_input_value);
+										var communities = SearchCommunity(
+												communityInfo, "0", "5");
+										$
+												.each(
+														communities,
+														function(n, community) {
+															addCommunity(
+																	community.ID,
+																	community.attributes.name,
+																	community.members.length,
+																	"searchCommunity",
+																	community.attributes.communityCard,
+																	community.members);
+														});
+									});
+
 				});

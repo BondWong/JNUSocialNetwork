@@ -153,10 +153,7 @@ $('body').on('click', '.alertCust', function() {
 	$(this).css("display", "none");
 	postIdContainer = [];
 });
-$('body').on('click', '.deletePostBtn', function() {
-	var id = $(this).find("input").attr("value");
-	DeletePost(id);
-});
+
 $('body').on("click", ".post_more", function() {
 	var id = $(this).attr('id');
 	$("div[id='postImg" + id + "']").find('img').click();

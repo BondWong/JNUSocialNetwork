@@ -397,7 +397,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ likerIDs.length
 			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "' maxLength='20'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">Submit</button></div></div>" + comment + "</div>";
 
 	$("#commentText" + postID).blur(function() {

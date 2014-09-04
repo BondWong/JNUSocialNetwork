@@ -106,7 +106,7 @@
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
 				<span>Community Activities</span>
-				<button role="button" class="btn btn-primary" data-toggle='modal'
+				<button role="button" id="createActivityBtn" class="btn btn-primary" data-toggle='modal'
 					data-target='#activityCommunity'>Create Activity</button>
 			</div>
 			<div
@@ -213,7 +213,7 @@
 	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
-	<script src="js/activity.js"></script>
+	<script src="js/activityCommunity.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
@@ -232,6 +232,9 @@
 				$.each(community.members,function(n,member){
 					memberIDs.push(member.ID);
 				});
+				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
+					$('.cardSetter').css("display", "inline");
+				}
 				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
 					$('#leaveCommunityBtn').css("display", "inline");
 				}

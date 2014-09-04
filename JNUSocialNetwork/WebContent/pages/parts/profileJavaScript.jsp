@@ -121,8 +121,10 @@
 									- window.windowHeight) {
 								var startIndex = $('.post').length - 1;
 								$('div#infinite_loader').show();
+								var url = window.location.search;
+								var otherUserID = url.substr(url.indexOf("&") + 1);
 								var response = [];
-								response = FetchPostsByOwner(USERID,
+								response = FetchPostsByOwner(otherUserID,
 											startIndex, pageSize);
 								$.each(response, function(n, dataString) {
 									var boarddiv = post(dataString.owner.ID,

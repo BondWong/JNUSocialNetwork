@@ -1,8 +1,8 @@
 //function showActivityDetail
 function showActivityDetail(activity, community) {
 	$('.activityShowName').html(activity.attributes.activityName);
-	$('.activityShowTime').html("&nbsp;" + activity.attributes.activityTime);
-	$('.activityShowAddre').html("&nbsp;" + activity.attributes.activityAddr);
+	$('.aT').html(activity.attributes.activityTime);
+	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
 	$('.activityShowD').html("&nbsp;" + activity.attributes.activityMore);
 	$('.activityHead').find('img').attr("src", activity.attributes.background);
 	$('#addComment').attr("value", activity.ID);
@@ -32,9 +32,9 @@ function showActivityDetail(activity, community) {
 						comment = comment
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
-								+ "'><div class='aCommentItem'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
 								+ jsonComment.owner.attributes.avatarLink
-								+ "'style='display: none'><div class='user_name'><strong>"
+								+ "'style='display: none'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"
 								+ jsonComment.publishDate
@@ -48,7 +48,7 @@ function showActivityDetail(activity, community) {
 								+ jsonComment.ID
 								+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
 								+ activity.ID + "' value='" + jsonComment.ID
-								+ "' /></span></div><br><div>"
+								+ "' /></span></div><br><div class='aC'>"
 								+ "<span class='commentHead'>" + atComment
 								+ "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
