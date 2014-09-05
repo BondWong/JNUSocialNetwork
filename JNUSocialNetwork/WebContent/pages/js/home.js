@@ -11,9 +11,9 @@ var animateBlock={
 					//background:time:0-500.o
 					//text:time:500-733.o.p:10px;
 					//menu:time:633-900.o.p:-10px;
-					$("#js-band-bg").animate({opacity:1},500);
-					$("#js-band-text").delay(500).animate({top:330,opacity:1},233);
-					$("#js-header").delay(633).animate({top:0,opacity:1},267);
+					$(".band-bg").animate({opacity:1},500);
+				    $(".band-text").delay(500).animate({top:330,opacity:1},233);
+				    $(".header").delay(633).animate({top:0,opacity:1},267);
 					delete animateBlock.animations.band;
 				}
 			},

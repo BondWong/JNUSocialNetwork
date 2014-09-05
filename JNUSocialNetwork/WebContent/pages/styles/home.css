@@ -19,6 +19,8 @@ a:hover {
 	height: 80px;
 	min-width: 1200px;
 	z-index: 10;
+	top: -10px;
+	opacity: 0;
 }
 
 .header-contain {
@@ -91,6 +93,7 @@ a:hover {
 	overflow: hidden;
 	margin-top: -81px;
 	min-width: 1200px;
+	background-color: #000;
 }
 
 .band-bg {
@@ -99,18 +102,18 @@ a:hover {
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
+	opacity: 0;
 	background: url('../images/band-bg.jpg') no-repeat scroll center 0px
 		transparent;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
 	min-width: 1200px;
 }
 
 .band-text {
 	position: absolute;
 	top: 330px;
-	right: 80px;
+	right: 80px;;
+	opacity: 0;
+	text-align: right;
 }
 
 .band-contain {
