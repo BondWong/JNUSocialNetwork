@@ -38,15 +38,15 @@ li.list-group-heading {
 }
 
 li.blue {
-	background-color: CornflowerBlue;
+	background-color: #AFEEEE;
 }
 
 li.green {
-	background-color: Aquamarine;
+	background-color: #F5F5DC;
 }
 
 li.red {
-	background-color: IndianRed;
+	background-color: #98FB98;
 }
 
 a.white:hover {
