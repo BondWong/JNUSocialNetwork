@@ -11,6 +11,7 @@ import model.modelType.UserType;
 import persistence.DAO;
 import service.helper.CommunitySearchMap;
 import transaction.DAOTransaction;
+import utils.NumberManager;
 
 public class CreateCommunityTransaction extends DAOTransaction {
 
@@ -30,6 +31,7 @@ public class CreateCommunityTransaction extends DAOTransaction {
 		CommunitySearchMap.addRecord(community.getAttribute("name"),
 				community.getID() + "");
 		CommunitySearchMap.serialize();
+		NumberManager.incrementCommunityNum();
 		return community.toRepresentation();
 	}
 

@@ -8,7 +8,7 @@ import model.Member;
 import model.modelType.UserType;
 import service.helper.MemberSearchMap;
 import transaction.DAOTransaction;
-import utils.MemberNumManager;
+import utils.NumberManager;
 
 public class RegisterMemberTransaction extends DAOTransaction {
 	DAOTransaction transaction = new RegisterTransaction();
@@ -18,7 +18,7 @@ public class RegisterMemberTransaction extends DAOTransaction {
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
-		MemberNumManager.increment();
+		NumberManager.incrementMemberNum();
 		MemberSearchMap.deserialize();
 		String name = ((Map<String, String>)params[2]).get("name");
 		MemberSearchMap.addRecord(name, (String) params[0]);

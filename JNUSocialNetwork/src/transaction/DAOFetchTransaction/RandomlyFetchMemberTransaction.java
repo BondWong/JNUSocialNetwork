@@ -3,7 +3,7 @@ package transaction.DAOFetchTransaction;
 import javax.persistence.EntityManager;
 
 import transaction.DAOTransaction;
-import utils.MemberNumManager;
+import utils.NumberManager;
 
 public class RandomlyFetchMemberTransaction extends DAOTransaction {
 	DAOTransaction transaction = new FetchMembersTransaction();
@@ -14,8 +14,8 @@ public class RandomlyFetchMemberTransaction extends DAOTransaction {
 		// TODO Auto-generated method stub
 		return transaction
 				.execute("Member.fetch", null,
-						(int) Math.round((Math.random() * MemberNumManager
-								.get())), 500);
+						(int) Math.round((Math.random() * NumberManager
+								.getMemberNum())), 500);
 	}
 
 }

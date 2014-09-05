@@ -9,7 +9,7 @@ function showActivityDetail(activity, community) {
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
 	$('.communityNum').html(
-			activity.likerIDs.length + "&nbspare intesting in this activity");
+			activity.likerIDs.length+ activity.participantIDs.length + "&nbspare intesting in this activity");
 	var comments = FetchCommentByPost(activity.ID, "0", "5");
 	var comment = "";
 	$
@@ -76,10 +76,24 @@ function showActivityDetail(activity, community) {
 	if ($.inArray(USERID, activity.likerIDs) != -1) {
 		$('#activityLike').attr("class", "glyphicon glyphicon-heart");
 	}
+	if ($.inArray(USERID, activity.participantIDs) != -1) {
+		$('.activityJoin').attr("selected", "selected");
+	}
+	var memberIDs = [];
+	$.each(community.members, function(n, member) {
+		memberIDs.push(member.ID);
+	});
+	if ($.inArray(USERID, memberIDs) != -1) {
+		$('.activityAddCommunity').css("display","none");
+	}
 }
 $('body').on("click", ".glyphicon-heart-empty", function() {
 	LikePost(USERID, activity.ID);
 	$('.glyphicon-heart-empty').attr("class", "glyphicon glyphicon-heart");
+});
+$('body').on("click", ".activityAddCommunity", function() {
+	JoinCommunity(USERID,community.ID);;
+	$(this).fadeOut("300");
 });
 $('body').on("click", ".glyphicon-heart", function() {
 	CancelLikePost(USERID, activity.ID);

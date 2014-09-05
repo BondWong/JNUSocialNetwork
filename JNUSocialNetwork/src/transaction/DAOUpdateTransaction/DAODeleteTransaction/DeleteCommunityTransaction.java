@@ -7,8 +7,9 @@ import model.Community;
 import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
+import utils.NumberManager;
 
-public class DeleteCommunityTransaction extends DAOTransaction{
+public class DeleteCommunityTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -16,8 +17,8 @@ public class DeleteCommunityTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Community community = dao.get(Community.class, params[0]);
-		for(Post post : community.getPosts()) {
-			for(Comment comment : post.getComments()) {
+		for (Post post : community.getPosts()) {
+			for (Comment comment : post.getComments()) {
 				comment.delete();
 				comment.clearAttributes();
 				comment.clearLikers();
@@ -41,6 +42,7 @@ public class DeleteCommunityTransaction extends DAOTransaction{
 		community.clearTags();
 		community.delete();
 		dao.update(community);
+		NumberManager.decrementCommunityNum();
 		return community;
 	}
 

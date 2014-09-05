@@ -771,10 +771,9 @@ body {
 .editActivity {
 	display: none;
 	margin-left: 20px;
-	margin-top: -15px;
 }
 .downLoadList {
-
+	display:none;
 	margin-left: 20px;
 	margin-top: -15px;
 }

@@ -9,7 +9,7 @@ import model.Member;
 import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
-import utils.MemberNumManager;
+import utils.NumberManager;
 
 public class DeleteMemberTransaction extends DAOTransaction {
 
@@ -79,7 +79,7 @@ public class DeleteMemberTransaction extends DAOTransaction {
 		member.delete();
 		dao.update(member);
 		dao.update(account);
-		MemberNumManager.decrement();
+		NumberManager.decrementMemberNum();
 		return member;
 	}
 
