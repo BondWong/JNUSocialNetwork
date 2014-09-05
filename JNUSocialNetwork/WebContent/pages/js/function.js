@@ -379,7 +379,7 @@ function clickEvent() {
 		$('#editMembersBtn').css("display", "inline");
 		$('#deleteCommunityBtn').css("display", "inline");
 		$('.editActivity').css("display", "inline");
-		$('.downLoadList').css("display", "");
+		$('.downLoadList').css("display", "inline");
 		$('#activityLike').css("display", "none");
 	}
 
