@@ -23,6 +23,7 @@ import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
+import transaction.DAOFetchTransaction.RandomlyFetchCommunityTransaction;
 import transaction.DAOFetchTransaction.SearchCommunitiesTransaction;
 import transaction.DAOUpdateTransaction.CommunityAddTagTransaction;
 import transaction.DAOUpdateTransaction.CommunityRemoveTagTransaction;
@@ -118,11 +119,11 @@ public class CommunityService {
 		transaction = new RemoveCommunityMemberTransaction();
 		try {
 			transaction.execute(ID, memberID, communityID);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 		return Response.ok().build();
 	}
 
@@ -277,6 +278,27 @@ public class CommunityService {
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
 					"Community.fetchJoined", ID, null, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@Path("fetchRandomly/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@SuppressWarnings("unchecked")
+	public Response fetchRandomly(@PathParam("pageSize") int pageSize)
+			throws Exception {
+		transaction = new RandomlyFetchCommunityTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

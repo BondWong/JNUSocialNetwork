@@ -92,11 +92,13 @@ public class LoginServlet extends HttpServlet {
 			if (account != null && !account.isProtected(new Date())) {
 				if (password.equals(account.getPassword())) {
 					UAgentInfo uai = new UAgentInfo(request);
-					synchronized (session) {
-						session.setAttribute("ID", account.getID());
-						session.setAttribute("userType", account.getUserType());
-						session.setAttribute("isIE", uai.detectMSIE());
-						System.out.println("is it IE: " + uai.detectMSIE());
+					session.invalidate();
+					HttpSession newSession = request.getSession(true);
+					synchronized (newSession) {
+						newSession.setAttribute("ID", account.getID());
+						newSession.setAttribute("userType",
+								account.getUserType());
+						newSession.setAttribute("isIE", uai.detectMSIE());
 						account.setAutoLoginSeriesNum(session.getId());
 						Cookie cookie = new Cookie("ALG", session.getId());
 						cookie.setHttpOnly(true);
@@ -144,9 +146,12 @@ public class LoginServlet extends HttpServlet {
 
 		if (account != null && !account.isProtected(new Date())) {
 			if (password.equals(account.getPassword())) {
+				request.getSession(false).invalidate();
 				HttpSession session = request.getSession();
-				session.setAttribute("ID", account.getID());
-				session.setAttribute("userType", account.getUserType());
+				synchronized (session) {
+					session.setAttribute("ID", account.getID());
+					session.setAttribute("userType", account.getUserType());
+				}
 				response.setStatus(200);
 			} else {
 				account.setLastAccessDate(new Date());
