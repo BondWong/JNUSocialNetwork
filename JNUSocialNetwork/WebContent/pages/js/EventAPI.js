@@ -4,6 +4,8 @@ function Subscribe() {
 	var loc = window.location;
 	var url = "";
 	url = loc.protocol + "//" + loc.hostname + ":8080";
+	if (loc.protocol === "https:")
+		url = loc.protocol + "//" + loc.hostname + ":8443";
 	if (EventSource.isPolyfill !== undefined) {
 		var options = {};
 		options['bufferSizeLimit'] = 1024 * 1024; // 1mb in bytes...
@@ -310,7 +312,7 @@ function FetchActivitiesByCommunity(communityID, startIndex, pageSize) {
 	});
 	return response;
 }
-//fetchActivity
+// fetchActivity
 function FetchActivities(startIndex, pageSize) {
 	var response = "";
 	$.ajax({

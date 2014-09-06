@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import security.helper.LoginUserManager;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
@@ -99,11 +100,16 @@ public class LoginServlet extends HttpServlet {
 						newSession.setAttribute("userType",
 								account.getUserType());
 						newSession.setAttribute("isIE", uai.detectMSIE());
-						account.setAutoLoginSeriesNum(session.getId());
-						Cookie cookie = new Cookie("ALG", session.getId());
+
+						account.setAutoLoginSeriesNum(newSession.getId());
+						Cookie cookie = new Cookie("ALG", newSession.getId());
 						cookie.setHttpOnly(true);
 						cookie.setPath("/");
 						cookie.setMaxAge(15 * 24 * 60 * 60);
+
+						LoginUserManager.add(account.getID(),
+								account.getUserType());
+
 						response.addCookie(cookie);
 						response.sendRedirect("/pages/community.jsp");
 					}
