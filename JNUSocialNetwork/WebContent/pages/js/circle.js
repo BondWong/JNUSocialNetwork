@@ -100,8 +100,13 @@ $(document)
 									$.support.fileInput ? undefined
 											: 'disabled');
 					// function addPost
-					$('#btn_share').click(function(e) {
-						e.preventDefault();
+					$('body').on('click','.Btnshare',function(){
+						$('.postForm').get(0).reset();
+					});
+					$('body').on('click','.share_txt',function(){
+						$('.postForm').get(0).reset();
+					});
+					$('#btn_share').click(function() {
 						// var formData = new FormData($('.photofom'));
 
 						var post = {
@@ -112,14 +117,16 @@ $(document)
 							imageLinks : fileDri
 						};
 						var json = $.toJSON(post);
-						AddPost(USERID, json);
-						$('#addPostModal').modal('hide');
-						$('.postForm').get(0).reset();
-						fileDri = [];
-						$('.progress-bar').remove();
-						$('.files').remove();
-						$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
-						$('.progress').after("<div id='files' class='files'></div>");
+						if($('.postForm')[0].checkValidity()){
+							AddPost(USERID, json);
+							$('#addPostModal').modal('hide');
+							fileDri = [];
+							$('.progress-bar').remove();
+							$('.files').remove();
+							$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+							$('.progress').after("<div id='files' class='files'></div>");
+						}
+						
 					});
 				});
 // function fectchPostByFollowee

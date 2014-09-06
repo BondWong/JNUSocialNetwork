@@ -33,8 +33,10 @@
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
 						data-target='#editActivity'>编辑</button>
-					<div class="downLoadList"><a class="btn btn-default" target="_blank"
-						id="download-name-list-button">下载活动名单</a></div>
+					<div class="downLoadList">
+						<a class="btn btn-default" target="_blank"
+							id="download-name-list-button">下载活动名单</a>
+					</div>
 					<script type="text/javascript">
 						var url = window.location.search;
 						var activityID = url.substr(url.indexOf("&") + 1);
@@ -53,7 +55,8 @@
 							aria-hidden="true">&times;</button>
 						<h4 class="modal-title" id="myModalLabel">编辑活动</h4>
 					</div>
-					<form class="activityForm" enctype="multipart/form-data">
+					<form class="activityForm" enctype="multipart/form-data"
+						onsubmit="return false;">
 						<div class="modal-body modalBody">
 							<div class="activityItem">
 								<span>活动名：</span> <input type="text"
@@ -61,11 +64,22 @@
 									id="activityName" required autofocus maxLength="30" />
 							</div>
 							<div class="activityItem">
-								<span>活动时间：</span>
-								<div class="input-group date form_datetime col-lg-10"
+									<span>活动时间：</span>
+									<div class="input-group date form_datetime1 col-lg-10"
+										data-link-field="dtp_input1">
+										<input type="text" class="form-control activityInput"
+											id="activityTime" readonly required/> <span
+											class="input-group-addon"><i
+											class="glyphicon glyphicon-th"></i></span>
+									</div>
+								</div>
+							<div class="activityItem">
+								<span>提醒时间：</span>
+								<div class="input-group date form_datetime2 col-lg-10"
 									data-link-field="dtp_input1">
 									<input type="text" class="form-control activityInput"
-										id="activityTime" readonly /> <span class="input-group-addon"><i
+										id="activityRemind" readonly required /> <span
+										class="input-group-addon"><i
 										class="glyphicon glyphicon-th"></i></span>
 								</div>
 							</div>
@@ -97,7 +111,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="saveActivity"
+							<button type="sumbit" class="btn btn-primary" id="saveActivity"
 								value="upload">Save</button>
 						</div>
 					</form>
@@ -150,7 +164,8 @@
 						<p>Hosted by:</p>
 						<h1 class="communityName">Hubble Space Telescope</h1>
 						<p class="communityNum">2,569,262 have them in circles</p>
-						<button class="btn btn-danger activityAddCommunity">Add community</button>
+						<button class="btn btn-danger activityAddCommunity">Add
+							community</button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
@@ -174,32 +189,33 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/activityShow.js"></script>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		$(document).ready(
-				function() {
-					if (USERID != null && USERID != "") {
-						login_initialization(USERID);
-						clickEvent();
-						if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-							$('.aBodyAsk').css("display", "none");
-						}
-					} else {
-						clickOffEvent();
-					}
-					var url = window.location.search;
-					var activityID = url.substr(url.indexOf("&") + 1);
-					window.activity = FetchPostByID(activityID);
-					var communityID = url.substr(url.indexOf("?") + 1, url
-							.indexOf("&")
-							- url.indexOf("?") - 1);
-					window.community = FetchCommunityByID(communityID);
-					showActivityDetail(activity, community);
-				});
+		$(document)
+				.ready(
+						function() {
+							if (USERID != null && USERID != "") {
+								login_initialization(USERID);
+								clickEvent();
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+									$('.aBodyAsk').css("display", "none");
+								}
+							} else {
+								clickOffEvent();
+							}
+							var url = window.location.search;
+							var activityID = url.substr(url.indexOf("&") + 1);
+							window.activity = FetchPostByID(activityID);
+							var communityID = url.substr(url.indexOf("?") + 1,
+									url.indexOf("&") - url.indexOf("?") - 1);
+							window.community = FetchCommunityByID(communityID);
+							showActivityDetail(activity, community);
+						});
 	</script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 </body>

@@ -168,7 +168,7 @@ body {
 	background-color: #EEEEEE;
 	margin-top: 70px;
 	margin-left: 120px;
-	width: 1270px;
+	width: 1170px;
 }
 
 .communitySideBar {
@@ -660,7 +660,7 @@ body {
 	margin-top: 20px;
 	width: 20%;
 	margin-right: auto;
-	margin-left: 400px;
+	margin-left: auto;
 }
 
 .containerApp {
@@ -1759,4 +1759,7 @@ display: block;
 }
 #createActivityBtn{
 	display:none;
+}
+#nav-bar-avatar{
+	margin-top:-8px;
 }

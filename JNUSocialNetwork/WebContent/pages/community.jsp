@@ -82,32 +82,26 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">创建社区</h4>
 				</div>
-				<form class="communityForm" enctype="multipart/form-data">
+				<form class="communityForm" enctype="multipart/form-data"  >
 					<div class="modal-body modalBody">
 						<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
 								-->
 						<p>
 							<span>社区名：</span> <input type="text" class="form-control"
-								placeholder="" id="communityName" required autofocus
+								placeholder="" id="communityName" data-errormessage-value-missing="请输入社区名" required autofocus
 								autocomplete="off" required maxLength="20" />
 						</p>
 						<p>
-							<span>社区标签：</span> <input type="text" class="form-control"
-								placeholder="" id="communityTag" required autofocus
-								required="required" maxLength="20" />
-						</p>
-						<p>
 							<span>社区介绍：</span>
-							<textarea class="form-control" placeholder="" id="communityIntro"
-								required autofocus required="required" maxLength="100"
+							<textarea class="form-control" placeholder=""  id="communityIntro"
+								required autofocus data-errormessage-value-missing="请输入社区介绍" maxLength="100"
 								style="resize: none;"></textarea>
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
-								<option value="default">请选择</option>
-								<option value="SCHOOLUNION">SchoolUnion</option>
-								<option value="FOLK">Folk</option>
+								<option value="SCHOOLUNION">社团组织</option>
+								<option value="FOLK">个人社区</option>
 							</select>
 						</p>
 						<span>社区名片</span> <span class="btn btn-success fileinput-button">
@@ -121,7 +115,7 @@
 					<br />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="communityCreate"
+						<button type="submit" class="btn btn-primary" id="communityCreate"
 							value="upload">创建</button>
 					</div>
 				</form>

@@ -48,20 +48,20 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">管理社区</h4>
 						</div>
-						<form class="editCommunityForm" enctype="multipart/form-data">
+						<form class="editCommunityForm" enctype="multipart/form-data" onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" id="communityName" required autofocus
+										placeholder="" data-errormessage-value-missing="请输入社区名" id="communityName" required autofocus
 										maxLength="20" />
 								</p>
 								<p>
 									<span>社区介绍：</span>
 									<textarea type="text" class="form-control" placeholder=""
-										id="communityIntro" required autofocus maxLength="100"
+										id="communityIntro" data-errormessage-value-missing="请输入社区介绍" required autofocus maxLength="100"
 										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
@@ -77,7 +77,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="saveCommunity"
+								<button type="submit" class="btn btn-primary" id="saveCommunity"
 									value="upload">Save</button>
 							</div>
 						</form>
@@ -148,11 +148,11 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title" id="myModalLabel">Share Post</h4>
 							</div>
-							<form class="postForm" enctype="multipart/form-data">
+							<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
 										placeholder="share anything you what to share" maxLength="200"
-										style="resize: none;"></textarea>
+										style="resize: none;" required data-errormessage-value-missing="请输入内容"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -171,7 +171,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="btn_shareC"
+									<button type="submit" class="btn btn-primary" id="btn_shareC"
 										value="upload">Share</button>
 								</div>
 							</form>

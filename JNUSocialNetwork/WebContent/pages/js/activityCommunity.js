@@ -1,4 +1,7 @@
 function activityClickEvent() {
+	$('body').on("click",'#createActivityBtn',function(){
+		$('.activityForm').get(0).reset();
+	});
 	$('body').on("click", "#activityCreate", function() {
 		var activityC = "";
 		if ($('#fileuploadA').val() != "") {
@@ -19,10 +22,17 @@ function activityClickEvent() {
 				},
 			imageLinks : []
 		};
-		var json = $.toJSON(post);
-		AddPostToCommunity(USERID, community.ID, json);
-		$('#activityCommunity').modal('hide');
-		$('.activityForm').get(0).reset();
+		
+		if($('.activityForm')[0].checkValidity()){
+			if($('#activityTime').val()!=""){
+				var json = $.toJSON(post);
+				AddPostToCommunity(USERID, community.ID, json);
+				$('#activityCommunity').modal('hide');
+			}else{
+				$('#fail_popover').fadeIn("fast");
+				setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+			}
+		}
 	});
 }
 var pageSize = 15;

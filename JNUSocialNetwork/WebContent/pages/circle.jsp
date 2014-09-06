@@ -67,10 +67,10 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title" id="myModalLabel">分享有趣事儿</h4>
 							</div>
-							<form class="postForm" enctype="multipart/form-data">
+							<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" style="resize: none;" maxLength="200"></textarea>
+										type="text" style="resize: none;" maxLength="200" required></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -88,7 +88,7 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary" id="btn_share"
+									<button type="submit" class="btn btn-primary" id="btn_share"
 										value="upload">分享</button>
 								</div>
 							</form>

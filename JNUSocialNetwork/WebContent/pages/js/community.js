@@ -15,10 +15,11 @@ function communityClickEvent() {
 			communityType : $('#communityType').val()
 		};
 		var json = $.toJSON(community);
-		var community = AddCommunity(USERID, json);
-		fetchCommunityByID(community.ID);
-		$('#createCommunity').modal('hide');
-		$('.communityForm').get(0).reset();
+		if($('.communityForm')[0].checkValidity()){
+			var community = AddCommunity(USERID, json);
+			fetchCommunityByID(community.ID);
+		}
+
 	});
 
 	// function joinCommunity

@@ -101,12 +101,15 @@ $(document)
 									$.support.fileInput ? undefined
 											: 'disabled');
 					// function addPostToCommunity
-
+					$('body').on('click','.Btnshare',function(){
+						$('.postForm').get(0).reset();
+					});
+					$('body').on('click','.share_txt',function(){
+						$('.postForm').get(0).reset();
+					});
 					$('#btn_shareC').click(
-							function(e) {
-								e.preventDefault();
+							function() {
 								// var formData = new FormData($('.photofom'));
-
 								var post = {
 									postType : 'NORMAL',
 									attributes : {
@@ -115,14 +118,16 @@ $(document)
 									imageLinks : fileDri
 								};
 								var json = $.toJSON(post);
-								AddPostToCommunity(USERID, community.ID, json);
-								$('#addPostModal').modal('hide');
-								$('.postForm').get(0).reset();
-								fileDri = [];
-								$('.progress-bar').remove();
-								$('.files').remove();
-								$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
-								$('.progress').after("<div id='files' class='files'></div>");
+								if($('.postForm')[0].checkValidity()){
+									AddPostToCommunity(USERID, community.ID, json);
+									$('#addPostModal').modal('hide');
+									fileDri = [];
+									$('.progress-bar').remove();
+									$('.files').remove();
+									$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
+									$('.progress').after("<div id='files' class='files'></div>");
+								}
+								
 							});
 				});
 // function fetchPostByCommunity

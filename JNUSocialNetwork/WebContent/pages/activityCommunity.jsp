@@ -21,7 +21,6 @@
 	</div>
 	<!-- /.navbar -->
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust alertCustC">新消息！</div>
 		<div class="communityCard">
 			<div class="dropdown">
 				<div class="cardSetter glyphicon glyphicon-cog" type="button"
@@ -48,7 +47,8 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
 						</div>
-						<form class="communityForm" enctype="multipart/form-data">
+						<form class="editCommunityForm" enctype="multipart/form-data"
+							onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
@@ -77,7 +77,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="saveCommunity"
+								<button type="submit" class="btn btn-primary" id="saveCommunity"
 									value="upload">Save</button>
 							</div>
 						</form>
@@ -106,8 +106,9 @@
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
 				<span>Community Activities</span>
-				<button role="button" id="createActivityBtn" class="btn btn-primary" data-toggle='modal'
-					data-target='#activityCommunity'>Create Activity</button>
+				<button role="button" id="createActivityBtn" class="btn btn-primary"
+					data-toggle='modal' data-target='#activityCommunity'>Create
+					Activity</button>
 			</div>
 			<div
 				style="background-color: #247EEC; color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
@@ -123,7 +124,8 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">Create Activity</h4>
 						</div>
-						<form class="activityForm" enctype="multipart/form-data">
+						<form class="activityForm" enctype="multipart/form-data"
+							onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<div class="activityItem">
 									<span>活动名：</span> <input type="text"
@@ -135,7 +137,7 @@
 									<div class="input-group date form_datetime1 col-lg-10"
 										data-link-field="dtp_input1">
 										<input type="text" class="form-control activityInput"
-											id="activityTime" readonly /> <span
+											id="activityTime" readonly required /> <span
 											class="input-group-addon"><i
 											class="glyphicon glyphicon-th"></i></span>
 									</div>
@@ -145,7 +147,7 @@
 									<div class="input-group date form_datetime2 col-lg-10"
 										data-link-field="dtp_input1">
 										<input type="text" class="form-control activityInput"
-											id="activityRemind" readonly /> <span
+											id="activityRemind" readonly required /> <span
 											class="input-group-addon"><i
 											class="glyphicon glyphicon-th"></i></span>
 									</div>
@@ -171,26 +173,25 @@
 									</span>
 								</div>
 								<!-- The container for the uploaded files -->
-								<div id="files" class="files"></div>
-								<br>
-							</div>
-							<br></br>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary"
-									id="activityCreate" value="upload">Create</button>
-							</div>
-						</form>
+							
+							<br>
 					</div>
-					<!-- /.modal-content -->
+					<br></br>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="type" class="btn btn-primary" id="activityCreate"
+							value="upload">Create</button>
+					</div>
+					</form>
 				</div>
-				<!-- /.modal-dialog -->
+				<!-- /.modal-content -->
 			</div>
-			<div class="activityBody">
-				<div class="activityBord"></div>
-			</div>
+			<!-- /.modal-dialog -->
 		</div>
+		<div class="activityBody">
+			<div class="activityBord"></div>
+		</div>
+	</div>
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
@@ -227,31 +228,37 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var url = window.location.search;
-			window.communityID = url.substr(url.indexOf("?") + 1);
-			window.community = FetchCommunityByID(communityID);
-			Msnry('.activityBody', '.activity', 435);
-			fetchActivitiesByCommunity();
-			showCommunityInfo();
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				activityClickEvent();
-				clickEvent();
-				var memberIDs =[];
-				$.each(community.members,function(n,member){
-					memberIDs.push(member.ID);
-				});
-				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
-					$('.cardSetter').css("display", "inline");
-				}
-				if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) != -1) {
-					$('#leaveCommunityBtn').css("display", "inline");
-				}
-			} else {
-				clickOffEvent();
-			}
-		});
+		$(document)
+				.ready(
+						function() {
+							var url = window.location.search;
+							window.communityID = url
+									.substr(url.indexOf("?") + 1);
+							window.community = FetchCommunityByID(communityID);
+							Msnry('.activityBody', '.activity', 435);
+							fetchActivitiesByCommunity();
+							showCommunityInfo();
+							if (USERID != null && USERID != "") {
+								login_initialization(USERID);
+								activityClickEvent();
+								clickEvent();
+								var memberIDs = [];
+								$.each(community.members, function(n, member) {
+									memberIDs.push(member.ID);
+								});
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										|| $.inArray(USERID, memberIDs) != -1) {
+									$('.cardSetter').css("display", "inline");
+								}
+								if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'
+										&& $.inArray(USERID, memberIDs) != -1) {
+									$('#leaveCommunityBtn').css("display",
+											"inline");
+								}
+							} else {
+								clickOffEvent();
+							}
+						});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
 </body>

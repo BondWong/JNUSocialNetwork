@@ -48,7 +48,7 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
 						</div>
-						<form class="communityForm" enctype="multipart/form-data">
+						<form class="editCommunityForm" enctype="multipart/form-data" onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
@@ -77,7 +77,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="saveCommunity"
+								<button type="submit" class="btn btn-primary" id="saveCommunity"
 									value="upload">Save</button>
 							</div>
 						</form>
