@@ -102,10 +102,10 @@ function fetchCommunityByType(communityType) {
 	});
 }
 function fetchCommunitys() {
+	fetchHotCommunity();
 	fetchCommunityByType("FOLK");
 	fetchCommunityByType("SCHOOLUNION");
 	fetchCommunityByType("OFFICIAL");
-
 }
 // 增加社区
 function addCommunity(id, name, memberNum, communityType, communityImg,
