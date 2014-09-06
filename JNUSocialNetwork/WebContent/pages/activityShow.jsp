@@ -33,8 +33,8 @@
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
 						data-target='#editActivity'>编辑</button>
-					<a class="btn btn-default downLoadList" target="_blank"
-						id="download-name-list-button">下载活动名单</a>
+					<div class="downLoadList"><a class="btn btn-default" target="_blank"
+						id="download-name-list-button">下载活动名单</a></div>
 					<script type="text/javascript">
 						var url = window.location.search;
 						var activityID = url.substr(url.indexOf("&") + 1);
@@ -150,7 +150,7 @@
 						<p>Hosted by:</p>
 						<h1 class="communityName">Hubble Space Telescope</h1>
 						<p class="communityNum">2,569,262 have them in circles</p>
-						<button class="btn btn-danger">Add community</button>
+						<button class="btn btn-danger activityAddCommunity">Add community</button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
