@@ -41,7 +41,6 @@ function login_initialization(ID) {
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
 	}
-	
 
 	/*
 	 * SSE Handle
@@ -53,12 +52,15 @@ function login_initialization(ID) {
 	// window.ws = $.parseJSON(sessionStorage.getItem("websocket"));
 	var loc = window.location;
 	var wsurl = "";
+	var port = "";
 	if (loc.protocol === "https:") {
 		wsurl = "wss:";
+		port = "8443";
 	} else {
 		wsurl = "ws:";
+		port = "8080";
 	}
-	wsurl += "//" + loc.hostname + ":8080/endpoint/connect/" + ID;
+	wsurl += "//" + loc.hostname + ":" + port + "/endpoint/connect/" + ID;
 	window.ws = new WebSocket(wsurl);
 	ws.onopen = function(e) {
 
