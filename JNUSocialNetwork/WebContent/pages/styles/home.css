@@ -89,7 +89,7 @@ a:hover {
 
 .band {
 	position: relative;
-	min-height: 700px;
+	min-height: 650px;
 	overflow: hidden;
 	margin-top: -81px;
 	min-width: 1200px;
@@ -106,6 +106,22 @@ a:hover {
 	background: url('../images/band-bg.jpg') no-repeat scroll center 0px
 		transparent;
 	min-width: 1200px;
+}
+
+.band-about {
+	margin-top: 30px;
+}
+
+.band-about span {
+	display: inline-block;
+	padding-right: 18px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 18px;
+	color: #CECECE;
+	cursor: pointer;
+	background: url('../images/play-icon.png') no-repeat scroll right 0px
+		transparent;
 }
 
 .band-text {
@@ -138,6 +154,8 @@ a:hover {
 	color: #FFF;
 	border-radius: 50px;
 	transition: all 0.15s ease 0s;
+	background: url('../images/begin-text.png') no-repeat scroll center
+		center #A32929;
 }
 
 .btn-inner-join {
@@ -345,13 +363,14 @@ a:hover {
 	font-size: 32px;
 	padding: 40px 0px 30px;
 	line-height: 1em;
-	background: url('../images/course-text.png') no-repeat scroll center
+	background: url('../images/community-text.png') no-repeat scroll center
 		center transparent;
 }
 
 .communityShowItem {
 	display: inline-block;
 	margin-left: 20px;
+	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
 .icommunity-footer {
@@ -379,7 +398,7 @@ a:hover {
 }
 
 .hide-text {
-	width: 297px;
+	width: 350px;
 	height: 30px;
 	background: url('../images/join-text.png') no-repeat scroll 0% 0%
 		transparent;
@@ -459,4 +478,45 @@ a:hover {
 	padding: 20px 0px 25px;
 	text-align: center;
 	color: #B4BBBF;
+}
+
+.icommunity li:hover img {
+	transform: scale(1.2);
+}
+
+.img_container {
+	overflow: hidden;
+}
+
+.img_container img {
+	transition: all 0.3s ease 0s;
+	line-height: 1em;
+}
+.content_container{
+	margin:0px;
+	position: relative;
+	overflow: hidden;
+	
+}
+.content_info {
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	height: 118px;
+	background: none repeat scroll 0% 0% #FFF;
+	font-size: 12px;
+	transition: all 0.3s ease 0s;
+	z-index: 9;
+}
+
+.content_tips {
+	opacity: 0;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	height: 118px;
+	font-size: 12px;
+	transition: all 0.3s ease 0s;
+	z-index: 9;
 }
