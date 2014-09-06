@@ -1,5 +1,5 @@
 function addCommunity(id,name,memberNum,communityImg,introduce) {
-	var boarddiv = "<li class='communityShowItem'><div class='content_container'><a><div class='img_container'><input type='hidden' value='"
+	var boarddiv = "<li class='communityShowItem'><div class='community_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
 			+ communityImg
@@ -7,10 +7,26 @@ function addCommunity(id,name,memberNum,communityImg,introduce) {
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div></div><div class='content_tips'><div class='content_count'>"
+			+ " members</div></div><div class='content_tips'><p>"
 			+ introduce
-			+ "</div></div></div></div>";
+			+ "</p></div></div></div>";
+	
 	$('.communityBoard').after(boarddiv);
+	$('.community_container').hover(function(){
+		$(this).find('.content_info').animate({
+			opacity : 0
+		},"fast");
+		$(this).find('.content_tips').animate({
+			opacity : 1
+		},"fast");
+	},function(){
+		$(this).find('.content_info').animate({
+			opacity : 1
+		},"fast");
+		$(this).find('.content_tips').animate({
+			opacity : 0
+		},"fast");
+	});
 }
 
 function fetchHotCommunity() {
@@ -26,6 +42,7 @@ $('body').on("click", ".img_container", function() {
 	var comm = $(this).find("input").attr("value");
 	window.location.href = 'communityShow.jsp?' + comm;
 });
+
 /**
  * auto_resize
  */

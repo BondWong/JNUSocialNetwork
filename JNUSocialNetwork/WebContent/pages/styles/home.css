@@ -369,8 +369,11 @@ a:hover {
 
 .communityShowItem {
 	display: inline-block;
+	margin-top: 10px; margin-left : 20px;
+	border-radius: 0px 0px 1px 1px;
+	box-shadow: 0px 1px 2px #C5C5C5;
+	transition: all 0.3s ease 0s;
 	margin-left: 20px;
-	box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
 .icommunity-footer {
@@ -492,18 +495,18 @@ a:hover {
 	transition: all 0.3s ease 0s;
 	line-height: 1em;
 }
-.content_container{
-	margin:0px;
+
+.content_container {
+	margin: 0px;
 	position: relative;
 	overflow: hidden;
-	
 }
+
 .content_info {
 	position: absolute;
-
 	left: 0px;
 	right: 0px;
-	height: 118px;
+	height: 80px;
 	background: none repeat scroll 0% 0% #FFF;
 	font-size: 12px;
 	transition: all 0.3s ease 0s;
@@ -515,8 +518,29 @@ a:hover {
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	height: 118px;
+	height: 80px;
 	font-size: 12px;
 	transition: all 0.3s ease 0s;
+	font-size: 20px;
 	z-index: 9;
+}
+
+.content_tips p {
+	width: 85%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	padding-top: 10px;
+	height: 80px;
+	line-height: 20px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.community_container {
+	background-color: #FFF;
+	height: 375px;
+	width: 265px;
+	position: relative;
+	overflow: hidden;
 }

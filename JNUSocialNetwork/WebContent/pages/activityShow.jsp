@@ -185,6 +185,9 @@
 					if (USERID != null && USERID != "") {
 						login_initialization(USERID);
 						clickEvent();
+						if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+							$('.aBodyAsk').css("display", "none");
+						}
 					} else {
 						clickOffEvent();
 					}
