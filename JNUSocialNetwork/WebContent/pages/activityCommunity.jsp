@@ -153,6 +153,10 @@
 									</div>
 								</div>
 								<div class="activityItem">
+									<div id="fail_popover" class="alert alert-danger"
+									style="width: 97%;text-align:center;padding:0px;display:none;">请输入时间！</div>
+								</div>
+								<div class="activityItem">
 									<span>活动地点：</span>
 									<textarea class="form-control activityInput" placeholder=""
 										id="activityAddr" required autofocus maxLength="100"
@@ -173,25 +177,26 @@
 									</span>
 								</div>
 								<!-- The container for the uploaded files -->
-							
-							<br>
+
+
+							</div>
+							<br></br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="type" class="btn btn-primary" id="activityCreate"
+									value="upload">Create</button>
+							</div>
+						</form>
 					</div>
-					<br></br>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="type" class="btn btn-primary" id="activityCreate"
-							value="upload">Create</button>
-					</div>
-					</form>
+					<!-- /.modal-content -->
 				</div>
-				<!-- /.modal-content -->
+				<!-- /.modal-dialog -->
 			</div>
-			<!-- /.modal-dialog -->
+			<div class="activityBody">
+				<div class="activityBord"></div>
+			</div>
 		</div>
-		<div class="activityBody">
-			<div class="activityBord"></div>
-		</div>
-	</div>
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>

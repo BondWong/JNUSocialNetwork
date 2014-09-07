@@ -24,7 +24,7 @@ function activityClickEvent() {
 		};
 		
 		if($('.activityForm')[0].checkValidity()){
-			if($('#activityTime').val()!=""){
+			if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
 				var json = $.toJSON(post);
 				AddPostToCommunity(USERID, community.ID, json);
 				$('#activityCommunity').modal('hide');

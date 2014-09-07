@@ -84,6 +84,10 @@
 								</div>
 							</div>
 							<div class="activityItem">
+									<div id="fail_popover" class="alert alert-danger"
+									style="width: 97%;text-align:center;padding:0px;display:none;">请输入时间！</div>
+								</div>
+							<div class="activityItem">
 								<span>活动地点：</span>
 								<textarea class="form-control activityInput" placeholder=""
 									id="activityAddr" required autofocus maxLength="150"

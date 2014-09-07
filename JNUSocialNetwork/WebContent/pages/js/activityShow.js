@@ -120,13 +120,15 @@ $('body').on("click", "#saveActivity", function() {
 	}
 	var attributes = {
 		activityName : $('#activityName').val(),
-		startDate : Date.parse($('#activityTime').val()) + "",
+		startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
+		remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
 		activityTime : $('#activityTime').val(),
 		activityAddr : $('#activityAddr').val(),
 		activityMore : $('#activityMore').val(),
 		background : activityC
 	};
 	if($('.activityForm')[0].checkValidity()){
+		if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
 		var json = $.toJSON(attributes);
 		var aup = UpdateActivity(activity.ID, json);
 		$('#editActivity').modal('hide');
@@ -136,6 +138,10 @@ $('body').on("click", "#saveActivity", function() {
 		$('.activityShowD').html("&nbsp;" + aup.attributes.activityMore);
 		$('.activityHead').find('img').attr("src",
 				activityC);
+		}else{
+			$('#fail_popover').fadeIn("fast");
+			setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+		}
 	}
 });
 var date1 = new Date();
