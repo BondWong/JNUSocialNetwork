@@ -49,6 +49,10 @@
 								data-errormessage-too-long="不能超过200字" required maxLength="200"
 								style="resize: none;"></textarea>
 						</p>
+						<p>
+							<input name="statement" value="agree" type="checkbox" checked
+								required /><span>我同意责任申明</span>
+						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block"

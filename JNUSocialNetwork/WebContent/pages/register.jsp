@@ -48,6 +48,10 @@
 						</div>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
+						<p style="float: left;">
+							<input type="checkbox" name="statement" value="agree" checked
+								required /><span>我同意责任申明</span>
+						</p>
 						<button class="btn btn-lg btn-success btn-block signUpBtn"
 							type="submit">注册</button>
 						<h4>

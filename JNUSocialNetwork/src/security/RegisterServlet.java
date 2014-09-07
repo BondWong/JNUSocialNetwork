@@ -150,7 +150,7 @@ public class RegisterServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String statement = request.getParameter("statement");
-		if (statement == null || statement != "agree") {
+		if (statement == null || !statement.equals("agree")) {
 			response.sendRedirect("/pages/register.jsp?agree=false");
 			return;
 		}
