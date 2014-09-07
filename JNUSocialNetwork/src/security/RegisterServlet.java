@@ -149,6 +149,12 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String statement = request.getParameter("statement");
+		if (statement == null || statement != "agree") {
+			response.sendRedirect("/pages/register.jsp?agree=false");
+			return;
+		}
+
 		String txtFJM = request.getParameter("valCode");
 		String txtYHBS = request.getParameter("ID");
 		String txtYHMM = request.getParameter("password");

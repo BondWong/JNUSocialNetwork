@@ -184,9 +184,9 @@ a:hover {
 	position: absolute;
 	left: 120px;
 	top: 60px;
-	width: 135px;
+	width: 160px;
 	height: 183px;
-	background: url('../images/char-icon1.png') no-repeat scroll center
+	background: url('../images/char-icon1.fw.png') no-repeat scroll center
 		center transparent;
 }
 
@@ -197,7 +197,7 @@ a:hover {
 	margin-left: -90px;
 	width: 180px;
 	height: 181px;
-	background: url('../images/char-icon2.png') no-repeat scroll center
+	background: url('../images/char-icon2.fw.png') no-repeat scroll center
 		center transparent;
 }
 
@@ -205,9 +205,9 @@ a:hover {
 	position: absolute;
 	top: 65px;
 	right: 120px;
-	width: 166px;
+	width: 180px;
 	height: 181px;
-	background: url('../images/char-icon3.png') no-repeat scroll center
+	background: url('../images/char-icon3.fw.png') no-repeat scroll center
 		center transparent;
 }
 
@@ -224,12 +224,12 @@ a:hover {
 
 .intro1-img {
 	position: absolute;
-	width: 581px;
+	width: 431px;
 	height: 431px;
 	bottom: -30px;
-	left: -15px;
+	left: 50px;
 	z-index: 9;
-	background: url('../images/01-video.png') no-repeat scroll 0px 0px
+	background: url('../images/community2.png') no-repeat scroll 0px 0px
 		transparent;
 }
 
@@ -256,12 +256,12 @@ a:hover {
 
 .intro3-img {
 	position: absolute;
-	width: 581px;
-	height: 431px;
+	width: 431px;
+	height: 469px;
 	bottom: -30px;
-	left: -15px;
+	left: 50px;
 	z-index: 9;
-	background: url('../images/03-rockets.png') no-repeat scroll 0px 0px
+	background: url('../images/makingFriends.png') no-repeat scroll 0px 0px
 		transparent;
 }
 
@@ -288,11 +288,11 @@ a:hover {
 
 .intro2-img {
 	position: absolute;
-	width: 580px;
+	width: 431px;
 	height: 430px;
 	top: -30px;
-	right: 0px;
-	background: url('../images/02-computer2.png') no-repeat scroll center
+	right: 50px;
+	background: url('../images/intro3.png') no-repeat scroll center
 		0px transparent;
 }
 
@@ -319,20 +319,21 @@ a:hover {
 
 .intro4-img {
 	position: absolute;
-	right: 0px;
+	right: 50px;
 	top: -30px;
-	width: 581px;
-	height: 430px;
+	width: 431px;
+	height: 460px;
 	z-index: 9;
 	top: 0px;
-	background: url('../images/04-hand.png') no-repeat scroll 0px 0px
+	bottom: -30px;
+	background: url('../images/safe.png') no-repeat scroll 0px 0px
 		transparent;
 }
 
 .intro4-text {
 	position: absolute;
 	width: 422px;
-	height: 70px;
+	height: 90px;
 	top: 165px;
 	left: 146px;
 	background: url('../images/04-text.png') no-repeat scroll 0% 0%
@@ -543,4 +544,37 @@ a:hover {
 	width: 265px;
 	position: relative;
 	overflow: hidden;
+}
+.process{
+	height: 160px;
+	overflow: hidden;
+	background-color: #EEF1F2;
+	min-width: 1200px;
+	text-align:center;
+}
+.process ul{
+	margin-top:50px;
+}
+.process li{
+	display:inline-block;
+	width:124px;
+	height:100px;
+	margin-right:80px;
+}
+.i1{
+	background: url('../images/process1.fw.png') no-repeat scroll center
+		center transparent;
+}
+.i2{
+	background: url('../images/process2.fw.png') no-repeat scroll center
+		center transparent;
+}
+.i3{
+	background: url('../images/process3.fw.png') no-repeat scroll center
+		center transparent;
+}
+.i4{
+	width:106px;
+	background: url('../images/process4.fw.png') no-repeat scroll center
+		center transparent;
 }

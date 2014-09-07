@@ -90,6 +90,15 @@
 				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
 			</script>
 		</c:when>
+		<c:when test='${param.agree eq false}'>
+			<script type="text/javascript">
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-warning" id="coregister_status" style="display: none">请同意责任申明</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
+			</script>
+		</c:when>
 	</c:choose>
 </body>
 </html>

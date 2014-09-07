@@ -96,6 +96,13 @@
 				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
 			</script>
 		</c:when>
+		<c:when test="${param.agree eq false }">
+			<script type="text/javascript">
+				$("#register_fail").text("请同意责任申明");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
 	</c:choose>
 </body>
 </html>

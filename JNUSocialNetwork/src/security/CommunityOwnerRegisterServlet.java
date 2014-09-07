@@ -46,6 +46,12 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String statement = request.getParameter("statement");
+		if (statement == null || statement != "agree") {
+			response.sendRedirect("/pages/applyCommunity.jsp?agree=false");
+			return;
+		}
+
 		String hiddenCode = request.getParameter("hiddenCode");
 		HttpSession session = request.getSession();
 		String sessionHiddenCode = "";
