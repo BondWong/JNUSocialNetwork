@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>CampuSite</display-name>
-  
   <security-constraint>
-  	<web-resource-collection>
-        <web-resource-name>CampuSite</web-resource-name>
-        <url-pattern>/*</url-pattern>
+    <web-resource-collection>
+      <web-resource-name>CampuSite</web-resource-name>
+      <url-pattern>/*</url-pattern>
     </web-resource-collection>
     <user-data-constraint>
-        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
     </user-data-constraint>
-</security-constraint>
-  
-  
-	<session-config>
-		<cookie-config>
-			<http-only>true</http-only>
-			<secure>true</secure>
-		</cookie-config>
-		<tracking-mode>COOKIE</tracking-mode>
-	</session-config>
-  
+  </security-constraint>
+  <session-config>
+    <cookie-config>
+      <http-only>true</http-only>
+      <secure>true</secure>
+    </cookie-config>
+    <tracking-mode>COOKIE</tracking-mode>
+  </session-config>
   <listener>
     <listener-class>system.Initialtor</listener-class>
   </listener>

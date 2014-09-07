@@ -19,8 +19,6 @@ import javax.websocket.server.ServerEndpoint;
 import model.ServerSentEvent;
 import model.factory.ModelFactory;
 import model.modelType.SSEType;
-import model.modelType.UserType;
-import security.helper.LoginUserManager;
 import service.actionType.WebSocketAction;
 import service.helper.MapEncoder;
 import service.helper.ListEncoder;
@@ -49,12 +47,6 @@ public class WebSocketEndPoint {
 	@OnOpen
 	public void open(@PathParam(value = "ID") String ID, Session session,
 			EndpointConfig conf) throws Exception {
-		if (!(LoginUserManager.isLogin(ID))
-				|| !(LoginUserManager.isAuthorized(ID, UserType.COMMUNITYOWNER) || LoginUserManager
-						.isAuthorized(ID, UserType.MEMBER))) {
-			session.close();
-			return;
-		}
 		session.getUserProperties().put("ID", ID);
 
 		transaction = new SSEConnectTransaction();
@@ -144,13 +136,13 @@ public class WebSocketEndPoint {
 			throw e;
 		}
 		messageStorage.removeMessagesQueue(ID);
-		LoginUserManager.remove(ID);
 	}
 
 	@OnError
 	public void error(Session session, Throwable error) throws IOException {
 		error.printStackTrace();
-		session.close();
+		if (session.isOpen())
+			session.close();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

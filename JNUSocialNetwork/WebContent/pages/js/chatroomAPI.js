@@ -36,17 +36,21 @@ function create_chatroom(data, fromID, toID, toName, online, top, right) {
 	$("#chatroom").remove();
 	var chatroom = '<div id="chatroom" class="panel panel-default chat-room"><div class="panel-heading chat-room-header"><a id="chatroom-close" href="javaScript:void(0);" class="chat-room-close chat-room"><span class="glyphicon glyphicon-remove"></span></a><h3 class="panel-title">';
 	if (online) {
-		chatroom += '<span class="label label-success">'
+		chatroom += '<span class="label label-success" id="'
+				+ toID
+				+ '">'
 				+ toName
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
-				+ data.ID + '"><input type="hidden" id="fromID" value="'
-				+ fromID + '"></div>';
+				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
+				+ '"></div>';
 	} else {
-		chatroom += '<span class="label label-default">'
+		chatroom += '<span class="label label-default" id="'
+				+ toID
+				+ '">'
 				+ toName
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">More</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
-				+ data.ID + '"><input type="hidden" id="fromID" value="'
-				+ fromID + '"></div>';
+				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
+				+ '"></div>';
 	}
 
 	$("body").append(chatroom);
@@ -165,9 +169,8 @@ function do_receive(data) {
 			window.bellIntervalID = setInterval(function() {
 				$("a#remind-bell").fadeOut(300).fadeIn(300);
 			}, 600);
-	}
-	if ($("#chatroom") != null && $("#chatroom").is(":visible")
-			&& $("#chatroom #fromID").val() == data.toID) {
+	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
+			&& $("#chatroom #toID").val() == data.toID) {
 		append_to_content_panel(data, "other");
 		save_message(data);
 		oriented_send({
@@ -176,6 +179,13 @@ function do_receive(data) {
 			"ID" : data.ID,
 			"status" : "READ"
 		});
+	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
+			&& $("#chatroom #toID").val() != data.toID) {
+		save_online_remind_messages(data);
+		if (window.bellIntervalID == null)
+			window.bellIntervalID = setInterval(function() {
+				$("a#remind-bell").fadeOut(300).fadeIn(300);
+			}, 600);
 	}
 }
 

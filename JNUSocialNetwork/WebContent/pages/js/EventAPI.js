@@ -581,7 +581,6 @@ function AddCommunity(userID, JsonData) {
 		},
 		data : JsonData,
 		async : false,
-		cache : false,
 		contentType : "application/json",
 		success : function(data, status) {
 			response = data;

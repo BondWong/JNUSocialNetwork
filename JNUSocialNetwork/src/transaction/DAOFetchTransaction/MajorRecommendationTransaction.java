@@ -39,7 +39,8 @@ public class MajorRecommendationTransaction extends DAOTransaction {
 					&& mattributes.get("major").equals(
 							memberAttributes.get("major"))
 					&& !((List<String>) member.get("followeeIDs")).contains(m
-							.get("ID")))
+							.get("ID"))
+					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}
 

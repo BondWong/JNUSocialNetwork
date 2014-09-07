@@ -108,6 +108,9 @@ $('body').on("click", ".editActivity", function() {
 $('body').on("click", ".addcommunityA", function() {
 
 });
+$('body').on("click", ".editActivity", function() {
+	$('.activityForm').get(0).reset();
+});
 $('body').on("click", "#saveActivity", function() {
 	var activityC = "";
 	if ($('#fileupload').val() != "") {
@@ -117,20 +120,57 @@ $('body').on("click", "#saveActivity", function() {
 	}
 	var attributes = {
 		activityName : $('#activityName').val(),
-		startDate : Date.parse($('#activityTime').val()) + "",
+		startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
+		remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
 		activityTime : $('#activityTime').val(),
 		activityAddr : $('#activityAddr').val(),
 		activityMore : $('#activityMore').val(),
 		background : activityC
 	};
-	var json = $.toJSON(attributes);
-	var aup = UpdateActivity(activity.ID, json);
-	$('#editActivity').modal('hide');
-	$('.activityShowName').html(aup.attributes.activityName);
-	$('.activityShowTime').html("&nbsp;" + aup.attributes.activityTime);
-	$('.activityShowAddre').html("&nbsp;" + aup.attributes.activityAddr);
-	$('.activityShowD').html("&nbsp;" + aup.attributes.activityMore);
-	$('.activityHead').find('img').attr("src",
-			activityC);
-	$('.activityForm').get(0).reset();
+	if($('.activityForm')[0].checkValidity()){
+		if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
+		var json = $.toJSON(attributes);
+		var aup = UpdateActivity(activity.ID, json);
+		$('#editActivity').modal('hide');
+		$('.activityShowName').html(aup.attributes.activityName);
+		$('.aT').html("&nbsp;" + aup.attributes.activityTime);
+		$('.aA').html("&nbsp;" + aup.attributes.activityAddr);
+		$('.activityShowD').html("&nbsp;" + aup.attributes.activityMore);
+		$('.activityHead').find('img').attr("src",
+				activityC);
+		}else{
+			$('#fail_popover').fadeIn("fast");
+			setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+		}
+	}
+});
+var date1 = new Date();
+date1.setDate(date1.getDate() + 1);
+$('.form_datetime1').datetimepicker({
+// language: 'fr',
+format : "MM dd,yyyy - hh:ii",
+startDate : date1,
+todayBtn : 0,
+autoclose : 1,
+startView : 2,
+Integer : 1,
+forceParse : 0,
+showMeridian : 1,
+pickerPosition : "bottom-left"
+});
+var date2 = new Date();
+var date3 = $('#activityTime').val();
+date2.setDate(date2.getDate() + 0.5);
+$('.form_datetime2').datetimepicker({
+// language: 'fr',
+format : "MM dd,yyyy - hh:ii",
+startDate : date2,
+endDate : date3,
+todayBtn : 0,
+autoclose : 1,
+startView : 2,
+Integer : 1,
+forceParse : 0,
+showMeridian : 1,
+pickerPosition : "bottom-left"
 });

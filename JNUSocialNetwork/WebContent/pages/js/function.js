@@ -342,11 +342,12 @@ function clickEvent() {
 		var postID = $(this).find("input").attr("id");
 		DeleteComment(postID, commentID);
 	});
-	$('body').on("click", ".editCommunity", function() {
+	/*$('body').on("click", ".editCommunity", function() {
+	 * $('.editCommunityForm').get(0).reset();
 		$('#communityName').val(community.attributes.name);
 		$('#communityIntro').val(community.attributes.introduct);
 
-	});
+	});*/
 	$('body').on("click", "#leaveCommunityBtn", function() {
 		LeaveCommunity(USERID, communityID);
 	});
@@ -354,7 +355,7 @@ function clickEvent() {
 		DeleteCommunity(communityID);
 	});
 
-	$('body').on("click", "#saveCommunity", function() {
+	$('body').on("click", "#saveCommunity", function saveCommunity() {
 		var card = community.attributes.communityCard;
 		if ($('#fileuploadEdit').val() != "") {
 			card = FileUpload(new FormData($('.editCommunityForm')[0]))[0];
@@ -367,12 +368,13 @@ function clickEvent() {
 			communityCard : card
 		};
 		var json = $.toJSON(attributes);
-		var c = UpdateCommunity(community.ID, json);
-		$('#editCommunity').modal('hide');
-		$('.cName').html(c.attributes.name);
-		$('.cIntro').html(c.attributes.introduct);
-		$('.communityPic').find('img').attr("src", card);
-		$('.editCommunityForm').get(0).reset();
+		if($('.editCommunityForm')[0].checkValidity()){
+			var c = UpdateCommunity(community.ID, json);
+			$('#editCommunity').modal('hide');
+			$('.cName').html(c.attributes.name);
+			$('.cIntro').html(c.attributes.introduct);
+			$('.communityPic').find('img').attr("src", card);
+		}
 	});
 	if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 		$('#editCommunityBtn').css("display", "inline");
