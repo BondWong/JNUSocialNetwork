@@ -30,7 +30,8 @@ public class FolloweeRecommendationTransaction extends DAOTransaction {
 			retains.retainAll((List<String>) member.get("followeeIDs"));
 			if (retains.size() > 0
 					&& !((List<String>) member.get("followeeIDs")).contains(m
-							.get("ID")))
+							.get("ID"))
+					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}
 

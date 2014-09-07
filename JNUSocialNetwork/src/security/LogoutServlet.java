@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import security.helper.LoginUserManager;
-
 /**
  * Servlet implementation class UserLogoutServlet
  */
@@ -35,11 +33,9 @@ public class LogoutServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String ID = "";
 		synchronized (session) {
-			ID = (String) session.getAttribute("ID");
-			session.removeAttribute("ID");
 			session.removeAttribute("userType");
+			session.removeAttribute("ID");
 			session.removeAttribute("isIE");
 			session.invalidate();
 		}
@@ -47,8 +43,6 @@ public class LogoutServlet extends HttpServlet {
 		Cookie newCookie = new Cookie("ALG", null);
 		newCookie.setMaxAge(0);
 		newCookie.setPath("/");
-
-		LoginUserManager.remove(ID);
 
 		response.addCookie(newCookie);
 		response.sendRedirect("/pages/home.jsp");

@@ -49,6 +49,9 @@
 								data-errormessage-too-long="不能超过200字" required maxLength="200"
 								style="resize: none;"></textarea>
 						</p>
+						<p>
+							<input name="statement" value="agree" type="checkbox" checked/><span>我同意责任申明</span>
+						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block"
@@ -86,6 +89,15 @@
 				$("#coregister_status")
 						.replaceWith(
 								'<div class="alert alert-warning" id="coregister_status" style="display: none">ID已经存在</div>');
+				$("#coregister_status").fadeIn("fast");
+				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
+			</script>
+		</c:when>
+		<c:when test='${param.agree eq false}'>
+			<script type="text/javascript">
+				$("#coregister_status")
+						.replaceWith(
+								'<div class="alert alert-warning" id="coregister_status" style="display: none">请同意责任申明</div>');
 				$("#coregister_status").fadeIn("fast");
 				setTimeout('$("#coregister_status").fadeOut("slow")', 5000);
 			</script>

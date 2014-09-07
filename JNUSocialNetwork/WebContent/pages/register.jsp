@@ -48,6 +48,9 @@
 						</div>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
+						<p style="float:left;">
+							<input type="checkbox" required/><span>我同意责任申明</span>
+						</p>
 						<button class="btn btn-lg btn-success btn-block signUpBtn"
 							type="submit">注册</button>
 						<h4>
@@ -92,6 +95,13 @@
 		<c:when test='${param.error == "IDORPAERROR"}'>
 			<script type="text/javascript">
 				$("#register_fail").text("ID或者密码错误");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+		<c:when test="${param.agree eq false }">
+			<script type="text/javascript">
+				$("#register_fail").text("请同意责任申明");
 				$("#register_fail").fadeIn("fast");
 				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
 			</script>

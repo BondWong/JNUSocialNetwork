@@ -20,10 +20,22 @@ function on_friends_node_click() {
 						+ chatRooms[i].m2.avatarLink
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m2.name;
-				if (!chatRooms[i].online)
-					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></a></div>';
+				var online = false;
+				var IDs = sessionStorage.getItem("onlineUserIDs");
+				IDs = $.parseJSON(IDs);
+				for (var j = 0; j < IDs.length; j++)
+					if (IDs[j] == chatRooms[i].m2ID) {
+						online = true;
+						break;
+					}
+				if (!online)
+					info += '<span class="glyphicon glyphicon-stop" id="'
+							+ chatRooms[i].m2ID
+							+ '" style="color: rgb(169, 169, 169);"></span></p></a></div>';
 				else
-					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
+					info += '<span class="glyphicon glyphicon-stop" id="'
+							+ chatRooms[i].m2ID
+							+ '"style="color: rgb(45, 189, 48);"></span></p></a></div>';
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRooms[i].m2ID).click(function() {
 					var name = sessionStorage.getItem("userNameID");
@@ -39,10 +51,22 @@ function on_friends_node_click() {
 						+ chatRooms[i].m1.avatarLink
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m1.name;
-				if (!chatRooms[i].online)
-					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></a></div>';
+				var online = false;
+				var IDs = sessionStorage.getItem("onlineUserIDs");
+				IDs = $.parseJSON(IDs);
+				for (var j = 0; j < IDs.length; j++)
+					if (IDs[j] == chatRooms[i].m1ID) {
+						online = true;
+						break;
+					}
+				if (!online)
+					info += '<span class="glyphicon glyphicon-stop" id="'
+							+ chatRooms[i].m1ID
+							+ '" style="color: rgb(169, 169, 169);"></span></p></a></div>';
 				else
-					info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
+					info += '<span class="glyphicon glyphicon-stop" id="'
+							+ chatRooms[i].m1ID
+							+ '" style="color: rgb(45, 189, 48);"></span></p></a></div>';
 				$("#contact-list .friends-tree-node").append(info);
 				$("#contact-list #" + chatRooms[i].m1ID).click(function() {
 					var name = sessionStorage.getItem("userNameID");
@@ -96,10 +120,22 @@ function add_to_friend_list() {
 					+ chatRooms[i].m2.avatarLink
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m2.name;
-			if (!chatRooms[i].online)
-				info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></a></div>';
+			var online = false;
+			var IDs = sessionStorage.getItem("onlineUserIDs");
+			IDs = $.parseJSON(IDs);
+			for (var j = 0; j < IDs.length; j++)
+				if (IDs[j] == chatRooms[i].m2ID) {
+					online = true;
+					break;
+				}
+			if (!online)
+				info += '<span class="glyphicon glyphicon-stop" id="'
+						+ chatRooms[i].m2ID
+						+ '" style="color: rgb(169, 169, 169);"></span></p></a></div>';
 			else
-				info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
+				info += '<span class="glyphicon glyphicon-stop" id="'
+						+ chatRooms[i].m2ID
+						+ '" style="color: rgb(45, 189, 48);"></span></p></a></div>';
 			$("#contact-list .friends-tree-node").append(info);
 			$("#contact-list #" + chatRooms[i].m2ID).click(function() {
 				var name = sessionStorage.getItem("userNameID");
@@ -114,10 +150,22 @@ function add_to_friend_list() {
 					+ chatRooms[i].m1.avatarLink
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m1.name;
-			if (!chatRooms[i].online)
-				info += '<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span></p></a></div>';
+			var online = false;
+			var IDs = sessionStorage.getItem("onlineUserIDs");
+			IDs = $.parseJSON(IDs);
+			for (var j = 0; j < IDs.length; j++)
+				if (IDs[j] == chatRooms[i].m1ID) {
+					online = true;
+					break;
+				}
+			if (!online)
+				info += '<span class="glyphicon glyphicon-stop" id="'
+						+ chatRooms[i].m1ID
+						+ '" style="color: rgb(169, 169, 169);"></span></p></a></div>';
 			else
-				info += '<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span></p></a></div>';
+				info += '<span class="glyphicon glyphicon-stop" id="'
+						+ chatRooms[i].m1ID
+						+ '" style="color: rgb(45, 189, 48);"></span></p></a></div>';
 			$("#contact-list .friends-tree-node").append(info);
 			$("#contact-list #" + chatRooms[i].m1ID).click(function() {
 				var name = sessionStorage.getItem("userNameID");

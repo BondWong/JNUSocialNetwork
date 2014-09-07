@@ -89,7 +89,7 @@ a:hover {
 
 .band {
 	position: relative;
-	min-height: 650px;
+	min-height: 680px;
 	overflow: hidden;
 	margin-top: -81px;
 	min-width: 1200px;
@@ -103,7 +103,7 @@ a:hover {
 	right: 0px;
 	bottom: 0px;
 	opacity: 0;
-	background: url('../images/band-bg.jpg') no-repeat scroll center 0px
+	background: url('../images/band-bg.fw.png') no-repeat scroll center 0px
 		transparent;
 	min-width: 1200px;
 }

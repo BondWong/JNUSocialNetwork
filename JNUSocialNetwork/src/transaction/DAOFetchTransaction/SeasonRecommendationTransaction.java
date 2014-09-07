@@ -28,7 +28,7 @@ public class SeasonRecommendationTransaction extends DAOTransaction {
 				.execute(params);
 		Map<String, String> memberAttributes = (Map<String, String>) member
 				.get("attributes");
-		
+
 		for (Map<String, Object> m : members) {
 			Map<String, String> mattributes = (Map<String, String>) m
 					.get("attributes");
@@ -39,7 +39,8 @@ public class SeasonRecommendationTransaction extends DAOTransaction {
 					&& mattributes.get("season").equals(
 							memberAttributes.get("season"))
 					&& !((List<String>) member.get("followeeIDs")).contains(m
-							.get("ID")))
+							.get("ID"))
+					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}
 
