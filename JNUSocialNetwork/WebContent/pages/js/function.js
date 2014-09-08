@@ -9,7 +9,20 @@ function Msnry(selectContain, item, width) {
 		});
 	});
 }
-
+function freeWall(selectContain, item, width){
+	var wall = new freewall(selectContain);
+	wall.reset({
+		selector: item,
+		animate: true,
+		cellW: width,
+		cellH: 200,
+		gutterX : 20,
+		onResize: function() {
+			ewall.fitWidth();
+		}
+	});
+	wall.fitWidth();
+}
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
 	var response = FetchCommentByPost(postID, "0", "10");
