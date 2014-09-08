@@ -28,7 +28,7 @@ a:hover {
 	margin-left: auto;
 	margin-right: auto;
 	height: 80px;
-	border-bottom: 1px solid #222526;
+	
 }
 
 .logo-contain {
@@ -65,12 +65,12 @@ a:hover {
 .right-item a {
 	display: block;
 	height: 80px;
-	font-size: 14px;
+	font-size: 18px;
 	line-height: 80px;
 	padding: 0px 10px;
 	transition: all 0.3s ease 0s;
-	color: #656E73;
-	border-bottom: 1px solid #222526;
+	color: #000;
+	
 }
 
 .right-item a:hover {
@@ -103,7 +103,7 @@ a:hover {
 	right: 0px;
 	bottom: 0px;
 	opacity: 0;
-	background: url('../images/band-bg.fw.png') no-repeat scroll center 0px
+	background: url('../images/band-bg3.fw.png') no-repeat scroll center 0px
 		transparent;
 	min-width: 1200px;
 }
@@ -156,6 +156,11 @@ a:hover {
 	transition: all 0.15s ease 0s;
 	background: url('../images/begin-text.png') no-repeat scroll center
 		center #A32929;
+}
+
+.btn-inner-join {
+	padding-top: 40px;
+	text-align: center;
 }
 
 .btn-inner-join {

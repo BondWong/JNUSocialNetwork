@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:scriptlet>String uri = request.getRequestURI();
+			boolean isHome = uri.contains("home.jsp");
+			boolean needChatRoom = !(uri.contains("aboutUs.jsp")
+					|| uri.contains("register.jsp")
+					|| uri.contains("applyCommunity.jsp")
+					|| uri.contains("login.jsp") || uri.contains("home.jsp"));
+			request.setAttribute("isHome", isHome);
+			request.setAttribute("needChatRoom", needChatRoom);</jsp:scriptlet>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- <meta http-equiv="pragma" content="no-cache">
@@ -23,8 +31,17 @@
     <![endif]-->
 
 <!-- Custom styles for this template -->
-<link href="styles/custom.css" rel="stylesheet">
-<link href="styles/instant-chat.css" rel="stylesheet">
+<c:choose>
+	<c:when test="${requestScope.isHome}">
+		<link href="styles/home.css" rel="stylesheet">
+	</c:when>
+	<c:otherwise>
+		<link href="styles/custom.css" rel="stylesheet">
+	</c:otherwise>
+</c:choose>
+<c:if test="${requestScope.needChatRoom }">
+	<link href="styles/instant-chat.css" rel="stylesheet">
+</c:if>
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="styles/jquery.fileupload.css">
 <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet"
