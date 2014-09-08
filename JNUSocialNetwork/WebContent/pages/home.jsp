@@ -7,207 +7,268 @@
 <%@ include file="parts/head.jsp"%>
 
 <body>
-	<div class="navbar-wrapper">
-		<div class="container">
-			<div class="navbar navbar-inverse navbar-static-top"
-				role="navigation">
+	<div class="header">
+		<div class="header-contain">
+			<div class="navbar-wrapper">
 				<div class="container">
-					<%@ include file="parts/navLeft.jsp"%>
-					<div class="navbar-collapse collapse">
-						<%@ include file="parts/communityDropDown.jsp"%>
-						<%@ include file="parts/navRight.jsp"%>
+					<div class="navbar navbar-inverse navbar-static-top"
+						role="navigation">
+						<div class="container">
+							<%@ include file="parts/navLeft.jsp"%>
+							<div class="navbar-collapse collapse">
+								<%@ include file="parts/communityDropDown.jsp"%>
+								<%@ include file="parts/navRight.jsp"%>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Carousel
-    ================================================== -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="item active">
-				<img src="images/guitar_top_1.jpg" />
-				<div class="container">
-					<div class="carousel-caption">
 
-						<p>
-							<a class="btn btn-lg btn-success" href="register.jsp"
-								role="button" id="showBtn">快速注册</a>
-						</p>
-					</div>
-				</div>
+	<!-- <div class="header">
+		<div class="header-contain">
+			<div class='logo-contain'>
+				<a class='logo'></a>
 			</div>
-			<div class="item">
-				<img src="images/guitar_top_3.jpg" />
-				<div class="container">
-					<div class="carousel-caption">
-
-						<p>
-							<a class="btn btn-lg btn-success" href="community.jsp"
-								role="button">发现社区</a>
-						</p>
-					</div>
-				</div>
+			<div class='header-right'>
+				<ul>
+					<li class='right-item'><a href="aboutUs.jsp">Campusite</a></li>
+					<li class='right-item'><a href="login.jsp">登录</a></li>
+					<li class='right-item'><a href="register.jsp">注册</a></li>
+				</ul>
 			</div>
-			<div class="item">
-				<img src="images/guitar_top_2.jpg" />
-				<div class="container">
-					<div class="carousel-caption">
+			<ul class="head-mid">
+				<li class='right-item'><a href="community.jsp">社区</a></li>
+				<li class='right-item'><a href="circle.jsp">朋友圈</a></li>
+			</ul>
 
-						<p>
-							<a class="btn btn-lg btn-success" href="people.jsp" role="button">寻找伙伴</a>
-						</p>
-					</div>
+		</div>
+	</div> -->
+	<div class="band">
+		<div class="band-bg"></div>
+
+		<div class="band-contain">
+			<div class="band-text">
+				<h1 class="band-title"></h1>
+				<div class="btn-inner">
+					<div class="btn btn-danger btnFind"></div>
 				</div>
 			</div>
 		</div>
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
-			class="glyphicon glyphicon-chevron-left"></span></a> <a
-			class="right carousel-control" href="#myCarousel" data-slide="next"><span
-			class="glyphicon glyphicon-chevron-right"></span></a>
 	</div>
-	<!-- /.carousel -->
-	<!-- Marketing messaging and featurettes
-    ================================================== -->
-	<!-- Wrap the rest of the page in another container to center all the content. -->
-
-	<div class="container marketing">
-
-		<!-- Three columns of text below the carousel -->
-		<div class="row">
-			<div class="col-lg-4">
-				<img class="img-circle" src="images/guitar_s1.jpg" />
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
-					euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-					Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-					Praesent commodo cursus magna.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="img-circle" src="images/guitar_s4.jpg" />
-				<h2>Heading</h2>
-				<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-					ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
-					purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo,
-					tortor mauris condimentum nibh.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="img-circle" src="images/guitar_s6.jpg" />
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-					nibh, ut fermentum massa justo sit amet risus.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
+	<div class="characters">
+		<div class="characters-container">
+			<span class="char-icon1"></span> <span class="char-icon2"></span> <span
+				class="char-icon3"></span>
 		</div>
-		<!-- /.row -->
-		<!-- START THE FEATURETTES -->
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					Who we are? <span class="text-muted">It'll blow your mind.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-5">
-				<img class="img-circle2" src="images/guitar_low_1.jpg" />
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-5">
-				<img class="img-circle2" src="images/guitar_low_3.jpg" />
-			</div>
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					Great WebApp is what we do. <span class="text-muted">See for
-						yourself.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					And lastly, this one. <span class="text-muted">Checkmate.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-5">
-				<img class="img-circle2" src="images/guitar_low_2.jpg" />
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<!-- /END THE FEATURETTES -->
-
-		<!-- FOOTER -->
-		<%@ include file="parts/footer.jsp"%>
 	</div>
-	<!-- /.container -->
+	<div class="intro1">
+		<div class="intro1-wrap">
+			<div class="intro1-img"></div>
+			<div class="intro1-text"></div>
+		</div>
+	</div>
+	<div class="intro2">
+		<div class="intro2-wrap">
+			<div class="intro2-text"></div>
+			<div class="intro2-img"></div>
+		</div>
+	</div>
+	<div class="intro3">
+		<div class="intro3-wrap">
+			<div class="intro3-img"></div>
+			<div class="intro3-text"></div>
+		</div>
+	</div>
+	<div class="intro4">
+		<div class="intro4-wrap">
+			<div class="intro4-text"></div>
+			<div class="intro4-img"></div>
+		</div>
+	</div>
+	<div class="process">
+		<ul>
+			<li class="i1"></li>
+			<li class="i2"></li>
+			<li class="i3"></li>
+			<li class="i4"></li>
+		</ul>
+	</div>
+	<div class="icommunity">
+		<div class="icommunity-contain">
+			<h1 class="icommunity-title"></h1>
+			<ul class="icommunity-container">
+				<li class="communityBoard"></li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+				<li class='communityShowItem'>
+					<div class="community_container">
+						<a>
+							<div class="img_container">
+								<input type="hidden" value="1409916593799"> <img
+									width="265" height="265" style=""
+									onload="javascript:auto_resize(267, 267, this)"
+									src="images/default/default-community-card.png">
+							</div>
+						</a>
+						<div class="content_info">
+							<div class="conten_head">qwq</div>
+							<div class="content_count">0 members</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="icommunity-footer">
+			<a href="">全部社区</a>
+		</div>
+	</div>
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+	<div class="joinCampusite">
+		<h1 class="hide-text"></h1>
+		<div class="btn-inner-join">
+			<div class="btn btn-danger btnFind"></div>
+		</div>
+	</div>
+
+	<div class="footer-home">
+		<div class="footer-wrap">
+			<a class="footer-weibo"></a> <a class="footer-weixin"></a> <a
+				class="footer-qqbo"></a> <a class="footer-qqzone"></a>
+		</div>
+		<div class="footer-link">
+			<a>关于我们</a> <a>加入我们</a> <a>联系我们</a> <a>意见反馈</a> <a>友情链接</a>
+		</div>
+		<div class="footer-copyright">© 2014 campusite.com.cn
+			粤ICP备13046642号</div>
+	</div>
 	<script src="js/jquery-1.10.2.js"></script>
-	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
-	<script src="js/EventHandle.js"></script>
-	<script src="js/global-initialization.js"></script>
-	<%@ include file="parts/loginJavaScript.jsp"%>
-	<script type="text/javascript" src="js/home-initialization.js"></script>
+	<script src="js/home.js"></script>
 	<script type="text/javascript">
-		if (USERID != "") {
-			$('#showBtn').css("display", "none");
-			$(document)
-			.click(
-					function(e) {
-						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-						if (dragel !== target && !$.contains(dragel, target)) {
-							drag.fadeOut(300);
-						}
-					});
-		}
+		$(".band-bg").animate({
+			opacity : 1
+		}, 500);
+		$(".band-text").delay(500).animate({
+			top : 330,
+			opacity : 1
+		}, 233);
+		$(".header").delay(633).animate({
+			top : 0,
+			opacity : 1
+		}, 267);
+		fetchHotCommunity();
 	</script>
 </body>
 </html>

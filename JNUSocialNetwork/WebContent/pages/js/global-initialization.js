@@ -155,7 +155,7 @@ function login_initialization(ID) {
 	});
 	$("#lougout_button").click(function() {
 		sessionStorage.clear();
-		ws.close("logout");
+		ws.close();
 	});
 }
 
@@ -186,19 +186,13 @@ function handle_event(data) {
 
 function handle_connect(data) {
 	data = $.parseJSON(data.data);
-	var chatRooms = sessionStorage.getItem("chatrooms");
-	chatRooms = $.parseJSON(chatRooms);
-	for (var i = 0; i < chatRooms.length; i++)
-		if (chatRooms[i].m1ID == data.ID || chatRooms[i].m2ID == data.ID)
-			chatRooms[i].online = true;
-	sessionStorage.setItem("chatrooms", JSON.stringify(chatRooms));
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(45, 189, 48);"></span>');
-	if ($("#chatroom span.label-default").length != 0) {
-		$("#chatroom span.label-default").replaceWidth(
-				'<span class="label label-success">'
-						+ $("#chatroom span.label-default").text() + '</span>');
+	if ($("#chatroom span#" + data.ID).length != 0) {
+		$("#chatroom span#" + data.ID).replaceWith(
+				'<span class="label label-success" id="' + data.ID + '">'
+						+ $("#chatroom span#" + data.ID).text() + '</span>');
 	}
 	var IDs = sessionStorage.getItem("onlineUserIDs");
 	IDs = $.parseJSON(IDs);
@@ -215,19 +209,13 @@ function handle_connect(data) {
 
 function handle_disconnect(data) {
 	data = $.parseJSON(data.data);
-	var chatRooms = sessionStorage.getItem("chatrooms");
-	chatRooms = $.parseJSON(chatRooms);
-	for (var i = 0; i < chatRooms.length; i++)
-		if (chatRooms[i].m1ID == data.ID || chatRooms[i].m2ID == data.ID)
-			chatRooms[i].online = false;
-	sessionStorage.setItem("chatrooms", JSON.stringify(chatRooms));
 	$("#contact-list #" + data.ID + " span")
 			.replaceWith(
 					'<span class="glyphicon glyphicon-stop" style="color: rgb(169, 169, 169);"></span>');
-	if ($("#chatroom span.label-success").length != 0) {
-		$("#chatroom span.label-success").replaceWidth(
-				'<span class="label label-default">'
-						+ $("#chatroom span.label-success").text() + '</span>');
+	if ($("#chatroom span#" + data.ID).length != 0) {
+		$("#chatroom span#" + data.ID).replaceWith(
+				'<span class="label label-default" id=' + data.ID + '>'
+						+ $("#chatroom span#" + data.ID).text() + '</span>');
 	}
 	var IDs = sessionStorage.getItem("onlineUserIDs");
 	IDs = $.parseJSON(IDs);
