@@ -251,14 +251,17 @@
 								$.each(community.members, function(n, member) {
 									memberIDs.push(member.ID);
 								});
-								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
-										|| $.inArray(USERID, memberIDs) != -1) {
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
 									$('.cardSetter').css("display", "inline");
 								}
-								if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'
-										&& $.inArray(USERID, memberIDs) != -1) {
-									$('#leaveCommunityBtn').css("display",
-											"inline");
+								if ($.inArray(USERID, memberIDs) != -1 && USERID != community.attributes.userID) {
+									$('#leaveCommunityBtn').css("display", "inline");
+								}
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'&& USERID == community.attributes.userID) {
+									$('#editCommunityBtn').css("display", "inline");
+									$('#editMembersBtn').css("display", "inline");
+									$('#deleteCommunityBtn').css("display", "inline");
+									$('.editActivity').css("display", "inline");
 								}
 							} else {
 								clickOffEvent();

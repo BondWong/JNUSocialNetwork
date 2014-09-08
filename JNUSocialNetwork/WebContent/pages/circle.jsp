@@ -114,7 +114,6 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
-	<script src="js/freewall.js"></script>
 	<script src="js/jquery.ui.widget.js"></script>
 	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 	<script src="js/load-image.min.js"></script>

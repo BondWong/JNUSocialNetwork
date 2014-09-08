@@ -8,6 +8,7 @@ function showActivityDetail(activity, community) {
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
+	$('.aCommentI').attr("src",$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
 	$('.communityNum').html(
 			activity.likerIDs.length+ activity.participantIDs.length + "&nbspare intesting in this activity");
 	var comments = FetchCommentByPost(activity.ID, "0", "5");

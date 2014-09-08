@@ -108,7 +108,6 @@ $(document)
 					});
 					$('#btn_share').click(function() {
 						// var formData = new FormData($('.photofom'));
-
 						var post = {
 							postType : 'NORMAL',
 							attributes : {

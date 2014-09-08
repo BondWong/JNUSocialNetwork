@@ -10,6 +10,7 @@
 	rel="stylesheet">
 <link href="styles/about-us.css" rel="stylesheet" type="text/css" />
 <link href="styles/custom.css" rel="stylesheet">
+<link href="styles/footer.css" rel="stylesheet">
 <script type="text/javascript"
 	src="//upcdn.b0.upaiyun.com/libs/jquery/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
