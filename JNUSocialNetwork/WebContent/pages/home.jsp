@@ -7,15 +7,19 @@
 <%@ include file="parts/head.jsp"%>
 
 <body>
-	<div class="navbar-wrapper">
-		<div class="container">
-			<div class="navbar navbar-inverse navbar-static-top"
-				role="navigation">
+	<div class="header">
+		<div class="header-contain">
+			<div class="navbar-wrapper">
 				<div class="container">
-					<%@ include file="parts/navLeft.jsp"%>
-					<div class="navbar-collapse collapse">
-						<%@ include file="parts/communityDropDown.jsp"%>
-						<%@ include file="parts/navRight.jsp"%>
+					<div class="navbar navbar-inverse navbar-static-top"
+						role="navigation">
+						<div class="container">
+							<%@ include file="parts/navLeft.jsp"%>
+							<div class="navbar-collapse collapse">
+								<%@ include file="parts/communityDropDown.jsp"%>
+								<%@ include file="parts/navRight.jsp"%>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -48,7 +52,7 @@
 			<div class="band-text">
 				<h1 class="band-title"></h1>
 				<div class="btn-inner">
-					<div class="btn btn-danger btnFind"></div>
+					<a class="btn btn-danger btnFind" href="register.jsp"></a>
 				</div>
 			</div>
 		</div>
@@ -227,32 +231,38 @@
 			</ul>
 		</div>
 		<div class="icommunity-footer">
-			<a href="">全部社区</a>
+			<a href="community.jsp">全部社区</a>
 		</div>
 	</div>
 
 	<div class="joinCampusite">
 		<h1 class="hide-text"></h1>
 		<div class="btn-inner-join">
-			<div class="btn btn-danger btnFind"></div>
+			<a class="btn btn-danger btnFind btnFind2" href="community.jsp"></a>
 		</div>
 	</div>
 
-	<div class="footer-home">
-		<div class="footer-wrap">
-			<a class="footer-weibo"></a> <a class="footer-weixin"></a> <a
-				class="footer-qqbo"></a> <a class="footer-qqzone"></a>
-		</div>
-		<div class="footer-link">
-			<a>关于我们</a> <a>加入我们</a> <a>联系我们</a> <a>意见反馈</a> <a>友情链接</a>
-		</div>
-		<div class="footer-copyright">© 2014 campusite.com.cn
-			粤ICP备13046642号</div>
-	</div>
+	<%@ include file="parts/footer.jsp"%>
 	<script src="js/jquery-1.10.2.js"></script>
+	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
+	<script src="js/EventHandle.js"></script>
+	<script src="js/global-initialization.js"></script>
+	<%@ include file="parts/loginJavaScript.jsp"%>
+	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<script src="js/home.js"></script>
 	<script type="text/javascript">
+		if (USERID != "") {
+			$(document)
+			.click(
+					function(e) {
+						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+						if (dragel !== target && !$.contains(dragel, target)) {
+							drag.fadeOut(300);
+						}
+					});
+		}
 		$(".band-bg").animate({
 			opacity : 1
 		}, 500);
@@ -266,5 +276,6 @@
 		}, 267);
 		fetchHotCommunity();
 	</script>
+	
 </body>
 </html>

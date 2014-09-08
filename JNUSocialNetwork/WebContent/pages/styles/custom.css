@@ -12,29 +12,6 @@ body {
 		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar-wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 20;
-}
-
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper .container {
-	padding-left: 0;
-	padding-right: 0;
-}
-
-.navbar-wrapper .navbar {
-	padding-left: 15px;
-	padding-right: 15px;
-}
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -108,24 +85,6 @@ body {
 		padding-right: 0;
 	}
 
-	/* Navbar positioning foo */
-	.navbar-wrapper {
-		margin-top: 20px;
-	}
-	.navbar-wrapper .container {
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-	.navbar-wrapper .navbar {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-	/* The navbar becomes detached from the top, so we round the corners */
-	.navbar-wrapper .navbar {
-		border-radius: 4px;
-	}
-
 	/* Bump up size of carousel content */
 	.carousel-caption p {
 		margin-bottom: 20px;
@@ -141,11 +100,6 @@ body {
 	.featurette-heading {
 		margin-top: 120px;
 	}
-}
-
-.navbar-form.navbar-costom:last-child {
-	float: right;
-	margin-right: 15px;
 }
 
 .container.container_custom {
@@ -209,22 +163,13 @@ body {
 .img_container {
 	height: 265px;
 	width: 265px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .btn_cust {
 	float: right;
 	margin-top: 10px;
 	font-size: 8px;
-}
-
-.nav_cust {
-	float: right;
-	margin-right: 20px;
-}
-
-.img_cust {
-	margin-top: 7px;
 }
 
 .profile_nav {
@@ -272,12 +217,6 @@ body {
 	margin-left: auto;
 	width: 900px;
 	margin-top: 20px;
-}
-
-.nav-tabs>li {
-	float: left;
-	margin-bottom: -1px;
-	margin-left: 70px;
 }
 
 .post {
@@ -329,7 +268,7 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-bottom: 5px;
-	cursor:pointer;
+	cursor: pointer;
 	overflow: hidden;
 	text-align: center;
 }
@@ -389,11 +328,13 @@ body {
 	border-top-color: #CDCDCD;
 	word-wrap: break-word;
 }
-.commentArea{
-	max-height:300px;
-	overflow-y:auto;
-	overflow-x:hidden;
+
+.commentArea {
+	max-height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
+
 .deletCa {
 	float: right;
 	position: relative;
@@ -447,10 +388,12 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
-.profileImgDiv{
-	width:620px;
-	height:300px;
+
+.profileImgDiv {
+	width: 620px;
+	height: 300px;
 }
+
 .profile_info {
 	background-color: #A2A2A2;
 	height: 300px;
@@ -469,10 +412,12 @@ body {
 	margin-left: auto;
 	text-align: center;
 }
-.profileAvatar{
-	width:120px;
-	height:120px;
+
+.profileAvatar {
+	width: 120px;
+	height: 120px;
 }
+
 .profile_img {
 	float: left;
 	width: 620px;
@@ -616,10 +561,12 @@ body {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
 .InforItem input {
 	float: left;
-	width:150px;
+	width: 150px;
 }
+
 .aEditbtn {
 	margin-left: 50px;
 	display: none;
@@ -653,7 +600,7 @@ body {
 	background-color: #FFF;
 	margin-bottom: 20px;
 	float: left;
-	width:280px;
+	width: 280px;
 }
 
 .containerReg {
@@ -772,11 +719,13 @@ body {
 	display: none;
 	margin-left: 20px;
 }
+
 .downLoadList {
-	display:none;
+	display: none;
 	margin-left: 20px;
 	margin-top: -15px;
 }
+
 .createCommunity h1 {
 	font-size: 18px;
 	float: left;
@@ -793,14 +742,17 @@ body {
 #editMembersBtn {
 	display: none;
 }
-.photoAddBtn{
-	display:none;
-	width:90px;
+
+.photoAddBtn {
+	display: none;
+	width: 90px;
 }
-.photoAdd{
-	float:left;
-	margin-top:0px;
+
+.photoAdd {
+	float: left;
+	margin-top: 0px;
 }
+
 #deleteCommunityBtn {
 	display: none;
 }
@@ -829,7 +781,7 @@ body {
 	margin-top: 23px;
 	margin-right: 15px;
 	color: #aaa;
-	display:none;
+	display: none;
 }
 
 .cardSetter:hover {
@@ -1028,7 +980,7 @@ body {
 
 .detailTxt {
 	margin-top: 20px;
-	font-size:16px;
+	font-size: 16px;
 }
 
 .aBodyCard img {
@@ -1167,11 +1119,13 @@ body {
 	float: right;
 	cursor: pointer;
 }
-.deleteActivity{
-	position:absolute;
-	left:410px;
-	top:2px;
+
+.deleteActivity {
+	position: absolute;
+	left: 410px;
+	top: 2px;
 }
+
 .deleteCommBtn {
 	float: right;
 }
@@ -1204,7 +1158,7 @@ body {
 
 .replyaComment {
 	float: right;
-	margin-top:40px;
+	margin-top: 40px;
 }
 
 .likeComment {
@@ -1234,7 +1188,7 @@ body {
 	float: left;
 	width: 435px;
 	padding-bottom: 20px;
-	padding-top:0px;
+	padding-top: 0px;
 }
 
 .activityAvatar {
@@ -1257,50 +1211,54 @@ body {
 }
 
 .activityName {
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:-20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -20px;
 	width: 90%;
 	font-size: 24px;
-	cursor:pointer;
-	color:#5A5A5A;
+	cursor: pointer;
+	color: #5A5A5A;
 }
-.activityName a{
-	color:#5A5A5A;
+
+.activityName a {
+	color: #5A5A5A;
 }
-.activityName a:hover{
-	color:#428BCA;
+
+.activityName a:hover {
+	color: #428BCA;
 }
 
 .activityTime {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
-	margin-top:5px;
-	font-size:16px;
+	margin-top: 5px;
+	font-size: 16px;
 }
-.activityShowTime{
-	margin-top:5px;
-	font-size:16px;
+
+.activityShowTime {
+	margin-top: 5px;
+	font-size: 16px;
 }
-.activityShowAddre{
-	margin-top:5px;
-	font-size:16px;
+
+.activityShowAddre {
+	margin-top: 5px;
+	font-size: 16px;
 }
 
 .activityaddre {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
-	margin-top:5px;
-	font-size:16px;
+	margin-top: 5px;
+	font-size: 16px;
 }
 
 .activityD {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
-	margin-top:10px;
+	margin-top: 10px;
 	word-wrap: break-word;
 }
 
@@ -1313,78 +1271,6 @@ body {
 .activityAsk>span {
 	font-size: 16px;
 	margin-right: 120px;
-}
-
-.mentionBody {
-	z-index: 1010;
-	width: 380px;
-	padding: 1px;
-	text-align: left;
-	white-space: normal;
-	background-color: #fafafa;
-	border: 1px solid #cccccc;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 6px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background-clip: padding-box;
-	position: fixed;
-	top: 0;
-	left: 0;
-	display: none;
-	
-}
-.mentionBody.bottom {
-	margin-top: 10px;
-}
-
-.mentionBody-title {
-	padding: 8px 14px;
-	margin: 0;
-	font-size: 20px;
-	font-weight: border;
-	line-height: 18px;
-	background-color: #f7f7f7;
-	border-bottom: 1px solid #ebebeb;
-	border-radius: 5px 5px 0 0;
-}
-
-.mentionBody-content {
-	padding: 9px 14px;
-	max-height:600px;
-	overflow:auto;
-	overflow-x: hidden;
-}
-
-.mentionBody::before {
-	content: '';
-	display: inline-block;
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid rgba(0, 0, 0, 0.2);
-	position: absolute;
-	top: -7px;
-	left: 251px;
-}
-
-.mentionBody::after {
-	content: '';
-	display: inline-block;
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid white;
-	position: absolute;
-	top: -6px;
-	left: 251px;
-}
-
-.NotiItem {
-	width: 300px;
-	height: 70px;
-}
-
-.NotiItem:hover {
-	background-color: #f6f6f6;
 }
 
 .white_content {
@@ -1601,32 +1487,6 @@ body {
 	margin-left: 10px;
 }
 
-.notifyItem {
-	width: 380px;
-	background-color: #fff;
-}
-
-.arrowBack {
-	float: left;
-	margin-top:5px;
-	margin-left:5px;
-	cursor:pointer;
-}
-#arrowBack{
-	display:none;
-}
-.mentionClose {
-	font-size: 12px;
-	float: right;
-	cursor:pointer;
-}
-
-.NotiItem h1 {
-	font-size: 16px;
-	font-weight: bolder;
-	color: #aaaaaa;
-}
-
 .postContent {
 	width: 100%;
 	word-wrap: break-word;
@@ -1682,9 +1542,9 @@ body {
 .memberRemoveBtn {
 	float: right;
 	display: none;
-	margin-top:5px;
-	margin-right:5px;
-	cursor:pointer;
+	margin-top: 5px;
+	margin-right: 5px;
+	cursor: pointer;
 }
 
 #activityLike {
@@ -1740,26 +1600,24 @@ footer {
 .userImgA {
 	margin-left: 10px;
 }
-.col-lg-1-cust{
-	padding:  0px;
+
+.col-lg-1-cust {
+	padding: 0px;
 	margin-left: -15px;
-	font-size:30px;
-	margin-top:-3px;
+	font-size: 30px;
+	margin-top: -3px;
 }
-.col-lg-2-cust{
+
+.col-lg-2-cust {
 	width: 12%;
-	padding-left:0px;
+	padding-left: 0px;
 }
-.aC{
-	font-size:16px;
-	width:90%
+
+.aC {
+	font-size: 16px;
+	width: 90%
 }
-ul.nav li.dropdown:hover ul.dropdown-menu{ 
-display: block; 
-}
-#createActivityBtn{
-	display:none;
-}
-#nav-bar-avatar{
-	margin-top:-8px;
+
+#createActivityBtn {
+	display: none;
 }

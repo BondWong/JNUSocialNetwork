@@ -21,7 +21,7 @@
 			</div>
 			<input type="hidden" name="hiddenCode"
 				value="${sessionScope.hiddenCode }" />
-			<button class="btn btn-success signInBtn" type="submit">登录</button>
+			<button class="btn btn-danger signInBtn" type="submit">登录</button>
 			<script src="js/jquery-1.10.2.js"></script>
 			<script src="js/md5.js"></script>
 			<script>
