@@ -1,16 +1,20 @@
 package service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.structure.Image;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -22,14 +26,14 @@ import service.helper.ExtensionManager;
 import utils.JsonUtil;
 
 @WebServlet("/app/fileUploader")
-public class FileUploadService extends HttpServlet {
+public class ImageUploadService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final long MAXIMUMFILESIZE = 1024 * 1024 * 10 * 3;
 	private static String root;
 	private DiskFileItemFactory factory;
 	private ServletFileUpload upload;
 
-	public FileUploadService() {
+	public ImageUploadService() {
 		super();
 	}
 
@@ -111,9 +115,10 @@ public class FileUploadService extends HttpServlet {
 			String temp = extention.substring(1) + "/" + userID + "--"
 					+ System.currentTimeMillis() + extention;
 			File uploaddedFile = new File(root + temp);
-
 			item.write(uploaddedFile);
-			links.add(temp);
+			BufferedImage bi = ImageIO.read(uploaddedFile);
+			Image image = new Image(temp, bi.getHeight(), bi.getWidth());
+			links.add(JsonUtil.toJson(image));
 		}
 
 		return links;

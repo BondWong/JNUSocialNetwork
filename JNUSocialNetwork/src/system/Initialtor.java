@@ -17,6 +17,7 @@ import service.helper.OnlineUserIDArray;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import utils.MD5;
+import utils.RootPathHelper;
 
 /**
  * Application Lifecycle Listener implementation class Boostrap
@@ -82,6 +83,8 @@ public class Initialtor implements ServletContextListener {
 			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
+			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
+					.getRealPath("/"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

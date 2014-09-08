@@ -44,6 +44,7 @@ import model.modelType.UserType;
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
 	@Lob

@@ -198,35 +198,42 @@ $(document)
 									$.support.fileInput ? undefined
 											: 'disabled');
 					// function addPost
-					$('body').on('click','.Btnshare',function(){
+					$('body').on('click', '.Btnshare', function() {
 						$('.postForm').get(0).reset();
 					});
-					$('body').on('click','.share_txt',function(){
+					$('body').on('click', '.share_txt', function() {
 						$('.postForm').get(0).reset();
 					});
-					$('#btn_share').click(function() {
-						// var formData = new FormData($('.photofom'));
+					$('#btn_share')
+							.click(
+									function() {
+										// var formData = new
+										// FormData($('.photofom'));
 
-						var post = {
-							postType : 'NORMAL',
-							attributes : {
-								content : $('#share_txt2').val()
-							},
-							imageLinks : fileDri
-						};
-						var json = $.toJSON(post);
-						AddPost(USERID, json);
-						if($('.postForm')[0].checkValidity()){
-							$('#addPostModal').modal('hide');
-							fileDri = [];
-							$('.progress-bar').remove();
-							$('.files').remove();
-							$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
-							$('.progress').after("<div id='files' class='files'></div>");
-						}
-						
+										var post = {
+											postType : 'NORMAL',
+											attributes : {
+												content : $('#share_txt2')
+														.val()
+											},
+											imageLinks : fileDri
+										};
+										var json = $.toJSON(post);
+										AddPost(USERID, json);
+										if ($('.postForm')[0].checkValidity()) {
+											$('#addPostModal').modal('hide');
+											fileDri = [];
+											$('.progress-bar').remove();
+											$('.files').remove();
+											$('.progress')
+													.append(
+															"<div class='progress-bar progress-bar-success'></div>");
+											$('.progress')
+													.after(
+															"<div id='files' class='files'></div>");
+										}
 
-					});
+									});
 				});
 function aboutClickEvent() {
 	// function editProfileInfro
@@ -240,13 +247,13 @@ function aboutClickEvent() {
 								"<input class='lookingforE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.lookingFor
 										+ "' maxLength='20'/>");
-						if(userInfo.userType=='COMMUNITYOWNER'){
+						if (userInfo.userType == 'COMMUNITYOWNER') {
 							$("span[class='Anickname']").html(
 									"<input class='nameE' id='focusedInput' type='text' value='"
 											+ userInfo.attributes.name
 											+ "' maxLength='20'/>");
 						}
-						
+
 						$("span[class='Atelenum']").html(
 								"<input class='telenumE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.telnum
@@ -286,23 +293,23 @@ function aboutClickEvent() {
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
 		var datajson = {
+			lookingFor : $('.lookingforE').val(),
+			relationship : $('.relationshipnE').val(),
+			telenum : $('.telenumE').val(),
+			email : $('.emailE').val(),
+			dorm : $('.addressE').val(),
+		};
+		if ($('.nameE').val() != null) {
+			datajson = {
 				lookingFor : $('.lookingforE').val(),
 				relationship : $('.relationshipnE').val(),
 				telenum : $('.telenumE').val(),
 				email : $('.emailE').val(),
 				dorm : $('.addressE').val(),
+				name : $('.nameE').val()
 			};
-		if($('.nameE').val()!=null){
-			datajson = {
-					lookingFor : $('.lookingforE').val(),
-					relationship : $('.relationshipnE').val(),
-					telenum : $('.telenumE').val(),
-					email : $('.emailE').val(),
-					dorm : $('.addressE').val(),
-					name : $('.nameE').val()
-				};
 		}
-		
+
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(userID, json);
 		fetchUserByID();
@@ -310,19 +317,23 @@ function aboutClickEvent() {
 		$(this).attr("class", "btn btn-primary aEditbtn");
 	});
 	// function avatarImgBtn
-	$('body').on("click", ".avatarImgBtn", function() {
-		var datajson = {
-			avatarLink : FileUpload(new FormData($('.avatarForm')[0]))[0],
-		};
-		var json = $.toJSON(datajson);
-		var userNew = UpdateUserProfile(userID, json);
-		$('.profile_user_img').find('img').attr("src",
-				userNew.attributes.avatarLink);
-		$('#myModal').modal('hide');
-		$('.avatarForm').get(0).reset();
-		
-		
-	});
+	$('body')
+			.on(
+					"click",
+					".avatarImgBtn",
+					function() {
+						var datajson = {
+							avatarLink : FileUpload(new FormData(
+									$('.avatarForm')[0]))[0],
+						};
+						var json = $.toJSON(datajson);
+						var userNew = UpdateUserProfile(userID, json);
+						$('.profile_user_img').find('img').attr("src",
+								$.parseJSON(userNew.attributes.avatarLink).src);
+						$('#myModal').modal('hide');
+						$('.avatarForm').get(0).reset();
+
+					});
 	// change Background
 	$('body').on(
 			"click",
@@ -333,42 +344,54 @@ function aboutClickEvent() {
 							$('.changBgForm')[0]))[0],
 				};
 				var json = $.toJSON(datajson);
-				var userNew = UpdateUserProfile(userID, json);;
+				var userNew = UpdateUserProfile(userID, json);
+				;
 				$('#myModalB').modal('hide');
 				$('.profile_img').find('img').attr("src",
-						userNew.attributes.profileImageLink);
+						$.parseJSON(userNew.attributes.profileImageLink).src);
 				$('.changBgForm').get(0).reset();
 			});
 	// function addPhoto
-	$('body').on(
-			"click",
-			".addPhoto",
-			function() {
-				AddImages(userID, photosfileDri);
-				$('#myModalPhoto').modal('hide');
-				$.each(photosfileDri, function(index, imageLink) {
-					var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
-							+ imageLink + "' /></div>";
-					$('.photoAddBtn').after(photoContainer);
-					Msnry('.pro_body', '.photo', 280);
-				});
-				photosfileDri = [];
-				$('.progress-bar').remove();
-				$('.files').remove();
-				$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
-				$('.progress').after("<div id='files' class='files'></div>");
-			});
+	$('body')
+			.on(
+					"click",
+					".addPhoto",
+					function() {
+						AddImages(userID, photosfileDri);
+						$('#myModalPhoto').modal('hide');
+						$
+								.each(
+										photosfileDri,
+										function(index, imageLink) {
+											var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
+													+ imageLink + "' /></div>";
+											$('.photoAddBtn').after(
+													photoContainer);
+											Msnry('.pro_body', '.photo', 280);
+										});
+						photosfileDri = [];
+						$('.progress-bar').remove();
+						$('.files').remove();
+						$('.progress')
+								.append(
+										"<div class='progress-bar progress-bar-success'></div>");
+						$('.progress').after(
+								"<div id='files' class='files'></div>");
+					});
 }
 
 // show photos
 function showPhotos() {
 	var response = FetchUserByID(userID);
-	$.each(response.imageLinks, function(index, imageLink) {
-		var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='" + imageLink
-				+ "' /></div>";
-		$('.photoAddBtn').after(photoContainer);
-		Msnry('.pro_body', '.photo', 280);
-	});
+	$
+			.each(
+					response.imageLinks,
+					function(index, imageLink) {
+						var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
+								+ imageLink + "' /></div>";
+						$('.photoAddBtn').after(photoContainer);
+						Msnry('.pro_body', '.photo', 280);
+					});
 }
 // show followees
 function showFollowees() {
@@ -378,7 +401,7 @@ function showFollowees() {
 					response,
 					function(index, followee) {
 						var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
-								+ followee.attributes.avatarLink
+								+ $.parseJSON(followee.attributes.avatarLink).src
 								+ "' style='display: none'></img><input type='hidden' name='userID' value='"
 								+ followee.ID + "'/>";
 						$('.userImgA').userTips();
@@ -393,7 +416,7 @@ function showFollowers() {
 					response,
 					function(index, follower) {
 						var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
-								+ follower.attributes.avatarLink
+								+ $.parseJSON(follower.attributes.avatarLink).src
 								+ "'style='display: none'></img><input type='hidden' name='userID' value='"
 								+ follower.ID + "'/>";
 
@@ -456,10 +479,11 @@ function fetchUserByID() {
 						});
 	}
 	$('.profile_user_img').find('img').attr("src",
-			userInfo.attributes.avatarLink);
+			$.parseJSON(userInfo.attributes.avatarLink).src);
 	$('.profile_img').find('img').attr("src",
-			userInfo.attributes.profileImageLink);
-	$('.profileAvatar').attr("src", userInfo.attributes.avatarLink);
+			$.parseJSON(userInfo.attributes.profileImageLink).src);
+	$('.profileAvatar').attr("src",
+			$.parseJSON(userInfo.attributes.avatarLink).src);
 	$('.profile_user_name').html(userInfo.attributes.name);
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);

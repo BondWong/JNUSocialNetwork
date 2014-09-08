@@ -147,7 +147,7 @@
 				</div>
 				<div class="aBodyComment commentBtn">
 					<div class="aCommentItem">
-						<img alt="" src="images/user_img.jpg">
+						<img class="aCommentI img-circle" onload="javascript:auto_resize(50, 50, this)"  alt="" src="images/user_img.jpg">
 						<div class="col-lg-6">
 							<input type="text" placeholder="Add a comment"
 								class="form-control acBtn" id="commentText1407032926865" />
@@ -208,6 +208,8 @@
 								clickEvent();
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 									$('.aBodyAsk').css("display", "none");
+									$('.downLoadList').css("display", "inline");
+									$('#activityLike').css("display", "none");
 								}
 							} else {
 								clickOffEvent();
