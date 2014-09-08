@@ -36,6 +36,13 @@
 	</c:when>
 
 	<c:otherwise>
-		<%@ include file="navRightProfile.jsp"%>
+		<c:choose>
+			<c:when test="${requestScope.isHome }">
+				<%@ include file="navRightHome.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="navRightProfile.jsp"%>
+			</c:otherwise>
+		</c:choose>
 	</c:otherwise>
 </c:choose>

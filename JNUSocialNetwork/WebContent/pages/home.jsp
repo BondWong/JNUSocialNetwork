@@ -100,134 +100,7 @@
 			<h1 class="icommunity-title"></h1>
 			<ul class="icommunity-container">
 				<li class="communityBoard"></li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
-				<li class='communityShowItem'>
-					<div class="community_container">
-						<a>
-							<div class="img_container">
-								<input type="hidden" value="1409916593799"> <img
-									width="265" height="265" style=""
-									onload="javascript:auto_resize(267, 267, this)"
-									src="images/default/default-community-card.png">
-							</div>
-						</a>
-						<div class="content_info">
-							<div class="conten_head">qwq</div>
-							<div class="content_count">0 members</div>
-						</div>
-					</div>
-				</li>
+
 			</ul>
 		</div>
 		<div class="icommunity-footer">
@@ -255,13 +128,14 @@
 	<script type="text/javascript">
 		if (USERID != "") {
 			$(document)
-			.click(
-					function(e) {
-						var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-						if (dragel !== target && !$.contains(dragel, target)) {
-							drag.fadeOut(300);
-						}
-					});
+					.click(
+							function(e) {
+								var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
+								if (dragel !== target
+										&& !$.contains(dragel, target)) {
+									drag.fadeOut(300);
+								}
+							});
 		}
 		$(".band-bg").animate({
 			opacity : 1
@@ -276,6 +150,6 @@
 		}, 267);
 		fetchHotCommunity();
 	</script>
-	
+
 </body>
 </html>

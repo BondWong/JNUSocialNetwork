@@ -10,6 +10,10 @@ body {
 	padding: 0px;
 }
 
+.navbar-inverse {
+	opacity: 0.9;
+}
+
 a:hover {
 	text-decoration: none;
 }
@@ -21,6 +25,7 @@ a:hover {
 	z-index: 10;
 	top: -10px;
 	opacity: 0;
+	padding-top: 20px;
 }
 
 .header-contain {
@@ -28,7 +33,6 @@ a:hover {
 	margin-left: auto;
 	margin-right: auto;
 	height: 80px;
-	
 }
 
 .logo-contain {
@@ -41,7 +45,7 @@ a:hover {
 .header-right {
 	position: absolute;
 	right: 20px;
-	top: 0px;
+	top: 10px;
 }
 
 .logo {
@@ -64,13 +68,10 @@ a:hover {
 
 .right-item a {
 	display: block;
-	height: 80px;
-	font-size: 18px;
-	line-height: 80px;
+	font-size: 16px;
 	padding: 0px 10px;
 	transition: all 0.3s ease 0s;
-	color: #000;
-	
+	color: #656E73;
 }
 
 .right-item a:hover {
@@ -83,6 +84,8 @@ a:hover {
 }
 
 .head-mid {
+	position: absolute;
+	top: 10px;
 	width: 100%;
 	text-align: center;
 }
@@ -103,7 +106,7 @@ a:hover {
 	right: 0px;
 	bottom: 0px;
 	opacity: 0;
-	background: url('../images/band-bg3.fw.png') no-repeat scroll center 0px
+	background: url('../images/band-bg5.fw.png') no-repeat scroll center 0px
 		transparent;
 	min-width: 1200px;
 }
@@ -147,7 +150,7 @@ a:hover {
 .btnFind {
 	display: inline-block;
 	height: 80px;
-	width: 240px;
+	width: 200px;
 	line-height: 60px;
 	text-align: center;
 	font-size: 30px;
@@ -156,6 +159,12 @@ a:hover {
 	transition: all 0.15s ease 0s;
 	background: url('../images/begin-text.png') no-repeat scroll center
 		center #A32929;
+}
+
+.btnFind2 {
+	width: 240px;
+	background: url('../images/begin.png') no-repeat scroll center center
+		#A32929;
 }
 
 .btn-inner-join {
@@ -297,8 +306,8 @@ a:hover {
 	height: 430px;
 	top: -30px;
 	right: 50px;
-	background: url('../images/intro3.png') no-repeat scroll center
-		0px transparent;
+	background: url('../images/intro3.png') no-repeat scroll center 0px
+		transparent;
 }
 
 .intro2-text {
@@ -375,7 +384,8 @@ a:hover {
 
 .communityShowItem {
 	display: inline-block;
-	margin-top: 10px; margin-left : 20px;
+	margin-top: 10px;
+	margin-left: 20px;
 	border-radius: 0px 0px 1px 1px;
 	box-shadow: 0px 1px 2px #C5C5C5;
 	transition: all 0.3s ease 0s;
@@ -415,80 +425,6 @@ a:hover {
 	margin: 110px auto 0px;
 }
 
-.footer-home {
-	background-color: #FFF;
-	min-width: 1200px;
-	margin: 0px auto;
-}
-
-.footer-wrap {
-	padding-top: 30px;
-	text-align: center;
-}
-
-.footer-wrap a {
-	display: inline-block;
-	height: 32px;
-	width: 32px;
-	vertical-align: middle;
-	background-image: url('../images/idx-btm.png');
-	background-repeat: no-repeat;
-	margin: 0px 9px;
-	cursor: pointer;
-}
-
-.footer-weibo {
-	background-position: 0px -221px;
-}
-
-.footer-weibo:hover {
-	background-position: 0px -262px;
-}
-
-.footer-weixin {
-	position: relative;
-	background-position: -52px -221px;
-}
-
-.footer-weixin:hover {
-	background-position: -52px -262px;
-}
-
-.footer-qqbo {
-	background-position: -104px -221px;
-}
-
-.footer-qqbo:hover {
-	background-position: -104px -262px;
-}
-
-.footer-qqzone {
-	background-position: -156px -221px;
-}
-
-.footer-qqzone:hover {
-	background-position: -156px -262px;
-}
-
-.footer-link {
-	width: 900px;
-	padding: 25px 0px;
-	margin: 0px auto;
-	text-align: center;
-	border-bottom: 1px solid #F4F7F8;
-}
-
-.footer-link a {
-	margin: 0px 10px;
-	color: #99A1A6;
-}
-
-.footer-copyright {
-	padding: 20px 0px 25px;
-	text-align: center;
-	color: #B4BBBF;
-}
-
 .icommunity li:hover img {
 	transform: scale(1.2);
 }
@@ -517,6 +453,12 @@ a:hover {
 	font-size: 12px;
 	transition: all 0.3s ease 0s;
 	z-index: 9;
+	margin-top: 20px;
+}
+
+.conten_head {
+	font-size: 20px;
+	color: #000;
 }
 
 .content_tips {
@@ -526,8 +468,8 @@ a:hover {
 	right: 0px;
 	height: 80px;
 	font-size: 12px;
+	word-wrap: break-word;
 	transition: all 0.3s ease 0s;
-	font-size: 20px;
 	z-index: 9;
 }
 
@@ -550,36 +492,43 @@ a:hover {
 	position: relative;
 	overflow: hidden;
 }
-.process{
+
+.process {
 	height: 160px;
 	overflow: hidden;
 	background-color: #EEF1F2;
 	min-width: 1200px;
-	text-align:center;
+	text-align: center;
 }
-.process ul{
-	margin-top:50px;
+
+.process ul {
+	margin-top: 50px;
 }
-.process li{
-	display:inline-block;
-	width:124px;
-	height:100px;
-	margin-right:80px;
+
+.process li {
+	display: inline-block;
+	width: 124px;
+	height: 100px;
+	margin-right: 80px;
 }
-.i1{
+
+.i1 {
 	background: url('../images/process1.fw.png') no-repeat scroll center
 		center transparent;
 }
-.i2{
+
+.i2 {
 	background: url('../images/process2.fw.png') no-repeat scroll center
 		center transparent;
 }
-.i3{
+
+.i3 {
 	background: url('../images/process3.fw.png') no-repeat scroll center
 		center transparent;
 }
-.i4{
-	width:106px;
+
+.i4 {
+	width: 106px;
 	background: url('../images/process4.fw.png') no-repeat scroll center
 		center transparent;
 }
