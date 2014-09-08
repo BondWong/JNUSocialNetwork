@@ -52,7 +52,7 @@
 			<div class="band-text">
 				<h1 class="band-title"></h1>
 				<div class="btn-inner">
-					<div class="btn btn-danger btnFind"></div>
+					<a class="btn btn-danger btnFind" href="register.jsp"></a>
 				</div>
 			</div>
 		</div>
@@ -231,14 +231,14 @@
 			</ul>
 		</div>
 		<div class="icommunity-footer">
-			<a href="">全部社区</a>
+			<a href="community.jsp">全部社区</a>
 		</div>
 	</div>
 
 	<div class="joinCampusite">
 		<h1 class="hide-text"></h1>
 		<div class="btn-inner-join">
-			<div class="btn btn-danger btnFind"></div>
+			<a class="btn btn-danger btnFind btnFind2" href="community.jsp"></a>
 		</div>
 	</div>
 
@@ -254,6 +254,7 @@
 			粤ICP备13046642号</div>
 	</div>
 	<script src="js/jquery-1.10.2.js"></script>
+	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/home.js"></script>
 	<script type="text/javascript">
