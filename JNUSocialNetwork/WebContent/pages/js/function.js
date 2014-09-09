@@ -46,7 +46,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ jsonComment.owner.attributes.avatarLink
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -90,8 +90,8 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						srcImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img class='postimg' onload='javascript:fixed_width_auto_resize(400, this)' onclick='showPost("
-									+ postID + ")' src='" + image + "'/>";
+									+ "<img class='postimg' width='450' height="+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+" onclick='showPost("
+									+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
@@ -107,7 +107,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
-			+ ownerImage
+			+ $.parseJSON(ownerImage).src
 			+ "' style='display: none'/><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
@@ -341,12 +341,14 @@ function clickEvent() {
 		var postID = $(this).find("input").attr("id");
 		DeleteComment(postID, commentID);
 	});
-	/*$('body').on("click", ".editCommunity", function() {
+	/*
+	 * $('body').on("click", ".editCommunity", function() {
 	 * $('.editCommunityForm').get(0).reset();
-		$('#communityName').val(community.attributes.name);
-		$('#communityIntro').val(community.attributes.introduct);
-
-	});*/
+	 * $('#communityName').val(community.attributes.name);
+	 * $('#communityIntro').val(community.attributes.introduct);
+	 * 
+	 * });
+	 */
 	$('body').on("click", "#leaveCommunityBtn", function() {
 		LeaveCommunity(USERID, communityID);
 	});
@@ -516,9 +518,9 @@ function clickOffEvent() {
 								var tipFrame = '<div id="'
 										+ data.ID
 										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
-										+ data.attributes.profileImageLink
+										+ $.parseJSON(data.attributes.profileImageLink).src
 										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
-										+ data.attributes.avatarLink
+										+ $.parseJSON(data.attributes.avatarLink).src
 										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
@@ -605,7 +607,7 @@ function showPost(postID) {
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ jsonComment.owner.attributes.avatarLink
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -642,8 +644,8 @@ function showPost(postID) {
 	});
 	layer
 			.photos({
-				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg' onload='javascript:auto_resize(50, 50, this)' src='"
-						+ dataString.owner.attributes.avatarLink
+				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' onload='javascript:auto_resize(50, 50, this)' src='"
+						+$.parseJSON( dataString.owner.attributes.avatarLink).src
 						+ "' style='display: none'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
@@ -711,7 +713,10 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 	srcImage.height = image.height;
 	$(srcImage).fadeIn("fast");
 }
-
+function getHeight(width,orgiginnalWidth,originalHeight){
+	newHeight = (width / orgiginnalWidth) * originalHeight;
+	return newHeight;
+}
 function fixed_width_auto_resize(width, srcImage) {
 	var image = new Image();
 	image.src = srcImage.src;

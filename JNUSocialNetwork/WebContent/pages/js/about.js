@@ -363,8 +363,8 @@ function aboutClickEvent() {
 								.each(
 										photosfileDri,
 										function(index, imageLink) {
-											var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
-													+ imageLink + "' /></div>";
+											var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+"' src='"
+													+ $.parseJSON(imageLink).src + "' /></div>";
 											$('.photoAddBtn').after(
 													photoContainer);
 											Msnry('.pro_body', '.photo', 280);
@@ -387,14 +387,15 @@ function showPhotos() {
 			.each(
 					response.imageLinks,
 					function(index, imageLink) {
-						var photoContainer = "<div class='photo'><img onload='javascript:fixed_width_auto_resize(280, this)' src='"
-								+ imageLink + "' /></div>";
+						var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+"' src='"
+								+ $.parseJSON(imageLink).src + "' /></div>";
 						$('.photoAddBtn').after(photoContainer);
 						Msnry('.pro_body', '.photo', 280);
 					});
 }
 // show followees
 function showFollowees() {
+	
 	var response = FetchFollowees(userID, "0", "10");
 	$
 			.each(

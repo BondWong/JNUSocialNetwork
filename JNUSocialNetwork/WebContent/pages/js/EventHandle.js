@@ -209,8 +209,8 @@ function CREATECOMMENT() {
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-									+ jsonComment.owner.attributes.avatarLink
-									+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-6 custom_lg-6'><div class='user_name'><strong>"
+									+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
+									+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 									+ removeBtn
@@ -256,7 +256,7 @@ function CREATECOMMENT() {
 							var comment = "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
 								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
-								+ jsonComment.owner.attributes.avatarLink
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "'style='display: none'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"

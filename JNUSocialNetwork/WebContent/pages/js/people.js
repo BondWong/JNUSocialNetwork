@@ -157,9 +157,10 @@ $('body')
 
 function AddUser(name, looking, id, avatarLink) {
 	sessionStorage.setItem("otherUserID", id);
-	var boarddiv = "<div class='userCard'><img onload='javascript:auto_resize(170, 170, this)' src='"
-			+ avatarLink
-			+ "' style='display: none'><p class='recommendName'><a class='tipUser'>"
+	
+	var boarddiv = "<div class='userCard'><img height='170' width='170' src='"
+			+ $.parseJSON(avatarLink).src
+			+ "' ><p class='recommendName'><a class='tipUser'>"
 			+ name
 			+ "</a></p><p class='recommendLooking'>"
 			+ looking

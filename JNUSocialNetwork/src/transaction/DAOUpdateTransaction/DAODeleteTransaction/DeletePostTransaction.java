@@ -7,7 +7,7 @@ import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class DeletePostTransaction extends DAOTransaction{
+public class DeletePostTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -15,7 +15,7 @@ public class DeletePostTransaction extends DAOTransaction{
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Post post = dao.get(Post.class, params[0]);
-		for(Comment comment : post.getComments()) {
+		for (Comment comment : post.getComments()) {
 			comment.delete();
 			comment.clearAttributes();
 			comment.clearLikers();

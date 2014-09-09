@@ -75,7 +75,7 @@ public class AttributesFactory {
 				attributes.put("content", "");
 				attributes.put("startDate", "");
 				attributes
-						.put("backgroundImageLink",
+						.put("background",
 								JsonUtil.toJson(new Image(
 										"images/default/default-activity-background.jpg")));
 			}
@@ -88,7 +88,7 @@ public class AttributesFactory {
 				attributes.put("name", "");
 				attributes.put("introduce", "");
 				attributes.put("foundDate", DateTimeUtil.getCurrnetDateTime());
-				attributes.put("communityCardImageLink", JsonUtil
+				attributes.put("communityCard", JsonUtil
 						.toJson(new Image(
 								"images/default/default-community-card.png")));
 			}

@@ -41,12 +41,7 @@
 							没有账号？<span class="btn signUp">注册</span>
 						</h4>
 					</form>
-					<div id="login_fail_popover" class="alert alert-danger"
-						style="display: none">登录失败</div>
-					<div class="alert alert-success" id="register_success"
-						style="display: none">注册成功，请登录</div>
-					<div class="alert alert-success" id="register_exist"
-						style="display: none">已有账号，请登录</div>
+					<div id="login_popover" style="display: none"></div>
 				</div>
 			</div>
 			<!-- /container -->
@@ -77,24 +72,33 @@
 	<c:choose>
 		<c:when test="${ param.success eq false}">
 			<script type="text/javascript">
-				$('#login_fail_popover').fadeIn("fast");
-				setTimeout('$("#login_fail_popover").fadeOut("slow")', 3000);
+				$('#login_popover')
+						.replaceWith(
+								'<div id="login_popover" class="alert alert-danger" style="display: none">登录失败</div>');
+				$('#login_popover').fadeIn("fast");
+				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
 			</script>
 
 		</c:when>
 		<c:when test="${param.register}">
 
 			<script type="text/javascript">
-				$('#register_success').fadeIn("fast");
-				setTimeout('$("#register_success").fadeOut("slow")', 3000);
+				$('#login_popover')
+						.replaceWith(
+								'<div id="login_popover" class="alert alert-success" style="display: none">注册成功，请登录</div>');
+				$('#login_popover').fadeIn("fast");
+				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
 			</script>
 
 		</c:when>
 		<c:when test="${param.registerExist}">
 
 			<script type="text/javascript">
-				$('#register_exist').fadeIn("fast");
-				setTimeout('$("#register_success").fadeOut("slow")', 3000);
+				$('#login_popover')
+						.replaceWith(
+								'<div id="login_popover" class="alert alert-danger" style="display: none">已有账号，请登录</div>');
+				$('#login_popover').fadeIn("fast");
+				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
 			</script>
 
 		</c:when>

@@ -20,6 +20,7 @@ public class DeleteUnhandledEventTransaction extends DAOTransaction {
 				sse.delete();
 				member.removeUnhandledEvent(sse);
 				dao.update(sse);
+				break;
 			}
 		}
 		dao.update(member);
