@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import utils.DateTimeUtil;
+import utils.JsonUtil;
 import model.ChatRoom;
 import model.Comment;
 import model.Community;
@@ -13,6 +14,7 @@ import model.Post;
 import model.ServerSentEvent;
 import model.communityOwnerFeature.CommunityOwner;
 import model.modelType.PostType;
+import model.structure.Image;
 
 public class AttributesFactory {
 	private static AttributesFactory factory;
@@ -35,10 +37,10 @@ public class AttributesFactory {
 		if (params != null && params.length > 0) {
 			Map<String, String> paramAttributes = (Map<String, String>) params[params.length - 1];
 			if (params[0].equals(Member.class)) {
-				attributes.put("avatarLink",
-						"images/default/default-user-avartar.png");
-				attributes.put("profileImageLink",
-						"images/default/default-profile-background.jpg");
+				attributes.put("avatarLink", JsonUtil.toJson(new Image(
+						"images/default/default-user-avartar.png")));
+				attributes.put("profileImageLink", JsonUtil.toJson(new Image(
+						"images/default/default-profile-background.jpg")));
 				attributes.put("gender", "");
 				attributes.put("name", "");
 				attributes.put("lookingFor", "");
@@ -53,10 +55,10 @@ public class AttributesFactory {
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}
 			if (params[0].equals(CommunityOwner.class)) {
-				attributes.put("avatarLink",
-						"images/default/default-user-avartar.png");
-				attributes.put("profileImageLink",
-						"images/default/default-profile-background.jpg");
+				attributes.put("avatarLink", JsonUtil.toJson(new Image(
+						"images/default/default-user-avartar.png")));
+				attributes.put("profileImageLink", JsonUtil.toJson(new Image(
+						"images/default/default-profile-background.jpg")));
 				attributes.put("gender", "");
 				attributes.put("name", "社区用户");
 				attributes.put("lookingFor", "");
@@ -72,8 +74,10 @@ public class AttributesFactory {
 				attributes.put("topic", "");
 				attributes.put("content", "");
 				attributes.put("startDate", "");
-				attributes.put("backgroundImageLink",
-						"images/default/default-activity-background.jpg");
+				attributes
+						.put("background",
+								JsonUtil.toJson(new Image(
+										"images/default/default-activity-background.jpg")));
 			}
 			if (params[0].equals(Post.class)
 					&& params[1].equals(PostType.NORMAL)) {
@@ -84,8 +88,9 @@ public class AttributesFactory {
 				attributes.put("name", "");
 				attributes.put("introduce", "");
 				attributes.put("foundDate", DateTimeUtil.getCurrnetDateTime());
-				attributes.put("communityCardImageLink",
-						"images/default/default-community-card.png");
+				attributes.put("communityCardImageLink", JsonUtil
+						.toJson(new Image(
+								"images/default/default-community-card.png")));
 			}
 			if (params[0].equals(Comment.class)) {
 				attributes.put("content", "");

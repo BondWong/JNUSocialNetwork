@@ -22,7 +22,7 @@ function login_initialization(ID) {
 					$("#nav-bar-avatar")
 							.attr(
 									"src",
-									$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+									$.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src);
 				}
 			});
 	if ($.parseJSON(sessionStorage.getItem("user")) != null

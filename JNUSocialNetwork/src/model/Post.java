@@ -55,6 +55,7 @@ public class Post extends AttributeModel {
 	@Enumerated(EnumType.STRING)
 	private PostType postType;
 	private String publishDate;
+	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
 	@Lob

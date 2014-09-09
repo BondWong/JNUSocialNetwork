@@ -3,25 +3,36 @@ function activityClickEvent() {
 		$('.activityForm').get(0).reset();
 	});
 	$('body').on("click", "#activityCreate", function() {
-		var activityC = "";
+		var post="";
 		if ($('#fileuploadA').val() != "") {
-			activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
+			post = {
+					postType : 'ACTIVITY',
+					attributes : {
+						activityName : $('#activityName').val(),
+						startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
+						remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
+						activityTime : $('#activityTime').val(),
+						activityAddr : $('#activityAddr').val(),
+						activityMore : $('#activityMore').val(),
+						background : FileUpload(new FormData($('.activityForm')[0]))[0]
+						},
+					imageLinks : []
+				};
 		} else {
-			activityC = 'images/default/default-activity-background.jpg';
+			post = {
+					postType : 'ACTIVITY',
+					attributes : {
+						activityName : $('#activityName').val(),
+						startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
+						remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
+						activityTime : $('#activityTime').val(),
+						activityAddr : $('#activityAddr').val(),
+						activityMore : $('#activityMore').val(),
+						},
+					imageLinks : []
+				};
 		}
-		var post = {
-			postType : 'ACTIVITY',
-			attributes : {
-				activityName : $('#activityName').val(),
-				startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
-				remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
-				activityTime : $('#activityTime').val(),
-				activityAddr : $('#activityAddr').val(),
-				activityMore : $('#activityMore').val(),
-				background : activityC
-				},
-			imageLinks : []
-		};
+		
 		
 		if($('.activityForm')[0].checkValidity()){
 			if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
@@ -70,14 +81,15 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 		askActivity = "";
 	}
+	
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg'><img onload='javascript:auto_resize(435, 100, this)' src='"
-			+ imagelink
-			+ "' style='display: none'/></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
-			+ avatarLink
+			+ "<div class='activityBg'><img width='435' height='100'  src='"
+			+ $.parseJSON(imagelink).src
+			+ "' /></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
+			+ $.parseJSON(avatarLink).src
 			+ "' style='display: none'/></div><div class='activityName activityHref' id='"
 			+ activityID
 			+ "'><a><span>"
@@ -115,8 +127,9 @@ $('body').on("click", ".activityHref", function() {
 });
 $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
-	DeletePost(id);
+	DeletePostFromCommunity(community.ID,id);
 	$(".post" + id + "").remove();
+	Msnry('.activityBody', '.activity', 435);
 });
 var date1 = new Date();
 date1.setDate(date1.getDate() + 1);

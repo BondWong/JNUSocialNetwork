@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebListener;
 
 import model.modelType.PostType;
 import model.modelType.UserType;
+import model.structure.Image;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateApplicationTransaction;
 import transaction.DAOCreateTransaction.CreatePostTransaction;
@@ -17,6 +18,7 @@ import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
 import transaction.DAOFetchTransaction.FetchChatRoomTransaction;
 import transaction.DAOUpdateTransaction.FollowTransaction;
+import utils.JsonUtil;
 import utils.MD5;
 
 /**
@@ -73,7 +75,8 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("relationship", "single");
 			attributes.put("lookingFor", "girls");
 			attributes.put("中文", "测试");
-			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("avatarLink", JsonUtil.toJson(new Image(
+					"images/default/default-user-avartar.png")));
 			attributes.put("major", "SE");
 			attributes.put("season", "2012");
 			attributes.put("campus", "珠海校区");
@@ -86,7 +89,8 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("gender", "male");
 			attributes.put("relationship", "married");
 			attributes.put("lookingFor", "geeks");
-			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("avatarLink", JsonUtil.toJson(new Image(
+					"images/default/default-user-avartar.png")));
 			attributes.put("major", "SE");
 			attributes.put("season", "2011");
 			attributes.put("campus", "珠海校区");
@@ -99,7 +103,8 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("gender", "male");
 			attributes.put("relationship", "available");
 			attributes.put("lookingFor", "girls");
-			attributes.put("avatarLink", "images/user_img.jpg");
+			attributes.put("avatarLink", JsonUtil.toJson(new Image(
+					"images/default/default-user-avartar.png")));
 			attributes.put("major", "Math");
 			attributes.put("season", "2011");
 			attributes.put("campus", "珠海校区");

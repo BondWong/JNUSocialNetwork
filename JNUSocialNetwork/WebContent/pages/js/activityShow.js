@@ -4,11 +4,11 @@ function showActivityDetail(activity, community) {
 	$('.aT').html(activity.attributes.activityTime);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
 	$('.activityShowD').html("&nbsp;" + activity.attributes.activityMore);
-	$('.activityHead').find('img').attr("src", activity.attributes.background);
+	$('.activityHead').find('img').attr("src", $.parseJSON(activity.attributes.background).src);
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
-	$('.aCommentI').attr("src",$.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink);
+	$('.aCommentI').attr("src",$.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src);
 	$('.communityNum').html(
 			activity.likerIDs.length+ activity.participantIDs.length + "&nbspare intesting in this activity");
 	var comments = FetchCommentByPost(activity.ID, "0", "5");
@@ -34,7 +34,7 @@ function showActivityDetail(activity, community) {
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
 								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
-								+ jsonComment.owner.attributes.avatarLink
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "'style='display: none'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"

@@ -102,7 +102,7 @@ function messages_remind(message) {
 						'<div class="NotiItem" id="'
 								+ message.fromID
 								+ '"><div class="col-lg-3"><div><img src="'
-								+ message.attributes.avatarLink
+								+ $.parseJSON(message.attributes.avatarLink).src
 								+ '" onload="javascript:auto_resize(50, 50, this)" style="display: none"/></div></div>'
 								+ '<div class="col-lg-9"><div>'
 								+ message.from
@@ -157,7 +157,7 @@ function events_remind(event) {
 					'<div class="NotiItem" id="'
 							+ event.data.eventID
 							+ '"><div class="col-lg-3"><div><img src="'
-							+ event.data.avatar
+							+ $.parseJSON(event.data.avatar).src
 							+ '" onload="javascript:auto_resize(50, 50, this)" style="display: none"/></div></div><div class="col-lg-9"><h1>'
 							+ head + '</h1><div class="remindConent">'
 							+ event.data.name + ' ' + description
@@ -286,9 +286,9 @@ function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
 	sessionStorage.setItem("otherUserID", data.ID);
 	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img  onload="javascript:auto_resize(350, 180, this)" src="'
-			+ data.attributes.profileImageLink
+			+ $.parseJSON(data.attributes.profileImageLink).src
 			+ '" id="remind-bell-profileImg" style="display: none"/></div><div class="urserInfShort"><img class="img-circle" onload="javascript:auto_resize(120, 120, this)" src="'
-			+ data.attributes.avatarLink
+			+ $.parseJSON(data.attributes.avatarLink).src
 			+ '" id="remind-bell-avatarImg" style="display: none"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
@@ -329,7 +329,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ jsonComment.owner.attributes.avatarLink
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -351,23 +351,19 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 						}
 					});
 	var likeClass = "glyphicon glyphicon-heart-empty";
-	var collectClass = "glyphicon glyphicon-star-empty";
 	if ($.inArray(USERID, likerIDs) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
-	if ($.inArray(USERID, colloctorIDs) != -1) {
-		collectClass = "glyphicon glyphicon-star";
-	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
+	
 	if (postImage.length != 0) {
 		$
 				.each(
 						postImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' onclick='showPost("
-									+ postID + ")' src='" + image
+									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' src='" + $.parseJSON(image).src
 									+ "' style='display: none'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
@@ -375,7 +371,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 		postImgDiv = "";
 	}
 	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
-			+ postOwnerAvatar
+			+ $.parseJSON(postOwnerAvatar).src
 			+ "' style='display: none'/><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
