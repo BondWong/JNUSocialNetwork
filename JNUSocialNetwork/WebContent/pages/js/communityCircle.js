@@ -145,7 +145,7 @@ function fetchPostByCommunity() {
 function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
-	$('.communityPic').find('img').attr("src", community.attributes.communityCard);
+	$('.communityPic').find('img').attr("src",$.parseJSON(community.attributes.communityCard).src);
 }
 $('body').on('click', '.alertCustC', function() {
 	fetchPostByIDs(communityPostIdContainer);

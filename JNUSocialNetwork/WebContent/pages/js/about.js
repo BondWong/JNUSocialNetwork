@@ -12,7 +12,7 @@ $(document)
 								success : function(data) {
 									for (var i = 0; i < data.length; i++) {
 										var dataString = data[i];
-										photosfileDri.push(dataString);
+										photosfileDri.push(encodeURIComponent(dataString));
 									}
 								},
 								acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
@@ -363,8 +363,8 @@ function aboutClickEvent() {
 								.each(
 										photosfileDri,
 										function(index, imageLink) {
-											var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+"' src='"
-													+ $.parseJSON(imageLink).src + "' /></div>";
+											var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(280,$.parseJSON(decodeURIComponent(imageLink)).width,$.parseJSON(decodeURIComponent(imageLink)).height)+"' src='"
+													+ $.parseJSON(decodeURIComponent(imageLink)).src + "' /></div>";
 											$('.photoAddBtn').after(
 													photoContainer);
 											Msnry('.pro_body', '.photo', 280);
@@ -387,7 +387,7 @@ function showPhotos() {
 			.each(
 					response.imageLinks,
 					function(index, imageLink) {
-						var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+"' src='"
+						var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(280,$.parseJSON(imageLink).width,$.parseJSON(imageLink).height)+"' src='"
 								+ $.parseJSON(imageLink).src + "' /></div>";
 						$('.photoAddBtn').after(photoContainer);
 						Msnry('.pro_body', '.photo', 280);

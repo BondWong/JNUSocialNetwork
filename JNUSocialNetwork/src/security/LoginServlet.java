@@ -148,7 +148,8 @@ public class LoginServlet extends HttpServlet {
 
 		if (account != null && !account.isProtected(new Date())) {
 			if (password.equals(account.getPassword())) {
-				request.getSession(false).invalidate();
+				if (request.getSession(false) != null)
+					request.getSession(false).invalidate();
 				HttpSession session = request.getSession();
 				synchronized (session) {
 					session.setAttribute("ID", account.getID());

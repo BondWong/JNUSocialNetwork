@@ -61,7 +61,7 @@ public class Member extends User {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "MEMBER_JOINEDCOMMUNITY", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "COMMUNITY_ID"))
 	private Set<Community> joinedCommunities;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "MEMBER_UNHANDLEDEVENTS", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
 	private Set<ServerSentEvent> unhandledEvents;
 	@ManyToMany(fetch = FetchType.LAZY)

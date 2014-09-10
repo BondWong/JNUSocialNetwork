@@ -8,7 +8,8 @@
 				class="footer-qqbo"></a> <a class="footer-qqzone"></a>
 		</div>
 		<div class="footer-link">
-			<a>关于我们</a> <a>加入我们</a> <a>联系我们</a> <a>意见反馈</a> <a>友情链接</a>
+			<a href="aboutUs.jsp">关于我们</a> <a href="aboutUs.jsp#fifth">加入我们</a> <a
+				href="mailto:campusite@outlook.com">联系我们</a> <a>意见反馈</a>
 		</div>
 		<div class="footer-copyright">© 2014 CampuSite</div>
 	</div>
