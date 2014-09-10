@@ -17,19 +17,16 @@ public class DeleteUnavailableModelTransaction extends DAOTransaction {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		List<Object> unavailableIDs = dao.combinedRead((String) params[0]);
-		System.out.println(unavailableIDs);
+		System.out.println("unavailableIDs:" + unavailableIDs);
 
 		for (int i = 1, effectRowNums = 0; i <= unavailableIDs.size(); i += bucketSize) {
 			try {
 				effectRowNums = dao.delete((String) params[1],
 						(Class) params[2], i - effectRowNums, i + bucketSize);
 			} catch (Exception e) {
-				System.out.println("Bond:" + e);
-				System.out
-						.println("Bond:"
-								+ (e.getCause() instanceof org.eclipse.persistence.exceptions.DatabaseException));
-				if (e.getCause() instanceof org.eclipse.persistence.exceptions.DatabaseException)
-					continue;
+				e.printStackTrace();
+				System.out.println(e.getCause());
+				continue;
 			}
 		}
 
