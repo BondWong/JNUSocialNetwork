@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -53,7 +54,7 @@ public class Community extends AttributeModel {
 	private Member owner;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "joinedCommunities")
 	private Set<Member> members;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Post> posts;
 
 	public Community() {
