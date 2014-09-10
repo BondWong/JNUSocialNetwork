@@ -374,7 +374,7 @@ function clickEvent() {
 			$('#editCommunity').modal('hide');
 			$('.cName').html(c.attributes.name);
 			$('.cIntro').html(c.attributes.introduct);
-			$('.communityPic').find('img').attr("src", card);
+			$('.communityPic').find('img').attr("src", $.parseJSON(card).src);
 		}
 	});
 	

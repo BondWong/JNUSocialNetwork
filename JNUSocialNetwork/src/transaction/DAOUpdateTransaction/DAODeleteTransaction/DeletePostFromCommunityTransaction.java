@@ -8,7 +8,7 @@ import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class DeletePostFromCommunityTransaction extends DAOTransaction{
+public class DeletePostFromCommunityTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -17,7 +17,7 @@ public class DeletePostFromCommunityTransaction extends DAOTransaction{
 		DAO dao = new DAO(em);
 		Community community = dao.get(Community.class, params[0]);
 		Post post = dao.get(Post.class, params[1]);
-		for(Comment comment : post.getComments()) {
+		for (Comment comment : post.getComments()) {
 			comment.delete();
 			comment.setOwner(null);
 			comment.clearAttributes();

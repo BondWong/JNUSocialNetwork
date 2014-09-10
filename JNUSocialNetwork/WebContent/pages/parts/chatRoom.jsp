@@ -8,8 +8,6 @@
 			<ul class="nav nav-tabs contact-list-nav-bar" role="tablist">
 				<li role="presentation" class="active"><a id="contact-button"
 					href="#contact" role="tab" data-toggle="tab"><i></i></a></li>
-				<li role="presentation"><a href="#history" role="tab"
-					data-toggle="tab" id="history-button"><i></i></a></li>
 			</ul>
 			<div class="tab-content contact-list-content">
 				<div class="tab-pane active" id="contact">
