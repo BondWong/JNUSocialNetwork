@@ -19,7 +19,7 @@ function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
 	$('.communityPic').find('img').attr("src",
-			community.attributes.communityCard);
+			$.parseJSON(community.attributes.communityCard).src);
 }
 $('body').on("click", ".communityHref", function() {
 	window.location.href = 'communityShow.jsp?' + community.ID;
