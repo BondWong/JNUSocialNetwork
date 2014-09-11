@@ -210,6 +210,7 @@
 									$('.aBodyAsk').css("display", "none");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
+									$('.activityAddCommunity').css("display", "none");
 								}
 							} else {
 								clickOffEvent();

@@ -114,7 +114,7 @@ function showCommunityInfo() {
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
 	$('.communityPic').find('img').attr("src",
-			community.attributes.communityCard);
+			$.parseJSON(community.attributes.communityCard).src);
 }
 // funtion sessionID
 $('body').on("click", ".communityHref", function() {

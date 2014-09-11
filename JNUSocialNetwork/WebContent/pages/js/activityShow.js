@@ -70,7 +70,7 @@ function showActivityDetail(activity, community) {
 					});
 	$(".commentBtn").after(comment);
 	$('.communityBS').find('img').attr("src",
-			community.attributes.communityCard);
+			$.parseJSON(community.attributes.communityCard).src);
 	$('.addcommunityA').attr("id", community.ID);
 	$('.activityJoin').attr("id", activity.ID);
 	$('.leaveactivityJoin').attr("id", activity.ID);
@@ -117,7 +117,7 @@ $('body').on("click", "#saveActivity", function() {
 	if ($('#fileupload').val() != "") {
 		activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
 	} else {
-		activityC = activity.attributes.background;
+		activityC = $.parseJSON(activity.attributes.background).src;
 	}
 	var attributes = {
 		activityName : $('#activityName').val(),
