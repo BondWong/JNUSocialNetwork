@@ -204,6 +204,15 @@ $(document)
 					$('body').on('click', '.share_txt', function() {
 						$('.postForm').get(0).reset();
 					});
+					$('body').on('click', '.close', function() {
+						$('.progress-bar').remove();
+						$('.files').remove();
+						$('.progress')
+								.append(
+										"<div class='progress-bar progress-bar-success'></div>");
+						$('.progress').after(
+								"<div id='files' class='files'></div>");
+					});
 					$('#btn_share')
 							.click(
 									function() {
@@ -219,8 +228,9 @@ $(document)
 											imageLinks : fileDri
 										};
 										var json = $.toJSON(post);
-										AddPost(USERID, json);
+										
 										if ($('.postForm')[0].checkValidity()) {
+											AddPost(USERID, json);
 											$('#addPostModal').modal('hide');
 											fileDri = [];
 											$('.progress-bar').remove();
