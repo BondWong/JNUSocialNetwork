@@ -17,7 +17,7 @@ function on_friends_node_click() {
 				var info = '<div class="person" id="'
 						+ chatRooms[i].m2ID
 						+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-						+ chatRooms[i].m2.avatarLink
+						+ $.parseJSON(chatRooms[i].m2.avatarLink).src
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m2.name;
 				var online = false;
@@ -48,7 +48,7 @@ function on_friends_node_click() {
 				var info = '<div class="person" id="'
 						+ chatRooms[i].m1ID
 						+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-						+ chatRooms[i].m1.avatarLink
+						+ $.parseJSON(chatRooms[i].m1.avatarLink).src
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m1.name;
 				var online = false;
@@ -117,7 +117,7 @@ function add_to_friend_list() {
 			var info = '<div class="person" id="'
 					+ chatRooms[i].m2ID
 					+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-					+ chatRooms[i].m2.avatarLink
+					+ $.parseJSON(chatRooms[i].m2.avatarLink).src
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m2.name;
 			var online = false;
@@ -147,7 +147,7 @@ function add_to_friend_list() {
 			var info = '<div class="person" id="'
 					+ chatRooms[i].m1ID
 					+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-					+ chatRooms[i].m1.avatarLink
+					+ $.parseJSON(chatRooms[i].m1.avatarLink).src
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m1.name;
 			var online = false;

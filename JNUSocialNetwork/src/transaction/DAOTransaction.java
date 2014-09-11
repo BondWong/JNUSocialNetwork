@@ -6,7 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.RollbackException;
 
-import utils.EntityManagerFactoryCreator;
+import persistence.helper.EntityManagerFactoryUtil;
 
 public abstract class DAOTransaction implements Transaction{
 	private EntityManagerFactory emf;
@@ -22,7 +22,7 @@ public abstract class DAOTransaction implements Transaction{
 	}
 	
 	private void initEntityManagerFactory(){
-		emf = EntityManagerFactoryCreator.getInstance().getEntityManagerFactory();
+		emf = EntityManagerFactoryUtil.getInstance().getEntityManagerFactory();
 	}
 	
 	private void initEntityManager(){

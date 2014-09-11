@@ -85,10 +85,10 @@
 				<div>
 					<img src="images/founder-avatar/hzy.JPG" class="round icon-like" />
 					<p class="palegreen intro">
-						<span>黄子阳</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
+						<span>黄子阳</span>
 					</p>
 					<p class="palegreen rank">
-						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
+						<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 				<div>
@@ -96,7 +96,7 @@
 					<p class="palegreen intro">
 						<span>胡海城</span>
 					<p class="palegreen rank">
-						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
+						<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 				<div>
@@ -104,7 +104,7 @@
 					<p class="palegreen intro">
 						<span>邓恩临</span>
 					<p class="palegreen rank">
-						<span>创始人</span> <span>|</span> <span>公共</span> <span>|</span> <span>推广</span>
+						<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 					</p>
 				</div>
 			</div>

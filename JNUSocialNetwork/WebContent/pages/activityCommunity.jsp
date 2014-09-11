@@ -33,7 +33,7 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1"
 						id="editMembersBtn">管理成员</a></li>
 					<li role="presentation"><a id="leaveCommunityBtn"
-						role="menuitem" tabindex="-1" href="#">离开社区</a></li>
+						role="menuitem" tabindex="-1" href="#">退出社区</a></li>
 					<li role="presentation"><a id="deleteCommunityBtn"
 						role="menuitem" tabindex="-1" href="#">删除社区</a></li>
 				</ul>
@@ -45,7 +45,7 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
+							<h4 class="modal-title" id="myModalLabel">编辑社区</h4>
 						</div>
 						<form class="editCommunityForm" enctype="multipart/form-data"
 							onsubmit="return false;">
@@ -64,10 +64,10 @@
 										id="communityIntro" required autofocus maxLength="100"
 										style="resize: none;"></textarea>
 								</p>
-								<span>社区名片</span> <span class="btn btn-success fileinput-button">
-									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file"
-									name="files[]">
+								<span>社区名片:</span> <span
+									class="btn btn-success fileinput-button"> <i
+									class="glyphicon glyphicon-plus"></i> <span>社区封面:</span> <input
+									id="fileuploadEdit" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -76,9 +76,9 @@
 							<br></br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+									data-dismiss="modal">关闭</button>
 								<button type="submit" class="btn btn-primary" id="saveCommunity"
-									value="upload">Save</button>
+									value="upload">保存</button>
 							</div>
 						</form>
 					</div>
@@ -154,7 +154,7 @@
 								</div>
 								<div class="activityItem">
 									<div id="fail_popover" class="alert alert-danger"
-									style="width: 97%;text-align:center;padding:0px;display:none;">请输入时间！</div>
+										style="width: 97%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
 								</div>
 								<div class="activityItem">
 									<span>活动地点：</span>
@@ -251,16 +251,23 @@
 								$.each(community.members, function(n, member) {
 									memberIDs.push(member.ID);
 								});
-								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										|| $.inArray(USERID, memberIDs) != -1) {
 									$('.cardSetter').css("display", "inline");
 								}
-								if ($.inArray(USERID, memberIDs) != -1 && USERID != community.attributes.userID) {
-									$('#leaveCommunityBtn').css("display", "inline");
+								if ($.inArray(USERID, memberIDs) != -1
+										&& USERID != community.attributes.userID) {
+									$('#leaveCommunityBtn').css("display",
+											"inline");
 								}
-								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'&& USERID == community.attributes.userID) {
-									$('#editCommunityBtn').css("display", "inline");
-									$('#editMembersBtn').css("display", "inline");
-									$('#deleteCommunityBtn').css("display", "inline");
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										&& USERID == community.attributes.userID) {
+									$('#editCommunityBtn').css("display",
+											"inline");
+									$('#editMembersBtn').css("display",
+											"inline");
+									$('#deleteCommunityBtn').css("display",
+											"inline");
 									$('.editActivity').css("display", "inline");
 								}
 							} else {

@@ -118,7 +118,6 @@
 	<%@ include file="parts/footer.jsp"%>
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/global-initialization.js"></script>
@@ -126,17 +125,6 @@
 	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<script src="js/home.js"></script>
 	<script type="text/javascript">
-		if (USERID != "") {
-			$(document)
-					.click(
-							function(e) {
-								var drag = $(".mentionBody"), dragel = $(".mentionBody")[0], target = e.target;
-								if (dragel !== target
-										&& !$.contains(dragel, target)) {
-									drag.fadeOut(300);
-								}
-							});
-		}
 		$(".band-bg").animate({
 			opacity : 1
 		}, 500);

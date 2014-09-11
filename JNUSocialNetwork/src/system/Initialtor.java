@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import persistence.helper.EntityManagerFactoryUtil;
 import service.helper.ActivitySearchMap;
 import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
@@ -49,6 +50,8 @@ public class Initialtor implements ServletContextListener {
 				.getServletContext()
 				.getAttribute("scheduledThreadPoolExecutor");
 		scheduledThreadPoolExecutor.shutdownNow();
+
+		EntityManagerFactoryUtil.getInstance().closeEntityManagerFactory();
 	}
 
 	/**

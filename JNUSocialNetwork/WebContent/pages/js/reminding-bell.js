@@ -52,6 +52,12 @@ function add_messages_to_bell() {
 		}
 	});
 
+	$.each(online_messages, function(index, val) {
+		for (var i = 0; i < val.length; i++) {
+			messages_remind(val[i]);
+		}
+	});
+
 	var online_messages_length = 0;
 	var offline_messages_length = 0;
 	for (key in online_messages) {
@@ -64,12 +70,6 @@ function add_messages_to_bell() {
 	}
 	if (online_messages_length == 0 && offline_messages_length == 0)
 		return false;
-
-	$.each(online_messages, function(index, val) {
-		for (var i = 0; i < val.length; i++) {
-			messages_remind(val[i]);
-		}
-	});
 
 	return true;
 }
@@ -165,91 +165,82 @@ function events_remind(event) {
 	var type = event.name;
 	var eventID = event.data.eventID;
 	var isOnline = event.action == null ? false : true;
-	$("div#" + event.data.eventID)
-			.click(
-					function(e) {
-						e.stopPropagation();
-						var incomingEvents = sessionStorage
-								.getItem("incomingEvents");
-						incomingEvents = $.parseJSON(incomingEvents);
-						delete incomingEvents["" + eventID];
-						sessionStorage.setItem("incomingEvents", JSON
-								.stringify(incomingEvents));
+	$("div#" + event.data.eventID).click(
+			function(e) {
+				e.stopPropagation();
+				var incomingEvents = sessionStorage.getItem("incomingEvents");
+				incomingEvents = $.parseJSON(incomingEvents);
+				delete incomingEvents["" + eventID];
+				sessionStorage.setItem("incomingEvents", JSON
+						.stringify(incomingEvents));
 
-						switch (type) {
-						case "CREATECOMMENT":
-							var dataString = FetchPostByID(event.data.postID);
-							notifyAddComment(event.data.commentID,
-									dataString.owner.ID,
-									dataString.owner.attributes.name,
-									dataString.publishDate,
-									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs,
-									dataString.owner.attributes.avatarLink,
-									dataString.imageLinks,
-									dataString.collectorIDs);
-							break;
-						case "FOLLOW":
-							notifyFollow(event.data.ID);
-							break;
-						case "LIKECOMMENT":
-							var dataString = FetchPostByID(event.data.postID);
-							notifyLikeComment(event.data.commentID,
-									dataString.owner.ID,
-									dataString.owner.attributes.name,
-									dataString.publishDate,
-									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs,
-									dataString.owner.attributes.avatarLink,
-									dataString.imageLinks,
-									dataString.collectorIDs);
-							break;
-						case "LIKEPOST":
-							var dataString = FetchPostByID(event.data.postID);
-							notifyLikePost(dataString.owner.ID,
-									dataString.owner.attributes.name,
-									dataString.publishDate,
-									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs,
-									dataString.owner.attributes.avatarLink,
-									dataString.imageLinks,
-									dataString.collectorIDs);
-							break;
-						case "REPLYCOMMENT":
-							var dataString = FetchPostByID(event.data.postID);
-							notifyReplyComment(event.data.commentID,
-									event.data.toCommentID,
-									dataString.owner.ID,
-									dataString.owner.attributes.name,
-									dataString.publicDate,
-									dataString.attributes.content,
-									dataString.ID, dataString.likerIDs,
-									dataString.owner.attributes.avatarLink,
-									dataString.imageLinks,
-									dataString.collectorIDs);
-							break;
-						}
+				switch (type) {
+				case "CREATECOMMENT":
+					var dataString = FetchPostByID(event.data.postID);
+					notifyAddComment(event.data.commentID, dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publishDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs,
+							dataString.owner.attributes.avatarLink,
+							dataString.imageLinks, dataString.collectorIDs);
+					break;
+				case "FOLLOW":
+					notifyFollow(event.data.ID);
+					break;
+				case "LIKECOMMENT":
+					var dataString = FetchPostByID(event.data.postID);
+					notifyLikeComment(event.data.commentID,
+							dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publishDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs,
+							dataString.owner.attributes.avatarLink,
+							dataString.imageLinks, dataString.collectorIDs);
+					break;
+				case "LIKEPOST":
+					var dataString = FetchPostByID(event.data.postID);
+					notifyLikePost(dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publishDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs,
+							dataString.owner.attributes.avatarLink,
+							dataString.imageLinks, dataString.collectorIDs);
+					break;
+				case "REPLYCOMMENT":
+					var dataString = FetchPostByID(event.data.postID);
+					notifyReplyComment(event.data.commentID,
+							event.data.toCommentID, dataString.owner.ID,
+							dataString.owner.attributes.name,
+							dataString.publicDate,
+							dataString.attributes.content, dataString.ID,
+							dataString.likerIDs,
+							dataString.owner.attributes.avatarLink,
+							dataString.imageLinks, dataString.collectorIDs);
+					break;
+				}
 
-						$("#arrowBack").css("display","inline");
-						$('.arrowBack').click(
-								function() {
-									$("#arrowBack").css("display","none");
-									$(".mentionBody-content").empty();
-									show_remind_content();
-								});
-						if (!isOnline) {
-							$.ajax({
-								type : "PUT",
-								url : '../../app/event/deleteUnhandledEvent/'
-										+ USERID + '/' + eventID,
-								beforeSend : function(request) {
-									request.setRequestHeader("ID", USERID);
-								},
-								success : function(data) {
-								}
-							});
+				$("#arrowBack").css("display", "inline");
+				$('.arrowBack').click(function() {
+					$("#arrowBack").css("display", "none");
+					$(".mentionBody-content").empty();
+					show_remind_content();
+				});
+				if (!isOnline) {
+					$.ajax({
+						type : "PUT",
+						url : '../../app/event/deleteUnhandledEvent/' + USERID
+								+ '/' + eventID,
+						beforeSend : function(request) {
+							request.setRequestHeader("ID", USERID);
+						},
+						success : function(data) {
 						}
 					});
+				}
+			});
 
 }
 
@@ -342,7 +333,9 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ jsonComment.likerIDs.length
 								+ "</span></div><a><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"+commentReply+"</div></div></div></div><div class='act_comment'><span class='commentHead'>"
+								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
+								+ commentReply
+								+ "</div></div></div></div><div class='act_comment'><span class='commentHead'>"
 								+ atComment + "</span>" + "&nbsp;"
 								+ jsonComment.attributes.content
 								+ "﻿</div></div>";
@@ -356,14 +349,15 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
-	
+
 	if (postImage.length != 0) {
 		$
 				.each(
 						postImage,
 						function(n, image) {
 							imageDiv = imageDiv
-									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' src='" + $.parseJSON(image).src
+									+ "<img class='postimg' onload='javascript:auto_resize(350, 208, this)' src='"
+									+ $.parseJSON(image).src
 									+ "' style='display: none'/>";
 						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";

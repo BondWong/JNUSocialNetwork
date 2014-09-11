@@ -4,21 +4,24 @@ $(document)
 					photosfileDri = [];
 					// funtion fileupload
 					$('#fileuploadPhoto')
-							.fileupload({
-								url : '../../app/fileUploader',
-								beforeSend : function(request) {
-									request.setRequestHeader("ID", USERID);
-								},
-								success : function(data) {
-									for (var i = 0; i < data.length; i++) {
-										var dataString = data[i];
-										photosfileDri.push(encodeURIComponent(dataString));
-									}
-								},
-								acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-								maxFileSize : 5000000
-							// 5 MB
-							})
+							.fileupload(
+									{
+										url : '../../app/fileUploader',
+										beforeSend : function(request) {
+											request.setRequestHeader("ID",
+													USERID);
+										},
+										success : function(data) {
+											for (var i = 0; i < data.length; i++) {
+												var dataString = data[i];
+												photosfileDri
+														.push(encodeURIComponent(dataString));
+											}
+										},
+										acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+										maxFileSize : 5000000
+									// 5 MB
+									})
 							.on(
 									'fileuploadadd',
 									function(e, data) {
@@ -204,15 +207,20 @@ $(document)
 					$('body').on('click', '.share_txt', function() {
 						$('.postForm').get(0).reset();
 					});
-					$('body').on('click', '.close', function() {
-						$('.progress-bar').remove();
-						$('.files').remove();
-						$('.progress')
-								.append(
-										"<div class='progress-bar progress-bar-success'></div>");
-						$('.progress').after(
-								"<div id='files' class='files'></div>");
-					});
+					$('body')
+							.on(
+									'click',
+									'.close',
+									function() {
+										$('.progress-bar').remove();
+										$('.files').remove();
+										$('.progress')
+												.append(
+														"<div class='progress-bar progress-bar-success'></div>");
+										$('.progress')
+												.after(
+														"<div id='files' class='files'></div>");
+									});
 					$('#btn_share')
 							.click(
 									function() {
@@ -228,7 +236,7 @@ $(document)
 											imageLinks : fileDri
 										};
 										var json = $.toJSON(post);
-										
+
 										if ($('.postForm')[0].checkValidity()) {
 											AddPost(USERID, json);
 											$('#addPostModal').modal('hide');
@@ -373,8 +381,17 @@ function aboutClickEvent() {
 								.each(
 										photosfileDri,
 										function(index, imageLink) {
-											var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(280,$.parseJSON(decodeURIComponent(imageLink)).width,$.parseJSON(decodeURIComponent(imageLink)).height)+"' src='"
-													+ $.parseJSON(decodeURIComponent(imageLink)).src + "' /></div>";
+											var photoContainer = "<div class='photo'><img width='280' height='"
+													+ getHeight(
+															280,
+															$
+																	.parseJSON(decodeURIComponent(imageLink)).width,
+															$
+																	.parseJSON(decodeURIComponent(imageLink)).height)
+													+ "' src='"
+													+ $
+															.parseJSON(decodeURIComponent(imageLink)).src
+													+ "' /></div>";
 											$('.photoAddBtn').after(
 													photoContainer);
 											Msnry('.pro_body', '.photo', 280);
@@ -393,19 +410,18 @@ function aboutClickEvent() {
 // show photos
 function showPhotos() {
 	var response = FetchUserByID(userID);
-	$
-			.each(
-					response.imageLinks,
-					function(index, imageLink) {
-						var photoContainer = "<div class='photo'><img width='280' height='"+getHeight(280,$.parseJSON(imageLink).width,$.parseJSON(imageLink).height)+"' src='"
-								+ $.parseJSON(imageLink).src + "' /></div>";
-						$('.photoAddBtn').after(photoContainer);
-						Msnry('.pro_body', '.photo', 280);
-					});
+	$.each(response.imageLinks, function(index, imageLink) {
+		var photoContainer = "<div class='photo'><img width='280' height='"
+				+ getHeight(280, $.parseJSON(imageLink).width, $
+						.parseJSON(imageLink).height) + "' src='"
+				+ $.parseJSON(imageLink).src + "' /></div>";
+		$('.photoAddBtn').after(photoContainer);
+		Msnry('.pro_body', '.photo', 280);
+	});
 }
 // show followees
 function showFollowees() {
-	
+
 	var response = FetchFollowees(userID, "0", "10");
 	$
 			.each(

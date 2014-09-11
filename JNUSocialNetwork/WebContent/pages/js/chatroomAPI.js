@@ -199,7 +199,7 @@ function append_to_content_panel(data, who) {
 	var message = '<div class="chat-bubble" id="'
 			+ data.ID
 			+ '" ><img class="chat-avatar" src="'
-			+ data.attributes.avatarLink
+			+ $.parseJSON(data.attributes.avatarLink).src
 			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
 			+ who + '" >' + data.attributes.content;
 	if (who == "self")
@@ -230,7 +230,7 @@ function prepend_to_content_panel(data, who) {
 	var message = '<div class="chat-bubble" id="'
 			+ data.ID
 			+ '" ><img class="chat-avatar" src="'
-			+ data.attributes.avatarLink
+			+ $.parseJSON(data.attributes.avatarLink).src
 			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
 			+ who + '" >' + data.attributes.content;
 	if (who == "self")

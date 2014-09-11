@@ -25,7 +25,6 @@ public class CreateMessagesTransaction extends DAOTransaction{
 		List<Map<String, Object>> messages = (List<Map<String, Object>>) params[0];
 		for(Object param : messages) {
 			Map<String, Object> messageMap = (Map<String, Object>) param;
-			System.out.println(messageMap);
 			Member from = dao.get(Member.class, messageMap.get("fromID"));
 			Member to = dao.get(Member.class, messageMap.get("toID"));
 			ChatRoom chatRoom = dao.get(ChatRoom.class, messageMap.get("chatRoomID"));
