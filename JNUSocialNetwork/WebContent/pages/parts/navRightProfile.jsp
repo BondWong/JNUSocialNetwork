@@ -12,9 +12,9 @@
 		<ul class="dropdown-menu pull-right">
 			<li><a href="profile.jsp?nav=post&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-home">&nbsp;<span
-						id="nav-bar-user">个人中心</span></span></a></li>
+						id="nav-bar-user">个人资料</span></span></a></li>
 			<li><a href="../security/UserLogoutServlet" id="lougout_button"><span
-					class="glyphicon glyphicon-log-out">&nbsp;退出</span></a></li>
+					class="glyphicon glyphicon-log-out">&nbsp;登出</span></a></li>
 		</ul></li>
 	<li></li>
 

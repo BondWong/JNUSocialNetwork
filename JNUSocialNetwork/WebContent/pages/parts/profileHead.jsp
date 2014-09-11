@@ -26,16 +26,16 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Change Avatar</h4>
+					<h4 class="modal-title" id="myModalLabel">换头像</h4>
 				</div>
 				<form class="avatarForm" enctype="multipart/form-data">
 					<div class="modal-body">
 						<input type="file" name="file" />
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary avatarImgBtn"
-							value="upload">Save changes</button>
+							value="upload">保存</button>
 					</div>
 				</form>
 			</div>
@@ -52,16 +52,16 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Change Background</h4>
+					<h4 class="modal-title" id="myModalLabel">换背景</h4>
 				</div>
 				<form class="changBgForm" enctype="multipart/form-data">
 					<div class="modal-body">
 						<input type="file" name="file" />
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary changeBg"
-							value="upload">Save changes</button>
+							value="upload">保存</button>
 					</div>
 				</form>
 			</div>

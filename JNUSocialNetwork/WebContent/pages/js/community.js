@@ -64,8 +64,7 @@ function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
 	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
-				community.members.length, "myCommunity", $
-						.parseJSON(community.attributes.communityCard).src,
+				community.members.length, "myCommunity", community.attributes.communityCard,
 				community.members, community.attributes.userID);
 	}
 }
@@ -74,8 +73,7 @@ function fetchCommunityByOwner() {
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "myCommunity", $
-							.parseJSON(community.attributes.communityCard).src,
+					community.members.length, "myCommunity", community.attributes.communityCard,
 					community.members, community.attributes.userID);
 		}
 	});
@@ -85,8 +83,7 @@ function fetchCommunityByJoin() {
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "myCommunity", $
-							.praseJSON(community.attributes.communityCard).src,
+					community.members.length, "myCommunity",community.attributes.communityCard,
 					community.members, community.attributes.userID);
 
 		}
@@ -98,8 +95,7 @@ function fetchHotCommunity() {
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "discoverCommunity", $
-							.parseJSON(community.attributes.communityCard).src,
+					community.members.length, "discoverCommunity", community.attributes.communityCard,
 					community.members, community.attributes.userID);
 		}
 	});
@@ -109,8 +105,7 @@ function fetchCommunityByType(communityType) {
 	$.each(communities, function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, community.communityType, $
-							.parseJSON(community.attributes.communityCard).src,
+					community.members.length, community.communityType, community.attributes.communityCard,
 					community.members, community.attributes.userID);
 		}
 	});
@@ -145,7 +140,7 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
-			+ $.parseJSON(communityImg).src
+			+ communityImg
 			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
@@ -279,9 +274,7 @@ $(document)
 																	community.ID,
 																	community.attributes.name,
 																	community.members.length,
-																	"searchCommunity",
-																	$
-																			.parseJON(community.attributes.communityCard).src,
+																	"searchCommunity",community.attributes.communityCard,
 																	community.members);
 														});
 									});

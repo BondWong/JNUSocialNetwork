@@ -171,8 +171,7 @@
 								<div class="activityItem">
 									<span>活动图片</span> <span
 										class="btn btn-success fileinput-button" style="width: auto;">
-										<i class="glyphicon glyphicon-plus"></i> <span>Add
-											photos...</span> <!-- The file input field used as target for the file upload widget -->
+										<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileuploadA" type="file" name="files[]">
 									</span>
 								</div>
@@ -183,9 +182,9 @@
 							<br></br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+									data-dismiss="modal">取消</button>
 								<button type="type" class="btn btn-primary" id="activityCreate"
-									value="upload">Create</button>
+									value="upload">举办</button>
 							</div>
 						</form>
 					</div>

@@ -20,7 +20,7 @@
 		<!-- /.container -->
 	</div>
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust alertCustC">New Post!</div>
+		<div class="alert alert-success alertCust alertCustC">新消息!</div>
 		<div class="communityCard">
 
 			<div class="dropdown">
@@ -48,26 +48,26 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">管理社区</h4>
 						</div>
-						<form class="editCommunityForm" enctype="multipart/form-data" onsubmit="return false;">
+						<form class="editCommunityForm" enctype="multipart/form-data"
+							onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
 								-->
 								<p>
 									<span>社区名：</span> <input type="text" class="form-control"
-										placeholder="" data-errormessage-value-missing="请输入社区名" id="communityName" required autofocus
-										maxLength="20" />
+										placeholder="" data-errormessage-value-missing="请输入社区名"
+										id="communityName" required autofocus maxLength="20" />
 								</p>
 								<p>
 									<span>社区介绍：</span>
 									<textarea type="text" class="form-control" placeholder=""
-										id="communityIntro" data-errormessage-value-missing="请输入社区介绍" required autofocus maxLength="100"
-										style="resize: none;"></textarea>
+										id="communityIntro" data-errormessage-value-missing="请输入社区介绍"
+										required autofocus maxLength="100" style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
-									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file"
-									name="files[]">
+									<i class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <input
+									id="fileuploadEdit" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 
@@ -76,9 +76,9 @@
 							<br></br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+									data-dismiss="modal">取消</button>
 								<button type="submit" class="btn btn-primary" id="saveCommunity"
-									value="upload">Save</button>
+									value="upload">保存</button>
 							</div>
 						</form>
 					</div>
@@ -96,44 +96,44 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span>All posts</span> <span class="activityHref">Activities</span>
+				<span>社区帖子</span> <span class="activityHref">社区活动</span>
 			</div>
 			<div class="memberList">
-				<h1>Members</h1>
-				<span class="memberHref">see all</span>
+				<h1>社区成员</h1>
+				<span class="memberHref">去看所有成员</span>
 			</div>
 
 		</div>
 		<div class="pro_body pro_body_community">
 			<div class="share post">
 				<form enctype="multipart/form-data">
-					<textarea class="form-control share_txt"
-						placeholder="share anything you what to share" data-toggle='modal'
-						data-target='#addPostModal' maxLength="200" style="resize: none;"></textarea>
+					<textarea class="form-control share_txt" placeholder="分享你所想、所见"
+						data-toggle='modal' data-target='#addPostModal' maxLength="200"
+						style="resize: none;"></textarea>
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/motion.png);"></div>
-							<div>Motion</div>
+							<!-- <div>Motion</div> -->
 						</div>
 						<div role="button" class="Btnshare btnPhoto" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/photo.png);"></div>
-							<div>Photos</div>
+							<!-- <div>Photos</div> -->
 						</div>
 						<div role="button" class="Btnshare btnVideo" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/video.png);"></div>
-							<div>Videos</div>
+							<!-- <div>Videos</div> -->
 						</div>
 						<div role="button" class="Btnshare btnShare" data-toggle='modal'
 							data-target='#addPostModal'>
 							<div class="Iconshare"
 								style="background-image: url(images/share.png);"></div>
-							<div class="Fontshare">Share</div>
+							<!-- <div class="Fontshare">Share</div> -->
 						</div>
 
 					</div>
@@ -146,18 +146,19 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">Share Post</h4>
+								<h4 class="modal-title" id="myModalLabel">分享</h4>
 							</div>
-							<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
+							<form class="postForm" enctype="multipart/form-data"
+								onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
 										placeholder="share anything you what to share" maxLength="200"
-										style="resize: none;" required data-errormessage-value-missing="请输入内容"></textarea>
+										style="resize: none;" required
+										data-errormessage-value-missing="请输入内容"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
-										class="glyphicon glyphicon-plus"></i> <span>Add
-											photos...</span> <!-- The file input field used as target for the file upload widget -->
+										class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileupload" type="file" name="files[]" multiple>
 									</span> <br> <br>
 									<!-- The global progress bar -->
@@ -170,9 +171,9 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
+										data-dismiss="modal">取消</button>
 									<button type="submit" class="btn btn-primary" id="btn_shareC"
-										value="upload">Share</button>
+										value="upload">分享</button>
 								</div>
 							</form>
 						</div>
@@ -221,39 +222,49 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var url = window.location.search;
-			window.communityID = url.substr(url.indexOf("?") + 1);
-			window.community = FetchCommunityByID(communityID);
-			Msnry('.pro_body', '.post', 435);
-			fetchPostByCommunity();
-			showCommunityInfo();
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				window.fileDri = [];
-				window.communityPostIdContainer = [];
-				clickEvent();
-				var memberIDs =[];
-				$.each(community.members,function(n,member){
-					memberIDs.push(member.ID);
-				});
-				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
-					$('.cardSetter').css("display", "inline");
-				}
-				if ($.inArray(USERID, memberIDs) != -1 && USERID != community.attributes.userID) {
-					$('#leaveCommunityBtn').css("display", "inline");
-				}
-				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'&& USERID == community.attributes.userID) {
-					$('#editCommunityBtn').css("display", "inline");
-					$('#editMembersBtn').css("display", "inline");
-					$('#deleteCommunityBtn').css("display", "inline");
-					$('.editActivity').css("display", "inline");
-				}
+		$(document)
+				.ready(
+						function() {
+							var url = window.location.search;
+							window.communityID = url
+									.substr(url.indexOf("?") + 1);
+							window.community = FetchCommunityByID(communityID);
+							Msnry('.pro_body', '.post', 435);
+							fetchPostByCommunity();
+							showCommunityInfo();
+							if (USERID != null && USERID != "") {
+								login_initialization(USERID);
+								window.fileDri = [];
+								window.communityPostIdContainer = [];
+								clickEvent();
+								var memberIDs = [];
+								$.each(community.members, function(n, member) {
+									memberIDs.push(member.ID);
+								});
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										|| $.inArray(USERID, memberIDs) != -1) {
+									$('.cardSetter').css("display", "inline");
+								}
+								if ($.inArray(USERID, memberIDs) != -1
+										&& USERID != community.attributes.userID) {
+									$('#leaveCommunityBtn').css("display",
+											"inline");
+								}
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										&& USERID == community.attributes.userID) {
+									$('#editCommunityBtn').css("display",
+											"inline");
+									$('#editMembersBtn').css("display",
+											"inline");
+									$('#deleteCommunityBtn').css("display",
+											"inline");
+									$('.editActivity').css("display", "inline");
+								}
 
-			} else {
-				clickOffEvent();
-			}
-		});
+							} else {
+								clickOffEvent();
+							}
+						});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
 </body>
