@@ -86,7 +86,7 @@ $(document)
 															var error = $(
 																	'<span class="text-danger"/>')
 																	.text(
-																			'File upload failed.');
+																			'上传失败');
 															$(
 																	data.context
 																			.children()[index])
@@ -100,33 +100,41 @@ $(document)
 									$.support.fileInput ? undefined
 											: 'disabled');
 					// function addPost
-					$('body').on('click','.Btnshare',function(){
+					$('body').on('click', '.Btnshare', function() {
 						$('.postForm').get(0).reset();
 					});
-					$('body').on('click','.share_txt',function(){
+					$('body').on('click', '.share_txt', function() {
 						$('.postForm').get(0).reset();
 					});
-					$('#btn_share').click(function() {
-						// var formData = new FormData($('.photofom'));
-						var post = {
-							postType : 'NORMAL',
-							attributes : {
-								content : $('#share_txt2').val()
-							},
-							imageLinks : fileDri
-						};
-						var json = $.toJSON(post);
-						if($('.postForm')[0].checkValidity()){
-							AddPost(USERID, json);
-							$('#addPostModal').modal('hide');
-							fileDri = [];
-							$('.progress-bar').remove();
-							$('.files').remove();
-							$('.progress').append("<div class='progress-bar progress-bar-success'></div>");
-							$('.progress').after("<div id='files' class='files'></div>");
-						}
-						
-					});
+					$('#btn_share')
+							.click(
+									function() {
+										// var formData = new
+										// FormData($('.photofom'));
+										var post = {
+											postType : 'NORMAL',
+											attributes : {
+												content : $('#share_txt2')
+														.val()
+											},
+											imageLinks : fileDri
+										};
+										var json = $.toJSON(post);
+										if ($('.postForm')[0].checkValidity()) {
+											AddPost(USERID, json);
+											$('#addPostModal').modal('hide');
+											fileDri = [];
+											$('.progress-bar').remove();
+											$('.files').remove();
+											$('.progress')
+													.append(
+															"<div class='progress-bar progress-bar-success'></div>");
+											$('.progress')
+													.after(
+															"<div id='files' class='files'></div>");
+										}
+
+									});
 				});
 // function fectchPostByFollowee
 var pageSize = 15;

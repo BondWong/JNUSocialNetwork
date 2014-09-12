@@ -46,9 +46,10 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Edit community</h4>
+							<h4 class="modal-title" id="myModalLabel">编辑社区</h4>
 						</div>
-						<form class="editCommunityForm" enctype="multipart/form-data" onsubmit="return false;">
+						<form class="editCommunityForm" enctype="multipart/form-data"
+							onsubmit="return false;">
 							<div class="modal-body modalBody">
 								<!--  <div class="pubCreate" id="createBlock">Public</div>
 								<div class="priCreate" id="createBlock">Private</div>
@@ -65,9 +66,8 @@
 										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片</span> <span class="btn btn-success fileinput-button">
-									<i class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <input id="fileuploadEdit" type="file"
-									name="files[]">
+									<i class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <input
+									id="fileuploadEdit" type="file" name="files[]">
 								</span>
 								<!-- The container for the uploaded files -->
 								<div id="files" class="files"></div>
@@ -76,9 +76,9 @@
 							<br></br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+									data-dismiss="modal">取消</button>
 								<button type="submit" class="btn btn-primary" id="saveCommunity"
-									value="upload">Save</button>
+									value="upload">保存</button>
 							</div>
 						</form>
 					</div>
@@ -96,20 +96,20 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span class="communityHref">All posts</span> <span class="activityHref">Activities</span>
+				<span class="communityHref">社区帖子</span> <span class="activityHref">社区活动</span>
 			</div>
 			<div class="memberList">
-				<h1>Members</h1>
-				<span class="memberHref">see all</span>
+				<h1>社区成员</h1>
+				<span class="memberHref">所有成员</span>
 			</div>
 		</div>
 		<div class="member_body pro_body_community">
 
-			<h4>Members</h4>
-			<h5 class="containBord">Members in this community</h5>
+			<h4>成员</h4>
+			<h5 class="containBord">社区成员</h5>
 			<div class="membersContainer">
 				<div class="membersBord"></div>
-				
+
 
 			</div>
 		</div>
@@ -149,46 +149,59 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
-$(document).ready(function() {
-			var url = window.location.search;
-			window.communityID = url.substr(url.indexOf("?") + 1);
-			window.community = FetchCommunityByID(communityID);
-			Msnry('.membersContainer', '.member', 215);
-			fetchMembers();
-			showCommunityInfo();
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				clickEvent();
-				var memberIDs =[];
-				$.each(community.members,function(n,member){
-					memberIDs.push(member.ID);
-				});
-				if ($.inArray(USERID, memberIDs) != -1 && USERID != community.attributes.userID) {
-					$('#leaveCommunityBtn').css("display", "inline");
-				}
-				var communities = FetchCommunityByOwner(USERID,"0","5");
-				var communityIDs = [];
-				$.each(communities,function(n,c){
-					communityIDs.push(c.ID);
-				});
-				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' || $.inArray(USERID, memberIDs) != -1) {
-					$('.cardSetter').css("display", "inline");
-				}
-				if (communityIDs == communityID
-						&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-					$('.memberRemoveBtn').css("display", "inline");
-				}
-				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'&& USERID == community.attributes.userID) {
-					$('#editCommunityBtn').css("display", "inline");
-					$('#editMembersBtn').css("display", "inline");
-					$('#deleteCommunityBtn').css("display", "inline");
-					$('.editActivity').css("display", "inline");
-				}
-			} else {
-				clickOffEvent();
-			}
-			
-		});
+		$(document)
+				.ready(
+						function() {
+							var url = window.location.search;
+							window.communityID = url
+									.substr(url.indexOf("?") + 1);
+							window.community = FetchCommunityByID(communityID);
+							Msnry('.membersContainer', '.member', 215);
+							fetchMembers();
+							showCommunityInfo();
+							if (USERID != null && USERID != "") {
+								login_initialization(USERID);
+								clickEvent();
+								var memberIDs = [];
+								$.each(community.members, function(n, member) {
+									memberIDs.push(member.ID);
+								});
+								if ($.inArray(USERID, memberIDs) != -1
+										&& USERID != community.attributes.userID) {
+									$('#leaveCommunityBtn').css("display",
+											"inline");
+								}
+								var communities = FetchCommunityByOwner(USERID,
+										"0", "5");
+								var communityIDs = [];
+								$.each(communities, function(n, c) {
+									communityIDs.push(c.ID);
+								});
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										|| $.inArray(USERID, memberIDs) != -1) {
+									$('.cardSetter').css("display", "inline");
+								}
+								if (communityIDs == communityID
+										&& $.parseJSON(sessionStorage
+												.getItem("user")).userType == 'COMMUNITYOWNER') {
+									$('.memberRemoveBtn').css("display",
+											"inline");
+								}
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										&& USERID == community.attributes.userID) {
+									$('#editCommunityBtn').css("display",
+											"inline");
+									$('#editMembersBtn').css("display",
+											"inline");
+									$('#deleteCommunityBtn').css("display",
+											"inline");
+									$('.editActivity').css("display", "inline");
+								}
+							} else {
+								clickOffEvent();
+							}
+
+						});
 	</script>
 </body>
 </html>

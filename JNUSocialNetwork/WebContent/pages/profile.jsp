@@ -40,8 +40,8 @@
 					<div class="share post sharePro">
 						<form enctype="multipart/form-data">
 							<input class="form-control share_txt" type="text"
-								placeholder="share anything you what to share"
-								data-toggle='modal' data-target='#addPostModal' maxLength="200" />
+								placeholder="说些什么？...." data-toggle='modal'
+								data-target='#addPostModal' maxLength="200" />
 							<div class="shareBtnGroup">
 								<div role="button" class="Btnshare btnMotion"
 									data-toggle='modal' data-target='#addPostModal'>
@@ -78,17 +78,17 @@
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal"
 											aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel">Share Post</h4>
+										<h4 class="modal-title" id="myModalLabel">发帖分享</h4>
 									</div>
-									<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
+									<form class="postForm" enctype="multipart/form-data"
+										onsubmit="return false;">
 										<div class="modal-body modalBody">
 											<textarea class="form-control share_txt2" id="share_txt2"
 												type="text" style="resize: none;" maxLength="200" required></textarea>
 											<br>
 											<!-- The fileinput-button span is used to style the file input field as button -->
 											<span class="btn btn-success fileinput-button"> <i
-												class="glyphicon glyphicon-plus"></i> <span>Add
-													photos...</span> <!-- The file input field used as target for the file upload widget -->
+												class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <!-- The file input field used as target for the file upload widget -->
 												<input id="fileupload" type="file" name="files[]" multiple>
 											</span> <br> <br>
 											<!-- The global progress bar -->
@@ -101,9 +101,9 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
+												data-dismiss="modal">取消</button>
 											<button type="submit" class="btn btn-primary" id="btn_share"
-												value="upload">Share</button>
+												value="upload">分享</button>
 										</div>
 									</form>
 								</div>

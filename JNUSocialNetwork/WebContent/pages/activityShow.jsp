@@ -26,16 +26,16 @@
 				onload="javascript:auto_resize(1170, 300, this)" src=""
 				style="display: none">
 			<div class="activityInfo">
-				<p class="activityShowName">草地吉他弹唱会</p>
+				<p class="activityShowName"></p>
 				<div class="activityShare">
 
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
-						data-target='#editActivity'>编辑</button>
+						data-target='#editActivity'></button>
 					<div class="downLoadList">
 						<a class="btn btn-default" target="_blank"
-							id="download-name-list-button">下载活动名单</a>
+							id="download-name-list-button"></a>
 					</div>
 					<script type="text/javascript">
 						var url = window.location.search;
@@ -64,15 +64,15 @@
 									id="activityName" required autofocus maxLength="30" />
 							</div>
 							<div class="activityItem">
-									<span>活动时间：</span>
-									<div class="input-group date form_datetime1 col-lg-10"
-										data-link-field="dtp_input1">
-										<input type="text" class="form-control activityInput"
-											id="activityTime" readonly required/> <span
-											class="input-group-addon"><i
-											class="glyphicon glyphicon-th"></i></span>
-									</div>
+								<span>活动时间：</span>
+								<div class="input-group date form_datetime1 col-lg-10"
+									data-link-field="dtp_input1">
+									<input type="text" class="form-control activityInput"
+										id="activityTime" readonly required /> <span
+										class="input-group-addon"><i
+										class="glyphicon glyphicon-th"></i></span>
 								</div>
+							</div>
 							<div class="activityItem">
 								<span>提醒时间：</span>
 								<div class="input-group date form_datetime2 col-lg-10"
@@ -84,9 +84,9 @@
 								</div>
 							</div>
 							<div class="activityItem">
-									<div id="fail_popover" class="alert alert-danger"
-									style="width: 97%;text-align:center;padding:0px;display:none;">请输入时间！</div>
-								</div>
+								<div id="fail_popover" class="alert alert-danger"
+									style="width: 97%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
+							</div>
 							<div class="activityItem">
 								<span>活动地点：</span>
 								<textarea class="form-control activityInput" placeholder=""
@@ -102,8 +102,7 @@
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"
 									style="width: auto;"> <i
-									class="glyphicon glyphicon-plus"></i> <span>Add
-										photos...</span> <!-- The file input field used as target for the file upload widget -->
+									class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <!-- The file input field used as target for the file upload widget -->
 									<input id="fileupload" type="file" name="files[]">
 								</span>
 							</div>
@@ -114,9 +113,9 @@
 						<br></br>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+								data-dismiss="modal">取消</button>
 							<button type="sumbit" class="btn btn-primary" id="saveActivity"
-								value="upload">Save</button>
+								value="upload">保存</button>
 						</div>
 					</form>
 				</div>
@@ -127,34 +126,30 @@
 		<div class="activityBody">
 			<div class="aBodyLeft">
 				<div class="activityDetail">
-					<span class="activityTitle">Detail</span>
+					<span class="activityTitle"></span>
 					<div class="detailBody">
 						<div>
 							<span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span
-								class="aT">Fri, Aug 1, 4:00 AM - 5:00 AM</span>
+								class="aT"></span>
 						</div>
 						<div>
 							<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span
-								class='aA'>Hangouts On Air</span>
+								class='aA'></span>
 						</div>
-						<div class="detailTxt activityShowD">Please join +Tony
-							Darnell as he discusses an amazing technique developed by Dr.
-							Rémi Soummer and his team at STScI to extract hidden planetary
-							disks from Hubble data. The technique involves systematically
-							removing bright light from a star, eventually revealing the disk
-							hidden in its glare.</div>
+						<div class="detailTxt activityShowD"></div>
 					</div>
 				</div>
 				<div class="aBodyComment commentBtn">
 					<div class="aCommentItem">
-						<img class="aCommentI img-circle" onload="javascript:auto_resize(50, 50, this)"  alt="" src="">
+						<img class="aCommentI img-circle"
+							onload="javascript:auto_resize(50, 50, this)" alt="" src="">
 						<div class="col-lg-6">
-							<input type="text" placeholder="Add a comment"
-								class="form-control acBtn" id="commentText1407032926865" />
+							<input type="text" placeholder="发条评论" class="form-control acBtn"
+								id="commentText1407032926865" />
 						</div>
 						<div class="col-lg-3">
 							<button type="button" class="btn btn-success" id="addComment"
-								value="">Submit</button>
+								value="">发送</button>
 						</div>
 					</div>
 				</div>
@@ -165,19 +160,18 @@
 						<img alt="" src="">
 					</div>
 					<div class="cBcontent">
-						<p>Hosted by:</p>
-						<h1 class="communityName">Hubble Space Telescope</h1>
-						<p class="communityNum">2,569,262 have them in circles</p>
-						<button class="btn btn-danger activityAddCommunity">Add
-							community</button>
+						<p>举办方:</p>
+						<h1 class="communityName"></h1>
+						<p class="communityNum"></p>
+						<button class="btn btn-danger activityAddCommunity"></button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
-					<h1>Are you going to join in?</h1>
+					<h1>参加吗?</h1>
 					<select class="btn btn-default">
-						<option>Maybe</option>
-						<option class="activityJoin">Yes</option>
-						<option class="leaveactivityJoin">No</option>
+						<option>可能吧</option>
+						<option class="activityJoin">走起</option>
+						<option class="leaveactivityJoin">不了，谢谢</option>
 					</select>
 				</div>
 			</div>
@@ -210,7 +204,8 @@
 									$('.aBodyAsk').css("display", "none");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
-									$('.activityAddCommunity').css("display", "none");
+									$('.activityAddCommunity').css("display",
+											"none");
 								}
 							} else {
 								clickOffEvent();

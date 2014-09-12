@@ -2,11 +2,19 @@
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);
 	imagesLoaded(container, function () {
-		msnry = new Masonry(container, {
+		var msnry = new Masonry(container, {
+			isInitLayout: false,
+			transitionDuration:'2s',
 			columnWidth : width,
 			itemSelector : item,
 			gutter : 20
 		});
+		msnry.on( 'layoutComplete', function() {
+			$(item).animate({
+				opacity : 1
+			}, 300);
+			});
+		msnry.layout();
 	});
 }
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,

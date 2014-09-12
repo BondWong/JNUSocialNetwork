@@ -15,6 +15,8 @@
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate">
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"> -->
+<!-- 由于国内浏览器 -->
+<meta name="renderer" content="webkit" />
 
 <title>CampuSite</title>
 <!-- Bootstrap core CSS -->

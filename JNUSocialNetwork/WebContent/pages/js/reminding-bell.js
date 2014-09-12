@@ -320,7 +320,8 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $
+										.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -388,7 +389,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
 			+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
-			+ postID + ">Submit</button></div></div>" + comment + "</div>";
+			+ postID + ">发送</button></div></div>" + comment + "</div>";
 
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
