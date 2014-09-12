@@ -8,9 +8,6 @@ function Msnry(selectContain, item, width) {
 			gutter : 20
 		});
 	});
-	msnry.on( 'layoutComplete', function(){
-		$('.post').fadeIn(300);
-	} );
 }
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
@@ -49,8 +46,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -61,9 +57,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ jsonComment.ID
 								+ "' >+<span>"
 								+ jsonComment.likerIDs.length
-								+ "</span></div><a "
-								+ likeCommentClass
-								+ "><input id='likeID' type='hidden' value='"
+								+ "</span></div><a "+likeCommentClass+"><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
 								+ commentReply
@@ -91,13 +85,14 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
 	if (srcImage.length != 0) {
-		$.each(srcImage, function(n, image) {
-			imageDiv = imageDiv
-					+ "<img class='postimg' width='450' height="
-					+ getHeight(450, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-		});
+		$
+				.each(
+						srcImage,
+						function(n, image) {
+							imageDiv = imageDiv
+									+ "<img class='postimg' width='450' height="+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+" onclick='showPost("
+									+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
 		postImgDiv = "";
@@ -109,7 +104,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 100) + "......";
 	}
-	var boarddiv = "<div style='display:none;' class='post "
+	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ $.parseJSON(ownerImage).src
@@ -131,12 +126,8 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "' maxLength='100'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID
-			+ ">发送</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"
-			+ postID
-			+ "' class='"
-			+ likeClass
-			+ "' style='font-size:30px'></span></a></div></div></div><div class='commentArea'>"
-			+ comment + "</div></div></div></div>";
+			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"+postID+"' class='" + likeClass
+			+ "' style='font-size:30px'></span></a></div></div></div><div class='commentArea'>" + comment + "</div></div></div></div>";
 	/*
 	 * <div class='post_collect' style='cursor:pointer'><a><input
 	 * id='collectID' type='hidden' value=" + postID + "><span class='" +
@@ -254,22 +245,15 @@ function clickEvent() {
 							return 0;
 						}
 					});
-	$('body')
-			.on(
-					"click",
-					".postCLike",
-					function() {
-						if ($(this).attr("class") == "glyphicon glyphicon-heart-empty postCLike") {
-							LikePost(USERID, $(this).attr("id"));
-							$(this).attr("class",
-									"glyphicon glyphicon-heart postCLike");
-						} else {
-							CancelLikePost(USERID, $(this).attr("id"));
-							$(this)
-									.attr("class",
-											"glyphicon glyphicon-heart-empty postCLike");
-						}
-					});
+	$('body').on("click", ".postCLike", function() {
+		if($(this).attr("class") == "glyphicon glyphicon-heart-empty postCLike"){
+			LikePost(USERID, $(this).attr("id"));
+			$(this).attr("class", "glyphicon glyphicon-heart postCLike");
+		}else{
+			CancelLikePost(USERID, $(this).attr("id"));
+			$(this).attr("class", "glyphicon glyphicon-heart-empty postCLike");
+		}
+	});
 	// reply comment
 	$('body').on("click", ".comment_reply", function() {
 		var postID = $(this).attr("id");
@@ -384,7 +368,7 @@ function clickEvent() {
 			communityCard : card
 		};
 		var json = $.toJSON(attributes);
-		if ($('.editCommunityForm')[0].checkValidity()) {
+		if($('.editCommunityForm')[0].checkValidity()){
 			var c = UpdateCommunity(community.ID, json);
 			$('#editCommunity').modal('hide');
 			$('.cName').html(c.attributes.name);
@@ -392,6 +376,7 @@ function clickEvent() {
 			$('.communityPic').find('img').attr("src", $.parseJSON(card).src);
 		}
 	});
+	
 
 	$(document)
 			.click(
@@ -532,11 +517,9 @@ function clickOffEvent() {
 								var tipFrame = '<div id="'
 										+ data.ID
 										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
-										+ $
-												.parseJSON(data.attributes.profileImageLink).src
+										+ $.parseJSON(data.attributes.profileImageLink).src
 										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
-										+ $
-												.parseJSON(data.attributes.avatarLink).src
+										+ $.parseJSON(data.attributes.avatarLink).src
 										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
@@ -623,8 +606,7 @@ function showPost(postID) {
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -662,7 +644,7 @@ function showPost(postID) {
 	layer
 			.photos({
 				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' onload='javascript:auto_resize(50, 50, this)' src='"
-						+ $.parseJSON(dataString.owner.attributes.avatarLink).src
+						+$.parseJSON( dataString.owner.attributes.avatarLink).src
 						+ "' style='display: none'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
@@ -684,7 +666,7 @@ function showPost(postID) {
 						+ postID
 						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 						+ postID
-						+ ">发送</button></div></div>"
+						+ ">Submit</button></div></div>"
 						+ comment
 						+ "</div></div>",
 				page : {
@@ -730,7 +712,7 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 	srcImage.height = image.height;
 	$(srcImage).fadeIn("fast");
 }
-function getHeight(width, orgiginnalWidth, originalHeight) {
+function getHeight(width,orgiginnalWidth,originalHeight){
 	newHeight = (width / orgiginnalWidth) * originalHeight;
 	return newHeight;
 }

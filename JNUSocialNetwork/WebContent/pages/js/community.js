@@ -140,7 +140,7 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
-			+ communityImg
+			+ $.parseJSON(communityImg).src
 			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"

@@ -90,7 +90,7 @@ $(document)
 															var error = $(
 																	'<span class="text-danger"/>')
 																	.text(
-																			'上传失败');
+																			'File upload failed.');
 															$(
 																	data.context
 																			.children()[index])
