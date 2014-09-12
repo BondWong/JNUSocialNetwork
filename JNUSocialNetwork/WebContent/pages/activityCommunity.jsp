@@ -87,33 +87,31 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<div class=communityCardInfo>
-				<h1 class="cName">Joke of the Day</h1>
-				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
-					humor!</p>
+				<h1 class="cName"></h1>
+				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
 				<img onload="javascript:auto_resize(221, 267, this)" src=""
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span class="communityHref">All posts</span> <span>Activities</span>
+				<span class="communityHref">社区帖子</span> <span>社区活动</span>
 			</div>
 			<div class="memberList">
-				<h1>Members</h1>
-				<span class="memberHref">see all</span>
+				<h1>社区成员</h1>
+				<span class="memberHref">看看所有成员</span>
 			</div>
 		</div>
 		<div class="pro_body pro_body_community">
 			<div class="activityHeader">
-				<span>Community Activities</span>
+				<span>社区活动</span>
 				<button role="button" id="createActivityBtn" class="btn btn-primary"
-					data-toggle='modal' data-target='#activityCommunity'>Create
-					Activity</button>
+					data-toggle='modal' data-target='#activityCommunity'>举办活动</button>
 			</div>
 			<div
 				style="background-color: #247EEC; color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
-				<h1>Nothing here?Create an event for this community</h1>
-				<p>Schedule your next community get-together or hangout</p>
+				<h1>～～社区活动详情～～</h1>
+				<p>快来参加来认识认识一些小伙伴吧</p>
 			</div>
 			<div class="modal fade" id="activityCommunity" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,7 +120,7 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Create Activity</h4>
+							<h4 class="modal-title" id="myModalLabel">举办活动</h4>
 						</div>
 						<form class="activityForm" enctype="multipart/form-data"
 							onsubmit="return false;">

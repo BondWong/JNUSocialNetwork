@@ -4,13 +4,20 @@ function showActivityDetail(activity, community) {
 	$('.aT').html(activity.attributes.activityTime);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
 	$('.activityShowD').html("&nbsp;" + activity.attributes.activityMore);
-	$('.activityHead').find('img').attr("src", $.parseJSON(activity.attributes.background).src);
+	$('.activityHead').find('img').attr("src",
+			$.parseJSON(activity.attributes.background).src);
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
-	$('.aCommentI').attr("src",$.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src);
+	$('.aCommentI')
+			.attr(
+					"src",
+					$
+							.parseJSON($.parseJSON(sessionStorage
+									.getItem("user")).attributes.avatarLink).src);
 	$('.communityNum').html(
-			activity.likerIDs.length+ activity.participantIDs.length + "&nbspare intesting in this activity");
+			activity.likerIDs.length + activity.participantIDs.length
+					+ "&nbsp个小伙伴参加了这个活动");
 	var comments = FetchCommentByPost(activity.ID, "0", "5");
 	var comment = "";
 	$
@@ -34,7 +41,8 @@ function showActivityDetail(activity, community) {
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
 								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
-								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $
+										.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "'style='display: none'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"
@@ -70,7 +78,7 @@ function showActivityDetail(activity, community) {
 					});
 	$(".commentBtn").after(comment);
 	$('.communityBS').find('img').attr("src",
-			community.attributes.communityCard);
+			$.parseJSON(community.attributes.communityCard).src);
 	$('.addcommunityA').attr("id", community.ID);
 	$('.activityJoin').attr("id", activity.ID);
 	$('.leaveactivityJoin').attr("id", activity.ID);
@@ -85,7 +93,7 @@ function showActivityDetail(activity, community) {
 		memberIDs.push(member.ID);
 	});
 	if ($.inArray(USERID, memberIDs) != -1) {
-		$('.activityAddCommunity').css("display","none");
+		$('.activityAddCommunity').css("display", "none");
 	}
 }
 $('body').on("click", ".glyphicon-heart-empty", function() {
@@ -93,7 +101,8 @@ $('body').on("click", ".glyphicon-heart-empty", function() {
 	$('.glyphicon-heart-empty').attr("class", "glyphicon glyphicon-heart");
 });
 $('body').on("click", ".activityAddCommunity", function() {
-	JoinCommunity(USERID,community.ID);;
+	JoinCommunity(USERID, community.ID);
+	;
 	$(this).fadeOut("300");
 });
 $('body').on("click", ".glyphicon-heart", function() {
@@ -112,66 +121,73 @@ $('body').on("click", ".addcommunityA", function() {
 $('body').on("click", ".editActivity", function() {
 	$('.activityForm').get(0).reset();
 });
-$('body').on("click", "#saveActivity", function() {
-	var activityC = "";
-	if ($('#fileupload').val() != "") {
-		activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
-	} else {
-		activityC = activity.attributes.background;
-	}
-	var attributes = {
-		activityName : $('#activityName').val(),
-		startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
-		remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
-		activityTime : $('#activityTime').val(),
-		activityAddr : $('#activityAddr').val(),
-		activityMore : $('#activityMore').val(),
-		background : activityC
-	};
-	if($('.activityForm')[0].checkValidity()){
-		if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
-		var json = $.toJSON(attributes);
-		var aup = UpdateActivity(activity.ID, json);
-		$('#editActivity').modal('hide');
-		$('.activityShowName').html(aup.attributes.activityName);
-		$('.aT').html("&nbsp;" + aup.attributes.activityTime);
-		$('.aA').html("&nbsp;" + aup.attributes.activityAddr);
-		$('.activityShowD').html("&nbsp;" + aup.attributes.activityMore);
-		$('.activityHead').find('img').attr("src",
-				activityC);
-		}else{
-			$('#fail_popover').fadeIn("fast");
-			setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
-		}
-	}
-});
+$('body').on(
+		"click",
+		"#saveActivity",
+		function() {
+			var activityC = "";
+			if ($('#fileupload').val() != "") {
+				activityC = FileUpload(new FormData($('.activityForm')[0]))[0];
+			} else {
+				activityC = $.parseJSON(activity.attributes.background).src;
+			}
+			var attributes = {
+				activityName : $('#activityName').val(),
+				startDate : Date.parse(
+						$('#activityTime').val().replace('-', '/')).toString(),
+				remindDate : Date.parse(
+						$('#activityRemind').val().replace('-', '/'))
+						.toString(),
+				activityTime : $('#activityTime').val(),
+				activityAddr : $('#activityAddr').val(),
+				activityMore : $('#activityMore').val(),
+				background : activityC
+			};
+			if ($('.activityForm')[0].checkValidity()) {
+				if ($('#activityTime').val() != ""
+						&& $('#activityRemind').val() != "") {
+					var json = $.toJSON(attributes);
+					var aup = UpdateActivity(activity.ID, json);
+					$('#editActivity').modal('hide');
+					$('.activityShowName').html(aup.attributes.activityName);
+					$('.aT').html("&nbsp;" + aup.attributes.activityTime);
+					$('.aA').html("&nbsp;" + aup.attributes.activityAddr);
+					$('.activityShowD').html(
+							"&nbsp;" + aup.attributes.activityMore);
+					$('.activityHead').find('img').attr("src", activityC);
+				} else {
+					$('#fail_popover').fadeIn("fast");
+					setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+				}
+			}
+		});
 var date1 = new Date();
 date1.setDate(date1.getDate() + 1);
 $('.form_datetime1').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date1,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date1,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
 });
 var date2 = new Date();
 var date3 = $('#activityTime').val();
 date2.setDate(date2.getDate() + 0.5);
 $('.form_datetime2').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date2,
-endDate : date3,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date2,
+	endDate : date3,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
 });

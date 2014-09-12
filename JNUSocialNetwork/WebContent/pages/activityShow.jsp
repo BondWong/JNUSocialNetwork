@@ -26,16 +26,16 @@
 				onload="javascript:auto_resize(1170, 300, this)" src=""
 				style="display: none">
 			<div class="activityInfo">
-				<p class="activityShowName">草地吉他弹唱会</p>
+				<p class="activityShowName"></p>
 				<div class="activityShare">
 
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
-						data-target='#editActivity'>编辑</button>
+						data-target='#editActivity'></button>
 					<div class="downLoadList">
 						<a class="btn btn-default" target="_blank"
-							id="download-name-list-button">下载活动名单</a>
+							id="download-name-list-button"></a>
 					</div>
 					<script type="text/javascript">
 						var url = window.location.search;
@@ -126,22 +126,17 @@
 		<div class="activityBody">
 			<div class="aBodyLeft">
 				<div class="activityDetail">
-					<span class="activityTitle">Detail</span>
+					<span class="activityTitle"></span>
 					<div class="detailBody">
 						<div>
 							<span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span
-								class="aT">Fri, Aug 1, 4:00 AM - 5:00 AM</span>
+								class="aT"></span>
 						</div>
 						<div>
 							<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span
-								class='aA'>Hangouts On Air</span>
+								class='aA'></span>
 						</div>
-						<div class="detailTxt activityShowD">Please join +Tony
-							Darnell as he discusses an amazing technique developed by Dr.
-							Rémi Soummer and his team at STScI to extract hidden planetary
-							disks from Hubble data. The technique involves systematically
-							removing bright light from a star, eventually revealing the disk
-							hidden in its glare.</div>
+						<div class="detailTxt activityShowD"></div>
 					</div>
 				</div>
 				<div class="aBodyComment commentBtn">
@@ -149,8 +144,8 @@
 						<img class="aCommentI img-circle"
 							onload="javascript:auto_resize(50, 50, this)" alt="" src="">
 						<div class="col-lg-6">
-							<input type="text" placeholder="Add a comment"
-								class="form-control acBtn" id="commentText1407032926865" />
+							<input type="text" placeholder="发条评论" class="form-control acBtn"
+								id="commentText1407032926865" />
 						</div>
 						<div class="col-lg-3">
 							<button type="button" class="btn btn-success" id="addComment"
@@ -166,10 +161,9 @@
 					</div>
 					<div class="cBcontent">
 						<p>举办方:</p>
-						<h1 class="communityName">Hubble Space Telescope</h1>
-						<p class="communityNum">2,569,262 have them in circles</p>
-						<button class="btn btn-danger activityAddCommunity">Add
-							community</button>
+						<h1 class="communityName"></h1>
+						<p class="communityNum"></p>
+						<button class="btn btn-danger activityAddCommunity"></button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
@@ -210,7 +204,8 @@
 									$('.aBodyAsk').css("display", "none");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
-									$('.activityAddCommunity').css("display", "none");
+									$('.activityAddCommunity').css("display",
+											"none");
 								}
 							} else {
 								clickOffEvent();

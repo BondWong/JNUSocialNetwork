@@ -87,9 +87,8 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<div class=communityCardInfo>
-				<h1 class="cName">Joke of the Day</h1>
-				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
-					humor!</p>
+				<h1 class="cName"></h1>
+				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
 				<img onload="javascript:auto_resize(221, 267, this)" src=""
@@ -152,9 +151,8 @@
 								onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										placeholder="share anything you what to share" maxLength="200"
-										style="resize: none;" required
-										data-errormessage-value-missing="请输入内容"></textarea>
+										placeholder="分享些什么吧" maxLength="200" style="resize: none;"
+										required data-errormessage-value-missing="请输入内容"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
