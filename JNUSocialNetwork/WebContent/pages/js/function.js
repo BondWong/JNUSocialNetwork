@@ -8,9 +8,6 @@ function Msnry(selectContain, item, width) {
 			gutter : 20
 		});
 	});
-	msnry.on( 'layoutComplete', function(){
-		$('.post').fadeIn(300);
-	} );
 }
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
@@ -107,7 +104,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 100) + "......";
 	}
-	var boarddiv = "<div style='display:none;' class='post "
+	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
 			+ $.parseJSON(ownerImage).src
