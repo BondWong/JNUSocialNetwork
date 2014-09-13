@@ -152,6 +152,7 @@ body {
 }
 
 .content_container {
+	opacity:0;
 	background-color: #FFF;
 	display: block;
 	height: 375px;
@@ -220,6 +221,7 @@ body {
 }
 
 .post {
+	opacity:0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #FFF;
@@ -597,6 +599,7 @@ body {
 }
 
 .photo {
+	opacity:0;
 	background-color: #FFF;
 	margin-bottom: 20px;
 	float: left;
@@ -745,7 +748,7 @@ body {
 
 .photoAddBtn {
 	display: none;
-	width: 90px;
+	width: 80px;
 }
 
 .photoAdd {
@@ -900,12 +903,13 @@ body {
 .activityBody {
 	margin-top: 30px;
 }
-
+.activity{
+	opacity:0;
+}
 .aBodyLeft {
 	float: left;
 	width: 710px;
 }
-
 .aBodyRight {
 	float: left;
 	margin-left: 20px;
@@ -1426,6 +1430,7 @@ body {
 }
 
 .userCard {
+	opacity:0;
 	margin-top: 20px;
 	float: left;
 	width: 170px;

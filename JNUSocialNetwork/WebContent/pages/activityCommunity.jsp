@@ -99,7 +99,7 @@
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
-				<span class="memberHref">看看所有成员</span>
+				<span class="memberHref">所有成员</span>
 			</div>
 		</div>
 		<div class="pro_body pro_body_community">
