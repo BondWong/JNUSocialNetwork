@@ -48,10 +48,11 @@ public class RegisterServlet extends HttpServlet {
 	private static final String VALIDATIONCODE = "http://202.116.0.176/ValidateCode.aspx";
 	private static final String LOGINURL = "http://202.116.0.176";
 	private static final String btnLogin = "登  录";
-	private static final String __EVENTVALIDATION = "/wEWBwKh6Oq+DwKDnbD2DALVp9zJDAKi+6bHDgKC3IeGDAKt86PwBQLv3aq9Bw==";
-	private static final String __VIEWSTATE = "/wEPDwUKMjA1ODgwODUwMg9kFgJmD2QWAgIBDw8WAh4EVGV4dAUk5pqo5Y2X5aSn5a2m57u85ZCI5pWZ5Yqh566h55CG57O757ufZGRk";
 	private static final String VALCODEERROR = "VALCODEERROR";
 	private static final String BSORMMERROR = "IDORPAERROR";
+	private static final String __VIEWSTATEPattern = "<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=\"(.+)\" />";
+	private static final String __VIEWSTATEGENERATORPattern = "<input type=\"hidden\" name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"(.+)\" />";
+	private static final String __EVENTVALIDATIONPattern = "<input type=\"hidden\" name=\"__EVENTVALIDATION\" id=\"__EVENTVALIDATION\" value=\"(.+)\" />";
 
 	private static ResponseHandler<String> responseHandler;
 
@@ -105,6 +106,36 @@ public class RegisterServlet extends HttpServlet {
 			httpClient = (CloseableHttpClient) (session
 					.getAttribute("httpClient") == null ? prepare() : session
 					.getAttribute("httpClient"));
+		}
+		HttpGet getHiddenCode = new HttpGet(LOGINURL);
+		CloseableHttpResponse hiddenCodeResponse = httpClient
+				.execute(getHiddenCode);
+		String htmlResponse = responseHandler
+				.handleResponse(hiddenCodeResponse);
+
+		String __EVENTVALIDATION = "";
+		String __VIEWSTATE = "";
+		String __VIEWSTATEGENERATOR = "";
+
+		Pattern pattern = Pattern.compile(__VIEWSTATEPattern);
+		Matcher m = pattern.matcher(htmlResponse);
+		if (m.find())
+			;
+		__VIEWSTATE = m.group(1);
+
+		pattern = Pattern.compile(__VIEWSTATEGENERATORPattern);
+		m = pattern.matcher(htmlResponse);
+		if (m.find())
+			__VIEWSTATEGENERATOR = m.group(1);
+		pattern = Pattern.compile(__EVENTVALIDATIONPattern);
+		m = pattern.matcher(htmlResponse);
+		if (m.find())
+			__EVENTVALIDATION = m.group(1);
+
+		synchronized (session) {
+			session.setAttribute("__VIEWSTATE", __VIEWSTATE);
+			session.setAttribute("__VIEWSTATEGENERATOR", __VIEWSTATEGENERATOR);
+			session.setAttribute("__EVENTVALIDATION", __EVENTVALIDATION);
 		}
 
 		HttpGet getValCode = new HttpGet(VALIDATIONCODE);
@@ -192,15 +223,24 @@ public class RegisterServlet extends HttpServlet {
 
 			HttpPost post = new HttpPost(LOGINURL);
 
+			String __EVENTVALIDATION = (String) session
+					.getAttribute("__EVENTVALIDATION");
+			String __VIEWSTATE = (String) session.getAttribute("__VIEWSTATE");
+			String __VIEWSTATEGENERATOR = (String) session
+					.getAttribute("__VIEWSTATEGENERATOR");
+
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 			nameValuePairs.add(new BasicNameValuePair("__EVENTVALIDATION",
 					__EVENTVALIDATION));
 			nameValuePairs.add(new BasicNameValuePair("__VIEWSTATE",
 					__VIEWSTATE));
+			nameValuePairs.add(new BasicNameValuePair("__VIEWSTATEGENERATOR",
+					__VIEWSTATEGENERATOR));
 			nameValuePairs.add(new BasicNameValuePair("btnLogin", btnLogin));
 			nameValuePairs.add(new BasicNameValuePair("txtFJM", txtFJM));
 			nameValuePairs.add(new BasicNameValuePair("txtYHBS", txtYHBS));
 			nameValuePairs.add(new BasicNameValuePair("txtYHMM", txtYHMM));
+			System.out.println(nameValuePairs);
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 			CloseableHttpResponse httpResponse = httpClient.execute(post);
@@ -228,6 +268,10 @@ public class RegisterServlet extends HttpServlet {
 					response.sendRedirect("/pages/register.jsp?error="
 							+ findErrorMessage(httpResponse));
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendError(500);
+				return;
 			} finally {
 				httpResponse.close();
 			}
@@ -241,7 +285,6 @@ public class RegisterServlet extends HttpServlet {
 	private String findErrorMessage(HttpResponse response)
 			throws ClientProtocolException, IOException {
 		String responsePage = responseHandler.handleResponse(response);
-
 		Pattern p = Pattern.compile("附加码不一致");
 		Matcher m = p.matcher(responsePage);
 		if (m.find())

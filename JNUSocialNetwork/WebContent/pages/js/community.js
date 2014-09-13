@@ -190,7 +190,7 @@ $(document)
 					// funtion sessionID
 					$('body').on("click", ".img_container", function() {
 						var comm = $(this).find("input").attr("value");
-						window.location.href = 'communityShow.jsp?' + comm;
+						window.location.href = 'activityCommunity.jsp?' + comm;
 					});
 
 					$('body').on("click", ".myCommunityBtn", function() {

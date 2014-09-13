@@ -29,7 +29,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 
 			<property name="hibernate.connection.provider_class"
 				value="org.hibernate.connection.C3P0ConnectionProvider" />
