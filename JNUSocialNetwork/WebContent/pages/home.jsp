@@ -25,26 +25,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <div class="header">
-		<div class="header-contain">
-			<div class='logo-contain'>
-				<a class='logo'></a>
-			</div>
-			<div class='header-right'>
-				<ul>
-					<li class='right-item'><a href="aboutUs.jsp">Campusite</a></li>
-					<li class='right-item'><a href="login.jsp">登录</a></li>
-					<li class='right-item'><a href="register.jsp">注册</a></li>
-				</ul>
-			</div>
-			<ul class="head-mid">
-				<li class='right-item'><a href="community.jsp">社区</a></li>
-				<li class='right-item'><a href="circle.jsp">朋友圈</a></li>
-			</ul>
-
-		</div>
-	</div> -->
 	<div class="band">
 		<div class="band-bg"></div>
 

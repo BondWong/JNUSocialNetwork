@@ -33,6 +33,8 @@
     <![endif]-->
 
 <!-- Custom styles for this template -->
+<link href="styles/footer.css" rel="stylesheet">
+<link href="styles/nav.css" rel="stylesheet">
 <c:choose>
 	<c:when test="${requestScope.isHome}">
 		<link href="styles/home.css" rel="stylesheet">
@@ -44,8 +46,7 @@
 <c:if test="${requestScope.needChatRoom }">
 	<link href="styles/instant-chat.css" rel="stylesheet">
 </c:if>
-<link href="styles/footer.css" rel="stylesheet">
-<link href="styles/nav.css" rel="stylesheet">
+
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="styles/jquery.fileupload.css">
 <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet"

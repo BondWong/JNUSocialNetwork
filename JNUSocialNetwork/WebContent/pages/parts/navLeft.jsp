@@ -7,5 +7,5 @@
 		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 		<span class="icon-bar"></span> <span class="icon-bar"></span>
 	</button>
-	<a class="navbar-brand" href="#">Campusite</a>
+	<a class="navbar-brand" href="home.jsp"><img src='images/logo.png'>CampuSite</a>
 </div>

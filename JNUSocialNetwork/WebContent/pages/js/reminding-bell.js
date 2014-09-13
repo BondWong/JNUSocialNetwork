@@ -8,7 +8,7 @@ function on_bell_click(e) {
 	var t = $(this).position().top;
 	var l = $(this).offset().left;
 	t += 50;
-	l -= 250;
+	l -= 238;
 	var divTip = '.mentionBody';
 	tinyTip = $(divTip);
 	tinyTip.hide();

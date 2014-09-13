@@ -44,6 +44,7 @@
 .nav_cust {
 	float: right;
 	margin-right: 20px;
+	margin-top:15px;
 }
 .nav-tabs>li {
 	float: left;
@@ -157,4 +158,33 @@ display: block;
 	font-size: 16px;
 	font-weight: bolder;
 	color: #aaaaaa;
+}
+.home-nav span{
+	font-size:16px;
+	margin:5px;
+}
+.navbar-brand{
+	padding-bottom:0px;
+}
+
+.home-nav{
+	margin-top:0px;
+	margin: 15px 0px 5px;
+}
+.nav > li > a {
+	text-align:center;
+	padding: 10px;
+}
+.home-nav a{
+	transition: all 0.3s ease 0s;
+	display: block;
+	height: 50px;
+	
+}
+.home-nav a:hover{
+	border-bottom:1px solid #BE3948;
+	
+}
+.navbar-costom{
+	margin-top:22px;
 }
