@@ -9,12 +9,7 @@ function showActivityDetail(activity, community) {
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
-	$('.aCommentI')
-			.attr(
-					"src",
-					$
-							.parseJSON($.parseJSON(sessionStorage
-									.getItem("user")).attributes.avatarLink).src);
+	
 	$('.communityNum').html(
 			activity.likerIDs.length + activity.participantIDs.length
 					+ "&nbsp个小伙伴参加了这个活动");
@@ -92,8 +87,8 @@ function showActivityDetail(activity, community) {
 	$.each(community.members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	if ($.inArray(USERID, memberIDs) != -1) {
-		$('.activityAddCommunity').css("display", "none");
+	if (USERID != null && USERID != "" && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && $.inArray(USERID, memberIDs) == -1) {
+		$('.activityAddCommunity').css("display", "inline");
 	}
 }
 $('body').on("click", ".glyphicon-heart-empty", function() {

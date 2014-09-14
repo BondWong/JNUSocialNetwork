@@ -163,12 +163,12 @@
 						<p>举办方:</p>
 						<h1 class="communityName"></h1>
 						<p class="communityNum"></p>
-						<button class="btn btn-danger activityAddCommunity"></button>
+						<button class="btn btn-danger activityAddCommunity">添加社区</button>
 					</div>
 				</div>
 				<div class="aBodyAsk">
 					<h1>参加吗?</h1>
-					<select class="btn btn-default">
+					<select class="btn btn-default" style='float: left'>
 						<option>可能吧</option>
 						<option class="activityJoin">走起</option>
 						<option class="leaveactivityJoin">不了，谢谢</option>
@@ -207,6 +207,13 @@
 									$('.activityAddCommunity').css("display",
 											"none");
 								}
+								$('.aCommentI')
+										.attr(
+												"src",
+												$
+														.parseJSON($
+																.parseJSON(sessionStorage
+																		.getItem("user")).attributes.avatarLink).src);
 							} else {
 								clickOffEvent();
 							}

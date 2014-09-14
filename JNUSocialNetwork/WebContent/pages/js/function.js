@@ -1,19 +1,19 @@
 //function Msnry
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);
-	imagesLoaded(container, function () {
+	imagesLoaded(container, function() {
 		var msnry = new Masonry(container, {
-			isInitLayout: false,
-			transitionDuration:'2s',
+			isInitLayout : false,
+			transitionDuration : '2s',
 			columnWidth : width,
 			itemSelector : item,
 			gutter : 20
 		});
-		msnry.on( 'layoutComplete', function() {
+		msnry.on('layoutComplete', function() {
 			$(item).animate({
 				opacity : 1
 			}, 300);
-			});
+		});
 		msnry.layout();
 	});
 }
@@ -54,7 +54,8 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $
+										.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -65,7 +66,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 								+ jsonComment.ID
 								+ "' >+<span>"
 								+ jsonComment.likerIDs.length
-								+ "</span></div><a "+likeCommentClass+"><input id='likeID' type='hidden' value='"
+								+ "</span></div><a "
+								+ likeCommentClass
+								+ "><input id='likeID' type='hidden' value='"
 								+ jsonComment.ID
 								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
 								+ commentReply
@@ -93,14 +96,13 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
 	if (srcImage.length != 0) {
-		$
-				.each(
-						srcImage,
-						function(n, image) {
-							imageDiv = imageDiv
-									+ "<img class='postimg' width='450' height="+getHeight(450,$.parseJSON(image).width,$.parseJSON(image).height)+" onclick='showPost("
-									+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-						});
+		$.each(srcImage, function(n, image) {
+			imageDiv = imageDiv
+					+ "<img class='postimg' width='450' height="
+					+ getHeight(450, $.parseJSON(image).width, $
+							.parseJSON(image).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
 		postImgDiv = "";
@@ -122,7 +124,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ ownerNickName
 			+ "</strong></div><div class='user_info'>"
 			+ publishDate
-			+ "</div></div><div class='col-md-4'>"
+			+ "</div></div><div class='col-md-4 postComm"+postID+"'>"
 			+ pRemoveBtn
 			+ "</div></div><div class='post_info'><span class='postContent'>"
 			+ contentD
@@ -134,8 +136,12 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "' maxLength='100'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID
-			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"+postID+"' class='" + likeClass
-			+ "' style='font-size:30px'></span></a></div></div></div><div class='commentArea'>" + comment + "</div></div></div></div>";
+			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"
+			+ postID
+			+ "' class='"
+			+ likeClass
+			+ "' style='font-size:30px'></span></a></div></div></div><div class='commentArea'>"
+			+ comment + "</div></div></div></div>";
 	/*
 	 * <div class='post_collect' style='cursor:pointer'><a><input
 	 * id='collectID' type='hidden' value=" + postID + "><span class='" +
@@ -221,13 +227,7 @@ function clickEvent() {
 				}, function() {
 					$(this).find('a').fadeOut(300);
 				});
-				$('body').on(
-						"click",
-						".tipUser",
-						function() {
-							window.location.href = 'profile.jsp?nav=post&'
-									+ sessionStorage.getItem("otherUserID");
-						});
+			
 			});
 	// function likePost and cancelLike
 	$('body')
@@ -245,7 +245,7 @@ function clickEvent() {
 							return 0;
 						}
 						if ($(this).find("span").attr("class") == "glyphicon glyphicon-heart") {
-							CancelLikePost("2011052406", id);
+							CancelLikePost(USERID, id);
 							var inputID = $("input[value='" + id
 									+ "'][id='likeID']");
 							inputID.next().attr("class",
@@ -253,15 +253,22 @@ function clickEvent() {
 							return 0;
 						}
 					});
-	$('body').on("click", ".postCLike", function() {
-		if($(this).attr("class") == "glyphicon glyphicon-heart-empty postCLike"){
-			LikePost(USERID, $(this).attr("id"));
-			$(this).attr("class", "glyphicon glyphicon-heart postCLike");
-		}else{
-			CancelLikePost(USERID, $(this).attr("id"));
-			$(this).attr("class", "glyphicon glyphicon-heart-empty postCLike");
-		}
-	});
+	$('body')
+			.on(
+					"click",
+					".postCLike",
+					function() {
+						if ($(this).attr("class") == "glyphicon glyphicon-heart-empty postCLike") {
+							LikePost(USERID, $(this).attr("id"));
+							$(this).attr("class",
+									"glyphicon glyphicon-heart postCLike");
+						} else {
+							CancelLikePost(USERID, $(this).attr("id"));
+							$(this)
+									.attr("class",
+											"glyphicon glyphicon-heart-empty postCLike");
+						}
+					});
 	// reply comment
 	$('body').on("click", ".comment_reply", function() {
 		var postID = $(this).attr("id");
@@ -349,13 +356,13 @@ function clickEvent() {
 		var postID = $(this).find("input").attr("id");
 		DeleteComment(postID, commentID);
 	});
-	
-	 $('body').on("click", ".editCommunity", function() {
-	 $('.editCommunityForm').get(0).reset();
-	 $('#communityName').val(community.attributes.name);
-	 $('#communityIntro').val(community.attributes.introduct);
-	 });
-	 
+
+	$('body').on("click", ".editCommunity", function() {
+		$('.editCommunityForm').get(0).reset();
+		$('#communityName').val(community.attributes.name);
+		$('#communityIntro').val(community.attributes.introduct);
+	});
+
 	$('body').on("click", "#leaveCommunityBtn", function() {
 		LeaveCommunity(USERID, communityID);
 	});
@@ -376,7 +383,7 @@ function clickEvent() {
 			communityCard : card
 		};
 		var json = $.toJSON(attributes);
-		if($('.editCommunityForm')[0].checkValidity()){
+		if ($('.editCommunityForm')[0].checkValidity()) {
 			var c = UpdateCommunity(community.ID, json);
 			$('#editCommunity').modal('hide');
 			$('.cName').html(c.attributes.name);
@@ -384,7 +391,6 @@ function clickEvent() {
 			$('.communityPic').find('img').attr("src", $.parseJSON(card).src);
 		}
 	});
-	
 
 	$(document)
 			.click(
@@ -404,84 +410,115 @@ function clickEvent() {
 	});
 
 }
+
 function clickOffEvent() {
-	$('.Btnshare').click(function(e) {
-		e.preventDefault();
-		$(this).attr("data-toggle", "");
-		alert("Sign In");
+	$('body').on('click', '.Btnshare', function() {
+		signInAlert();
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.share_txt').click(function(e) {
-		e.preventDefault();
-		$(this).attr("data-toggle", "");
-		alert("Sign In");
+	$('body').on('click', '.share_txt', function() {
+		signInAlert();
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.post_collect').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.post_like', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.post_like').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.postCLike', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.comment_like').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.comment_like', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.activityJoin').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.activityJoin', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.leaveactivityJoin').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.leaveactivityJoin', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('#addComment').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '#addComment', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('#followBtn').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '#followBtn', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('#deleteCommBtn').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '#deleteCommBtn', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('#communityCreate').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '#communityCreate', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.content_join').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.content_join', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('#activityCreate').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '#activityCreate', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.pinCommon').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.pinCommon', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.pCampus').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.pCampus', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.pSeason').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.pSeason', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.pMajor').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '.pMajor', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('。pClass').click(function(e) {
-		e.preventDefault();
-		alert("Sign In");
+	$('body').on('click', '。pClass', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
-	$('.addphotoBtn').click(function(e) {
-		$(this).attr("data-toggle", "");
-		alert("Sign In");
+	$('body').on('click', '.addphotoBtn', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
+	$('body').on('click', '#activityLike', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
+	$('body').on('click', '#chatCreate', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
+	$('body').on('click', '.followBtn', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
 	});
 	$('.aSavebtn').css("display", "none");
 	$('.aEditbtn').css("display", "none");
@@ -491,6 +528,10 @@ function clickOffEvent() {
 	});
 	$('.share_txt').attr("readonly", "readonly");
 
+}
+function signInAlert() {
+	var alert = "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>还没登陆哦</h4></div><div class='modal-body modal-custom'><a href='register.jsp' type='button' class='btn btn-primary'>注册</a><a href='login.jsp'  type='button' class='btn btn-primary loginA'>登录</a></div></div></div></div>";
+	$('body').append(alert);
 }
 (function($) {
 	$.fn.userTips = function() {
@@ -525,9 +566,11 @@ function clickOffEvent() {
 								var tipFrame = '<div id="'
 										+ data.ID
 										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
-										+ $.parseJSON(data.attributes.profileImageLink).src
+										+ $
+												.parseJSON(data.attributes.profileImageLink).src
 										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
-										+ $.parseJSON(data.attributes.avatarLink).src
+										+ $
+												.parseJSON(data.attributes.avatarLink).src
 										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
@@ -614,7 +657,8 @@ function showPost(postID) {
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
-								+ $.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ $
+										.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -652,7 +696,7 @@ function showPost(postID) {
 	layer
 			.photos({
 				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' onload='javascript:auto_resize(50, 50, this)' src='"
-						+$.parseJSON( dataString.owner.attributes.avatarLink).src
+						+ $.parseJSON(dataString.owner.attributes.avatarLink).src
 						+ "' style='display: none'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
@@ -691,7 +735,13 @@ $('body').on("click", ".activityHref", function() {
 $('body').on("click", ".memberHref", function() {
 	window.location.href = 'communityMember.jsp?' + community.ID;
 });
-
+$('body').on(
+		"click",
+		".tipUser",
+		function() {
+			window.location.href = 'profile.jsp?nav=post&'
+					+ sessionStorage.getItem("otherUserID");
+		});
 /**
  * auto_resize
  */
@@ -720,7 +770,7 @@ function auto_resize(maxWidth, maxHeight, srcImage) {
 	srcImage.height = image.height;
 	$(srcImage).fadeIn("fast");
 }
-function getHeight(width,orgiginnalWidth,originalHeight){
+function getHeight(width, orgiginnalWidth, originalHeight) {
 	newHeight = (width / orgiginnalWidth) * originalHeight;
 	return newHeight;
 }

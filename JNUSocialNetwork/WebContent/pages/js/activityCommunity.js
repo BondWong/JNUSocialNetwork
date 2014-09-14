@@ -14,7 +14,7 @@ function activityClickEvent() {
 						activityTime : $('#activityTime').val(),
 						activityAddr : $('#activityAddr').val(),
 						activityMore : $('#activityMore').val(),
-						background : FileUpload(new FormData($('.activityForm')[0]))[0]
+						background : FileUpload(new FormData($('.activityForm')[0]))[0],
 						},
 					imageLinks : []
 				};
