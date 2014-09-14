@@ -115,7 +115,9 @@ $(document)
 											postType : 'NORMAL',
 											attributes : {
 												content : $('#share_txt2')
-														.val()
+														.val(),
+												communityName : community.attributes.name,
+												communityID : community.ID.toString()
 											},
 											imageLinks : fileDri
 										};

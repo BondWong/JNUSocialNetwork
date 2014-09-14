@@ -140,26 +140,54 @@ $(document)
 var pageSize = 15;
 function fetchByFolloweeOrOwner() {
 	var response = FetchByFolloweeOrOwner(USERID, 0, pageSize);
-	$.each(response.reverse(), function(n, dataString) {
-		if (dataString.postType == "NORMAL") {
-			addPost(dataString.owner.ID, dataString.owner.attributes.name,
-					dataString.publishDate, dataString.attributes.content,
-					dataString.ID, dataString.likerIDs,
-					dataString.collectorIDs, dataString.imageLinks,
-					dataString.owner.attributes.avatarLink);
-		}
-	});
+	$
+			.each(
+					response.reverse(),
+					function(n, dataString) {
+						if (dataString.postType == "NORMAL"
+								&& dataString.available == true) {
+							addPost(dataString.owner.ID,
+									dataString.owner.attributes.name,
+									dataString.publishDate,
+									dataString.attributes.content,
+									dataString.ID, dataString.likerIDs,
+									dataString.collectorIDs,
+									dataString.imageLinks,
+									dataString.owner.attributes.avatarLink);
+							if (dataString.attributes.communityName != null) {
+								var board = "<a class='communityPostSpan' id = '"
+										+ dataString.attributes.communityID
+										+ "'><span class='glyphicon glyphicon-th-large'></span>&nbsp;"
+										+ dataString.attributes.communityName
+										+ "</a> ";
+								$(".postComm"+dataString.ID).append(board);
+							}
+						}
+					});
 }
+$('body').on("click",".communityPostSpan",function(){
+	window.location.href = "communityShow.jsp?"+$(this).attr('id');
+});
 // function fectchHeatPost
 
 function fectchHeatPost() {
 	var response = FetchHeatPost(0, pageSize);
-	$.each(response.reverse(), function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs,
-				dataString.imageLinks, dataString.owner.attributes.avatarLink);
-	});
+	if (response.length != 0) {
+		$.each(response.reverse(),
+				function(n, dataString) {
+					if (dataString.postType == "NORMAL"
+							&& dataString.available == true) {
+						addPost(dataString.owner.ID,
+								dataString.owner.attributes.name,
+								dataString.publishDate,
+								dataString.attributes.content, dataString.ID,
+								dataString.likerIDs, dataString.collectorIDs,
+								dataString.imageLinks,
+								dataString.owner.attributes.avatarLink);
+					}
+				});
+
+	}
 }
 // function fetchPostsByIDs
 $('body').on('click', '.alertCust', function() {

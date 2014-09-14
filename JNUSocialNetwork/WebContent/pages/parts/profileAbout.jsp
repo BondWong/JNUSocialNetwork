@@ -28,28 +28,28 @@
 		</div>
 	</div>
 	<div class="post about">
-		<div class="aboutRed">
+				<div class="aboutRed">
 			<div>
-				<span class="aboutTitle">Profile</span>
+				<span class="aboutTitle">特殊信息</span>
 			</div>
 
 			<div class="InforItem">
-				<span class="Atitle">Relationship</span><span class="Arelationship"></span>
+				<span class="Atitle">情感状态</span><span class="Arelationship"></span>
 			</div>
 			<div class="InforItem">
-				<span class="Atitle">Address</span><span class="Aaddress"></span>
+				<span class="Atitle">地址</span><span class="Aaddress"></span>
 			</div>
 			<div class="InforItem">
-				<span class="Atitle">TeleNum</span><span class="Atelenum"></span>
+				<span class="Atitle">电话号码</span><span class="Atelenum"></span>
 			</div>
 			<div class="InforItem">
-				<span class="Atitle">Email</span><span class="Aemail"></span>
+				<span class="Atitle">邮箱</span><span class="Aemail"></span>
 			</div>
 			<div class="InforItem">
-				<span class="Atitle">Looking for</span><span class="Alooking"></span>
+				<span class="Atitle">我想找</span><span class="Alooking"></span>
 			</div>
 			<div class="InforItem">
-				<button class="btn btn-primary aEditbtn">Edit</button>
+				<button class="btn btn-primary aEditbtn">编辑</button>
 			</div>
 		</div>
 	</div>

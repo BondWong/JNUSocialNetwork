@@ -105,8 +105,8 @@
 		</div>
 		<div class="member_body pro_body_community">
 
-			<h4>成员</h4>
-			<h5 class="containBord">社区成员</h5>
+			<h4>社区成员</h4>
+			<h5 class="containBord"></h5>
 			<div class="membersContainer">
 				<div class="membersBord"></div>
 
