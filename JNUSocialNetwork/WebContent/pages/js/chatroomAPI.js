@@ -221,7 +221,7 @@ function append_to_content_panel(data, who) {
 			&& data.attributes.content.length <= 25)
 		$("#" + data.ID + ' .chat-content-' + who).css("width",
 				100 + (data.attributes.content.length - 10) * 10 + "px");
-	if (data.attributes.content.length > 18)
+	if (data.attributes.content.length > 25)
 		$("#" + data.ID + ' .chat-content-' + who).css("width", "250px");
 	$("#chatroom .panel-body").scrollTop(10000000);
 }

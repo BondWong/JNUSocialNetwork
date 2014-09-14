@@ -496,44 +496,29 @@ body {
 	background-color: #FFF;
 	width: 100%;
 	height: 300px;
-	border-top-width: 5px;
-	border-right-width: 1px;
-	border-bottom-width: 2px;
-	border-left-width: 1px;
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #76a7fa;
-	border-right-color: #d8d8d8;
-	border-bottom-color: #d8d8d8;
-	border-left-color: #d8d8d8;
-	padding-top: 30px;
-	padding-right: 20px;
-	padding-bottom: 10px;
-	padding-left: 20px;
+	border-width: 5px 1px 2px 1px;
+	border-style: solid ;
+	border-color: #76a7fa #d8d8d8 #d8d8d8;
+	padding: 30px 20px 10px 20px;
 }
 
 .post .aboutRed {
 	background-color: #FFF;
 	width: 100%;
-	height: 340px;
-	border-top-width: 5px;
-	border-right-width: 1px;
-	border-bottom-width: 2px;
-	border-left-width: 1px;
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #e46f61;
-	border-right-color: #d8d8d8;
-	border-bottom-color: #d8d8d8;
-	border-left-color: #d8d8d8;
-	padding-top: 30px;
-	padding-right: 20px;
-	padding-bottom: 10px;
-	padding-left: 20px;
+	height: 240px;
+	border-width: 5px 1px 2px 1px;
+	border-style: solid;
+	border-color: #e46f61 #d8d8d8 #d8d8d8;
+	padding: 30px 20px 10px 20px;
+}
+.post .aboutBlack {
+	background-color: #FFF;
+	width: 100%;
+	height: 200px;
+	border-width: 5px 1px 2px 1px;
+	border-style: solid;
+	border-color: #101010 #d8d8d8 #d8d8d8;
+	padding: 30px 20px 10px 20px;
 }
 
 .Atitle {
@@ -559,29 +544,41 @@ body {
 }
 
 .InforItem {
-	width: 300px;
+	width: 100%;
 	float: left;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-
+.iAt{
+	float:left;
+	width:70%;
+}
 .InforItem input {
 	float: left;
 	width: 150px;
 }
 
 .aEditbtn {
-	margin-left: 50px;
+	margin-right: 50px;
+	float:right;
 	display: none;
 }
-
-.aSavebtn {
-	margin-left: 50px;
+.aEditbtn2 {
+	margin-right: 50px;
+	float:right;
+	display: none;
 }
-
+.aSavebtn {
+	float:right;
+	margin-right: 50px;
+}
+.aSavebtn2 {
+	float:right;
+	margin-right: 50px;
+}
 .alertCust {
 	margin-right: auto;
-	margin-left: auto;
+	margin-right: auto;
 	width: 900px;
 	height: 20px;
 	text-align: center;
@@ -1653,3 +1650,8 @@ footer {
 	color:#000;
 	text-decoration:none;
 }
+.selectAbout{
+	margin-left:20px;
+	display:none;
+}
+

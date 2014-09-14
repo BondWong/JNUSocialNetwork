@@ -80,7 +80,9 @@ public class Initialtor implements ServletContextListener {
 
 		Transaction transaction = new RegisterGodTransaction();
 		try {
+			transaction = new RegisterGodTransaction();
 			transaction.execute("Admin", MD5.toMD5Code("123456"));
+
 			MemberSearchMap.initializeEnvironment();
 			ActivitySearchMap.initializeEnvironment();
 			CommunitySearchMap.initializeEnvironment();
