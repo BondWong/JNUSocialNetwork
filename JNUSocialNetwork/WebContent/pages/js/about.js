@@ -313,7 +313,7 @@ function aboutClickEvent() {
 		var datajson = {
 			lookingFor : $('.lookingforE').val(),
 			relationship : $('.relationshipnE').val(),
-			telenum : $('.telenumE').val(),
+			telnum : $('.telenumE').val(),
 			email : $('.emailE').val(),
 			dorm : $('.addressE').val(),
 		};
@@ -321,7 +321,7 @@ function aboutClickEvent() {
 			datajson = {
 				lookingFor : $('.lookingforE').val(),
 				relationship : $('.relationshipnE').val(),
-				telenum : $('.telenumE').val(),
+				telnum : $('.telenumE').val(),
 				email : $('.emailE').val(),
 				dorm : $('.addressE').val(),
 				name : $('.nameE').val()
