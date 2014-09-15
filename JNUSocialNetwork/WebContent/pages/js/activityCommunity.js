@@ -7,54 +7,69 @@ function activityClickEvent() {
 			"#activityCreate",
 			function() {
 				var post = "";
-				if ($('#fileuploadA').val() != "") {
-					post = {
-						postType : 'ACTIVITY',
-						attributes : {
-							activityName : $('#activityName').val(),
-							startDate : toTimeValue($('#activityTime').val()
-									+ "")
-									+ "",
-							remindDate : toTimeValue($('#activityRemind').val()
-									+ "")
-									+ "",
-							activityTime : $('#activityTime').val(),
-							activityAddr : $('#activityAddr').val(),
-							activityMore : $('#activityMore').val(),
-							background : FileUpload(new FormData(
-									$('.activityForm')[0]))[0],
-						},
-						imageLinks : []
-					};
-				} else {
-					post = {
-						postType : 'ACTIVITY',
-						attributes : {
-							activityName : $('#activityName').val(),
-							startDate : toTimeValue($('#activityTime').val()
-									+ "")
-									+ "",
-							remindDate : toTimeValue($('#activityRemind').val()
-									+ "")
-									+ "",
-							activityTime : $('#activityTime').val(),
-							activityAddr : $('#activityAddr').val(),
-							activityMore : $('#activityMore').val(),
-						},
-						imageLinks : []
-					};
-				}
-
-				if ($('.activityForm')[0].checkValidity()) {
-					if ($('#activityTime').val() != ""
-							&& $('#activityRemind').val() != "") {
-						var json = $.toJSON(post);
-						AddPostToCommunity(USERID, community.ID, json);
-						$('#activityCommunity').modal('hide');
+				if ($('#activityTime').val() != ""
+						&& $('#activityRemind').val() != "") {
+					if ($('#fileuploadA').val() != "") {
+						post = {
+							postType : 'ACTIVITY',
+							attributes : {
+								activityName : $('#activityName').val(),
+								startDate : toTimeValue($('#activityTime')
+										.val()
+										+ "")
+										+ "",
+								remindDate : toTimeValue($('#activityRemind')
+										.val()
+										+ "")
+										+ "",
+								activityTime : $('#activityTime').val(),
+								activityAddr : $('#activityAddr').val(),
+								activityMore : $('#activityMore').val(),
+								communityName : community.attributes.name,
+								background : FileUpload(new FormData(
+										$('.activityForm')[0]))[0],
+							},
+							imageLinks : []
+						};
 					} else {
-						$('#fail_popover').fadeIn("fast");
-						setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+						post = {
+							postType : 'ACTIVITY',
+							attributes : {
+								activityName : $('#activityName').val(),
+								startDate : toTimeValue($('#activityTime')
+										.val()
+										+ "")
+										+ "",
+								remindDate : toTimeValue($('#activityRemind')
+										.val()
+										+ "")
+										+ "",
+								communityName : community.attributes.name,
+								activityTime : $('#activityTime').val(),
+								activityAddr : $('#activityAddr').val(),
+								activityMore : $('#activityMore').val(),
+							},
+							imageLinks : []
+						};
 					}
+					var diffDate = toTimeValue($('#activityTime').val() + "")
+							- toTimeValue($('#activityRemind').val() + "");
+					if ($('.activityForm')[0].checkValidity()) {
+
+						if (diffDate > 0.5 * 24 * 60 * 60 * 1000) {
+							var json = $.toJSON(post);
+							AddPostToCommunity(USERID, community.ID, json);
+							$('#activityCommunity').modal('hide');
+						} else {
+							$('#fail_popover2').fadeIn("fast");
+							setTimeout('$("#fail_popover2").fadeOut("slow")',
+									3000);
+						}
+
+					}
+				} else {
+					$('#fail_popover').fadeIn("fast");
+					setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
 				}
 			});
 }
@@ -158,13 +173,11 @@ $('.form_datetime1').datetimepicker({
 	pickerPosition : "bottom-left"
 });
 var date2 = new Date();
-var date3 = $('#activityTime').val();
-date2.setDate(date2.getDate() + 0.5);
+date2.setTime(date2.getTime() + 0.4 * 24 * 60 * 60 * 1000);
 $('.form_datetime2').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",
 	startDate : date2,
-	endDate : date3,
 	todayBtn : 0,
 	autoclose : 1,
 	startView : 2,
@@ -173,37 +186,6 @@ $('.form_datetime2').datetimepicker({
 	showMeridian : 1,
 	pickerPosition : "bottom-left"
 });
-$(window)
-		.scroll(
-				function() {
-					if ($(window).scrollTop() == $(document).height()
-							- window.windowHeight) {
-						var startIndex = $('.activity').length;
-						$('div#infinite_loader').show();
-						var response = FetchActivitiesByCommunity(communityID,
-								startIndex, pageSize);
-						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID,
-									dataString.attributes.activityName,
-									dataString.attributes.activityTime,
-									dataString.attributes.activityAddr,
-									dataString.attributes.activityMore,
-									dataString.attributes.background,
-									dataString.owner.ID,
-									dataString.participantIDs);
-							$(".activityBord").after(boarddiv);
-							Msnry('.activityBody', '.activity', 435);
-						});
-						if (response.length == pageSize) {
-							$('div#infinite_loader').hide();
-						} else {
-							$('div#infinite_loader')
-									.replaceWith(
-											'<div id="no_more_infinite_load"><span>no more</span></div>');
-							$(window).unbind("scroll");
-						}
-					}
-				});
 function toTimeValue(dateTime) {
 	var patt = /([a-zA-Z]{3,9})\s(\d{2}),(\d{4})\s-\s(\d{2}):(\d{2})/;
 	var matchers = patt.exec(dateTime);
@@ -250,3 +232,34 @@ function toTimeValue(dateTime) {
 			0, 0);
 	return d.valueOf();
 }
+$(window)
+		.scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- window.windowHeight) {
+						var startIndex = $('.activity').length;
+						$('div#infinite_loader').show();
+						var response = FetchActivitiesByCommunity(communityID,
+								startIndex, pageSize);
+						$.each(response, function(n, dataString) {
+							var boarddiv = activity(dataString.ID,
+									dataString.attributes.activityName,
+									dataString.attributes.activityTime,
+									dataString.attributes.activityAddr,
+									dataString.attributes.activityMore,
+									dataString.attributes.background,
+									dataString.owner.ID,
+									dataString.participantIDs);
+							$(".activityBord").after(boarddiv);
+							Msnry('.activityBody', '.activity', 435);
+						});
+						if (response.length == pageSize) {
+							$('div#infinite_loader').hide();
+						} else {
+							$('div#infinite_loader')
+									.replaceWith(
+											'<div id="no_more_infinite_load"><span>no more</span></div>');
+							$(window).unbind("scroll");
+						}
+					}
+				});

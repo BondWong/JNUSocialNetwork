@@ -551,7 +551,7 @@ body {
 }
 .iAt{
 	float:left;
-	width:70%;
+	width:78%;
 }
 .InforItem input {
 	float: left;
@@ -1656,6 +1656,6 @@ footer {
 	margin-left:20px;
 	display:none;
 }
-#teleUpload{
+.teleUpload{
 	margin-top:20px;
 }

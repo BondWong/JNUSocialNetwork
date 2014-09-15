@@ -64,13 +64,13 @@ public class Post extends AttributeModel {
 
 	@ManyToOne
 	private Member owner;
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "POST_LIKER", joinColumns = @JoinColumn(name = "POST_ID"), inverseJoinColumns = @JoinColumn(name = "MEMBER_ID"))
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "POST_LIKER", joinColumns = @JoinColumn(name = "POST_ID"), inverseJoinColumns = @JoinColumn(name = "MEMBER_ID", unique = false, nullable = false))
 	private Set<Member> likers;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "collectedPosts")
 	private Set<Member> collectors;
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "POST_PARTICIPANT", joinColumns = @JoinColumn(name = "POST_ID"), inverseJoinColumns = @JoinColumn(name = "MEMBER_ID"))
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "POST_PARTICIPANT", joinColumns = @JoinColumn(name = "POST_ID"), inverseJoinColumns = @JoinColumn(name = "MEMBER_ID", unique = false, nullable = false))
 	private Set<Member> participants;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Comment> comments;

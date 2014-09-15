@@ -23,6 +23,7 @@ public class RegisterCommunityOwnerTransaction extends DAOTransaction {
 		String name = ((Map<String, String>) params[2]).get("name");
 		MemberSearchMap.addRecord(name, (String) params[0]);
 		MemberSearchMap.serialize();
+		((Map<String, String>) params[2]).put("telnum", (String) params[1]);
 		return transaction.execute(Member.class, params[0], params[1],
 				params[2], UserType.COMMUNITYOWNER);
 	}
