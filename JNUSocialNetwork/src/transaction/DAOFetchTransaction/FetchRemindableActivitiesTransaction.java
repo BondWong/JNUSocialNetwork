@@ -35,8 +35,15 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 					query += ")";
 			}
 			TypedQuery<Post> tq = em.createQuery(query, Post.class);
-			for (Post post : tq.getResultList())
-				results.add(post.toRepresentation());
+			for (Post post : tq.getResultList()) {
+				Long startDate = Long.parseLong(post.getAttribute("startDate"));
+				Long remindDate = Long.parseLong(post
+						.getAttribute("remindDate"));
+				String reminded = post.getAttribute("remindStatus");
+				if (reminded == "false" && startDate > remindDate
+						&& (startDate - remindDate) > 12 * 60 * 60 * 1000)
+					results.add(post.toRepresentation());
+			}
 		}
 
 		return results;

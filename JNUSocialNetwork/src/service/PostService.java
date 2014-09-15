@@ -15,7 +15,6 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.Post;
 import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
@@ -23,7 +22,7 @@ import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
-import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
+import transaction.DAOUpdateTransaction.UpdatePostAttributeTransaction;
 import transaction.SSETransaction.SSECancelCollectPostTransaction;
 import transaction.SSETransaction.SSECancelLikePostTransaction;
 import transaction.SSETransaction.SSECollectPostTransaction;
@@ -427,11 +426,11 @@ public class PostService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateAttributes(@PathParam("postID") Long postID,
 			Map attributes) throws Exception {
-		transaction = new UpdateAttributeTransaction();
+		transaction = new UpdatePostAttributeTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(Post.class,
-					postID, attributes);
+			result = (Map<String, Object>) transaction.execute(postID,
+					attributes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

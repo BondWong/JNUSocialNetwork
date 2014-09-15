@@ -36,7 +36,7 @@ public class OnlineUserIDArray {
 			}
 			Files.write(Paths.get(PATH), JsonUtil.toJson(onlineUserIDs)
 					.getBytes());
-			System.out.println("s:" + onlineUserIDs);
+			System.out.println("onlineUsers:" + onlineUserIDs);
 			onlineUserIDs.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -52,7 +52,6 @@ public class OnlineUserIDArray {
 			bytes = Files.readAllBytes(Paths.get(PATH));
 			String strSearchMap = new String(bytes, "utf8");
 			onlineUserIDs = JsonUtil.fromJson(strSearchMap, List.class);
-			System.out.println("d:" + onlineUserIDs);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

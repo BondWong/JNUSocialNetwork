@@ -29,6 +29,7 @@ public class DesertFileLinkMap {
 			}
 			Files.write(Paths.get(PATH), JsonUtil.toJson(links, TYPE)
 					.getBytes());
+			System.out.println("desertFileLinkMap:" + links);
 			links.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

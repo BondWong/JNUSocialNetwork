@@ -26,7 +26,6 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 		Post post = ModelFactory.getInstance().create(Post.class, params[2],
 				params[3], params[4]);
 		user.createPost(community, post);
-		System.out.println(post.getOwner() == null);
 		dao.update(community);
 		if (params[2].equals(PostType.ACTIVITY)) {
 			ActivitySearchMap.deserialize();

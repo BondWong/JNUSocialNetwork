@@ -74,10 +74,9 @@ public class AttributesFactory {
 				attributes.put("topic", "");
 				attributes.put("content", "");
 				attributes.put("startDate", "");
-				attributes
-						.put("background",
-								JsonUtil.toJson(new Image(
-										"images/default/default-activity-background.jpg")));
+				attributes.put("reminded", "false");
+				attributes.put("background", JsonUtil.toJson(new Image(
+						"images/default/default-activity-background.jpg")));
 			}
 			if (params[0].equals(Post.class)
 					&& params[1].equals(PostType.NORMAL)) {
@@ -88,9 +87,8 @@ public class AttributesFactory {
 				attributes.put("name", "");
 				attributes.put("introduce", "");
 				attributes.put("foundDate", DateTimeUtil.getCurrnetDateTime());
-				attributes.put("communityCard", JsonUtil
-						.toJson(new Image(
-								"images/default/default-community-card.png")));
+				attributes.put("communityCard", JsonUtil.toJson(new Image(
+						"images/default/default-community-card.png")));
 			}
 			if (params[0].equals(Comment.class)) {
 				attributes.put("content", "");

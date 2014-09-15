@@ -53,6 +53,7 @@ public class ActivitySearchMap {
 			}
 			Files.write(Paths.get(PATH), JsonUtil.toJson(activityMap, TYPE)
 					.getBytes());
+			System.out.println(activityMap);
 			activityMap.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

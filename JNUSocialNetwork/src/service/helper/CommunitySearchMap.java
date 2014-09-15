@@ -56,7 +56,10 @@ public class CommunitySearchMap {
 			}
 			IDs = IDs.trim();
 			synchronized (CommunitySearchMap.class) {
-				searchMap.put(key, IDs);
+				if (IDs.length() == 0)
+					searchMap.remove(key);
+				else
+					searchMap.put(key, IDs);
 			}
 		}
 
@@ -79,7 +82,7 @@ public class CommunitySearchMap {
 				Files.createFile(Paths.get(PATH));
 			}
 			Files.write(Paths.get(PATH), JsonUtil.toJson(searchMap).getBytes());
-			System.out.println("s:" + searchMap);
+			System.out.println("communitySearchMap:" + searchMap);
 			searchMap.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -95,7 +98,6 @@ public class CommunitySearchMap {
 			bytes = Files.readAllBytes(Paths.get(PATH));
 			String strSearchMap = new String(bytes, "utf8");
 			searchMap = JsonUtil.fromJson(strSearchMap, Map.class);
-			System.out.println("d:" + searchMap);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
