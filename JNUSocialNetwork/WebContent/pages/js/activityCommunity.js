@@ -1,50 +1,62 @@
 function activityClickEvent() {
-	$('body').on("click",'#createActivityBtn',function(){
+	$('body').on("click", '#createActivityBtn', function() {
 		$('.activityForm').get(0).reset();
 	});
-	$('body').on("click", "#activityCreate", function() {
-		var post="";
-		if ($('#fileuploadA').val() != "") {
-			post = {
-					postType : 'ACTIVITY',
-					attributes : {
-						activityName : $('#activityName').val(),
-						startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
-						remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
-						activityTime : $('#activityTime').val(),
-						activityAddr : $('#activityAddr').val(),
-						activityMore : $('#activityMore').val(),
-						background : FileUpload(new FormData($('.activityForm')[0]))[0],
+	$('body').on(
+			"click",
+			"#activityCreate",
+			function() {
+				var post = "";
+				if ($('#fileuploadA').val() != "") {
+					post = {
+						postType : 'ACTIVITY',
+						attributes : {
+							activityName : $('#activityName').val(),
+							startDate : toTimeValue($('#activityTime').val()
+									+ "")
+									+ "",
+							remindDate : toTimeValue($('#activityRemind').val()
+									+ "")
+									+ "",
+							activityTime : $('#activityTime').val(),
+							activityAddr : $('#activityAddr').val(),
+							activityMore : $('#activityMore').val(),
+							background : FileUpload(new FormData(
+									$('.activityForm')[0]))[0],
 						},
-					imageLinks : []
-				};
-		} else {
-			post = {
-					postType : 'ACTIVITY',
-					attributes : {
-						activityName : $('#activityName').val(),
-						startDate : Date.parse($('#activityTime').val().replace('-','/')).toString(),
-						remindDate: Date.parse($('#activityRemind').val().replace('-','/')).toString(),
-						activityTime : $('#activityTime').val(),
-						activityAddr : $('#activityAddr').val(),
-						activityMore : $('#activityMore').val(),
+						imageLinks : []
+					};
+				} else {
+					post = {
+						postType : 'ACTIVITY',
+						attributes : {
+							activityName : $('#activityName').val(),
+							startDate : toTimeValue($('#activityTime').val()
+									+ "")
+									+ "",
+							remindDate : toTimeValue($('#activityRemind').val()
+									+ "")
+									+ "",
+							activityTime : $('#activityTime').val(),
+							activityAddr : $('#activityAddr').val(),
+							activityMore : $('#activityMore').val(),
 						},
-					imageLinks : []
-				};
-		}
-		
-		
-		if($('.activityForm')[0].checkValidity()){
-			if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
-				var json = $.toJSON(post);
-				AddPostToCommunity(USERID, community.ID, json);
-				$('#activityCommunity').modal('hide');
-			}else{
-				$('#fail_popover').fadeIn("fast");
-				setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
-			}
-		}
-	});
+						imageLinks : []
+					};
+				}
+
+				if ($('.activityForm')[0].checkValidity()) {
+					if ($('#activityTime').val() != ""
+							&& $('#activityRemind').val() != "") {
+						var json = $.toJSON(post);
+						AddPostToCommunity(USERID, community.ID, json);
+						$('#activityCommunity').modal('hide');
+					} else {
+						$('#fail_popover').fadeIn("fast");
+						setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+					}
+				}
+			});
 }
 var pageSize = 15;
 // function fetchActivitiesByCommunity()
@@ -81,7 +93,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 		askActivity = "";
 	}
-	
+
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
@@ -127,39 +139,39 @@ $('body').on("click", ".activityHref", function() {
 });
 $('body').on('click', '.deletePostBtn', function() {
 	var id = $(this).find("input").attr("value");
-	DeletePostFromCommunity(community.ID,id);
+	DeletePostFromCommunity(community.ID, id);
 	$(".post" + id + "").remove();
 	Msnry('.activityBody', '.activity', 435);
 });
 var date1 = new Date();
 date1.setDate(date1.getDate() + 1);
 $('.form_datetime1').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date1,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date1,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
 });
 var date2 = new Date();
 var date3 = $('#activityTime').val();
 date2.setDate(date2.getDate() + 0.5);
 $('.form_datetime2').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date2,
-endDate : date3,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date2,
+	endDate : date3,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
 });
 $(window)
 		.scroll(
@@ -192,3 +204,48 @@ $(window)
 						}
 					}
 				});
+function toTimeValue(dateTime) {
+	var patt = /([a-zA-Z]{3,9})\s(\d{2}),(\d{4})\s-\s(\d{2}):(\d{2})/;
+	var matchers = patt.exec(dateTime);
+	var month = "NaN";
+	switch (matchers[1]) {
+	case "January":
+		month = 1;
+		break;
+	case "February":
+		month = 2;
+		break;
+	case "March":
+		month = 3;
+		break;
+	case "April":
+		month = 4;
+		break;
+	case "May":
+		month = 5;
+		break;
+	case "June":
+		month = 6;
+		break;
+	case "July":
+		month = 7;
+		break;
+	case "August":
+		month = 8;
+		break;
+	case "September":
+		month = 9;
+		break;
+	case "October":
+		month = 10;
+		break;
+	case "November":
+		month = 11;
+		break;
+	case "December":
+		month = 12;
+		break;
+	}
+	return Date.UTC(matchers[3], month, matchers[2], matchers[4], matchers[5],
+			0, 0);
+}

@@ -6,6 +6,7 @@ import model.Comment;
 import model.Community;
 import model.Post;
 import persistence.DAO;
+import service.helper.CommunitySearchMap;
 import transaction.DAOTransaction;
 import utils.NumberManager;
 
@@ -36,6 +37,10 @@ public class DeleteCommunityTransaction extends DAOTransaction {
 			dao.update(post);
 		}
 		community.setOwner(null);
+		CommunitySearchMap.deserialize();
+		CommunitySearchMap.removeRecord(community.getAttribute("name"),
+				params[0] + "");
+		CommunitySearchMap.serialize();
 		community.clearAttributes();
 		community.clearMembers();
 		community.clearPosts();

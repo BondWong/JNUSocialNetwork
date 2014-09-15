@@ -5,18 +5,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.Post;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchMembersByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchRemindableActivitiesTransaction;
+import transaction.DAOUpdateTransaction.UpdateAttributeTransaction;
 
 public class SmsRemindTask implements Runnable {
 	private static final String addr = "http://api.sms.cn/mt/";
 	private static final String userId = "55443";
 	private static final String pwd = "bcfcd8e4100c47fcd1a90195360461df";
 	private static final String encode = "utf8";
+	private static Map<String, String> reminded;
+	static {
+		reminded = new HashMap<String, String>();
+		reminded.put("reminded", "true");
+	}
 
 	@SuppressWarnings({ "unchecked" })
 	@Override
@@ -55,6 +63,14 @@ public class SmsRemindTask implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			transaction = new UpdateAttributeTransaction();
+			try {
+				transaction.execute(Post.class, activity.get("ID"), reminded);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 

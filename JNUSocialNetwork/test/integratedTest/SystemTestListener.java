@@ -42,6 +42,8 @@ public class SystemTestListener implements ServletContextListener {
 			transaction = new RegisterCommunityOwnerTransaction();
 			transaction.execute("636645", MD5.toMD5Code("123456"),
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
+			transaction.execute("636644", MD5.toMD5Code("123456"),
+					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

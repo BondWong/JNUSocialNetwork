@@ -24,8 +24,8 @@
 						<p>
 							<input type="text" pattern="[0-9]{11}" class="form-control"
 								name="applicationID" placeholder="请输入手机号码作为ID" id="appTele"
-								autocomplete="off" data-errormessage-value-missing="请输入手机好吗作为ID"
-								data-errormessage-pattern-mismatch="请输入手机号码作为ID" required
+								autocomplete="off" data-errormessage-value-missing="请输入手机号码作为ID"
+								data-errormessage-pattern-mismatch="请输入正确的手机号码" required
 								autofocus maxLength="11" />
 						</p>
 						<p>
