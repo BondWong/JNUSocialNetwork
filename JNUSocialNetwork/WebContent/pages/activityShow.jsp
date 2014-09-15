@@ -32,10 +32,10 @@
 					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
 						style="font-size: 20px"></span>
 					<button class="btn btn-default editActivity" data-toggle='modal'
-						data-target='#editActivity'></button>
+						data-target='#editActivity'>管理活动</button>
 					<div class="downLoadList">
 						<a class="btn btn-default" target="_blank"
-							id="download-name-list-button"></a>
+							id="download-name-list-button">下载参与列表</a>
 					</div>
 					<script type="text/javascript">
 						var url = window.location.search;
@@ -87,6 +87,10 @@
 								<div id="fail_popover" class="alert alert-danger"
 									style="width: 97%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
 							</div>
+							<div class="activityItem">
+									<div id="fail_popover2" class="alert alert-danger"
+										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须比活动开始时间提前半天哦，亲</div>
+								</div>
 							<div class="activityItem">
 								<span>活动地点：</span>
 								<textarea class="form-control activityInput" placeholder=""
@@ -202,6 +206,7 @@
 								clickEvent();
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
 									$('.aBodyAsk').css("display", "none");
+									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
 									$('.activityAddCommunity').css("display",

@@ -1,5 +1,6 @@
 function activityClickEvent() {
 	$('body').on("click",'#createActivityBtn',function(){
+		datePicker();
 		$('.activityForm').get(0).reset();
 	});
 	$('body').on("click", "#activityCreate", function() {
@@ -33,12 +34,18 @@ function activityClickEvent() {
 				};
 		}
 		
-		
+		var diffDate = Date.parse($('#activityTime').val().replace('-','/')) - Date.parse($('#activityRemind').val().replace('-','/'));
 		if($('.activityForm')[0].checkValidity()){
 			if($('#activityTime').val()!="" && $('#activityRemind').val()!=""){
-				var json = $.toJSON(post);
-				AddPostToCommunity(USERID, community.ID, json);
-				$('#activityCommunity').modal('hide');
+				if(diffDate > 0.5*24*60*60*1000 ){
+					var json = $.toJSON(post);
+					AddPostToCommunity(USERID, community.ID, json);
+					$('#activityCommunity').modal('hide');
+				}else{
+					$('#fail_popover2').fadeIn("fast");
+					setTimeout('$("#fail_popover2").fadeOut("slow")', 3000);
+				}
+				
 			}else{
 				$('#fail_popover').fadeIn("fast");
 				setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
@@ -131,36 +138,36 @@ $('body').on('click', '.deletePostBtn', function() {
 	$(".post" + id + "").remove();
 	Msnry('.activityBody', '.activity', 435);
 });
-var date1 = new Date();
-date1.setDate(date1.getDate() + 1);
-$('.form_datetime1').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date1,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
-});
-var date2 = new Date();
-var date3 = $('#activityTime').val();
-date2.setDate(date2.getDate() + 0.5);
-$('.form_datetime2').datetimepicker({
-// language: 'fr',
-format : "MM dd,yyyy - hh:ii",
-startDate : date2,
-endDate : date3,
-todayBtn : 0,
-autoclose : 1,
-startView : 2,
-Integer : 1,
-forceParse : 0,
-showMeridian : 1,
-pickerPosition : "bottom-left"
-});
+function datePicker(){
+	var date1 = new Date();
+	date1.setDate(date1.getDate() + 1);
+	$('.form_datetime1').datetimepicker({
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date1,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
+	});
+	var date2 = new Date();
+	date2.setTime(date2.getTime() + 0.4*24*60*60*1000);
+	$('.form_datetime2').datetimepicker({
+	// language: 'fr',
+	format : "MM dd,yyyy - hh:ii",
+	startDate : date2,
+	todayBtn : 0,
+	autoclose : 1,
+	startView : 2,
+	Integer : 1,
+	forceParse : 0,
+	showMeridian : 1,
+	pickerPosition : "bottom-left"
+	});
+}
 $(window)
 		.scroll(
 				function() {

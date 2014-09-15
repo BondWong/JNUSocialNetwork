@@ -302,6 +302,18 @@ function aboutClickEvent() {
 						$("span[class='Aemail']").html(
 								"<input class='emailE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.email + "' />");
+						if(userInfo.attributes.selectEmail == "公开"){
+							$('.selectEmail').val("公开");
+						}
+						if(userInfo.attributes.selectWechat == "公开"){
+							$('.selectWechat').val("公开");
+						}
+						if(userInfo.attributes.selectTele == "公开"){
+							$('.selectTele').val("公开");
+						}
+						if(userInfo.attributes.selectAddre == "公开"){
+							$('.selectAddre').val("公开");
+						}
 
 						$(this).text("保存");
 						$(this).attr("class", "btn btn-primary aSavebtn");
@@ -545,18 +557,7 @@ function fetchUserByID() {
 		$('.Awechat').html(userInfo.attributes.wechat);
 		$('.Atelenum').html(userInfo.attributes.telnum);
 		$('.Aaddress').html(userInfo.attributes.dorm);
-		if(userInfo.attributes.selectEmail == "公开"){
-			$('.selectEmail').val("公开");
-		}
-		if(userInfo.attributes.selectWechat == "公开"){
-			$('.selectWechat').val("公开");
-		}
-		if(userInfo.attributes.selectTele == "公开"){
-			$('.selectTele').val("公开");
-		}
-		if(userInfo.attributes.selectAddre == "公开"){
-			$('.selectAddre').val("公开");
-		}
+		
 	}
 	$('.profile_user_img').find('img').attr("src",
 			$.parseJSON(userInfo.attributes.avatarLink).src);
