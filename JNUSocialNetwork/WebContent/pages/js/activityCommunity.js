@@ -210,42 +210,43 @@ function toTimeValue(dateTime) {
 	var month = "NaN";
 	switch (matchers[1]) {
 	case "January":
-		month = 1;
+		month = 0;
 		break;
 	case "February":
-		month = 2;
+		month = 1;
 		break;
 	case "March":
-		month = 3;
+		month = 2;
 		break;
 	case "April":
-		month = 4;
+		month = 3;
 		break;
 	case "May":
-		month = 5;
+		month = 4;
 		break;
 	case "June":
-		month = 6;
+		month = 5;
 		break;
 	case "July":
-		month = 7;
+		month = 6;
 		break;
 	case "August":
-		month = 8;
+		month = 7;
 		break;
 	case "September":
-		month = 9;
+		month = 8;
 		break;
 	case "October":
-		month = 10;
+		month = 9;
 		break;
 	case "November":
-		month = 11;
+		month = 10;
 		break;
 	case "December":
-		month = 12;
+		month = 11;
 		break;
 	}
-	return Date.UTC(matchers[3], month, matchers[2], matchers[4], matchers[5],
+	var d = new Date(matchers[3], month, matchers[2], matchers[4], matchers[5],
 			0, 0);
+	return d.valueOf();
 }
