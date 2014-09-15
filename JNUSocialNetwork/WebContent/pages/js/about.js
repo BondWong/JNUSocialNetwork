@@ -272,11 +272,12 @@ function aboutClickEvent() {
 						$("span[class='Atelenum']").html(
 								"<input class='telenumE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.telnum
-										+ "' maxLength='20'/>");
+										+ "' maxLength='11'/>");
 						$("span[class='Awechat']").html(
 								"<input class='wechatE' id='focusedInput' type='text' value='"
 										+ userInfo.attributes.wechat
 										+ "' maxLength='20'/>");
+						var campus = "";
 						if ($('.Acampus').html() == "珠海校区") {
 							campus = "ZhuhaiCampus";
 						}
@@ -301,7 +302,7 @@ function aboutClickEvent() {
 										+ "</select>");
 						$("span[class='Aemail']").html(
 								"<input class='emailE' id='focusedInput' type='text' value='"
-										+ userInfo.attributes.email + "' />");
+										+ userInfo.attributes.email + "' maxLength='25' />");
 						if(userInfo.attributes.selectEmail == "公开"){
 							$('.selectEmail').val("公开");
 						}

@@ -114,62 +114,82 @@ $('body').on("click", ".editActivity", function() {
 	$('#activityMore').val(activity.attributes.activityMore);
 	dataPicker();
 });
-$('body').on(
-		"click",
-		"#saveActivity",
-		function() {
-			var attributes = "";
-			if ($('#fileupload').val() != "") {
-				attributes = {
-						activityName : $('#activityName').val(),
-						startDate : Date.parse(
-								$('#activityTime').val().replace('-', '/')).toString(),
-						remindDate : Date.parse(
-								$('#activityRemind').val().replace('-', '/'))
-								.toString(),
-						activityTime : $('#activityTime').val(),
-						activityAddr : $('#activityAddr').val(),
-						activityMore : $('#activityMore').val(),
-						background : FileUpload(new FormData($('.activityForm')[0]))[0]
-					};
-			} else {
-				attributes = {
-						activityName : $('#activityName').val(),
-						startDate : Date.parse(
-								$('#activityTime').val().replace('-', '/')).toString(),
-						remindDate : Date.parse(
-								$('#activityRemind').val().replace('-', '/'))
-								.toString(),
-						activityTime : $('#activityTime').val(),
-						activityAddr : $('#activityAddr').val(),
-						activityMore : $('#activityMore').val()
-					};
-			}
-			
-			var diffDate = Date.parse($('#activityTime').val().replace('-','/')) - Date.parse($('#activityRemind').val().replace('-','/'));
-			if ($('.activityForm')[0].checkValidity()) {
-				if ($('#activityTime').val() != ""
-						&& $('#activityRemind').val() != "") {
-					if( diffDate > 0.5*24*60*60*1000){
-						var json = $.toJSON(attributes);
-						var aup = UpdateActivity(activity.ID, json);
-						$('#editActivity').modal('hide');
-						$('.activityShowName').html(aup.attributes.activityName);
-						$('.aT').html("&nbsp;" + aup.attributes.activityTime);
-						$('.aA').html("&nbsp;" + aup.attributes.activityAddr);
-						$('.activityShowD').html(
-								"&nbsp;" + aup.attributes.activityMore);
-						$('.activityHead').find('img').attr("src", $.parseJSON(aup.attributes.background).src);
-					}else{
-						$('#fail_popover2').fadeIn("fast");
-						setTimeout('$("#fail_popover2").fadeOut("slow")', 3000);
+$('body')
+		.on(
+				"click",
+				"#saveActivity",
+				function() {
+					var attributes = "";
+					if ($('#activityTime').val() != ""
+							&& $('#activityRemind').val() != "") {
+						if ($('#fileupload').val() != "") {
+							attributes = {
+								activityName : $('#activityName').val(),
+								startDate : toTimeValue($('#activityTime')
+										.val()
+										+ "")
+										+ "",
+								remindDate : toTimeValue($('#activityRemind')
+										.val()
+										+ "")
+										+ "",
+								activityTime : $('#activityTime').val(),
+								activityAddr : $('#activityAddr').val(),
+								activityMore : $('#activityMore').val(),
+								background : FileUpload(new FormData(
+										$('.activityForm')[0]))[0]
+							};
+						} else {
+							attributes = {
+								activityName : $('#activityName').val(),
+								startDate : toTimeValue($('#activityTime')
+										.val()
+										+ "")
+										+ "",
+								remindDate : toTimeValue($('#activityRemind')
+										.val()
+										+ "")
+										+ "",
+								activityTime : $('#activityTime').val(),
+								activityAddr : $('#activityAddr').val(),
+								activityMore : $('#activityMore').val()
+							};
+						}
+
+						var diffDate = toTimeValue($('#activityTime').val()
+								+ "")
+								- toTimeValue($('#activityRemind').val() + "");
+						if ($('.activityForm')[0].checkValidity()) {
+							if (diffDate > 0.5 * 24 * 60 * 60 * 1000) {
+								var json = $.toJSON(attributes);
+								var aup = UpdateActivity(activity.ID, json);
+								$('#editActivity').modal('hide');
+								$('.activityShowName').html(
+										aup.attributes.activityName);
+								$('.aT').html(
+										"&nbsp;" + aup.attributes.activityTime);
+								$('.aA').html(
+										"&nbsp;" + aup.attributes.activityAddr);
+								$('.activityShowD').html(
+										"&nbsp;" + aup.attributes.activityMore);
+								$('.activityHead')
+										.find('img')
+										.attr(
+												"src",
+												$
+														.parseJSON(aup.attributes.background).src);
+							} else {
+								$('#fail_popover2').fadeIn("fast");
+								setTimeout(
+										'$("#fail_popover2").fadeOut("slow")',
+										3000);
+							}
+						}
+					} else {
+						$('#fail_popover').fadeIn("fast");
+						setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
 					}
-				} else {
-					$('#fail_popover').fadeIn("fast");
-					setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
-				}
-			}
-		});
+				});
 function dataPicker() {
 	var date1 = new Date();
 	date1.setDate(date1.getDate() + 1);
@@ -186,17 +206,63 @@ function dataPicker() {
 		pickerPosition : "bottom-left"
 	});
 	var date2 = new Date();
-	date2.setTime(date2.getTime() + 0.4*24*60*60*1000);
+	date2.setTime(date2.getTime() + 0.4 * 24 * 60 * 60 * 1000);
 	$('.form_datetime2').datetimepicker({
-	// language: 'fr',
-	format : "MM dd,yyyy - hh:ii",
-	startDate : date2,
-	todayBtn : 0,
-	autoclose : 1,
-	startView : 2,
-	Integer : 1,
-	forceParse : 0,
-	showMeridian : 1,
-	pickerPosition : "bottom-left"
+		// language: 'fr',
+		format : "MM dd,yyyy - hh:ii",
+		startDate : date2,
+		todayBtn : 0,
+		autoclose : 1,
+		startView : 2,
+		Integer : 1,
+		forceParse : 0,
+		showMeridian : 1,
+		pickerPosition : "bottom-left"
 	});
+}
+function toTimeValue(dateTime) {
+	var patt = /([a-zA-Z]{3,9})\s(\d{2}),(\d{4})\s-\s(\d{2}):(\d{2})/;
+	var matchers = patt.exec(dateTime);
+	var month = "NaN";
+	switch (matchers[1]) {
+	case "January":
+		month = 0;
+		break;
+	case "February":
+		month = 1;
+		break;
+	case "March":
+		month = 2;
+		break;
+	case "April":
+		month = 3;
+		break;
+	case "May":
+		month = 4;
+		break;
+	case "June":
+		month = 5;
+		break;
+	case "July":
+		month = 6;
+		break;
+	case "August":
+		month = 7;
+		break;
+	case "September":
+		month = 8;
+		break;
+	case "October":
+		month = 9;
+		break;
+	case "November":
+		month = 10;
+		break;
+	case "December":
+		month = 11;
+		break;
+	}
+	var d = new Date(matchers[3], month, matchers[2], matchers[4], matchers[5],
+			0, 0);
+	return d.valueOf();
 }
