@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import security.helper.UAgentInfo;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
-import utils.UAgentInfo;
 import model.Account;
 import model.modelType.UserType;
 

@@ -307,7 +307,6 @@ function clickEvent() {
 					'.activityJoin',
 					function() {
 						var activityID = $(this).attr("id");
-						alert(activityID);
 						if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
 							var response = JoinActivity(USERID, activityID);
 							if (response == 'success') {

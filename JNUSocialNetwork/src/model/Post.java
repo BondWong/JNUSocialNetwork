@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -115,6 +116,14 @@ public class Post extends AttributeModel {
 	}
 
 	public void removeImageLink(String imageLink) {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLink(imageLink);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.imageLinks.remove(imageLink);
 	}
 
@@ -123,7 +132,14 @@ public class Post extends AttributeModel {
 	}
 
 	public void clearImageLinks() {
-		DesertFileLinkMap.addLinks(this.imageLinks);
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLinks(this.imageLinks);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.imageLinks.clear();
 	}
 

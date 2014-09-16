@@ -241,15 +241,17 @@ $(window)
 						var startIndex = $('.activity').length;
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
-								startIndex+1, pageSize);
+								startIndex + 1, pageSize);
 						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID, dataString.attributes.activityName,
+							var boarddiv = activity(dataString.ID,
+									dataString.attributes.activityName,
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
 									dataString.attributes.background,
 									dataString.owner.attributes.avatarLink,
-									dataString.owner.ID, dataString.participantIDs);
+									dataString.owner.ID,
+									dataString.participantIDs);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});
