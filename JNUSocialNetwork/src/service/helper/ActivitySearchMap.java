@@ -43,6 +43,7 @@ public class ActivitySearchMap {
 				removeRecord(ID);
 
 		}
+		System.out.println("remindIDs:" + IDs);
 		return IDs;
 	}
 

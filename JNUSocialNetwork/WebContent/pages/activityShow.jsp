@@ -37,6 +37,7 @@
 						<a class="btn btn-default" target="_blank"
 							id="download-name-list-button">下载参与列表</a>
 					</div>
+					<button class="btn btn-default backActivity">返回活动列表</button>
 					<script type="text/javascript">
 						var url = window.location.search;
 						var activityID = url.substr(url.indexOf("&") + 1);
@@ -63,7 +64,7 @@
 									class="form-control activityInput" placeholder=""
 									id="activityName" required autofocus maxLength="30" />
 							</div>
-							<div class="activityItem">
+							<div class="activityItem activitySpan">
 								<span>活动时间：</span>
 								<div class="input-group date form_datetime1 col-lg-10"
 									data-link-field="dtp_input1">
@@ -73,7 +74,7 @@
 										class="glyphicon glyphicon-th"></i></span>
 								</div>
 							</div>
-							<div class="activityItem">
+							<div class="activityItem activitySpan">
 								<span>提醒时间：</span>
 								<div class="input-group date form_datetime2 col-lg-10"
 									data-link-field="dtp_input1">
@@ -85,7 +86,7 @@
 							</div>
 							<div class="activityItem">
 								<div id="fail_popover" class="alert alert-danger"
-									style="width: 97%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
+									style="width: 81%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
 							</div>
 							<div class="activityItem">
 									<div id="fail_popover2" class="alert alert-danger"
@@ -201,10 +202,16 @@
 		$(document)
 				.ready(
 						function() {
+							var url = window.location.search;
+							var activityID = url.substr(url.indexOf("&") + 1);
+							window.activity = FetchPostByID(activityID);
+							var communityID = url.substr(url.indexOf("?") + 1,
+									url.indexOf("&") - url.indexOf("?") - 1);
+							window.community = FetchCommunityByID(communityID);
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();
-								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && USERID == community.attributes.userID ) {
 									$('.aBodyAsk').css("display", "none");
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
@@ -222,12 +229,8 @@
 							} else {
 								clickOffEvent();
 							}
-							var url = window.location.search;
-							var activityID = url.substr(url.indexOf("&") + 1);
-							window.activity = FetchPostByID(activityID);
-							var communityID = url.substr(url.indexOf("?") + 1,
-									url.indexOf("&") - url.indexOf("?") - 1);
-							window.community = FetchCommunityByID(communityID);
+							
+							
 							showActivityDetail(activity, community);
 						});
 	</script>
