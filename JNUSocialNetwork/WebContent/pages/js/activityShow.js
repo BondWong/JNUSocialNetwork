@@ -107,12 +107,18 @@ $('body').on("click", ".glyphicon-heart", function() {
 	CancelLikePost(USERID, activity.ID);
 	$('.glyphicon-heart').attr("class", "glyphicon glyphicon-heart-empty");
 });
+$('body').on("click",".backActivity",function(){
+	window.location.href = "activityCommunity.jsp?"+ community.ID;
+});
 $('body').on("click", ".editActivity", function() {
 	$('#activityName').val(activity.attributes.activityName);
 	$('#activityTime').val(activity.attributes.activityTime);
 	$('#activityAddr').val(activity.attributes.activityAddr);
 	$('#activityMore').val(activity.attributes.activityMore);
 	dataPicker();
+	if(activity.attributes.reminded != "false"){
+		$('.activitySpan').css("display","none");
+	}
 });
 $('body')
 		.on(

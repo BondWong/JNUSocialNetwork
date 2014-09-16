@@ -307,6 +307,7 @@ function clickEvent() {
 					'.activityJoin',
 					function() {
 						var activityID = $(this).attr("id");
+						alert(activityID);
 						if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
 							var response = JoinActivity(USERID, activityID);
 							if (response == 'success') {
@@ -324,7 +325,7 @@ function clickEvent() {
 		var dataString = {
 			telnum : $('#tele').val()
 		};
-		if($('.teleForm')[0].checkValidity()){
+		if ($('.teleForm')[0].checkValidity()) {
 			UpdateUserProfile(USERID, $.toJSON(dataString));
 			var response = JoinActivity(USERID, activityID);
 			if (response == 'success') {
@@ -560,7 +561,9 @@ function signInAlert() {
 	$('body').append(alert);
 }
 function teleAlert(activityID) {
-	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload ' id='"+activityID+"' type='submit'>确认</button></form></div></div></div></div>";
+	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload ' id='"
+			+ activityID
+			+ "' type='submit'>确认</button></form></div></div></div></div>";
 	$('body').append(alert);
 }
 

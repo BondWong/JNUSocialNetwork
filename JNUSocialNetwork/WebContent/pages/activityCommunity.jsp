@@ -263,6 +263,7 @@
 								}
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										&& USERID == community.attributes.userID) {
+									$('#createActivityBtn').css("display","inline");
 									$('#editCommunityBtn').css("display",
 											"inline");
 									$('#editMembersBtn').css("display",

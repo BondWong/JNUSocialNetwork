@@ -95,12 +95,12 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 	if ($.inArray(USERID, joinIDs) != -1) {
 		select = "selected";
 	}
-	var askActivity = "<div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
+	var askActivity = "<div class='activityAsk'><span>快来参加吧～</span><select class='btn btn-default'><option>考虑考虑</option><option class='activityJoin' id='"
 			+ activityID
 			+ "' "
 			+ select
-			+ ">Yes</option><option class='leaveactivityJoin' id='"
-			+ activityID + "'>No</option></select></div>";
+			+ ">走起！</option><option class='leaveactivityJoin' id='"
+			+ activityID + "'>不了，谢谢</option></select></div>";
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
@@ -231,6 +231,7 @@ function toTimeValue(dateTime) {
 	var d = new Date(matchers[3], month, matchers[2], matchers[4], matchers[5],
 			0, 0);
 	return d.valueOf();
+
 }
 $(window)
 		.scroll(
@@ -240,16 +241,15 @@ $(window)
 						var startIndex = $('.activity').length;
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
-								startIndex, pageSize);
+								startIndex+1, pageSize);
 						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID,
-									dataString.attributes.activityName,
+							var boarddiv = activity(dataString.ID, dataString.attributes.activityName,
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
 									dataString.attributes.background,
-									dataString.owner.ID,
-									dataString.participantIDs);
+									dataString.owner.attributes.avatarLink,
+									dataString.owner.ID, dataString.participantIDs);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});
