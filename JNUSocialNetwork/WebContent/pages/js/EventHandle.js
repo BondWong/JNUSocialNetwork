@@ -58,7 +58,9 @@ function CREATEPOSTINCOMMUNITY() {
 					jsondata.post.attributes.activityMore,
 					jsondata.post.attributes.background,
 					jsondata.post.owner.attributes.avatarLink,
-					jsondata.post.owner.ID);
+					jsondata.post.owner.ID, jsondata.post.participantIDs,
+					jsondata.post.owner.attributes.startDate,
+					jsondata.post.owner.attributes.limitation);
 
 		}
 	});
@@ -99,7 +101,6 @@ function DELETEPOSTFROMCOMMUNITY() {
 	source.addEventListener('DELETEPOSTFROMCOMMUNITY', function(event) {
 		var jsondata = $.parseJSON(event.data);
 		$("div[class='post " + jsondata.postID + "']").remove();
-		fetchPostByCommunity();
 		Msnry('.pro_body', '.post', 435);
 	});
 }

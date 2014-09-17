@@ -96,7 +96,7 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span class="communityHref">社区帖子</span> <span class="activityHref">社区活动</span>
+				 <span class="activityHref">社区活动</span> <span class="communityHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -142,8 +142,8 @@
 	<script src="js/jquery.fileupload-video.js"></script>
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
-	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
+	<script src="js/function.js"></script>
 	<script src="js/communityMember.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>

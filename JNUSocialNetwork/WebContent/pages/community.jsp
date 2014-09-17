@@ -25,7 +25,7 @@
 		<ul class="nav nav-pills nav-stacked" role="tablist">
 			<li id="myCommunityBtn"><a class="myCommunityBtn">我的社区</a></li>
 			<li><a href="community.jsp">所有社区</a></li>
-			<li><a class="officalCommunityBtn">官方社区</a></li>
+			<!-- <li><a class="officalCommunityBtn">官方社区</a></li>-->
 			<li><a class="studentUnionCommunityBtn">社团组织</a></li>
 			<li><a class="folkCommunityBtn">个人社区</a></li>
 			<li><a class="discoverCommunityBtn">热门社区</a></li>
@@ -42,12 +42,12 @@
 		<div class="container containerMy">
 			<div class="myCommunity"></div>
 		</div>
-		<div class="communityGroupTitle">
+		<!--<div class="communityGroupTitle">
 			<h3>官方社区</h3>
 		</div>
 		<div class="container containerOffical">
 			<div class="officalCommunity"></div>
-		</div>
+		</div>-->
 		<div class="communityGroupTitle">
 			<h3>社团组织</h3>
 		</div>
@@ -66,11 +66,6 @@
 		<div class="container containerDiscovery ">
 			<div class="communityDiscovery"></div>
 
-		</div>
-		<div class="createCommunity">
-			<div role="button" class="btn btn-sm btn-success createCom"
-				data-toggle='modal' data-target='#createCommunity'
-				id="createCommunityBtn">创建社区</div>
 		</div>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"
@@ -148,8 +143,8 @@
 				login_initialization(USERID);
 				clickEvent();
 				communityClickEvent();
-				fetchCommunityByOwner();
-				fetchCommunityByJoin();
+				fetchCommunityByJoin("18");
+				fetchCommunityByOwner("5");
 			} else {
 				clickOffEvent();
 			}
@@ -157,5 +152,6 @@
 
 		});
 	</script>
+	<%@ include file="parts/contentScroll.jsp"%>
 </body>
 </html>

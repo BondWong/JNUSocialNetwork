@@ -1,3 +1,10 @@
+if(BrowserDetection() != false){
+	var alert = "<div class='modal fade' id='browserDetection' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>检测到你浏览器的版本过低，有可能影响网站效果哦</h4></div><div class='modal-body modal-custom'><a data-dismiss='modal' type='button' class='btn btn-primary' >我知道了</a></div></div></div></div>";
+	var button = "<button  data-toggle='modal' class='browserClick' data-target='#browserDetection'></button>";
+	$('body').append(button);
+	$('body').append(alert);
+	$('.browserClick').click();
+}
 function addCommunity(id,name,memberNum,communityImg,introduce) {
 	var boarddiv = "<li class='communityShowItem'><div class='community_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id

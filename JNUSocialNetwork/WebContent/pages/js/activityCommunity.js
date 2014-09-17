@@ -25,6 +25,7 @@ function activityClickEvent() {
 								activityTime : $('#activityTime').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								limitation : $('.activityNum').val(),
 								communityName : community.attributes.name,
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0],
@@ -48,6 +49,7 @@ function activityClickEvent() {
 								activityTime : $('#activityTime').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								limitation : $('.activityNum').val()
 							},
 							imageLinks : []
 						};
@@ -85,30 +87,35 @@ function fetchActivitiesByCommunity() {
 					dataString.attributes.activityMore,
 					dataString.attributes.background,
 					dataString.owner.attributes.avatarLink,
-					dataString.owner.ID, dataString.participantIDs);
+					dataString.owner.ID, dataString.participantIDs,
+					dataString.attributes.startDate,
+					dataString.attributes.limitation);
 		}
 	});
 }
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,
-		ownerID, joinIDs) {
-	var select = "";
+		ownerID, joinIDs, startDate, limitation) {
+	var join = "<a><div class='activityJoin' id='activity" + activityID
+			+ "'><input type='hidden' value='" + activityID
+			+ "'><span>Join</span></div></a>";
 	if ($.inArray(USERID, joinIDs) != -1) {
-		select = "selected";
+		join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
+				+ activityID
+				+ "'><input type='hidden' value='"
+				+ activityID
+				+ "'><span>Joined</span></div></a>";
 	}
-	var askActivity = "<div class='activityAsk'><span>快来参加吧～</span><select class='btn btn-default'><option>考虑考虑</option><option class='activityJoin' id='"
-			+ activityID
-			+ "' "
-			+ select
-			+ ">走起！</option><option class='leaveactivityJoin' id='"
-			+ activityID + "'>不了，谢谢</option></select></div>";
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
-		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
+		pRemoveBtn = "<div class='deleteActivity'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
-		askActivity = "";
+		join = "";
 	}
-
+	var now = new Date();
+	if (joinIDs.length >= limitation || startDate - now.getTime() <= 0) {
+		join = "";
+	}
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
@@ -125,14 +132,14 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ time
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + more
-			+ "</span></div>" + askActivity + "</div>";
+			+ "</span></div><div class='activityAsk'>"+join+"</div></div>";
 	return boarddiv;
 }
 // function addActivity
 function addActivity(activityID, name, time, addre, more, imagelink,
-		avatarLink, ownerID, joinIDs) {
+		avatarLink, ownerID, joinIDs, startDate, limitation) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink, ownerID, joinIDs);
+			avatarLink, ownerID, joinIDs, startDate, limitation);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -152,7 +159,7 @@ $('body').on("click", ".activityHref", function() {
 	var id = $(this).attr("id");
 	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
 });
-$('body').on('click', '.deletePostBtn', function() {
+$('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePostFromCommunity(community.ID, id);
 	$(".post" + id + "").remove();
@@ -242,19 +249,26 @@ $(window)
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
 								startIndex + 1, pageSize);
-						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID,
-									dataString.attributes.activityName,
-									dataString.attributes.activityTime,
-									dataString.attributes.activityAddr,
-									dataString.attributes.activityMore,
-									dataString.attributes.background,
-									dataString.owner.attributes.avatarLink,
-									dataString.owner.ID,
-									dataString.participantIDs);
-							$(".activityBord").after(boarddiv);
-							Msnry('.activityBody', '.activity', 435);
-						});
+						if(response.length != 0){
+							$.each(response, function(n, dataString) {
+								if (dataString.available == true) {
+								var boarddiv = activity(dataString.ID,
+										dataString.attributes.activityName,
+										dataString.attributes.activityTime,
+										dataString.attributes.activityAddr,
+										dataString.attributes.activityMore,
+										dataString.attributes.background,
+										dataString.owner.attributes.avatarLink,
+										dataString.owner.ID,
+										dataString.participantIDs,
+										dataString.attributes.startDate,
+										dataString.attributes.limitation);
+								$(".activityBord").after(boarddiv);
+								Msnry('.activityBody', '.activity', 435);
+								}
+							});
+						}
+						
 						if (response.length == pageSize) {
 							$('div#infinite_loader').hide();
 						} else {

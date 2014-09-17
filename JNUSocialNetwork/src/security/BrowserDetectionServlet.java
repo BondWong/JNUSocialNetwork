@@ -35,9 +35,10 @@ public class BrowserDetectionServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		boolean reminded = false;
+		Boolean reminded = false;
 		synchronized (session) {
-			reminded = (boolean) session.getAttribute("reminded");
+			if (session.getAttribute("reminded") == null)
+				reminded = false;
 		}
 		response.setContentType(MediaType.APPLICATION_JSON);
 		if (!reminded) {
@@ -51,9 +52,9 @@ public class BrowserDetectionServlet extends HttpServlet {
 			}
 			System.out.println("needUpdateRemind:" + needUpdateRemind);
 			if (needUpdateRemind)
-				response.getWriter().write("true");
-			else
 				response.getWriter().write("false");
+			else
+				response.getWriter().write("true");
 		} else {
 			System.out.println("needUpdateRemind:" + false);
 			response.getWriter().write("false");
