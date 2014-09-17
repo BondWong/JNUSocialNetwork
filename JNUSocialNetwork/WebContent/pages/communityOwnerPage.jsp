@@ -20,7 +20,6 @@
 		<!-- /.container -->
 	</div>
 	<div class="container container_custom">
-		<div class="alert alert-success alertCust alertCustC">新消息!</div>
 		<div class="communityCard">
 
 			<div class="dropdown">
@@ -95,7 +94,7 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				 <span class="activityHref">社区活动</span><span>社区帖子</span><span class="ownerHref">社区介绍</span>   
+				 <span class="activityHref">社区活动</span> <span class="communityHref">社区帖子</span> <span>社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>

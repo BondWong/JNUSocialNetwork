@@ -9,8 +9,9 @@
 		</div>
 		<div class="footer-link">
 			<a href="aboutUs.jsp">关于我们</a> <a href="aboutUs.jsp#fifth">加入我们</a> <a
-				href="mailto:campusite@outlook.com">联系我们</a> <a>意见反馈</a>
+				href="mailto:campusite@outlook.com">联系我们</a> <a
+				href="mailto:campusite@outlook.com">意见反馈</a>
 		</div>
-		<div class="footer-copyright">© 2014 CampuSite</div>
+		<div class="footer-copyright">© 2014 CampuSite 湘ICP备14013294号</div>
 	</div>
 </footer>

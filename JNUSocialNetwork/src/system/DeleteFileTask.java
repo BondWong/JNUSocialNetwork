@@ -11,6 +11,7 @@ public class DeleteFileTask implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		System.out.println("[Running delete deserted file task]");
 		try {
 			DesertFileLinkMap.deserialize();
 		} catch (IOException e1) {

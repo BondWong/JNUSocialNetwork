@@ -34,7 +34,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		query.setFirstResult(startIndex);
 		query.setMaxResults(pageSize);
 		for (int i = 1; params != null && i <= params.length
-				&& params[i-1] != null; i++) {
+				&& params[i - 1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -45,7 +45,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		// TODO Auto-generated method stub
 		TypedQuery<T> query = em.createNamedQuery(queryName, type);
 		for (int i = 1; params != null && i <= params.length
-				&& params[i-1] != null; i++) {
+				&& params[i - 1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -73,7 +73,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		query.setFirstResult(startIndex);
 		query.setMaxResults(pageSize);
 		for (int i = 1; params != null && i <= params.length
-				&& params[i-1] != null; i++) {
+				&& params[i - 1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -85,7 +85,7 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 		// TODO Auto-generated method stub
 		Query query = em.createNamedQuery(queryName);
 		for (int i = 1; params != null && i <= params.length
-				&& params[i-1] != null; i++) {
+				&& params[i - 1] != null; i++) {
 			query.setParameter(i, params[i - 1]);
 		}
 		return query.getResultList();
@@ -106,10 +106,10 @@ public class DAO implements Creator, Reader, Updator, Deletor {
 	}
 
 	@Override
-	public <T> int delete(String deleteQuery, Class<T> type, int startIndex,
-			int pageSize, Object... params) {
+	public int delete(String deleteQuery, int startIndex, int pageSize,
+			Object... params) {
 		// TODO Auto-generated method stub
-		TypedQuery<T> query = em.createNamedQuery(deleteQuery, type);
+		Query query = em.createNamedQuery(deleteQuery);
 		query.setFirstResult(startIndex);
 		query.setMaxResults(pageSize);
 		return query.executeUpdate();
