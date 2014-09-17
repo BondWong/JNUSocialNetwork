@@ -41,23 +41,20 @@ public class SmsRemindTask implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(activities);
+		System.out.println("remindable:" + activities);
 		for (Map<String, Object> activity : activities) {
 			List<String> IDs = (List<String>) activity.get("participantIDs");
-			System.out.println(IDs);
+			System.out.println("participantIDs:" + IDs);
 			transaction = new FetchMembersByIDsTransaction();
 			List<Map<String, Object>> members = new ArrayList<Map<String, Object>>();
 			try {
 				members = (List<Map<String, Object>>) transaction.execute(IDs);
-				System.out.println(members);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			for (Map<String, Object> member : members)
 				try {
-					System.out.println(((Map<String, String>) member
-							.get("attributes")).get("telnum"));
 
 					send(activity, member);
 
@@ -134,7 +131,7 @@ public class SmsRemindTask implements Runnable {
 				+ "你好，你参加的\""
 				+ ((Map<String, String>) activity.get("attributes"))
 						.get("activityName")
-				+ "\"活动于"
+				+ "\"活动将于"
 				+ month
 				+ "月"
 				+ day
@@ -143,9 +140,9 @@ public class SmsRemindTask implements Runnable {
 				+ "开始，地点是"
 				+ ((Map<String, String>) activity.get("attributes"))
 						.get("activityAddr")
-				+ " 来自\""
+				+ "。[来自CampuSite\""
 				+ ((Map<String, String>) activity.get("attributes"))
-						.get("communityName") + "\"";
+						.get("communityName") + "\"]";
 		// 组建请求
 		String straddr = addr
 				+ "?uid="

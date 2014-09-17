@@ -152,11 +152,11 @@
 								</div>
 								<div class="activityItem">
 									<div id="fail_popover" class="alert alert-danger"
-										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">请输入时间！</div>
+										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请输入时间！</div>
 								</div>
 								<div class="activityItem">
 									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须比活动开始时间提前半天哦，亲</div>
+										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须比活动开始时间提前半天哦，亲</div>
 								</div>
 								<div class="activityItem">
 									<span>活动地点：</span>
@@ -169,6 +169,12 @@
 									<textarea class="form-control activityInput" placeholder=""
 										id="activityMore" required autofocus maxLength="200"
 										style="resize: none;"></textarea>
+								</div>
+								<div class="activityItem">
+									<span>人数上限：</span><select class="activityNum" required><option>50</option>
+										<option>100</option>
+										<option>500</option>
+										<option>1000</option></select>
 								</div>
 								<div class="activityItem">
 									<span>活动图片</span> <span
@@ -227,8 +233,8 @@
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
-	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
+	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<script src="js/activityCommunity.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
@@ -263,7 +269,8 @@
 								}
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										&& USERID == community.attributes.userID) {
-									$('#createActivityBtn').css("display","inline");
+									$('#createActivityBtn').css("display",
+											"inline");
 									$('#editCommunityBtn').css("display",
 											"inline");
 									$('#editMembersBtn').css("display",

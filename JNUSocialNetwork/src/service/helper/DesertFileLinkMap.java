@@ -55,6 +55,10 @@ public class DesertFileLinkMap {
 		links.addAll(imageLinks);
 	}
 
+	public synchronized static void addLink(String imageLink) {
+		links.add(imageLink);
+	}
+
 	public synchronized static void removeLinks() {
 		links.clear();
 	}

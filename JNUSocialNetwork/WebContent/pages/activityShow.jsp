@@ -29,8 +29,7 @@
 				<p class="activityShowName"></p>
 				<div class="activityShare">
 
-					<span class="glyphicon glyphicon-heart-empty" id="activityLike"
-						style="font-size: 20px"></span>
+					<button class="btn btn-default joinSActivity">参加活动</button>
 					<button class="btn btn-default editActivity" data-toggle='modal'
 						data-target='#editActivity'>管理活动</button>
 					<div class="downLoadList">
@@ -131,7 +130,7 @@
 		<div class="activityBody">
 			<div class="aBodyLeft">
 				<div class="activityDetail">
-					<span class="activityTitle"></span>
+					<span class="activityTitle">活动细节</span>
 					<div class="detailBody">
 						<div>
 							<span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span
@@ -173,11 +172,7 @@
 				</div>
 				<div class="aBodyAsk">
 					<h1>参加吗?</h1>
-					<select class="btn btn-default" style='float: left'>
-						<option>可能吧</option>
-						<option class="activityJoin">走起</option>
-						<option class="leaveactivityJoin">不了，谢谢</option>
-					</select>
+					
 				</div>
 			</div>
 		</div>
@@ -193,9 +188,9 @@
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="js/EventAPI.js"></script>
 	<script src="js/function.js"></script>
 	<script src="js/EventHandle.js"></script>
-	<script src="js/EventAPI.js"></script>
 	<script src="js/activityShow.js"></script>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">
@@ -212,12 +207,17 @@
 								login_initialization(USERID);
 								clickEvent();
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && USERID == community.attributes.userID ) {
-									$('.aBodyAsk').css("display", "none");
+									$('.aBodyAsk').remove();
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
 									$('.activityAddCommunity').css("display",
 											"none");
+								}
+								var now = new Date();
+								if(activity.attributes.startDate - now.getTime()<= 0 || activity.attributes.reminded != "false"){
+									$('.aBodyAsk').remove();
+									$('.editActivity').remove();
 								}
 								$('.aCommentI')
 										.attr(

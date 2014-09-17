@@ -142,8 +142,8 @@
 	<script src="js/jquery.fileupload-video.js"></script>
 	<!-- The File Upload validation plugin -->
 	<script src="js/jquery.fileupload-validate.js"></script>
-	<script src="js/function.js"></script>
 	<script src="js/EventAPI.js"></script>
+	<script src="js/function.js"></script>
 	<script src="js/communityMember.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>

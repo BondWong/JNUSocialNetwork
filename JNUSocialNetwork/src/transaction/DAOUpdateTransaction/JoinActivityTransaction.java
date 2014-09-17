@@ -7,7 +7,8 @@ import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class JoinActivityTransaction extends DAOTransaction{
+public class JoinActivityTransaction extends DAOTransaction {
+	private static final int MAXIMUM = 1000;
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -16,8 +17,14 @@ public class JoinActivityTransaction extends DAOTransaction{
 		DAO dao = new DAO(em);
 		Member member = dao.get(Member.class, params[0]);
 		Post post = dao.get(Post.class, params[1]);
-		member.joinActivity(post);
-		dao.update(post);
+		int limitation = Integer.parseInt(post.getAttribute("limitation"));
+		int currentParticipantNum = post.getParticipants().size();
+		if (limitation > MAXIMUM)
+			limitation = MAXIMUM;
+		if (currentParticipantNum < limitation) {
+			member.joinActivity(post);
+			dao.update(post);
+		}
 		return post.toRepresentation();
 	}
 

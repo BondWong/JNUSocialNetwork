@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -25,11 +26,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import service.helper.DesertFileLinkMap;
+import utils.JsonUtil;
 import model.communityOwnerFeature.CommunityOwner;
 import model.communityOwnerFeature.CommunityOwnerFeature;
 import model.communityOwnerFeature.NonCommunityOwner;
 import model.factory.AttributesFactory;
 import model.modelType.UserType;
+import model.structure.Image;
 
 @Entity
 @Access(AccessType.FIELD)
@@ -148,10 +151,26 @@ public class Member extends User {
 	}
 
 	public void removeImageLink(String link) {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLink(link);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		imageLinks.remove(link);
 	}
 
 	public void removeImageLinks(Set<String> links) {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLinks(links);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.imageLinks.removeAll(links);
 	}
 
@@ -160,7 +179,14 @@ public class Member extends User {
 	}
 
 	public void clearImageLinks() {
-		DesertFileLinkMap.addLinks(this.imageLinks);
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLinks(this.imageLinks);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.imageLinks.clear();
 	}
 
@@ -187,6 +213,27 @@ public class Member extends User {
 	}
 
 	public void clearAttributes() {
+		try {
+			Image image = JsonUtil.fromJson(this.getAttribute("avatarLink"),
+					Image.class);
+			String link = image.getSrc();
+			if (!link.contains("default")) {
+				DesertFileLinkMap.deserialize();
+				DesertFileLinkMap.addLink(link);
+				DesertFileLinkMap.serialize();
+			}
+			image = JsonUtil.fromJson(this.getAttribute("profileImageLink"),
+					Image.class);
+			link = image.getSrc();
+			if (!link.contains("default")) {
+				DesertFileLinkMap.deserialize();
+				DesertFileLinkMap.addLink(link);
+				DesertFileLinkMap.serialize();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.attributes.clear();
 	}
 

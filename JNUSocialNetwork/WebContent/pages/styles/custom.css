@@ -364,7 +364,19 @@ body {
 	background-color: #fff;
 	cursor: pointer;
 }
-
+.activityJoin{
+	display: block;
+	height: 30px;
+	width: 70px;
+	text-align: center;
+	border: 1px solid #E6E6E6;
+	font-size: 14px;
+	vertical-align: middle;
+	padding: 5px;
+	float: right;
+	background-color: #fff;
+	cursor: pointer;
+}
 .act_time {
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -667,7 +679,6 @@ body {
 
 .modalBody {
 	width: 90%;
-	margin-top: 20px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -712,9 +723,6 @@ body {
 	margin-top: 30px;
 }
 
-#createCommunityBtn {
-	display: none;
-}
 
 .editActivity {
 	display: none;
@@ -891,7 +899,7 @@ body {
 .activityShare {
 	margin-top: 5px;
 	float: right;
-	margin-right: 50px;
+	margin-right: 20px;
 }
 
 .activityShare span {
@@ -1206,7 +1214,7 @@ body {
 }
 
 .activityItem {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 .activityItem>span {
@@ -1657,4 +1665,9 @@ footer {
 }
 .teleUpload{
 	margin-top:20px;
+}
+#browserDetection{
+	top:200px;
+	display:block;
+	opacity:1;
 }

@@ -16,7 +16,21 @@ function Subscribe() {
 		return source;
 	}
 }
+
 // ***********************************SSES end*********************************
+//***********************************浏览器检测*********************************
+function BrowserDetection(){
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../security/detect',
+		async : false,
+		success : function(data) {
+			response = data;
+		}
+	});
+	return response;
+}
 // ***********************************FileService begin************************
 // 文件上传 输入：formDate格式 输出：imagelink数组
 function FileUpload(formData) {

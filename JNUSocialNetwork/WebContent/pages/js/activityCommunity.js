@@ -25,6 +25,7 @@ function activityClickEvent() {
 								activityTime : $('#activityTime').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								limitation : $('.activityNum').val(),
 								communityName : community.attributes.name,
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0],
@@ -48,6 +49,7 @@ function activityClickEvent() {
 								activityTime : $('#activityTime').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								limitation : $('.activityNum').val()
 							},
 							imageLinks : []
 						};
@@ -85,30 +87,35 @@ function fetchActivitiesByCommunity() {
 					dataString.attributes.activityMore,
 					dataString.attributes.background,
 					dataString.owner.attributes.avatarLink,
-					dataString.owner.ID, dataString.participantIDs);
+					dataString.owner.ID, dataString.participantIDs,
+					dataString.attributes.startDate,
+					dataString.attributes.limitation);
 		}
 	});
 }
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,
-		ownerID, joinIDs) {
-	var select = "";
+		ownerID, joinIDs, startDate, limitation) {
+	var join = "<a><div class='activityJoin' id='activity" + activityID
+			+ "'><input type='hidden' value='" + activityID
+			+ "'><span>Join</span></div></a>";
 	if ($.inArray(USERID, joinIDs) != -1) {
-		select = "selected";
+		join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
+				+ activityID
+				+ "'><input type='hidden' value='"
+				+ activityID
+				+ "'><span>Joined</span></div></a>";
 	}
-	var askActivity = "<div class='activityAsk'><span>Are you going to join in?</span><select class='btn btn-default'><option>Maybe</option><option class='activityJoin' id='"
-			+ activityID
-			+ "' "
-			+ select
-			+ ">Yes</option><option class='leaveactivityJoin' id='"
-			+ activityID + "'>No</option></select></div>";
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
-		askActivity = "";
+		join = "";
 	}
-
+	var now = new Date();
+	if (joinIDs.length >= limitation || startDate - now.getTime() <= 0) {
+		join = "";
+	}
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
@@ -125,14 +132,14 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ time
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + more
-			+ "</span></div>" + askActivity + "</div>";
+			+ "</span></div><div class='activityAsk'>"+join+"</div></div>";
 	return boarddiv;
 }
 // function addActivity
 function addActivity(activityID, name, time, addre, more, imagelink,
-		avatarLink, ownerID, joinIDs) {
+		avatarLink, ownerID, joinIDs, startDate, limitation) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink, ownerID, joinIDs);
+			avatarLink, ownerID, joinIDs, startDate, limitation);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -231,6 +238,7 @@ function toTimeValue(dateTime) {
 	var d = new Date(matchers[3], month, matchers[2], matchers[4], matchers[5],
 			0, 0);
 	return d.valueOf();
+
 }
 $(window)
 		.scroll(
@@ -240,15 +248,19 @@ $(window)
 						var startIndex = $('.activity').length;
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
-								startIndex+1, pageSize);
+								startIndex + 1, pageSize);
 						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID, dataString.attributes.activityName,
+							var boarddiv = activity(dataString.ID,
+									dataString.attributes.activityName,
 									dataString.attributes.activityTime,
 									dataString.attributes.activityAddr,
 									dataString.attributes.activityMore,
 									dataString.attributes.background,
 									dataString.owner.attributes.avatarLink,
-									dataString.owner.ID, dataString.participantIDs);
+									dataString.owner.ID,
+									dataString.participantIDs,
+									dataString.attributes.startDate,
+									dataString.attributes.limitation);
 							$(".activityBord").after(boarddiv);
 							Msnry('.activityBody', '.activity', 435);
 						});

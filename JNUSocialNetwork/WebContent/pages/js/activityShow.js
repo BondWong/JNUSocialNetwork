@@ -10,8 +10,7 @@ function showActivityDetail(activity, community) {
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
 
-	$('.communityNum').html(
-			activity.likerIDs.length + activity.participantIDs.length
+	$('.communityNum').html( activity.participantIDs.length
 					+ "&nbsp个小伙伴参加了这个活动");
 	var comments = FetchCommentByPost(activity.ID, "0", "5");
 	var comment = "";
@@ -75,13 +74,11 @@ function showActivityDetail(activity, community) {
 	$('.communityBS').find('img').attr("src",
 			$.parseJSON(community.attributes.communityCard).src);
 	$('.addcommunityA').attr("id", community.ID);
-	$('.activityJoin').attr("id", activity.ID);
-	$('.leaveactivityJoin').attr("id", activity.ID);
-	if ($.inArray(USERID, activity.likerIDs) != -1) {
-		$('#activityLike').attr("class", "glyphicon glyphicon-heart");
-	}
 	if ($.inArray(USERID, activity.participantIDs) != -1) {
-		$('.activityJoin').attr("selected", "selected");
+		$('.joinSActivity').css("color", "rgb(255, 255, 255)");
+		$('.joinSActivity').css("background-color",
+				"rgb(66,139,202)");
+		$('.joinSActivity').text("已经参加");
 	}
 	var memberIDs = [];
 	$.each(community.members, function(n, member) {
@@ -91,16 +88,67 @@ function showActivityDetail(activity, community) {
 			&& USERID != ""
 			&& $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'
 			&& $.inArray(USERID, memberIDs) == -1) {
-		$('.activityAddCommunity').css("display", "inline");
+		$('.activityAddCommunity').remove();
 	}
 }
-$('body').on("click", ".glyphicon-heart-empty", function() {
-	LikePost(USERID, activity.ID);
-	$('.glyphicon-heart-empty').attr("class", "glyphicon glyphicon-heart");
+$('body')
+.on(
+		'click',
+		'.joinSActivity',
+		function() {
+			if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
+				if ($(this).css("background-color") == "rgb(235, 235, 235)") {
+					var response = JoinActivity(USERID, activityID);
+					if (response == 'success') {
+						alert("参加成功！");
+					}
+					$(this).css("color", "rgb(255, 255, 255)");
+					$(this).css("background-color",
+							"rgb(66,139,202)");
+					$(this).text("已经参加");
+					return 0;
+				} else {
+					LeaveActivity(USERID, activityID);
+					$(this).css("color", "rgb(51,51,51)");
+					$(this).css("background-color","rgb(235, 235, 235)");
+					$(this).text("参加活动");
+					return 0;
+				}
+			} else {
+				$(this).attr("data-toggle", "modal");
+				$(this).attr("data-target", "#telemodal");
+				teleAlert(activityID);
+			}
+
+		});
+$('body').on("click", ".teleUpload", function() {
+var dataString = {
+telnum : $('#tele').val()
+};
+if ($('.teleForm')[0].checkValidity()) {
+UpdateUserProfile(USERID, $.toJSON(dataString));
+if ($(this).css("background-color") == "rgb(235, 235, 235)") {
+	var response = JoinActivity(USERID, activityID);
+	if (response == 'success') {
+		alert("参加成功！");
+	}
+	$(this).css("color", "rgb(255, 255, 255)");
+	$(this).css("background-color",
+			"rgb(66,139,202)");
+	$(this).text("已经参加");
+	return 0;
+} else {
+	LeaveActivity(USERID, activityID);
+	$(this).css("color", "rgb(51,51,51)");
+	$(this).css("background-color","rgb(235, 235, 235)");
+	$(this).text("参加活动");
+	return 0;
+}
+$('#telemodal').modal('hide');
+}
 });
 $('body').on("click", ".activityAddCommunity", function() {
 	JoinCommunity(USERID, community.ID);
-	;
 	$(this).fadeOut("300");
 });
 $('body').on("click", ".glyphicon-heart", function() {
@@ -116,9 +164,6 @@ $('body').on("click", ".editActivity", function() {
 	$('#activityAddr').val(activity.attributes.activityAddr);
 	$('#activityMore').val(activity.attributes.activityMore);
 	dataPicker();
-	if(activity.attributes.reminded != "false"){
-		$('.activitySpan').css("display","none");
-	}
 });
 $('body')
 		.on(

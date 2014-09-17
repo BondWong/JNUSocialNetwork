@@ -532,3 +532,11 @@ a:hover {
 	background: url('../images/process4.fw.png') no-repeat scroll center
 		center transparent;
 }
+.modal-custom{
+	position: relative;
+	padding: 20px 100px;
+	text-align: center;
+}
+.loginA{
+	margin-left:50px;
+}

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,8 +25,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import service.helper.DesertFileLinkMap;
+import utils.JsonUtil;
 import model.factory.AttributesFactory;
 import model.modelType.CommunityType;
+import model.structure.Image;
 
 @Entity
 @Access(AccessType.FIELD)
@@ -136,6 +140,20 @@ public class Community extends AttributeModel {
 	}
 
 	public void clearAttributes() {
+		try {
+			Image image = JsonUtil.fromJson(this.getAttribute("communityCard"),
+					Image.class);
+			String link = image.getSrc();
+			System.out.println(link);
+			if (!link.contains("default")) {
+				DesertFileLinkMap.deserialize();
+				DesertFileLinkMap.addLink(link);
+				DesertFileLinkMap.serialize();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.attributes.clear();
 	}
 
