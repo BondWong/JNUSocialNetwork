@@ -251,6 +251,13 @@ function CREATECOMMENT() {
 								atComment = "@"
 										+ jsonComment.attributes.commentToComment;
 							}
+							var commentReply = "<div class='comment_reply' id="
+								+ jsondata.postID
+								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+								+ jsonComment.owner.attributes.name
+								+ "' /><input id='replyID' type='hidden' value='"
+								+ jsonComment.ID
+								+ "' />reply<span style='font-size: 8px'></span></a></div>";
 							var removeBtn = "";
 							if (USERID == jsonComment.owner.ID) {
 								removeBtn = "<div class='deleteCommBtn deletCa' style='cursor:pointer'><a><input id='"
@@ -258,6 +265,7 @@ function CREATECOMMENT() {
 										+ "' type='hidden' value='"
 										+ jsonComment.ID
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+								commentReply = "";
 							}
 							var comment = "<div class='aBodyComment' id='commentTxt"
 									+ jsonComment.ID
@@ -270,13 +278,7 @@ function CREATECOMMENT() {
 									+ jsonComment.publishDate
 									+ "</span>"
 									+ removeBtn
-									+ "<div class='comment_reply replyaComment' id="
-									+ jsonComment.attributes.postID
-									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-									+ jsonComment.owner.attributes.name
-									+ "' /><input id='replyID' type='hidden' value='"
-									+ jsonComment.ID
-									+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
+									+ commentReply+"<input type='hidden' id='"
 									+ activity.ID
 									+ "' value='"
 									+ jsonComment.ID

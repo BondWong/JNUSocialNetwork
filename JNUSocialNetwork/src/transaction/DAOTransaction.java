@@ -8,64 +8,66 @@ import javax.persistence.RollbackException;
 
 import persistence.helper.EntityManagerFactoryUtil;
 
-public abstract class DAOTransaction implements Transaction{
+public abstract class DAOTransaction implements Transaction {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	private EntityTransaction tx;
-	
-	public final Object execute(Object... params) throws Exception{
+
+	public final Object execute(Object... params) throws Exception {
 		initEntityManagerFactory();
 		initEntityManager();
 		initEntityTransaction();
-		
+
 		return execute(em, params);
 	}
-	
-	private void initEntityManagerFactory(){
+
+	private void initEntityManagerFactory() {
 		emf = EntityManagerFactoryUtil.getInstance().getEntityManagerFactory();
 	}
-	
-	private void initEntityManager(){
+
+	private void initEntityManager() {
 		em = emf.createEntityManager();
 	}
-	
-	private void initEntityTransaction(){
+
+	private void initEntityTransaction() {
 		tx = em.getTransaction();
 	}
-	
-	private void beginTransaction(){
+
+	private void beginTransaction() {
 		tx.begin();
 	}
-	
-	protected abstract Object process(EntityManager em, Object...params) throws Exception;
-	
-	private void commitTransaction(){
+
+	protected abstract Object process(EntityManager em, Object... params)
+			throws Exception;
+
+	private void commitTransaction() {
 		tx.commit();
 	}
-	
+
 	private void rollBackTransaction() {
-		if(tx.isActive())
+		if (tx.isActive())
 			tx.rollback();
 	}
-	
+
 	private void close() {
-		em.close();
+		if (em.isOpen())
+			em.close();
 	}
-	
-	private Object execute(EntityManager em, Object...params) throws Exception{
-		try{
+
+	private Object execute(EntityManager em, Object... params) throws Exception {
+		try {
 			beginTransaction();
 			Object result = process(em, params);
 			commitTransaction();
 			return result;
-		} catch(RollbackException re) {
+		} catch (RollbackException re) {
 			if (re.getCause() instanceof OptimisticLockException) {
 				return execute(em, params);
 			} else {
 				rollBackTransaction();
 				throw re;
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			rollBackTransaction();
 			throw e;
 		} finally {

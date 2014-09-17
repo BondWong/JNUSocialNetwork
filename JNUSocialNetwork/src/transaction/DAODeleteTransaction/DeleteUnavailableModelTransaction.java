@@ -10,7 +10,7 @@ import transaction.DAOTransaction;
 public class DeleteUnavailableModelTransaction extends DAOTransaction {
 	static final int bucketSize = 10;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
@@ -21,8 +21,8 @@ public class DeleteUnavailableModelTransaction extends DAOTransaction {
 
 		for (int i = 1, effectRowNums = 0; i <= unavailableIDs.size(); i += bucketSize) {
 			try {
-				effectRowNums = dao.delete((String) params[1],
-						(Class) params[2], i - effectRowNums, i + bucketSize);
+				effectRowNums = dao.delete((String) params[1], i
+						- effectRowNums, i + bucketSize);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(e.getCause());

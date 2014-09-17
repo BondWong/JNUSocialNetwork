@@ -143,7 +143,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postImgDiv
 			+ "<div class='row'></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "' maxLength='100'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='100' required></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID
 			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"
 			+ postID
@@ -323,8 +323,10 @@ function clickEvent() {
 										"background-color", "rgb(66,139,202)");
 								$("div[id='activity" + id + "']").find('span')
 										.text("Joined");
-								JoinActivity(USERID, id);
-								alert("参加成功！");
+								var response = JoinActivity(USERID, id);
+								if (response == 'success') {
+									alert("参加成功！");
+								}
 								return 0;
 							} else {
 								$("div[id='activity" + id + "']").css("color",
@@ -385,6 +387,7 @@ function clickEvent() {
 
 	// function addComment
 	$('body').on('click', '#addComment', function() {
+
 		var id = this.getAttribute("value");
 		var commentID = "";
 		var commentOwnerName = "";
@@ -404,10 +407,41 @@ function clickEvent() {
 			}
 		};
 		var commentJson = $.toJSON(comment);
-		AddComment(USERID, id, commentJson);
-		sessionStorage.setItem("commentOwnerName", "");
-		sessionStorage.setItem("commentID", "");
-		inputComm.val("");
+		if (inputComm.val() != "") {
+			AddComment(USERID, id, commentJson);
+			sessionStorage.setItem("commentOwnerName", "");
+			sessionStorage.setItem("commentID", "");
+			inputComm.val("");
+		}
+	});
+	$('body').on('click', '.addComment2', function() {
+
+		var id = this.getAttribute("value");
+		var commentID = "";
+		var commentOwnerName = "";
+		if (sessionStorage.getItem("commentID") != null) {
+			commentID = sessionStorage.getItem("commentID");
+		}
+		if (sessionStorage.getItem("commentOwnerName") != null) {
+			commentOwnerName = sessionStorage.getItem("commentOwnerName");
+		}
+		var inputComm = $("input[id='commentText2" + id + "']");
+		var comment = {
+			attributes : {
+				content : inputComm.val(),
+				toCommentID : commentID,
+				commentToComment : commentOwnerName,
+				postID : id + ""
+			}
+		};
+		var commentJson = $.toJSON(comment);
+		if (inputComm.val() != "") {
+			AddComment(USERID, id, commentJson);
+			sessionStorage.setItem("commentOwnerName", "");
+			sessionStorage.setItem("commentID", "");
+			inputComm.val("");
+		}
+
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -792,9 +826,9 @@ function showPost(postID) {
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
-						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt2' id='commentText2"
 						+ postID
-						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success addComment2' id='addComment' value="
 						+ postID
 						+ ">Submit</button></div></div>"
 						+ comment

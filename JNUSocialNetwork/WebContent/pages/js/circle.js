@@ -185,6 +185,14 @@ function fectchHeatPost() {
 								dataString.imageLinks,
 								dataString.owner.attributes.avatarLink);
 					}
+					if (dataString.attributes.communityName != null) {
+						var board = "<a class='communityPostSpan' id = '"
+								+ dataString.attributes.communityID
+								+ "'><span class='glyphicon glyphicon-th-large'></span>&nbsp;"
+								+ dataString.attributes.communityName
+								+ "</a> ";
+						$(".postComm"+dataString.ID).append(board);
+					}
 				});
 
 	}
@@ -205,7 +213,7 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length - 1;
+						var startIndex = $('.post').length;
 						$('div#infinite_loader').show();
 						var response = [];
 						if (USERID == null || USERID == "")

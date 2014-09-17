@@ -141,8 +141,8 @@ $(document)
 				});
 // function fetchPostByCommunity
 var pageSize = 20;
-function fetchPostByCommunity() {
-	var response = FetchByCommunity(community.ID, 0, pageSize);
+function fetchPostsByCommunityOwner() {
+	var response = FetchPostsByOwner(community.attributes.userID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == true) {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
@@ -165,10 +165,13 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length - 1;
+						
+						var startIndex = $('.post').length;
+						if(USERID == community.attributes.userID){
+							startIndex -= 1;
+						}
 						$('div#infinite_loader').show();
-						var response = FetchByCommunity(communityID,
-								startIndex, pageSize);
+						var response = FetchPostsByOwner(community.attributes.userID, startIndex, pageSize);
 						$
 								.each(
 										response.reverse(),

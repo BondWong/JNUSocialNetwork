@@ -214,7 +214,7 @@
 	<script src="js/layer.ext.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/function.js"></script>
-	<script src="js/communityCircle.js"></script>
+	<script src="js/communityOwnerPage.js"></script>
 	<script src="js/EventHandle.js"></script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
@@ -227,7 +227,7 @@
 									.substr(url.indexOf("?") + 1);
 							window.community = FetchCommunityByID(communityID);
 							Msnry('.pro_body', '.post', 435);
-							fetchPostByCommunity();
+							fetchPostsByCommunityOwner();
 							showCommunityInfo();
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
@@ -246,6 +246,9 @@
 										&& USERID != community.attributes.userID) {
 									$('#leaveCommunityBtn').css("display",
 											"inline");
+								}
+								if(USERID != community.attributes.userID){
+									$('.share').remove();
 								}
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										&& USERID == community.attributes.userID) {

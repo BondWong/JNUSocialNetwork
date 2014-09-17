@@ -16,13 +16,20 @@ function showActivityDetail(activity, community) {
 	var comment = "";
 	$
 			.each(
-					comments.reverse(),
+					comments,
 					function(index, jsonComment) {
 						var atComment = "";
 						if (jsonComment.attributes.commentToComment != "") {
 							atComment = "@"
 									+ jsonComment.attributes.commentToComment;
 						}
+						var commentReply = "<div class='comment_reply replyaComment' id="
+							+ activity.ID 
+							+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+							+ jsonComment.owner.attributes.name
+							+ "' /><input id='replyID' type='hidden' value='"
+							+ jsonComment.ID
+							+ "' />reply<span style='font-size: 8px'></span></a></div>";
 						var removeBtn = "";
 						if (USERID == jsonComment.owner.ID) {
 							removeBtn = "<div class='deleteCommBtn deletCa' style='cursor:pointer'><a><input id='"
@@ -30,6 +37,7 @@ function showActivityDetail(activity, community) {
 									+ "' type='hidden' value='"
 									+ jsonComment.ID
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							commentReply = "";
 						}
 						comment = comment
 								+ "<div class='aBodyComment' id='commentTxt"
@@ -43,13 +51,7 @@ function showActivityDetail(activity, community) {
 								+ jsonComment.publishDate
 								+ "</span>"
 								+ removeBtn
-								+ "<div class='comment_reply replyaComment' id="
-								+ jsonComment.attributes.postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
+								+ commentReply + "<input type='hidden' id='"
 								+ activity.ID + "' value='" + jsonComment.ID
 								+ "' /></span></div><br><div class='aC'>"
 								+ "<span class='commentHead'>" + atComment
