@@ -35,9 +35,6 @@ function login_initialization(ID) {
 		$('.containerMy').css("display", "block");
 		$('#myCommunityBtn').css("display", "block");
 	}
-	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER') {
-		$('.createCom').remove();
-	}
 	if (FetchCommunityByJoin(USERID, "0", "1").length != 0) {
 		$('.titleMy').css("display", "block");
 		$('.containerMy').css("display", "block");

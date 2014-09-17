@@ -147,9 +147,9 @@
 				fetchCommunityByOwner("5");
 			} else {
 				clickOffEvent();
+				$('.createCom').remove();
 			}
 			fetchCommunitys();
-
 		});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
