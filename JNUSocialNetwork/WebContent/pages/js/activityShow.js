@@ -98,20 +98,20 @@ $('body')
 		function() {
 			if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
 				if ($(this).css("background-color") == "rgb(235, 235, 235)") {
-					var response = JoinActivity(USERID, activityID);
-					if (response == 'success') {
-						alert("参加成功！");
-					}
 					$(this).css("color", "rgb(255, 255, 255)");
 					$(this).css("background-color",
 							"rgb(66,139,202)");
 					$(this).text("已经参加");
+					var response = JoinActivity(USERID, activityID);
+					if (response == 'success') {
+						alert("参加成功！");
+					}
 					return 0;
 				} else {
-					LeaveActivity(USERID, activityID);
 					$(this).css("color", "rgb(51,51,51)");
 					$(this).css("background-color","rgb(235, 235, 235)");
 					$(this).text("参加活动");
+					LeaveActivity(USERID, activityID);
 					return 0;
 				}
 			} else {

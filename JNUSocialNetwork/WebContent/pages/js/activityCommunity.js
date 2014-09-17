@@ -107,7 +107,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 	}
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
-		pRemoveBtn = "<div class='deletePostBtn deleteActivity'><input id='deleteID' type='hidden' value="
+		pRemoveBtn = "<div class='deleteActivity'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 		join = "";
@@ -159,7 +159,7 @@ $('body').on("click", ".activityHref", function() {
 	var id = $(this).attr("id");
 	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
 });
-$('body').on('click', '.deletePostBtn', function() {
+$('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePostFromCommunity(community.ID, id);
 	$(".post" + id + "").remove();
@@ -249,21 +249,26 @@ $(window)
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
 								startIndex + 1, pageSize);
-						$.each(response, function(n, dataString) {
-							var boarddiv = activity(dataString.ID,
-									dataString.attributes.activityName,
-									dataString.attributes.activityTime,
-									dataString.attributes.activityAddr,
-									dataString.attributes.activityMore,
-									dataString.attributes.background,
-									dataString.owner.attributes.avatarLink,
-									dataString.owner.ID,
-									dataString.participantIDs,
-									dataString.attributes.startDate,
-									dataString.attributes.limitation);
-							$(".activityBord").after(boarddiv);
-							Msnry('.activityBody', '.activity', 435);
-						});
+						if(response.length != 0){
+							$.each(response, function(n, dataString) {
+								if (dataString.available == true) {
+								var boarddiv = activity(dataString.ID,
+										dataString.attributes.activityName,
+										dataString.attributes.activityTime,
+										dataString.attributes.activityAddr,
+										dataString.attributes.activityMore,
+										dataString.attributes.background,
+										dataString.owner.attributes.avatarLink,
+										dataString.owner.ID,
+										dataString.participantIDs,
+										dataString.attributes.startDate,
+										dataString.attributes.limitation);
+								$(".activityBord").after(boarddiv);
+								Msnry('.activityBody', '.activity', 435);
+								}
+							});
+						}
+						
 						if (response.length == pageSize) {
 							$('div#infinite_loader').hide();
 						} else {

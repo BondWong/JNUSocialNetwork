@@ -95,7 +95,7 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span class="communityHref">社区帖子</span> <span>社区活动</span>
+				<span>社区活动</span> <span class="communityHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -235,8 +235,9 @@
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/function.js"></script>
-	<script src="js/EventHandle.js"></script>
 	<script src="js/activityCommunity.js"></script>
+	<script src="js/EventHandle.js"></script>
+	
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">

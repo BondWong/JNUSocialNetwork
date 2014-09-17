@@ -1136,6 +1136,9 @@ body {
 	position: absolute;
 	left: 410px;
 	top: 2px;
+	color: #CCC;
+	float: right;
+	cursor: pointer;
 }
 
 .deleteCommBtn {

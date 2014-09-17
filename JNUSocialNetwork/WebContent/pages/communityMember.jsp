@@ -96,7 +96,7 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span class="communityHref">社区帖子</span> <span class="activityHref">社区活动</span>
+				 <span class="activityHref">社区活动</span> <span class="communityHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>

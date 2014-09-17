@@ -1,12 +1,11 @@
-
-if(BrowserDetection() != false){
+if (BrowserDetection() != false) {
 	var alert = "<div class='modal fade' id='browserDetection' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>检测到你浏览器的版本过低，有可能影响网站效果哦</h4></div><div class='modal-body modal-custom'><a data-dismiss='modal' type='button' class='btn btn-primary' >我知道了</a></div></div></div></div>";
 	var button = "<button  data-toggle='modal' class='browserClick' data-target='#browserDetection'></button>";
 	$('body').append(button);
 	$('body').append(alert);
 	$('.browserClick').click();
 }
-//function Msnry
+// function Msnry
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);
 	imagesLoaded(container, function() {
@@ -318,22 +317,24 @@ function clickEvent() {
 						if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
 							var id = $(this).find("input").attr("value");
 							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
-								var response = JoinActivity(USERID, id);
-								if (response == 'success') {
-									alert("参加成功！");
-								}
-								$("div[id='activity" + id + "']")
-										.css("color", "rgb(255, 255, 255)");
-								$("div[id='activity" + id + "']").css("background-color",
-										"rgb(66,139,202)");
-								$("div[id='activity" + id + "']").find('span').text("Joined");
+								$("div[id='activity" + id + "']").css("color",
+										"rgb(255, 255, 255)");
+								$("div[id='activity" + id + "']").css(
+										"background-color", "rgb(66,139,202)");
+								$("div[id='activity" + id + "']").find('span')
+										.text("Joined");
+								JoinActivity(USERID, id);
+								alert("参加成功！");
 								return 0;
 							} else {
-								LeaveActivity(USERID, id);
-								$("div[id='activity" + id + "']").css("color", "rgb(66,139,202)");
-								$("div[id='activity" + id + "']").css("background-color",
+								$("div[id='activity" + id + "']").css("color",
+										"rgb(66,139,202)");
+								$("div[id='activity" + id + "']").css(
+										"background-color",
 										"rgb(255, 255, 255)");
-								$("div[id='activity" + id + "']").find('span').text("Join");
+								$("div[id='activity" + id + "']").find('span')
+										.text("Join");
+								LeaveActivity(USERID, id);
 								return 0;
 							}
 						} else {
@@ -343,36 +344,44 @@ function clickEvent() {
 						}
 
 					});
-	$('body').on("click", ".teleUpload", function() {
-		var activityID = $(this).attr("id");
-		var dataString = {
-			telnum : $('#tele').val()
-		};
-		if ($('.teleForm')[0].checkValidity()) {
-			UpdateUserProfile(USERID, $.toJSON(dataString));
-			var id = $(this).find("input").attr("value");
-			if ($(this).css("background-color") == "rgb(255, 255, 255)") {
-				var response = JoinActivity(USERID, id);
-				if (response == 'success') {
-					alert("参加成功！");
-				}
-				$("div[id='activity" + id + "']")
-						.css("color", "rgb(255, 255, 255)");
-				$("div[id='activity" + id + "']").css("background-color",
-						"rgb(66,139,202)");
-				$("div[id='activity" + id + "']").find('span').text("Joined");
-				return 0;
-			} else {
-				LeaveActivity(USERID, activityID);
-				$("div[id='activity" + id + "']").css("color", "rgb(66,139,202)");
-				$("div[id='activity" + id + "']").css("background-color",
-						"rgb(255, 255, 255)");
-				$("div[id='activity" + id + "']").find('span').text("Join");
-				return 0;
-			}
-			$('#telemodal').modal('hide');
-		}
-	});
+	$('body')
+			.on(
+					"click",
+					".teleUpload",
+					function() {
+						var activityID = $(this).attr("id");
+						var dataString = {
+							telnum : $('#tele').val()
+						};
+						if ($('.teleForm')[0].checkValidity()) {
+							UpdateUserProfile(USERID, $.toJSON(dataString));
+							var id = $(this).find("input").attr("value");
+							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
+								$("div[id='activity" + id + "']").css("color",
+										"rgb(255, 255, 255)");
+								$("div[id='activity" + id + "']").css(
+										"background-color", "rgb(66,139,202)");
+								$("div[id='activity" + id + "']").find('span')
+										.text("Joined");
+								var response = JoinActivity(USERID, id);
+								if (response == 'success') {
+									alert("参加成功！");
+								}
+								return 0;
+							} else {
+								$("div[id='activity" + id + "']").css("color",
+										"rgb(66,139,202)");
+								$("div[id='activity" + id + "']").css(
+										"background-color",
+										"rgb(255, 255, 255)");
+								$("div[id='activity" + id + "']").find('span')
+										.text("Join");
+								LeaveActivity(USERID, activityID);
+								return 0;
+							}
+							$('#telemodal').modal('hide');
+						}
+					});
 
 	// function addComment
 	$('body').on('click', '#addComment', function() {
@@ -798,11 +807,17 @@ function showPost(postID) {
 			});
 }
 // funtion sessionID
+$('body').on("click", ".showHref", function() {
+	window.location.href = 'communityShow.jsp?' + community.ID;
+});
 $('body').on("click", ".activityHref", function() {
 	window.location.href = 'activityCommunity.jsp?' + community.ID;
 });
 $('body').on("click", ".memberHref", function() {
 	window.location.href = 'communityMember.jsp?' + community.ID;
+});
+$('body').on("click", ".ownerHref", function() {
+	window.location.href = 'communityOwnerPage.jsp?' + community.ID;
 });
 $('body').on(
 		"click",

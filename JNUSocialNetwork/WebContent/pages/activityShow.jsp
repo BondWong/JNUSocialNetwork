@@ -207,7 +207,7 @@
 								login_initialization(USERID);
 								clickEvent();
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && USERID == community.attributes.userID ) {
-									$('.aBodyAsk').remove();
+									$('.joinSActivity').remove();
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
 									$('#activityLike').css("display", "none");
@@ -216,7 +216,7 @@
 								}
 								var now = new Date();
 								if(activity.attributes.startDate - now.getTime()<= 0 || activity.attributes.reminded != "false"){
-									$('.aBodyAsk').remove();
+									$('.joinSActivity').remove();
 									$('.editActivity').remove();
 								}
 								$('.aCommentI')
