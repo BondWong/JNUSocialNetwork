@@ -144,7 +144,8 @@ var pageSize = 20;
 function fetchPostsByCommunityOwner() {
 	var response = FetchPostsByOwner(community.attributes.userID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		if (dataString.available == true) {
+		if (dataString.postType == "NORMAL"
+			&& dataString.available == true) {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
 					dataString.ID, dataString.likerIDs,
@@ -176,7 +177,8 @@ $(window)
 								.each(
 										response.reverse(),
 										function(n, dataString) {
-											if (dataString.available == true) {
+											if (dataString.postType == "NORMAL"
+												&& dataString.available == true) {
 												var boarddiv = post(
 														dataString.owner.ID,
 														dataString.owner.attributes.name,

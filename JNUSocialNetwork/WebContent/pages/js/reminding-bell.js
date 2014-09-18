@@ -158,7 +158,7 @@ function events_remind(event) {
 							+ event.data.eventID
 							+ '"><div class="col-lg-3"><div><img src="'
 							+ $.parseJSON(event.data.avatar).src
-							+ '" width="50" height="50" style="display: none"/></div></div><div class="col-lg-9"><h1>'
+							+ '" width="50" height="50" /></div></div><div class="col-lg-9"><h1>'
 							+ head + '</h1><div class="remindConent">'
 							+ event.data.name + ' ' + description
 							+ '</div></div><div>');
@@ -276,7 +276,7 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
 	sessionStorage.setItem("otherUserID", data.ID);
-	var tipFrame = '<div class="popTip notifyItem"><div class="content"><div class="urserBgShort"><img  width="350" height="180" src="'
+	var tipFrame = '<div class="popTip notifyItem" id="popR"><div class="content"><div class="urserBgShort"><img  width="350" height="180" src="'
 			+ $.parseJSON(data.attributes.profileImageLink).src
 			+ '" id="remind-bell-profileImg" /></div><div class="urserInfShort"><img class="img-circle" width="120" height="120" src="'
 			+ $.parseJSON(data.attributes.avatarLink).src
@@ -322,7 +322,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -367,7 +367,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	}
 	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
 			+ $.parseJSON(postOwnerAvatar).src
-			+ "' style='display: none'/><input type='hidden' value='"
+			+ "'/><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -377,7 +377,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ content
 			+ "</span></div>"
 			+ postImgDiv
-			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
+			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID'  value="
 			+ ownerID
 			+ "></p><input id='likeID' type='hidden' value="
 			+ postID
