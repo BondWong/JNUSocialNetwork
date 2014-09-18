@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <jsp:scriptlet>synchronized (session) {
 				session.setAttribute("hiddenCode", System.currentTimeMillis()
 						+ "");
@@ -79,7 +79,7 @@
 				</div>
 				<div class="modal-body modalBody">
 					<div class="declare">
-						<span style="margin-bottom:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广大同学与各大组织须知，加入CampuSite校园社区须遵守以下条例，文明社交，共创和谐社区。</span>
+						<span style="margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广大同学与各大组织须知，加入CampuSite校园社区须遵守以下条例，文明社交，共创和谐社区。</span>
 						<ul>
 							<li>个人以及社区用户不得在校园社区内传播不良信息，包括黄色淫秽信息、传销组织信息、邪教信息等；</li>
 							<li>个人以及社区组织应平等和谐相处，不得相互进行人身攻击以及诽谤行为；</li>
@@ -103,51 +103,51 @@
 		</div>
 	</div>
 	<%@ include file="parts/footer.jsp"%>
-		<!-- /container -->
+	<!-- /container -->
 
-		<!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="js/jquery-1.10.2.js"></script>
-		<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-		<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
-		<script src="js/md5.js"></script>
-		<script>
-			function finish_loading_valcode() {
-				$("#register_loadingvalcode_image").hide();
-				$("#register_valcode_image").show();
-			}
-			$('.displayBody').animate({
-				opacity : 1
-			}, 300);
-		</script>
-		<script>
-			$("h4 span.signIn").click(function() {
-				location.href = "login.jsp";
-			});
-		</script>
-		<c:choose>
-			<c:when test='${param.error == "VALCODEERROR"}'>
-				<script type="text/javascript">
-					$("#register_fail").text("验证码错误");
-					$("#register_fail").fadeIn("fast");
-					setTimeout('$("#regiter_fail").fadeOut("slow")', 3000);
-				</script>
-			</c:when>
-			<c:when test='${param.error == "IDORPAERROR"}'>
-				<script type="text/javascript">
-					$("#register_fail").text("ID或者密码错误");
-					$("#register_fail").fadeIn("fast");
-					setTimeout('$("#register_fail").fadeOut("slow")', 3000);
-				</script>
-			</c:when>
-			<c:when test="${param.agree eq false }">
-				<script type="text/javascript">
-					$("#register_fail").text("请同意责任申明");
-					$("#register_fail").fadeIn("fast");
-					setTimeout('$("#register_fail").fadeOut("slow")', 3000);
-				</script>
-			</c:when>
-		</c:choose>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
+	<script src="js/md5.js"></script>
+	<script>
+		function finish_loading_valcode() {
+			$("#register_loadingvalcode_image").hide();
+			$("#register_valcode_image").show();
+		}
+		$('.displayBody').animate({
+			opacity : 1
+		}, 300);
+	</script>
+	<script>
+		$("h4 span.signIn").click(function() {
+			location.href = "login.jsp";
+		});
+	</script>
+	<c:choose>
+		<c:when test='${param.error == "VALCODEERROR"}'>
+			<script type="text/javascript">
+				$("#register_fail").text("验证码错误");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#regiter_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+		<c:when test='${param.error == "IDORPAERROR"}'>
+			<script type="text/javascript">
+				$("#register_fail").text("ID或者密码错误");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+		<c:when test="${param.agree eq false }">
+			<script type="text/javascript">
+				$("#register_fail").text("请同意责任申明");
+				$("#register_fail").fadeIn("fast");
+				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
+	</c:choose>
 </body>
 </html>
