@@ -31,7 +31,7 @@
                 <div class="section" id="section0">
                     <div class="container home">
                         <div class="col-md-10 col-md-offset-1">
-                            <h1 class="about-h">CampuSite</h1>
+                            <h1 class="about-h"><a href="index.html">CampuSite</a></h1>
                             <h2 class="sub-h2 about-h">介绍</h2>
                         </div>
                     </div>

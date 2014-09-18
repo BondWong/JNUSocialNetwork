@@ -14,7 +14,14 @@ body {
     padding: 0;
 }
 .about-h {
-    text-shadow: 5px 5px 20px #666;
+    text-shadow: 1px 1px 80px #000;
+}
+.about-h a {
+    color: white;
+    text-decoration: none;
+}
+.about-h a:hover {
+    color: #3f7cdd;
 }
 h1 {
     font-family: "Museo 900", Verdana, serif;
@@ -59,14 +66,12 @@ p {
 #slide4 .fp-tableCell {
     display: block;
 }
-#hjb,
-#lwx,
-#hjj,
-#hzy,
-#hhc,
-#del {
+.intro {
     position: fixed;
     display: none;
+    opacity: 0;
+    -webkit-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 #hjb .info {
     color: #000;
@@ -78,6 +83,11 @@ p {
     top: 40%;
     left: 0;
 }
+#hjb:hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+}
 #lwx {
     top: 5%;
     left: 3%;
@@ -85,6 +95,16 @@ p {
 #hjj {
     bottom: 5%;
     right: 3%;
+}
+#lwx:hover {
+    -webkit-transform: scale(1.5) translate(15%, 7%);
+    -ms-transform: scale(1.5) translate(15%, 7%);
+    transform: scale(1.5) translate(15%, 7%);
+}
+#hjj:hover {
+    -webkit-transform: scale(1.5) translate(0, -5%);
+    -ms-transform: scale(1.5) translate(0, -5%);
+    transform: scale(1.5) translate(0, -5%);
 }
 #hzy {
     top: 15%;
@@ -97,6 +117,13 @@ p {
 #del {
     top: 55%;
     left: 35%;
+}
+#hzy:hover,
+#hhc:hover,
+#del:hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
 }
 /*======================================================*/
 
@@ -127,6 +154,13 @@ img {
     width: 62%;
     height: 50%;
     box-shadow: 5px 5px 30px #000;
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
+}
+.imgset .icon-like:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
 }
 .wwa {
     text-align: center;
