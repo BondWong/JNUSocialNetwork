@@ -1,6 +1,7 @@
 /*global $, jQuery, console, ActiveXObject, alert, BMap, Papa, DataManager, document, Option, window, Elementm, map, event,BMapLib*/
 
 (function ($) {
+    var currentSlideIndex;
     $(document).ready(function () {
         $('#fullpage').fullpage({
             anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage'],
@@ -9,13 +10,28 @@
             navigationPosition: 'right',
             navigationTooltips: ['First page', 'Second page', 'Third page', 'The last page'],
             loopBottom: true,
-            afterSlideLoad: customAfterSlideLoad,
-            onSlideLeave: customOnSlideLeave
+            onLeave: customOnLeave,
+            afterLoad: customAfterLoad,
+            onSlideLeave: customOnSlideLeave,
+            afterSlideLoad: customAfterSlideLoad
         });
 
     });
 
+    function customAfterLoad(anchorLink, index) {
+        if (index === 2) {
+            customAfterSlideLoad(null, null, null, currentSlideIndex);
+        }
+    }
+
+    function customOnLeave(index, nextIndex, direction) {
+        if (index === 2 && nextIndex === 3) {
+            customOnSlideLeave(null, null, currentSlideIndex, null);
+        }
+    }
+
     function customAfterSlideLoad(anchorLink, index, slideAnchor, slideIndex) {
+
         var $$target;
         if (slideIndex === 1) {
             $$target = $("#hjb");
@@ -30,6 +46,7 @@
                 $$target.css("opacity", 1);
             }, 10);
         }
+        currentSlideIndex = slideIndex;
     }
 
     function customOnSlideLeave(anchorLink, index, slideIndex, direction) {
@@ -43,7 +60,6 @@
             $$target = $("#hzy,#hhc,#del");
         }
         if ($$target) {
-
             $$target.css("opacity", 0);
             setTimeout(function () {
                 $$target.removeClass("show");

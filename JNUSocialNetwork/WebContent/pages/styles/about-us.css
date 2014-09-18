@@ -14,9 +14,10 @@ body {
     padding: 0;
 }
 .about-h {
-    text-shadow: 1px 1px 80px #000;
+    text-shadow: 5px 5px 40px #666;
 }
 .about-h a {
+    text-shadow: 1px 1px 80px #000;
     color: white;
     text-decoration: none;
 }
