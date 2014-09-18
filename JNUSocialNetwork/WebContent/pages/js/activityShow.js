@@ -42,10 +42,10 @@ function showActivityDetail(activity, community) {
 						comment = comment
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
-								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' width='50' width='50'  src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "'style='display: none'></div><div class='user_name'><strong>"
+								+ "'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"
 								+ jsonComment.publishDate
@@ -90,7 +90,7 @@ function showActivityDetail(activity, community) {
 			&& USERID != ""
 			&& $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'
 			&& $.inArray(USERID, memberIDs) == -1) {
-		$('.activityAddCommunity').remove();
+		$('.activityAddCommunity').css("display","inline");
 	}
 }
 $('body')

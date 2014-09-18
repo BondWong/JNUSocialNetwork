@@ -263,6 +263,7 @@
 
 							} else {
 								clickOffEvent();
+								$('.share').remove();
 							}
 						});
 	</script>

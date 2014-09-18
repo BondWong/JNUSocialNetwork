@@ -60,10 +60,10 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -123,9 +123,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}
 	var boarddiv = "<div class='post "
 			+ postID
-			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
 			+ $.parseJSON(ownerImage).src
-			+ "' style='display: none'/><input type='hidden' value='"
+			+ "' /><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -677,13 +677,13 @@ function teleAlert(activityID) {
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
 										+ $
 												.parseJSON(data.attributes.profileImageLink).src
-										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
+										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
 										+ $
 												.parseJSON(data.attributes.avatarLink).src
-										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
+										+ '" /></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
@@ -768,10 +768,10 @@ function showPost(postID) {
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -807,9 +807,9 @@ function showPost(postID) {
 	});
 	layer
 			.photos({
-				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' onload='javascript:auto_resize(50, 50, this)' src='"
+				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' width='50' height='50' src='"
 						+ $.parseJSON(dataString.owner.attributes.avatarLink).src
-						+ "' style='display: none'/><input type='hidden' value='"
+						+ "'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 						+ dataString.owner.attributes.name

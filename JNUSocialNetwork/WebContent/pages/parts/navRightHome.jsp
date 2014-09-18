@@ -5,8 +5,8 @@
 
 	<li class="dropdown"><a href="#" class="dropdown-toggle"
 		data-toggle="dropdown"><img src=""
-			onload="javascript:auto_resize(40, 40, this)"
-			class="img-circle img_cust" id="nav-bar-avatar" style="display: none"></a>
+			width="40" height="40"
+			class="img-circle img_cust" id="nav-bar-avatar"></a>
 		<ul class="dropdown-menu pull-right">
 			<li><a href="profile.jsp?nav=post&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-home">&nbsp;<span
