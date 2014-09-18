@@ -32,7 +32,7 @@ public class PassApplicationTransaction extends DAOTransaction {
 				+ id
 				+ "\npassword:"
 				+ password
-				+ "\nPlease login using this link: www.campusite.com.cn/pages/login.jsp";
+				+ "\nPlease login using this link: http://218.244.137.34/pages/login.jsp";
 		EmailSender.send("Your application passed!", content, email);
 
 		account.setID(id);

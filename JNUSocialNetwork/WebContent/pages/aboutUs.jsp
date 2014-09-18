@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 
-<title>CampuSite</title>
+<title>关于我们 - CampuSite</title>
 
 <!-- Bootstrap core CSS -->
 <link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
@@ -33,7 +33,9 @@
 		<div class="section" id="section0">
 			<div class="container home">
 				<div class="col-md-10 col-md-offset-1">
-					<h1 class="about-h">CampuSite</h1>
+					<h1 class="about-h">
+						<a href="index.html">CampuSite</a>
+					</h1>
 					<h2 class="sub-h2 about-h">介绍</h2>
 				</div>
 			</div>
@@ -79,7 +81,7 @@
 					<div class="info">
 						<h2>黃俊邦</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>架构</span> <span>|</span> <span>服务端开发</span>
+							<span>创始人</span> <span>|</span> <span>架构师</span> <span>|</span> <span>服务端工程师</span>
 						</p>
 					</div>
 				</div>
@@ -92,8 +94,8 @@
 					<div class="info">
 						<h2>刘威雄</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span>
-							<span>前端开发</span>
+							<span>创始人</span> <span>|</span> <span>前端设计师</span> <span>|</span>
+							<span>前端工程师</span>
 						</p>
 					</div>
 				</div>
@@ -103,7 +105,7 @@
 					<div class="info">
 						<h2>何炬江</h2>
 						<p>
-							<span>前端设计</span> <span>|</span> <span>前端工程</span>
+							<span>前端设计师</span> <span>|</span> <span>前端工程师</span>
 						</p>
 					</div>
 				</div>
@@ -116,8 +118,7 @@
 					<div class="info">
 						<h2>黄子阳</h2>
 						<p>
-							<span>联合创始人</span> <span>|</span> <span>公关</span> <span>|</span>
-							<span>推广</span>
+							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
 					</div>
 				</div>
@@ -127,8 +128,7 @@
 					<div class="info">
 						<h2>胡海城</h2>
 						<p>
-							<span>联合创始人</span> <span>|</span> <span>公关</span> <span>|</span>
-							<span>推广</span>
+							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
 					</div>
 				</div>
@@ -138,8 +138,7 @@
 					<div class="info">
 						<h2>邓恩临</h2>
 						<p>
-							<span>联合创始人</span> <span>|</span> <span>公关</span> <span>|</span>
-							<span>推广</span>
+							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
 					</div>
 				</div>
@@ -165,7 +164,7 @@
 				<div class="col-md-10 col-md-offset-1">
 					<h2>加入我们！ Join Us</h2>
 					<h3>
-						通过<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>联系我们吧!
+						发简历到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>，并注明申请职位!
 					</h3>
 
 					<ul class="list-group col-xs-12 col-md-4">

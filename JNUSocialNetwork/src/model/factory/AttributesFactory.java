@@ -52,6 +52,7 @@ public class AttributesFactory {
 				attributes.put("birthday", "");
 				attributes.put("campus", "");
 				attributes.put("dorm", "");
+				attributes.put("wechat", "");
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}
 			if (params[0].equals(CommunityOwner.class)) {
@@ -67,6 +68,7 @@ public class AttributesFactory {
 				attributes.put("email", "");
 				attributes.put("institution", "");
 				attributes.put("campus", "");
+				attributes.put("wechat", "");
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}
 			if (params[0].equals(Post.class)
