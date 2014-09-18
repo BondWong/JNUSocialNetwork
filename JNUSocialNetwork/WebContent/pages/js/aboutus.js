@@ -34,11 +34,11 @@
 
         var $$target;
         if (slideIndex === 1) {
-            $$target = $("#hjb");
+            $$target = $("#lwx,#hjb");
         } else if (slideIndex === 2) {
-            $$target = $("#lwx,#hjj");
-        } else if (slideIndex === 3) {
             $$target = $("#hzy,#hhc,#del");
+        } else if (slideIndex === 3) {
+            $$target = $("#hjj");
         }
         if ($$target) {
             $$target.addClass("show");
@@ -53,11 +53,11 @@
 
         var $$target;
         if (slideIndex === 1) {
-            $$target = $("#hjb");
+            $$target = $("#hjb,#lwx");
         } else if (slideIndex === 2) {
-            $$target = $("#lwx,#hjj");
-        } else if (slideIndex === 3) {
             $$target = $("#hzy,#hhc,#del");
+        } else if (slideIndex === 3) {
+            $$target = $("#hjj");
         }
         if ($$target) {
             $$target.css("opacity", 0);

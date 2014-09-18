@@ -12,6 +12,9 @@ body {
     margin: 0;
     min-width: 980px;
     padding: 0;
+    color: #5a5a5a;
+	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif !important;
 }
 .about-h {
     text-shadow: 5px 5px 40px #666;
@@ -25,7 +28,8 @@ body {
     color: #3f7cdd;
 }
 h1 {
-    font-family: "Museo 900", Verdana, serif;
+   font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif !important;
     font-weight: 700;
     font-style: normal;
     color: #fff;
@@ -35,23 +39,26 @@ h1 {
     color: #fff;
 }
 .home {
-    margin-top: 3%;
+    margin-top: 1%;
 }
 h2 {
-    font-family: "Beau Sans Pro Book", Verdana, sans-serif;
+   font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif !important;
     font-size: 40px;
     font-weight: 900;
     font-style: normal;
 }
 h3 {
-    font-family: "Beau Sans Pro Book", Verdana, sans-serif;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif !important;
     font-size: 30px;
     font-weight: 800;
     font-style: normal;
 }
 p {
     margin: 0 0 20px 0;
-    font-family: "Proxima Nova Light", 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif !important;
     font-style: normal;
     font-weight: 200;
 }
@@ -81,7 +88,7 @@ p {
     background-color: rgba(142, 142, 142, 0.7);
 }
 #hjb {
-    top: 40%;
+    top: 10%;
     left: 0;
 }
 #hjb:hover {
@@ -89,18 +96,30 @@ p {
     -ms-transform: scale(1.5);
     transform: scale(1.5);
 }
+#lwx:hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+}
+#lwx .info {
+    color: #000;
+    text-shadow: 2px 2px 13px #fff;
+    border-radius: 30px;
+    background-color: rgba(142, 142, 142, 0.7);
+}
 #lwx {
-    top: 5%;
-    left: 3%;
+    top: 60%;
+    left: 0;
 }
 #hjj {
-    bottom: 5%;
-    right: 3%;
+    top: 30%;
+    left: 29%;
 }
-#lwx:hover {
-    -webkit-transform: scale(1.5) translate(15%, 7%);
-    -ms-transform: scale(1.5) translate(15%, 7%);
-    transform: scale(1.5) translate(15%, 7%);
+#hjj .info {
+    color: #000;
+    text-shadow: 2px 2px 13px #fff;
+    border-radius: 30px;
+    background-color: rgba(142, 142, 142, 0.7);
 }
 #hjj:hover {
     -webkit-transform: scale(1.5) translate(0, -5%);
@@ -164,12 +183,12 @@ img {
     transform: scale(1.2);
 }
 .wwa {
-    text-align: center;
+    width:30%;
     margin: 0 auto;
     font-size: 1.5em;
-    color: #62628d;
-    margin-top: -5%;
-    text-shadow: 0 2px 30px #666;
+    color: #aaa;
+    margin-top:-8%;
+    padding-left:100px;
 }
 /* Backgrounds will cover all the section
 	* --------------------------------------- */
@@ -184,7 +203,8 @@ img {
 	* --------------------------------------- */
 
 #section0 {
-    background-image: url(../images/about-us/campus.png);
+	color:#000;
+    background-image: url(../images/about-us/campus.jpg);
     padding: 0 0 0 0;
 }
 #section1 {
@@ -255,4 +275,20 @@ a.white:active {
 }
 a.white:link {
     color: white;
+}
+.homeHref{
+	display:block;
+	width:390px;
+	height:120px;
+	background: url(../images/about-us/header.png)  no-repeat scroll center
+		center transparent;
+}
+.joinIntro{
+	margin-top:40px;
+	text-indent: 2em;
+	display:block;
+}
+.join{
+	text-indent: 2em;
+	margin-bottom:30%;
 }
