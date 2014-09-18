@@ -860,6 +860,13 @@ $('body').on(
 			window.location.href = 'profile.jsp?nav=post&'
 					+ sessionStorage.getItem("otherUserID");
 		});
+$('body').on(
+		"click",
+		".tipUser2",
+		function() {
+			window.location.href = 'profile.jsp?nav=post&'
+					+ $(this).attr("id");
+		});
 /**
  * auto_resize
  */

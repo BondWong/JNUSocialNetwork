@@ -32,11 +32,11 @@
 	<div id="fullpage">
 		<div class="section" id="section0">
 			<div class="container home">
-				<div class="col-md-10 col-md-offset-1">
+				<div class="col-md-10">
 					<h1 class="about-h">
-						<a href="index.html">CampuSite</a>
+						<a href="home.jsp" class='homeHref'></a>
 					</h1>
-					<h2 class="sub-h2 about-h">介绍</h2>
+					<h2 class="sub-h2 about-h"></h2>
 				</div>
 			</div>
 		</div>
@@ -81,38 +81,44 @@
 					<div class="info">
 						<h2>黃俊邦</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>架构师</span> <span>|</span> <span>服务端工程师</span>
+							<span>创始人</span> <span>|</span> <span>架构</span> <span>|</span> <span>服务端开发</span>
+						</p>
+						<p>
+							<span>wechat:WongZeonbong</span>
 						</p>
 					</div>
 				</div>
-			</div>
-			<div class="slide" id="slide3">
-
-				<div id="lwx" class="intro">
+				<div id="lwx" class="intro container col-md-6 col-md-offset-3">
 					<img src="images/founder-avatar/lwx.png" class="round icon-like"
 						alt="lwx.png" />
 					<div class="info">
 						<h2>刘威雄</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>前端设计师</span> <span>|</span>
-							<span>前端工程师</span>
+							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span><span>前端开发</span>
 						</p>
-					</div>
-				</div>
-				<div id="hjj" class="intro">
-					<img src="images/founder-avatar/hjj.png" class="round icon-like"
-						alt="lwx.png" />
-					<div class="info">
-						<h2>何炬江</h2>
 						<p>
-							<span>前端设计师</span> <span>|</span> <span>前端工程师</span>
+							<span>wechat:AD_daxiong</span>
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="slide" id="slide4">
-
-				<div id="hzy" class="intro">
+				<div id="hjj" class="intro container col-md-6">
+					<img src="images/founder-avatar/hjj.png" class="round icon-like"
+						alt="lwx.png" />
+					<div class="info">
+						<h2>何炬江</h2>
+						<p>
+							<span>前端设计</span> <span>|</span> <span>前端开发</span>
+						</p>
+						<p>
+							<span>wechat:saintscott119</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="slide" id="slide3">
+				<div id="hzy" class="intro container col-md-6">
 					<img src="images/founder-avatar/hzy.png" class="round icon-like"
 						alt="hzy.png" />
 					<div class="info">
@@ -120,9 +126,12 @@
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
+						<p>
+							<span>wechat:alexhuangzy</span>
+						</p>
 					</div>
 				</div>
-				<div id="hhc" class="intro">
+				<div id="hhc" class="intro container col-md-6">
 					<img src="images/founder-avatar/hhc.png" class="round icon-like"
 						alt="hhc.png" />
 					<div class="info">
@@ -130,15 +139,21 @@
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
+						<p>
+							<span>wechat:whyshing</span>
+						</p>
 					</div>
 				</div>
-				<div id="del" class="intro">
+				<div id="del" class="intro container col-md-6">
 					<img src="images/founder-avatar/del.png" class="round icon-like"
 						alt="del.png" />
 					<div class="info">
 						<h2>邓恩临</h2>
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
+						</p>
+						<p>
+							<span>wechat:FeIReNaS</span>
 						</p>
 					</div>
 				</div>
@@ -160,30 +175,14 @@
 		<!-- section2 end -->
 
 		<div class="section" id="section3">
-			<div class="container">
+			<div class="container container-bottom">
 				<div class="col-md-10 col-md-offset-1">
 					<h2>加入我们！ Join Us</h2>
-					<h3>
-						发简历到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>，并注明申请职位!
-					</h3>
+					<h4 class="joinIntro">厌倦大学里三点一式的生活？不想再循规蹈矩一步步走？浑身本领却无处施展？来吧，加入我们，让我们一起改变校园社交生活！</h4>
+					<h4 class="join">
+						将简单介绍发到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a><span>campusite@outlook.com</span>，并说明为什么要加入我们，想在团队里担任什么样的位置,我们会尽快联系你。
+					</h4>
 
-					<ul class="list-group col-xs-12 col-md-4">
-						<li class="list-group-item list-group-heading blue">技术类</li>
-						<li class="list-group-item">IOS开发</li>
-						<li class="list-group-item">Android开发</li>
-						<li class="list-group-item">Web前端开发</li>
-						<li class="list-group-item">Java服务端开发</li>
-						<li class="list-group-item">平面设计</li>
-					</ul>
-
-					<ul class="list-group col-xs-12  col-md-4">
-						<li class="list-group-item list-group-heading green">市场类</li>
-					</ul>
-
-					<ul class="list-group  col-xs-12 col-md-4">
-						<li class="list-group-item list-group-heading red">文书类</li>
-						<li class="list-group-item">秘书</li>
-					</ul>
 
 				</div>
 
@@ -195,7 +194,7 @@
 		<!-- ========================== scripts ======================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript"
 			src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
@@ -203,6 +202,7 @@
 		<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
 		<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 		<script type="text/javascript" src="js/aboutus.js"></script>
+	</div>
 </body>
 
 </html>

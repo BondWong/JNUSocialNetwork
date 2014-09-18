@@ -1493,7 +1493,13 @@ body {
 	color: #404040;
 	cursor: pointer;
 }
-
+.tipUser2 {
+	color: #404040;
+}
+.tipUser2:hover {
+	color: #404040;
+	cursor: pointer;
+}
 .rl-button-text {
 	text-align: center;
 }
