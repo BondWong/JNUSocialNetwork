@@ -60,10 +60,10 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -123,9 +123,9 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}
 	var boarddiv = "<div class='post "
 			+ postID
-			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)' src='"
+			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
 			+ $.parseJSON(ownerImage).src
-			+ "' style='display: none'/><input type='hidden' value='"
+			+ "' /><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
 			+ ownerNickName
@@ -143,7 +143,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postImgDiv
 			+ "<div class='row'></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
 			+ postID
-			+ "' maxLength='100'></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
+			+ "' maxLength='100' required></div></div><div class='col-lg-3'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID
 			+ ">Submit</button></div><div class='col-md-1 col-lg-1-cust'><div style='cursor:pointer'><a><span id='"
 			+ postID
@@ -323,8 +323,10 @@ function clickEvent() {
 										"background-color", "rgb(66,139,202)");
 								$("div[id='activity" + id + "']").find('span')
 										.text("Joined");
-								JoinActivity(USERID, id);
-								alert("参加成功！");
+								var response = JoinActivity(USERID, id);
+								if (response == 'success') {
+									alert("参加成功！");
+								}
 								return 0;
 							} else {
 								$("div[id='activity" + id + "']").css("color",
@@ -385,6 +387,7 @@ function clickEvent() {
 
 	// function addComment
 	$('body').on('click', '#addComment', function() {
+
 		var id = this.getAttribute("value");
 		var commentID = "";
 		var commentOwnerName = "";
@@ -404,10 +407,41 @@ function clickEvent() {
 			}
 		};
 		var commentJson = $.toJSON(comment);
-		AddComment(USERID, id, commentJson);
-		sessionStorage.setItem("commentOwnerName", "");
-		sessionStorage.setItem("commentID", "");
-		inputComm.val("");
+		if (inputComm.val() != "") {
+			AddComment(USERID, id, commentJson);
+			sessionStorage.setItem("commentOwnerName", "");
+			sessionStorage.setItem("commentID", "");
+			inputComm.val("");
+		}
+	});
+	$('body').on('click', '.addComment2', function() {
+
+		var id = this.getAttribute("value");
+		var commentID = "";
+		var commentOwnerName = "";
+		if (sessionStorage.getItem("commentID") != null) {
+			commentID = sessionStorage.getItem("commentID");
+		}
+		if (sessionStorage.getItem("commentOwnerName") != null) {
+			commentOwnerName = sessionStorage.getItem("commentOwnerName");
+		}
+		var inputComm = $("input[id='commentText2" + id + "']");
+		var comment = {
+			attributes : {
+				content : inputComm.val(),
+				toCommentID : commentID,
+				commentToComment : commentOwnerName,
+				postID : id + ""
+			}
+		};
+		var commentJson = $.toJSON(comment);
+		if (inputComm.val() != "") {
+			AddComment(USERID, id, commentJson);
+			sessionStorage.setItem("commentOwnerName", "");
+			sessionStorage.setItem("commentID", "");
+			inputComm.val("");
+		}
+
 	});
 	// function follow cancelfollow
 	$('body').on('click', '#followBtn', function() {
@@ -643,13 +677,13 @@ function teleAlert(activityID) {
 							if (data != "") {
 								var tipFrame = '<div id="'
 										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img onload="javascript:auto_resize(240, 135, this)" src="'
+										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
 										+ $
 												.parseJSON(data.attributes.profileImageLink).src
-										+ '" style="display: none"/></div><div class="urserInfShort"><div class="userInImg"><img onload="javascript:auto_resize(120, 120, this)"  src="'
+										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
 										+ $
 												.parseJSON(data.attributes.avatarLink).src
-										+ '" style="display: none"/></div><p><h1><a class="tipUser">'
+										+ '" /></div><p><h1><a class="tipUser">'
 										+ data.attributes.name
 										+ '</a></h1></p><p>'
 										+ data.attributes.lookingFor
@@ -734,10 +768,10 @@ function showPost(postID) {
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img onload='javascript:auto_resize(30, 30, this)' src='"
+								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' style='display: none'/></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
 								+ removeBtn
@@ -773,9 +807,9 @@ function showPost(postID) {
 	});
 	layer
 			.photos({
-				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' onload='javascript:auto_resize(50, 50, this)' src='"
+				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' width='50' height='50' src='"
 						+ $.parseJSON(dataString.owner.attributes.avatarLink).src
-						+ "' style='display: none'/><input type='hidden' value='"
+						+ "'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
 						+ dataString.owner.attributes.name
@@ -792,9 +826,9 @@ function showPost(postID) {
 						+ likeClass
 						+ "' style='font-size:20px'>"
 						+ dataString.likerIDs.length
-						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+						+ "</span></a></div></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt2' id='commentText2"
 						+ postID
-						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
+						+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success addComment2' id='addComment' value="
 						+ postID
 						+ ">Submit</button></div></div>"
 						+ comment

@@ -144,7 +144,8 @@ var pageSize = 20;
 function fetchPostByCommunity() {
 	var response = FetchByCommunity(community.ID, 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
-		if (dataString.available == true) {
+		if (dataString.postType == "NORMAL"
+			&& dataString.available == true) {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
 					dataString.ID, dataString.likerIDs,
@@ -170,7 +171,7 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length - 1;
+						var startIndex = $('.post').length ;
 						$('div#infinite_loader').show();
 						var response = FetchByCommunity(communityID,
 								startIndex, pageSize);
@@ -178,7 +179,8 @@ $(window)
 								.each(
 										response.reverse(),
 										function(n, dataString) {
-											if (dataString.available == true) {
+											if (dataString.postType == "NORMAL"
+												&& dataString.available == true) {
 												var boarddiv = post(
 														dataString.owner.ID,
 														dataString.owner.attributes.name,

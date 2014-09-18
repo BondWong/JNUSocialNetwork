@@ -143,7 +143,7 @@ function communities(id, name, memberNum, communityType, communityImg,
 			+ id
 			+ "'><img src='"
 			+ $.parseJSON(communityImg).src
-			+ "' onload='javascript:auto_resize(267, 267, this)' style='display: none'/></div></a><div class='content_info'><div class='conten_head'>"
+			+ "' width='267' height='267' /></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum

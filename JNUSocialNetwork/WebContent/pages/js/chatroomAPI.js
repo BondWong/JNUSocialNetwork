@@ -200,7 +200,7 @@ function append_to_content_panel(data, who) {
 			+ data.ID
 			+ '" ><img class="chat-avatar" src="'
 			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
+			+ '" width="30" height="30" /><p class="chat-content-'
 			+ who + '" >' + data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
@@ -231,7 +231,7 @@ function prepend_to_content_panel(data, who) {
 			+ data.ID
 			+ '" ><img class="chat-avatar" src="'
 			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" onload="javascript:auto_resize(30, 30, this)" style="display: none"/><p class="chat-content-'
+			+ '" width="30" height="30"/><p class="chat-content-'
 			+ who + '" >' + data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'

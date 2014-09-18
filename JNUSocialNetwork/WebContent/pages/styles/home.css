@@ -491,6 +491,7 @@ a:hover {
 	width: 265px;
 	position: relative;
 	overflow: hidden;
+	cursor:pointer;
 }
 
 .process {

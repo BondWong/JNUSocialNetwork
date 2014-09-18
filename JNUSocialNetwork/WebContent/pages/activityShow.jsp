@@ -170,10 +170,6 @@
 						<button class="btn btn-danger activityAddCommunity">添加社区</button>
 					</div>
 				</div>
-				<div class="aBodyAsk">
-					<h1>参加吗?</h1>
-					
-				</div>
 			</div>
 		</div>
 	</div>
