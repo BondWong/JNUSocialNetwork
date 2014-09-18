@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
-        <html> 
+        <html>
 
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -40,94 +40,91 @@
 
                 <div class="section" id="section1">
                     <div class="slide" id="slide1">
-
-                        <h1 class="about-h center">Team Members</h1>
-                        <div class="container col-md-10 col-md-offset-1 imgset">
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/hjb.JPG" class="round icon-like" alt="hjb.JPG" />
-                            </div>
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/lwx.jpg" class="round icon-like" alt="lwx.JPG" />
-                            </div>
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/hzy.JPG" class="round icon-like" alt="hzy.JPG" />
-                            </div>
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/hhc.jpeg" class="round icon-like" alt="hhc.JPG" />
-                            </div>
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/del.JPG" class="round icon-like" alt="del.JPG" />
-                            </div>
-                            <div class="col-md-2">
-                                <img src="images/founder-avatar/hjj.png" class="round icon-like" alt="hjj.png" />
+                        <div class="vertical-center">
+                            <h1 class="about-h center">Team Members</h1>
+                            <div class="container col-md-10 col-md-offset-1 imgset">
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/hjb.png" class="round icon-like" alt="hjb.png" />
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/lwx.png" class="round icon-like" alt="lwx.png" />
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/hzy.png" class="round icon-like" alt="hzy.png" />
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/hhc.png" class="round icon-like" alt="hhc.png" />
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/del.png" class="round icon-like" alt="del.png" />
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="images/founder-avatar/hjj.png" class="round icon-like" alt="hjj.png" />
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="slide" id="slide2">
-                        <div class="introbox">
-                            <div id="hjb" class="intro">
-                                <img src="images/founder-avatar/hjb.JPG" class="round icon-like" alt="hjb.JPG" />
-                                <div class="info">
-                                    <h2>黃俊邦</h2>
-                                    <p>
-                                        <span>创始人</span>  <span>|</span>  <span>架构师</span>  <span>|</span>  <span>服务端工程师</span>
-                                    </p>
-                                </div>
+                        <div id="hjb" class="intro container col-md-6 col-md-offset-3">
+                            <img src="images/founder-avatar/hjb.png" class="round icon-like" alt="hjb.png" />
+                            <div class="info">
+                                <h2>黃俊邦</h2>
+                                <p>
+                                    <span>创始人</span>  <span>|</span>  <span>架构师</span>  <span>|</span>  <span>服务端工程师</span>
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="slide" id="slide3">
-                        <div class="introbox">
-                            <div id="lwx" class="intro">
-                                <img src="images/founder-avatar/lwx.jpg" class="round icon-like" alt="lwx.JPG" />
-                                <div class="info">
-                                    <h2>刘威雄</h2>
-                                    <p>
-                                        <span>创始人</span>  <span>|</span>  <span>前端设计师</span>  <span>|</span>
-                                        <span>前端工程师</span>
-                                    </p>
-                                </div>
+
+                        <div id="lwx" class="intro">
+                            <img src="images/founder-avatar/lwx.png" class="round icon-like" alt="lwx.png" />
+                            <div class="info">
+                                <h2>刘威雄</h2>
+                                <p>
+                                    <span>创始人</span>  <span>|</span>  <span>前端设计师</span>  <span>|</span>
+                                    <span>前端工程师</span>
+                                </p>
                             </div>
-                            <div id="hjj" class="intro">
-                                <img src="images/founder-avatar/hjj.png" class="round icon-like" alt="lwx.JPG" />
-                                <div class="info">
-                                    <h2>何炬江</h2>
-                                    <p>
-                                        <span>前端设计师</span>  <span>|</span>
-                                        <span>前端工程师</span>
-                                    </p>
-                                </div>
+                        </div>
+                        <div id="hjj" class="intro">
+                            <img src="images/founder-avatar/hjj.png" class="round icon-like" alt="lwx.png" />
+                            <div class="info">
+                                <h2>何炬江</h2>
+                                <p>
+                                    <span>前端设计师</span>  <span>|</span>
+                                    <span>前端工程师</span>
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="slide" id="slide4">
-                        <div class="introbox">
-                            <div id="hzy" class="intro">
-                                <img src="images/founder-avatar/hzy.JPG" class="round icon-like" alt="hzy.JPG" />
-                                <div class="info">
-                                    <h2>黄子阳</h2>
-                                    <p>
-                                        <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
-                                    </p>
-                                </div>
+
+                        <div id="hzy" class="intro">
+                            <img src="images/founder-avatar/hzy.png" class="round icon-like" alt="hzy.png" />
+                            <div class="info">
+                                <h2>黄子阳</h2>
+                                <p>
+                                    <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
+                                </p>
                             </div>
-                            <div id="hhc" class="intro">
-                                <img src="images/founder-avatar/hhc.jpeg" class="round icon-like" alt="hhc.JPG" />
-                                <div class="info">
-                                    <h2>胡海城</h2>
-                                    <p>
-                                        <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
-                                    </p>
-                                </div>
+                        </div>
+                        <div id="hhc" class="intro">
+                            <img src="images/founder-avatar/hhc.png" class="round icon-like" alt="hhc.png" />
+                            <div class="info">
+                                <h2>胡海城</h2>
+                                <p>
+                                    <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
+                                </p>
                             </div>
-                            <div id="del" class="intro">
-                                <img src="images/founder-avatar/del.JPG" class="round icon-like" alt="del.JPG" />
-                                <div class="info">
-                                    <h2>邓恩临</h2>
-                                    <p>
-                                        <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
-                                    </p>
-                                </div>
+                        </div>
+                        <div id="del" class="intro">
+                            <img src="images/founder-avatar/del.png" class="round icon-like" alt="del.png" />
+                            <div class="info">
+                                <h2>邓恩临</h2>
+                                <p>
+                                    <span>创始人</span>  <span>|</span>  <span>公关</span>  <span>|</span>  <span>推广</span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -179,19 +176,17 @@
                     </div>
                     <%@ include file="parts/footer.jsp" %>
                 </div>
-                <!-- section3 end -->
-            </div>
 
-            <!-- ========================== scripts ======================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+                <!-- ========================== scripts ======================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+                <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-            <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-            <script type="text/javascript" src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="js/jquery.easings.min.js"></script>
-            <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
-            <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-            <script type="text/javascript" src="js/aboutus.js"></script>
+                <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+                <script type="text/javascript" src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+                <script type="text/javascript" src="js/jquery.easings.min.js"></script>
+                <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
+                <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
+                <script type="text/javascript" src="js/aboutus.js"></script>
         </body>
 
         </html>
