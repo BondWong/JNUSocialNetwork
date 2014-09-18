@@ -25,11 +25,23 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/jnusocialnetwork" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.password" value="BM1003mb" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.c3p0.max_size" value="20" />
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_statements" value="100" />
+			<property name="hibernate.c3p0.acquire_increment" value="5" />
+			<property name="hibernate.c3p0.timeout" value="300" />
+			<property name="hibernate.c3p0.unreturnedConnectionTimeout"
+				value="240" />
+			<property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+				value="true" />
 
 			<property name="hibernate.connection.provider_class"
 				value="org.hibernate.connection.C3P0ConnectionProvider" />
