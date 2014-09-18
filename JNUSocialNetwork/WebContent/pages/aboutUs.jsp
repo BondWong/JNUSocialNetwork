@@ -31,7 +31,9 @@
                 <div class="section" id="section0">
                     <div class="container home">
                         <div class="col-md-10 col-md-offset-1">
-                            <h1 class="about-h"><a href="index.html">CampuSite</a></h1>
+                            <h1 class="about-h">
+						<a href="index.html">CampuSite</a>
+					</h1>
                             <h2 class="sub-h2 about-h">介绍</h2>
                         </div>
                     </div>
@@ -92,8 +94,7 @@
                             <div class="info">
                                 <h2>何炬江</h2>
                                 <p>
-                                    <span>前端设计师</span>  <span>|</span>
-                                    <span>前端工程师</span>
+                                    <span>前端设计师</span>  <span>|</span>  <span>前端工程师</span>
                                 </p>
                             </div>
                         </div>
@@ -149,8 +150,8 @@
                         <div class="col-md-10 col-md-offset-1">
                             <h2>加入我们！ Join Us</h2>
                             <h3>
-				        发简历到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>，并注明申请职位!
-			        </h3>
+						发简历到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a>，并注明申请职位!
+					</h3>
 
                             <ul class="list-group col-xs-12 col-md-4">
                                 <li class="list-group-item list-group-heading blue">技术类</li>
@@ -180,13 +181,14 @@
                 <!-- ========================== scripts ======================== -->
                 <!-- Placed at the end of the document so the pages load faster -->
                 <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
                 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
                 <script type="text/javascript" src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
                 <script type="text/javascript" src="js/jquery.easings.min.js"></script>
                 <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
                 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
                 <script type="text/javascript" src="js/aboutus.js"></script>
+            </div>
         </body>
 
         </html>

@@ -255,94 +255,97 @@ $(document)
 				});
 function aboutClickEvent() {
 	// function editProfileInfro
+	$('body').on(
+			'click',
+			'.aEditbtn',
+			function() {
+				$('.selectAbout').css("display", "inline");
+				var userInfo = FetchUserByID(userID);
+				if (userInfo.userType == 'COMMUNITYOWNER') {
+					$("span[class='Anickname']").html(
+							"<input class='nameE' id='focusedInput' type='text' value='"
+									+ userInfo.attributes.name
+									+ "' maxLength='20'/>");
+				}
+
+				$("span[class='Atelenum']").html(
+						"<input class='telenumE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.telnum
+								+ "' maxLength='11'/>");
+				$("span[class='Awechat']").html(
+						"<input class='wechatE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.wechat
+								+ "' maxLength='20'/>");
+				var campus = "";
+				if ($('.Acampus').html() == "珠海校区") {
+					campus = "ZhuhaiCampus";
+				}
+				if ($('.Acampus').html() == "华文校区") {
+					campus = "HuawenCampus";
+				}
+				if ($('.Acampus').html() == "深圳旅游学院") {
+					campus = "ShenzhenCampus";
+				}
+				if ($('.Acampus').html() == "校本部") {
+					campus = "GuangzhouCampus";
+				}
+
+				var dormInfo = GetDormInfo(campus);
+				var option = "";
+				$.each(dormInfo, function(index, dorm) {
+					option = option + "<option value='" + dorm + "'>" + dorm
+							+ "</option>";
+				});
+				$("span[class='Aaddress']").html(
+						"<select class='addressE'>" + option + "</select>");
+				$("span[class='Aemail']").html(
+						"<input class='emailE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.email
+								+ "' maxLength='25' />");
+				if (userInfo.attributes.selectEmail == "公开") {
+					$('.selectEmail').val("公开");
+				}
+				if (userInfo.attributes.selectWechat == "公开") {
+					$('.selectWechat').val("公开");
+				}
+				if (userInfo.attributes.selectTele == "公开") {
+					$('.selectTele').val("公开");
+				}
+				if (userInfo.attributes.selectAddre == "公开") {
+					$('.selectAddre').val("公开");
+				}
+
+				$(this).text("保存");
+				$(this).attr("class", "btn btn-primary aSavebtn");
+			});
 	$('body')
 			.on(
-					'click',
-					'.aEditbtn',
+					"click",
+					".aEditbtn2",
 					function() {
-						$('.selectAbout').css("display","inline");
 						var userInfo = FetchUserByID(userID);
-						if (userInfo.userType == 'COMMUNITYOWNER') {
-							$("span[class='Anickname']").html(
-									"<input class='nameE' id='focusedInput' type='text' value='"
-											+ userInfo.attributes.name
-											+ "' maxLength='20'/>");
-						}
-
-						$("span[class='Atelenum']").html(
-								"<input class='telenumE' id='focusedInput' type='text' value='"
-										+ userInfo.attributes.telnum
-										+ "' maxLength='11'/>");
-						$("span[class='Awechat']").html(
-								"<input class='wechatE' id='focusedInput' type='text' value='"
-										+ userInfo.attributes.wechat
-										+ "' maxLength='20'/>");
-						var campus = "";
-						if ($('.Acampus').html() == "珠海校区") {
-							campus = "ZhuhaiCampus";
-						}
-						if ($('.Acampus').html() == "华文校区") {
-							campus = "HuawenCampus";
-						}
-						if ($('.Acampus').html() == "深圳旅游学院") {
-							campus = "ShenzhenCampus";
-						}
-						if ($('.Acampus').html() == "校本部") {
-							campus = "GuangzhouCampus";
-						}
-
-						var dormInfo = GetDormInfo("ZhuhaiCampus");
-						var option = "";
-						$.each(dormInfo, function(index, dorm) {
-							option = option + "<option value='" + dorm + "'>"
-									+ dorm + "</option>";
-						});
-						$("span[class='Aaddress']").html(
-								"<select class='addressE'>" + option
-										+ "</select>");
-						$("span[class='Aemail']").html(
-								"<input class='emailE' id='focusedInput' type='text' value='"
-										+ userInfo.attributes.email + "' maxLength='25' />");
-						if(userInfo.attributes.selectEmail == "公开"){
-							$('.selectEmail').val("公开");
-						}
-						if(userInfo.attributes.selectWechat == "公开"){
-							$('.selectWechat').val("公开");
-						}
-						if(userInfo.attributes.selectTele == "公开"){
-							$('.selectTele').val("公开");
-						}
-						if(userInfo.attributes.selectAddre == "公开"){
-							$('.selectAddre').val("公开");
-						}
-
+						$("span[class='Alooking']").html(
+								"<textarea class='lookingforE' id='focusedInput' type='text' value='"
+										+ userInfo.attributes.lookingFor
+										+ "' maxLength='30'/></textarea>");
+						$("span[class='Arelationship']")
+								.html(
+										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
 						$(this).text("保存");
-						$(this).attr("class", "btn btn-primary aSavebtn");
+						$(this).attr("class", "btn btn-primary aSavebtn2");
 					});
-	$('body').on("click",".aEditbtn2",function(){
-		var userInfo = FetchUserByID(userID);
-		$("span[class='Alooking']").html(
-				"<textarea class='lookingforE' id='focusedInput' type='text' value='"
-						+ userInfo.attributes.lookingFor
-						+ "' maxLength='30'/></textarea>");
-		$("span[class='Arelationship']")
-		.html(
-				"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
-		$(this).text("保存");
-		$(this).attr("class", "btn btn-primary aSavebtn2");
-	});
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
-		$('.selectAbout').css("display","none");
+		$('.selectAbout').css("display", "none");
 		var datajson = {
 			telnum : $('.telenumE').val(),
 			email : $('.emailE').val(),
 			dorm : $('.addressE').val(),
 			wechat : $('.wechatE').val(),
-			selectTele: $('.selectTele').val(),
-			selectEmail: $('.selectEmail').val(),
-			selectWechat: $('.selectWechat').val(),
-			selectAddre: $('.selectAddre').val()
+			selectTele : $('.selectTele').val(),
+			selectEmail : $('.selectEmail').val(),
+			selectWechat : $('.selectWechat').val(),
+			selectAddre : $('.selectAddre').val()
 		};
 		if ($('.nameE').val() != null) {
 			datajson = {
@@ -350,10 +353,10 @@ function aboutClickEvent() {
 				email : $('.emailE').val(),
 				dorm : $('.addressE').val(),
 				wechat : $('.wechatE').val(),
-				selectTele: $('.selectTele').val(),
-				selectEmail: $('.selectEmail').val(),
-				selectWechat: $('.selectWechat').val(),
-				selectAddre: $('.selectAddre').val(),
+				selectTele : $('.selectTele').val(),
+				selectEmail : $('.selectEmail').val(),
+				selectWechat : $('.selectWechat').val(),
+				selectAddre : $('.selectAddre').val(),
 				name : $('.nameE').val()
 			};
 		}
@@ -365,7 +368,7 @@ function aboutClickEvent() {
 		$(this).attr("class", "btn btn-primary aEditbtn");
 	});
 	$('body').on('click', '.aSavebtn2', function() {
-		$('.selectAbout').css("display","none");
+		$('.selectAbout').css("display", "none");
 		var datajson = {
 			lookingFor : $('.lookingforE').val(),
 			relationship : $('.relationshipnE').val(),
@@ -558,7 +561,7 @@ function fetchUserByID() {
 		$('.Awechat').html(userInfo.attributes.wechat);
 		$('.Atelenum').html(userInfo.attributes.telnum);
 		$('.Aaddress').html(userInfo.attributes.dorm);
-		
+
 	}
 	$('.profile_user_img').find('img').attr("src",
 			$.parseJSON(userInfo.attributes.avatarLink).src);
@@ -570,23 +573,24 @@ function fetchUserByID() {
 	$('.Agender').html(userInfo.attributes.gender);
 	$('.Ainstitution').html(userInfo.attributes.institution);
 	$('.Amajor').html(userInfo.attributes.major);
-	
+
 	$('.Acampus').html(userInfo.attributes.campus);
 	$('.Anickname').html(userInfo.attributes.name);
-	if(userInfo.attributes.selectEmail == "公开"){
+	if (userInfo.attributes.selectEmail == "公开") {
 		$('.Aemail').html(userInfo.attributes.email);
 	}
-	if(userInfo.attributes.selectWechat == "公开"){
+	if (userInfo.attributes.selectWechat == "公开") {
 		$('.Awechat').html(userInfo.attributes.wechat);
 	}
-	if(userInfo.attributes.selectTele == "公开"){
+	if (userInfo.attributes.selectTele == "公开") {
 		$('.Atelenum').html(userInfo.attributes.telnum);
 	}
-	if(userInfo.attributes.selectAddre == "公开"){
+	if (userInfo.attributes.selectAddre == "公开") {
 		$('.Aaddress').html(userInfo.attributes.dorm);
 	}
 	$('.Arelationship').html(userInfo.attributes.relationship);
 	$('.Alooking').html(userInfo.attributes.lookingFor);
 	$('.Abirth').html(
-			userInfo.attributes.year + "/" + userInfo.attributes.month + "/" + userInfo.attributes.date);
+			userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
+					+ userInfo.attributes.date);
 }
