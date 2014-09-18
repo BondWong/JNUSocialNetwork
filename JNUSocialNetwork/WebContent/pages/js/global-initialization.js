@@ -27,7 +27,7 @@ function login_initialization(ID) {
 			});
 	if ($.parseJSON(sessionStorage.getItem("user")) != null
 			&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-		if (FetchCommunityByOwner(USERID, "0", "5").length > 1) {
+		if (FetchCommunityByOwner(USERID, "0", "5").length >= 1) {
 			$('.createCom').remove();
 		}
 		$('.appCom').remove();
@@ -36,7 +36,7 @@ function login_initialization(ID) {
 		$('#myCommunityBtn').css("display", "block");
 	}
 	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER') {
-		$('.createCom').remove();
+			$('.createCom').remove();
 	}
 	if (FetchCommunityByJoin(USERID, "0", "1").length != 0) {
 		$('.titleMy').css("display", "block");

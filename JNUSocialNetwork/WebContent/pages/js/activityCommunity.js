@@ -122,9 +122,9 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ pRemoveBtn
 			+ "<div class='activityBg'><img width='435' height='100'  src='"
 			+ $.parseJSON(imagelink).src
-			+ "' /></div><div class='user_img activityAvatar'><img onload='javascript:auto_resize(49, 49, this)' class='img-circle userImg' src='"
+			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
-			+ "' style='display: none'/></div><div class='activityName activityHref' id='"
+			+ "' /></div><div class='activityName activityHref' id='"
 			+ activityID
 			+ "'><a><span>"
 			+ name

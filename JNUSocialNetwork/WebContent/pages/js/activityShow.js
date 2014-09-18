@@ -16,13 +16,20 @@ function showActivityDetail(activity, community) {
 	var comment = "";
 	$
 			.each(
-					comments.reverse(),
+					comments,
 					function(index, jsonComment) {
 						var atComment = "";
 						if (jsonComment.attributes.commentToComment != "") {
 							atComment = "@"
 									+ jsonComment.attributes.commentToComment;
 						}
+						var commentReply = "<div class='comment_reply replyaComment' id="
+							+ activity.ID 
+							+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+							+ jsonComment.owner.attributes.name
+							+ "' /><input id='replyID' type='hidden' value='"
+							+ jsonComment.ID
+							+ "' />reply<span style='font-size: 8px'></span></a></div>";
 						var removeBtn = "";
 						if (USERID == jsonComment.owner.ID) {
 							removeBtn = "<div class='deleteCommBtn deletCa' style='cursor:pointer'><a><input id='"
@@ -30,26 +37,21 @@ function showActivityDetail(activity, community) {
 									+ "' type='hidden' value='"
 									+ jsonComment.ID
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+							commentReply = "";
 						}
 						comment = comment
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
-								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' onload='javascript:auto_resize(50, 50, this)'  src='"
+								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' width='50' width='50'  src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "'style='display: none'></div><div class='user_name'><strong>"
+								+ "'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"
 								+ jsonComment.publishDate
 								+ "</span>"
 								+ removeBtn
-								+ "<div class='comment_reply replyaComment' id="
-								+ jsonComment.attributes.postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div><input type='hidden' id='"
+								+ commentReply + "<input type='hidden' id='"
 								+ activity.ID + "' value='" + jsonComment.ID
 								+ "' /></span></div><br><div class='aC'>"
 								+ "<span class='commentHead'>" + atComment
@@ -88,7 +90,7 @@ function showActivityDetail(activity, community) {
 			&& USERID != ""
 			&& $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'
 			&& $.inArray(USERID, memberIDs) == -1) {
-		$('.activityAddCommunity').remove();
+		$('.activityAddCommunity').css("display","inline");
 	}
 }
 $('body')

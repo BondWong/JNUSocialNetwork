@@ -476,9 +476,9 @@ function showFollowees() {
 			.each(
 					response,
 					function(index, followee) {
-						var followeeDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
+						var followeeDiv = "<img class='img-circle userImg userImgA' width='50' height='50' src='"
 								+ $.parseJSON(followee.attributes.avatarLink).src
-								+ "' style='display: none'></img><input type='hidden' name='userID' value='"
+								+ "' ></img><input type='hidden' name='userID' value='"
 								+ followee.ID + "'/>";
 						$('.userImgA').userTips();
 						$('.followeeShow').append(followeeDiv);
@@ -491,9 +491,9 @@ function showFollowers() {
 			.each(
 					response,
 					function(index, follower) {
-						var followerDiv = "<img class='img-circle userImg userImgA' onload='javascript:auto_resize( 50, 50, this)' src='"
+						var followerDiv = "<img class='img-circle userImg userImgA' width='50' height='50' src='"
 								+ $.parseJSON(follower.attributes.avatarLink).src
-								+ "'style='display: none'></img><input type='hidden' name='userID' value='"
+								+ "'></img><input type='hidden' name='userID' value='"
 								+ follower.ID + "'/>";
 
 						$('.followerShow').append(followerDiv);

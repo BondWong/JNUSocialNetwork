@@ -5,8 +5,8 @@
 		<div class="profile_container">
 			<div class="profile_user_img">
 				<img class="img-circle profileAvatar"
-					onload="javascript:auto_resize(120, 120, this)" src=""
-					alt="Generic placeholder image" style="display: none">
+					onload="javascript:auto_resize( 120, 120, this)" src=""
+					alt="Generic placeholder image"  style="display: none">
 			</div>
 			<div class="profile_user_name">
 				<strong></strong>
