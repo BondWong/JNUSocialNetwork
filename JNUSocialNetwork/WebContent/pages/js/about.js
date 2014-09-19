@@ -343,7 +343,7 @@ function aboutClickEvent() {
 								+ "</textarea>");
 				$("span[class='Cnickname']").html(
 						"<input class='cnicknameE' id='focusedInput' type='text' value='"
-								+ userInfo.attributes.Cnickname
+								+ userInfo.attributes.name
 								+ "' maxLength='20'/>");
 				$("span[class='Cinstitution']").html(
 						"<input class='cinstitutionE' id='focusedInput' type='text' value='"
@@ -400,7 +400,7 @@ function aboutClickEvent() {
 	$('body').on('click', '.aSavebtn3', function() {
 		$('.selectAbout').css("display", "none");
 		var datajson = {
-				Cnickname : $('.cnicknameE').val(),
+				name : $('.cnicknameE').val(),
 				lookingFor : $('.cintroE').val(),
 				Cinstitution : $('.cinstitutionE').val(),
 				Ccontact : $('.ccontactE').val(),
@@ -408,7 +408,7 @@ function aboutClickEvent() {
 
 		var json = $.toJSON(datajson);
 		var userInfo = UpdateUserProfile(USERID, json);
-		communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		communityShow(userInfo.attributes.name,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn3");
 	});
@@ -554,7 +554,7 @@ function communityInfo() {
 		if (userID == USERID) {
 			$('.aEditbtn3').css("display", "inline");
 		}
-		 communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		 communityShow(userInfo.attributes.name,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
 	}
 }
 function communityShow(Cnickname,Cintro,Cinstitution,Ccontact){
