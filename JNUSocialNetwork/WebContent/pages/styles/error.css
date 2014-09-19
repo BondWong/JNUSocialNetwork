@@ -63,16 +63,88 @@ body {
 }
 /*================================= animation =====================================*/
 
+.error {
+    -webkit-animation: error_anim 1000ms linear 1 both;
+    animation: error_anim 1000ms linear 1 both;
+}
+.msg {
+    -webkit-animation: msg_anim 1000ms linear 1 both;
+    animation: msg_anim 1000ms linear 1 both;
+}
+.return {
+    -webkit-animation: return_anim 1000ms linear 1 both;
+    animation: return_anim 1000ms linear 1 both;
+}
+@-webkit-keyframes error_anim {
+    from {
+        -webkit-transform: translateY(-150%);
+        transform: translateY(-150%);
+    }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes error_anim {
+    from {
+        -webkit-transform: translateY(-150%);
+        transform: translateY(-150%);
+    }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@-webkit-keyframes msg_anim {
+    from {
+        -webkit-transform: translateX(350%);
+        transform: translateX(350%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes msg_anim {
+    from {
+        -webkit-transform: translateX(350%);
+        transform: translateX(350%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@-webkit-keyframes return_anim {
+    from {
+        -webkit-transform: translateX(-1000%);
+        transform: translateX(-1000%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes return_anim {
+    from {
+        -webkit-transform: translateX(-1000%);
+        transform: translateX(-1000%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
 /*support by bounce.js*/
 
 .animation-target {
     position: absolute;
-    top: 80%;
+    bottom: 100px;
     left: -10%;
     z-index: 55;
-    -webkit-animation: animation 5800ms linear infinite both;
-    -moz-animation: animation 5800ms linear infinite both;
-    animation: animation 5800ms linear infinite both;
+    -webkit-animation: animation 5800ms linear 1200ms infinite both;
+    -moz-animation: animation 5800ms linear 1200ms infinite both;
+    animation: animation 5800ms linear 1200ms infinite both;
 }
 /* Generated with Bounce.js. Edit at http://goo.gl/bdEL3i */
 
