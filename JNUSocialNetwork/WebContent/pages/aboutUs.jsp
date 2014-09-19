@@ -81,7 +81,7 @@
 					<div class="info">
 						<h2>黃俊邦</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>架构</span> <span>|</span> <span>服务端工程</span>
+							<span>创始人</span> <span>|</span> <span>架构</span> <span>|</span> <span>服务端开发</span>
 						</p>
 						<p>
 							<span>wechat:WongZeonbong</span>
@@ -95,7 +95,7 @@
 						<h2>刘威雄</h2>
 						<p>
 							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span>
-							<span>前端工程</span>
+							<span>前端开发</span>
 						</p>
 						<p>
 							<span>wechat:AD_daxiong</span>
@@ -110,7 +110,7 @@
 					<div class="info">
 						<h2>何炬江</h2>
 						<p>
-							<span>前端设计</span> <span>|</span> <span>前端工程</span>
+							<span>前端设计</span> <span>|</span> <span>前端开发</span>
 						</p>
 						<p>
 							<span>wechat:saintscott119</span>
