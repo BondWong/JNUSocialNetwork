@@ -291,7 +291,7 @@ function aboutClickEvent() {
 					campus = "GuangzhouCampus";
 				}
 
-				var dormInfo = GetDormInfo("ZhuhaiCampus");
+				var dormInfo = GetDormInfo(campus);
 				var option = "";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
