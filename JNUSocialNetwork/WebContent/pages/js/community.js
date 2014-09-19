@@ -74,7 +74,7 @@ function fetchCommunityByID(communityID) {
 }
 function fetchCommunityByOwner(pageSize) {
 	var communities = FetchCommunityByOwner(USERID, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
@@ -85,7 +85,7 @@ function fetchCommunityByOwner(pageSize) {
 }
 function fetchCommunityByJoin(pageSize) {
 	var communities = FetchCommunityByJoin(USERID, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "myCommunity",
@@ -98,7 +98,7 @@ function fetchCommunityByJoin(pageSize) {
 // fetchCommunity()
 function fetchHotCommunity(pageSize) {
 	var communities = FetchCommunity("0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
@@ -109,7 +109,7 @@ function fetchHotCommunity(pageSize) {
 }
 function fetchCommunityByType(communityType, pageSize) {
 	var communities = FetchCommunityByType(communityType, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, community.communityType,
@@ -344,7 +344,7 @@ function scrollType(response, communityType) {
 						if ($(window).scrollTop() == $(document).height()
 								- window.windowHeight) {
 							$('div#infinite_loader').show();
-							$.each(response, function(n, community) {
+							$.each(response.reverse(), function(n, community) {
 								if (community.available == true) {
 									var boarddiv = communities(community.ID,
 											community.attributes.name,

@@ -352,7 +352,7 @@ function aboutClickEvent() {
 				$("span[class='Ccontact']").html(
 						"<input class='ccontactE' id='focusedInput' type='text' value='"
 								+ userInfo.attributes.Ccontact
-								+ "' maxLength='20'/>");
+								+ "' maxLength='25'/>");
 				
 				$(this).text("保存");
 				$(this).attr("class", "btn btn-primary aSavebtn3");
@@ -550,7 +550,7 @@ function communityInfo() {
 		$('.about').remove();
 		$('.about_body')
 				.append(
-						"<div class='post about'><div class='aboutBlue'><div><span class='aboutTitle'>社团信息<button class='btn btn-primary aEditbtn3'>编辑</button></span></div><div class='InforItem'><span class='Atitle'>名称</span><span class='Cnickname'></span></div><div class='InforItem'><span class='Atitle'>所属校区</span><span class='Cinstitution'></span></div><div class='InforItem'><span class='Atitle'>联系方式</span><span class='Cinstitution'></span></div><div class='InforItem'><span class='Atitle'>简短介绍</span><span class='Cintro'></span></div></div></div>");
+						"<div class='post about'><div class='aboutBlue'><div><span class='aboutTitle'>社团信息<button class='btn btn-primary aEditbtn3'>编辑</button></span></div><div class='InforItem'><span class='Atitle'>名称</span><span class='Cnickname'></span></div><div class='InforItem'><span class='Atitle'>所属校区</span><span class='Cinstitution'></span></div><div class='InforItem'><span class='Atitle'>联系方式</span><span class='Ccontact'></span></div><div class='InforItem'><span class='Atitle'>简短介绍</span><span class='Cintro'></span></div></div></div>");
 		if (userID == USERID) {
 			$('.aEditbtn3').css("display", "inline");
 		}
