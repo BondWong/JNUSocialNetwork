@@ -276,6 +276,13 @@ function notifyAddComment(commentID, ownerID, ownerNickName, publishDate,
 function notifyFollow(followerID) {
 	var data = FetchUserByID(followerID);
 	sessionStorage.setItem("otherUserID", data.ID);
+	var followTxt = "Follow";
+	if ($.inArray(USERID, data.followerIDs) != -1) {
+		followTxt = "Following";
+	}
+	if (USERID == followerID) {
+		followTxt = "Yourself";
+	}
 	var tipFrame = '<div class="popTip notifyItem" id="popR"><div class="content"><div class="urserBgShort"><img  width="350" height="180" src="'
 			+ $.parseJSON(data.attributes.profileImageLink).src
 			+ '" id="remind-bell-profileImg" /></div><div class="urserInfShort"><img class="img-circle" width="120" height="120" src="'
@@ -283,7 +290,8 @@ function notifyFollow(followerID) {
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
-			+ data.attributes.lookingFor + '</p></div></div></div>';
+			+ data.attributes.lookingFor + '</p><button class="btn btn-danger followBtn2" id="'+followerID+'">'
+			+ followTxt + '</button></div></div></div>';
 	$(".mentionBody-content").empty();
 	$(".mentionBody-content").append(tipFrame);
 }
@@ -350,19 +358,26 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
-
-	if (postImage.length != 0) {
-		$
-				.each(
-						postImage,
-						function(n, image) {
-							imageDiv = imageDiv
-									+ "<img class='postimg' width='350' height='208' src='"
-									+ $.parseJSON(image).src
-									+ "' />";
-						});
+	if (postImage.length > 3) {
+		$.each(postImage, function(n, image) {
+			imageDiv = imageDiv
+					+ "<img style='float:left;' class='postimg' width='160' height="
+					+ getHeight(160, $.parseJSON(image).width, $
+							.parseJSON(image).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	} else {
+	}else if( postImage.length > 0 && srcImage.length <= 3){
+		$.each(postImage, function(n, image) {
+			imageDiv = imageDiv
+					+ "<img class='postimg' width='350' height="
+					+ getHeight(350, $.parseJSON(image).width, $
+							.parseJSON(image).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			
+		});
+		postImgDiv = postImgDiv + imageDiv + "</div>";
+	}else{
 		postImgDiv = "";
 	}
 	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"

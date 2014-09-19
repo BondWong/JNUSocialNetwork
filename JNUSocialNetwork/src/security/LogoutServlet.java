@@ -45,7 +45,11 @@ public class LogoutServlet extends HttpServlet {
 		newCookie.setPath("/");
 
 		response.addCookie(newCookie);
-		response.sendRedirect("/pages/home.jsp");
+		if (request.getParameter("oldPassword") == null
+				|| request.getParameter("oldPassword") == "")
+			response.sendRedirect("/pages/home.jsp");
+		else
+			response.sendRedirect("pages/login.jsp?relogin=true");
 	}
 
 	/**

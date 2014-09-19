@@ -68,6 +68,12 @@
   <filter-mapping>
     <filter-name>AutoLoginFilter</filter-name>
     <url-pattern>
+			/communityOwnerPage.jsp
+		</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>
 			/home.jsp
 		</url-pattern>
   </filter-mapping>

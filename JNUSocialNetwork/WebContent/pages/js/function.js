@@ -104,40 +104,35 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
 	if (srcImage.length > 3) {
-		$
-				.each(
-						srcImage,
-						function(n, image) {
-							imageDiv = imageDiv
-									+ "<img style='float:left;' class='postimg' width='200' height="
-									+ getHeight(200, $.parseJSON(image).width,
-											$.parseJSON(image).height)
-									+ " onclick='showPost(" + postID
-									+ ")' src='" + $.parseJSON(image).src
-									+ "'/>";
-						});
+		$.each(srcImage, function(n, image) {
+			imageDiv = imageDiv
+					+ "<img style='float:left;' class='postimg' width='200' height="
+					+ getHeight(200, $.parseJSON(image).width, $
+							.parseJSON(image).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	} else if (srcImage.length > 0 && srcImage.length <= 3) {
+	}else if( srcImage.length > 0 && srcImage.length <= 3){
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='450' height="
 					+ getHeight(450, $.parseJSON(image).width, $
 							.parseJSON(image).height) + " onclick='showPost("
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-
+			
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	} else {
+	}else{
 		postImgDiv = "";
 	}
 	var readmore = "";
 	var contentD = content;
 	if (content.length > 100) {
-		readmore = "<div class='post_more" + postID + "' id='" + postID
+		readmore = "<div class='post_more"+postID+"' id='" + postID
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 100) + "......";
 	}
-
+	
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
@@ -152,9 +147,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "'>"
 			+ pRemoveBtn
-			+ "</div></div><div class='post_info'><span class='postContent' id='postContent"
-			+ postID
-			+ "'>"
+			+ "</div></div><div class='post_info'><span class='postContent' id='postContent"+postID+"'>"
 			+ contentD
 			+ "</span>"
 			+ readmore
@@ -184,17 +177,17 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}, function() {
 		$(this).find('a').fadeOut(300);
 	});
-
-	$('body').on("click", ".post_more" + postID, function() {
+	
+	$('body').on("click",".post_more"+postID,function(){
 		var id = $(this).attr('id');
 		$("span[id='postContent" + id + "']").text(content);
 		Msnry('.pro_body', '.post', 435);
 		$(this).remove();
 	});
-
-	$('body').on("click", ".post_more" + postID, function() {
+	
+	$('body').on("click", ".post_more"+postID, function() {
 		var id = $(this).attr('id');
-		if ($("div[id='postImg" + id + "']").find('img').length != 0) {
+		if($("div[id='postImg" + id + "']").find('img').length != 0){
 			$("div[id='postImg" + id + "']").find('img')[0].click();
 		}
 		Msnry('.pro_body', '.post', 435);
@@ -347,7 +340,7 @@ function clickEvent() {
 					'.activityJoin',
 					function() {
 						var id = $(this).find("input").attr("value");
-						if (FetchUserByID(USERID).attributes.telnum != "") {
+						if ( FetchUserByID(USERID).attributes.telnum != "") {
 							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
 								$("div[id='activity" + id + "']").css("color",
 										"rgb(255, 255, 255)");
@@ -378,31 +371,32 @@ function clickEvent() {
 						}
 
 					});
-	$('body').on(
-			"click",
-			".teleUpload",
-			function() {
-				var activityID = $(this).attr("id");
-				var dataString = {
-					telnum : $('#tele').val()
-				};
-				if ($('.teleForm')[0].checkValidity()) {
-					UpdateUserProfile(USERID, $.toJSON(dataString));
-					$('#telemodal').modal('hide');
-					$("div[id='activity" + activityID + "']").css("color",
-							"rgb(255, 255, 255)");
-					$("div[id='activity" + activityID + "']").css(
-							"background-color", "rgb(66,139,202)");
-					$("div[id='activity" + activityID + "']").find('span')
-							.text("Joined");
-					var response = JoinActivity(USERID, activityID);
-					if (response == 'success') {
-						alert("参加成功！");
-					}
-					$('.activityJoin').attr("data-toggle", "");
-					$('.activityJoin').attr("data-target", "");
-				}
-			});
+	$('body')
+			.on(
+					"click",
+					".teleUpload",
+					function() {
+						var activityID = $(this).attr("id");
+						var dataString = {
+							telnum : $('#tele').val()
+						};
+						if ($('.teleForm')[0].checkValidity()) {
+							UpdateUserProfile(USERID, $.toJSON(dataString));
+							$('#telemodal').modal('hide');
+								$("div[id='activity" + activityID + "']").css("color",
+										"rgb(255, 255, 255)");
+								$("div[id='activity" + activityID + "']").css(
+										"background-color", "rgb(66,139,202)");
+								$("div[id='activity" + activityID + "']").find('span')
+										.text("Joined");
+								var response = JoinActivity(USERID, activityID);
+								if (response == 'success') {
+									alert("参加成功！");
+								}
+								$('.activityJoin').attr("data-toggle", "");
+								$('.activityJoin').attr("data-target", "");
+						}
+					});
 
 	// function addComment
 	$('body').on('click', '#addComment', function() {
@@ -472,6 +466,18 @@ function clickEvent() {
 		if ($(this).text() == "Following") {
 			CancelFollow(USERID, id);
 			var followBtn = $("button[id='followBtn']");
+			followBtn.text("Follow");
+		}
+	});
+	$('body').on('click', '.followBtn2', function() {
+		// get post owner
+		var id = $(this).attr('id');
+		if ($(this).text() == "Follow") {
+			Follow(USERID, id);
+		}
+		if ($(this).text() == "Following") {
+			CancelFollow(USERID, id);
+			var followBtn = $("button[class='btn btn-danger followBtn2']");
 			followBtn.text("Follow");
 		}
 	});
@@ -879,9 +885,13 @@ $('body').on(
 			window.location.href = 'profile.jsp?nav=post&'
 					+ sessionStorage.getItem("otherUserID");
 		});
-$('body').on("click", ".tipUser2", function() {
-	window.location.href = 'profile.jsp?nav=post&' + $(this).attr("id");
-});
+$('body').on(
+		"click",
+		".tipUser2",
+		function() {
+			window.location.href = 'profile.jsp?nav=post&'
+					+ $(this).attr("id");
+		});
 /**
  * auto_resize
  */

@@ -262,13 +262,6 @@ function aboutClickEvent() {
 			function() {
 				$('.selectAbout').css("display", "inline");
 				var userInfo = FetchUserByID(userID);
-				if (userInfo.userType == 'COMMUNITYOWNER') {
-					$("span[class='Anickname']").html(
-							"<input class='nameE' id='focusedInput' type='text' value='"
-									+ userInfo.attributes.name
-									+ "' maxLength='20'/>");
-				}
-
 				$("span[class='Atelenum']").html(
 						"<input class='telenumE' id='focusedInput' type='text' value='"
 								+ userInfo.attributes.telnum
@@ -292,7 +285,7 @@ function aboutClickEvent() {
 				}
 
 				var dormInfo = GetDormInfo(campus);
-				var option = "";
+				var option = "<option value=''>请选择</option>";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
 							+ "</option>";
@@ -315,6 +308,9 @@ function aboutClickEvent() {
 				if (userInfo.attributes.selectAddre == "公开") {
 					$('.selectAddre').val("公开");
 				}
+				if (userInfo.attributes.selectBirth == "公开") {
+					$('.selectBirth').val("公开");
+				}
 
 				$(this).text("保存");
 				$(this).attr("class", "btn btn-primary aSavebtn");
@@ -326,24 +322,25 @@ function aboutClickEvent() {
 					function() {
 						var userInfo = FetchUserByID(userID);
 						$("span[class='Alooking']").html(
-								"<textarea class='lookingforE' id='focusedInput' type='text' value='"
+								"<textarea class='lookingforE' maxLength='30'>"
 										+ userInfo.attributes.lookingFor
-										+ "' maxLength='30'/></textarea>");
+										+ "</textarea>");
 						$("span[class='Arelationship']")
 								.html(
-										"<select class='relationshipnE'><option value='single'>single</option><option value='loving'>loving</option></select>");
+										"<select class='relationshipnE'><option value=''>请选择</option><option value='没有目标'>没有目标</option><option value='单身'>单身</option><option value='有暗恋对象'>有暗恋对象</option><option value='恋爱中'>恋爱中</option><option value='准备分手'>准备分手</option><option value='已经分手'>已经分手</option></select>");
 						$(this).text("保存");
 						$(this).attr("class", "btn btn-primary aSavebtn2");
 					});
-	$('body').on(
+	$('body')
+	.on(
 			"click",
 			".aEditbtn3",
 			function() {
 				var userInfo = FetchUserByID(userID);
 				$("span[class='Cintro']").html(
-						"<textarea class='cintroE' id='focusedInput' type='text' value='"
+						"<textarea class='cintroE' id='focusedInput' type='text' value='' maxLength='30'>"
 								+ userInfo.attributes.lookingFor
-								+ "' maxLength='30'/></textarea>");
+								+ "</textarea>");
 				$("span[class='Cnickname']").html(
 						"<input class='cnicknameE' id='focusedInput' type='text' value='"
 								+ userInfo.attributes.Cnickname
@@ -356,7 +353,7 @@ function aboutClickEvent() {
 						"<input class='ccontactE' id='focusedInput' type='text' value='"
 								+ userInfo.attributes.Ccontact
 								+ "' maxLength='20'/>");
-
+				
 				$(this).text("保存");
 				$(this).attr("class", "btn btn-primary aSavebtn3");
 			});
@@ -371,21 +368,9 @@ function aboutClickEvent() {
 			selectTele : $('.selectTele').val(),
 			selectEmail : $('.selectEmail').val(),
 			selectWechat : $('.selectWechat').val(),
-			selectAddre : $('.selectAddre').val()
+			selectAddre : $('.selectAddre').val(),
+			selectBirth : $('.selectBirth').val()
 		};
-		if ($('.nameE').val() != null) {
-			datajson = {
-				telnum : $('.telenumE').val(),
-				email : $('.emailE').val(),
-				dorm : $('.addressE').val(),
-				wechat : $('.wechatE').val(),
-				selectTele : $('.selectTele').val(),
-				selectEmail : $('.selectEmail').val(),
-				selectWechat : $('.selectWechat').val(),
-				selectAddre : $('.selectAddre').val(),
-				name : $('.nameE').val()
-			};
-		}
 
 		var json = $.toJSON(datajson);
 		UpdateUserProfile(USERID, json);
@@ -412,27 +397,21 @@ function aboutClickEvent() {
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn2");
 	});
-	$('body').on(
-			'click',
-			'.aSavebtn3',
-			function() {
-				$('.selectAbout').css("display", "none");
-				var datajson = {
-					Cnickname : $('.cnicknameE').val(),
-					lookingFor : $('.cintroE').val(),
-					Cinstitution : $('.cinstitutionE').val(),
-					Ccontact : $('.ccontactE').val(),
-				};
+	$('body').on('click', '.aSavebtn3', function() {
+		$('.selectAbout').css("display", "none");
+		var datajson = {
+				Cnickname : $('.cnicknameE').val(),
+				lookingFor : $('.cintroE').val(),
+				Cinstitution : $('.cinstitutionE').val(),
+				Ccontact : $('.ccontactE').val(),
+		};
 
-				var json = $.toJSON(datajson);
-				var userInfo = UpdateUserProfile(USERID, json);
-				communityShow(userInfo.attributes.Cnickname,
-						userInfo.attributes.lookingFor,
-						userInfo.attributes.Cinstitution,
-						userInfo.attributes.Ccontact);
-				$(this).text("编辑");
-				$(this).attr("class", "btn btn-primary aEditbtn3");
-			});
+		var json = $.toJSON(datajson);
+		var userInfo = UpdateUserProfile(USERID, json);
+		communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		$(this).text("编辑");
+		$(this).attr("class", "btn btn-primary aEditbtn3");
+	});
 	// function avatarImgBtn
 	$('body')
 			.on(
@@ -575,12 +554,10 @@ function communityInfo() {
 		if (userID == USERID) {
 			$('.aEditbtn3').css("display", "inline");
 		}
-		communityShow(userInfo.attributes.Cnickname,
-				userInfo.attributes.lookingFor,
-				userInfo.attributes.Cinstitution, userInfo.attributes.Ccontact);
+		 communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
 	}
 }
-function communityShow(Cnickname, Cintro, Cinstitution, Ccontact) {
+function communityShow(Cnickname,Cintro,Cinstitution,Ccontact){
 	$('.Cnickname').html(Cnickname);
 	$('.Cintro').html(Cintro);
 	$('.Cinstitution').html(Cinstitution);
@@ -629,7 +606,9 @@ function fetchUserByID() {
 		$('.Awechat').html(userInfo.attributes.wechat);
 		$('.Atelenum').html(userInfo.attributes.telnum);
 		$('.Aaddress').html(userInfo.attributes.dorm);
-
+		$('.Abirth').html(
+				userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
+						+ userInfo.attributes.date);
 	}
 	$('.profile_user_img').find('img').attr("src",
 			$.parseJSON(userInfo.attributes.avatarLink).src);
@@ -644,6 +623,11 @@ function fetchUserByID() {
 
 	$('.Acampus').html(userInfo.attributes.campus);
 	$('.Anickname').html(userInfo.attributes.name);
+	if (userInfo.attributes.selectBirth == "公开") {
+		$('.Abirth').html(
+				userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
+						+ userInfo.attributes.date);
+	}
 	if (userInfo.attributes.selectEmail == "公开") {
 		$('.Aemail').html(userInfo.attributes.email);
 	}
@@ -658,7 +642,5 @@ function fetchUserByID() {
 	}
 	$('.Arelationship').html(userInfo.attributes.relationship);
 	$('.Alooking').html(userInfo.attributes.lookingFor);
-	$('.Abirth').html(
-			userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
-					+ userInfo.attributes.date);
+	
 }

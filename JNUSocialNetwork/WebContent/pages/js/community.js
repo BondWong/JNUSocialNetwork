@@ -27,7 +27,7 @@ function communityClickEvent() {
 						communityType : $('#communityType').val()
 					};
 				}
-				
+
 				var json = $.toJSON(community);
 				if ($('.communityForm')[0].checkValidity()) {
 					var community = AddCommunity(USERID, json);
@@ -131,8 +131,11 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	var officalID = ["13286050151","13631272706","13726285186","13750044036","13750057060","13750066893","13750069327","13750069659","13750069678","13750070025","13750072213","13750075145","13750075284","18666561301"];
-	var officalIcon="";
+	var officalID = [ "13286050151", "13631272706", "13726285186",
+			"13750044036", "13750057060", "13750066893", "13750069327",
+			"13750069659", "13750069678", "13750070025", "13750072213",
+			"13750075145", "13750075284", "18666561301" ];
+	var officalIcon = "";
 	if ($.inArray(ownerID, officalID) != -1) {
 		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
 	}
@@ -153,7 +156,9 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 			+ id
 			+ "'><img src='"
 			+ $.parseJSON(communityImg).src
-			+ "' width='266' height='266' />"+officalIcon+"</div></a><div class='content_info'><div class='conten_head'>"
+			+ "' width='266' height='266' />"
+			+ officalIcon
+			+ "</div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
@@ -340,45 +345,48 @@ function scrollType(response, communityType) {
 								- window.windowHeight) {
 							$('div#infinite_loader').show();
 							$.each(response, function(n, community) {
-								var boarddiv = communities(community.ID,
-										community.attributes.name,
-										community.members.length,
-										community.communityType,
-										community.attributes.communityCard,
-										community.members,
-										community.attributes.userID);
-								switch (communityType) {
-								case "discoverCommunity":
-									$(".communityDiscovery").after(boarddiv);
-									Msnry('.containerDiscovery',
-											'.content_container', 265);
-									break;
-								case "myCommunity":
-									$(".containerMy").append(boarddiv);
-									Msnry('.containerMy', '.content_container',
-											265);
-									break;
-								/*
-								 * case "OFFICIAL":
-								 * $(".containerOffical").append(boarddiv);
-								 * Msnry('.containerOffical',
-								 * '.content_container', 265); break;
-								 */
-								case "SCHOOLUNION":
-									$(".containerSchool").append(boarddiv);
-									Msnry('.containerSchool',
-											'.content_container', 265);
-									break;
-								case "FOLK":
-									$(".containerFolk").append(boarddiv);
-									Msnry('.containerFolk',
-											'.content_container', 265);
-									break;
-								case "searchCommunity":
-									$(".containerSearch").append(boarddiv);
-									Msnry('.containerSearch',
-											'.content_container', 265);
-									break;
+								if (community.available == true) {
+									var boarddiv = communities(community.ID,
+											community.attributes.name,
+											community.members.length,
+											community.communityType,
+											community.attributes.communityCard,
+											community.members,
+											community.attributes.userID);
+									switch (communityType) {
+									case "discoverCommunity":
+										$(".communityDiscovery")
+												.after(boarddiv);
+										Msnry('.containerDiscovery',
+												'.content_container', 265);
+										break;
+									case "myCommunity":
+										$(".containerMy").append(boarddiv);
+										Msnry('.containerMy',
+												'.content_container', 265);
+										break;
+									/*
+									 * case "OFFICIAL":
+									 * $(".containerOffical").append(boarddiv);
+									 * Msnry('.containerOffical',
+									 * '.content_container', 265); break;
+									 */
+									case "SCHOOLUNION":
+										$(".containerSchool").append(boarddiv);
+										Msnry('.containerSchool',
+												'.content_container', 265);
+										break;
+									case "FOLK":
+										$(".containerFolk").append(boarddiv);
+										Msnry('.containerFolk',
+												'.content_container', 265);
+										break;
+									case "searchCommunity":
+										$(".containerSearch").append(boarddiv);
+										Msnry('.containerSearch',
+												'.content_container', 265);
+										break;
+									}
 								}
 							});
 							if (response.length == "15") {
