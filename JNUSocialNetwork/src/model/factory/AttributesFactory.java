@@ -69,6 +69,8 @@ public class AttributesFactory {
 				attributes.put("institution", "");
 				attributes.put("campus", "");
 				attributes.put("wechat", "");
+				attributes.put("Cinstitution", "");
+				attributes.put("Ccontact", "");
 				attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 			}
 			if (params[0].equals(Post.class)
