@@ -15,11 +15,12 @@ public class RejectApplicationTransaction extends DAOTransaction {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		Application application = dao.get(Application.class, params[0]);
-		
+
 		String email = application.getAttribute("email");
 		String reason = (String) params[1];
-		
-		EmailSender.send("Sorry! Your application is rejected!", reason, email);
+
+		new EmailSender().send("Sorry! Your application is rejected!", reason,
+				email);
 
 		application.delete();
 		application.clearAttributes();

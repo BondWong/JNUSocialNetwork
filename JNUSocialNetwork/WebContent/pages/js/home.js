@@ -6,7 +6,7 @@ if(BrowserDetection() != false){
 	$('.browserClick').click();
 }
 function addCommunity(id,name,memberNum,communityImg,introduce,ownerID) {
-	var officalID = ["13286050151","13631272706","13726285186","13750044036","13750057060","13750066893","13750069327","13750069659","13750069678","13750070025","13750072213","13750075145","13750075284","18666561301"];
+	var officalID = ["13728357716","13286050151","13631272706","13726285186","13750044036","13750057060","13750066893","13750069327","13750069659","13750069678","13750070025","13750072213","13750075145","13750075284","18666561301"];
 	var officalIcon="";
 	if ($.inArray(ownerID, officalID) != -1) {
 		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
