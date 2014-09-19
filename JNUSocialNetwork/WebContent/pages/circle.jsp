@@ -70,7 +70,7 @@
 							<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" style="resize: none;" maxLength="200" required></textarea>
+										type="text" style="resize: none;min-height:100px;" maxLength="200" required></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
