@@ -124,7 +124,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ $.parseJSON(imagelink).src
 			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
-			+ "' /></div><div class='activityName activityHref' id='"
+			+ "' /></div><div class='activityName activityShowHref' id='"
 			+ activityID
 			+ "'><a><span>"
 			+ name
@@ -155,7 +155,7 @@ $('body').on("click", ".communityHref", function() {
 	window.location.href = 'communityShow.jsp?' + community.ID;
 });
 
-$('body').on("click", ".activityHref", function() {
+$('body').on("click", ".activityShowHref", function() {
 	var id = $(this).attr("id");
 	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
 });

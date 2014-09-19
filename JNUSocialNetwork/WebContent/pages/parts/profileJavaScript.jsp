@@ -48,23 +48,31 @@
 	});
 	$('body').on('click', '.circleNav', function() {
 		window.location.href = "profile.jsp?nav=circle&" + userID;
-		
+
 	});
 	fetchUserByID();
 </script>
 <c:choose>
 	<c:when test="${param.nav eq 'about' }">
 		<script type="text/javascript">
-			$(document).ready(function() {
-				if (USERID != null && USERID != "") {
-					login_initialization(USERID);
-					aboutClickEvent();
-					clickEvent();
-				} else {
-					clickOffEvent();
-				}
-				Msnry('.about_body', '.post', 435);
-			});
+			$(document)
+					.ready(
+							function() {
+								if (USERID != null && USERID != "") {
+									login_initialization(USERID);
+									aboutClickEvent();
+									clickEvent();
+								} else {
+									clickOffEvent();
+								}
+								communityInfo();
+								/*if (userID == USERID) {
+									$('.about_body')
+											.append(
+													"<div class='post about' style='width:80px;'><a class='btn btn-success' href='password.jsp'>修改密码</button></a>");
+								}*/
+								Msnry('.about_body', '.post', 435);
+							});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'photo' }">
@@ -101,54 +109,79 @@
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
-			$(document).ready(function() {
-				if (USERID != null && USERID != "") {
-					login_initialization(USERID);
-					aboutClickEvent();
-					clickEvent();
-					if(USERID == userID){
-						$('.sharePro').css("display","block");
-					}
-				} else {
-					clickOffEvent();
-				}
-				Msnry('.pro_body', '.post', 435);
-				fetchPostsByOwner();
-				$(window)
-				.scroll(
-						function() {
-							if ($(window).scrollTop() == $(document).height()
-									- window.windowHeight) {
-								var startIndex = $('.post').length - 1;
-								$('div#infinite_loader').show();
-								var url = window.location.search;
-								var otherUserID = url.substr(url.indexOf("&") + 1);
-								var response = [];
-								response = FetchPostsByOwner(otherUserID,
-											startIndex, pageSize);
-								$.each(response, function(n, dataString) {
-									var boarddiv = post(dataString.owner.ID,
-											dataString.owner.attributes.name,
-											dataString.publishDate,
-											dataString.attributes.content,
-											dataString.ID, dataString.likerIDs,
-											dataString.collectorIDs,
-											dataString.imageLinks,
-											dataString.owner.attributes.avatarLink);
-									$(".pro_body").append(boarddiv);
-									Msnry('.pro_body', '.post', 435);
-								});
-								if (response.length == pageSize) {
-									$('div#infinite_loader').hide();
+			$(document)
+					.ready(
+							function() {
+								if (USERID != null && USERID != "") {
+									login_initialization(USERID);
+									aboutClickEvent();
+									clickEvent();
+									if (USERID == userID) {
+										$('.sharePro').css("display", "block");
+									}
 								} else {
-									$('div#infinite_loader')
-											.replaceWith(
-													'<div id="no_more_infinite_load"><span>no more</span></div>');
-									$(window).unbind("scroll");
+									clickOffEvent();
 								}
-							}
-						});
-			});
+								Msnry('.pro_body', '.post', 435);
+								fetchPostsByOwner();
+								$(window)
+										.scroll(
+												function() {
+													if ($(window).scrollTop() == $(
+															document).height()
+															- window.windowHeight) {
+														var startIndex = $('.post').length - 1;
+														$('div#infinite_loader')
+																.show();
+														var url = window.location.search;
+														var otherUserID = url
+																.substr(url
+																		.indexOf("&") + 1);
+														var response = [];
+														response = FetchPostsByOwner(
+																otherUserID,
+																startIndex,
+																pageSize);
+														$
+																.each(
+																		response,
+																		function(
+																				n,
+																				dataString) {
+																			var boarddiv = post(
+																					dataString.owner.ID,
+																					dataString.owner.attributes.name,
+																					dataString.publishDate,
+																					dataString.attributes.content,
+																					dataString.ID,
+																					dataString.likerIDs,
+																					dataString.collectorIDs,
+																					dataString.imageLinks,
+																					dataString.owner.attributes.avatarLink);
+																			$(
+																					".pro_body")
+																					.append(
+																							boarddiv);
+																			Msnry(
+																					'.pro_body',
+																					'.post',
+																					435);
+																		});
+														if (response.length == pageSize) {
+															$(
+																	'div#infinite_loader')
+																	.hide();
+														} else {
+															$(
+																	'div#infinite_loader')
+																	.replaceWith(
+																			'<div id="no_more_infinite_load"><span>no more</span></div>');
+															$(window).unbind(
+																	"scroll");
+														}
+													}
+												});
+							});
 		</script>
 		<%@ include file="contentScroll.jsp"%>
 	</c:otherwise>

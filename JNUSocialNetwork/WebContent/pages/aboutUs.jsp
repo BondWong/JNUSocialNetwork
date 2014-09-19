@@ -94,7 +94,8 @@
 					<div class="info">
 						<h2>刘威雄</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span><span>前端开发</span>
+							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span>
+							<span>前端开发</span>
 						</p>
 						<p>
 							<span>wechat:AD_daxiong</span>

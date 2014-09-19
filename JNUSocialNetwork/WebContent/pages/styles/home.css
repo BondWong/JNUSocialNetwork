@@ -430,7 +430,11 @@ a:hover {
 }
 
 .img_container {
-	overflow: hidden;
+	height: 265px;
+	width: 265px;
+	cursor: pointer;
+	overflow:hidden;
+	position:relative;
 }
 
 .img_container img {
@@ -540,4 +544,9 @@ a:hover {
 }
 .loginA{
 	margin-left:50px;
+}
+.officalIcon{
+	position:absolute;
+	bottom:5px;
+	right:5px;
 }

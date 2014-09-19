@@ -23,7 +23,11 @@ public class EmailSender {
 		props.put("mail.smtp.starttls.enable", "true");
 	}
 
-	public static synchronized void send(String subject, String test, String to) {
+	public EmailSender() {
+
+	}
+
+	public void send(String subject, String test, String to) {
 		Session session = Session.getInstance(props);
 		MimeMessage msg = new MimeMessage(session);
 		try {

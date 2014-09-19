@@ -17,7 +17,7 @@
 					role="button"><span>回到首页</span></a> <a href="aboutUs.jsp"
 					class="btn btn-primary btn-sm rl-button-text" role="button"><span>关于我们</span></a>
 			</div>
-			<div class="regTitle">登录</div>
+			<div class="regTitle">修改密码</div>
 			<div class="containerReg" style="display: block">
 				<div class="regBox">
 					<form class="form-signin" role="form" method="post"
@@ -28,15 +28,21 @@
 								autofocus maxLength="20" />
 						</p>
 						<p>
-							<input type="password" class="form-control" placeholder="请输入密码"
-								name="password" id="md5Password"
-								data-errormessage-value-missing="请输入密码" required autofocus
+							<input type="password" class="form-control" placeholder="请输入旧密码"
+								name="oldPassword" id="md5Password"
+								data-errormessage-value-missing="请输入旧密码" required autofocus
+								maxLength="40" />
+						</p>
+						<p>
+							<input type="password" class="form-control" placeholder="请输入新密码"
+								name="newpassword" id="md5Password"
+								data-errormessage-value-missing="请输入新密码" required autofocus
 								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
-							type="submit">登录</button>
+							type="submit">确认</button>
 						<h4>
 							没有账号？<span class="btn signUp">注册</span>
 						</h4>
@@ -101,15 +107,6 @@
 				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
 			</script>
 
-		</c:when>
-		<c:when test="${param.oldPasswordError }">
-			<script type="text/javascript">
-				$('#login_popover')
-						.replaceWith(
-								'<div id="login_popover" class="alert alert-success" style="display: none">修改密码成功，请重新登录</div>');
-				$('#login_popover').fadeIn("fast");
-				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
-			</script>
 		</c:when>
 	</c:choose>
 </body>

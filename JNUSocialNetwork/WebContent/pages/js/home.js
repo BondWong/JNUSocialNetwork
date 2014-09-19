@@ -5,12 +5,17 @@ if(BrowserDetection() != false){
 	$('body').append(alert);
 	$('.browserClick').click();
 }
-function addCommunity(id,name,memberNum,communityImg,introduce) {
+function addCommunity(id,name,memberNum,communityImg,introduce,ownerID) {
+	var officalID = ["13728357716","13286050151","13631272706","13726285186","13750044036","13750057060","13750066893","13750069327","13750069659","13750069678","13750070025","13750072213","13750075145","13750075284","18666561301"];
+	var officalIcon="";
+	if ($.inArray(ownerID, officalID) != -1) {
+		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
+	}
 	var boarddiv = "<li class='communityShowItem'><div class='community_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
 			+ $.parseJSON(communityImg).src
-			+ "' width='267' height='267' /></div></a><div class='content_info'><div class='conten_head'>"
+			+ "' width='267' height='267' />"+officalIcon+"</div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
@@ -38,16 +43,16 @@ function addCommunity(id,name,memberNum,communityImg,introduce) {
 
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "8");
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length,community.attributes.communityCard,community.attributes.introduct);
+					community.members.length,community.attributes.communityCard,community.attributes.introduct,community.attributes.userID);
 		}
 	});
 }
 $('body').on("click", ".img_container", function() {
 	var comm = $(this).find("input").attr("value");
-	window.location.href = 'communityShow.jsp?' + comm;
+	window.location.href = 'communityOwnerPage.jsp?' + comm;
 });
 
 /**

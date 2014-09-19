@@ -27,6 +27,7 @@ function communityClickEvent() {
 						communityType : $('#communityType').val()
 					};
 				}
+
 				var json = $.toJSON(community);
 				if ($('.communityForm')[0].checkValidity()) {
 					var community = AddCommunity(USERID, json);
@@ -66,27 +67,30 @@ function fetchCommunityByID(communityID) {
 	var community = FetchCommunityByID(communityID);
 	if (community.available == true) {
 		addCommunity(community.ID, community.attributes.name,
-				community.members.length, "myCommunity", community.attributes.communityCard,
-				community.members, community.attributes.userID);
+				community.members.length, "myCommunity",
+				community.attributes.communityCard, community.members,
+				community.attributes.userID);
 	}
 }
 function fetchCommunityByOwner(pageSize) {
 	var communities = FetchCommunityByOwner(USERID, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "myCommunity", community.attributes.communityCard,
-					community.members, community.attributes.userID);
+					community.members.length, "myCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
 function fetchCommunityByJoin(pageSize) {
 	var communities = FetchCommunityByJoin(USERID, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "myCommunity",community.attributes.communityCard,
-					community.members, community.attributes.userID);
+					community.members.length, "myCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 
 		}
 	});
@@ -94,38 +98,47 @@ function fetchCommunityByJoin(pageSize) {
 // fetchCommunity()
 function fetchHotCommunity(pageSize) {
 	var communities = FetchCommunity("0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, "discoverCommunity", community.attributes.communityCard,
-					community.members, community.attributes.userID);
+					community.members.length, "discoverCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
-function fetchCommunityByType(communityType,pageSize) {
+function fetchCommunityByType(communityType, pageSize) {
 	var communities = FetchCommunityByType(communityType, "0", pageSize);
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
-					community.members.length, community.communityType, community.attributes.communityCard,
-					community.members, community.attributes.userID);
+					community.members.length, community.communityType,
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
 		}
 	});
 }
 function fetchCommunitys() {
 	fetchHotCommunity(homePageSize);
-	//fetchCommunityByType("FOLK",homePageSize);
-	fetchCommunityByType("SCHOOLUNION",homePageSize);
-	fetchCommunityByType("OFFICIAL",homePageSize);
+	fetchCommunityByType("FOLK", homePageSize);
+	fetchCommunityByType("SCHOOLUNION", homePageSize);
+	// fetchCommunityByType("OFFICIAL",homePageSize);
 }
 // 增加社区
-function communities(id, name, memberNum, communityType, communityImg,
-		members, ownerID){
+function communities(id, name, memberNum, communityType, communityImg, members,
+		ownerID) {
 	var memberIDs = [];
 	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-
+	var officalID = [ "13728357716", "13286050151", "13631272706", "13726285186",
+			"13750044036", "13750057060", "13750066893", "13750069327",
+			"13750069659", "13750069678", "13750070025", "13750072213",
+			"13750075145", "13750075284", "18666561301" ];
+	var officalIcon = "";
+	if ($.inArray(ownerID, officalID) != -1) {
+		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
+	}
 	var join = "<a><div class='content_join' id='" + id
 			+ "'><input type='hidden' value='" + id
 			+ "'><span>Join</span></div></a>";
@@ -143,7 +156,9 @@ function communities(id, name, memberNum, communityType, communityImg,
 			+ id
 			+ "'><img src='"
 			+ $.parseJSON(communityImg).src
-			+ "' width='267' height='267' /></div></a><div class='content_info'><div class='conten_head'>"
+			+ "' width='266' height='266' />"
+			+ officalIcon
+			+ "</div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
@@ -152,8 +167,8 @@ function communities(id, name, memberNum, communityType, communityImg,
 }
 function addCommunity(id, name, memberNum, communityType, communityImg,
 		members, ownerID) {
-	var boarddiv = communities(id, name, memberNum, communityType, communityImg,
-			members, ownerID);
+	var boarddiv = communities(id, name, memberNum, communityType,
+			communityImg, members, ownerID);
 	switch (communityType) {
 	case "discoverCommunity":
 		$(".communityDiscovery").after(boarddiv);
@@ -163,10 +178,10 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 		$(".myCommunity").after(boarddiv);
 		Msnry('.containerMy', '.content_container', 265);
 		break;
-	/*case "OFFICIAL":
-		$(".officalCommunity").after(boarddiv);
-		Msnry('.containerOffical', '.content_container', 265);
-		break;*/
+	/*
+	 * case "OFFICIAL": $(".officalCommunity").after(boarddiv);
+	 * Msnry('.containerOffical', '.content_container', 265); break;
+	 */
 	case "SCHOOLUNION":
 		$(".schoolUnionCommunity").after(boarddiv);
 		Msnry('.containerSchool', '.content_container', 265);
@@ -196,46 +211,67 @@ $(document)
 		.ready(
 				function() {
 					// funtion sessionID
-					$('body').on("click", ".img_container", function() {
-						var comm = $(this).find("input").attr("value");
-						window.location.href = 'activityCommunity.jsp?' + comm;
-					});
+					$('body')
+							.on(
+									"click",
+									".img_container",
+									function() {
+										var comm = $(this).find("input").attr(
+												"value");
+										window.location.href = 'communityOwnerPage.jsp?'
+												+ comm;
+									});
 
-					$('body').on("click", ".myCommunityBtn", function() {
-						fetchByType("myCommunity", "我的社区", "containerMy");
-						$('.titleMy').css("display", "block");
-						$('.containerMy').css("display", "block");
-						fetchCommunityByJoin("15");
-						fetchCommunityByOwner("1");
-						var communities =  FetchCommunityByJoin(USERID, $('.content_container').length,clickPageSize);
-						scrollType(communities,"myCommunity");
-					});
-					/*$('body').on(
+					$('body').on(
 							"click",
-							".officalCommunityBtn",
+							".myCommunityBtn",
 							function() {
-								fetchByType("officalCommunity", "官方社区",
-										"containerOffical");
-								fetchCommunityByType("OFFICIAL","15");
-								var communities =  FetchCommunityByType("OFFICIAL", $('.content_container').length,clickPageSize);
-								scrollType(communities,"OFFICIAL");
-							});*/
+								fetchByType("myCommunity", "我的社区",
+										"containerMy");
+								$('.titleMy').css("display", "block");
+								$('.containerMy').css("display", "block");
+								fetchCommunityByJoin("15");
+								fetchCommunityByOwner("1");
+								var communities = FetchCommunityByJoin(USERID,
+										$('.content_container').length,
+										clickPageSize);
+								scrollType(communities, "myCommunity");
+							});
+					/*
+					 * $('body').on( "click", ".officalCommunityBtn", function() {
+					 * fetchByType("officalCommunity", "官方社区",
+					 * "containerOffical");
+					 * fetchCommunityByType("OFFICIAL","15"); var communities =
+					 * FetchCommunityByType("OFFICIAL",
+					 * $('.content_container').length,clickPageSize);
+					 * scrollType(communities,"OFFICIAL"); });
+					 */
 					$('body').on(
 							"click",
 							".studentUnionCommunityBtn",
 							function() {
 								fetchByType("schoolUnionCommunity", "社团组织",
 										"containerSchool");
-								fetchCommunityByType("SCHOOLUNION",clickPageSize);
-								var communities =  FetchCommunityByType("SCHOOLUNION", $('.content_container').length,clickPageSize);
-								scrollType(communities,"SCHOOLUNION");
+								fetchCommunityByType("SCHOOLUNION",
+										clickPageSize);
+								var communities = FetchCommunityByType(
+										"SCHOOLUNION",
+										$('.content_container').length,
+										clickPageSize);
+								scrollType(communities, "SCHOOLUNION");
 							});
-					$('body').on("click", ".folkCommunityBtn", function() {
-						fetchByType("folkCommunity", "个人社区", "containerFolk");
-						fetchCommunityByType("FOLK",clickPageSize);
-						var communities =  FetchCommunityByType("FOLK", $('.content_container').length,clickPageSize);
-						scrollType(communities,"FOLK");
-					});
+					$('body').on(
+							"click",
+							".folkCommunityBtn",
+							function() {
+								fetchByType("folkCommunity", "个人社区",
+										"containerFolk");
+								fetchCommunityByType("FOLK", clickPageSize);
+								var communities = FetchCommunityByType("FOLK",
+										$('.content_container').length,
+										clickPageSize);
+								scrollType(communities, "FOLK");
+							});
 					$('body').on(
 							"click",
 							".discoverCommunityBtn",
@@ -243,8 +279,10 @@ $(document)
 								fetchByType("communityDiscovery", "热门社区",
 										"containerDiscovery");
 								fetchHotCommunity(clickPageSize);
-								var communities =  FetchCommunityByType("FOLK", $('.content_container').length,clickPageSize);
-								scrollType(communities,"FOLK");
+								var communities = FetchCommunityByType("FOLK",
+										$('.content_container').length,
+										clickPageSize);
+								scrollType(communities, "FOLK");
 							});
 					$('body')
 							.on(
@@ -292,59 +330,74 @@ $(document)
 																	community.ID,
 																	community.attributes.name,
 																	community.members.length,
-																	"searchCommunity",community.attributes.communityCard,
+																	"searchCommunity",
+																	community.attributes.communityCard,
 																	community.members);
 														});
 									});
 
 				});
-function scrollType(response,communityType){
+function scrollType(response, communityType) {
 	$(window)
-	.scroll(
-			function() {
-				if ($(window).scrollTop() == $(document).height()
-						- window.windowHeight) {
-					$('div#infinite_loader').show();
-					$.each(response, function(n, community) {
-						var boarddiv = communities(community.ID, community.attributes.name,
-								community.members.length, community.communityType, community.attributes.communityCard,
-								community.members, community.attributes.userID);
-						switch (communityType) {
-						case "discoverCommunity":
-							$(".communityDiscovery").after(boarddiv);
-							Msnry('.containerDiscovery', '.content_container', 265);
-							break;
-						case "myCommunity":
-							$(".containerMy").append(boarddiv);
-							Msnry('.containerMy', '.content_container', 265);
-							break;
-						/*case "OFFICIAL":
-							$(".containerOffical").append(boarddiv);
-							Msnry('.containerOffical', '.content_container', 265);
-							break;*/
-						case "SCHOOLUNION":
-							$(".containerSchool").append(boarddiv);
-							Msnry('.containerSchool', '.content_container', 265);
-							break;
-						case "FOLK":
-							$(".containerFolk").append(boarddiv);
-							Msnry('.containerFolk', '.content_container', 265);
-							break;
-						case "searchCommunity":
-							$(".containerSearch").append(boarddiv);
-							Msnry('.containerSearch', '.content_container', 265);
-							break;
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							$('div#infinite_loader').show();
+							$.each(response.reverse(), function(n, community) {
+								if (community.available == true) {
+									var boarddiv = communities(community.ID,
+											community.attributes.name,
+											community.members.length,
+											community.communityType,
+											community.attributes.communityCard,
+											community.members,
+											community.attributes.userID);
+									switch (communityType) {
+									case "discoverCommunity":
+										$(".communityDiscovery")
+												.after(boarddiv);
+										Msnry('.containerDiscovery',
+												'.content_container', 265);
+										break;
+									case "myCommunity":
+										$(".containerMy").append(boarddiv);
+										Msnry('.containerMy',
+												'.content_container', 265);
+										break;
+									/*
+									 * case "OFFICIAL":
+									 * $(".containerOffical").append(boarddiv);
+									 * Msnry('.containerOffical',
+									 * '.content_container', 265); break;
+									 */
+									case "SCHOOLUNION":
+										$(".containerSchool").append(boarddiv);
+										Msnry('.containerSchool',
+												'.content_container', 265);
+										break;
+									case "FOLK":
+										$(".containerFolk").append(boarddiv);
+										Msnry('.containerFolk',
+												'.content_container', 265);
+										break;
+									case "searchCommunity":
+										$(".containerSearch").append(boarddiv);
+										Msnry('.containerSearch',
+												'.content_container', 265);
+										break;
+									}
+								}
+							});
+							if (response.length == "15") {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+
 						}
 					});
-					if (response.length == "15") {
-						$('div#infinite_loader').hide();
-					} else {
-						$('div#infinite_loader')
-								.replaceWith(
-										'<div id="no_more_infinite_load"><span>no more</span></div>');
-						$(window).unbind("scroll");
-					}
-					
-				}
-			});
 }

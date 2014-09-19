@@ -61,7 +61,7 @@
 								<p>
 									<span>社区介绍：</span>
 									<textarea class="form-control" placeholder=""
-										id="communityIntro" required autofocus maxLength="100"
+										id="communityIntro" required autofocus maxLength="90"
 										style="resize: none;"></textarea>
 								</p>
 								<span>社区名片:</span> <span
@@ -91,11 +91,11 @@
 				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src=""
+				<img onload="javascript:auto_resize(220, 220, this)" src=""
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span>社区活动</span> <span class="communityHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
+				<span>社区活动</span> <span class="showHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -181,13 +181,11 @@
 										class="btn btn-success fileinput-button" style="width: auto;">
 										<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <!-- The file input field used as target for the file upload widget -->
 										<input id="fileuploadA" type="file" name="files[]">
-									</span>
+									</span>							
 								</div>
+								<span style="display:block;font-size:12px;margin-top: 30px;">[请上传长宽比例1140*300的海报头，否则影响显示效果]</span>
 								<!-- The container for the uploaded files -->
-
-
 							</div>
-							<br></br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">取消</button>
@@ -262,6 +260,7 @@
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										|| $.inArray(USERID, memberIDs) != -1) {
 									$('.cardSetter').css("display", "inline");
+									$('.activityJoin').css("display", "none");
 								}
 								if ($.inArray(USERID, memberIDs) != -1
 										&& USERID != community.attributes.userID) {
