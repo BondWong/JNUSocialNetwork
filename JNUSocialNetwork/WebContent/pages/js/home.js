@@ -38,7 +38,7 @@ function addCommunity(id,name,memberNum,communityImg,introduce) {
 
 function fetchHotCommunity() {
 	var communities = FetchCommunity("0", "8");
-	$.each(communities, function(n, community) {
+	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length,community.attributes.communityCard,community.attributes.introduct);
@@ -47,7 +47,7 @@ function fetchHotCommunity() {
 }
 $('body').on("click", ".img_container", function() {
 	var comm = $(this).find("input").attr("value");
-	window.location.href = 'communityShow.jsp?' + comm;
+	window.location.href = 'communityOwnerPage.jsp?' + comm;
 });
 
 /**

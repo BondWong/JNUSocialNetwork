@@ -63,6 +63,7 @@
 				} else {
 					clickOffEvent();
 				}
+				communityInfo();
 				Msnry('.about_body', '.post', 435);
 			});
 		</script>

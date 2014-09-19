@@ -48,7 +48,7 @@ public class Account extends Model {
 	private Date expireDate;
 
 	public Account() {
-		this.chance = 5;
+		this.chance = 10;
 	}
 
 	public String getID() {

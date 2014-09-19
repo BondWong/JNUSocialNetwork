@@ -91,7 +91,7 @@
 				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src=""
+				<img onload="javascript:auto_resize(220, 220, this)" src=""
 					style="display: none" />
 			</div>
 			<div class="cardA">

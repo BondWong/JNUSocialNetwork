@@ -4,8 +4,9 @@
 	<div class="back_to_top_button"></div>
 	<div class="footer-home">
 		<div class="footer-wrap">
-			<a class="footer-weibo"></a> <a class="footer-weixin"></a> <a
-				class="footer-qqbo"></a> <a class="footer-qqzone"></a>
+			<a class="footer-weibo"></a> <a class="footer-weixin"
+				 ></a> <a class="footer-qqbo"></a>
+			<a class="footer-qqzone"></a>
 		</div>
 		<div class="footer-link">
 			<a href="aboutUs.jsp">关于我们</a> <a href="aboutUs.jsp#4thPage">加入我们</a>

@@ -17,19 +17,19 @@ import org.junit.Test;
 import service.helper.EmailSender;
 
 public class SendingMailTest {
-	//@Ignore
+	// @Ignore
 	@Test
 	public void testSendMail() {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.live.com");
 		props.put("mail.transport.protocol", "smtps");
 		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.starttls.enable", "true"); 
+		props.put("mail.smtp.starttls.enable", "true");
 		Session session = Session.getInstance(props);
 		MimeMessage msg = new MimeMessage(session);
 		try {
-			Address campusite = new InternetAddress("kingkong_webber@outlook.com",
-					"CampuSite");
+			Address campusite = new InternetAddress(
+					"kingkong_webber@outlook.com", "CampuSite");
 			Address qq = new InternetAddress("694613550@qq.com", "Dear User");
 			msg.setText("content : <a href=\"www.baidu.com\">link</a>");
 			msg.setFrom(campusite);
@@ -40,10 +40,11 @@ public class SendingMailTest {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	@Ignore
 	@Test
 	public void testEmailSender() {
-		EmailSender.send("Test", "content : www.baidu.com", "694613550@qq.com");
+		new EmailSender().send("Test", "content : www.baidu.com",
+				"694613550@qq.com");
 	}
 }
