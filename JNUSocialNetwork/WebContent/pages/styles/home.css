@@ -433,8 +433,8 @@ a:hover {
 	height: 265px;
 	width: 265px;
 	cursor: pointer;
-	overflow:hidden;
-	position:relative;
+	overflow: hidden;
+	position: relative;
 }
 
 .img_container img {
@@ -495,7 +495,7 @@ a:hover {
 	width: 265px;
 	position: relative;
 	overflow: hidden;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .process {
@@ -537,16 +537,19 @@ a:hover {
 	background: url('../images/process4.fw.png') no-repeat scroll center
 		center transparent;
 }
-.modal-custom{
+
+.modal-custom {
 	position: relative;
 	padding: 20px 100px;
 	text-align: center;
 }
-.loginA{
-	margin-left:50px;
+
+.loginA {
+	margin-left: 50px;
 }
-.officalIcon{
-	position:absolute;
-	bottom:5px;
-	right:5px;
+
+.officalIcon {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
