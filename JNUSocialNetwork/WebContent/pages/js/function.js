@@ -469,6 +469,18 @@ function clickEvent() {
 			followBtn.text("Follow");
 		}
 	});
+	$('body').on('click', '.followBtn2', function() {
+		// get post owner
+		var id = $(this).attr('id');
+		if ($(this).text() == "Follow") {
+			Follow(USERID, id);
+		}
+		if ($(this).text() == "Following") {
+			CancelFollow(USERID, id);
+			var followBtn = $("button[class='btn btn-danger followBtn2']");
+			followBtn.text("Follow");
+		}
+	});
 	$('body').on('click', '.deleteCommBtn', function() {
 		var commentID = $(this).find("input").attr("value");
 		var postID = $(this).find("input").attr("id");
