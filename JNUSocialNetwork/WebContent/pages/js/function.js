@@ -112,13 +112,14 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	}else if(0 < srcImage.length <= 3){
+	}else if( srcImage.length > 0 && srcImage.length <= 3){
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='450' height="
 					+ getHeight(450, $.parseJSON(image).width, $
 							.parseJSON(image).height) + " onclick='showPost("
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	}else{
@@ -180,6 +181,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	$('body').on("click",".post_more"+postID,function(){
 		var id = $(this).attr('id');
 		$("span[id='postContent" + id + "']").text(content);
+		Msnry('.pro_body', '.post', 435);
 		$(this).remove();
 	});
 	
@@ -188,6 +190,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		if($("div[id='postImg" + id + "']").find('img').length != 0){
 			$("div[id='postImg" + id + "']").find('img')[0].click();
 		}
+		Msnry('.pro_body', '.post', 435);
 	});
 	return boarddiv;
 }
