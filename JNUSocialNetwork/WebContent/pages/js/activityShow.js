@@ -98,7 +98,7 @@ $('body')
 		'click',
 		'.joinSActivity',
 		function() {
-			if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
+			if (FetchUserByID(USERID).attributes.telnum != "") {
 				if ($(this).css("background-color") == "rgb(235, 235, 235)") {
 					$(this).css("color", "rgb(255, 255, 255)");
 					$(this).css("background-color",
@@ -119,36 +119,36 @@ $('body')
 			} else {
 				$(this).attr("data-toggle", "modal");
 				$(this).attr("data-target", "#telemodal");
-				teleAlert(activityID);
+				teleAlert2(activityID);
 			}
 
 		});
-$('body').on("click", ".teleUpload", function() {
+$('body').on("click", ".teleUpload2", function() {
 var dataString = {
 telnum : $('#tele').val()
 };
 if ($('.teleForm')[0].checkValidity()) {
 UpdateUserProfile(USERID, $.toJSON(dataString));
-if ($(this).css("background-color") == "rgb(235, 235, 235)") {
 	var response = JoinActivity(USERID, activityID);
 	if (response == 'success') {
 		alert("参加成功！");
 	}
-	$(this).css("color", "rgb(255, 255, 255)");
-	$(this).css("background-color",
+	$('.joinSActivity').css("color", "rgb(255, 255, 255)");
+	$('.joinSActivity').css("background-color",
 			"rgb(66,139,202)");
-	$(this).text("已经参加");
+	$('.joinSActivity').text("已经参加");
+	$('#telemodal').modal('hide');
+	$('.joinSActivity').attr("data-toggle", "");
+	$('.joinSActivity').attr("data-target", "");
 	return 0;
-} else {
-	LeaveActivity(USERID, activityID);
-	$(this).css("color", "rgb(51,51,51)");
-	$(this).css("background-color","rgb(235, 235, 235)");
-	$(this).text("参加活动");
-	return 0;
-}
-$('#telemodal').modal('hide');
 }
 });
+function teleAlert2(activityID) {
+	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload2 ' id='"
+			+ activityID
+			+ "' type='submit'>确认</button></form></div></div></div></div>";
+	$('body').append(alert);
+}
 $('body').on("click", ".activityAddCommunity", function() {
 	JoinCommunity(USERID, community.ID);
 	$(this).fadeOut("300");

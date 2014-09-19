@@ -90,11 +90,11 @@
 				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
-				<img onload="javascript:auto_resize(221, 267, this)" src=""
+				<img onload="javascript:auto_resize(220, 220, this)" src=""
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				 <span class="activityHref">社区活动</span> <span class="communityHref">社区帖子</span> <span>社区介绍</span>
+				 <span class="activityHref">社区活动</span> <span class="showHref">社区帖子</span> <span>社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>

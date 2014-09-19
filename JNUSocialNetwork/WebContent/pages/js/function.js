@@ -24,6 +24,7 @@ function Msnry(selectContain, item, width) {
 		msnry.layout();
 	});
 }
+
 function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 		collecters, srcImage, ownerImage) {
 	var response = FetchCommentByPost(postID, "0", "10");
@@ -102,7 +103,16 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
-	if (srcImage.length != 0) {
+	if (srcImage.length > 3) {
+		$.each(srcImage, function(n, image) {
+			imageDiv = imageDiv
+					+ "<img style='float:left;' class='postimg' width='200' height="
+					+ getHeight(200, $.parseJSON(image).width, $
+							.parseJSON(image).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+		});
+		postImgDiv = postImgDiv + imageDiv + "</div>";
+	}else if(0 < srcImage.length <= 3){
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='450' height="
@@ -111,16 +121,17 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	} else {
+	}else{
 		postImgDiv = "";
 	}
 	var readmore = "";
 	var contentD = content;
 	if (content.length > 100) {
-		readmore = "<div class='post_more' id='" + postID
+		readmore = "<div class='post_more"+postID+"' id='" + postID
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 100) + "......";
 	}
+	
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
@@ -135,7 +146,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 			+ postID
 			+ "'>"
 			+ pRemoveBtn
-			+ "</div></div><div class='post_info'><span class='postContent'>"
+			+ "</div></div><div class='post_info'><span class='postContent' id='postContent"+postID+"'>"
 			+ contentD
 			+ "</span>"
 			+ readmore
@@ -161,12 +172,23 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	});
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
-
 		$(this).find('a').fadeIn(300);
 	}, function() {
 		$(this).find('a').fadeOut(300);
 	});
-
+	
+	$('body').on("click",".post_more"+postID,function(){
+		var id = $(this).attr('id');
+		$("span[id='postContent" + id + "']").text(content);
+		$(this).remove();
+	});
+	
+	$('body').on("click", ".post_more"+postID, function() {
+		var id = $(this).attr('id');
+		if($("div[id='postImg" + id + "']").find('img').length != 0){
+			$("div[id='postImg" + id + "']").find('img')[0].click();
+		}
+	});
 	return boarddiv;
 }
 // function addDiv
@@ -179,6 +201,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	Msnry('.pro_body', '.post', 435);
 
 }
+
 // function hovercommentDeleteBtn
 
 $('.act_content').hover(function() {
@@ -313,9 +336,8 @@ function clickEvent() {
 					'click',
 					'.activityJoin',
 					function() {
-						var activityID = $(this).attr("id");
-						if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum != "") {
-							var id = $(this).find("input").attr("value");
+						var id = $(this).find("input").attr("value");
+						if ( FetchUserByID(USERID).attributes.telnum != "") {
 							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
 								$("div[id='activity" + id + "']").css("color",
 										"rgb(255, 255, 255)");
@@ -342,7 +364,7 @@ function clickEvent() {
 						} else {
 							$(this).attr("data-toggle", "modal");
 							$(this).attr("data-target", "#telemodal");
-							teleAlert(activityID);
+							teleAlert(id);
 						}
 
 					});
@@ -357,31 +379,19 @@ function clickEvent() {
 						};
 						if ($('.teleForm')[0].checkValidity()) {
 							UpdateUserProfile(USERID, $.toJSON(dataString));
-							var id = $(this).find("input").attr("value");
-							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
-								$("div[id='activity" + id + "']").css("color",
+							$('#telemodal').modal('hide');
+								$("div[id='activity" + activityID + "']").css("color",
 										"rgb(255, 255, 255)");
-								$("div[id='activity" + id + "']").css(
+								$("div[id='activity" + activityID + "']").css(
 										"background-color", "rgb(66,139,202)");
-								$("div[id='activity" + id + "']").find('span')
+								$("div[id='activity" + activityID + "']").find('span')
 										.text("Joined");
-								var response = JoinActivity(USERID, id);
+								var response = JoinActivity(USERID, activityID);
 								if (response == 'success') {
 									alert("参加成功！");
 								}
-								return 0;
-							} else {
-								$("div[id='activity" + id + "']").css("color",
-										"rgb(66,139,202)");
-								$("div[id='activity" + id + "']").css(
-										"background-color",
-										"rgb(255, 255, 255)");
-								$("div[id='activity" + id + "']").find('span')
-										.text("Join");
-								LeaveActivity(USERID, activityID);
-								return 0;
-							}
-							$('#telemodal').modal('hide');
+								$('.activityJoin').attr("data-toggle", "");
+								$('.activityJoin').attr("data-target", "");
 						}
 					});
 

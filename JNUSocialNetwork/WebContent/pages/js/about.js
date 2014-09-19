@@ -200,6 +200,7 @@ $(document)
 							.parent().addClass(
 									$.support.fileInput ? undefined
 											: 'disabled');
+
 					// function addPost
 					$('body').on('click', '.Btnshare', function() {
 						$('.postForm').get(0).reset();
@@ -290,7 +291,7 @@ function aboutClickEvent() {
 					campus = "GuangzhouCampus";
 				}
 
-				var dormInfo = GetDormInfo(campus);
+				var dormInfo = GetDormInfo("ZhuhaiCampus");
 				var option = "";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
@@ -334,6 +335,32 @@ function aboutClickEvent() {
 						$(this).text("保存");
 						$(this).attr("class", "btn btn-primary aSavebtn2");
 					});
+	$('body')
+	.on(
+			"click",
+			".aEditbtn3",
+			function() {
+				var userInfo = FetchUserByID(userID);
+				$("span[class='Cintro']").html(
+						"<textarea class='cintroE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.lookingFor
+								+ "' maxLength='30'/></textarea>");
+				$("span[class='Cnickname']").html(
+						"<input class='cnicknameE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.Cnickname
+								+ "' maxLength='20'/>");
+				$("span[class='Cinstitution']").html(
+						"<input class='cinstitutionE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.Cinstitution
+								+ "' maxLength='20'/>");
+				$("span[class='Ccontact']").html(
+						"<input class='ccontactE' id='focusedInput' type='text' value='"
+								+ userInfo.attributes.Ccontact
+								+ "' maxLength='20'/>");
+				
+				$(this).text("保存");
+				$(this).attr("class", "btn btn-primary aSavebtn3");
+			});
 	// function saveProfileInfro
 	$('body').on('click', '.aSavebtn', function() {
 		$('.selectAbout').css("display", "none");
@@ -362,7 +389,7 @@ function aboutClickEvent() {
 		}
 
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(userID, json);
+		UpdateUserProfile(USERID, json);
 		fetchUserByID();
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn");
@@ -381,10 +408,25 @@ function aboutClickEvent() {
 		}
 
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(userID, json);
+		UpdateUserProfile(USERID, json);
 		fetchUserByID();
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn2");
+	});
+	$('body').on('click', '.aSavebtn3', function() {
+		$('.selectAbout').css("display", "none");
+		var datajson = {
+				Cnickname : $('.cnicknameE').val(),
+				lookingFor : $('.cintroE').val(),
+				Cinstitution : $('.cinstitutionE').val(),
+				Ccontact : $('.ccontactE').val(),
+		};
+
+		var json = $.toJSON(datajson);
+		var userInfo = UpdateUserProfile(USERID, json);
+		communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		$(this).text("编辑");
+		$(this).attr("class", "btn btn-primary aEditbtn3");
 	});
 	// function avatarImgBtn
 	$('body')
@@ -517,7 +559,26 @@ function fetchPostsByOwner() {
 		}
 	});
 }
-
+// function communitydetail
+function communityInfo() {
+	var userInfo = FetchUserByID(userID);
+	if (userInfo.userType == 'COMMUNITYOWNER') {
+		$('.about').remove();
+		$('.about_body')
+				.append(
+						"<div class='post about'><div class='aboutBlue'><div><span class='aboutTitle'>社团信息<button class='btn btn-primary aEditbtn3'>编辑</button></span></div><div class='InforItem'><span class='Atitle'>名称</span><span class='Cnickname'></span></div><div class='InforItem'><span class='Atitle'>所属校区</span><span class='Cinstitution'></span></div><div class='InforItem'><span class='Atitle'>联系方式</span><span class='Cinstitution'></span></div><div class='InforItem'><span class='Atitle'>简短介绍</span><span class='Cintro'></span></div></div></div>");
+		if (userID == USERID) {
+			$('.aEditbtn3').css("display", "inline");
+		}
+		 communityShow(userInfo.attributes.Cnickname,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+	}
+}
+function communityShow(Cnickname,Cintro,Cinstitution,Ccontact){
+	$('.Cnickname').html(Cnickname);
+	$('.Cintro').html(Cintro);
+	$('.Cinstitution').html(Cinstitution);
+	$('.Ccontact').html(Ccontact);
+}
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);

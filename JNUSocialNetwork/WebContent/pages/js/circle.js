@@ -204,10 +204,7 @@ $('body').on('click', '.alertCust', function() {
 	postIdContainer = [];
 });
 
-$('body').on("click", ".post_more", function() {
-	var id = $(this).attr('id');
-	$("div[id='postImg" + id + "']").find('img').click();
-});
+
 $(window)
 		.scroll(
 				function() {
