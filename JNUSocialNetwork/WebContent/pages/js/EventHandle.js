@@ -211,7 +211,7 @@ function CREATECOMMENT() {
 							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
-									+ "'><div class='row'><div class='col-lg-1'><img height='30' height='30' src='"
+									+ "'><div class='row'><div class='col-lg-1'><img height='30' width='30' src='"
 									+ $
 											.parseJSON(jsonComment.owner.attributes.avatarLink).src
 									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"

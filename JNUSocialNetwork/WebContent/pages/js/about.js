@@ -540,6 +540,14 @@ function fetchPostsByOwner() {
 					dataString.ID, dataString.likerIDs,
 					dataString.collectorIDs, dataString.imageLinks,
 					dataString.owner.attributes.avatarLink);
+			if (dataString.attributes.communityName != null) {
+				var board = "<a class='communityPostSpan' id = '"
+						+ dataString.attributes.communityID
+						+ "'><span class='glyphicon glyphicon-th-large'></span>&nbsp;"
+						+ dataString.attributes.communityName
+						+ "</a> ";
+				$(".postComm"+dataString.ID).append(board);
+			}
 		}
 	});
 }
