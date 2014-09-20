@@ -1,5 +1,6 @@
 package service;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +20,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
+import security.helper.ContentEncoder;
+import service.helper.HeheUser;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
@@ -27,6 +31,7 @@ import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
+import transaction.DAOFetchTransaction.InstitutionRecommendationTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
 import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
@@ -43,6 +48,7 @@ public class UserService {
 	private ServerSentEvent sse;
 	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
 			.getInstance();
+	private ContentEncoder contentEncoder = new ContentEncoder();
 
 	@Path("delete/{ID : \\d+}")
 	@PUT
@@ -101,7 +107,8 @@ public class UserService {
 		transaction = new UpdateMemberAttributeTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(ID, attributes);
+			result = (Map<String, Object>) transaction.execute(ID,
+					contentEncoder.encodeMapContent(attributes));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -342,6 +349,26 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Path("recommendateViaInstitution/{ID : \\d+}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recommendateViaInstitution(@PathParam("ID") String ID)
+			throws Exception {
+		transaction = new InstitutionRecommendationTransaction();
+		List<Map<String, Object>> members;
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(ID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Path("recommendateViaMajor/{ID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -462,6 +489,23 @@ public class UserService {
 			throw e;
 		}
 		return Response.ok(result).build();
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Path("registerCandC")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response helpMeRegister(Map hehe) throws IOException {
+		try {
+			HeheUser.deserialize();
+			HeheUser.addHehe(hehe);
+			HeheUser.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
 	}
 
 }

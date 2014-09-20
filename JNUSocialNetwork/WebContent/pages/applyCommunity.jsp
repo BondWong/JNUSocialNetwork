@@ -32,7 +32,7 @@
 							<input type="password" class="form-control" name="password"
 								pattern="[A-Za-z0-9]{8,16}" placeholder="请输入密码" id="appPassword"
 								autocomplete="off" data-errormessage-value-missing="请输入密码"
-								data-errormessage-pattern-mismatch="请输入密码，长度：8-16，内容可谓为英文大写或小写或数字"
+								data-errormessage-pattern-mismatch="请输入密码，长度：8-16，内容可为英文大写或小写或数字"
 								required maxLength="40" />
 						</p>
 						<p>
@@ -52,7 +52,7 @@
 						<p>
 							<input name="statement" value="agree" type="checkbox" checked
 								required /><span class="agree" data-toggle='modal'
-									data-target='#declare'>我同意责任申明</span>
+								data-target='#declare'>我同意责任申明</span>
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" />
@@ -76,7 +76,7 @@
 				</div>
 				<div class="modal-body modalBody">
 					<div class="declare">
-						<span style="margin-bottom:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广大同学与各大组织须知，加入CampuSite校园社区须遵守以下条例，文明社交，共创和谐社区。</span>
+						<span style="margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;广大同学与各大组织须知，加入CampuSite校园社区须遵守以下条例，文明社交，共创和谐社区。</span>
 						<ul>
 							<li>个人以及社区用户不得在校园社区内传播不良信息，包括黄色淫秽信息、传销组织信息、邪教信息等；</li>
 							<li>个人以及社区组织应平等和谐相处，不得相互进行人身攻击以及诽谤行为；</li>
@@ -99,7 +99,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 	</div>
-	
+
 	<%@ include file="parts/footer.jsp"%>
 	<!-- /container -->
 

@@ -367,7 +367,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	}else if( postImage.length > 0 && srcImage.length <= 3){
+	}else if( postImage.length > 0 && postImage.length <= 3){
 		$.each(postImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='350' height="

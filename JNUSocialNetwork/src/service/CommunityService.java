@@ -18,9 +18,11 @@ import javax.ws.rs.core.Response;
 import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
+import security.helper.ContentEncoder;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
+import transaction.DAOFetchTransaction.FetchAllCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
 import transaction.DAOFetchTransaction.RandomlyFetchCommunityTransaction;
@@ -39,6 +41,7 @@ public class CommunityService {
 	private ServerSentEvent sse;
 	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
 			.getInstance();
+	private ContentEncoder contentEncoder = new ContentEncoder();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Path("add/{ID : \\d+}")
@@ -49,9 +52,12 @@ public class CommunityService {
 		transaction = new CreateCommunityTransaction();
 		Map<String, Object> result;
 		try {
-			result = (Map<String, Object>) transaction.execute(ID, community
-					.get("attributes"), community.get("tags"), CommunityType
-					.valueOf((String) community.get("communityType")));
+			result = (Map<String, Object>) transaction.execute(ID,
+					contentEncoder
+							.encodeMapContent((Map<String, String>) community
+									.get("attributes")), community.get("tags"),
+					CommunityType.valueOf((String) community
+							.get("communityType")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -321,7 +327,8 @@ public class CommunityService {
 		Map<String, Object> community;
 		try {
 			community = (Map<String, Object>) transaction.execute(
-					Community.class, communityID, attributes);
+					Community.class, communityID,
+					contentEncoder.encodeMapContent(attributes));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -388,6 +395,24 @@ public class CommunityService {
 					startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchAll")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchAllCommunity() throws Exception {
+		transaction = new FetchAllCommunityTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute();
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}

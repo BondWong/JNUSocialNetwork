@@ -102,7 +102,7 @@
 			</script>
 
 		</c:when>
-		<c:when test="${param.oldPasswordError }">
+		<c:when test="${param.changePassword }">
 			<script type="text/javascript">
 				$('#login_popover')
 						.replaceWith(
