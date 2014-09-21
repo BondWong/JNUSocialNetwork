@@ -60,7 +60,7 @@ function activityClickEvent() {
 							- toTimeValue($('#activityRemind').val() + "");
 					if ($('.activityForm')[0].checkValidity()) {
 
-						if (diffDate > 0) {
+						if (diffDate > 0.021*24*60*60*1000) {
 							var json = $.toJSON(post);
 							AddPostToCommunity(USERID, community.ID, json);
 							$('#activityCommunity').modal('hide');

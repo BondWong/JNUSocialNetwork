@@ -1104,6 +1104,23 @@ function FetchUserByID(userID) {
 	});
 	return response;
 }
+//fetchRandom
+function FetchRandom(startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/user/fetchRandomly/',
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // recommendate
 function Recommendate(startIndex, pageSize) {
 	var response = "";
