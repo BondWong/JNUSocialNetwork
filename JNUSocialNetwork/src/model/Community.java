@@ -34,6 +34,7 @@ import model.structure.Image;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
+		@NamedQuery(name = "Community.size", query = "SELECT COUNT(c) FROM Community c"),
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchJoined", query = "SELECT jc FROM Member m JOIN m.joinedCommunities jc WHERE m.ID = ?1"),
 		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1"),

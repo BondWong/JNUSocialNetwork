@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import model.Member;
 import model.modelType.UserType;
 import service.helper.MemberSearchMap;
+import service.helper.NumberManager;
 import transaction.DAOTransaction;
-import utils.NumberManager;
 
 public class RegisterMemberTransaction extends DAOTransaction {
 	DAOTransaction transaction = new RegisterTransaction();

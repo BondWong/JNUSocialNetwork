@@ -7,8 +7,8 @@ import model.Community;
 import model.Post;
 import persistence.DAO;
 import service.helper.CommunitySearchMap;
+import service.helper.NumberManager;
 import transaction.DAOTransaction;
-import utils.NumberManager;
 
 public class DeleteCommunityTransaction extends DAOTransaction {
 
