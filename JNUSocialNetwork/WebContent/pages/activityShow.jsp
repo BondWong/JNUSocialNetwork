@@ -89,7 +89,7 @@
 							</div>
 							<div class="activityItem">
 									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须是活动开始时间前哦，亲</div>
+										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
 								</div>
 							<div class="activityItem">
 								<span>活动地点：</span>

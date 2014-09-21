@@ -1,5 +1,5 @@
 function pHot() {
-	var users = Recommendate("0", "5");
+	var users = FetchRandom("0", "5");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
 				user.attributes.avatarLink);
@@ -143,7 +143,7 @@ $('body')
 						$('.userContainer').remove();
 						var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
 						$('.containBord').after(borddiv);
-						var users = SearchMember(userInfo, "0", "5");
+						var users = SearchMember(userInfo, "0", "10");
 						if (users.length != 0) {
 							$.each(users, function(n, user) {
 								AddUser(user.attributes.name,

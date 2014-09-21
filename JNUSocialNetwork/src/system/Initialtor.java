@@ -15,9 +15,12 @@ import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
 import service.helper.HeheUser;
 import service.helper.MemberSearchMap;
+import service.helper.NumberManager;
 import service.helper.OnlineUserIDArray;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
+import transaction.DAOFetchTransaction.GetCommunityNumTransaction;
+import transaction.DAOFetchTransaction.GetMemberNumTransaction;
 import utils.MD5;
 import utils.RootPathHelper;
 
@@ -79,7 +82,7 @@ public class Initialtor implements ServletContextListener {
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
 
-		Transaction transaction = new RegisterGodTransaction();
+		Transaction transaction;
 		try {
 			transaction = new RegisterGodTransaction();
 			transaction.execute("Admin", MD5.toMD5Code("123456"));
@@ -92,6 +95,13 @@ public class Initialtor implements ServletContextListener {
 			HeheUser.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
+
+			transaction = new GetMemberNumTransaction();
+			long mnum = (long) transaction.execute();
+			transaction = new GetCommunityNumTransaction();
+			long cnum = (long) transaction.execute();
+			System.out.println(mnum + "" + cnum);
+			NumberManager.initiate(mnum, cnum);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

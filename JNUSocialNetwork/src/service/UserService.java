@@ -33,6 +33,7 @@ import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
 import transaction.DAOFetchTransaction.InstitutionRecommendationTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
+import transaction.DAOFetchTransaction.RandomlyFetchMemberTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
 import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
@@ -263,6 +264,25 @@ public class UserService {
 
 		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchRandomly")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response randomlyFetch() throws Exception {
+		transaction = new RandomlyFetchMemberTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
 
 	@SuppressWarnings("unchecked")

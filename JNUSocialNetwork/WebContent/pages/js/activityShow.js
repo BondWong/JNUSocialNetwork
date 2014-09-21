@@ -219,7 +219,7 @@ $('body')
 								+ "")
 								- toTimeValue($('#activityRemind').val() + "");
 						if ($('.activityForm')[0].checkValidity()) {
-							if (diffDate > 0) {
+							if (diffDate > 0.021*24*60*60*1000) {
 								var json = $.toJSON(attributes);
 								var aup = UpdateActivity(activity.ID, json);
 								$('#editActivity').modal('hide');

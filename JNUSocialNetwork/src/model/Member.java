@@ -37,6 +37,7 @@ import model.structure.Image;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
+		@NamedQuery(name = "Member.size", query = "SELECT COUNT(m) FROM Member m"),
 		@NamedQuery(name = "Member.fetchFollowees", query = "SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1"),
 		@NamedQuery(name = "Member.fetchFollowers", query = "SELECT f FROM Member m JOIN m.followers f WHERE m.ID = ?1"),
 		@NamedQuery(name = "Member.fetchByID", query = "SELECT m FROM Member m WHERE m.ID = ?1"),

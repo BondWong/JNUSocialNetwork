@@ -8,8 +8,8 @@ import model.Community;
 import model.Member;
 import model.Post;
 import persistence.DAO;
+import service.helper.NumberManager;
 import transaction.DAOTransaction;
-import utils.NumberManager;
 
 public class DeleteMemberTransaction extends DAOTransaction {
 

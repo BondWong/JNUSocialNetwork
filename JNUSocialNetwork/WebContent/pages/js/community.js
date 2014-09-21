@@ -233,7 +233,7 @@ $(document)
 								fetchCommunityByJoin("15");
 								fetchCommunityByOwner("1");
 								var communities = FetchCommunityByJoin(USERID,
-										$('.content_container').length,
+										$('.content_container').length + 1,
 										clickPageSize);
 								scrollType(communities, "myCommunity");
 							});
@@ -256,7 +256,7 @@ $(document)
 										clickPageSize);
 								var communities = FetchCommunityByType(
 										"SCHOOLUNION",
-										$('.content_container').length,
+										$('.content_container').length + 1,
 										clickPageSize);
 								scrollType(communities, "SCHOOLUNION");
 							});
@@ -268,7 +268,7 @@ $(document)
 										"containerFolk");
 								fetchCommunityByType("FOLK", clickPageSize);
 								var communities = FetchCommunityByType("FOLK",
-										$('.content_container').length,
+										$('.content_container').length + 1,
 										clickPageSize);
 								scrollType(communities, "FOLK");
 							});
@@ -280,7 +280,7 @@ $(document)
 										"containerDiscovery");
 								fetchHotCommunity(clickPageSize);
 								var communities = FetchCommunityByType("FOLK",
-										$('.content_container').length,
+										$('.content_container').length + 1,
 										clickPageSize);
 								scrollType(communities, "FOLK");
 							});
