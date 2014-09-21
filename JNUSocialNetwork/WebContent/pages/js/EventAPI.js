@@ -18,8 +18,8 @@ function Subscribe() {
 }
 
 // ***********************************SSES end*********************************
-//***********************************浏览器检测*********************************
-function BrowserDetection(){
+// ***********************************浏览器检测*********************************
+function BrowserDetection() {
 	var response = "";
 	$.ajax({
 		type : "GET",
@@ -1153,6 +1153,26 @@ function RecommendateViaCampus(userID) {
 	$.ajax({
 		type : "GET",
 		url : '../../app/user/recommendateViaCampus/' + userID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+// RecommendateViaCampus 输入：userID;返回：userJson
+function RecommendateViaInstitution(userID) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/user/recommendateViaInstitution/' + userID,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},

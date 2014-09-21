@@ -69,7 +69,7 @@
 								if (userID == USERID) {
 									$('.about_body')
 											.append(
-													"<div class='post about' style='width:80px;'><a class='btn btn-success' href='password.jsp'>修改密码</button></a>");
+													"<div class='post about' style='width:80px;'><a class='btn btn-success' href='changePassword.jsp'>修改密码</button></a>");
 								}
 								Msnry('.about_body', '.post', 435);
 							});

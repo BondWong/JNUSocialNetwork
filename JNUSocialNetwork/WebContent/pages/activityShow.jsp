@@ -89,7 +89,7 @@
 							</div>
 							<div class="activityItem">
 									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须比活动开始时间提前半天哦，亲</div>
+										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须是活动开始时间前哦，亲</div>
 								</div>
 							<div class="activityItem">
 								<span>活动地点：</span>
@@ -103,6 +103,11 @@
 									placeholder="" id="activityMore" required autofocus
 									maxLength="200" style="resize: none;"></textarea>
 							</div>
+							<div class="activityItem">
+									<span>人数上限：</span><input type="text"
+										class="form-control activityInput" placeholder=""
+										id="activityNum" pattern="[0-9]{3}" required autofocus maxLength="3" />
+								</div>
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"
 									style="width: auto;"> <i
@@ -199,6 +204,10 @@
 							var communityID = url.substr(url.indexOf("?") + 1,
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
+							var now = new Date();
+							if (activity.participantIDs.length >= activity.attributes.limitation || activity.attributes.startDate - now.getTime() <= 0) {
+								$('.joinSActivity').remove();
+							}
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();

@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
 import model.modelType.PostType;
+import security.helper.ContentEncoder;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
@@ -40,8 +41,9 @@ public class PostService {
 	private ServerSentEvent sse;
 	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
 			.getInstance();
+	private ContentEncoder contentEncoder = new ContentEncoder();
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Path("add/{ID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -50,7 +52,8 @@ public class PostService {
 		transaction = new SSECreatePostTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, PostType.NORMAL,
-					post.get("attributes"), post.get("imageLinks"));
+					contentEncoder.encodeMapContent((Map<String, String>) post
+							.get("attributes")), post.get("imageLinks"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +64,7 @@ public class PostService {
 		return Response.ok().build();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Path("addToCommunity/{ID : \\d+}/{communityID : \\d+}")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -72,7 +75,8 @@ public class PostService {
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
 					PostType.valueOf((String) post.get("postType")),
-					post.get("attributes"), post.get("imageLinks"));
+					contentEncoder.encodeMapContent((Map<String, String>) post
+							.get("attributes")), post.get("imageLinks"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

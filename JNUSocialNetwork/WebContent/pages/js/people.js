@@ -13,7 +13,7 @@ function PinCommon() {
 	});
 }
 function pCampus() {
-	var users = RecommendateViaCampus(USERID);
+	var users = RecommendateViaInstitution(USERID);
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.lookingFor, user.ID,
 				user.attributes.avatarLink);
@@ -158,12 +158,9 @@ $('body')
 function AddUser(name, looking, id, avatarLink) {
 	var boarddiv = "<div class='userCard'><img height='170' width='170' src='"
 			+ $.parseJSON(avatarLink).src
-			+ "' ><p class='recommendName'><a id="+id+" class='tipUser2'>"
-			+ name
-			+ "</a></p><p class='recommendLooking'>"
-			+ looking
-			+ "</p><div class='recommendBtn'><button  id="
-			+ id
+			+ "' ><p class='recommendName'><a id=" + id + " class='tipUser2'>"
+			+ name + "</a></p><p class='recommendLooking'>" + looking
+			+ "</p><div class='recommendBtn'><button  id=" + id
 			+ " class='btn btn-danger followBtn'>Follow</button></div></div>";
 	$(".recommendBord").after(boarddiv);
 	Msnry('.userContainer', '.userCard', 200);

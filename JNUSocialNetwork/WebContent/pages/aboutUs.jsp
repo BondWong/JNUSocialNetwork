@@ -81,7 +81,10 @@
 					<div class="info">
 						<h2>黃俊邦</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>架构师</span> <span>|</span> <span>服务端工程师</span>
+							<span>创始人</span> <span>|</span> <span>架构</span> <span>|</span> <span>服务端开发</span>
+						</p>
+						<p>
+							<span>wechat:WongZeonbong</span>
 						</p>
 					</div>
 				</div>
@@ -91,8 +94,11 @@
 					<div class="info">
 						<h2>刘威雄</h2>
 						<p>
-							<span>创始人</span> <span>|</span> <span>前端设计师</span> <span>|</span>
-							<span>前端工程师</span>
+							<span>创始人</span> <span>|</span> <span>前端设计</span> <span>|</span>
+							<span>前端开发</span>
+						</p>
+						<p>
+							<span>wechat:AD_daxiong</span>
 						</p>
 					</div>
 				</div>
@@ -104,7 +110,10 @@
 					<div class="info">
 						<h2>何炬江</h2>
 						<p>
-							<span>前端设计师</span> <span>|</span> <span>前端工程师</span>
+							<span>前端设计</span> <span>|</span> <span>前端开发</span>
+						</p>
+						<p>
+							<span>wechat:saintscott119</span>
 						</p>
 					</div>
 				</div>
@@ -118,6 +127,9 @@
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
+						<p>
+							<span>wechat:alexhuangzy</span>
+						</p>
 					</div>
 				</div>
 				<div id="hhc" class="intro container col-md-6">
@@ -128,6 +140,9 @@
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
 						</p>
+						<p>
+							<span>wechat:whyshing</span>
+						</p>
 					</div>
 				</div>
 				<div id="del" class="intro container col-md-6">
@@ -137,6 +152,9 @@
 						<h2>邓恩临</h2>
 						<p>
 							<span>创始人</span> <span>|</span> <span>公关</span> <span>|</span> <span>推广</span>
+						</p>
+						<p>
+							<span>wechat:FeIReNaS</span>
 						</p>
 					</div>
 				</div>
@@ -165,7 +183,7 @@
 					<h4 class="join">
 						将简单介绍发到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a><span>campusite@outlook.com</span>，并说明为什么要加入我们，想在团队里担任什么样的位置,我们会尽快联系你。
 					</h4>
-					
+
 
 				</div>
 

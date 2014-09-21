@@ -23,12 +23,13 @@ function activityClickEvent() {
 										+ "")
 										+ "",
 								activityTime : $('#activityTime').val(),
+								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
 								limitation : $('.activityNum').val(),
 								communityName : community.attributes.name,
 								background : FileUpload(new FormData(
-										$('.activityForm')[0]))[0],
+										$('#activityForm')[0]))[0],
 							},
 							imageLinks : []
 						};
@@ -47,9 +48,10 @@ function activityClickEvent() {
 										+ "",
 								communityName : community.attributes.name,
 								activityTime : $('#activityTime').val(),
+								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
-								limitation : $('.activityNum').val()
+								limitation : $('#activityNum').val()
 							},
 							imageLinks : []
 						};
@@ -58,7 +60,7 @@ function activityClickEvent() {
 							- toTimeValue($('#activityRemind').val() + "");
 					if ($('.activityForm')[0].checkValidity()) {
 
-						if (diffDate > 0.5 * 24 * 60 * 60 * 1000) {
+						if (diffDate > 0) {
 							var json = $.toJSON(post);
 							AddPostToCommunity(USERID, community.ID, json);
 							$('#activityCommunity').modal('hide');
@@ -180,7 +182,7 @@ $('.form_datetime1').datetimepicker({
 	pickerPosition : "bottom-left"
 });
 var date2 = new Date();
-date2.setTime(date2.getTime() + 0.4 * 24 * 60 * 60 * 1000);
+date2.setTime(date2.getTime());
 $('.form_datetime2').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",

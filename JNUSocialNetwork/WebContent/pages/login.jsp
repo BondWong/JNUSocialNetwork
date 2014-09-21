@@ -102,6 +102,15 @@
 			</script>
 
 		</c:when>
+		<c:when test="${param.changePassword }">
+			<script type="text/javascript">
+				$('#login_popover')
+						.replaceWith(
+								'<div id="login_popover" class="alert alert-success" style="display: none">修改密码成功，请重新登录</div>');
+				$('#login_popover').fadeIn("fast");
+				setTimeout('$("#login_popover").fadeOut("slow")', 3000);
+			</script>
+		</c:when>
 	</c:choose>
 </body>
 </html>

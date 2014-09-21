@@ -16,13 +16,22 @@
 	<session-config>
 		<cookie-config>
 			<http-only>true</http-only>
-			<!-- <secure>true</secure> -->
 		</cookie-config>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 	<listener>
 		<listener-class>system.Initialtor</listener-class>
 	</listener>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/404.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/pages/500.html</location>
+	</error-page>
+
 	<filter>
 		<filter-name>AutoLoginFilter</filter-name>
 		<filter-class>security.AutoLoginFilter</filter-class>
@@ -67,6 +76,12 @@
 		<filter-name>AutoLoginFilter</filter-name>
 		<url-pattern>
 			/communityMember.jsp
+		</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/communityOwnerPage.jsp
 		</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

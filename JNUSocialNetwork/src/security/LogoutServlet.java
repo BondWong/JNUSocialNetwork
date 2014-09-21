@@ -45,11 +45,7 @@ public class LogoutServlet extends HttpServlet {
 		newCookie.setPath("/");
 
 		response.addCookie(newCookie);
-		if (request.getParameter("oldPassword") == null
-				|| request.getParameter("oldPassword") == "")
-			response.sendRedirect("/pages/home.jsp");
-		else
-			response.sendRedirect("pages/login.jsp?relogin=true");
+		response.sendRedirect("/pages/home.jsp");
 	}
 
 	/**
@@ -59,6 +55,20 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		synchronized (session) {
+			session.removeAttribute("userType");
+			session.removeAttribute("ID");
+			session.removeAttribute("isIE");
+			session.invalidate();
+		}
+
+		Cookie newCookie = new Cookie("ALG", null);
+		newCookie.setMaxAge(0);
+		newCookie.setPath("/");
+
+		response.addCookie(newCookie);
+		response.sendRedirect("/pages/login.jsp?changePassword=true");
 	}
 
 }
