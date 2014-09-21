@@ -254,6 +254,9 @@ $(document)
 
 									});
 				});
+$('body').on("click",".communityPostSpan",function(){
+	window.location.href = "communityShow.jsp?"+$(this).attr('id');
+});
 function aboutClickEvent() {
 	// function editProfileInfro
 	$('body').on(

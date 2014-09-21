@@ -148,24 +148,27 @@
 																		function(
 																				n,
 																				dataString) {
-																			var boarddiv = post(
-																					dataString.owner.ID,
-																					dataString.owner.attributes.name,
-																					dataString.publishDate,
-																					dataString.attributes.content,
-																					dataString.ID,
-																					dataString.likerIDs,
-																					dataString.collectorIDs,
-																					dataString.imageLinks,
-																					dataString.owner.attributes.avatarLink);
-																			$(
-																					".pro_body")
-																					.append(
-																							boarddiv);
-																			Msnry(
-																					'.pro_body',
-																					'.post',
-																					435);
+																			if (dataString.postType == "NORMAL"
+																					&& dataString.available == true) {
+																				var boarddiv = post(
+																						dataString.owner.ID,
+																						dataString.owner.attributes.name,
+																						dataString.publishDate,
+																						dataString.attributes.content,
+																						dataString.ID,
+																						dataString.likerIDs,
+																						dataString.collectorIDs,
+																						dataString.imageLinks,
+																						dataString.owner.attributes.avatarLink);
+																				$(
+																						".pro_body")
+																						.append(
+																								boarddiv);
+																				Msnry(
+																						'.pro_body',
+																						'.post',
+																						435);
+																			}
 																		});
 														if (response.length == pageSize) {
 															$(
