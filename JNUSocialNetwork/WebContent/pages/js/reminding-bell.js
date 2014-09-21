@@ -97,16 +97,13 @@ function add_events_to_bell() {
 
 function messages_remind(message) {
 	if ($("div.mentionBody-content #" + message.fromID).length == 0) {
-		$("div.mentionBody-content")
-				.append(
-						'<div class="NotiItem" id="'
-								+ message.fromID
-								+ '"><div class="col-lg-3"><div><img src="'
-								+ $.parseJSON(message.attributes.avatarLink).src
-								+ '" width="50" height="50" /></div></div>'
-								+ '<div class="col-lg-9"><div>'
-								+ message.from
-								+ '<span class="badge">1</span></div></div></div>');
+		$("div.mentionBody-content").append(
+				'<div class="NotiItem" id="' + message.fromID
+						+ '"><div class="col-lg-3"><div><img src="'
+						+ $.parseJSON(message.attributes.avatarLink).src
+						+ '" width="50" height="50" /></div></div>'
+						+ '<div class="col-lg-9"><div>' + message.from
+						+ '<span class="badge">1</span></div></div></div>');
 		var tempToID = message.toID;
 		var tempFromID = message.fromID;
 		var tempFrom = message.from;
@@ -290,8 +287,10 @@ function notifyFollow(followerID) {
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
-			+ data.attributes.lookingFor + '</p><button class="btn btn-danger followBtn2" id="'+followerID+'">'
-			+ followTxt + '</button></div></div></div>';
+			+ data.attributes.lookingFor
+			+ '</p><button class="btn btn-danger followBtn2" id="'
+			+ followerID
+			+ '">' + followTxt + '</button></div></div></div>';
 	$(".mentionBody-content").empty();
 	$(".mentionBody-content").append(tipFrame);
 }
@@ -303,53 +302,55 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			.each(
 					response,
 					function(index, jsonComment) {
-						var atComment = "";
-						if (jsonComment.attributes.commentToComment != "") {
-							atComment = "@"
-									+ jsonComment.attributes.commentToComment;
-						}
-						var removeBtn = "";
-						var commentReply = "<div class='comment_reply' id="
-								+ postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div>";
-						if (USERID == jsonComment.owner.ID) {
-							removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
+						if (jsonComment.available == true) {
+							var atComment = "";
+							if (jsonComment.attributes.commentToComment != "") {
+								atComment = "@"
+										+ jsonComment.attributes.commentToComment;
+							}
+							var removeBtn = "";
+							var commentReply = "<div class='comment_reply' id="
 									+ postID
-									+ "' type='hidden' value='"
+									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+									+ jsonComment.owner.attributes.name
+									+ "' /><input id='replyID' type='hidden' value='"
 									+ jsonComment.ID
-									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
-							commentReply = "";
-						}
-						comment = comment
-								+ "<div class='act_content' id='"
-								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
-								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
-								+ jsonComment.owner.attributes.name
-								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
-								+ removeBtn
-								+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
-								+ jsonComment.publishDate
-								+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
-								+ jsonComment.ID
-								+ "'>+<span>"
-								+ jsonComment.likerIDs.length
-								+ "</span></div><a><input id='likeID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
-								+ commentReply
-								+ "</div></div></div></div><div class='act_comment'><span class='commentHead'>"
-								+ atComment + "</span>" + "&nbsp;"
-								+ jsonComment.attributes.content
-								+ "﻿</div></div>";
-						if (USERID != jsonComment.owner.ID) {
-							$('.deleteCommBtn').css("display", "none");
+									+ "' />reply<span style='font-size: 8px'></span></a></div>";
+							if (USERID == jsonComment.owner.ID) {
+								removeBtn = "<div class='deleteCommBtn' style='cursor:pointer'><a><input id='"
+										+ postID
+										+ "' type='hidden' value='"
+										+ jsonComment.ID
+										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
+								commentReply = "";
+							}
+							comment = comment
+									+ "<div class='act_content' id='"
+									+ jsonComment.ID
+									+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
+									+ $
+											.parseJSON(jsonComment.owner.attributes.avatarLink).src
+									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
+									+ jsonComment.owner.attributes.name
+									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
+									+ removeBtn
+									+ "</div></div><div class='row'><div class='col-lg-7 custom_lg-6'><div class='user_info'>"
+									+ jsonComment.publishDate
+									+ "</div></div><div class='col-lg-2 custom_lg-6'><div class='comment_like' style='cursor: pointer'><div class='likeComment likeCommentN"
+									+ jsonComment.ID
+									+ "'>+<span>"
+									+ jsonComment.likerIDs.length
+									+ "</span></div><a><input id='likeID' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' />+1<span style='font-size: 8px'></span></a></div></div><div class='col-lg-2'>"
+									+ commentReply
+									+ "</div></div></div></div><div class='act_comment'><span class='commentHead'>"
+									+ atComment + "</span>" + "&nbsp;"
+									+ jsonComment.attributes.content
+									+ "﻿</div></div>";
+							if (USERID != jsonComment.owner.ID) {
+								$('.deleteCommBtn').css("display", "none");
+							}
 						}
 					});
 	var likeClass = "glyphicon glyphicon-heart-empty";
@@ -359,25 +360,30 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
 	if (postImage.length > 3) {
-		$.each(postImage, function(n, image) {
-			imageDiv = imageDiv
-					+ "<img style='float:left;' class='postimg' width='160' height="
-					+ getHeight(160, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-		});
+		$
+				.each(
+						postImage,
+						function(n, image) {
+							imageDiv = imageDiv
+									+ "<img style='float:left;' class='postimg' width='160' height="
+									+ getHeight(160, $.parseJSON(image).width,
+											$.parseJSON(image).height)
+									+ " onclick='showPost(" + postID
+									+ ")' src='" + $.parseJSON(image).src
+									+ "'/>";
+						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	}else if( postImage.length > 0 && postImage.length <= 3){
+	} else if (postImage.length > 0 && postImage.length <= 3) {
 		$.each(postImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='350' height="
 					+ getHeight(350, $.parseJSON(image).width, $
 							.parseJSON(image).height) + " onclick='showPost("
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-			
+
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	}else{
+	} else {
 		postImgDiv = "";
 	}
 	var boarddiv = "<div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"

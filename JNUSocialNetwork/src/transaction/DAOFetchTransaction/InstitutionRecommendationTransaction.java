@@ -23,6 +23,7 @@ public class InstitutionRecommendationTransaction extends DAOTransaction {
 		transaction = new RandomlyFetchMemberTransaction();
 		List<Map<String, Object>> members = (List<Map<String, Object>>) transaction
 				.execute();
+		transaction = new FetchMemberTransaction();
 		Map<String, Object> member = (Map<String, Object>) transaction
 				.execute(params);
 		Map<String, String> memberAttributes = (Map<String, String>) member
