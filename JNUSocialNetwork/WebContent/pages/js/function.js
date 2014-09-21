@@ -5,6 +5,7 @@ if (BrowserDetection() != false) {
 	$('body').append(alert);
 	$('.browserClick').click();
 }
+
 // function Msnry
 function Msnry(selectContain, item, width) {
 	var container = document.querySelector(selectContain);

@@ -211,7 +211,7 @@ function CREATECOMMENT() {
 							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
-									+ "'><div class='row'><div class='col-lg-1'><img height='30' height='30' src='"
+									+ "'><div class='row'><div class='col-lg-1'><img height='30' width='30' src='"
 									+ $
 											.parseJSON(jsonComment.owner.attributes.avatarLink).src
 									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
@@ -252,12 +252,12 @@ function CREATECOMMENT() {
 										+ jsonComment.attributes.commentToComment;
 							}
 							var commentReply = "<div class='comment_reply' id="
-								+ jsondata.postID
-								+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
-								+ jsonComment.owner.attributes.name
-								+ "' /><input id='replyID' type='hidden' value='"
-								+ jsonComment.ID
-								+ "' />reply<span style='font-size: 8px'></span></a></div>";
+									+ jsondata.postID
+									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
+									+ jsonComment.owner.attributes.name
+									+ "' /><input id='replyID' type='hidden' value='"
+									+ jsonComment.ID
+									+ "' />reply<span style='font-size: 8px'></span></a></div>";
 							var removeBtn = "";
 							if (USERID == jsonComment.owner.ID) {
 								removeBtn = "<div class='deleteCommBtn deletCa' style='cursor:pointer'><a><input id='"
@@ -278,7 +278,8 @@ function CREATECOMMENT() {
 									+ jsonComment.publishDate
 									+ "</span>"
 									+ removeBtn
-									+ commentReply+"<input type='hidden' id='"
+									+ commentReply
+									+ "<input type='hidden' id='"
 									+ activity.ID
 									+ "' value='"
 									+ jsonComment.ID

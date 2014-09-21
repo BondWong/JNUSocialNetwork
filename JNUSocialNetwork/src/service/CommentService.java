@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
+import security.helper.ContentEncoder;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchCommentTransaction;
@@ -30,8 +31,9 @@ public class CommentService {
 	private ServerSentEvent sse;
 	private ServerSentEventBroadcaster broadcaster = ServerSentEventBroadcaster
 			.getInstance();
+	private ContentEncoder contentEncoder = new ContentEncoder();
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Path("add/{ID : \\d+}/{postID : \\d+}")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -40,7 +42,9 @@ public class CommentService {
 		transaction = new SSECreateCommentTransaction();
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, postID,
-					comment.get("attributes"));
+					contentEncoder
+							.encodeMapContent((Map<String, String>) comment
+									.get("attributes")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

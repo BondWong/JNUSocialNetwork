@@ -86,7 +86,7 @@ public class ChangePasswordServlet extends HttpServlet {
 							.getRequestDispatcher("/security/UserLogoutServlet");
 					dispatcher.forward(request, response);
 				} else {
-					response.sendRedirect("pages.chagePassword.jsp?oldPasswordError=true");
+					response.sendRedirect("/pages/changePassword.jsp?oldPasswordError=true");
 				}
 			} else {
 				response.sendRedirect("/pages/changePassword.jsp");
