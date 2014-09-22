@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,10 +20,10 @@ import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
 import security.helper.ContentEncoder;
+import service.helper.DepartmentsInfoManager;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
-import transaction.DAOFetchTransaction.FetchAllCommunityTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
 import transaction.DAOFetchTransaction.RandomlyFetchCommunityTransaction;
@@ -403,22 +404,15 @@ public class CommunityService {
 				}).build();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Path("fetchAll")
+	@Path("getDepartment/{communityID:\\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchAllCommunity() throws Exception {
-		transaction = new FetchAllCommunityTransaction();
-		List<Map<String, Object>> results;
-		try {
-			results = (List<Map<String, Object>>) transaction.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(results) {
-				}).build();
+	public Response getDepartment(
+			@PathParam("communityID") Long communityID) {
+		List<String> departments = new ArrayList<String>();
+		departments = DepartmentsInfoManager.get(communityID);
+		return Response.ok(new GenericEntity<List<String>>(departments) {
+		}).build();
 	}
 
 }

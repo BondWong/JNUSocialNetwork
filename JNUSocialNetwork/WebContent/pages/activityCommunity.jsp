@@ -156,7 +156,7 @@
 								</div>
 								<div class="activityItem">
 									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须比活动开始时间提前半天哦，亲</div>
+										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
 								</div>
 								<div class="activityItem">
 									<span>活动地点：</span>
@@ -171,10 +171,9 @@
 										style="resize: none;"></textarea>
 								</div>
 								<div class="activityItem">
-									<span>人数上限：</span><select class="activityNum" required><option>50</option>
-										<option>100</option>
-										<option>500</option>
-										<option>1000</option></select>
+									<span>人数上限：</span><input type="text"
+										class="form-control activityInput" placeholder=""
+										id="activityNum" pattern="[0-9]{3}" required autofocus maxLength="3" />
 								</div>
 								<div class="activityItem">
 									<span>活动图片</span> <span
@@ -260,7 +259,6 @@
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										|| $.inArray(USERID, memberIDs) != -1) {
 									$('.cardSetter').css("display", "inline");
-									$('.activityJoin').css("display", "none");
 								}
 								if ($.inArray(USERID, memberIDs) != -1
 										&& USERID != community.attributes.userID) {

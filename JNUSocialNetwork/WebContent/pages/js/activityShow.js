@@ -163,8 +163,10 @@ $('body').on("click",".backActivity",function(){
 $('body').on("click", ".editActivity", function() {
 	$('#activityName').val(activity.attributes.activityName);
 	$('#activityTime').val(activity.attributes.activityTime);
+	$('#activityRemind').val(activity.attributes.activityRemindTime);
 	$('#activityAddr').val(activity.attributes.activityAddr);
 	$('#activityMore').val(activity.attributes.activityMore);
+	$('#activityNum').val(activity.attributes.limitation);
 	dataPicker();
 });
 $('body')
@@ -187,8 +189,10 @@ $('body')
 										+ "")
 										+ "",
 								activityTime : $('#activityTime').val(),
+								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								limitation : $('#activityNum').val(),
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0]
 							};
@@ -204,8 +208,10 @@ $('body')
 										+ "")
 										+ "",
 								activityTime : $('#activityTime').val(),
+								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
-								activityMore : $('#activityMore').val()
+								activityMore : $('#activityMore').val(),
+								limitation : $('#activityNum').val()
 							};
 						}
 
@@ -213,7 +219,7 @@ $('body')
 								+ "")
 								- toTimeValue($('#activityRemind').val() + "");
 						if ($('.activityForm')[0].checkValidity()) {
-							if (diffDate > 0.5 * 24 * 60 * 60 * 1000) {
+							if (diffDate > 0.021*24*60*60*1000) {
 								var json = $.toJSON(attributes);
 								var aup = UpdateActivity(activity.ID, json);
 								$('#editActivity').modal('hide');
@@ -259,7 +265,7 @@ function dataPicker() {
 		pickerPosition : "bottom-left"
 	});
 	var date2 = new Date();
-	date2.setTime(date2.getTime() + 0.4 * 24 * 60 * 60 * 1000);
+	date2.setTime(date2.getTime());
 	$('.form_datetime2').datetimepicker({
 		// language: 'fr',
 		format : "MM dd,yyyy - hh:ii",
