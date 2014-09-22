@@ -23,6 +23,34 @@ public class DepartmentsInfoManager {
 		department.add("组织部");
 
 		departments.put(1411055191107l, department);
+		department.clear();
+
+		department.add("秘书部");
+		department.add("公关部");
+		department.add("人资部");
+		department.add("学术部");
+		department.add("组织部");
+		department.add("体育部");
+		department.add("宣传部");
+		department.add("文娱部");
+		department.add("编辑部");
+		department.add("心理部");
+		department.add("青年志愿者协会");
+
+		// departments.put(1411055191107l, department);
+		// department.clear();
+
+		department.add("秘书处");
+		department.add("公关部");
+		department.add("心服部");
+		department.add("文体部");
+		department.add("编辑部");
+		department.add("组织部");
+		department.add("学术部");
+		department.add("宣传部");
+
+		departments.put(1411054407457l, department);
+		department.clear();
 	}
 
 	public static List<String> get(Long communityID) {

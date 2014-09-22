@@ -30,7 +30,7 @@
         data.telnum = $("#telNum").val();
         data.wish1 = $("#intent_dept1").find("option:selected").val();
         data.wish2 = $("#intent_dept2").find("option:selected").val();
-        $.post("/app/user/registerCandC", data)
+        $.post("/app/user/registerCandC", data, "json")
             .success(function () {
                 console.log("post success");
                 displayAlert($("#successAlert"));
@@ -55,25 +55,25 @@
 
     // FetchByType 输入：communityID;返回：postJson
     function fetchCommunityByType(communityType, startIndex, pageSize, successCallback) {
-        var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize,
-            // var url = "js/applydata.json";
-            $.getJSON(url, successCallback);
+        var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize;
+        // var url = "js/applydata.json";
+        $.getJSON(url, successCallback);
     }
 
     function setDepartments(id, target) {
-        var url = "/app/community/getDepartment/" + id,
-            //var url = "js/1411055191107.json";
-            $.getJSON(url, function (data) {
-                console.log(data);
-                currentDepartments = data;
-                var dept1 = document.getElementById("intent_dept1");
-                dept1.options.length = 0;
-                for (var i in currentDepartments) {
-                    dept1.options[i] = new Option(currentDepartments[i], currentDepartments[i]);
-                }
-                dept1.options[0].selected = true;
-                setCandidateDepartments();
-            });
+        var url = "/app/community/getDepartment/" + id;
+        //var url = "js/1411055191107.json";
+        $.getJSON(url, function (data) {
+            console.log(data);
+            currentDepartments = data;
+            var dept1 = document.getElementById("intent_dept1");
+            dept1.options.length = 0;
+            for (var i in currentDepartments) {
+                dept1.options[i] = new Option(currentDepartments[i], currentDepartments[i]);
+            }
+            dept1.options[0].selected = true;
+            setCandidateDepartments();
+        });
     }
 
     function setCandidateDepartments() {
