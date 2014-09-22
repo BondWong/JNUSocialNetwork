@@ -123,13 +123,58 @@ function AddPostToCommunity(UserID, communityID, JsonData) {
 	});
 	return response;
 }
+//addImages 输入：数组ImageLinks[];返回：postJson
+function AddActivityImages(postID, imageLinks) {
+	var response = "";
+	var Urls = '../../app/post/addImages/' + postID + '?';
+	$.each(imageLinks, function(n, value) {
+		if (n != imageLinks.length - 1) {
+			Urls = Urls + 'imageLinks=' + value + '&';
+		} else {
+			Urls = Urls + 'imageLinks=' + value;
+		}
+	});
+	$.ajax({
+		type : "PUT",
+		url : Urls,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
 
+	});
+	return response;
+}
 // DeletePost 输入：postID
-function DeletePost(postID) {
+function DeletePost(postID, imageLinks) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
 		url : '../../app/post/delete/' + postID,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			response = status;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+	});
+	return response;
+}
+//DeleteAI 输入：postID
+function DeleteAI(postID , imageLinks) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/post/removeImages/' + postID + '?imageLinks=' + imageLinks,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
