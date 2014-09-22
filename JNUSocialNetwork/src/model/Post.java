@@ -111,7 +111,7 @@ public class Post extends AttributeModel {
 		this.imageLinks.add(imageLink);
 	}
 
-	public void addImageLink(Set<String> links) {
+	public void addImageLinks(Set<String> links) {
 		this.imageLinks.addAll(links);
 	}
 
@@ -125,6 +125,18 @@ public class Post extends AttributeModel {
 			e.printStackTrace();
 		}
 		this.imageLinks.remove(imageLink);
+	}
+
+	public void removeImageLinks(Set<String> imageLinks) {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLinks(imageLinks);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.imageLinks.removeAll(imageLinks);
 	}
 
 	public Set<String> getImageLinks() {

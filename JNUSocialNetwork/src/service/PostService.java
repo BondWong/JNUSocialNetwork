@@ -1,7 +1,9 @@
 package service;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -23,6 +25,8 @@ import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
+import transaction.DAOUpdateTransaction.AddPostImagesTransaction;
+import transaction.DAOUpdateTransaction.RemovePostImageLinksTransaction;
 import transaction.DAOUpdateTransaction.UpdatePostAttributeTransaction;
 import transaction.SSETransaction.SSECancelCollectPostTransaction;
 import transaction.SSETransaction.SSECancelLikePostTransaction;
@@ -442,6 +446,42 @@ public class PostService {
 		}
 		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
 		}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("addImages/{postID : \\d+}")
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addImages(@PathParam("postID") Long postID,
+			@QueryParam("imageLinks") List<String> imageLinks) throws Exception {
+		transaction = new AddPostImagesTransaction();
+		Set<String> links = new LinkedHashSet<String>(imageLinks);
+		Map<String, Object> result;
+		try {
+			result = (Map<String, Object>) transaction.execute(postID, links);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+		return Response.ok(new GenericEntity<Map<String, Object>>(result) {
+		}).build();
+	}
+
+	@Path("removeImages/{ID : \\d+}")
+	@PUT
+	public Response removeImages(@PathParam("postID") Long postID,
+			@QueryParam("imageLinks") List<String> imageLinks) throws Exception {
+		transaction = new RemovePostImageLinksTransaction();
+		Set<String> links = new LinkedHashSet<String>(imageLinks);
+		try {
+			transaction.execute(postID, links);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
 	}
 
 }
