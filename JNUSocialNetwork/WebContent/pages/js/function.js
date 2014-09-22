@@ -169,6 +169,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	 * id='collectID' type='hidden' value=" + postID + "><span class='" +
 	 * collectClass + "' style='font-size:20px'></span></a></div>
 	 */
+	
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
@@ -178,7 +179,6 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	}, function() {
 		$(this).find('a').fadeOut(300);
 	});
-	
 	$('body').on("click",".post_more"+postID,function(){
 		var id = $(this).attr('id');
 		$("span[id='postContent" + id + "']").text(content);

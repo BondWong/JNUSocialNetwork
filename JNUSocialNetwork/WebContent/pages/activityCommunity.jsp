@@ -259,7 +259,6 @@
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										|| $.inArray(USERID, memberIDs) != -1) {
 									$('.cardSetter').css("display", "inline");
-									$('.activityJoin').css("display", "none");
 								}
 								if ($.inArray(USERID, memberIDs) != -1
 										&& USERID != community.attributes.userID) {

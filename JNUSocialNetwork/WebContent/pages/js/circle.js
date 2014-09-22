@@ -212,7 +212,7 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length;
+						var startIndex = $('.post').length + 1;
 						$('div#infinite_loader').show();
 						var response = [];
 						if (USERID == null || USERID == "")
@@ -237,6 +237,7 @@ $(window)
 														dataString.imageLinks,
 														dataString.owner.attributes.avatarLink);
 												$(".pro_body").append(boarddiv);
+												$('img.userImg').userTips();
 												Msnry('.pro_body', '.post', 435);
 											}
 										});
