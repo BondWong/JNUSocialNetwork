@@ -212,7 +212,7 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length;
+						var startIndex = $('.post').length + 1;
 						$('div#infinite_loader').show();
 						var response = [];
 						if (USERID == null || USERID == "")
