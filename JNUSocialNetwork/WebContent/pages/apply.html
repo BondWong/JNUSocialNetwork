@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
-    <meta name="description" content="">
+    <meta name="description" content="社团一键报名系统">
 
     <title>社团一键报名 - CampuSite</title>
 
@@ -43,19 +43,19 @@
                         <div class="form-group">
                             <label class="col-xs-4 control-label" for="studentID">学号</label>
                             <div class="col-xs-8">
-                                <input class="form-control" name="studentID" id="studentID" type="text" maxlength="10" autofocus />
+                                <input class="form-control" name="studentID" id="studentID" type="text" maxlength="10" autofocus required />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-4 control-label" for="password">教务处密码</label>
                             <div class="col-xs-8">
-                                <input class="form-control" name="password" id="password" type="password" />
+                                <input class="form-control" name="password" id="password" type="password" required />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-4 control-label" for="telNum">手机号码</label>
                             <div class="col-xs-8">
-                                <input class="form-control" name="telNum" id="telNum" type="tel" maxlength="11" />
+                                <input class="form-control" name="telNum" id="telNum" type="tel" maxlength="11" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,57 +84,42 @@
         </div>
     </div>
 
+    <!-- template hidden -->
+    <ul class="template">
+        <li class="league col-xs-12 col-sm-12 col-md-6" id="template">
+            <div class="league-card">
+                <button type="button" class="btn btn-primary apply-btn" data-toggle="modal" data-target="#applyModal" data-id="league-id">报名</button>
+                <div class="img-box">
+                    <img class="league-photo" src="images/default/default-user-avartar.png" alt="league.png" />
+                </div>
+                <div class="league-info">
+                    <h2 class="league-title">古典乐器协会</h2>
+                    <p class="league-intro">图文混排的Thumbnail List这是一种在很多网站上都用得比较普遍的列表样式，“图文混排”，图文混排往往比单一的文字更能吸引人的眼球</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <!-- /template -->
+
     <div class="container">
         <ul class="league-list" id="league-list">
-            <li class="league col-xs-12 col-sm-12 col-md-6">
-                <div class="league-card">
-                    <button type="button" class="btn btn-primary apply-btn" data-toggle="modal" data-target="#applyModal">报名</button>
-                    <div class="img-box">
-                        <img class="league-photo" src="images/founder-avatar/del.png" alt="645.png" />
-                    </div>
-                    <div class="league-info">
-                        <h2 class="league-title">电竞社</h2>
-                        <p class="league-intro">图文混排的Thumbnail List这是一种在很多网站上都用得比较普遍的列表样式，“图文混排”，图文混排往往比单一的文字更能吸引人的眼球</p>
-                    </div>
-                </div>
-            </li>
-            <li class="league col-xs-12 col-sm-12 col-md-6">
-                <div class="league-card">
-                    <button type="button" class="btn btn-primary apply-btn" data-toggle="modal" data-target="#applyModal">报名</button>
-                    <div class="img-box">
-                        <img class="league-photo" src="images/default/default-user-avartar.png" alt="645.png" />
-                    </div>
-                    <div class="league-info">
-                        <h2 class="league-title">古典乐器协会</h2>
-                        <p class="league-intro">图文混排的Thumbnail List这是一种在很多网站上都用得比较普遍的列表样式，“图文混排”，图文混排往往比单一的文字更能吸引人的眼球</p>
-                    </div>
-                </div>
-            </li>
-            <li class="league col-xs-12 col-sm-12 col-md-6">
-                <div class="league-card">
-                    <button type="button" class="btn btn-primary apply-btn" data-toggle="modal" data-target="#applyModal">报名</button>
-                    <div class="img-box">
-                        <img class="league-photo" src="images/founder-avatar/del.png" alt="645.png" />
-                    </div>
-                    <div class="league-info">
-                        <h2 class="league-title">电竞社</h2>
-                        <p class="league-intro">图文混排的Thumbnail List这是一种在很多网站上都用得比较普遍的列表样式，“图文混排”，图文混排往往比单一的文字更能吸引人的眼球</p>
-                    </div>
-                </div>
-            </li>
-            <li class="league col-xs-12 col-sm-12 col-md-6">
-                <div class="league-card">
-                    <button type="button" class="btn btn-primary apply-btn" data-toggle="modal" data-target="#applyModal">报名</button>
-                    <div class="img-box">
-                        <img class="league-photo" src="images/default/default-user-avartar.png" alt="645.png" />
-                    </div>
-                    <div class="league-info">
-                        <h2 class="league-title">古典乐器协会</h2>
-                        <p class="league-intro">图文混排的Thumbnail List这是一种在很多网站上都用得比较普遍的列表样式，“图文混排”，图文混排往往比单一的文字更能吸引人的眼球</p>
-                    </div>
-                </div>
-            </li>
         </ul>
+    </div>
+
+    <div id="successAlert" class="col-xs-10 col-md-8 col-xs-offset-1 col-md-offset-2 alert alert-success alert-dismissible container react-alert" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <p>注册成功并已报名！</p>
+    </div>
+
+    <div id="errorAlert" class="col-xs-10 col-md-8 col-xs-offset-1 col-md-offset-2 alert alert-danger alert-dismissible container react-alert" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <p>未知错误，注册失败，无法报名，抱歉！</p>
     </div>
 
     <footer>
@@ -148,8 +133,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/apply.min.js"></script>
 
 </body>
