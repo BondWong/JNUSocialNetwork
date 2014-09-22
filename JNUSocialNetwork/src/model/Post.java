@@ -111,7 +111,7 @@ public class Post extends AttributeModel {
 		this.imageLinks.add(imageLink);
 	}
 
-	public void addImageLink(Set<String> links) {
+	public void addImageLinks(Set<String> links) {
 		this.imageLinks.addAll(links);
 	}
 
@@ -124,7 +124,31 @@ public class Post extends AttributeModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.imageLinks.remove(imageLink);
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			if (!postImageLink.contains(imageLink))
+				temp.add(postImageLink);
+		}
+		this.imageLinks = temp;
+	}
+
+	public void removeImageLinks(Set<String> imageLinks) {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap.addLinks(imageLinks);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			for (String imageLink : imageLinks) {
+				if (!postImageLink.contains(imageLink))
+					temp.add(postImageLink);
+			}
+		}
+		this.imageLinks = temp;
 	}
 
 	public Set<String> getImageLinks() {

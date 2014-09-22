@@ -32,6 +32,8 @@
 					<button class="btn btn-default joinSActivity">参加活动</button>
 					<button class="btn btn-default editActivity" data-toggle='modal'
 						data-target='#editActivity'>管理活动</button>
+					<button class="btn btn-default activityPhoto" data-toggle='modal'
+						data-target='#addActivityPhoto'>添加活动图片</button>
 					<div class="downLoadList">
 						<a class="btn btn-default" target="_blank"
 							id="download-name-list-button">下载参与列表</a>
@@ -88,9 +90,9 @@
 									style="width: 81%; text-align: center; padding: 0px; display: none;">请输入时间！</div>
 							</div>
 							<div class="activityItem">
-									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%;margin-left:80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
-								</div>
+								<div id="fail_popover2" class="alert alert-danger"
+									style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
+							</div>
 							<div class="activityItem">
 								<span>活动地点：</span>
 								<textarea class="form-control activityInput" placeholder=""
@@ -104,10 +106,11 @@
 									maxLength="200" style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
-									<span>人数上限：</span><input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityNum" pattern="[0-9]{3}" required autofocus maxLength="3" />
-								</div>
+								<span>人数上限：</span><input type="text"
+									class="form-control activityInput" placeholder=""
+									id="activityNum" pattern="[0-9]{3}" required autofocus
+									maxLength="3" />
+							</div>
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"
 									style="width: auto;"> <i
@@ -115,15 +118,49 @@
 									<input id="fileupload" type="file" name="files[]">
 								</span>
 							</div>
-							<!-- The container for the uploaded files -->
-							<div id="files" class="files"></div>
-							<br>
 						</div>
 						<br></br>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">取消</button>
 							<button type="sumbit" class="btn btn-primary" id="saveActivity"
+								value="upload">保存</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<div class="modal fade" id="addActivityPhoto" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加图片</h4>
+					</div>
+					<form class="activityPhotoForm" enctype="multipart/form-data">
+						<div class="modal-body modalBody">
+
+							<!-- The fileinput-button span is used to style the file input field as button -->
+							<span class="btn btn-success fileinput-button photoAdd"> <i
+								class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <!-- The file input field used as target for the file upload widget -->
+								<input id="fileuploadPhoto" type="file" name="files[]" multiple>
+							</span> <br> <br>
+							<!-- The global progress bar -->
+							<div id="progress" class="progress progressCust">
+								<div class="progress-bar progress-bar-success"></div>
+							</div>
+							<!-- The container for the uploaded files -->
+							<div id="files" class="files"></div>
+							<br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary addActivityPhoto"
 								value="upload">保存</button>
 						</div>
 					</form>
@@ -146,6 +183,20 @@
 								class='aA'></span>
 						</div>
 						<div class="detailTxt activityShowD"></div>
+					</div>
+				</div>
+				<div class="activityPhotos">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<div class="carousel-inner">
+							
+						</div>
+						<a class="left carousel-control" href="#myCarousel"
+							data-slide="prev"><span
+							class="glyphicon glyphicon-chevron-left"></span></a> <a
+							class="right carousel-control" href="#myCarousel"
+							data-slide="next"><span
+							class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
 				<div class="aBodyComment commentBtn">
@@ -188,6 +239,23 @@
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>
 	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/jquery.ui.widget.js"></script>
+	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+	<script src="js/load-image.min.js"></script>
+	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+	<script src="js/canvas-to-blob.min.js"></script>
+	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+	<script src="js/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="js/jquery.fileupload.js"></script>
+	<!-- The File Upload processing plugin -->
+	<script src="js/jquery.fileupload-process.js"></script>
+	<!-- The File Upload image preview & resize plugin -->
+	<script src="js/jquery.fileupload-image.js"></script>
+	<!-- The File Upload video preview plugin -->
+	<script src="js/jquery.fileupload-video.js"></script>
+	<!-- The File Upload validation plugin -->
+	<script src="js/jquery.fileupload-validate.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/EventAPI.js"></script>
 	<script src="js/function.js"></script>
@@ -204,23 +272,30 @@
 							var communityID = url.substr(url.indexOf("?") + 1,
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
+							showImages();
 							var now = new Date();
-							if (activity.participantIDs.length >= activity.attributes.limitation || activity.attributes.startDate - now.getTime() <= 0) {
+							if (activity.participantIDs.length >= activity.attributes.limitation
+									|| activity.attributes.startDate
+											- now.getTime() <= 0) {
 								$('.joinSActivity').remove();
 							}
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();
-								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && USERID == community.attributes.userID ) {
+								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+										&& USERID == community.attributes.userID) {
 									$('.joinSActivity').remove();
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
+									$('.activityPhoto').css("display", "inline");
 									$('#activityLike').css("display", "none");
 									$('.activityAddCommunity').css("display",
 											"none");
 								}
 								var now = new Date();
-								if(activity.attributes.startDate - now.getTime()<= 0 || activity.attributes.reminded != "false"){
+								if (activity.attributes.startDate
+										- now.getTime() <= 0
+										|| activity.attributes.reminded != "false") {
 									$('.joinSActivity').remove();
 									$('.editActivity').remove();
 								}
@@ -234,8 +309,7 @@
 							} else {
 								clickOffEvent();
 							}
-							
-							
+
 							showActivityDetail(activity, community);
 						});
 	</script>

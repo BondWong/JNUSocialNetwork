@@ -160,7 +160,12 @@ public class Member extends User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		imageLinks.remove(link);
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			if (!postImageLink.contains(link))
+				temp.add(postImageLink);
+		}
+		this.imageLinks = temp;
 	}
 
 	public void removeImageLinks(Set<String> links) {
@@ -172,7 +177,14 @@ public class Member extends User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.imageLinks.removeAll(links);
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			for (String imageLink : links) {
+				if (!postImageLink.contains(imageLink))
+					temp.add(postImageLink);
+			}
+		}
+		this.imageLinks = temp;
 	}
 
 	public Set<String> getImageLinks() {

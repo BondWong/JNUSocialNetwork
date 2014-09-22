@@ -924,7 +924,13 @@ body {
 	background-color: #FFF;
 	padding: 20px;
 }
-
+.activityPhotos{
+	width: 100%;
+	background-color: #FFF;
+	padding: 20px;
+	margin-top: 20px;
+	position : relative;
+}
 .aBodyCard {
 	width: 100%;
 	padding-bottom: 20px;
@@ -942,7 +948,12 @@ body {
 	margin-top: 20px;
 	background-color: #FFF
 }
-
+.carousel{
+	margin-bottom: 0px;
+}
+.carousel-control.left {
+	background-image:"";
+}
 .aCommentItem {
 	width: 100%;
 	background-color: #FFF;
@@ -1703,4 +1714,14 @@ footer {
 	position:absolute;
 	bottom:5px;
 	right:5px;
+}
+.activityPhoto{
+	display:none;
+}
+.deleteAI{
+	position:absolute;
+	right:10px;
+	top:10px;
+	z-index: 1000;
+	cursor:pointer;
 }
