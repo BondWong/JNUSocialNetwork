@@ -468,7 +468,7 @@ public class PostService {
 		}).build();
 	}
 
-	@Path("removeImages/{ID : \\d+}")
+	@Path("removeImages/{postID : \\d+}")
 	@PUT
 	public Response removeImages(@PathParam("postID") Long postID,
 			@QueryParam("imageLinks") List<String> imageLinks) throws Exception {
