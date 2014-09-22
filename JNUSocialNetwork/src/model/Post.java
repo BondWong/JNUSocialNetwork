@@ -124,7 +124,12 @@ public class Post extends AttributeModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.imageLinks.remove(imageLink);
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			if (!postImageLink.contains(imageLink))
+				temp.add(postImageLink);
+		}
+		this.imageLinks = temp;
 	}
 
 	public void removeImageLinks(Set<String> imageLinks) {
@@ -136,7 +141,14 @@ public class Post extends AttributeModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.imageLinks.removeAll(imageLinks);
+		Set<String> temp = new LinkedHashSet<String>();
+		for (String postImageLink : this.imageLinks) {
+			for (String imageLink : imageLinks) {
+				if (!postImageLink.contains(imageLink))
+					temp.add(postImageLink);
+			}
+		}
+		this.imageLinks = temp;
 	}
 
 	public Set<String> getImageLinks() {
