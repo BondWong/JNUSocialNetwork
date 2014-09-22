@@ -1,5 +1,6 @@
 package transaction.DAOFetchTransaction;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class InstitutionRecommendationTransaction extends DAOTransaction {
 		transaction = new RandomlyFetchMemberTransaction();
 		List<Map<String, Object>> members = (List<Map<String, Object>>) transaction
 				.execute();
+		transaction = new FetchMemberTransaction();
 		Map<String, Object> member = (Map<String, Object>) transaction
 				.execute(params);
 		Map<String, String> memberAttributes = (Map<String, String>) member
@@ -42,8 +44,10 @@ public class InstitutionRecommendationTransaction extends DAOTransaction {
 				recommendations.add(m);
 		}
 
-		return recommendations.size() > TOINDEX ? recommendations.subList(
-				STARTINDEX, TOINDEX) : recommendations;
+		recommendations = recommendations.size() > TOINDEX ? recommendations
+				.subList(STARTINDEX, TOINDEX) : recommendations;
+		Collections.shuffle(recommendations);
+		return recommendations;
 	}
 
 }
