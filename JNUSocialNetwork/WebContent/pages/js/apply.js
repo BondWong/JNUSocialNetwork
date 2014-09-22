@@ -32,10 +32,9 @@
         postdata.wish2 = $("#intent_dept2").find("option:selected").val();
         var settings = {
             type: "POST",
-            url: "/app/user/registerCandC",
             data: postdata,
             error: function (XHR, textStatus, errorThrown) {
-                console.log("post error");
+                console.log("post error!" + errorThrown);
                 displayAlert($("#errorAlert"));
             },
             success: function (data, textStatus) {
@@ -43,10 +42,10 @@
                 displayAlert($("#successAlert"));
             },
             headers: {
-                "Content-Type:": "application/json;charset=utf-8"
+                "Content-Type": "application/json;charset=utf-8"
             }
         };
-
+        $.ajax("/app/user/registerCandC", settings);
         $('#applyModal').modal('hide');
     });
 
