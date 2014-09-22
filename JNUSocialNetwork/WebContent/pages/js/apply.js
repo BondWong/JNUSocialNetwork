@@ -24,21 +24,29 @@
 
     // 确认提交
     $("#confirm-btn").click(function () {
-        var data = {};
-        data.name = $("#studentID").val();
-        data.password = $("#password").val();
-        data.telnum = $("#telNum").val();
-        data.wish1 = $("#intent_dept1").find("option:selected").val();
-        data.wish2 = $("#intent_dept2").find("option:selected").val();
-        $.post("/app/user/registerCandC", data)
-            .success(function () {
-                console.log("post success");
-                displayAlert($("#successAlert"));
-            })
-            .error(function () {
+        var postdata = {};
+        postdata.name = $("#studentID").val();
+        postdata.password = $("#password").val();
+        postdata.telnum = $("#telNum").val();
+        postdata.wish1 = $("#intent_dept1").find("option:selected").val();
+        postdata.wish2 = $("#intent_dept2").find("option:selected").val();
+        var settings = {
+            type: "POST",
+            url: "/app/user/registerCandC",
+            data: postdata,
+            error: function (XHR, textStatus, errorThrown) {
                 console.log("post error");
                 displayAlert($("#errorAlert"));
-            });
+            },
+            success: function (data, textStatus) {
+                console.log("post success");
+                displayAlert($("#successAlert"));
+            },
+            headers: {
+                "Content-Type:": "application/json;charset=utf-8"
+            }
+        };
+
         $('#applyModal').modal('hide');
     });
 
