@@ -62,10 +62,11 @@
 				login_initialization(USERID);
 				peopleClickEvent();
 				clickEvent();
+				 PinCommon();
 			} else {
+				pHot();
 				clickOffEvent();
 			}
-			pHot();
 			Msnry('.userContainer', '.userCard', 170);
 
 		});
