@@ -237,6 +237,7 @@ $(window)
 														dataString.imageLinks,
 														dataString.owner.attributes.avatarLink);
 												$(".pro_body").append(boarddiv);
+												$('img.userImg').userTips();
 												Msnry('.pro_body', '.post', 435);
 											}
 										});
