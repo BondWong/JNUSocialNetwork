@@ -25,6 +25,8 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("post/joinActivity");
 		loginProtectionURLs.add("post/leaveActivity");
 		loginProtectionURLs.add("post/updateAttributes");
+		loginProtectionURLs.add("post/addImages");
+		loginProtectionURLs.add("post/removeImages");
 
 		loginProtectionURLs.add("community/add");
 		loginProtectionURLs.add("community/delete");
@@ -76,6 +78,8 @@ public class ProtectedURLManager {
 		authorizationProtectionURLs.put("post/joinActivity", userTypes);
 		authorizationProtectionURLs.put("post/leaveActivity", userTypes);
 		authorizationProtectionURLs.put("post/updateAttributes", userTypes);
+		authorizationProtectionURLs.put("post/addImages", userTypes);
+		authorizationProtectionURLs.put("post/removeImages", userTypes);
 
 		authorizationProtectionURLs.put("community/add", communityOwner);
 		authorizationProtectionURLs.put("community/delete", communityOwner);
