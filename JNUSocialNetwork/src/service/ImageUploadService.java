@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.structure.Image;
+import net.coobird.thumbnailator.Thumbnails;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -116,6 +117,15 @@ public class ImageUploadService extends HttpServlet {
 					+ System.currentTimeMillis() + extention;
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
+			int size = (int) (uploaddedFile.length() / (1024 * 1024));
+			if (size >= 1)
+				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
+			else if (size > 1 && size <= 2)
+				Thumbnails.of(uploaddedFile).scale(0.6f).toFile(uploaddedFile);
+			else if (size > 2 && size <= 3)
+				Thumbnails.of(uploaddedFile).scale(0.5f).toFile(uploaddedFile);
+			else if (size > 3)
+				Thumbnails.of(uploaddedFile).scale(0.4f).toFile(uploaddedFile);
 			BufferedImage bi = ImageIO.read(uploaddedFile);
 			Image image = new Image(temp, bi.getHeight(), bi.getWidth());
 			links.add(JsonUtil.toJson(image));
