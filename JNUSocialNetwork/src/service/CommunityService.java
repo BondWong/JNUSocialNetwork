@@ -404,11 +404,10 @@ public class CommunityService {
 				}).build();
 	}
 
-	@Path("getDepartment/{communityID:\\d+}")
+	@Path("getDepartment/{communityID : \\d+}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getDepartment(
-			@PathParam("communityID") Long communityID) {
+	public Response getDepartment(@PathParam("communityID") Long communityID) {
 		List<String> departments = new ArrayList<String>();
 		departments = DepartmentsInfoManager.get(communityID);
 		return Response.ok(new GenericEntity<List<String>>(departments) {

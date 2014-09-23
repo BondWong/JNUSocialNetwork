@@ -14,6 +14,12 @@
 			<li><a href="profile.jsp?nav=post&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-home">&nbsp;<span
 						id="nav-bar-user">个人中心</span></span></a></li>
+			<li><a href="community.jsp?nav=mycommunity"><span
+					class="glyphicon glyphicon-th-large">&nbsp;<span
+						id="">我的社区</span></span></a></li>
+			<!--  <li><a href=""><span
+					class="glyphicon glyphicon-flag">&nbsp;<span
+						id="">我的活动</span></span></a></li>	-->		
 			<li><a href="../security/UserLogoutServlet" id="lougout_button"><span
 					class="glyphicon glyphicon-log-out">&nbsp;登出</span></a></li>
 		</ul></li>
