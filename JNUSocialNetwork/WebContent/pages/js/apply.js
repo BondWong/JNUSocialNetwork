@@ -32,7 +32,7 @@
         postdata.wish2 = $("#intent_dept2").find("option:selected").val();
         var settings = {
             type: "POST",
-            data: postdata,
+            data: JSON.stringify(postdata),
             error: function (XHR, textStatus, errorThrown) {
                 console.log("post error!" + errorThrown);
                 displayAlert($("#errorAlert"));
