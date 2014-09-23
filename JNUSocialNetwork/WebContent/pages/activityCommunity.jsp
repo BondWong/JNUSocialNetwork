@@ -173,7 +173,7 @@
 								<div class="activityItem">
 									<span>人数上限：</span><input type="text"
 										class="form-control activityInput" placeholder=""
-										id="activityNum" pattern="[0-9]{3}" required autofocus maxLength="3" />
+										id="activityNum" pattern="[0-9]{1,3}" data-errormessage-pattern-mismatch="请输入参与人数，最大999" required autofocus maxLength="3" />
 								</div>
 								<div class="activityItem">
 									<span>活动图片</span> <span
