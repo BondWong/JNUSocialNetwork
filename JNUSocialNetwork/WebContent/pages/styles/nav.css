@@ -181,9 +181,26 @@ display: block;
 	height: 50px;
 	
 }
+
 .home-nav a:hover{
 	border-bottom:1px solid #BE3948;
 	
+}
+.community-bar li{
+	margin-top:3px;
+	transition: all 0.3s ease 0s;
+}
+.community-bar{
+	width:62px;
+	cursor:pointer;
+	display:none;
+	color:#999;
+	text-align:center;
+	
+}
+.community-bar li:hover{
+	color:#fff;
+	border-bottom:1px solid #BE3948;
 }
 .navbar-costom{
 	margin-top:22px;

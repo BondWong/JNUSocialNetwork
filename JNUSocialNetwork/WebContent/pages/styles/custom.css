@@ -152,21 +152,21 @@ body {
 }
 
 .content_container {
-	opacity:0;
+	opacity: 0;
 	background-color: #FFF;
 	display: block;
 	height: 375px;
 	width: 265px;
 	margin-top: 10px;
 	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
-	position:relative;
+	position: relative;
 }
 
 .img_container {
 	height: 265px;
 	width: 265px;
 	cursor: pointer;
-	position:relative;
+	position: relative;
 }
 
 .btn_cust {
@@ -223,7 +223,7 @@ body {
 }
 
 .post {
-	opacity:0;
+	opacity: 0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #FFF;
@@ -365,11 +365,12 @@ body {
 	float: right;
 	background-color: #fff;
 	cursor: pointer;
-	position:absolute;
-	bottom:10px;
-	right:10px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }
-.activityJoin{
+
+.activityJoin {
 	display: block;
 	height: 30px;
 	width: 70px;
@@ -382,6 +383,7 @@ body {
 	background-color: #fff;
 	cursor: pointer;
 }
+
 .act_time {
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -406,7 +408,7 @@ body {
 	width: 900px;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 .profileImgDiv {
@@ -488,7 +490,7 @@ body {
 .popTip .urserInfShort {
 	text-align: center;
 	margin-top: -40px;
-	word-wrap:break-word;
+	word-wrap: break-word;
 }
 
 .post .aboutBlue {
@@ -496,7 +498,7 @@ body {
 	width: 100%;
 	min-height: 300px;
 	border-width: 5px 1px 2px 1px;
-	border-style: solid ;
+	border-style: solid;
 	border-color: #76a7fa #d8d8d8 #d8d8d8;
 	padding: 30px 20px 10px 20px;
 }
@@ -510,6 +512,7 @@ body {
 	border-color: #e46f61 #d8d8d8 #d8d8d8;
 	padding: 30px 20px 10px 20px;
 }
+
 .post .aboutBlack {
 	background-color: #FFF;
 	width: 100%;
@@ -548,10 +551,12 @@ body {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-.iAt{
-	float:left;
-	width:78%;
+
+.iAt {
+	float: left;
+	width: 78%;
 }
+
 .InforItem input {
 	float: left;
 	width: 150px;
@@ -559,31 +564,37 @@ body {
 
 .aEditbtn {
 	margin-right: 50px;
-	float:right;
+	float: right;
 	display: none;
 }
+
 .aEditbtn2 {
 	margin-right: 50px;
-	float:right;
+	float: right;
 	display: none;
 }
+
 .aEditbtn3 {
 	margin-right: 50px;
-	float:right;
+	float: right;
 	display: none;
 }
+
 .aSavebtn {
-	float:right;
+	float: right;
 	margin-right: 50px;
 }
+
 .aSavebtn2 {
-	float:right;
+	float: right;
 	margin-right: 50px;
 }
+
 .aSavebtn3 {
-	float:right;
+	float: right;
 	margin-right: 50px;
 }
+
 .alertCust {
 	margin-right: auto;
 	margin-right: auto;
@@ -605,7 +616,7 @@ body {
 }
 
 .photo {
-	opacity:0;
+	opacity: 0;
 	background-color: #FFF;
 	margin-bottom: 20px;
 	float: left;
@@ -706,19 +717,10 @@ body {
 	float: left;
 }
 
-.titleMy {
-	display: none;
-}
-
-.containerMy {
-	display: none;
-}
-
 .createCommunity {
 	margin-left: 10px;
 	margin-top: 30px;
 }
-
 
 .editActivity {
 	display: none;
@@ -877,7 +879,7 @@ body {
 	width: 100%;
 	height: 365px;
 	overflow: hidden;
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 .activityInfo {
@@ -906,13 +908,16 @@ body {
 .activityBody {
 	margin-top: 30px;
 }
-.activity{
-	opacity:0;
+
+.activity {
+	opacity: 0;
 }
+
 .aBodyLeft {
 	float: left;
 	width: 710px;
 }
+
 .aBodyRight {
 	float: left;
 	margin-left: 20px;
@@ -924,13 +929,15 @@ body {
 	background-color: #FFF;
 	padding: 20px;
 }
-.activityPhotos{
+
+.activityPhotos {
 	width: 100%;
 	background-color: #FFF;
 	padding: 20px;
 	margin-top: 20px;
-	position : relative;
+	position: relative;
 }
+
 .aBodyCard {
 	width: 100%;
 	padding-bottom: 20px;
@@ -948,12 +955,15 @@ body {
 	margin-top: 20px;
 	background-color: #FFF
 }
-.carousel{
+
+.carousel {
 	margin-bottom: 0px;
 }
+
 .carousel-control.left {
-	background-image:"";
+	background-image: "";
 }
+
 .aCommentItem {
 	width: 100%;
 	background-color: #FFF;
@@ -1101,9 +1111,11 @@ body {
 	opacity: .80;
 	filter: alpha(opacity = 93);
 }
-.displayBody{
-	opacity:0;
+
+.displayBody {
+	opacity: 0;
 }
+
 .regBox {
 	padding: 20px;
 	text-align: center;
@@ -1449,7 +1461,7 @@ body {
 }
 
 .userCard {
-	opacity:0;
+	opacity: 0;
 	margin-top: 20px;
 	float: left;
 	width: 170px;
@@ -1501,13 +1513,16 @@ body {
 	color: #404040;
 	cursor: pointer;
 }
+
 .tipUser2 {
 	color: #404040;
 }
+
 .tipUser2:hover {
 	color: #404040;
 	cursor: pointer;
 }
+
 .rl-button-text {
 	text-align: center;
 }
@@ -1651,77 +1666,101 @@ footer {
 #createActivityBtn {
 	display: none;
 }
-.modal-custom{
+
+.modal-custom {
 	position: relative;
 	padding: 20px 100px;
 	text-align: center;
 }
-.loginA{
-	margin-left:50px;
+
+.loginA {
+	margin-left: 50px;
 }
-.activityAddCommunity{
-	display:none;
+
+.activityAddCommunity {
+	display: none;
 }
-.communityPostSpan{
-	font-size:16px;
-	color:#aaa;
-	cursor:pointer;
-	max-width:108px;
-	overflow:hidden;
-	text-decoration:none;
+
+.communityPostSpan {
+	font-size: 16px;
+	color: #aaa;
+	cursor: pointer;
+	max-width: 108px;
+	overflow: hidden;
+	text-decoration: none;
 	transition: all 0.3s ease 0s;
 }
 
-.communityPostSpan:hover{
-	color:#000;
-	text-decoration:none;
+.communityPostSpan:hover {
+	color: #000;
+	text-decoration: none;
 }
-.selectAbout{
-	margin-left:20px;
-	display:none;
+
+.selectAbout {
+	margin-left: 20px;
+	display: none;
 }
-.Cintro{
-	word-wrap:break-word;
+
+.Cintro {
+	word-wrap: break-word;
 	display: block;
 	width: 50%;
 	float: left;
 }
-.teleUpload{
-	margin-top:20px;
+
+.teleUpload {
+	margin-top: 20px;
 }
-.teleUpload2{
-	margin-top:20px;
+
+.teleUpload2 {
+	margin-top: 20px;
 }
-#browserDetection{
-	top:200px;
-	display:block;
-	opacity:1;
-	
+
+#browserDetection {
+	top: 200px;
+	display: block;
+	opacity: 1;
 }
-.agree{
-	cursor:pointer;
+
+.agree {
+	cursor: pointer;
 }
-.declare h1{
-	text-align:center;
-	width:100%;
-	margin-left:auto;
-	margin-right:auto;
+
+.declare h1 {
+	text-align: center;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
-#popR{
-	width:350px;
+
+#popR {
+	width: 350px;
 }
-.officalIcon{
-	position:absolute;
-	bottom:5px;
-	right:5px;
+
+.officalIcon {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
-.activityPhoto{
-	display:none;
+
+.activityPhoto {
+	display: none;
 }
-.deleteAI{
-	position:absolute;
-	right:10px;
-	top:10px;
+
+.deleteAI {
+	position: absolute;
+	right: 10px;
+	top: 10px;
 	z-index: 1000;
-	cursor:pointer;
+	cursor: pointer;
+}
+
+.guideCommunity {
+	display:none;
+	background-color: #247EEC;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 15px;
 }

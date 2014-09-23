@@ -645,9 +645,9 @@ function AddCommunity(userID, JsonData) {
 			response = data;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 		},
 		error : function(data, status) {
@@ -670,9 +670,9 @@ function DeleteCommunity(communityID) {
 			response = status;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 
 		},
@@ -712,9 +712,9 @@ function LeaveCommunity(userID, communityID) {
 			response = status;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 		},
 		error : function(data, status) {
