@@ -107,7 +107,7 @@ public class LoginServlet extends HttpServlet {
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 
 						response.addCookie(cookie);
-						response.sendRedirect("/pages/community.jsp");
+						response.sendRedirect("/pages/community.jsp?nav=mycommunity");
 					}
 				} else {
 					account.setLastAccessDate(new Date());
