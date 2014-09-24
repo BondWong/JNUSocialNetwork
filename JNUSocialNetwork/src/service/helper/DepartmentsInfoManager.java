@@ -67,7 +67,7 @@ public class DepartmentsInfoManager {
 		department4.add("宣传部");
 		department4.add("编辑部");
 
-		// departments.put(1411054407457l, department4);
+		departments.put(1411555413859l, department4);
 
 		// 暨南大学职业发展协会珠海分会
 		List<String> department5 = new ArrayList<String>();
