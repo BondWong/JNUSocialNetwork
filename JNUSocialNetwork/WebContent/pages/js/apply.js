@@ -63,7 +63,7 @@
     // FetchByType 输入：communityID;返回：postJson
     function fetchCommunityByType(communityType, startIndex, pageSize, successCallback) {
         var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize;
-        // var url = "js/applydata.json";
+        //var url = "js/applydata.json";
         $.getJSON(url, successCallback);
     }
 
@@ -95,8 +95,11 @@
 
     function fetchSucceed(data) {
         // 过滤不可用的社团信息
+
+        var filterArr = ["1411055191107", "1411090991902", "1411054407457", "1411301318703", "1411397204271", "1411522941400", "1411390027993"];
         for (var i in data) {
-            if (data[i].available) {
+            //if (data[i].available)
+            if (filterArr.indexOf(data[i].ID >= 0)) {
                 availableData.push(data[i]);
             }
         }
@@ -154,4 +157,19 @@ function SimpleLeague() {
     this.title = '';
     this.intro = '';
     this.departments = [];
+}
+
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (obj, fromIndex) {
+        if (fromIndex == null) {
+            fromIndex = 0;
+        } else if (fromIndex < 0) {
+            fromIndex = Math.max(0, this.length + fromIndex);
+        }
+        for (var i = fromIndex, j = this.length; i < j; i++) {
+            if (this[i] === obj)
+                return i;
+        }
+        return -1;
+    };
 }
