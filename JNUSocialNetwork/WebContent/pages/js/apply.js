@@ -9,6 +9,7 @@
 
     $(document).ready(function () {
         fetchCommunityByType("SCHOOLUNION", 0, 30, fetchSucceed);
+        addlisteners();
     });
 
     $(window).scroll(function () {
@@ -18,7 +19,6 @@
         if (aa < 0.1 && $("#league-list").children().size() < availableData.length) {
             // 每次加载3条新信息
             generateTopN(availableData.slice($("#league-list").children().size()), 3);
-            addlistener();
         }
     });
 
@@ -54,8 +54,8 @@
     });
 
     // 为报名按钮添加监听器
-    function addlistener() {
-        $(".apply-btn").click(function (ent) {
+    function addlisteners() {
+        $("#league-list").delegate('.apply-btn', 'click', function () {
             setDepartments($(this).data("id"));
         });
     }
@@ -126,7 +126,6 @@
             newleague.imgsrc = JSON.parse(data[j].attributes.communityCard).src;
             generateListItem(newleague);
         }
-        addlistener();
     }
 
     function generateListItem(league) {
