@@ -645,7 +645,7 @@ function AddCommunity(userID, JsonData) {
 			response = data;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp?nav=mycommunity";
+						+ "&target=community.jsp?nav=mycommunity";
 			} else {
 				window.location.href = 'community.jsp?nav=mycommunity';
 			}
