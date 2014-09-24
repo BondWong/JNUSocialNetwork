@@ -23,7 +23,8 @@
 	<!-- /.navbar -->
 	<div class="communitySideBar">
 		<ul class="nav nav-pills nav-stacked" role="tablist">
-			<li><a class='myCommunityBtn' href='community.jsp?nav=mycommunity'>我的社区</a></li>
+			<li><a class='myCommunityBtn'
+				href='community.jsp?nav=mycommunity'>我的社区</a></li>
 			<li><a href='community.jsp?nav=official'>官方社区</a></li>
 			<li><a href='community.jsp?nav=student'>社团组织</a></li>
 			<li><a href='community.jsp?nav=folk'>个人社区</a></li>
@@ -51,7 +52,17 @@
 			<c:when test="${param.nav eq 'discovery' }">
 				<%@ include file="parts/communityDiscovery.jsp"%>
 			</c:when>
-	</c:choose>
+			<c:otherwise>
+				<script>
+					if (EventSource.isPolyfill != undefined) {
+						window.location.href = 'ieSuccess.jsp'
+								+ "?target=community.jsp?nav=mycommunity";
+					} else {
+						window.location.href = 'community.jsp?nav=mycommunity';
+					}
+				</script>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -88,8 +99,7 @@
 						<span>社区名片</span> <span class="btn btn-success fileinput-button">
 							<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <input
 							id="fileupload" type="file" name="files">
-						</span>
-						<span style="font-size:12px;margin-top:10px;">[请上传长宽比例1:1的图片，否则影响显示效果]</span>
+						</span> <span style="font-size: 12px; margin-top: 10px;">[请上传长宽比例1:1的图片，否则影响显示效果]</span>
 						<!-- The container for the uploaded files -->
 						<div id="files" class="files"></div>
 						<br>
@@ -111,7 +121,7 @@
 	<%@ include file="parts/chatRoom.jsp"%>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <%@ include file="parts/communityJavaScript.jsp"%>
+	<%@ include file="parts/communityJavaScript.jsp"%>
 	<%@ include file="parts/contentScroll.jsp"%>
 </body>
 </html>
