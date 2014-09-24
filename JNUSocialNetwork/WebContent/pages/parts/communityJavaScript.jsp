@@ -165,7 +165,7 @@
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -264,9 +264,9 @@
 											pageSize);
 									$
 											.each(
-													response.reverse(),
+													response,
 													function(n, community) {
-														if (community.available == true) {
+														if (community.available == true ) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
