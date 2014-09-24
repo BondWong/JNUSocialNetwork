@@ -99,7 +99,7 @@
         var filterArr = ["1411055191107", "1411090991902", "1411054407457", "1411301318703", "1411397204271", "1411522941400", "1411390027993"];
         for (var i in data) {
             //if (data[i].available)
-            if (filterArr.indexOf(data[i].ID >= 0)) {
+            if (filterArr.indexOf(data[i].ID) >= 0) {
                 availableData.push(data[i]);
             }
         }
