@@ -25,24 +25,6 @@ function login_initialization(ID) {
 									$.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src);
 				}
 			});
-	if ($.parseJSON(sessionStorage.getItem("user")) != null
-			&& $.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER') {
-		if (FetchCommunityByOwner(USERID, "0", "5").length >= 1) {
-			$('.createCom').remove();
-		}
-		$('.appCom').remove();
-		$('.titleMy').css("display", "block");
-		$('.containerMy').css("display", "block");
-		$('#myCommunityBtn').css("display", "block");
-	}
-	if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER') {
-			$('.createCom').remove();
-	}
-	if (FetchCommunityByJoin(USERID, "0", "1").length != 0) {
-		$('.titleMy').css("display", "block");
-		$('.containerMy').css("display", "block");
-		$('#myCommunityBtn').css("display", "block");
-	}
 
 	/*
 	 * SSE Handle

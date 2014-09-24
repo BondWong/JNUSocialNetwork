@@ -123,7 +123,7 @@ function AddPostToCommunity(UserID, communityID, JsonData) {
 	});
 	return response;
 }
-//addImages 输入：数组ImageLinks[];返回：postJson
+// addImages 输入：数组ImageLinks[];返回：postJson
 function AddActivityImages(postID, imageLinks) {
 	var response = "";
 	var Urls = '../../app/post/addImages/' + postID + '?';
@@ -169,12 +169,13 @@ function DeletePost(postID, imageLinks) {
 	});
 	return response;
 }
-//DeleteAI 输入：postID
-function DeleteAI(postID , imageLinks) {
+// DeleteAI 输入：postID
+function DeleteAI(postID, imageLinks) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
-		url : '../../app/post/removeImages/' + postID + '?imageLinks=' + imageLinks,
+		url : '../../app/post/removeImages/' + postID + '?imageLinks='
+				+ imageLinks,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -639,15 +640,15 @@ function AddCommunity(userID, JsonData) {
 			request.setRequestHeader("ID", USERID);
 		},
 		data : JsonData,
-		async : false,
 		contentType : "application/json",
+		asyn : false,
 		success : function(data, status) {
 			response = data;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 		},
 		error : function(data, status) {
@@ -670,9 +671,9 @@ function DeleteCommunity(communityID) {
 			response = status;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 
 		},
@@ -712,9 +713,9 @@ function LeaveCommunity(userID, communityID) {
 			response = status;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
-						+ "?target=community.jsp";
+						+ "?target=community.jsp?nav=mycommunity";
 			} else {
-				window.location.href = 'community.jsp';
+				window.location.href = 'community.jsp?nav=mycommunity';
 			}
 		},
 		error : function(data, status) {
@@ -1149,7 +1150,7 @@ function FetchUserByID(userID) {
 	});
 	return response;
 }
-//fetchRandom
+// fetchRandom
 function FetchRandom(startIndex, pageSize) {
 	var response = "";
 	$.ajax({

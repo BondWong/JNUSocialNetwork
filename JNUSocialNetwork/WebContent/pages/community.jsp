@@ -23,50 +23,46 @@
 	<!-- /.navbar -->
 	<div class="communitySideBar">
 		<ul class="nav nav-pills nav-stacked" role="tablist">
-			<li id="myCommunityBtn"><a class="myCommunityBtn">我的社区</a></li>
-			<li><a href="community.jsp">所有社区</a></li>
-			<!-- <li><a class="officalCommunityBtn">官方社区</a></li>-->
-			<li><a class="studentUnionCommunityBtn">社团组织</a></li>
-			<li><a class="folkCommunityBtn">个人社区</a></li>
-			<li><a class="discoverCommunityBtn">热门社区</a></li>
-			<li><a class="searchCommunityBtn">搜索社区</a></li>
+			<li><a class='myCommunityBtn'
+				href='community.jsp?nav=mycommunity'>我的社区</a></li>
+			<li><a href='community.jsp?nav=official'>官方社区</a></li>
+			<li><a href='community.jsp?nav=student'>社团组织</a></li>
+			<li><a href='community.jsp?nav=folk'>个人社区</a></li>
+			<li><a href='community.jsp?nav=discovery'>热门社区</a></li>
+			<li><a class='searchCommunityBtn'>搜索社区</a></li>
 			<li><a class="appCom" href="applyCommunity.jsp">申请社区</a></li>
 			<li><a role="button" class="createCom" data-toggle='modal'
 				data-target='#createCommunity' id="createCommunityBtn">创建社区</a></li>
 		</ul>
 	</div>
 	<div class="container container_community">
-		<div class="communityGroupTitle titleMy">
-			<h3>我的社区</h3>
-		</div>
-		<div class="container containerMy">
-			<div class="myCommunity"></div>
-		</div>
-		<!--<div class="communityGroupTitle">
-			<h3>官方社区</h3>
-		</div>
-		<div class="container containerOffical">
-			<div class="officalCommunity"></div>
-		</div>-->
-		<div class="communityGroupTitle">
-			<h3>社团组织</h3>
-		</div>
-		<div class="container containerSchool">
-			<div class="schoolUnionCommunity"></div>
-		</div>
-		<div class="communityGroupTitle">
-			<h3>个人社区</h3>
-		</div>
-		<div class="container containerFolk">
-			<div class="folkCommunity"></div>
-		</div>
-		<div class="communityGroupTitle">
-			<h3>热门社区</h3>
-		</div>
-		<div class="container containerDiscovery ">
-			<div class="communityDiscovery"></div>
-
-		</div>
+		<c:choose>
+			<c:when test="${param.nav eq 'official' }">
+				<%@ include file="parts/communityOfficial.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'mycommunity' }">
+				<%@ include file="parts/communityMy.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'student' }">
+				<%@ include file="parts/communityStudent.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'folk' }">
+				<%@ include file="parts/communityFolk.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'discovery' }">
+				<%@ include file="parts/communityDiscovery.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<script>
+					if (EventSource.isPolyfill != undefined) {
+						window.location.href = 'ieSuccess.jsp'
+								+ "?target=community.jsp?nav=mycommunity";
+					} else {
+						window.location.href = 'community.jsp?nav=mycommunity';
+					}
+				</script>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="modal fade" id="createCommunity" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -103,8 +99,7 @@
 						<span>社区名片</span> <span class="btn btn-success fileinput-button">
 							<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <input
 							id="fileupload" type="file" name="files">
-						</span>
-						<span style="font-size:12px;margin-top:10px;">[请上传长宽比例1:1的图片，否则影响显示效果]</span>
+						</span> <span style="font-size: 12px; margin-top: 10px;">[请上传长宽比例1:1的图片，否则影响显示效果]</span>
 						<!-- The container for the uploaded files -->
 						<div id="files" class="files"></div>
 						<br>
@@ -126,33 +121,7 @@
 	<%@ include file="parts/chatRoom.jsp"%>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery-1.10.2.js"></script>
-	<script src="js/jquery.json.min.js"></script>
-	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-	<script src="js/masonry.pkgd.min.js"></script>
-	<script src="js/imagesloaded.pkgd.min.js"></script>
-	<script src="js/EventAPI.js"></script>
-	<script src="js/function.js"></script>
-	<script src="js/community.js"></script>
-	<script src="js/EventHandle.js"></script>
-	<%@ include file="parts/loginJavaScript.jsp"%>
-	<script src="js/global-initialization.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			if (USERID != null && USERID != "") {
-				login_initialization(USERID);
-				clickEvent();
-				communityClickEvent();
-				fetchCommunityByJoin("18");
-				fetchCommunityByOwner("5");
-			} else {
-				clickOffEvent();
-				$('.createCom').remove();
-			}
-			fetchCommunitys();
-		});
-	</script>
+	<%@ include file="parts/communityJavaScript.jsp"%>
 	<%@ include file="parts/contentScroll.jsp"%>
 </body>
 </html>

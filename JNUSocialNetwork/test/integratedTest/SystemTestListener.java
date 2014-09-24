@@ -65,11 +65,11 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("communityCard", JsonUtil.toJson(new Image(
 					"images/default/default-community-card.png")));
 			transaction.execute("13750046645", attributes,
-					new LinkedList<String>(), CommunityType.SCHOOLUNION);
+					new LinkedList<String>(), CommunityType.OFFICIAL);
 			transaction.execute("13750046645", attributes,
-					new LinkedList<String>(), CommunityType.SCHOOLUNION);
+					new LinkedList<String>(), CommunityType.OFFICIAL);
 			transaction.execute("13750046645", attributes,
-					new LinkedList<String>(), CommunityType.SCHOOLUNION);
+					new LinkedList<String>(), CommunityType.OFFICIAL);
 			transaction.execute("13750046645", attributes,
 					new LinkedList<String>(), CommunityType.SCHOOLUNION);
 			transaction.execute("13750046645", attributes,
@@ -93,7 +93,7 @@ public class SystemTestListener implements ServletContextListener {
 					new LinkedList<String>(), CommunityType.FOLK);
 			transaction.execute("13750046645", attributes,
 					new LinkedList<String>(), CommunityType.FOLK);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

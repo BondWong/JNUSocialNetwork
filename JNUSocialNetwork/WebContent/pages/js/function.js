@@ -201,7 +201,7 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var boarddiv = post(ownerID, ownerNickName, publishDate, content, postID,
 			likers, collecters, srcImage, ownerImage);
 	$(".share").after(boarddiv);
-	$('img.userImg').userTips();
+	$('.'+postID).find('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
 }
@@ -670,93 +670,92 @@ function teleAlert(activityID) {
 			+ "' type='submit'>确认</button></form></div></div></div></div>";
 	$('body').append(alert);
 }
-
+var hoverT, timer;  
 (function($) {
 	$.fn.userTips = function() {
 		// Speed of the animations in milliseconds - 1000 =
 		// 1 second.
 		var animSpeed = 300;
-		var tinyTip;
+		var tinyTip=$("");
+		 
 		// When we hover over the element that we want the
 		// tooltip applied to
 		$(this)
 				.hover(
 						function() {
+							clearTimeout(timer);
 							var pos = $(this).offset();
 							var nPos = pos;
 							nPos.top = pos.top + 20;
 							nPos.left = pos.left + 40;
 							var userid = $(this).next().val();
-							var data = FetchUserByID(userid);
-							var followTxt = "Follow";
-							if ($.inArray(USERID, data.followerIDs) != -1) {
-								followTxt = "Following";
-							}
-							if (USERID == userid) {
-								followTxt = "Yourself";
-							}
-							sessionStorage.setItem("otherUserID", data.ID);
-							var chatSpan = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color:#d7d7d7;"></span>';
-							if (data.ID == USERID) {
-								chatSpan = "";
-							}
-							if (data != "") {
-								var tipFrame = '<div id="'
-										+ data.ID
-										+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
-										+ $
-												.parseJSON(data.attributes.profileImageLink).src
-										+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
-										+ $
-												.parseJSON(data.attributes.avatarLink).src
-										+ '" /></div><p><h1><a class="tipUser">'
-										+ data.attributes.name
-										+ '</a></h1></p><p>'
-										+ data.attributes.lookingFor
-										+ '</p><button class="btn btn-danger" id="followBtn">'
-										+ followTxt + '</button></div>'
-										+ chatSpan + '</div></div>';
-								$('body').append(tipFrame);
-								var divTip = 'div.popTip';
-								tinyTip = $(divTip);
-								tinyTip.hide();
-								tinyTip.css('position', 'absolute').css(
-										'z-index', '1000');
-								tinyTip.css(nPos).fadeIn(animSpeed);
-								tinyTip.hover(function() {
-									clearTimeout(window.timer);
-								}, function() {
-									tinyTip.fadeOut(animSpeed, function() {
-										$(this).remove();
-									});
-								});
-								var chat = '';
-								$('.userInImg').after(chat);
-								if (USERID != null && USERID != "") {
-									$("span#chatCreate")
-											.click(
-													function() {
-														open_chatroom(
-																USERID,
-																sessionStorage
-																		.getItem("otherUserID"),
-																data.attributes.name);
-													});
+							hoverT = setTimeout(function(){ 
+								var data = FetchUserByID(userid);
+								var followTxt = "Follow";
+								if ($.inArray(USERID, data.followerIDs) != -1) {
+									followTxt = "Following";
 								}
-								/*
-								 * $('.userInImg').hover(function(){
-								 * $('#chatCreate').fadeIn(300);
-								 * $('#chatCreate').css("display","inline");
-								 * },function(){ $('#chatCreate').fadeOut(300);
-								 * });
-								 */
-							}
+								if (USERID == userid) {
+									followTxt = "Yourself";
+								}
+								sessionStorage.setItem("otherUserID", data.ID);
+								var chatSpan = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color:#d7d7d7;"></span>';
+								if (data.ID == USERID) {
+									chatSpan = "";
+								}
+								if (data != "") {
+									var tipFrame = '<div id="'
+											+ data.ID
+											+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
+											+ $
+													.parseJSON(data.attributes.profileImageLink).src
+											+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
+											+ $
+													.parseJSON(data.attributes.avatarLink).src
+											+ '" /></div><p><h1><a class="tipUser">'
+											+ data.attributes.name
+											+ '</a></h1></p><p>'
+											+ data.attributes.lookingFor
+											+ '</p><button class="btn btn-danger" id="followBtn">'
+											+ followTxt + '</button></div>'
+											+ chatSpan + '</div></div>';
+									$('body').append(tipFrame);
+									var divTip = 'div.popTip';
+									tinyTip = $(divTip);
+									tinyTip.hide();
+									tinyTip.css('position', 'absolute').css(
+											'z-index', '1000');
+									tinyTip.css(nPos).fadeIn(animSpeed);
+									tinyTip.hover(function() {
+										clearTimeout(window.timer);
+									}, function() {
+										tinyTip.fadeOut(500, function() {
+											$(this).remove();
+										});
+									});
+									var chat = '';
+									$('.userInImg').after(chat);
+									if (USERID != null && USERID != "") {
+										$("span#chatCreate")
+												.click(
+														function() {
+															open_chatroom(
+																	USERID,
+																	sessionStorage
+																			.getItem("otherUserID"),
+																	data.attributes.name);
+														});
+									}
+								}
+							},200);
+							
 						}, function() {
+							clearTimeout(hoverT);
 							window.timer = setTimeout(function() {
 								tinyTip.fadeOut(300, function() {
 									$(this).remove();
 								});
-							}, 200);
+							}, 500);
 
 						});
 
@@ -893,6 +892,33 @@ $('body').on(
 			window.location.href = 'profile.jsp?nav=post&'
 					+ $(this).attr("id");
 		});
+var hoverTimer, outTimer; 
+$(".navbar-community").hover(function(){
+	clearTimeout(outTimer);
+	hoverTimer = setTimeout(function(){  
+		$(".home-nav").animate({height:"140px"});
+		 $('.community-bar').css("display","inline-block");
+	} ,250);
+	 
+},function(){
+	clearTimeout(hoverTimer);
+	outTimer = setTimeout(function(){ 
+		$(".home-nav").animate({height:"50px"});
+		 $('.community-bar').css("display","none");
+	},500);
+});
+$('body').on('click', '.communityO', function() {
+	window.location.href = "community.jsp?nav=official";
+});
+$('body').on('click', '.communityS', function() {
+	window.location.href = "community.jsp?nav=student";
+});
+$('body').on('click', '.communityF', function() {
+	window.location.href = "community.jsp?nav=folk";
+});
+$('body').on('click', '.communityD', function() {
+	window.location.href = "community.jsp?nav=discovery";
+});
 /**
  * auto_resize
  */
