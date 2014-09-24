@@ -8,7 +8,7 @@
     var currentDepartments = [];
 
     $(document).ready(function () {
-        fetchCommunityByType("SCHOOLUNION", 0, 30, fetchSucceed);
+        fetchCommunityByType("OFFICIAL", 0, 30, fetchSucceed);
         addlisteners();
     });
 
@@ -63,7 +63,7 @@
     // FetchByType 输入：communityID;返回：postJson
     function fetchCommunityByType(communityType, startIndex, pageSize, successCallback) {
         var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize;
-        //var url = "js/applydata.json";
+        //var url = "test.json";
         $.getJSON(url, successCallback);
     }
 
@@ -96,11 +96,14 @@
     function fetchSucceed(data) {
         // 过滤不可用的社团信息
 
-        var filterArr = [1411055191107, 1411090991902, 1411054407457, 1411301318703, 1411397204271, 1411522941400, 1411390027993];
-        for (var i in data) {
+        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411522941400, 1411390027993];
+        for (var i in filterArr) {
             //if (data[i].available)
-            if (filterArr.indexOf(data[i].ID) >= 0) {
-                availableData.push(data[i]);
+            for (var j in data) {
+                if (filterArr[i] === data[j].ID) {
+                    availableData.push(data[j]);
+                    break;
+                }
             }
         }
 
