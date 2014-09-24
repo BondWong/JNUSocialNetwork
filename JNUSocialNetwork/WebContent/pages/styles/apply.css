@@ -25,9 +25,6 @@ li {
     display: inline-block;
     overflow: auto;
 }
-a {
-    text-decoration: underline;
-}
 header,
 footer {
     text-align: center;
@@ -325,6 +322,7 @@ footer {
     display: table-cell;
     vertical-align: middle;
     width: 35%;
+    height: 100%;
     padding: 0.2em 0.4em 0.2em 0;
 }
 .league-photo {
@@ -371,6 +369,35 @@ footer {
 #errorAlert {
     -moz-box-shadow: 0 0 10px rgba(237, 115, 115, 0.68);
     box-shadow: 0 0 10px rgba(237, 115, 115, 0.68);
+}
+.site-link {
+    -webkit-animation: neon 1s ease-in-out infinite alternate;
+    -moz-animation: neon 1s ease-in-out infinite alternate;
+    -o-animation: neon 1s ease-in-out infinite alternate;
+    animation: neon 1s ease-in-out infinite alternate;
+    font-weight: bold;
+}
+/*glow*/
+
+@-webkit-keyframes neon {
+    to {
+        text-shadow: 0 0 5px #2636fc, 0 0 8px #2636fc, 0 0 10px #2636fc, 0 0 20px #2636fc, 0 0 30px #2636fc, 0 0 50px #2636fc, 0 0 75px #2636fc;
+    }
+}
+@-moz-keyframes neon {
+    to {
+        text-shadow: 0 0 5px #2636fc, 0 0 8px #2636fc, 0 0 10px #2636fc, 0 0 20px #2636fc, 0 0 30px #2636fc, 0 0 50px #2636fc, 0 0 75px #2636fc;
+    }
+}
+@-o-keyframes neon {
+    to {
+        text-shadow: 0 0 5px #2636fc, 0 0 8px #2636fc, 0 0 10px #2636fc, 0 0 20px #2636fc, 0 0 30px #2636fc, 0 0 50px #2636fc, 0 0 75px #2636fc;
+    }
+}
+@keyframes neon {
+    to {
+        text-shadow: 0 0 5px #2636fc, 0 0 8px #2636fc, 0 0 10px #2636fc, 0 0 20px #2636fc, 0 0 30px #2636fc, 0 0 50px #2636fc, 0 0 75px #2636fc;
+    }
 }
 /* modal form style */
 
