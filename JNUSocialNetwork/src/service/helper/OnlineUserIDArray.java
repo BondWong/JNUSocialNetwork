@@ -13,7 +13,9 @@ public class OnlineUserIDArray {
 	private static List<String> onlineUserIDs = new ArrayList<String>();
 
 	public static void initializeEnvironment() throws IOException {
-		serialize();
+		if (!Files.exists(Paths.get(PATH))) {
+			Files.createFile(Paths.get(PATH));
+		}
 	}
 
 	public synchronized static void add(String ID) {

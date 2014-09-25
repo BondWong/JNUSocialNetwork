@@ -19,7 +19,9 @@ public class DesertFileLinkMap {
 	private static List<String> links = new ArrayList<String>();
 
 	public static void initializeEnvironment() throws IOException {
-		serialize();
+		if (!Files.exists(Paths.get(PATH))) {
+			Files.createFile(Paths.get(PATH));
+		}
 	}
 
 	public static synchronized void serialize() throws IOException {

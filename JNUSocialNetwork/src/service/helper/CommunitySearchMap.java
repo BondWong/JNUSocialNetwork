@@ -13,7 +13,9 @@ public class CommunitySearchMap {
 	private static Map<String, String> searchMap = new HashMap<String, String>();
 
 	public static void initializeEnvironment() throws IOException {
-		serialize();
+		if (!Files.exists(Paths.get(PATH))) {
+			Files.createFile(Paths.get(PATH));
+		}
 	}
 
 	public static void addRecord(String key, String ID) {

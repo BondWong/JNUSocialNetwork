@@ -15,7 +15,9 @@ public class HeheUser {
 	private static List<Map> heheList = new LinkedList<Map>();
 
 	public static void initializeEnvironment() throws IOException {
-		serialize();
+		if (!Files.exists(Paths.get(PATH))) {
+			Files.createFile(Paths.get(PATH));
+		}
 	}
 
 	@SuppressWarnings("rawtypes")
