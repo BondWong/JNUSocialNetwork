@@ -265,5 +265,6 @@
 						});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

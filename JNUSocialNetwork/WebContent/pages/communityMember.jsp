@@ -203,5 +203,6 @@
 
 						});
 	</script>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

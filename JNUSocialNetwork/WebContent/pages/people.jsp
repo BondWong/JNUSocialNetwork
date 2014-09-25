@@ -72,5 +72,6 @@
 		});
 	</script>
 	<%@ include file="parts/loginJavaScript.jsp"%>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>
