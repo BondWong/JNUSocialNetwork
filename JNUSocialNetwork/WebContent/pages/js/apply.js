@@ -14,7 +14,7 @@
             rules: {
                 password: {
                     minlength: 5,
-                    require: true
+                    required: true
                 },
                 confirmpassword: {
                     required: true,
@@ -36,39 +36,34 @@
         }
     });
 
-    // 表单正式提交
-    $("#signup").submit(function () {
-        var postdata = {};
-        postdata.name = $("#studentID").val();
-        postdata.password = $("#password").val();
-        postdata.telnum = $("#telNum").val();
-        postdata.wish1 = $("#intent_dept1").find("option:selected").val();
-        postdata.wish2 = $("#intent_dept2").find("option:selected").val();
-
-
-        var settings = {
-            type: "POST",
-            data: JSON.stringify(postdata),
-            error: function (XHR, textStatus, errorThrown) {
-                console.log("post error! " + textStatus + " " + errorThrown);
-                displayAlert($("#errorAlert"));
-            },
-            success: function (data, textStatus) {
-                console.log("post success " + textStatus);
-                displayAlert($("#successAlert"));
-            },
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            }
-        };
-        $.ajax("/app/user/registerCandC", settings);
-        $('#applyModal').modal('hide');
-    });
-
     // 确认提交
     $("#confirm-btn").click(function () {
         if ($("#signup").valid()) {
-            $("#signup").submit();
+            var postdata = {};
+            postdata.name = $("#studentID").val();
+            postdata.password = $("#password").val();
+            postdata.telnum = $("#telNum").val();
+            postdata.wish1 = $("#intent_dept1").find("option:selected").val();
+            postdata.wish2 = $("#intent_dept2").find("option:selected").val();
+
+
+            var settings = {
+                type: "POST",
+                data: JSON.stringify(postdata),
+                error: function (XHR, textStatus, errorThrown) {
+                    console.log("post error! " + textStatus + " " + errorThrown);
+                    displayAlert($("#errorAlert"));
+                },
+                success: function (data, textStatus) {
+                    console.log("post success " + textStatus);
+                    displayAlert($("#successAlert"));
+                },
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                }
+            };
+            $.ajax("/app/user/registerCandC", settings);
+            $('#applyModal').modal('hide');
         }
     });
 
