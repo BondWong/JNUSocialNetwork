@@ -62,6 +62,8 @@ function activityClickEvent() {
 
 						if (diffDate > 0.021*24*60*60*1000) {
 							var json = $.toJSON(post);
+							$('.layer').fadeIn(300);
+							$('#infinite_loader2').fadeIn(300);
 							AddPostToCommunity(USERID, community.ID, json);
 							$('#activityCommunity').modal('hide');
 						} else {

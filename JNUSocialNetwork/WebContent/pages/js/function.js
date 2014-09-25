@@ -960,3 +960,4 @@ function fixed_width_auto_resize(width, srcImage) {
 	srcImage.height = (width / originalWidth) * originalHeight;
 	$(srcImage).fadeIn("fast");
 }
+
