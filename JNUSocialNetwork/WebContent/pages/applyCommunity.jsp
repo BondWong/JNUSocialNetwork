@@ -140,5 +140,6 @@
 			</script>
 		</c:when>
 	</c:choose>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

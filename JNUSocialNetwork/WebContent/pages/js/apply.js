@@ -8,10 +8,24 @@
     var currentDepartments = [];
 
     $(document).ready(function () {
-        fetchCommunityByType("SCHOOLUNION", 0, 30, fetchSucceed);
+        fetchCommunityByType("OFFICIAL", 0, 30, fetchSucceed);
         addlisteners();
+        $("#signup").validate({
+            rules: {
+                password: {
+                    minlength: 5,
+                    required: true
+                },
+                confirmpassword: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#password"
+                }
+            }
+        });
     });
 
+    // 滚动加载
     $(window).scroll(function () {
         var pageH = $(document.body).height(); //页面总高度 
         var scrollT = $(window).scrollTop(); //滚动条top 
@@ -24,31 +38,36 @@
 
     // 确认提交
     $("#confirm-btn").click(function () {
-        var postdata = {};
-        postdata.name = $("#studentID").val();
-        postdata.password = $("#password").val();
-        postdata.telnum = $("#telNum").val();
-        postdata.wish1 = $("#intent_dept1").find("option:selected").val();
-        postdata.wish2 = $("#intent_dept2").find("option:selected").val();
-        var settings = {
-            type: "POST",
-            data: JSON.stringify(postdata),
-            error: function (XHR, textStatus, errorThrown) {
-                console.log("post error!" + errorThrown);
-                displayAlert($("#errorAlert"));
-            },
-            success: function (data, textStatus) {
-                console.log("post success");
-                displayAlert($("#successAlert"));
-            },
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            }
-        };
-        $.ajax("/app/user/registerCandC", settings);
-        $('#applyModal').modal('hide');
+        if ($("#signup").valid()) {
+            var postdata = {};
+            postdata.name = $("#studentID").val();
+            postdata.password = $("#password").val();
+            postdata.telnum = $("#telNum").val();
+            postdata.wish1 = $("#intent_dept1").find("option:selected").val();
+            postdata.wish2 = $("#intent_dept2").find("option:selected").val();
+
+
+            var settings = {
+                type: "POST",
+                data: JSON.stringify(postdata),
+                error: function (XHR, textStatus, errorThrown) {
+                    console.log("post error! " + textStatus + " " + errorThrown);
+                    displayAlert($("#errorAlert"));
+                },
+                success: function (data, textStatus) {
+                    console.log("post success " + textStatus);
+                    displayAlert($("#successAlert"));
+                },
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                }
+            };
+            $.ajax("/app/user/registerCandC", settings);
+            $('#applyModal').modal('hide');
+        }
     });
 
+    // 下拉框2随下拉框1改变而改变
     $("#intent_dept1").change(function () {
         setCandidateDepartments();
     });
@@ -63,10 +82,11 @@
     // FetchByType 输入：communityID;返回：postJson
     function fetchCommunityByType(communityType, startIndex, pageSize, successCallback) {
         var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize;
-        //var url = "js/applydata.json";
+        //var url = "a.json";
         $.getJSON(url, successCallback);
     }
 
+    // 设置下拉框1选择项
     function setDepartments(id, target) {
         var url = "/app/community/getDepartment/" + id;
         //var url = "js/1411055191107.json";
@@ -83,6 +103,7 @@
         });
     }
 
+    // 设置下拉框2选择项
     function setCandidateDepartments() {
         var dept1 = document.getElementById("intent_dept1");
         var dept2 = document.getElementById("intent_dept2");
@@ -93,14 +114,17 @@
         dept2.options.remove(dept1.selectedIndex);
     }
 
+    // 拉取信息成功则回调加载信息
     function fetchSucceed(data) {
         // 过滤不可用的社团信息
-
-        var filterArr = ["1411055191107", "1411090991902", "1411054407457", "1411301318703", "1411397204271", "1411522941400", "1411390027993"];
-        for (var i in data) {
+        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411390027993, 1411094627377, 1411112101865, 1411141391379];
+        for (var i in filterArr) {
             //if (data[i].available)
-            if (filterArr.indexOf(data[i].ID) >= 0) {
-                availableData.push(data[i]);
+            for (var j in data) {
+                if (filterArr[i] === data[j].ID) {
+                    availableData.push(data[j]);
+                    break;
+                }
             }
         }
 
@@ -112,6 +136,7 @@
         }
     }
 
+    // 生成前N个信息
     function generateTopN(data, limitSize) {
         // 提取并生成前六社团信息
         var rightStop = data.length;
@@ -128,6 +153,7 @@
         }
     }
 
+    // 生成列表项
     function generateListItem(league) {
         var newItem = $("#template").clone();
         newItem.removeAttr("id");
@@ -140,6 +166,7 @@
         $("#league-list").append(newItem);
     }
 
+    // 展示通知框
     function displayAlert(target) {
         target.fadeIn(500);
         setTimeout(function () {

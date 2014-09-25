@@ -123,5 +123,6 @@
     ================================================== -->
 	<%@ include file="parts/communityJavaScript.jsp"%>
 	<%@ include file="parts/contentScroll.jsp"%>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

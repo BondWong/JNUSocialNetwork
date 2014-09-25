@@ -162,5 +162,6 @@
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>
 	<script src="js/global-initialization.js"></script>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

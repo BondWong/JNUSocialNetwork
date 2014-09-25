@@ -11,7 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="styles/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/apply.css" rel="stylesheet">
+    <link href="styles/apply.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,11 +39,11 @@
                     <h4 class="modal-title" id="applyModalLabel">注册并报名</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal container-fluid" role="form">
+                    <form class="form-horizontal container-fluid" role="form" id="signup">
                         <div class="form-group">
                             <label class="col-xs-4 control-label" for="studentID">学号</label>
                             <div class="col-xs-8">
-                                <input class="form-control" name="studentID" id="studentID" type="text" maxlength="10" autofocus required />
+                                <input class="form-control" name="studentID" id="studentID" type="text" minlength="10" maxlength="10" autofocus required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,9 +53,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-xs-4 control-label" for="confirmpassword">确认密码</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" name="confirmpassword" id="confirmpassword" type="password" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-xs-4 control-label" for="telNum">手机号码</label>
                             <div class="col-xs-8">
-                                <input class="form-control" name="telNum" id="telNum" type="tel" maxlength="11" required />
+                                <input class="form-control" name="telNum" id="telNum" type="tel" minlength="11" maxlength="11" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -111,7 +117,7 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <p>注册成功并已报名！</p>
+        <p>报名已提交！</p>
     </div>
 
     <div id="errorAlert" class="col-xs-10 col-md-8 col-xs-offset-1 col-md-offset-2 alert alert-danger alert-dismissible container react-alert" role="alert">
@@ -135,6 +141,7 @@
     <!--        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/apply.min.js"></script>
 
 </body>
