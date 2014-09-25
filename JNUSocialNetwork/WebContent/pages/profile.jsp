@@ -125,5 +125,6 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<%@ include file="parts/profileJavaScript.jsp"%>
 	<%@ include file="parts/loginJavaScript.jsp"%>
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 </html>

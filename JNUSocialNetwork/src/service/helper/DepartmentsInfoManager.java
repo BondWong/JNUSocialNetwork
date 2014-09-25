@@ -26,21 +26,18 @@ public class DepartmentsInfoManager {
 		departments.put(1411055191107l, department1);
 
 		// 管理学院
-		List<String> department2 = new ArrayList<String>();
-
-		department2.add("秘书部");
-		department2.add("公关部");
-		department2.add("人资部");
-		department2.add("学术部");
-		department2.add("组织部");
-		department2.add("体育部");
-		department2.add("宣传部");
-		department2.add("文娱部");
-		department2.add("编辑部");
-		department2.add("心理部");
-		department2.add("青年志愿者协会2.0");
-
-		departments.put(1411522941400l, department2);
+		/*
+		 * List<String> department2 = new ArrayList<String>();
+		 * 
+		 * department2.add("秘书部"); department2.add("公关部");
+		 * department2.add("人资部"); department2.add("学术部");
+		 * department2.add("组织部"); department2.add("体育部");
+		 * department2.add("宣传部"); department2.add("文娱部");
+		 * department2.add("编辑部"); department2.add("心理部");
+		 * department2.add("青年志愿者协会2.0");
+		 * 
+		 * departments.put(1411522941400l, department2);
+		 */
 
 		// 翻译学院
 		List<String> department3 = new ArrayList<String>();
@@ -59,15 +56,15 @@ public class DepartmentsInfoManager {
 		// 社联
 		List<String> department4 = new ArrayList<String>();
 
-		department4.add("交促部");
-		department4.add("IT部");
+		department4.add("社团交流促进部");
+		department4.add("信息部");
 		department4.add("秘书处");
 		department4.add("人力资源部");
 		department4.add("公关部");
 		department4.add("宣传部");
 		department4.add("编辑部");
 
-		// departments.put(1411054407457l, department4);
+		departments.put(1411555413859l, department4);
 
 		// 暨南大学职业发展协会珠海分会
 		List<String> department5 = new ArrayList<String>();
@@ -114,6 +111,7 @@ public class DepartmentsInfoManager {
 		department7.add("心理服务部");
 		department7.add("文娱部");
 		department7.add("学习部");
+		department7.add("人力资源部");
 
 		departments.put(1411301318703l, department7);
 
@@ -141,9 +139,11 @@ public class DepartmentsInfoManager {
 		department9.add("公关部");
 		department9.add("学术部");
 		department9.add("宣传部");
-		department9.add("心里服务部");
+		department9.add("心理服务部");
 		department9.add("文娱部");
 		department9.add("组织部");
+		department9.add("司仪队");
+		department9.add("司仪队");
 
 		departments.put(1411390027993l, department9);
 
