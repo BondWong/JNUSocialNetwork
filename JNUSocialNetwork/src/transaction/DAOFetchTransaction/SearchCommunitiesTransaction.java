@@ -18,7 +18,8 @@ public class SearchCommunitiesTransaction extends DAOTransaction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		CommunitySearchMap.deserialize();
-		String[] IDs = CommunitySearchMap.searchIDs((String) params[0]);
+		String criteria = new String(((String) params[0]).getBytes(), "utf8");
+		String[] IDs = CommunitySearchMap.searchIDs(criteria);
 		CommunitySearchMap.serialize();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		if (IDs != null && IDs.length != 0) {
