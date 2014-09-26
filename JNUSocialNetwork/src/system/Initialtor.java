@@ -100,7 +100,6 @@ public class Initialtor implements ServletContextListener {
 			long mnum = (long) transaction.execute();
 			transaction = new GetCommunityNumTransaction();
 			long cnum = (long) transaction.execute();
-			System.out.println(mnum + "" + cnum);
 			NumberManager.initiate(mnum, cnum);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

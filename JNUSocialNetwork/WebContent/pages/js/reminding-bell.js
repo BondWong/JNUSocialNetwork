@@ -395,7 +395,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ "</strong></div><div class='user_info'>"
 			+ publishDate
 			+ "</div></div></div><div class='post_info'><span class='postContent'>"
-			+ content
+			+ '<pre>' + content +'</pre>'
 			+ "</span></div>"
 			+ postImgDiv
 			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID'  value="

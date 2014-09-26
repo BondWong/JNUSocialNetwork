@@ -114,46 +114,42 @@ function peopleClickEvent() {
 						PinCommon();
 					});
 }
-var search_user_input_value = "";
-$('body')
-		.on(
-				'click',
-				'.searchUser',
-				function() {
-					$(this)
-							.replaceWith(
-									"<input class='searchInput' placeholder='name or id or sex ' maxLength='20'>");
-					$('.searchInput').focus();
-					$('.searchInput')
-							.blur(
-									function() {
-										search_user_input_value = $(this).val();
-										$(this)
-												.replaceWith(
-														"<span class='searchUser'>Search for anyone</span>");
-									});
-				});
+
 $('body')
 		.on(
 				'click',
 				'.userSearch',
 				function() {
-					if (search_user_input_value != "") {
-						var userInfo = encodeURI(search_user_input_value);
-						$('.userContainer').remove();
-						var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
-						$('.containBord').after(borddiv);
-						var users = SearchMember(userInfo, "0", "10");
-						if (users.length != 0) {
-							$.each(users, function(n, user) {
-								AddUser(user.attributes.name,
-										user.attributes.lookingFor, user.ID,
-										user.attributes.avatarLink);
-							});
-						}
-					}
-
+					searchUser();
 				});
+$('body').on('keydown','.searchInput',function(event){
+	if(event.keyCode == 13){
+		searchUser();
+	}
+});
+$('body').on('blur','.searchInput',function(event){
+	$('.searchInput').val("");
+});
+function searchUser(){
+	if ($('.searchInput').val() != "") {
+		var userInfo = encodeURI($('.searchInput').val());
+		$('.userContainer').remove();
+		var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
+		$('.containBord').after(borddiv);
+		var users = SearchMember(userInfo, "0", "10");
+		if ($.toJSON(users[0]) != '{}') {
+			$('.searchInput').val("");
+			$('.searchInput').blur();
+			$.each(users, function(n, user) {
+				AddUser(user.attributes.name,
+						user.attributes.lookingFor, user.ID,
+						user.attributes.avatarLink);
+			});
+			
+		}
+	}
+}
+
 
 function AddUser(name, looking, id, avatarLink) {
 	var boarddiv = "<div class='userCard'><img height='170' width='170' src='"

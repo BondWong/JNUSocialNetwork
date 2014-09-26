@@ -67,7 +67,7 @@ function showActivityDetail(activity, community) {
 	$('.activityShowName').html(activity.attributes.activityName);
 	$('.aT').html(activity.attributes.activityTime);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
-	$('.activityShowD').html("&nbsp;" + activity.attributes.activityMore);
+	$('.activityShowD').html("<pre>"+"&nbsp;" + activity.attributes.activityMore+"</pre>");
 	$('.activityHead').find('img').attr("src",
 			$.parseJSON(activity.attributes.background).src);
 	$('#addComment').attr("value", activity.ID);

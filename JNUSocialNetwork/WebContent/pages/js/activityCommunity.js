@@ -135,7 +135,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
 			+ time
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
-			+ addre + "</span></div><div class='activityD'><span>" + more
+			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'+more+'</pre>'
 			+ "</span></div><div class='activityAsk'>"+join+"</div></div>";
 	return boarddiv;
 }

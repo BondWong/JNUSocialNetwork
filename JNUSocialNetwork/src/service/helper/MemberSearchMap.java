@@ -4,17 +4,49 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import utils.JsonUtil;
 
 public class MemberSearchMap {
 	private final static String PATH = "membersearchmap.txt";
 	private static Map<String, String> searchMap = new HashMap<String, String>();
 
-	public static void initializeEnvironment() throws IOException {
+	@SuppressWarnings("unchecked")
+	public static void initializeEnvironment() throws Exception {
 		if (!Files.exists(Paths.get(PATH))) {
-			Files.createFile(Paths.get(PATH));
+			Transaction transaction = new FetchMembersTransaction();
+			List<Map<String, Object>> results;
+			try {
+				results = (List<Map<String, Object>>) transaction.execute(
+						"Member.fetch", null, 0, 500);
+				for (Map<String, Object> result : results) {
+					addRecord(
+							((Map<String, String>) result.get("attributes"))
+									.get("name"),
+							(String) result.get("ID"));
+					addRecord(
+							((Map<String, String>) result.get("attributes"))
+									.get("gender"),
+							(String) result.get("ID"));
+					if (((Map<String, String>) result.get("attributes"))
+							.get("relationship") != null
+							&& !((Map<String, String>) result.get("attributes"))
+									.get("relationship").equals(""))
+						addRecord(((Map<String, String>) result
+								.get("attributes")).get("relationship"),
+								(String) result.get("ID"));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw e;
+			}
+			serialize();
 		}
 	}
 
@@ -70,9 +102,15 @@ public class MemberSearchMap {
 	public static String[] searchIDs(String key) {
 		String IDs = "";
 		synchronized (MemberSearchMap.class) {
-			IDs = searchMap.get(key);
+			Set<String> keys = searchMap.keySet();
+			for (String k : keys)
+				if (k.contains(key)) {
+					IDs += searchMap.get(k);
+					IDs.trim();
+					IDs += " ";
+				}
 		}
-		if (IDs == null)
+		if (IDs.equals(""))
 			return new String[0];
 		else
 			return IDs.split(" ");

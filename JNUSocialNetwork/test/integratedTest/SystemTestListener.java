@@ -1,5 +1,8 @@
 package integratedTest;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -37,6 +40,15 @@ public class SystemTestListener implements ServletContextListener {
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
+		try {
+			Files.deleteIfExists(Paths.get("membersearchmap.txt"));
+			Files.deleteIfExists(Paths.get("activitysearchmap.txt"));
+			Files.deleteIfExists(Paths.get("communitysearchmap.txt"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -59,7 +71,7 @@ public class SystemTestListener implements ServletContextListener {
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
 			transaction = new CreateCommunityTransaction();
 			Map<String, String> attributes = new HashMap<String, String>();
-			attributes.put("name", "test");
+			attributes.put("name", "測試");
 			attributes.put("introduce", "test");
 			attributes.put("foundDate", DateTimeUtil.getCurrnetDateTime());
 			attributes.put("communityCard", JsonUtil.toJson(new Image(
@@ -74,7 +86,7 @@ public class SystemTestListener implements ServletContextListener {
 					new LinkedList<String>(), CommunityType.SCHOOLUNION);
 			transaction.execute("13750046645", attributes,
 					new LinkedList<String>(), CommunityType.SCHOOLUNION);
-			attributes.put("tag", "campus");
+			attributes.put("name", "test");
 			transaction.execute("13750046645", attributes,
 					new LinkedList<String>(), CommunityType.SCHOOLUNION);
 			transaction.execute("13750046645", attributes,

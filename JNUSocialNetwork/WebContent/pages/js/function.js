@@ -26,8 +26,9 @@ function Msnry(selectContain, item, width) {
 	});
 }
 
-function post(ownerID, ownerNickName, publishDate, content, postID, likers,
+function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
+	var content = '<pre>' + contentR +'</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -841,7 +842,7 @@ function showPost(postID) {
 						+ "</strong></div><div class='user_info'>"
 						+ dataString.publishDate
 						+ "</div></div></div><div class='post_info'><span class='postContent'>"
-						+ dataString.attributes.content
+						+ '<pre>' + dataString.attributes.content + '</pre>'
 						+ "</span></div><div class='row'><div class='col-md-6'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID
 						+ "></p><input id='likeID' type='hidden' value="
