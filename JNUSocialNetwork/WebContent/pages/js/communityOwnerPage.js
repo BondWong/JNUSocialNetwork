@@ -123,6 +123,8 @@ $(document)
 										};
 										var json = $.toJSON(post);
 										if ($('.postForm')[0].checkValidity()) {
+											$('#infinite_loader2').fadeIn(300);
+											$('.layer2').fadeIn(300);
 											AddPostToCommunity(USERID,
 													community.ID, json);
 											$('#addPostModal').modal('hide');

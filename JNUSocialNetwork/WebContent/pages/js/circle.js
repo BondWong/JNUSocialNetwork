@@ -121,6 +121,8 @@ $(document)
 										};
 										var json = $.toJSON(post);
 										if ($('.postForm')[0].checkValidity()) {
+											$('.layer2').fadeIn(300);
+											$('#infinite_loader2').fadeIn(300);
 											AddPost(USERID, json);
 											$('#addPostModal').modal('hide');
 											fileDri = [];

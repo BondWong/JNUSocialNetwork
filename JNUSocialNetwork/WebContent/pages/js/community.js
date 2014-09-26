@@ -30,6 +30,8 @@ function communityClickEvent() {
 
 				var json = $.toJSON(community);
 				if ($('.communityForm')[0].checkValidity()) {
+					$('.layer2').fadeIn(300);
+					$('#infinite_loader2').fadeIn(300);
 					var community = AddCommunity(USERID, json);
 					fetchCommunityByID(community.ID);
 				}
