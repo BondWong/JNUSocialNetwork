@@ -8,10 +8,25 @@
     var currentDepartments = [];
 
     $(document).ready(function () {
-        fetchCommunityByType("OFFICIAL", 0, 30, fetchSucceed);
+        fetchCommunityByType("OFFICIAL", 0, 30)
+            .done(function (oData) {
+                fetchCommunityByType("SCHOOLUNION", 0, 30)
+                    .done(function (sData) {
+                        fetchSucceed(oData.concat(sData));
+                    });
+
+            });
         addlisteners();
+
+        // 开启表单验证
         $("#signup").validate({
             rules: {
+                studentID: {
+                    minlength: 10
+                },
+                telNum: {
+                    minlength: 11
+                },
                 password: {
                     minlength: 5,
                     required: true
@@ -25,71 +40,70 @@
         });
     });
 
-    // 滚动加载
-    $(window).scroll(function () {
-        var pageH = $(document.body).height(); //页面总高度 
-        var scrollT = $(window).scrollTop(); //滚动条top 
-        var aa = (pageH - winH - scrollT) / winH;
-        if (aa < 0.1 && $("#league-list").children().size() < availableData.length) {
-            // 每次加载3条新信息
-            generateTopN(availableData.slice($("#league-list").children().size()), 3);
-        }
-    });
-
-    // 确认提交
-    $("#confirm-btn").click(function () {
-        if ($("#signup").valid()) {
-            var postdata = {};
-            postdata.name = $("#studentID").val();
-            postdata.password = $("#password").val();
-            postdata.telnum = $("#telNum").val();
-            postdata.wish1 = $("#intent_dept1").find("option:selected").val();
-            postdata.wish2 = $("#intent_dept2").find("option:selected").val();
-
-
-            var settings = {
-                type: "POST",
-                data: JSON.stringify(postdata),
-                error: function (XHR, textStatus, errorThrown) {
-                    console.log("post error! " + textStatus + " " + errorThrown);
-                    displayAlert($("#errorAlert"));
-                },
-                success: function (data, textStatus) {
-                    console.log("post success " + textStatus);
-                    displayAlert($("#successAlert"));
-                },
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8"
-                }
-            };
-            $.ajax("/app/user/registerCandC", settings);
-            $('#applyModal').modal('hide');
-        }
-    });
-
-    // 下拉框2随下拉框1改变而改变
-    $("#intent_dept1").change(function () {
-        setCandidateDepartments();
-    });
-
-    // 为报名按钮添加监听器
+    // 添加监听器
     function addlisteners() {
+        // 滚动加载
+        $(window).scroll(function () {
+            var pageH = $(document.body).height(); //页面总高度 
+            var scrollT = $(window).scrollTop(); //滚动条top 
+            var aa = (pageH - winH - scrollT) / winH;
+            if (aa < 0.1 && $("#league-list").children().size() < availableData.length) {
+                // 每次加载3条新信息
+                generateTopN(availableData.slice($("#league-list").children().size()), 3);
+            }
+        });
+
+        // 确认提交
+        $("#confirm-btn").click(function () {
+            if ($("#signup").valid()) {
+                var postdata = {};
+                postdata.name = $("#studentID").val();
+                postdata.password = $("#password").val();
+                postdata.telnum = $("#telNum").val();
+                postdata.wish1 = $("#intent_dept1").find("option:selected").val();
+                postdata.wish2 = $("#intent_dept2").find("option:selected").val();
+
+
+                var settings = {
+                    type: "POST",
+                    data: JSON.stringify(postdata),
+                    error: function (XHR, textStatus, errorThrown) {
+                        console.log("post error! " + textStatus + " " + errorThrown);
+                        displayAlert($("#errorAlert"));
+                    },
+                    success: function (data, textStatus) {
+                        console.log("post success " + textStatus);
+                        displayAlert($("#successAlert"));
+                    },
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8"
+                    }
+                };
+                $.ajax("/app/user/registerCandC", settings);
+                $('#applyModal').modal('hide');
+            }
+        });
+
+        // 下拉框2随下拉框1改变而改变
+        $("#intent_dept1").change(function () {
+            setCandidateDepartments();
+        });
+        //为报名按钮添加监听器
         $("#league-list").delegate('.apply-btn', 'click', function () {
             setDepartments($(this).data("id"));
         });
     }
 
     // FetchByType 输入：communityID;返回：postJson
-    function fetchCommunityByType(communityType, startIndex, pageSize, successCallback) {
+    function fetchCommunityByType(communityType, startIndex, pageSize) {
         var url = "/app/community/fetchByType/" + communityType + '/' + startIndex + '/' + pageSize;
-        //var url = "a.json";
-        $.getJSON(url, successCallback);
+        //var url = filename;
+        return $.getJSON(url);
     }
 
     // 设置下拉框1选择项
     function setDepartments(id, target) {
         var url = "/app/community/getDepartment/" + id;
-        //var url = "js/1411055191107.json";
         $.getJSON(url, function (data) {
             console.log(data);
             currentDepartments = data;
@@ -117,7 +131,7 @@
     // 拉取信息成功则回调加载信息
     function fetchSucceed(data) {
         // 过滤不可用的社团信息
-        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411390027993, 1411094627377, 1411112101865, 1411141391379];
+        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411390027993, 1411094627377, 1411112101865, 1411141391379, 1411697745258];
         for (var i in filterArr) {
             //if (data[i].available)
             for (var j in data) {
@@ -176,6 +190,7 @@
 
 }(jQuery));
 
+// 创建一个简单的社团信息类
 function SimpleLeague() {
     "use strict";
     this.id = '';
