@@ -91,6 +91,7 @@ footer {
 }
 .league-title {
     font-weight: bold;
+    max-width: 70%;
 }
 .league-intro {
     height: 70%;
