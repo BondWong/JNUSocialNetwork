@@ -7,5 +7,5 @@
 <div id="infinite_loader2">
 	<img src="images/contentScroll.GIF" />
 </div>
-<div class="layer">
+<div class="layer2">
 </div>

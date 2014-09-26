@@ -96,7 +96,7 @@ function AddPost(UserID, JsonData) {
 		},
 		success : function(data, status) {
 			$('#infinite_loader2').fadeOut(300);
-			$('.layer').fadeOut(300);
+			$('.layer2').fadeOut(300);
 			response = status;
 		},
 		error : function(data, status) {
@@ -119,7 +119,7 @@ function AddPostToCommunity(UserID, communityID, JsonData) {
 		success : function(data, status) {
 			response = status;
 			$('#infinite_loader2').fadeOut(300);
-			$('.layer').fadeOut(300);
+			$('.layer2').fadeOut(300);
 		},
 		error : function(data, status) {
 			response = status;
@@ -648,7 +648,7 @@ function AddCommunity(userID, JsonData) {
 		asyn : false,
 		success : function(data, status) {
 			$('#infinite_loader2').fadeOut(300);
-			$('.layer').fadeOut(300);
+			$('.layer2').fadeOut(300);
 			response = data;
 			if (EventSource.isPolyfill != undefined) {
 				window.location.href = 'ieSuccess.jsp'
