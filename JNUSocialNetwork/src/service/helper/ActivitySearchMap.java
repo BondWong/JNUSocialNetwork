@@ -20,7 +20,9 @@ public class ActivitySearchMap {
 	private static Map<Long, Long> activityMap = new HashMap<Long, Long>();
 
 	public static void initializeEnvironment() throws IOException {
-		serialize();
+		if (!Files.exists(Paths.get(PATH))) {
+			Files.createFile(Paths.get(PATH));
+		}
 	}
 
 	public static synchronized void addRecord(Long ID, Long startDate) {

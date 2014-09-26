@@ -147,6 +147,24 @@ public class DepartmentsInfoManager {
 
 		departments.put(1411390027993l, department9);
 
+		List<String> department10 = new ArrayList<String>();
+
+		department10.add("益箩筐");
+
+		departments.put(1411094627377l, department10);
+
+		List<String> department11 = new ArrayList<String>();
+
+		department11.add("模特队");
+
+		departments.put(1411141391379l, department11);
+
+		List<String> department12 = new ArrayList<String>();
+
+		department12.add("暨大英语辩论队");
+
+		departments.put(1411112101865l, department12);
+
 	}
 
 	public static List<String> get(Long communityID) {
