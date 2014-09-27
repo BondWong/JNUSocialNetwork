@@ -191,7 +191,7 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	});
 	$('body').on("click",".post_more"+postID,function(){
 		var id = $(this).attr('id');
-		$("span[id='postContent" + id + "']").text(content);
+		$("span[id='postContent" + id + "']").html(content);
 		Msnry('.pro_body', '.post', 435);
 		$(this).remove();
 	});
