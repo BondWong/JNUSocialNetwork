@@ -20,7 +20,7 @@ public class DesertFileLinkMap {
 
 	public static void initializeEnvironment() throws IOException {
 		if (!Files.exists(Paths.get(PATH))) {
-			Files.createFile(Paths.get(PATH));
+			serialize();
 		}
 	}
 

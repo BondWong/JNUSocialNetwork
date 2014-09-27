@@ -127,9 +127,6 @@ $('body').on('keydown','.searchInput',function(event){
 		searchUser();
 	}
 });
-$('body').on('blur','.searchInput',function(event){
-	$('.searchInput').val("");
-});
 function searchUser(){
 	if ($('.searchInput').val() != "") {
 		var userInfo = encodeURI($('.searchInput').val());
@@ -143,7 +140,7 @@ function searchUser(){
 			$.each(users, function(n, user) {
 				AddUser(user.attributes.name,
 						user.attributes.lookingFor, user.ID,
-						user.attributes.avatarLink);
+						user.attributes.avatarLink,user.followerIDs);
 			});
 			
 		}
@@ -151,13 +148,20 @@ function searchUser(){
 }
 
 
-function AddUser(name, looking, id, avatarLink) {
+function AddUser(name, looking, id, avatarLink,followerIDs) {
+	var followTxt = "Follow";
+	if ($.inArray(USERID, followerIDs) != -1) {
+		followTxt = "Following";
+	}
+	if (USERID == id) {
+		followTxt = "Yourself";
+	}
 	var boarddiv = "<div class='userCard'><img height='170' width='170' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' ><p class='recommendName'><a id=" + id + " class='tipUser2'>"
 			+ name + "</a></p><p class='recommendLooking'>" + looking
 			+ "</p><div class='recommendBtn'><button  id=" + id
-			+ " class='btn btn-danger followBtn'>Follow</button></div></div>";
+			+ " class='btn btn-danger followBtn'>"+followTxt+"</button></div></div>";
 	$(".recommendBord").after(boarddiv);
 	Msnry('.userContainer', '.userCard', 200);
 }
