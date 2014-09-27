@@ -266,17 +266,16 @@ body {
 }
 
 .post_img {
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #DFDFDF;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	border-bottom: 1px solid #DFDFDF;
+	padding:5px;
 	margin-bottom: 5px;
 	cursor: pointer;
 	overflow: hidden;
 	text-align: center;
 }
-
+.post_img img{
+	margin-top:5px;
+}
 .media_show {
 	background-color: #FFF;
 	padding: 20px;

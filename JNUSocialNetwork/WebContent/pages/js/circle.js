@@ -214,7 +214,7 @@ $(window)
 				function() {
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
-						var startIndex = $('.post').length + 1;
+						var startIndex = $('.post').length - 1;
 						$('div#infinite_loader').show();
 						var response = [];
 						if (USERID == null || USERID == "")
@@ -227,7 +227,7 @@ $(window)
 										response,
 										function(n, dataString) {
 											if (dataString.postType == "NORMAL"
-													&& dataString.available == true) {
+													&& dataString.available == true && $("div[class='post "+dataString.ID+"']").length == 0) {
 												var boarddiv = post(
 														dataString.owner.ID,
 														dataString.owner.attributes.name,

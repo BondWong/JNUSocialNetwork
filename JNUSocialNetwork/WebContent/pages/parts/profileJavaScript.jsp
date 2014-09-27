@@ -149,7 +149,7 @@
 																				n,
 																				dataString) {
 																			if (dataString.postType == "NORMAL"
-																					&& dataString.available == true) {
+																					&& dataString.available == true && $("div[class='post "+dataString.ID+"']").length == 0) {
 																				var boarddiv = post(
 																						dataString.owner.ID,
 																						dataString.owner.attributes.name,

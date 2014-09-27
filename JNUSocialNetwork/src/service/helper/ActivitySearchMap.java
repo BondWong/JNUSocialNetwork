@@ -32,8 +32,10 @@ public class ActivitySearchMap {
 				activities = (List<Map<String, Object>>) transaction.execute(
 						"Post.fetchByTypeASC", PostType.ACTIVITY, 0, 500);
 				for (Map<String, Object> activity : activities) {
-					if (((Map<String, String>) activity.get("attributes")).get(
-							"reminded").equals("false"))
+					if (activity.get("available").equals(true)
+							&& ((Map<String, String>) activity
+									.get("attributes")).get("reminded").equals(
+									"false"))
 						addRecord((Long) activity.get("ID"),
 								Long.parseLong(((Map<String, String>) activity
 										.get("attributes")).get("remindDate")));
@@ -41,7 +43,6 @@ public class ActivitySearchMap {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				throw e;
 			}
 			serialize();
 		}

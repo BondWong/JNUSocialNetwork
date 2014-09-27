@@ -107,11 +107,20 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	var imageDiv = "";
 	if (srcImage.length > 3) {
 		$.each(srcImage, function(n, image) {
-			imageDiv = imageDiv
-					+ "<img style='float:left;' class='postimg' width='200' height="
-					+ getHeight(200, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			if(n%2 == 1){
+				imageDiv = imageDiv
+				+ "<img style='float:right;' class='postimg' width='200' height="
+				+ getHeight(200, $.parseJSON(image).width, $
+						.parseJSON(image).height) + " onclick='showPost("
+				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			}else{
+				imageDiv = imageDiv
+				+ "<img style='float:left;' class='postimg' width='200' height="
+				+ getHeight(200, $.parseJSON(image).width, $
+						.parseJSON(image).height) + " onclick='showPost("
+				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			}
+			
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	}else if( srcImage.length > 0 && srcImage.length <= 3){

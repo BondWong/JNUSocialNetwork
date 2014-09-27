@@ -252,10 +252,10 @@ $(window)
 						var startIndex = $('.activity').length;
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
-								startIndex + 1, pageSize);
+								startIndex, pageSize);
 						if(response.length != 0){
 							$.each(response, function(n, dataString) {
-								if (dataString.available == true) {
+								if (dataString.available == true && $("div[class='activity post"+dataString.ID+"']").length == 0) {
 								var boarddiv = activity(dataString.ID,
 										dataString.attributes.activityName,
 										dataString.attributes.activityTime,
