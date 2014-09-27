@@ -239,7 +239,7 @@ $(document)
 									function() {
 										$(this)
 												.replaceWith(
-														"<input style='font-size:14px;' class='searchInput' placeholder='请输入社区名' maxLength='30'>");
+														"<input style='font-size:14px;' class='searchInput' style='width:200px;' placeholder='请输入社区名' maxLength='30'>");
 										$('.searchInput').focus();
 										$('.searchInput')
 												.blur(
