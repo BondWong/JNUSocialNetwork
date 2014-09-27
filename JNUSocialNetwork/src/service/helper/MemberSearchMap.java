@@ -44,7 +44,6 @@ public class MemberSearchMap {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				throw e;
 			}
 			serialize();
 		}
