@@ -60,9 +60,9 @@
                 postdata.name = $("#studentID").val();
                 postdata.password = $("#password").val();
                 postdata.telnum = $("#telNum").val();
+                postdata.communityID = $("#signup").data("id");
                 postdata.wish1 = $("#intent_dept1").find("option:selected").val();
                 postdata.wish2 = $("#intent_dept2").find("option:selected").val();
-
 
                 var settings = {
                     type: "POST",
@@ -91,6 +91,7 @@
         //为报名按钮添加监听器
         $("#league-list").delegate('.apply-btn', 'click', function () {
             setDepartments($(this).data("id"));
+            $("#signup").data("id", $(this).data("id"));
         });
     }
 
@@ -131,7 +132,7 @@
     // 拉取信息成功则回调加载信息
     function fetchSucceed(data) {
         // 过滤不可用的社团信息
-        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411390027993, 1411094627377, 1411112101865, 1411141391379, 1411697745258, 1411269556967];
+        var filterArr = [1411301318703, 1411090991902, 1411555413859, 1411397204271, 1411055191107, 1411054407457, 1411390027993, 1411094627377, 1411112101865, 1411141391379, 1411697745258, 1411269556967, 1411783249523];
         for (var i in filterArr) {
             //if (data[i].available)
             for (var j in data) {
