@@ -259,6 +259,10 @@ $(document)
 $('body').on("click",".communityPostSpan",function(){
 	window.location.href = "communityShow.jsp?"+$(this).attr('id');
 });
+$('body').on("click",".deletePostFromCBtn",function(){
+	var id = $(this).find("input").attr("value");
+	DeletePostFromCommunity($(this).attr('id'),id);
+});
 function aboutClickEvent() {
 	// function editProfileInfro
 	$('body').on(
@@ -551,6 +555,7 @@ function fetchPostsByOwner() {
 						+ "'><span class='glyphicon glyphicon-th-large'></span>&nbsp;"
 						+ dataString.attributes.communityName
 						+ "</a> ";
+				$(".postComm" + dataString.ID).children('.deletePostBtn').attr('class','deletePostFromCBtn').attr('id',dataString.attributes.communityID);
 				$(".postComm"+dataString.ID).append(board);
 			}
 		}

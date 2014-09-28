@@ -34,7 +34,8 @@
 								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
-							value="${sessionScope.hiddenCode }" />
+							value="${sessionScope.hiddenCode }" /> <input type="hidden"
+							name="origin" value="" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
 							type="submit">登录</button>
 						<h4>
@@ -68,6 +69,7 @@
 		$("h4 span.signUp").click(function() {
 			location.href = "register.jsp";
 		});
+		$('input[name="origin"]').val(localStorage.getItem("url"));
 	</script>
 	<c:choose>
 		<c:when test="${ param.success eq false}">
