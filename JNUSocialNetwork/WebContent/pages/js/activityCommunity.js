@@ -135,7 +135,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
 			+ time
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
-			+ addre + "</span></div><div class='activityD'><span>" + more
+			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'+more+'</pre>'
 			+ "</span></div><div class='activityAsk'>"+join+"</div></div>";
 	return boarddiv;
 }
@@ -252,10 +252,10 @@ $(window)
 						var startIndex = $('.activity').length;
 						$('div#infinite_loader').show();
 						var response = FetchActivitiesByCommunity(communityID,
-								startIndex + 1, pageSize);
+								startIndex, pageSize);
 						if(response.length != 0){
 							$.each(response, function(n, dataString) {
-								if (dataString.available == true) {
+								if (dataString.available == true && $("div[class='activity post"+dataString.ID+"']").length == 0) {
 								var boarddiv = activity(dataString.ID,
 										dataString.attributes.activityName,
 										dataString.attributes.activityTime,

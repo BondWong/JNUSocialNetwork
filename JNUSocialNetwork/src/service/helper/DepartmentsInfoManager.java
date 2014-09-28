@@ -147,23 +147,40 @@ public class DepartmentsInfoManager {
 
 		departments.put(1411390027993l, department9);
 
+		// 益箩筐
 		List<String> department10 = new ArrayList<String>();
 
 		department10.add("益箩筐");
 
 		departments.put(1411094627377l, department10);
 
+		// 模特队
 		List<String> department11 = new ArrayList<String>();
 
 		department11.add("模特队");
 
 		departments.put(1411141391379l, department11);
 
+		// 英语辩论队
 		List<String> department12 = new ArrayList<String>();
 
 		department12.add("暨大英语辩论队");
 
 		departments.put(1411112101865l, department12);
+
+		// 创行
+		List<String> department13 = new ArrayList<String>();
+
+		department13.add("enactus创行");
+
+		departments.put(1411269556967l, department13);
+
+		// 学代
+		List<String> department14 = new ArrayList<String>();
+
+		department14.add("秘书处");
+
+		departments.put(1411697745258l, department14);
 
 	}
 

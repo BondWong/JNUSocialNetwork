@@ -4,17 +4,36 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import utils.JsonUtil;
 
 public class CommunitySearchMap {
 	private final static String PATH = "communitysearchmap.txt";
 	private static Map<String, String> searchMap = new HashMap<String, String>();
 
-	public static void initializeEnvironment() throws IOException {
+	@SuppressWarnings("unchecked")
+	public static void initializeEnvironment() throws Exception {
 		if (!Files.exists(Paths.get(PATH))) {
-			Files.createFile(Paths.get(PATH));
+			Transaction transaction = new FetchCommunitiesTransaction();
+			List<Map<String, Object>> communities;
+			try {
+				communities = (List<Map<String, Object>>) transaction.execute(
+						"Community.fetch", null, null, 0, 500);
+				for (Map<String, Object> community : communities)
+					addRecord(
+							((Map<String, String>) community.get("attributes"))
+									.get("name"),
+							community.get("ID") + "");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			serialize();
 		}
 	}
 
@@ -70,9 +89,17 @@ public class CommunitySearchMap {
 	public static String[] searchIDs(String key) {
 		String IDs = "";
 		synchronized (CommunitySearchMap.class) {
-			IDs = searchMap.get(key);
+			Set<String> keys = searchMap.keySet();
+			for (String k : keys) {
+				if (k.contains(key)) {
+					IDs += searchMap.get(k);
+					IDs.trim();
+					IDs += " ";
+					System.out.println(IDs);
+				}
+			}
 		}
-		if (IDs == null)
+		if (IDs.equals(""))
 			return new String[0];
 		else
 			return IDs.split(" ");

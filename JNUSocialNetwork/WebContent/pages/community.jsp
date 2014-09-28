@@ -25,7 +25,7 @@
 		<ul class="nav nav-pills nav-stacked" role="tablist">
 			<li><a class='myCommunityBtn'
 				href='community.jsp?nav=mycommunity'>我的社区</a></li>
-			<li><a href='community.jsp?nav=official'>官方社区</a></li>
+			<li><a href='community.jsp?nav=official'>官方组织</a></li>
 			<li><a href='community.jsp?nav=student'>社团组织</a></li>
 			<li><a href='community.jsp?nav=folk'>个人社区</a></li>
 			<li><a href='community.jsp?nav=discovery'>热门社区</a></li>

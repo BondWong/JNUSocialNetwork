@@ -266,17 +266,16 @@ body {
 }
 
 .post_img {
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #DFDFDF;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	border-bottom: 1px solid #DFDFDF;
+	padding:5px;
 	margin-bottom: 5px;
 	cursor: pointer;
 	overflow: hidden;
 	text-align: center;
 }
-
+.post_img img{
+	margin-top:5px;
+}
 .media_show {
 	background-color: #FFF;
 	padding: 20px;
@@ -1430,7 +1429,7 @@ body {
 }
 
 .searchUser {
-	font-size: 14px;
+	font-size: 16px;
 	margin-left: 20px;
 	color: #c5c5c5;
 }
@@ -1442,7 +1441,8 @@ body {
 }
 
 .searchBody {
-	height: 40px;
+	padding-top:10px;
+	height: 60px;
 }
 
 .peopeleTypeHover {
@@ -1459,6 +1459,8 @@ body {
 
 .searchInput {
 	margin-left: 20px;
+	width:80%;
+	border:0;
 }
 
 .searchCommunityInput h3 {
@@ -1793,4 +1795,9 @@ footer {
 pre {
 white-space: pre-wrap;
 word-wrap: break-word;
+background-color: #FFF;
+border: 0px;
+margin:0px;
+padding:0px;
+font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif !important;
 }

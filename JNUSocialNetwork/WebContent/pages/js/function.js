@@ -26,8 +26,9 @@ function Msnry(selectContain, item, width) {
 	});
 }
 
-function post(ownerID, ownerNickName, publishDate, content, postID, likers,
+function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
+	var content = '<pre>' + contentR +'</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -106,11 +107,20 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var imageDiv = "";
 	if (srcImage.length > 3) {
 		$.each(srcImage, function(n, image) {
-			imageDiv = imageDiv
-					+ "<img style='float:left;' class='postimg' width='200' height="
-					+ getHeight(200, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			if(n%2 == 1){
+				imageDiv = imageDiv
+				+ "<img style='float:right;' class='postimg' width='200' height="
+				+ getHeight(200, $.parseJSON(image).width, $
+						.parseJSON(image).height) + " onclick='showPost("
+				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			}else{
+				imageDiv = imageDiv
+				+ "<img style='float:left;' class='postimg' width='200' height="
+				+ getHeight(200, $.parseJSON(image).width, $
+						.parseJSON(image).height) + " onclick='showPost("
+				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+			}
+			
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	}else if( srcImage.length > 0 && srcImage.length <= 3){
@@ -181,7 +191,7 @@ function post(ownerID, ownerNickName, publishDate, content, postID, likers,
 	});
 	$('body').on("click",".post_more"+postID,function(){
 		var id = $(this).attr('id');
-		$("span[id='postContent" + id + "']").text(content);
+		$("span[id='postContent" + id + "']").html(content);
 		Msnry('.pro_body', '.post', 435);
 		$(this).remove();
 	});
@@ -841,7 +851,7 @@ function showPost(postID) {
 						+ "</strong></div><div class='user_info'>"
 						+ dataString.publishDate
 						+ "</div></div></div><div class='post_info'><span class='postContent'>"
-						+ dataString.attributes.content
+						+ '<pre>' + dataString.attributes.content + '</pre>'
 						+ "</span></div><div class='row'><div class='col-md-6'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID
 						+ "></p><input id='likeID' type='hidden' value="

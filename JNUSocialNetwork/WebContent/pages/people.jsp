@@ -26,7 +26,7 @@
 			<div class="peopleType">
 				<div class="searchBody">
 					<span class="glyphicon glyphicon-search glyphicon-search-custom userSearch"
-						style="cursor: pointer;"></span> <span class="searchUser">寻找小伙伴</span>
+						style="cursor: pointer;font-size:20px;"></span> <span><input class='searchInput' placeholder='请输入姓名或学号或性别 ' maxLength='20'></span>
 				</div>
 				<span class="peopeleType peopeleTypeHover pinCommon">同兴趣伙伴</span> <span
 					class="peopeleType pCampus">同学院伙伴</span> <span

@@ -9,8 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.modelType.PostType;
+
 import com.google.gson.reflect.TypeToken;
 
+import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchPostsTransaction;
 import utils.JsonUtil;
 
 public class ActivitySearchMap {
@@ -19,9 +23,28 @@ public class ActivitySearchMap {
 	}.getType();
 	private static Map<Long, Long> activityMap = new HashMap<Long, Long>();
 
-	public static void initializeEnvironment() throws IOException {
+	@SuppressWarnings("unchecked")
+	public static void initializeEnvironment() throws Exception {
 		if (!Files.exists(Paths.get(PATH))) {
-			Files.createFile(Paths.get(PATH));
+			List<Map<String, Object>> activities;
+			Transaction transaction = new FetchPostsTransaction();
+			try {
+				activities = (List<Map<String, Object>>) transaction.execute(
+						"Post.fetchByTypeASC", PostType.ACTIVITY, 0, 500);
+				for (Map<String, Object> activity : activities) {
+					if (activity.get("available").equals(true)
+							&& ((Map<String, String>) activity
+									.get("attributes")).get("reminded").equals(
+									"false"))
+						addRecord((Long) activity.get("ID"),
+								Long.parseLong(((Map<String, String>) activity
+										.get("attributes")).get("remindDate")));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			serialize();
 		}
 	}
 

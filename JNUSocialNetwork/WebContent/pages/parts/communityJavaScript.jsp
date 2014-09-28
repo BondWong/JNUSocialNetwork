@@ -59,13 +59,13 @@
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByJoin(USERID,
-											$('.content_container').length + 1,
+											$('.content_container').length,
 											pageSize+1);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -109,13 +109,13 @@
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByType("OFFICIAL",
-											$('.content_container').length + 1,
+											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true ) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -159,7 +159,7 @@
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByType("FOLK",
-											$('.content_container').length + 1,
+											$('.content_container').length,
 											pageSize);
 									$
 											.each(
@@ -210,13 +210,13 @@
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByType(
 											"SCHOOLUNION",
-											$('.content_container').length + 1,
+											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -260,13 +260,13 @@
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
 									var response = FetchCommunity(
-											$('.content_container').length + 1,
+											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response,
 													function(n, community) {
-														if (community.available == true ) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
