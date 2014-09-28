@@ -69,6 +69,7 @@
 		$("h4 span.signUp").click(function() {
 			location.href = "register.jsp";
 		});
+		$('input[name="origin"]').val(localStorage.getItem("url"));
 	</script>
 	<c:choose>
 		<c:when test="${ param.success eq false}">

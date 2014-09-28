@@ -121,6 +121,7 @@
 		$('.displayBody').animate({
 			opacity : 1
 		}, 300);
+		$('input[name="origin"]').val(localStorage.getItem("url"));
 	</script>
 	<script>
 		$("h4 span.signIn").click(function() {
