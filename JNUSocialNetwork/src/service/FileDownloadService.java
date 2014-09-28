@@ -1,5 +1,6 @@
 package service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -31,6 +32,7 @@ import transaction.DAOFetchTransaction.FetchPostTransaction;
 @WebServlet("/app/fileDownloader")
 public class FileDownloadService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static String root;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,6 +40,17 @@ public class FileDownloadService extends HttpServlet {
 	public FileDownloadService() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public void init() {
+		root = getServletConfig().getServletContext().getRealPath("/");
+		File dir = new File(root + "activityRegisterTemplate");
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		File file = new File(root + "activityRegisterForm");
+		if (!file.exists())
+			file.mkdir();
 	}
 
 	/**
@@ -57,6 +70,22 @@ public class FileDownloadService extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
+		case "REGISTERFORM":
+			try {
+				downloadRegisterForm(Long.parseLong(request
+						.getParameter("activityID")));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "ACTIVITYREGISTERS":
+			downloadActivityRegisters(Long.parseLong(request
+					.getParameter("activityID")));
 			break;
 		default:
 		}
@@ -283,6 +312,22 @@ public class FileDownloadService extends HttpServlet {
 
 		wb.write(outStream);
 		outStream.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void downloadRegisterForm(Long activityID) throws Exception {
+		Transaction transaction = new FetchPostTransaction();
+		Map<String, Object> post = (Map<String, Object>) transaction
+				.execute(activityID);
+		String addr = (String) ((Map<String, Object>) post.get("attributes"))
+				.get("registerTemplateAddr");
+		addr = root + addr;
+		File file = new File(addr);
+
+	}
+
+	private void downloadActivityRegisters(Long activityID) {
+
 	}
 
 }

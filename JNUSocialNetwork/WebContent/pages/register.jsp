@@ -122,6 +122,7 @@
 			opacity : 1
 		}, 300);
 		$('input[name="origin"]').val(localStorage.getItem("url"));
+		localStorage.removeItem('url');
 	</script>
 	<script>
 		$("h4 span.signIn").click(function() {

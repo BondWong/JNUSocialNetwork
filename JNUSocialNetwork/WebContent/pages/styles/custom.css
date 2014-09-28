@@ -1810,3 +1810,11 @@ margin:0px;
 padding:0px;
 font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif !important;
 }
+.imgLeft{
+	width:200px;
+	float:left;
+}
+.imgRight{
+	width:200px;
+	float:right;
+}
