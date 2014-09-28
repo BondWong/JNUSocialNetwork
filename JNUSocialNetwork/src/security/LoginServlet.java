@@ -71,6 +71,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String hiddenCode = request.getParameter("hiddenCode");
 		String origin = request.getParameter("origin");
+		System.out.println(origin);
 		boolean fromRegister = false;
 		fromRegister = new Boolean(true).equals(request
 				.getAttribute("fromRegister")) ? true : false;
