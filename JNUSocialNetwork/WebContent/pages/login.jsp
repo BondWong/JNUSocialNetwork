@@ -34,7 +34,8 @@
 								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
-							value="${sessionScope.hiddenCode }" />
+							value="${sessionScope.hiddenCode }" /> <input type="hidden"
+							name="origin" value="" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
 							type="submit">登录</button>
 						<h4>
