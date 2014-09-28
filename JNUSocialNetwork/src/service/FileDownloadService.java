@@ -322,8 +322,6 @@ public class FileDownloadService extends HttpServlet {
 		String addr = (String) ((Map<String, Object>) post.get("attributes"))
 				.get("registerTemplateAddr");
 		addr = root + addr;
-		File file = new File(addr);
-
 	}
 
 	private void downloadActivityRegisters(Long activityID) {
