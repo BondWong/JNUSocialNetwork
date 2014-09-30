@@ -73,6 +73,20 @@ public class RegisterFormUploadService extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String[] parameters = request.getQueryString().split("&");
+		String type = "";
+		String activityID = "";
+		String name = "";
+		for (String parameter : parameters) {
+			String[] kvp = parameter.split("=");
+			if (kvp[0].equals("uploadType"))
+				type = kvp[1];
+			else if (kvp[0].equals("activityID"))
+				activityID = kvp[1];
+			else if (kvp[0].equals("memberName"))
+				name = kvp[1];
+		}
+
 		List<FileItem> items = new ArrayList<FileItem>();
 		try {
 			items = upload.parseRequest(request);
@@ -80,20 +94,14 @@ public class RegisterFormUploadService extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String type = "";
-		String activityID = "";
-		String name = "";
 		FileItem it = null;
 		for (FileItem item : items) {
-			if (item.getFieldName().equals("uploadType"))
-				type = item.getString();
-			else if (item.getFieldName().equals("activityID"))
-				activityID = item.getString();
-			else if (item.getFieldName().equals("memberName"))
-				name = item.getString();
-			else if (item.getFieldName().equals("file"))
+			if (item.isFormField())
+				continue;
+			else
 				it = item;
 		}
+
 		switch (type) {
 		case "REGISTERTEMPLATE":
 			try {

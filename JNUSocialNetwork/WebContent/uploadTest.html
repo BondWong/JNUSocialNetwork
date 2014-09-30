@@ -6,21 +6,17 @@
 </head>
 <body>
 	<div>
-		<form method="post" action="/app/registerFormUpload"
+		<form method="post"
+			action="/app/registerFormUpload?uploadType=REGISTERTEMPLATE&activityID=140011111111"
 			enctype="multipart/form-data">
-			<input type="file" name="file" /> <input type="hidden"
-				name="activityID" value="140011111111"> <input type="hidden"
-				name="uploadType" value="REGISTERTEMPLATE"> <input
-				type="submit" />
+			<input type="file" name="file" /> <input type="submit" />
 		</form>
 	</div>
 	<div>
-		<form method="post" action="/app/registerFormUpload"
+		<form method="post"
+			action="/app/registerFormUpload?uploadType=REGISTERFORM&activityID=140011111111&memberName=bond"
 			enctype="multipart/form-data">
-			<input type="file" name="file" /> <input type="hidden"
-				name="activityID" value="140011111111"> <input type="hidden"
-				name="uploadType" value="REGISTERFORM"> <input type="hidden"
-				name="memberName" value="bond" /><input type="submit" />
+			<input type="file" name="file" /> <input type="submit" />
 		</form>
 	</div>
 	<div>
