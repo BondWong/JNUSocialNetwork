@@ -142,6 +142,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		response.setContentType("application/json");
 		response.setStatus(200);
 		response.getWriter().write(temp);
+		response.flushBuffer();
 	}
 
 	private void uploadForm(FileItem item, String activityID, String name,

@@ -58,6 +58,7 @@ public class ImageUploadService extends HttpServlet {
 			response.setContentType("application/json");
 			response.setStatus(200);
 			response.getWriter().write(JsonUtil.toJson(links));
+			response.flushBuffer();
 
 		} catch (FileUploadBase.InvalidContentTypeException icte) {
 			response.sendError(406);
