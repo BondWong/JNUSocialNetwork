@@ -97,7 +97,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		switch (type) {
 		case "REGISTERTEMPLATE":
 			try {
-				uploadTemplate(it, activityID, response);
+				uploadTemplate(it, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -114,8 +114,8 @@ public class RegisterFormUploadService extends HttpServlet {
 		}
 	}
 
-	private void uploadTemplate(FileItem item, String activityID,
-			HttpServletResponse response) throws Exception {
+	private void uploadTemplate(FileItem item, HttpServletResponse response)
+			throws Exception {
 
 		String extention = "";
 		if (ExtensionManager.containsKey(item.getContentType()))
@@ -126,7 +126,8 @@ public class RegisterFormUploadService extends HttpServlet {
 		else
 			throw new Exception();
 
-		String temp = "activityRegisterTemplate/" + activityID + extention;
+		String temp = "activityRegisterTemplate/" + "registerTemplate"
+				+ System.currentTimeMillis() + extention;
 		File uploaddedFile = new File(root + temp);
 		item.write(uploaddedFile);
 
