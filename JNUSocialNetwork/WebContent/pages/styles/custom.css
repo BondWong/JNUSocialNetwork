@@ -847,6 +847,7 @@ body {
 }
 
 .member {
+	opacity:0;
 	margin-top: 10px;
 	width: 215px;
 	height: 80px;
@@ -1263,13 +1264,21 @@ body {
 
 .activityItem {
 	margin-top: 20px;
+	width:92%;
 }
 
 .activityItem>span {
 	width: 70px;
 	float: left;
 }
-
+.uploadItem {
+	margin-top: 20px;
+}
+.uploadItem>span {
+	float: left;
+	width: 70px;
+	text-align: right;
+}
 .activityName {
 	margin-left: auto;
 	margin-right: auto;
@@ -1816,5 +1825,38 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 }
 .imgRight{
 	width:200px;
+	float:right;
+}
+.follow {
+	margin-top: 10px;
+	margin-left:6px;
+	width: 125px;
+	height: 55px;
+	background-color: #fff;
+	float:left;
+}
+.followeeContainer{
+	width:100%;
+	position:relative;
+}
+.followName {
+	font-size: 16px;
+	color: #404040;
+	font-weight: bolder;
+	width: 50%;
+	margin-left: 10px;
+	display: block;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}
+.followeeShow{
+	position:absolute;
+}
+.followerShow{
+	position:absolute;
+}
+.aUB{
 	float:right;
 }

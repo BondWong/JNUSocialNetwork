@@ -28,7 +28,7 @@ function Msnry(selectContain, item, width) {
 
 function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
-	var content = '<pre>' + contentR +'</pre>';
+	var content = '<pre>' + replaceURLWithHTMLLinks(contentR) +'</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -217,7 +217,10 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	Msnry('.pro_body', '.post', 435);
 
 }
-
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
 // function hovercommentDeleteBtn
 
 $('.act_content').hover(function() {
