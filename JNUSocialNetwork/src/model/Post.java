@@ -27,10 +27,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import service.helper.DesertFileLinkMap;
-import utils.DateTimeUtil;
 import model.factory.AttributesFactory;
 import model.modelType.PostType;
+import service.helper.DesertFileLinkMap;
+import utils.DateTimeUtil;
+import utils.RootPathHelper;
 
 @Entity
 @Access(AccessType.FIELD)
@@ -184,6 +185,17 @@ public class Post extends AttributeModel {
 	}
 
 	public void clearAttributes() {
+		try {
+			DesertFileLinkMap.deserialize();
+			DesertFileLinkMap
+					.addLink(this.getAttribute("registerTemplateAddr"));
+			DesertFileLinkMap.addLink(RootPathHelper.getRootPath()
+					+ "activityRegisterForm/" + this.ID);
+			DesertFileLinkMap.serialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.attributes.clear();
 	}
 

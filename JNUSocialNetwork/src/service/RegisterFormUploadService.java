@@ -142,7 +142,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		response.setContentType("text/plain");
 		response.setStatus(200);
 		System.out.println("about to write back:" + temp);
-		response.getWriter().write(temp);
+		response.getWriter().write(root + temp);
 		response.flushBuffer();
 	}
 
@@ -164,13 +164,14 @@ public class RegisterFormUploadService extends HttpServlet {
 		}
 
 		String temp = "activityRegisterForm/" + activityID + "/"
-				+ System.currentTimeMillis() + "--" + name + extention;
+				+ System.currentTimeMillis() + "--"
+				+ java.net.URLDecoder.decode(name, "UTF-8") + extention;
 		File uploaddedFile = new File(root + temp);
 		item.write(uploaddedFile);
 
 		response.setContentType("application/json");
 		response.setStatus(200);
-		response.getWriter().write(temp);
+		response.getWriter().write(root + temp);
 	}
 
 }

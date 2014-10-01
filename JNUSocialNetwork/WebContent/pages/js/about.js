@@ -293,7 +293,7 @@ function aboutClickEvent() {
 					campus = "GuangzhouCampus";
 				}
 
-				var dormInfo = GetDormInfo(campus);
+				var dormInfo = GetDormInfo("ZhuhaiCampus");
 				var option = "<option value=''>请选择</option>";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
@@ -509,34 +509,40 @@ function showPhotos() {
 // show followees
 function showFollowees() {
 
-	var response = FetchFollowees(userID, "0", "10");
+	var response = FetchFollowees(userID, "0", "30");
 	$
 			.each(
 					response,
 					function(index, followee) {
-						var followeeDiv = "<img class='img-circle userImg userImgA' width='50' height='50' src='"
-								+ $.parseJSON(followee.attributes.avatarLink).src
-								+ "' ></img><input type='hidden' name='userID' value='"
-								+ followee.ID + "'/>";
-						$('.userImgA').userTips();
-						$('.followeeShow').append(followeeDiv);
+						var followeeDiv = addFollow(followee.ID,followee.attributes.avatarLink,followee.attributes.name);
+						
+						$('.followeeBoard').after(followeeDiv);
+						Msnry('.followeeContainer', '.member', 215);
+						$('.followName').userTips();
 					});
 }
 // show followers
 function showFollowers() {
-	var response = FetchFollowers(userID, "0", "10");
+	var response = FetchFollowers(userID, "0", "30");
 	$
 			.each(
 					response,
 					function(index, follower) {
-						var followerDiv = "<img class='img-circle userImg userImgA' width='50' height='50' src='"
-								+ $.parseJSON(follower.attributes.avatarLink).src
-								+ "'></img><input type='hidden' name='userID' value='"
-								+ follower.ID + "'/>";
-
-						$('.followerShow').append(followerDiv);
-						$('.userImgA').userTips();
+						var followeeDiv = addFollow(follower.ID,follower.attributes.avatarLink,follower.attributes.name);
+						$('.followerBoard').after(followeeDiv);
+						Msnry('.followerContainer', '.member', 215);
+						$('.followName').userTips();
 					});
+}
+function addFollow(id,avatarLink,name){
+	var followDiv = "<div class='follow' id='"
+		+ id
+		+ "'><img width='50' height='50'  class='userMember' src='"
+		+ $.parseJSON(avatarLink).src
+		+ "' /><span class='followName'><a style='cursor:pointer;color:#404040'>"
+		+ name + "</a></span><input type='hidden' value='" + id
+		+ "' name='userID'/></div>";
+	return followDiv;
 }
 var pageSize = 15;
 // function fetchPostsByOwner()

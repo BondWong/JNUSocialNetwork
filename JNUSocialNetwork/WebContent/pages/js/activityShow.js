@@ -64,6 +64,12 @@ $('#fileuploadPhoto')
 				$.support.fileInput ? undefined : 'disabled');
 // function showActivityDetail
 function showActivityDetail(activity, community) {
+	if(activity.attributes.ifUpload == "默认方式"){
+		$('#download-name-list-button').attr("href","../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID=" + activity.ID);
+	}else{
+		$('#download-name-list-button').attr("href","../app/fileDownloader?type=ACTIVITYREGISTERS&activityID=" + activity.ID);
+	}
+	
 	$('.activityShowName').html(activity.attributes.activityName);
 	$('.aT').html(activity.attributes.activityTime);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);

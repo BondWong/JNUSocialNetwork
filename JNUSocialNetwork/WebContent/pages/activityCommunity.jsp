@@ -95,7 +95,8 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				<span>社区活动</span> <span class="showHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
+				<span>社区活动</span> <span class="showHref">社区帖子</span> <span
+					class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -123,75 +124,168 @@
 							<h4 class="modal-title" id="myModalLabel">举办活动</h4>
 						</div>
 						<form class="activityForm" enctype="multipart/form-data"
-							onsubmit="return false;">
-							<div class="modal-body modalBody">
-								<div class="activityItem">
-									<span>活动名：</span> <input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityName" required autofocus maxLength="30" />
+							onsubmit="return false;"
+							style="position: relative; overflow: hidden;">
+							<div class="modal-body modalBody" style="height: 510px;">
+								<div class="innerNav" style="display: none; visibility: hidden">
+									<hr />
+									<ul>
+										<li class="active" id="go_page1"><span>基本信息</span></li>
+										<li id="go_page2"><span>报名方式</span></li>
+										<li id="go_page3"><span>上传报名表</span></li>
+									</ul>
 								</div>
-								<div class="activityItem">
-									<span>活动时间：</span>
-									<div class="input-group date form_datetime1 col-lg-10"
-										data-link-field="dtp_input1">
-										<input type="text" class="form-control activityInput"
-											id="activityTime" readonly required /> <span
-											class="input-group-addon"><i
-											class="glyphicon glyphicon-th"></i></span>
+								<div id="page1"
+									style="position: absolute; top: 30px; left: 0px; width: 100%">
+									<div class="activityItem">
+										<span>活动名：</span> <input type="text"
+											class="form-control activityInput" placeholder=""
+											id="activityName" required autofocus maxLength="30" />
+									</div>
+									<div class="activityItem">
+										<span>活动时间：</span>
+										<div class="input-group date form_datetime1 col-lg-10"
+											data-link-field="dtp_input1">
+											<input type="text" class="form-control activityInput"
+												id="activityTime" readonly required /> <span
+												class="input-group-addon"><i
+												class="glyphicon glyphicon-th"></i></span>
+										</div>
+									</div>
+									<div class="activityItem">
+										<span>提醒时间：</span>
+										<div class="input-group date form_datetime2 col-lg-10"
+											data-link-field="dtp_input1">
+											<input type="text" class="form-control activityInput"
+												id="activityRemind" readonly required /> <span
+												class="input-group-addon"><i
+												class="glyphicon glyphicon-th"></i></span>
+										</div>
+									</div>
+									<div class="activityItem">
+										<div id="fail_popover" class="alert alert-danger"
+											style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请输入时间！</div>
+									</div>
+									<div class="activityItem">
+										<div id="fail_popover2" class="alert alert-danger"
+											style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
+									</div>
+									<div class="activityItem">
+										<span>活动地点：</span>
+										<textarea class="form-control activityInput" placeholder=""
+											id="activityAddr" required autofocus maxLength="100"
+											style="resize: none;"></textarea>
+									</div>
+									<div class="activityItem">
+										<span>活动细节：</span>
+										<textarea class="form-control activityInput" placeholder=""
+											id="activityMore" required autofocus maxLength="200"
+											style="resize: none;"></textarea>
+									</div>
+									<div class="activityItem">
+										<span>人数上限：</span><input type="text"
+											class="form-control activityInput" placeholder=""
+											id="activityNum" pattern="[0-9]{1,3}"
+											data-errormessage-pattern-mismatch="请输入参与人数，最大999" required
+											autofocus maxLength="3" />
+									</div>
+									<div class="activityItem">
+										<span>活动图片</span> <span
+											class="btn btn-success fileinput-button" style="width: auto;">
+											<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <!-- The file input field used as target for the file upload widget -->
+											<input id="fileuploadA" type="file" name="file">
+										</span>
+									</div>
+									<span
+										style="display: block; font-size: 12px; margin-top: 30px;">[请上传长宽比例1140*300的海报头，否则影响显示效果]</span>
+									<!-- The container for the uploaded files -->
+								</div>
+								</form>
+								<div id="page2"
+									style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
+									<div class="form-group">
+										<div class="col-sm-9">
+										
+											<label class="radio"> <input type="radio"
+												name="optionsRadios" id="optionsRadios1" value="option1"
+												checked> 默认报名：用户只需点击参加即可，无需填写报名表；
+											</label> <label class="radio"> <input type="radio"
+												name="optionsRadios" id="optionsRadios2" value="option2">
+												上传报名表：用户需要下载报名表，填写报名表后上传。
+											</label>
+										</div>
+
+									</div>
+									<form class="regForm" enctype="multipart/form-data">
+									<div class="form-group" id="div_fileuploadB"
+										style="display: none; float: left;">
+										<label for="fileuploadB" class="col-sm-2 control-label"></label>
+										<span class="btn btn-success fileinput-button"
+											style="width: auto; margin-left: 10px"> <i
+											class="glyphicon glyphicon-plus"></i> <span>添加报名表</span> <!-- The file input field used as target for the file upload widget -->
+											<input id="fileuploadB" type="file" name="file" />
+										</span>
+									</div>
+									</form>
+									<div class="activityItem">
+										<div id="fail_popover3" class="alert alert-danger"
+											style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请上传报名表！</div>
 									</div>
 								</div>
-								<div class="activityItem">
-									<span>提醒时间：</span>
-									<div class="input-group date form_datetime2 col-lg-10"
-										data-link-field="dtp_input1">
-										<input type="text" class="form-control activityInput"
-											id="activityRemind" readonly required /> <span
-											class="input-group-addon"><i
-											class="glyphicon glyphicon-th"></i></span>
-									</div>
+								
+								<div id="page3"
+									style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
+									<table class="table">
+										<caption style='font-size: 18px;'>确认信息</caption>
+										<tr>
+											<td>活动名</td>
+											<td id="table_activityName" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>活动时间</td>
+											<td id="table_activityTime" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>提醒时间</td>
+											<td id="table_activityRemind" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>活动地点</td>
+											<td id="table_activityAddr" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>活动细节</td>
+											<td id="table_activityMore" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>人数上限</td>
+											<td id="table_activityNum" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>报名方式</td>
+											<td id="table_activitySign" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>已上传活动图片</td>
+											<td id="table_fileuploadA" style="text-align: right"></td>
+										</tr>
+										<tr>
+											<td>已上传报名表</td>
+											<td id="table_fileuploadB" style="text-align: right"></td>
+										</tr>
+									</table>
 								</div>
-								<div class="activityItem">
-									<div id="fail_popover" class="alert alert-danger"
-										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请输入时间！</div>
-								</div>
-								<div class="activityItem">
-									<div id="fail_popover2" class="alert alert-danger"
-										style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
-								</div>
-								<div class="activityItem">
-									<span>活动地点：</span>
-									<textarea class="form-control activityInput" placeholder=""
-										id="activityAddr" required autofocus maxLength="100"
-										style="resize: none;"></textarea>
-								</div>
-								<div class="activityItem">
-									<span>活动细节：</span>
-									<textarea class="form-control activityInput" placeholder=""
-										id="activityMore" required autofocus maxLength="200"
-										style="resize: none;"></textarea>
-								</div>
-								<div class="activityItem">
-									<span>人数上限：</span><input type="text"
-										class="form-control activityInput" placeholder=""
-										id="activityNum" pattern="[0-9]{1,3}" data-errormessage-pattern-mismatch="请输入参与人数，最大999" required autofocus maxLength="3" />
-								</div>
-								<div class="activityItem">
-									<span>活动图片</span> <span
-										class="btn btn-success fileinput-button" style="width: auto;">
-										<i class="glyphicon glyphicon-plus"></i> <span>添加图片:</span> <!-- The file input field used as target for the file upload widget -->
-										<input id="fileuploadA" type="file" name="files[]">
-									</span>							
-								</div>
-								<span style="display:block;font-size:12px;margin-top: 30px;">[请上传长宽比例1140*300的海报头，否则影响显示效果]</span>
-								<!-- The container for the uploaded files -->
 							</div>
+							
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">取消</button>
-								<button type="type" class="btn btn-primary" id="activityCreate"
-									value="upload">举办</button>
+								<a href="#" class="btn btn-success" id="go_pre"
+									style="display: none; width: 70px">上一步</a> <a href="#"
+									class="btn btn-success" id="go_next" style="width: 70px">下一步</a>
+								<input type="submit" class="btn btn-success" value="完成"
+									style="display: none; width: 70px"
+									id="go_submit" />
 							</div>
-						</form>
+						
 					</div>
 					<!-- /.modal-content -->
 				</div>
@@ -234,7 +328,7 @@
 	<script src="js/function.js"></script>
 	<script src="js/activityCommunity.js"></script>
 	<script src="js/EventHandle.js"></script>
-	
+
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script src="js/global-initialization.js"></script>
 	<script type="text/javascript">

@@ -55,6 +55,44 @@ function FileUpload(formData) {
 	});
 	return fileDri;
 }
+function RegisterFormUpload(formData) {
+	var response = "";
+	$.ajax({
+		type : "POST",
+		url : '../../app/registerFormUpload?uploadType=REGISTERTEMPLATE',
+		data : formData,
+		async : false,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data) {
+			response = data;
+		},
+		cache : false,
+		contentType : false,
+		processData : false
+	});
+	return response;
+}
+function formUpload(formData,activityID,name) {
+	var response = "";
+	$.ajax({
+		type : "POST",
+		url : '../../app/registerFormUpload?uploadType=REGISTERFORM&activityID='+activityID+'&memberName='+name+'',
+		data : formData,
+		async : false,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data,status) {
+			response = status;
+		},
+		cache : false,
+		contentType : false,
+		processData : false
+	});
+	return response;
+}
 // ***********************************FileService
 // end*********************************
 // ***********************************ApplicationService

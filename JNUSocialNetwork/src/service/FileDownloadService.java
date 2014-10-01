@@ -354,8 +354,8 @@ public class FileDownloadService extends HttpServlet {
 
 		// forces download
 		String headerKey = "Content-Disposition";
-		String headerValue = String
-				.format("attachment; filename=\"%s\"", "报名表");
+		String headerValue = String.format("attachment; filename=\"%s\"",
+				addr.replace(addr.substring(0, addr.lastIndexOf(".")), "register"));
 		response.setHeader(headerKey, headerValue);
 
 		// obtains response's output stream

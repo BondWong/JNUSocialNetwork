@@ -28,7 +28,7 @@ function Msnry(selectContain, item, width) {
 
 function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
-	var content = '<pre>' + contentR +'</pre>';
+	var content = '<pre>' + replaceURLWithHTMLLinks(contentR) +'</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -105,16 +105,18 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
+	var imageDiv1 = "";
+	var imageDiv2 = "";
 	if (srcImage.length > 3) {
 		$.each(srcImage, function(n, image) {
 			if(n%2 == 1){
-				imageDiv = imageDiv
+				imageDiv1 = imageDiv1
 				+ "<img style='float:right;' class='postimg' width='200' height="
 				+ getHeight(200, $.parseJSON(image).width, $
 						.parseJSON(image).height) + " onclick='showPost("
 				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 			}else{
-				imageDiv = imageDiv
+				imageDiv2 = imageDiv2
 				+ "<img style='float:left;' class='postimg' width='200' height="
 				+ getHeight(200, $.parseJSON(image).width, $
 						.parseJSON(image).height) + " onclick='showPost("
@@ -122,7 +124,7 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 			}
 			
 		});
-		postImgDiv = postImgDiv + imageDiv + "</div>";
+		postImgDiv = postImgDiv + "<div class='imgLeft'>" +imageDiv1 + "</div>" +"<div class='imgRight'>" +imageDiv2 + "</div>" + "</div>";
 	}else if( srcImage.length > 0 && srcImage.length <= 3){
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
@@ -215,7 +217,10 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	Msnry('.pro_body', '.post', 435);
 
 }
-
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
 // function hovercommentDeleteBtn
 
 $('.act_content').hover(function() {

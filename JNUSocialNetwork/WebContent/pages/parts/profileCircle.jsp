@@ -7,6 +7,7 @@
 			<div>
 				<span class="aboutTitle">关注你的小伙伴</span>
 			</div>
+			<div class="followerContainer"><div class="followerBoard"></div></div>
 		</div>
 	</div>
 	<div class="post about">
@@ -14,6 +15,7 @@
 			<div>
 				<span class="aboutTitle">你关注的小伙伴</span>
 			</div>
+			<div class="followeeContainer"><div class="followeeBoard"></div></div>
 		</div>
 	</div>
 </div>
