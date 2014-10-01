@@ -196,13 +196,19 @@ $('body')
 					}
 					$(this).attr("data-toggle", "modal");
 					$(this).attr("data-target", "#uploadmodal");
-					var board = "<div class='modal fade' id='uploadmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>上传报名表</h4></div><div class='modal-body'><form class='uploadForm' role='form' onsubmit='return false;'>"
+					var board = "<div class='modal fade' id='uploadmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>上传报名表</h4></div><form class='uploadForm' role='form' onsubmit='return false;'><div class='modal-body'>"
 							+ teleAlert
-							+ "<div class='uploadItem'><span>报名表：</span><input type='file' name='file'/></div><p style='margin-top:20px;margin-left:14px;'>[注意：请先下载报名表，填写并上传，其他文件报名不成功！]</p></form></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='ulFile' value='upload'>上传</button></div></div></div></div>";
+							+ "<div class='uploadItem'><span>报名表：</span><input class='uploadexe' type='file' name='file'/></div><p style='margin-top:20px;margin-left:14px;'>[注意：请先下载报名表，填写并上传，其他文件报名不成功！]</p></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='ulFile' value='upload'>上传</button></div></form></div></div></div>";
 					$('body').append(board);
 				});
 $('body').on('click','#ulFile',function(){
-	if($('.uploadForm')[0].checkValidity()){
+	if($('.uploadForm')[0].checkValidity() && $('.uploadexe').val() != ""){
+		if($('.tele').val()!=""){
+			var dataString = {
+					telnum : $('#tele').val()
+				};
+			UpdateUserProfile(USERID, $.toJSON(dataString));
+		}
 		var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
 		$('#uploadmodal').modal('hide');
 		if(response == 'success'){
@@ -379,10 +385,10 @@ $(document)
 														'#activityRemind')
 														.val()
 														+ "") < 0.021 * 24 * 60
-												* 60 * 1000) {
+												* 60 * 1000  ) {
 									go_submit.click();
 									return;
-								} else if (current_page < page.length - 1) {
+								}else if (current_page < page.length - 1) {
 									go_page[++current_page].click();
 									if (current_page == 2) {
 										$('#table_activityName').html(

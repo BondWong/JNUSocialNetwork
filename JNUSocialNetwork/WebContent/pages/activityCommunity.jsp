@@ -227,6 +227,10 @@
 										</span>
 									</div>
 									</form>
+									<div class="activityItem">
+										<div id="fail_popover3" class="alert alert-danger"
+											style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请上传报名表！</div>
+									</div>
 								</div>
 								
 								<div id="page3"
