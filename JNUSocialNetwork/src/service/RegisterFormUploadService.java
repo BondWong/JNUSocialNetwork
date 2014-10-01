@@ -139,7 +139,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		File uploaddedFile = new File(root + temp);
 		item.write(uploaddedFile);
 
-		response.setContentType("application/json");
+		response.setContentType("text/plain");
 		response.setStatus(200);
 		System.out.println("about to write back:" + temp);
 		response.getWriter().write(temp);
