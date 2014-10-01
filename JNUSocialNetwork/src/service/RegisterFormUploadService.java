@@ -156,7 +156,7 @@ public class RegisterFormUploadService extends HttpServlet {
 				item.getName().indexOf("."))))
 			extention = item.getName().substring(item.getName().indexOf("."));
 		else
-			throw new Exception();
+			throw new Exception("Do Not Support File Type Exception");
 
 		File dir = new File(root + "activityRegisterForm/" + activityID);
 		if (!dir.exists()) {
