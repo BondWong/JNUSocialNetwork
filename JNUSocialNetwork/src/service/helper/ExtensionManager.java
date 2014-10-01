@@ -19,6 +19,7 @@ public class ExtensionManager {
 				.put("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 						".xlsx");
 		mimeExtensionMap.put("application/vnd.ms-excel", ".xls");
+		mimeExtensionMap.put("application/kset", ".et");
 		mimeExtensionMap
 				.put("application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 						".docx");
@@ -26,6 +27,7 @@ public class ExtensionManager {
 				.put("application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 						".docx");
 		mimeExtensionMap.put("application/msword", ".doc");
+		mimeExtensionMap.put("application/kswps", ".wps");
 	}
 
 	public static boolean containsKey(String mimeType) {
