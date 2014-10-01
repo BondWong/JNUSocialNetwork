@@ -57,6 +57,7 @@ public class ImageUploadService extends HttpServlet {
 			List<String> links = process(request);
 			response.setContentType("application/json");
 			response.setStatus(200);
+			System.out.println("about to write back:" + JsonUtil.toJson(links));
 			response.getWriter().write(JsonUtil.toJson(links));
 			response.flushBuffer();
 
