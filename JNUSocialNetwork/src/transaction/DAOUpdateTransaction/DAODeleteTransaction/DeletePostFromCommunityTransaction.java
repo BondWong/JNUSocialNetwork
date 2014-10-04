@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.Comment;
 import model.Community;
+import model.Member;
 import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
@@ -30,6 +31,8 @@ public class DeletePostFromCommunityTransaction extends DAOTransaction {
 		post.clearComments();
 		post.clearImageLinks();
 		post.clearLikers();
+		for (Member member : post.getParticipants())
+			member.leaveActivity(post);
 		post.clearParticipants();
 		post.setOwner(null);
 		community.removePost(post);

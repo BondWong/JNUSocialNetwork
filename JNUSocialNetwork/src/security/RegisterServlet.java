@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -262,7 +263,10 @@ public class RegisterServlet extends HttpServlet {
 						return;
 					}
 
-					response.sendRedirect("/pages/login.jsp?register=true");
+					RequestDispatcher dispatcher = getServletContext()
+							.getRequestDispatcher("/security/Login");
+					request.setAttribute("fromRegister", true);
+					dispatcher.forward(request, response);
 
 				} else {
 					response.sendRedirect("/pages/register.jsp?error="

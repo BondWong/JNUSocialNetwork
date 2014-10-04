@@ -87,9 +87,8 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<div class=communityCardInfo>
-				<h1 class="cName">Joke of the Day</h1>
-				<p class="cIntro">Funny quotes, jokes, memes, photos, and good
-					humor!</p>
+				<h1 class="cName"></h1>
+				<p class="cIntro"></p>
 			</div>
 			<div class="communityPic">
 				<img onload="javascript:auto_resize(220, 220, this)" src=""

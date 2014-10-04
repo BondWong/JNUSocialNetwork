@@ -170,7 +170,7 @@ function do_receive(data) {
 				$("a#remind-bell").fadeOut(300).fadeIn(300);
 			}, 600);
 	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
-			&& $("#chatroom #toID").val() == data.toID) {
+			&& $("#chatroom #toID").val() == data.fromID) {
 		append_to_content_panel(data, "other");
 		save_message(data);
 		oriented_send({
@@ -180,7 +180,7 @@ function do_receive(data) {
 			"status" : "READ"
 		});
 	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
-			&& $("#chatroom #toID").val() != data.toID) {
+			&& $("#chatroom #toID").val() != data.fromID) {
 		save_online_remind_messages(data);
 		if (window.bellIntervalID == null)
 			window.bellIntervalID = setInterval(function() {
@@ -196,12 +196,11 @@ function do_send(data) {
 }
 
 function append_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="'
-			+ data.ID
+	var message = '<div class="chat-bubble" id="' + data.ID
 			+ '" ><img class="chat-avatar" src="'
 			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" width="30" height="30" /><p class="chat-content-'
-			+ who + '" >' + data.attributes.content;
+			+ '" width="30" height="30" /><p class="chat-content-' + who
+			+ '" >' + data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
@@ -227,12 +226,11 @@ function append_to_content_panel(data, who) {
 }
 
 function prepend_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="'
-			+ data.ID
+	var message = '<div class="chat-bubble" id="' + data.ID
 			+ '" ><img class="chat-avatar" src="'
 			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" width="30" height="30"/><p class="chat-content-'
-			+ who + '" >' + data.attributes.content;
+			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
+			+ data.attributes.content;
 	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';

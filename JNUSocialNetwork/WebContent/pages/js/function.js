@@ -28,7 +28,7 @@ function Msnry(selectContain, item, width) {
 
 function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
-	var content = '<pre>' + contentR +'</pre>';
+	var content = '<pre>' + replaceURLWithHTMLLinks(contentR) +'</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -105,16 +105,18 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
+	var imageDiv1 = "";
+	var imageDiv2 = "";
 	if (srcImage.length > 3) {
 		$.each(srcImage, function(n, image) {
 			if(n%2 == 1){
-				imageDiv = imageDiv
+				imageDiv1 = imageDiv1
 				+ "<img style='float:right;' class='postimg' width='200' height="
 				+ getHeight(200, $.parseJSON(image).width, $
 						.parseJSON(image).height) + " onclick='showPost("
 				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
 			}else{
-				imageDiv = imageDiv
+				imageDiv2 = imageDiv2
 				+ "<img style='float:left;' class='postimg' width='200' height="
 				+ getHeight(200, $.parseJSON(image).width, $
 						.parseJSON(image).height) + " onclick='showPost("
@@ -122,7 +124,7 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 			}
 			
 		});
-		postImgDiv = postImgDiv + imageDiv + "</div>";
+		postImgDiv = postImgDiv + "<div class='imgLeft'>" +imageDiv1 + "</div>" +"<div class='imgRight'>" +imageDiv2 + "</div>" + "</div>";
 	}else if( srcImage.length > 0 && srcImage.length <= 3){
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
@@ -215,7 +217,10 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	Msnry('.pro_body', '.post', 435);
 
 }
-
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
 // function hovercommentDeleteBtn
 
 $('.act_content').hover(function() {
@@ -671,9 +676,19 @@ function clickOffEvent() {
 
 }
 function signInAlert() {
-	var alert = "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>还没登陆哦</h4></div><div class='modal-body modal-custom'><a href='register.jsp' type='button' class='btn btn-primary'>注册</a><a href='login.jsp'  type='button' class='btn btn-primary loginA'>登录</a></div></div></div></div>";
+	var alert = "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>还没登陆哦</h4></div><div class='modal-body modal-custom'><a type='button' class='btn btn-primary registerA '>注册</a><a type='button' class='btn btn-primary loginA'>登录</a></div></div></div></div>";
 	$('body').append(alert);
 }
+$('body').on('click','.registerA',function(){
+	localStorage.setItem("url",window.location.href);
+	window.location.href = 'register.jsp';
+
+});
+$('body').on('click','.loginA',function(){
+	localStorage.setItem("url",window.location.href);
+	window.location.href = 'login.jsp';
+
+});
 function teleAlert(activityID) {
 	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload ' id='"
 			+ activityID

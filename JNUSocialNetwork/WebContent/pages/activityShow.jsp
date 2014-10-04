@@ -39,12 +39,6 @@
 							id="download-name-list-button">下载参与列表</a>
 					</div>
 					<button class="btn btn-default backActivity">返回活动列表</button>
-					<script type="text/javascript">
-						var url = window.location.search;
-						var activityID = url.substr(url.indexOf("&") + 1);
-						document.getElementById("download-name-list-button").href = "../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
-								+ activityID;
-					</script>
 				</div>
 			</div>
 		</div>

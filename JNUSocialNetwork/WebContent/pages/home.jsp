@@ -84,7 +84,7 @@
 			</ul>
 		</div>
 		<div class="icommunity-footer">
-			<a href="community.jsp">全部社区</a>
+			<a href="community.jsp?nav=discovery">全部社区</a>
 		</div>
 	</div>
 

@@ -212,9 +212,10 @@ span.open_button {
 }
 
 .contact-list-content {
-	border-top: 1px solid #DCDCDC;
+	height: 80%;
 	overflow-x: hidden;
 	overflow-y: auto;
+	border-top: 1px solid #DCDCDC;
 }
 
 .person {

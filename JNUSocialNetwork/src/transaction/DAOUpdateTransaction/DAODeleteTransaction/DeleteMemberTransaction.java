@@ -34,6 +34,8 @@ public class DeleteMemberTransaction extends DAOTransaction {
 			post.clearComments();
 			post.clearImageLinks();
 			post.clearLikers();
+			for (Member m : post.getParticipants())
+				m.leaveActivity(post);
 			post.clearParticipants();
 			post.delete();
 			post.setOwner(null);
@@ -54,6 +56,8 @@ public class DeleteMemberTransaction extends DAOTransaction {
 				post.clearComments();
 				post.clearImageLinks();
 				post.clearLikers();
+				for (Member m : post.getParticipants())
+					m.leaveActivity(post);
 				post.clearParticipants();
 				post.setOwner(null);
 				dao.update(post);
