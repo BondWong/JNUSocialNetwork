@@ -32,7 +32,6 @@ function activityClickEvent() {
 												'#activityRemind').val(),
 										activityAddr : $('#activityAddr').val(),
 										activityMore : $('#activityMore').val(),
-										activityType : $('#activityType').val(),
 										limitation : $('.activityNum').val(),
 										communityName : community.attributes.name,
 										communityID : community.ID.toString(),
@@ -43,7 +42,8 @@ function activityClickEvent() {
 										registerTemplateAddr : RegisterFormUpload(new FormData(
 												$('.regForm')[0]))
 									},
-									imageLinks : []
+									imageLinks : [],
+									activityTypeTags : [$('#activityType').val()]
 								};
 							} else {
 								post = {
@@ -64,7 +64,6 @@ function activityClickEvent() {
 												'#activityRemind').val(),
 										activityAddr : $('#activityAddr').val(),
 										activityMore : $('#activityMore').val(),
-										activityType : $('#activityType').val(),
 										limitation : $('#activityNum').val(),
 										communityID : community.ID.toString(),
 										ifUpload : $('#table_activitySign')
@@ -72,7 +71,8 @@ function activityClickEvent() {
 										registerTemplateAddr : RegisterFormUpload(new FormData(
 												$('.regForm')[0]))
 									},
-									imageLinks : []
+									imageLinks : [],
+									activityTypeTags : [$('#activityType').val()]
 								};
 							}
 							var diffDate = toTimeValue($('#activityTime').val()

@@ -80,7 +80,8 @@ public class PostService {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
 					PostType.valueOf((String) post.get("postType")),
 					contentEncoder.encodeMapContent((Map<String, String>) post
-							.get("attributes")), post.get("imageLinks"));
+							.get("attributes")), post.get("imageLinks"), post
+							.get("activityTypeTags"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -336,6 +337,27 @@ public class PostService {
 		try {
 			activities = (List<Map<String, Object>>) transaction.execute(
 					"Post.fetchMyActivities", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchActivitiesByType/{tagID}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchActivitiesByType(@PathParam("tagID") String tagID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchActivitiesByTag", tagID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

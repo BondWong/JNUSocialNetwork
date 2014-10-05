@@ -51,4 +51,31 @@ $(document)
 			fetchAllActivities("0", "16");
 		</script>
 	</c:when>
+	<c:when test="${param.nav eq 'entertainment' }">
+		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.entertainmentA').css("background-color", "#f6f6f6");
+			$('.entertainmentA').css("border-left", "2px solid #4285f4");
+			fetchActivitiesByType("ENTERTAINMENT","0", "16");
+		</script>
+	</c:when>
+	<c:when test="${param.nav eq 'academic' }">
+		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.academicA').css("background-color", "#f6f6f6");
+			$('.academicA').css("border-left", "2px solid #4285f4");
+			fetchActivitiesByType("ACADEMIC","0", "16");
+		</script>
+	</c:when>
+	<c:when test="${param.nav eq 'athletic' }">
+		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.athleticA').css("background-color", "#f6f6f6");
+			$('.athleticA').css("border-left", "2px solid #4285f4");
+			fetchActivitiesByType("ATHLETIC","0", "16");
+		</script>
+	</c:when>
 </c:choose>

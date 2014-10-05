@@ -2,6 +2,6 @@
 	pageEncoding="UTF-8"%>
 	
 
-		<div class="containerFolk">
-			<div class="folkCommunity"></div>
+		<div class="containerEntertainment">
+			<div class="entertainmentCommunity"></div>
 		</div>

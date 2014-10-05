@@ -104,9 +104,9 @@
 							<div class="activityItem">
 										<span>活动类型：</span>
 										<select class="activityType">
-											<option value="娱乐类">娱乐类</option>
-											<option value="体育类">体育类</option>
-											<option value="学术类">学术类</option>
+											<option value="ENTERTAINMENT">娱乐类</option>
+											<option value="ATHLETIC">体育类</option>
+											<option value="ACADEMIC">学术类</option>
 										</select>
 									</div>
 							<div class="activityItem">

@@ -112,6 +112,7 @@ $(document)
 										// var formData = new
 										// FormData($('.photofom'));
 										var post = {
+											activityTypeTags :[],
 											postType : 'NORMAL',
 											attributes : {
 												content : $('#share_txt2')

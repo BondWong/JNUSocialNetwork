@@ -414,6 +414,24 @@ function FetchActivitiesByCommunity(communityID, startIndex, pageSize) {
 	});
 	return response;
 }
+//fetchActivityByType
+function FetchActivitiesByType(activityType, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchActivitiesByType/' + activityType + '/'
+				+ startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 //fetchActivityAll
 function FetchAllActivities(startIndex, pageSize) {
 	var response = "";

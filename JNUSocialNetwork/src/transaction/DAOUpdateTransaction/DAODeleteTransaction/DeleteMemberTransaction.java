@@ -80,6 +80,7 @@ public class DeleteMemberTransaction extends DAOTransaction {
 		member.clearJoinedCommunities();
 		member.clearCreatedPosts();
 		member.clearUnhandledEvents();
+		member.clearLookingForTags();
 		member.delete();
 		dao.update(member);
 		dao.update(account);

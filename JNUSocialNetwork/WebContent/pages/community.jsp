@@ -28,30 +28,32 @@
 					style="cursor: pointer;font-size:20px;"></span> <span><input class='searchInput' placeholder='请输入社区ID或名称 ' maxLength='20'></span>
 			</div>
 			<a href="community.jsp?nav=mycommunity" class="peopeleType peopeleTypeHover">我的社区</a>
-			<a href="community.jsp?nav=discovery" class="peopeleType discoveryCommunity">热门社区</a>
-			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">娱乐类</a>
-			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">体育类</a>
-			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">学术类</a>
-			<a href="community.jsp?nav=official" class="peopeleType officialCommunity">官方组织</a>
-			<a href="community.jsp?nav=student" class="peopeleType studentCommunity">社团组织</a> 
-			<a href="community.jsp?nav=folk" class="peopeleType folkCommunity">个人社区</a>
+			<a href="community.jsp?nav=discovery" class="peopeleType">热门社区</a>
+			<a href="community.jsp?nav=entertainment" class="peopeleType peopeleTypeS entertainmentC">娱乐类</a>
+			<a href="community.jsp?nav=athletic" class="peopeleType peopeleTypeS athleticC">体育类</a>
+			<a href="community.jsp?nav=academic" class="peopeleType peopeleTypeS academicC">学术类</a>
+			<a href="community.jsp?nav=student" class="peopeleType studentC">社团组织</a> 
 			<a role="button" class="createCom peopeleType" data-toggle='modal'
 				data-target='#createCommunity' id="createCommunityBtn">创建社区</a>
 		</div>
 	</div>
 	<div class="container container_community">
 		<c:choose>
-			<c:when test="${param.nav eq 'official' }">
-				<%@ include file="parts/communityOfficial.jsp"%>
-			</c:when>
+			
 			<c:when test="${param.nav eq 'mycommunity' }">
 				<%@ include file="parts/communityMy.jsp"%>
 			</c:when>
 			<c:when test="${param.nav eq 'student' }">
 				<%@ include file="parts/communityStudent.jsp"%>
 			</c:when>
-			<c:when test="${param.nav eq 'folk' }">
-				<%@ include file="parts/communityFolk.jsp"%>
+			<c:when test="${param.nav eq 'entertainment' }">
+				<%@ include file="parts/communityEt.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'academic' }">
+				<%@ include file="parts/communityAd.jsp"%>
+			</c:when>
+			<c:when test="${param.nav eq 'athletic' }">
+				<%@ include file="parts/communityAt.jsp"%>
 			</c:when>
 			<c:when test="${param.nav eq 'discovery' }">
 				<%@ include file="parts/communityDiscovery.jsp"%>
@@ -96,8 +98,9 @@
 						</p>
 						<p>
 							<span>社区类型：</span> <select id="communityType">
-								<option value="SCHOOLUNION">社团组织</option>
-								<option value="FOLK">个人社区</option>
+								<option value="ENTERTAINMENT">娱乐类</option>
+								<option value="ATHLETIC">体育类</option>
+								<option value="ACADEMIC">学术类</option>
 							</select>
 						</p>
 						<span>社区名片</span> <span class="btn btn-success fileinput-button">
