@@ -41,7 +41,7 @@ import utils.RootPathHelper;
 		@NamedQuery(name = "Post.fetchAllActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchHeatActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY SIZE(p.participants) DESC"),
 		@NamedQuery(name = "Post.fetchMyActivities", query = "SELECT p FROM Post p JOIN p.participants ps WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT m FROM Member m WHERE m.ID = ?1) IN ps ORDER BY p.ID DESC"),
-		@NamedQuery(name = "Post.fetchActivitiesByTag", query = "SELECT p FROM Post p JOIN p.activityTypeTags t WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT tag FROM Tag tag WHERE tag.ID = ?!) IN t ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchActivitiesByTag", query = "SELECT p FROM Post p JOIN p.activityTypeTags t WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT tag FROM Tag tag WHERE tag.ID = ?1) IN t ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
 				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
