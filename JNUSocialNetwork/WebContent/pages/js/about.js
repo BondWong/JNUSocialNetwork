@@ -587,9 +587,27 @@ function communityShow(Cnickname,Cintro,Cinstitution,Ccontact){
 	$('.Cinstitution').html(Cinstitution);
 	$('.Ccontact').html(Ccontact);
 }
+
+$('body').on('click', '.followBtnAB', function() {
+	if ($(this).text() == "Follow") {
+		Follow(USERID, userID);
+
+	}
+	if ($(this).text() == "Following") {
+		CancelFollow(USERID, userID);
+		$(this).text('Follow');
+	}
+});
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
+	if ($.inArray(USERID, userInfo.followerIDs) != -1) {
+		$('.followBtnA').find('button').text("Following");
+	}
+	if (USERID == userID) {
+		$('.followBtnA').remove();
+	}
+	$(".followNum").text(userInfo.followerIDs.length);
 	if (userID == USERID) {
 		$('.photoAddBtn').css("display", "inline");
 		$('.aEditbtn').css("display", "inline");

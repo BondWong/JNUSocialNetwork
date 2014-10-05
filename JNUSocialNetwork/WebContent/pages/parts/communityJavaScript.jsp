@@ -99,6 +99,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'official' }">
 		<script type="text/javascript">
+		$('.peopeleType').css("background-color", "#fff");
+		$('.peopeleType').css("border-left", "#4285f4");
+		$('.officialCommunity').css("background-color", "#f6f6f6");
+		$('.officialCommunity').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchCommunityByType("OFFICIAL", pageSize);
 			$(window)
@@ -149,6 +153,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'folk' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.folkCommunity').css("background-color", "#f6f6f6");
+			$('.folkCommunity').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchCommunityByType("FOLK", pageSize);
 			$(window)
@@ -199,6 +207,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'student' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.studentCommunity').css("background-color", "#f6f6f6");
+			$('.studentCommunity').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchCommunityByType("SCHOOLUNION", pageSize);
 			$(window)
@@ -250,6 +262,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'discovery' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.discoveryCommunity').css("background-color", "#f6f6f6");
+			$('.discoveryCommunity').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchHotCommunity(pageSize);
 			$(window)

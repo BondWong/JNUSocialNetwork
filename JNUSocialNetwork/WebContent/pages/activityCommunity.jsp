@@ -172,15 +172,23 @@
 									</div>
 									<div class="activityItem">
 										<span>活动地点：</span>
-										<textarea class="form-control activityInput" placeholder=""
+										<input class="form-control activityInput" placeholder=""
 											id="activityAddr" required autofocus maxLength="100"
-											style="resize: none;"></textarea>
+											style="resize: none;" />
 									</div>
 									<div class="activityItem">
 										<span>活动细节：</span>
 										<textarea class="form-control activityInput" placeholder=""
 											id="activityMore" required autofocus maxLength="200"
 											style="resize: none;"></textarea>
+									</div>
+									<div class="activityItem">
+										<span>活动类型：</span>
+										<select id="activityType">
+											<option value="ET">娱乐类</option>
+											<option value="PA">体育类</option>
+											<option value="AD">学术类</option>
+										</select>
 									</div>
 									<div class="activityItem">
 										<span>人数上限：</span><input type="text"

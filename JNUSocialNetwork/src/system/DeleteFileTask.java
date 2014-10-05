@@ -1,8 +1,11 @@
 package system;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import org.apache.commons.io.FileUtils;
 
 import service.helper.DesertFileLinkMap;
 
@@ -20,7 +23,10 @@ public class DeleteFileTask implements Runnable {
 		}
 		for (String link : DesertFileLinkMap.getLinks()) {
 			try {
-				Files.deleteIfExists(Paths.get(link));
+				if (Files.isDirectory(Paths.get(link)))
+					FileUtils.deleteDirectory(new File(link));
+				else
+					Files.deleteIfExists(Paths.get(link));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
