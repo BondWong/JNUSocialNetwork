@@ -80,7 +80,8 @@ public class PostService {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
 					PostType.valueOf((String) post.get("postType")),
 					contentEncoder.encodeMapContent((Map<String, String>) post
-							.get("attributes")), post.get("imageLinks"));
+							.get("attributes")), post.get("imageLinks"), post
+							.get("activityTypeTags"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
