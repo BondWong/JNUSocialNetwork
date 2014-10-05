@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,8 @@ public class PostService {
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, PostType.NORMAL,
 					contentEncoder.encodeMapContent((Map<String, String>) post
-							.get("attributes")), post.get("imageLinks"));
+							.get("attributes")), post.get("imageLinks"),
+					new ArrayList<String>());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -17,7 +17,7 @@ public class CreatePostTransaction extends DAOTransaction {
 		DAO dao = new DAO(em);
 		Member member = dao.get(Member.class, params[0]);
 		Post post = ModelFactory.getInstance().create(Post.class, params[1],
-				params[2], params[3]);
+				params[2], params[3], params[4]);
 		member.createPost(post);
 		dao.update(member);
 		return post.toRepresentation();
