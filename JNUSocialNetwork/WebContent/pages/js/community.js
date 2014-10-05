@@ -120,12 +120,7 @@ function fetchCommunityByType(communityType, pageSize) {
 		}
 	});
 }
-function fetchCommunitys() {
-	fetchHotCommunity(homePageSize);
-	fetchCommunityByType("FOLK", homePageSize);
-	fetchCommunityByType("SCHOOLUNION", homePageSize);
-	// fetchCommunityByType("OFFICIAL",homePageSize);
-}
+
 // 增加社区
 function communities(id, name, memberNum, communityType, communityImg, members,
 		ownerID) {
@@ -177,21 +172,25 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 		$(".communityDiscovery").after(boarddiv);
 		Msnry('.containerDiscovery', '.content_container', 265);
 		break;
+	case "ACADEMIC":
+		$(".communityAcademic").after(boarddiv);
+		Msnry('.containerAcademic', '.content_container', 265);
+		break;
 	case "myCommunity":
 		$(".myCommunity").after(boarddiv);
 		Msnry('.containerMy', '.content_container', 265);
 		break;
-	case "OFFICIAL":
-		$(".officalCommunity").after(boarddiv);
-		Msnry('.containerOffical', '.content_container', 265);
+	case "ATHLETIC":
+		$(".athleticCommunity").after(boarddiv);
+		Msnry('.containerAthletic', '.content_container', 265);
 		break;
-	case "SCHOOLUNION":
+	case "STUDENTUNION":
 		$(".schoolUnionCommunity").after(boarddiv);
 		Msnry('.containerSchool', '.content_container', 265);
 		break;
-	case "FOLK":
-		$(".folkCommunity").after(boarddiv);
-		Msnry('.containerFolk', '.content_container', 265);
+	case "ENTERTAINMENT":
+		$(".entertainmentCommunity").after(boarddiv);
+		Msnry('.containerEntertainment', '.content_container', 265);
 		break;
 	case "searchCommunity":
 		$(".searchCommunity").after(boarddiv);

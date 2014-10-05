@@ -370,7 +370,6 @@ $('body')
 								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
-								activityType : $('#activityType').val(),
 								limitation : $('#activityNum').val(),
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0]

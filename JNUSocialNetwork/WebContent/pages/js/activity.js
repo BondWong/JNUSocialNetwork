@@ -109,6 +109,23 @@ function fetchMyActivities() {
 		}
 	});
 }
+function fetchActivitiesByType(activityType) {
+	var response = FetchActivitiesByType(activityType, 0, pageSize);
+	$.each(response.reverse(), function(n, dataString) {
+		if (dataString.available == true) {
+			addActivity(dataString.ID, dataString.attributes.activityName,
+					dataString.attributes.activityTime,
+					dataString.attributes.activityAddr,
+					dataString.attributes.activityMore,
+					dataString.attributes.background,
+					dataString.owner.attributes.avatarLink,
+					dataString.owner.ID, dataString.participantIDs,
+					dataString.attributes.startDate,
+					dataString.attributes.limitation,
+					dataString.attributes.ifUpload);
+		}
+	});
+}
 $('body')
 .on(
 		"click",

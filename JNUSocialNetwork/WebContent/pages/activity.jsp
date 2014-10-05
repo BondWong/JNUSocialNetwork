@@ -26,9 +26,9 @@
 			<a href="activity.jsp?nav=myactivity" class="peopeleType peopeleTypeHover myActivity">我的活动</a>
 			<a href="activity.jsp?nav=discovery" class="peopeleType discoveryActivity">近期活动</a>
 			<a href="activity.jsp?nav=hit" class="peopeleType hitActivity">热门活动</a> 
-			<a href="activity.jsp?nav=myactivity" class="peopeleType peopeleTypeS">娱乐类</a>
-			<a href="activity.jsp?nav=myactivity" class="peopeleType peopeleTypeS">体育类</a>
-			<a href="activity.jsp?nav=myactivity" class="peopeleType peopeleTypeS">学术类</a>
+			<a href="activity.jsp?nav=entertainment" class="peopeleType peopeleTypeS">娱乐类</a>
+			<a href="activity.jsp?nav=athletic" class="peopeleType peopeleTypeS">体育类</a>
+			<a href="activity.jsp?nav=academic" class="peopeleType peopeleTypeS">学术类</a>
 		</div>
 	</div>
 	<div class="container container_activityA">
