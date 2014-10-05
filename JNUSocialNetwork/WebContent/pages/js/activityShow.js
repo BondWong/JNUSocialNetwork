@@ -64,17 +64,32 @@ $('#fileuploadPhoto')
 				$.support.fileInput ? undefined : 'disabled');
 // function showActivityDetail
 function showActivityDetail(activity, community) {
-	if(activity.attributes.ifUpload == "默认方式"){
-		$('#download-name-list-button').attr("href","../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID=" + activity.ID);
-	}else{
-		$('#download-name-list-button').attr("href","../app/fileDownloader?type=ACTIVITYREGISTERS&activityID=" + activity.ID);
+	if (activity.attributes.ifUpload == "默认方式") {
+		$('#download-name-list-button').attr(
+				"href",
+				"../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
+						+ activity.ID);
+	} else {
+		$('#download-name-list-button').attr(
+				"href",
+				"../app/fileDownloader?type=ACTIVITYREGISTERS&activityID="
+						+ activity.ID);
+		$('.joinSActivity')
+				.replaceWith(
+						"<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="
+								+ activity.ID
+								+ "' class='btn btn-default dlR' id='"
+								+ activity.ID
+								+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
+								+ activity.ID + "'>上传报名表</a></div>");
 	}
-	
+
 	$('.activityShowName').html(activity.attributes.activityName);
 	$('.aT').html(activity.attributes.activityTime);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
-	$('.activityShowD').html("<pre>"+"&nbsp;" + activity.attributes.activityMore+"</pre>");
-	$('.activityHead').find('img').attr("src",
+	$('.activityShowD').html(
+			"<pre>" + "&nbsp;" + activity.attributes.activityMore + "</pre>");
+	$('.activityPh').find('img').attr("src",
 			$.parseJSON(activity.attributes.background).src);
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
@@ -161,6 +176,46 @@ function showActivityDetail(activity, community) {
 		$('.activityAddCommunity').css("display", "inline");
 	}
 }
+$('body')
+		.on(
+				"click",
+				".ulR",
+				function() {
+					var teleAlert = "";
+					if ($.parseJSON(sessionStorage.getItem("user")).attributes.telnum == "") {
+						teleAlert = "<div class='uploadItem'><span>电话号码：</span><input type='text' pattern='[0-9]{11}' style='margin-bottom:20px;width:80%;' class='form-control' placeholder='个人资料未填写手机号码，请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /></div>";
+					}
+					$(this).attr("data-toggle", "modal");
+					$(this).attr("data-target", "#uploadmodal");
+					var board = "<div class='modal fade' id='uploadmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>上传报名表</h4></div><form class='uploadForm' role='form' onsubmit='return false;'><div class='modal-body'>"
+							+ teleAlert
+							+ "<div class='uploadItem'><span>报名表：</span><input class='uploadexe' type='file' name='file'/></div><p style='margin-top:20px;margin-left:14px;'>[注意：请先下载报名表，填写并上传，其他文件报名不成功！]</p></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='ulFile' value='upload'>上传</button></div></form></div></div></div>";
+					$('body').append(board);
+				});
+$('body')
+		.on(
+				'click',
+				'#ulFile',
+				function() {
+					if ($('.uploadForm')[0].checkValidity()
+							&& $('.uploadexe').val() != "") {
+						if ($('.tele').val() != "") {
+							var dataString = {
+								telnum : $('#tele').val()
+							};
+							UpdateUserProfile(USERID, $.toJSON(dataString));
+						}
+						var response = formUpload(new FormData(
+								$('.uploadForm')[0]), $('.ulR').attr('id'),
+								encodeURI($.parseJSON(sessionStorage
+										.getItem("user")).attributes.name));
+						JoinActivity(USERID, $('.ulR').attr('id'));
+						$('#uploadmodal').modal('hide');
+						if (response == 'success') {
+							alert("参加成功！");
+						}
+					}
+				});
 $('body').on('click', '.joinSActivity', function() {
 	if (FetchUserByID(USERID).attributes.telnum != "") {
 		if ($(this).css("background-color") == "rgb(235, 235, 235)") {
@@ -233,59 +288,64 @@ $('body').on("click", ".editActivity", function() {
 });
 
 $('body')
-.on(
-		"click",
-		".addActivityPhoto",
-		function() {
-			AddActivityImages(activity.ID, photosfileDri);
-			$('#addActivityPhoto').modal('hide');
-			$
-					.each(
-							photosfileDri,
-							function(index, imageLink) {
-								var photoContainer = "<img width='600' height='450' src='"
-										+ $
-												.parseJSON(decodeURIComponent(imageLink)).src
-										+ "' />";
-								$('.carousel-inner').append(
-										"<div class='item'>"+"<div class='deleteAI'><span class='glyphicon glyphicon-remove'></span></div>"+photoContainer+"</div>");
-							});
-			photosfileDri = [];
-			window.location.href = "activityShow.jsp?" + community.ID + "&"+ activity.ID;
-		});
-$('body').on('click','.deleteAI',function(){
-	DeleteAI(activity.ID,$(this).next().attr("src"));
-	$($(this).parent()).next().attr("class","item active");
+		.on(
+				"click",
+				".addActivityPhoto",
+				function() {
+					AddActivityImages(activity.ID, photosfileDri);
+					$('#addActivityPhoto').modal('hide');
+					$
+							.each(
+									photosfileDri,
+									function(index, imageLink) {
+										var photoContainer = "<img width='600' height='450' src='"
+												+ $
+														.parseJSON(decodeURIComponent(imageLink)).src
+												+ "' />";
+										$('.carousel-inner')
+												.append(
+														"<div class='item'>"
+																+ "<div class='deleteAI'><span class='glyphicon glyphicon-remove'></span></div>"
+																+ photoContainer
+																+ "</div>");
+									});
+					photosfileDri = [];
+					window.location.href = "activityShow.jsp?" + community.ID
+							+ "&" + activity.ID;
+				});
+$('body').on('click', '.deleteAI', function() {
+	DeleteAI(activity.ID, $(this).next().attr("src"));
+	$($(this).parent()).next().attr("class", "item active");
 	$(this).parent().remove();
 });
 function showImages() {
-	if(activity.imageLinks.length == 0){
-		$('.activityPhotos').css("display","none");
-	}else{
+	if (activity.imageLinks.length == 0) {
+		$('.activityPhotos').css("display", "none");
+	} else {
 		var pRemoveBtn = "";
 		if (USERID == activity.owner.ID) {
 			pRemoveBtn = "<div class='deleteAI'><span style='color:#000;' class='glyphicon glyphicon-remove'></span></div>";
 		}
 		$.each(activity.imageLinks, function(index, imageLink) {
-			if(index == 0){
+			if (index == 0) {
 				var photoContainer = "<img width='600' height='450' src='"
-					+ $
-							.parseJSON(decodeURIComponent(imageLink)).src
-					+ "' />";
-			$('.carousel-inner').append(
-					"<div class='item active'>"+pRemoveBtn+photoContainer+"</div>");
-			}else{
+						+ $.parseJSON(decodeURIComponent(imageLink)).src
+						+ "' />";
+				$('.carousel-inner').append(
+						"<div class='item active'>" + pRemoveBtn
+								+ photoContainer + "</div>");
+			} else {
 				var photoContainer = "<img width='600' height='450' src='"
-					+ $
-							.parseJSON(decodeURIComponent(imageLink)).src
-					+ "' />";
-			$('.carousel-inner').append(
-					"<div class='item'>"+pRemoveBtn+photoContainer+"</div>");
+						+ $.parseJSON(decodeURIComponent(imageLink)).src
+						+ "' />";
+				$('.carousel-inner').append(
+						"<div class='item'>" + pRemoveBtn + photoContainer
+								+ "</div>");
 			}
-			
+
 		});
 	}
-	
+
 }
 $('body')
 		.on(
@@ -310,6 +370,7 @@ $('body')
 								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
+								activityType : $('#activityType').val(),
 								limitation : $('#activityNum').val(),
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0]

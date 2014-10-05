@@ -133,10 +133,11 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	var officalID = ["13750070105","13750059219","13143127771","13750056472",  "13728357716", "13286050151", "13631272706", "13726285186",
-			"13750044036", "13750057060", "13750066893", "13750069327",
-			"13750069659", "13750069678", "13750070025", "13750072213",
-			"13750075145", "13750075284", "18666561301" ];
+	var officalID = [ "13750070105", "13750059219", "13143127771",
+			"13750056472", "13728357716", "13286050151", "13631272706",
+			"13726285186", "13750044036", "13750057060", "13750066893",
+			"13750069327", "13750069659", "13750069678", "13750070025",
+			"13750072213", "13750075145", "13750075284", "18666561301" ];
 	var officalIcon = "";
 	if ($.inArray(ownerID, officalID) != -1) {
 		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
@@ -180,8 +181,10 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 		$(".myCommunity").after(boarddiv);
 		Msnry('.containerMy', '.content_container', 265);
 		break;
-	 case "OFFICIAL": $(".officalCommunity").after(boarddiv);
-	 	Msnry('.containerOffical', '.content_container', 265); break;
+	case "OFFICIAL":
+		$(".officalCommunity").after(boarddiv);
+		Msnry('.containerOffical', '.content_container', 265);
+		break;
 	case "SCHOOLUNION":
 		$(".schoolUnionCommunity").after(boarddiv);
 		Msnry('.containerSchool', '.content_container', 265);
@@ -198,79 +201,46 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 }
 function fetchByType(communityType, communityTypeName, containerName) {
 	$('.container_community').remove();
-	var communityContainer = '<div class="container container_community"><div class="communityGroupTitle"><h3>'
-			+ communityTypeName
-			+ '</h3></div><div class="container '
+	var communityContainer = '<div class="container container_community"><div class="'
 			+ containerName
 			+ '"><div class="'
 			+ communityType
 			+ '"></div></div></div>';
 	$('.communitySideBar').after(communityContainer);
 }
-$(document)
-		.ready(
-				function() {
-					// funtion sessionID
-					$('body')
-							.on(
-									"click",
-									".img_container",
-									function() {
-										var comm = $(this).find("input").attr(
-												"value");
-										window.location.href = 'communityOwnerPage.jsp?'
-												+ comm;
-									});
-					$('body')
-							.on(
-									"click",
-									".searchCommunityBtn",
-									function() {
-										fetchByType(
-												"searchCommunity",
-												"<div class='searchCommunityBody'><span class='glyphicon glyphicon-search glyphicon-search-custom communitySearch' style='cursor: pointer;'></span> <span class='searchCommunityInput'>搜索社区</span></div> ",
-												"containerSearch");
+$(document).ready(
+		function() {
+			// funtion sessionID
+			$('body').on("click", ".img_container", function() {
+				var comm = $(this).find("input").attr("value");
+				window.location.href = 'communityOwnerPage.jsp?' + comm;
+			});
+			$('body').on('click', '.userSearch', function() {
+				searchCommunity();
+			});
+			$('body').on('keydown', '.searchInput', function(event) {
+				if (event.keyCode == 13) {
+					searchCommunity();
+				}
+			});
+			function searchCommunity() {
+				if ($('.searchInput').val() != "") {
+					var communityInfo = encodeURI($('.searchInput').val());
+					var communities = SearchCommunity(communityInfo, "0", "5");
 
-									});
-					$('body')
-							.on(
-									'click',
-									'.searchCommunityInput',
-									function() {
-										$(this)
-												.replaceWith(
-														"<input style='font-size:14px;' class='searchInput' style='width:200px;' placeholder='请输入社区名' maxLength='30'>");
-										$('.searchInput').focus();
-										$('.searchInput')
-												.blur(
-														function() {
-															search_user_input_value = $(
-																	this).val();
-															$(this)
-																	.replaceWith(
-																			"<span class='searchCommunityInput'>搜索社区</span>");
-														});
-									});
-					$('body')
-							.on(
-									'click',
-									'.communitySearch',
-									function() {
-										var communityInfo = encodeURI(search_user_input_value);
-										var communities = SearchCommunity(
-												communityInfo, "0", "5");
-										$
-												.each(
-														communities,
-														function(n, community) {
-															addCommunity(
-																	community.ID,
-																	community.attributes.name,
-																	community.members.length,
-																	"searchCommunity",
-																	community.attributes.communityCard,
-																	community.members);
-														});
-									});
-
-				});
+					if ($.toJSON(communities[0]) != '{}') {
+						$('.searchInput').val("");
+						$('.searchInput').blur();
+						fetchByType("searchCommunity", "", "containerSearch");
+						$.each(communities, function(n, community) {
+							addCommunity(community.ID,
+									community.attributes.name,
+									community.members.length,
+									"searchCommunity",
+									community.attributes.communityCard,
+									community.members,community.attributes.userID);
+						});
+					}
+				}
+			}
+		});

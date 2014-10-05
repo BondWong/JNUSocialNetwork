@@ -1,5 +1,5 @@
 package model.modelType;
 
 public enum CommunityType {
-	SCHOOLUNION, OFFICIAL, FOLK;
+	STUDENTUNION, ENTERTAINMENT, ACADAMIC, ATHLETIC;
 }

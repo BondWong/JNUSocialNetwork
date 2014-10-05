@@ -586,6 +586,16 @@ function clickOffEvent() {
 		$(this).attr("data-toggle", "modal");
 		$(this).attr("data-target", "#myModal");
 	});
+	$('body').on('click', '.aUB', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
+	$('body').on('click', '.ulR', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
 	$('body').on('click', '.leaveactivityJoin', function() {
 		signInAlert();
 		$(this).attr("data-toggle", "modal");
@@ -918,31 +928,37 @@ $('body').on(
 					+ $(this).attr("id");
 		});
 var hoverTimer, outTimer; 
-$(".navbar-community").hover(function(){
+$(".home-nav").hover(function(){
 	clearTimeout(outTimer);
 	hoverTimer = setTimeout(function(){  
-		$(".home-nav").animate({height:"140px"});
-		 $('.community-bar').css("display","inline-block");
+		$(".home-nav").animate({height:"100px"});
+		 $('.show-bar').css("display","inline-block");
 	} ,250);
 	 
 },function(){
 	clearTimeout(hoverTimer);
 	outTimer = setTimeout(function(){ 
 		$(".home-nav").animate({height:"50px"});
-		 $('.community-bar').css("display","none");
+		 $('.show-bar').css("display","none");
 	},500);
 });
 $('body').on('click', '.communityO', function() {
 	window.location.href = "community.jsp?nav=official";
 });
-$('body').on('click', '.communityS', function() {
-	window.location.href = "community.jsp?nav=student";
-});
-$('body').on('click', '.communityF', function() {
-	window.location.href = "community.jsp?nav=folk";
-});
 $('body').on('click', '.communityD', function() {
 	window.location.href = "community.jsp?nav=discovery";
+});
+$('body').on('click', '.applyCommunity', function() {
+	window.location.href = "applyCommunity.jsp";
+});
+$('body').on('click', '.activityA', function() {
+	window.location.href = "activity.jsp?nav=discovery";
+});
+$('body').on('click', '.activityC', function() {
+	window.location.href = "circle.jsp";
+});
+$('body').on('click', '.hrefIntro', function() {
+	window.location.href = "aboutUs.jsp";
 });
 /**
  * auto_resize

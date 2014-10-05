@@ -11,6 +11,8 @@
 			<div class="profile_user_name">
 				<strong></strong>
 			</div>
+			<div class='followBtnA'><button class='btn btn-danger followBtnAB'>Follow</button></div>
+			<div class='followInfo'><span class='followNum'>4</span><span>&nbsp;粉丝</span><span>&nbsp;|&nbsp;</span><span>123</span><span>&nbsp;赞</span></div>
 		</div>
 	</div>
 	<div class="profile_img">

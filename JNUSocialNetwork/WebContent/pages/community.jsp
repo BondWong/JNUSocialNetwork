@@ -22,18 +22,22 @@
 	</div>
 	<!-- /.navbar -->
 	<div class="communitySideBar">
-		<ul class="nav nav-pills nav-stacked" role="tablist">
-			<li><a class='myCommunityBtn'
-				href='community.jsp?nav=mycommunity'>我的社区</a></li>
-			<li><a href='community.jsp?nav=official'>官方组织</a></li>
-			<li><a href='community.jsp?nav=student'>社团组织</a></li>
-			<li><a href='community.jsp?nav=folk'>个人社区</a></li>
-			<li><a href='community.jsp?nav=discovery'>热门社区</a></li>
-			<li><a class='searchCommunityBtn'>搜索社区</a></li>
-			<li><a class="appCom" href="applyCommunity.jsp">申请社区</a></li>
-			<li><a role="button" class="createCom" data-toggle='modal'
-				data-target='#createCommunity' id="createCommunityBtn">创建社区</a></li>
-		</ul>
+		<div class="peopleType">
+			<div class="searchBody">
+				<span class="glyphicon glyphicon-search glyphicon-search-custom userSearch"
+					style="cursor: pointer;font-size:20px;"></span> <span><input class='searchInput' placeholder='请输入社区ID或名称 ' maxLength='20'></span>
+			</div>
+			<a href="community.jsp?nav=mycommunity" class="peopeleType peopeleTypeHover">我的社区</a>
+			<a href="community.jsp?nav=discovery" class="peopeleType discoveryCommunity">热门社区</a>
+			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">娱乐类</a>
+			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">体育类</a>
+			<a href="community.jsp?nav=folk" class="peopeleType peopeleTypeS">学术类</a>
+			<a href="community.jsp?nav=official" class="peopeleType officialCommunity">官方组织</a>
+			<a href="community.jsp?nav=student" class="peopeleType studentCommunity">社团组织</a> 
+			<a href="community.jsp?nav=folk" class="peopeleType folkCommunity">个人社区</a>
+			<a role="button" class="createCom peopeleType" data-toggle='modal'
+				data-target='#createCommunity' id="createCommunityBtn">创建社区</a>
+		</div>
 	</div>
 	<div class="container container_community">
 		<c:choose>

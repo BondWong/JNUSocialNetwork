@@ -46,6 +46,7 @@ import model.structure.Image;
 		@NamedQuery(name = "Member.fetchIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 AND m NOT IN (SELECT f FROM Member o JOIN o.followees f WHERE o.ID = ?1) ORDER BY SIZE(m.followers) DESC"),
+		@NamedQuery(name = "Member.fetchByLookingForTag", query = "SELECT m FROM Tag t JOIN t.lookingForUsers m WHERE t.ID = ?1 "),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {
@@ -74,6 +75,8 @@ public class Member extends User {
 	private Set<Member> followees;
 	@ManyToMany(mappedBy = "followees", fetch = FetchType.LAZY)
 	private Set<Member> followers;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<Tag> lookingForTags;
 	@Transient
 	private CommunityOwnerFeature communityOwnerFeature;
 
@@ -92,6 +95,7 @@ public class Member extends User {
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
 		this.followees = new LinkedHashSet<Member>();
 		this.followers = new LinkedHashSet<Member>();
+		this.lookingForTags = new LinkedHashSet<>();
 		this.userType = (UserType) initParams[2];
 		switch (this.userType) {
 		case MEMBER:
@@ -394,6 +398,24 @@ public class Member extends User {
 		this.communityOwnerFeature.removeMember(community, member);
 	}
 
+	public void addLookingForTag(Tag tag) {
+		if (this.lookingForTags.size() >= 5)
+			return;
+		this.lookingForTags.add(tag);
+		tag.usedBy(this);
+	}
+
+	public void removeLookingForTag(Tag tag) {
+		this.lookingForTags.remove(tag);
+		tag.removedBy(this);
+	}
+
+	public void clearLookingForTags() {
+		for (Tag tag : this.lookingForTags)
+			tag.removedBy(this);
+		this.lookingForTags.clear();
+	}
+
 	@Override
 	public String toString() {
 		return toRepresentation().toString();
@@ -425,6 +447,13 @@ public class Member extends User {
 		List<Long> communityIDs = new ArrayList<Long>();
 		for (Community community : this.createdCommunities)
 			communityIDs.add(community.getID());
+		representation.put("communityIDs", communityIDs);
+
+		List<String> lookingForTags = new ArrayList<String>();
+		for (Tag tag : this.lookingForTags)
+			lookingForTags.add(tag.getID());
+		representation.put("lookingForTags", lookingForTags);
+
 		return representation;
 	}
 
