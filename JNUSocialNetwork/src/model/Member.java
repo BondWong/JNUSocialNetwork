@@ -402,17 +402,17 @@ public class Member extends User {
 		if (this.lookingForTags.size() >= 5)
 			return;
 		this.lookingForTags.add(tag);
-		tag.usedBy(this);
+		tag.lookingForUsedBy(this);
 	}
 
 	public void removeLookingForTag(Tag tag) {
 		this.lookingForTags.remove(tag);
-		tag.removedBy(this);
+		tag.lookingForRemovedBy(this);
 	}
 
 	public void clearLookingForTags() {
 		for (Tag tag : this.lookingForTags)
-			tag.removedBy(this);
+			tag.lookingForRemovedBy(this);
 		this.lookingForTags.clear();
 	}
 

@@ -22,25 +22,36 @@ public class Tag extends Model {
 	private String ID;
 	@ManyToMany(mappedBy = "lookingForTags", fetch = FetchType.LAZY)
 	private Set<Member> lookingForUsers;
+	@ManyToMany(mappedBy = "activityTypeTags", fetch = FetchType.LAZY)
+	private Set<Post> activityTypeUsers;
 
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
 		ID = (String) initParams[0];
 		lookingForUsers = new LinkedHashSet<>();
+		activityTypeUsers = new LinkedHashSet<>();
 	}
 
 	public String getID() {
 		return this.ID;
 	}
 
-	public void usedBy(Member member) {
+	public void lookingForUsedBy(Member member) {
 		this.lookingForUsers.add(member);
 
 	}
 
-	public void removedBy(Member member) {
+	public void lookingForRemovedBy(Member member) {
 		this.lookingForUsers.remove(member);
+	}
+
+	public void activityTypeUsedBy(Post post) {
+		this.activityTypeUsers.add(post);
+	}
+
+	public void activityTypeRemovedBy(Post post) {
+		this.activityTypeUsers.remove(post);
 	}
 
 	@Override
