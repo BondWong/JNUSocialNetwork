@@ -317,7 +317,7 @@
 
                         // 更新用户信息
                         var datajson = {};
-                        datajson[this.defaults.imgUrlAttrName] = this.url;
+                        datajson[this.defaults.imgUrlAttrName] = data;
                         UpdateUserProfile(userID, $.toJSON(datajson));
 
                         this.cropDone();
