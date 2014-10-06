@@ -13,7 +13,6 @@ import persistence.helper.EntityManagerFactoryUtil;
 import service.helper.ActivitySearchMap;
 import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
-import service.helper.HeheUser;
 import service.helper.MemberSearchMap;
 import service.helper.NumberManager;
 import service.helper.OnlineUserIDArray;
@@ -95,7 +94,6 @@ public class Initialtor implements ServletContextListener {
 			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
-			HeheUser.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
 

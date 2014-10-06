@@ -34,6 +34,7 @@ function activityClickEvent() {
 										activityMore : $('#activityMore').val(),
 										limitation : $('.activityNum').val(),
 										communityName : community.attributes.name,
+										communityID : community.ID.toString(),
 										ifUpload : $('#table_activitySign')
 												.text(),
 										background : FileUpload(new FormData(
@@ -41,7 +42,8 @@ function activityClickEvent() {
 										registerTemplateAddr : RegisterFormUpload(new FormData(
 												$('.regForm')[0]))
 									},
-									imageLinks : []
+									imageLinks : [],
+									activityTypeTags : [$('#activityType').val()]
 								};
 							} else {
 								post = {
@@ -63,12 +65,14 @@ function activityClickEvent() {
 										activityAddr : $('#activityAddr').val(),
 										activityMore : $('#activityMore').val(),
 										limitation : $('#activityNum').val(),
+										communityID : community.ID.toString(),
 										ifUpload : $('#table_activitySign')
 												.text(),
 										registerTemplateAddr : RegisterFormUpload(new FormData(
 												$('.regForm')[0]))
 									},
-									imageLinks : []
+									imageLinks : [],
+									activityTypeTags : [$('#activityType').val()]
 								};
 							}
 							var diffDate = toTimeValue($('#activityTime').val()
@@ -153,7 +157,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg'><img width='435' height='100'  src='"
+			+ "<div class='activityBg'><img width='435' height='"+getHeight(435, $.parseJSON(imagelink).width, $.parseJSON(imagelink).height)+"'  src='"
 			+ $.parseJSON(imagelink).src
 			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
@@ -210,6 +214,7 @@ $('body').on('click','#ulFile',function(){
 			UpdateUserProfile(USERID, $.toJSON(dataString));
 		}
 		var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
+		JoinActivity(USERID, $('.ulR').attr('id'));
 		$('#uploadmodal').modal('hide');
 		if(response == 'success'){
 			alert("参加成功！");

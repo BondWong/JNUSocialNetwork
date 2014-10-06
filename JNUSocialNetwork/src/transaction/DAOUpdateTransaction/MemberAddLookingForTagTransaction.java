@@ -1,26 +1,27 @@
-package transaction.DAOCreateTransaction;
+package transaction.DAOUpdateTransaction;
 
 import javax.persistence.EntityManager;
 
-import persistence.DAO;
 import model.Member;
-import model.Post;
+import model.Tag;
 import model.factory.ModelFactory;
+import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class CreatePostTransaction extends DAOTransaction {
+public class MemberAddLookingForTagTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
+		Tag tag = dao.get(Tag.class, params[1]);
+		if (tag == null)
+			tag = ModelFactory.getInstance().create(Tag.class, params[1]);
 		Member member = dao.get(Member.class, params[0]);
-		Post post = ModelFactory.getInstance().create(Post.class, params[1],
-				params[2], params[3], params[4]);
-		member.createPost(post);
+		member.addLookingForTag(tag);
 		dao.update(member);
-		return post.toRepresentation();
+		return member.toRepresentation();
 	}
 
 }

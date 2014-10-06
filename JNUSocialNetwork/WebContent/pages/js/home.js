@@ -6,32 +6,39 @@ if(BrowserDetection() != false){
 	$('.browserClick').click();
 }
 var hoverTimer, outTimer; 
-$(".navbar-community").hover(function(){
+$(".home-nav").hover(function(){
 	clearTimeout(outTimer);
 	hoverTimer = setTimeout(function(){  
-		$(".home-nav").animate({height:"140px"});
-		 $('.community-bar').css("display","inline-block");
+		$(".home-nav").animate({height:"100px"});
+		 $('.show-bar').css("display","inline-block");
 	} ,250);
 	 
 },function(){
 	clearTimeout(hoverTimer);
 	outTimer = setTimeout(function(){ 
 		$(".home-nav").animate({height:"50px"});
-		 $('.community-bar').css("display","none");
+		 $('.show-bar').css("display","none");
 	},500);
 });
 $('body').on('click', '.communityO', function() {
 	window.location.href = "community.jsp?nav=official";
 });
-$('body').on('click', '.communityS', function() {
-	window.location.href = "community.jsp?nav=student";
-});
-$('body').on('click', '.communityF', function() {
-	window.location.href = "community.jsp?nav=folk";
-});
 $('body').on('click', '.communityD', function() {
 	window.location.href = "community.jsp?nav=discovery";
 });
+$('body').on('click', '.applyCommunity', function() {
+	window.location.href = "applyCommunity.jsp";
+});
+$('body').on('click', '.activityA', function() {
+	window.location.href = "activity.jsp?nav=discovery";
+});
+$('body').on('click', '.activityC', function() {
+	window.location.href = "circle.jsp";
+});
+$('body').on('click', '.hrefIntro', function() {
+	window.location.href = "aboutUs.jsp";
+});
+
 function addCommunity(id,name,memberNum,communityImg,introduce,ownerID) {
 	var officalID = ["13728357716","13286050151","13631272706","13726285186","13750044036","13750057060","13750066893","13750069327","13750069659","13750069678","13750070025","13750072213","13750075145","13750075284","18666561301"];
 	var officalIcon="";

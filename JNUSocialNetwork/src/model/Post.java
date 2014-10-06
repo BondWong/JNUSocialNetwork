@@ -41,6 +41,7 @@ import utils.RootPathHelper;
 		@NamedQuery(name = "Post.fetchAllActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchHeatActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY SIZE(p.participants) DESC"),
 		@NamedQuery(name = "Post.fetchMyActivities", query = "SELECT p FROM Post p JOIN p.participants ps WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT m FROM Member m WHERE m.ID = ?1) IN ps ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchActivitiesByTag", query = "SELECT p FROM Post p JOIN p.activityTypeTags t WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT tag FROM Tag tag WHERE tag.ID = ?1) IN t ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
 				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
@@ -79,6 +80,8 @@ public class Post extends AttributeModel {
 	private Set<Member> participants;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Comment> comments;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<Tag> activityTypeTags;
 
 	public Post() {
 	}
@@ -97,6 +100,8 @@ public class Post extends AttributeModel {
 		collectors = new LinkedHashSet<Member>();
 		participants = new LinkedHashSet<Member>();
 		comments = new LinkedHashSet<Comment>();
+		activityTypeTags = new LinkedHashSet<Tag>();
+		toActivityTypeTags((List<String>) initParams[3]);
 	}
 
 	public Long getID() {
@@ -294,6 +299,32 @@ public class Post extends AttributeModel {
 
 	public void clearComments() {
 		this.comments.clear();
+	}
+
+	public void addActivityTypeTag(Tag tag) {
+		if (this.activityTypeTags.size() >= 5)
+			return;
+		this.activityTypeTags.add(tag);
+		tag.activityTypeUsedBy(this);
+	}
+
+	public void removeActivityTypeTag(Tag tag) {
+		this.activityTypeTags.remove(tag);
+		tag.activityTypeRemovedBy(this);
+	}
+
+	public void clearActivityTypeTags() {
+		for (Tag tag : this.activityTypeTags)
+			tag.activityTypeRemovedBy(this);
+		this.activityTypeTags.clear();
+	}
+
+	private void toActivityTypeTags(List<String> tags) {
+		for (String tag : tags) {
+			Tag t = new Tag();
+			t.init(tag);
+			addActivityTypeTag(t);
+		}
 	}
 
 	@Override

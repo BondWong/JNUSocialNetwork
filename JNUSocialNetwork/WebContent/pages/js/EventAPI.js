@@ -414,6 +414,75 @@ function FetchActivitiesByCommunity(communityID, startIndex, pageSize) {
 	});
 	return response;
 }
+//fetchActivityByType
+function FetchActivitiesByType(activityType, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchActivitiesByType/' + activityType + '/'
+				+ startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//fetchActivityAll
+function FetchAllActivities(startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchAllActivities/'+ startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//FetchHeatActivities
+function FetchHeatActivities(startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchHeatActivities/'+ startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//FetchHeatActivities
+function FetchMyActivities(userID, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchMyActivities/'+ userID +'/' + startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // fetchActivity
 function FetchActivities(startIndex, pageSize) {
 	var response = "";
@@ -478,6 +547,7 @@ function FetchPostByID(postID) {
 	var response = "";
 	$.ajax({
 		type : "GET",
+		async : false,
 		url : '../../app/post/fetchByID/' + postID,
 		async : false,
 		success : function(data, status) {

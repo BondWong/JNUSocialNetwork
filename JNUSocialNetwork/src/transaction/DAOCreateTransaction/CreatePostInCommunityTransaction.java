@@ -24,7 +24,7 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 		Member user = dao.get(Member.class, params[0]);
 		Community community = dao.get(Community.class, params[1]);
 		Post post = ModelFactory.getInstance().create(Post.class, params[2],
-				params[3], params[4]);
+				params[3], params[4], params[5]);
 		user.createPost(community, post);
 		dao.update(community);
 		if (params[2].equals(PostType.ACTIVITY)) {

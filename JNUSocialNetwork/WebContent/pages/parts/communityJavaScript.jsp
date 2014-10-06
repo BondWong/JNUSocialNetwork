@@ -97,10 +97,14 @@
 							});
 		</script>
 	</c:when>
-	<c:when test="${param.nav eq 'official' }">
+	<c:when test="${param.nav eq 'athletic' }">
 		<script type="text/javascript">
+		$('.peopeleType').css("background-color", "#fff");
+		$('.peopeleType').css("border-left", "#4285f4");
+		$('.athleticC').css("background-color", "#f6f6f6");
+		$('.athleticC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
-			fetchCommunityByType("OFFICIAL", pageSize);
+			fetchCommunityByType("ATHLETIC", pageSize);
 			$(window)
 					.scroll(
 							function() {
@@ -108,7 +112,7 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByType("OFFICIAL",
+									var response = FetchCommunityByType("ATHLETIC",
 											$('.content_container').length,
 											pageSize);
 									$
@@ -147,10 +151,14 @@
 							});
 		</script>
 	</c:when>
-	<c:when test="${param.nav eq 'folk' }">
+	<c:when test="${param.nav eq 'entertainment' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.entertainmentC').css("background-color", "#f6f6f6");
+			$('.entertainmentC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
-			fetchCommunityByType("FOLK", pageSize);
+			fetchCommunityByType("ENTERTAINMENT", pageSize);
 			$(window)
 					.scroll(
 							function() {
@@ -158,7 +166,7 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByType("FOLK",
+									var response = FetchCommunityByType("ENTERTAINMENT",
 											$('.content_container').length,
 											pageSize);
 									$
@@ -175,11 +183,11 @@
 																	community.members,
 																	community.attributes.userID);
 															$(
-																	".containerFolk")
+																	".containerEntertainment")
 																	.append(
 																			boarddiv);
 															Msnry(
-																	'.containerFolk',
+																	'.containerEntertainment',
 																	'.content_container',
 																	265);
 														}
@@ -199,8 +207,12 @@
 	</c:when>
 	<c:when test="${param.nav eq 'student' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.studentC').css("background-color", "#f6f6f6");
+			$('.studentC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
-			fetchCommunityByType("SCHOOLUNION", pageSize);
+			fetchCommunityByType("STUDENTUNION", pageSize);
 			$(window)
 					.scroll(
 							function() {
@@ -209,7 +221,7 @@
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByType(
-											"SCHOOLUNION",
+											"STUDENTUNION",
 											$('.content_container').length,
 											pageSize);
 									$
@@ -250,6 +262,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'discovery' }">
 		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.discoveryCommunity').css("background-color", "#f6f6f6");
+			$('.discoveryCommunity').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchHotCommunity(pageSize);
 			$(window)
@@ -281,6 +297,61 @@
 																			boarddiv);
 															Msnry(
 																	'.containerDiscovery',
+																	'.content_container',
+																	265);
+														}
+													});
+									if (response.length == "15") {
+										$('div#infinite_loader').hide();
+									} else {
+										$('div#infinite_loader')
+												.replaceWith(
+														'<div id="no_more_infinite_load"><span>no more</span></div>');
+										$(window).unbind("scroll");
+									}
+
+								}
+							});
+		</script>
+	</c:when>
+	<c:when test="${param.nav eq 'academic' }">
+		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.academicC').css("background-color", "#f6f6f6");
+			$('.academicC').css("border-left", "2px solid #4285f4");
+			pageSize = 16;
+			fetchCommunityByType("ACADEMIC", pageSize);
+			$(window)
+					.scroll(
+							function() {
+								if ($(window).scrollTop() == $(document)
+										.height()
+										- window.windowHeight) {
+									$('div#infinite_loader').show();
+									var response = FetchCommunityByType(
+											"ACADEMIC",
+											$('.content_container').length,
+											pageSize);
+									$
+											.each(
+													response,
+													function(n, community) {
+														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+															var boarddiv = communities(
+																	community.ID,
+																	community.attributes.name,
+																	community.members.length,
+																	community.communityType,
+																	community.attributes.communityCard,
+																	community.members,
+																	community.attributes.userID);
+															$(
+																	".containerAcademic")
+																	.append(
+																			boarddiv);
+															Msnry(
+																	'.containerAcademic',
 																	'.content_container',
 																	265);
 														}

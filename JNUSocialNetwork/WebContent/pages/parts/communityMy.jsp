@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="communityGroupTitle">
-	<h3>我的社区</h3>
-</div>
-<div class="container containerMy">
+
+<div class="containerMy">
 	<div class="myCommunity"></div>
 	<div class='guideCommunity'>
 		<h1>还没有加入或创建社区？</h1>

@@ -119,7 +119,8 @@ $(document)
 												communityName : community.attributes.name,
 												communityID : community.ID.toString()
 											},
-											imageLinks : fileDri
+											imageLinks : fileDri,
+											activityTypeTags :[]
 										};
 										var json = $.toJSON(post);
 										if ($('.postForm')[0].checkValidity()) {
