@@ -146,7 +146,6 @@ public class ImageUploadService extends HttpServlet {
 			if (cropData != null) {
 				bi = bi.getSubimage(cropData.get("x"), cropData.get("y"),
 						cropData.get("width"), cropData.get("height"));
-				uploaddedFile.deleteOnExit();
 				ImageIO.write(bi, extention.substring(1), uploaddedFile);
 				bi = ImageIO.read(uploaddedFile);
 				cropData = null;
