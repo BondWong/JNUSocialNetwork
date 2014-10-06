@@ -1,4 +1,4 @@
-/*global $, jQuery, console, ActiveXObject, alert, BMap, Papa, DataManager, document, Option, window, Elementm, map, event,BMapLib*/
+/*global $, jQuery, console, ActiveXObject, alert, BMap, Papa, DataManager, document, Option, window, Elementm, event, setTimeout*/
 
 (function ($) {
     var currentSlideIndex;
