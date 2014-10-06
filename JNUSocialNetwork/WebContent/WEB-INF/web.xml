@@ -106,7 +106,7 @@
 			/profile.jsp
 		</url-pattern>
 	</filter-mapping>
-	<filter>
+	<!-- <filter>
 		<filter-name>LoginCheckFilter</filter-name>
 		<filter-class>security.LoginCheckFilter</filter-class>
 	</filter>
@@ -221,5 +221,5 @@
 		<url-pattern>
 			/app/fileDownloader/*
 		</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 </web-app>
