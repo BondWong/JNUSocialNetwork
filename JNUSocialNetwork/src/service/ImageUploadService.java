@@ -101,7 +101,8 @@ public class ImageUploadService extends HttpServlet {
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
-			if (item.isFormField() && !item.getFieldName().equals("crop_data")) {
+			if (item.isFormField()
+					&& !item.getFieldName().equals("crop_data")) {
 				userID = item.getString();
 				continue;
 			} else if (item.isFormField()

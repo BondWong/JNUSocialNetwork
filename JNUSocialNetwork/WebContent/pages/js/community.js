@@ -97,6 +97,18 @@ function fetchCommunityByJoin(pageSize) {
 		}
 	});
 }
+function fetchMyCommunities(pageSize) {
+	var communities = FetchMyCommunities(USERID, "0", pageSize);
+	$.each(communities.reverse(), function(n, community) {
+		if (community.available == true) {
+			addCommunity(community.ID, community.attributes.name,
+					community.members.length, "myCommunity",
+					community.attributes.communityCard, community.members,
+					community.attributes.userID);
+
+		}
+	});
+}
 // fetchCommunity()
 function fetchHotCommunity(pageSize) {
 	var communities = FetchCommunity("0", pageSize);
