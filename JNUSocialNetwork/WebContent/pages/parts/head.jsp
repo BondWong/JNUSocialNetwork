@@ -7,7 +7,9 @@
 					|| uri.contains("register.jsp")
 					|| uri.contains("applyCommunity.jsp")
 					|| uri.contains("login.jsp") || uri.contains("home.jsp"));
+			boolean isProfile = uri.contains("profile.jsp");
 			request.setAttribute("isHome", isHome);
+			request.setAttribute("isProfile", isProfile);
 			request.setAttribute("needChatRoom", needChatRoom);</jsp:scriptlet>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,6 +40,10 @@
 <c:choose>
 	<c:when test="${requestScope.isHome}">
 		<link href="styles/home.css" rel="stylesheet">
+	</c:when>
+	<c:when test="${requestScope.isProfile }">
+		
+		<link href="styles/custom.css" rel="stylesheet">
 	</c:when>
 	<c:otherwise>
 		<link href="styles/custom.css" rel="stylesheet">
