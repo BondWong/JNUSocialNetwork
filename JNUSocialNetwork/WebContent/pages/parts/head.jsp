@@ -22,7 +22,7 @@
 <link rel="shortcut icon" href="images/favicon.ico">
 <title>CampuSite</title>
 <!-- Bootstrap core CSS -->
-<link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
+<link href="styles/bootstrap-3.2.0-dist/css/bootstrap.css"
 	rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->

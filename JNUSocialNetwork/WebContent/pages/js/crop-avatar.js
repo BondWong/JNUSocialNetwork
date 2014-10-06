@@ -17,15 +17,23 @@
 
     // 构造CropAvatar
     function CropAvatar($element, options) {
+        // 默认参数
+        this.defaults = {
+            aspectRatio: 1,
+            // unit=MB
+            imgPreferredSize: 2,
+            imgUrlAttrName: 'avatarLink',
+            targetView: ".profile_user_img"
+        };
         
         this.setDefaults(options);
-        
+
         this.$container = $element;
 
-        this.$avatarView = this.$container.find(".show-view"); // to be modified
+        this.$avatarView = this.$container.find(this.defaults.targetView); // to be modified
         this.$avatar = this.$avatarView.find("img");
-        this.$avatarModal = this.$container; // to be modified
-        this.$loading = $.find(".loading");
+        this.$avatarModal = this.$container.find(".modal"); // to be modified
+        this.$loading = this.$container.find(".loading");
 
         this.$avatarForm = this.$avatarModal.find(".avatar-form");
         this.$avatarUpload = this.$avatarForm.find(".avatar-upload");
@@ -37,21 +45,14 @@
         this.$avatarWrapper = this.$avatarModal.find(".avatar-wrapper");
         this.$avatarPreview = this.$avatarModal.find(".avatar-preview");
 
-        
+
         this.init();
         log(this);
     }
 
+
     CropAvatar.prototype = {
         constructor: CropAvatar,
-
-        // 默认参数
-        defaults: {
-            aspectRatio: 1,
-            // unit=MB
-            imgPreferredSize: 2,
-            imgUrlAttrName: 'avatarLink'
-        },
 
         // 合并传入的参数
         setDefaults: function (options) {
@@ -128,15 +129,15 @@
 
         // 添加监听器，并利用代理改变回调函数作用域
         addListener: function () {
-            this.$avatarView.on("click", $.proxy(this.click, this));
+//            this.$avatarView.on("click", $.proxy(this.click, this));
             this.$avatarInput.on("change", $.proxy(this.change, this));
             this.$avatarForm.on("submit", $.proxy(this.submit, this));
         },
 
         // 点击显示模态框
-        click: function () {
-            this.$avatarModal.modal("show");
-        },
+//        click: function () {
+//            this.$avatarModal.modal("show");
+//        },
 
         // input[type=file]变更监听，主要验证图片是否符合规定，再读取文件信息
         change: function () {
@@ -310,15 +311,15 @@
                     this.url = data.src;
 
                     log("response url = " + this.url);
-                    
+
                     if (this.support.datauri || this.uploaded) {
                         this.uploaded = false;
-                        
+
                         // 更新用户信息
                         var datajson = {};
-                        datajson[this.defaults.imgUrlAttrName]=this.url;
+                        datajson[this.defaults.imgUrlAttrName] = this.url;
                         UpdateUserProfile(userID, $.toJSON(datajson));
-                        
+
                         this.cropDone();
                     } else {
                         this.uploaded = true;

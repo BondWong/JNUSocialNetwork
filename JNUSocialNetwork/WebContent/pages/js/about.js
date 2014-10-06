@@ -292,12 +292,13 @@ function aboutClickEvent() {
         });
     (function () {
         $(function () {
-            var cropper1 = new CropAvatar($("#avatar-modal"));
+            var cropper1 = new CropAvatar($("#crop-avatar"));
 
-            var cropper2 = new CropAvatar($("#userbg-modal"), {
+            var cropper2 = new CropAvatar($("#crop-userbg"), {
                 aspectRatio: 2.067,
                 imgPreferredSize: 5,
-                imgUrlAttrName: 'profileImageLink'
+                imgUrlAttrName: 'profileImageLink',
+                targetView: ".profile_img"
             });
 
         });
