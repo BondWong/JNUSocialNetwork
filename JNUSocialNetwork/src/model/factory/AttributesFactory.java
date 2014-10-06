@@ -43,8 +43,8 @@ public class AttributesFactory {
 						"images/default/default-profile-background.jpg")));
 				attributes.put("gender", "");
 				attributes.put("name", "");
-				attributes.put("lookingFor", "");
 				attributes.put("relationship", "");
+				attributes.put("introduce", "");
 				attributes.put("institution", "");
 				attributes.put("major", "");
 				attributes.put("telnum", "");
@@ -62,8 +62,8 @@ public class AttributesFactory {
 						"images/default/default-profile-background.jpg")));
 				attributes.put("gender", "");
 				attributes.put("name", "社区用户");
-				attributes.put("lookingFor", "");
 				attributes.put("relationship", "");
+				attributes.put("introduce", "");
 				attributes.put("telnum", "");
 				attributes.put("email", "");
 				attributes.put("institution", "");
