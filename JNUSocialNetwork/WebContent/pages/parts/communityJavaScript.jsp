@@ -49,8 +49,7 @@
 	<c:when test="${param.nav eq 'mycommunity' }">
 		<script type="text/javascript">
 			pageSize = 15;
-			fetchCommunityByJoin(pageSize);
-			fetchCommunityByOwner("1");
+			fetchMyCommunities(pageSize);
 			$(window)
 					.scroll(
 							function() {
@@ -58,7 +57,7 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByJoin(USERID,
+									var response = FetchMyCommunities(USERID,
 											$('.content_container').length,
 											pageSize+1);
 									$

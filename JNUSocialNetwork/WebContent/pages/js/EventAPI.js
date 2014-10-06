@@ -933,112 +933,31 @@ function SearchCommunity(key, startIndex, pageSize) {
 	});
 	return response;
 }
-function SearchCommunity(key, startIndex, pageSize) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/community/search/' + key + '/' + startIndex + '/'
-				+ pageSize,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
 
-	});
-	return response;
-}
-function SearchCommunity(key, startIndex, pageSize) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/community/search/' + key + '/' + startIndex + '/'
-				+ pageSize,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
-
-	});
-	return response;
-}
-function SearchCommunity(key, startIndex, pageSize) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/community/search/' + key + '/' + startIndex + '/'
-				+ pageSize,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
-
-	});
-	return response;
-}
-function SearchCommunity(key, startIndex, pageSize) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/community/search/' + key + '/' + startIndex + '/'
-				+ pageSize,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
-
-	});
-	return response;
-}
-function SearchCommunity(key, startIndex, pageSize) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/community/search/' + key + '/' + startIndex + '/'
-				+ pageSize,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
-
-	});
-	return response;
-}
 // FetchByOwner 输入：communityID;返回：postJson
 function FetchCommunityByOwner(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
 		url : '../../app/community/fetchByOwner/' + userID + '/' + startIndex
+				+ '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//fetchMyCommunities 
+function FetchMyCommunities(userID, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/community/fetchMyCommunities/' + userID + '/' + startIndex
 				+ '/' + pageSize,
 		async : false,
 		success : function(data, status) {
