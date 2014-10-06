@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A complete example of Cropper.">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery, PHP, image cropping, web development">
+    <meta name="author" content="Fengyuan Chen">
+    <title>Crop Avatar - Cropper</title>
+    <link rel="stylesheet" href="styles/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/cropper.min.css">
+    <link rel="stylesheet" href="styles/crop-avatar.css">
+</head>
+
+<body>
+    <div class="container" id="crop-avatar">
+
+        <!-- Current avatar -->
+        <div class="avatar-view" title="Change the avatar">
+            <img src="images/picture.jpg" alt="Avatar">
+        </div>
+
+        <!-- Cropping modal -->
+        <div class="modal fade" id="avatar-modal" tabindex="-1" role="dialog" aria-labelledby="avatar-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="avatar-form" method="post" action="/app/fileUploader" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="avatar-body">
+
+                                <!-- Upload image and data -->
+                                <div class="avatar-upload">
+                                    <input class="avatar-src" name="avatar_src" type="hidden">
+                                    <input class="avatar-data" name="avatar_data" type="hidden">
+                                    <span class="btn btn-primary fileinput-button">
+                                        <i class="glyphicon glyphicon-folder-open"></i><span>&nbsp;&nbsp;browse...</span>
+                                    <input class="avatar-input" id="avatarInput" type="file" name="avatar_file" accept="image/jpeg,image/png">
+                                    </span>
+                                    <span>&nbsp;&nbsp;图片文件大小请勿超过2MB！</span>
+                                </div>
+
+                                <!-- Crop and preview -->
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="avatar-wrapper"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="avatar-preview preview-lg"></div>
+                                        <div class="avatar-preview preview-md img-circle"></div>
+                                        <div class="avatar-preview preview-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-success avatar-save avatarImgBtn" value="upload"><i class="glyphicon glyphicon-upload"></i>&nbsp;保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+
+        <!-- Loading state -->
+        <div class="loading" tabindex="-1" role="img" aria-label="Loading"></div>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    <script src="js/cropper.min.js"></script>
+    <script src="js/crop-avatar.js"></script>
+    <script>
+        $(function () {
+            var example = new CropAvatar($("#crop-avatar"));
+        });
+    </script>
+</body>
+
+</html>
