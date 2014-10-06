@@ -26,6 +26,7 @@ public class JnuSocialNetwork extends Application {
 		classes.add(JacksonFeature.class);
 		classes.add(MultiPartFeature.class);
 		classes.add(ApplicationService.class);
+		classes.add(TagService.class);
 		classes.add(AccessControlAllowOriginReponseFilter.class);
 		return classes;
 	}
