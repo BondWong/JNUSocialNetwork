@@ -42,7 +42,8 @@
 		<link href="styles/home.css" rel="stylesheet">
 	</c:when>
 	<c:when test="${requestScope.isProfile }">
-		
+		<link rel="stylesheet" href="styles/cropper.min.css">
+        <link rel="stylesheet" href="styles/crop-avatar.css">
 		<link href="styles/custom.css" rel="stylesheet">
 	</c:when>
 	<c:otherwise>

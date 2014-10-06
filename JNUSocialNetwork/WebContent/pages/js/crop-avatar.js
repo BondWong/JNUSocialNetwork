@@ -9,8 +9,6 @@
 
     "use strict";
 
-    var USERID = 13750046645;
-
     var log = function (o) {
         try {
             console.log(o);
@@ -19,13 +17,15 @@
 
     // 构造CropAvatar
     function CropAvatar($element, options) {
-
+        
+        this.setDefaults(options);
+        
         this.$container = $element;
 
-        this.$avatarView = this.$container.find(".avatar-view"); // to be modified
+        this.$avatarView = this.$container.find(".show-view"); // to be modified
         this.$avatar = this.$avatarView.find("img");
-        this.$avatarModal = this.$container.find("#avatar-modal"); // to be modified
-        this.$loading = this.$container.find(".loading");
+        this.$avatarModal = this.$container; // to be modified
+        this.$loading = $.find(".loading");
 
         this.$avatarForm = this.$avatarModal.find(".avatar-form");
         this.$avatarUpload = this.$avatarForm.find(".avatar-upload");
@@ -37,7 +37,7 @@
         this.$avatarWrapper = this.$avatarModal.find(".avatar-wrapper");
         this.$avatarPreview = this.$avatarModal.find(".avatar-preview");
 
-        this.setDefaults(options);
+        
         this.init();
         log(this);
     }
@@ -49,7 +49,8 @@
         defaults: {
             aspectRatio: 1,
             // unit=MB
-            imgPreferredSize: 2
+            imgPreferredSize: 2,
+            imgUrlAttrName: 'avatarLink'
         },
 
         // 合并传入的参数
@@ -74,13 +75,6 @@
 
             this.initModal();
             this.addListener();
-        },
-
-        // 添加监听器，并利用代理改变回调函数作用域
-        addListener: function () {
-            this.$avatarView.on("click", $.proxy(this.click, this));
-            this.$avatarInput.on("change", $.proxy(this.change, this));
-            this.$avatarForm.on("submit", $.proxy(this.submit, this));
         },
 
         // 初始化模态框
@@ -132,6 +126,13 @@
             });
         },
 
+        // 添加监听器，并利用代理改变回调函数作用域
+        addListener: function () {
+            this.$avatarView.on("click", $.proxy(this.click, this));
+            this.$avatarInput.on("change", $.proxy(this.change, this));
+            this.$avatarForm.on("submit", $.proxy(this.submit, this));
+        },
+
         // 点击显示模态框
         click: function () {
             this.$avatarModal.modal("show");
@@ -161,26 +162,22 @@
             }
         },
 
-        // 表格提交操作
-        submit: function () {
-
-            // 验证是否重复上传（不太合理）
-            if (!this.$avatarSrc.val() && !this.$avatarInput.val()) {
-                return false;
-            }
-
-            if (this.support.formData) {
-                this.ajaxUpload();
-                return false;
-            }
-        },
-
         // 检查图片类型
         isImageFile: function (file) {
             if (file.type) {
                 return /^image\/\w+$/.test(file.type);
             } else {
                 return /\.(jpg|jpeg|png|gif)$/.test(file);
+            }
+        },
+
+        // 验证图片大小
+        validateImgSize: function (file) {
+            if (file.size > this.defaults.imgPreferredSize * 1024 * 1024) {
+                alert("file size overflow");
+                return false;
+            } else {
+                return true;
             }
         },
 
@@ -195,16 +192,6 @@
                 _this.url = this.result;
                 _this.startCropper();
             };
-        },
-
-        // 验证图片大小
-        validateImgSize: function (file) {
-            if (file.size > this.defaults.imgPreferredSize * 1024 * 1024) {
-                alert("file size overflow");
-                return false;
-            } else {
-                return true;
-            }
         },
 
         // 插入图像并为其开启cropper插件
@@ -242,6 +229,15 @@
                 this.$img.data("cropper", null).remove();
                 this.active = false;
             }
+        },
+
+        // 上传成功后，重置表单数据,并关闭cropper
+        cropDone: function () {
+            this.$avatarSrc.val("");
+            this.$avatarData.val("");
+            this.$avatar.attr("src", this.url);
+            this.stopCropper();
+            this.$avatarModal.modal("hide");
         },
 
         // 上传处理
@@ -282,6 +278,20 @@
             this.$avatarSave.click();
         },
 
+        // 表格提交操作
+        submit: function () {
+
+            // 验证是否重复上传（不太合理）
+            if (!this.$avatarSrc.val() && !this.$avatarInput.val()) {
+                return false;
+            }
+
+            if (this.support.formData) {
+                this.ajaxUpload();
+                return false;
+            }
+        },
+
         // 开始提交，显示loading
         submitStart: function () {
             this.$loading.fadeIn();
@@ -295,13 +305,20 @@
                 data = $.parseJSON(data);
             } catch (e) {}
 
-            if (data && data.state === 200) {
-                if (data.result) {
-                    this.url = data.result;
+            if (data) {
+                if (data.src) {
+                    this.url = data.src;
 
                     log("response url = " + this.url);
+                    
                     if (this.support.datauri || this.uploaded) {
                         this.uploaded = false;
+                        
+                        // 更新用户信息
+                        var datajson = {};
+                        datajson[this.defaults.imgUrlAttrName]=this.url;
+                        UpdateUserProfile(userID, $.toJSON(datajson));
+                        
                         this.cropDone();
                     } else {
                         this.uploaded = true;
@@ -310,6 +327,7 @@
                     }
 
                     this.$avatarInput.val("");
+
                 } else if (data.message) {
                     this.alert(data.message);
                 }
@@ -326,15 +344,6 @@
         // 提交结束，loading消失
         submitEnd: function () {
             this.$loading.fadeOut();
-        },
-
-        // 上传成功后，重置表单数据
-        cropDone: function () {
-            this.$avatarSrc.val("");
-            this.$avatarData.val("");
-            this.$avatar.attr("src", this.url);
-            this.stopCropper();
-            this.$avatarModal.modal("hide");
         },
 
         // 信息警报

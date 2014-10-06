@@ -28,6 +28,9 @@
 <script src="js/layer.ext.js"></script>
 <script src="js/EventAPI.js"></script>
 <script src="js/function.js"></script>
+<!-- cropper plugin -->
+<script src="js/cropper.min.js"></script>
+<script src="js/crop-avatar.js"></script>
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
 <script src="js/global-initialization.js"></script>
