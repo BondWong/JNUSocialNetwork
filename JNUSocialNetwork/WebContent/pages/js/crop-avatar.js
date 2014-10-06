@@ -17,13 +17,15 @@
 
     // 构造CropAvatar
     function CropAvatar($element, options) {
-
+        
+        this.setDefaults(options);
+        
         this.$container = $element;
 
-        this.$avatarView = this.$container.find(".avatar-view"); // to be modified
+        this.$avatarView = this.$container.find(".show-view"); // to be modified
         this.$avatar = this.$avatarView.find("img");
-        this.$avatarModal = this.$container.find("#avatar-modal"); // to be modified
-        this.$loading = this.$container.find(".loading");
+        this.$avatarModal = this.$container; // to be modified
+        this.$loading = $.find(".loading");
 
         this.$avatarForm = this.$avatarModal.find(".avatar-form");
         this.$avatarUpload = this.$avatarForm.find(".avatar-upload");
@@ -35,7 +37,7 @@
         this.$avatarWrapper = this.$avatarModal.find(".avatar-wrapper");
         this.$avatarPreview = this.$avatarModal.find(".avatar-preview");
 
-        this.setDefaults(options);
+        
         this.init();
         log(this);
     }
@@ -47,7 +49,8 @@
         defaults: {
             aspectRatio: 1,
             // unit=MB
-            imgPreferredSize: 2
+            imgPreferredSize: 2,
+            imgUrlAttrName: 'avatarLink'
         },
 
         // 合并传入的参数
@@ -307,8 +310,15 @@
                     this.url = data.src;
 
                     log("response url = " + this.url);
+                    
                     if (this.support.datauri || this.uploaded) {
                         this.uploaded = false;
+                        
+                        // 更新用户信息
+                        var datajson = {};
+                        datajson[this.defaults.imgUrlAttrName]=this.url;
+                        UpdateUserProfile(userID, $.toJSON(datajson));
+                        
                         this.cropDone();
                     } else {
                         this.uploaded = true;

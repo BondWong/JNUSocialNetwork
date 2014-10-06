@@ -55,7 +55,7 @@ $(document).ready(function () {
                     $(data.context.children()[index]).append('<br>').append(error);
                 });
         }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
-    
+
     $('#fileupload').fileupload({
         url: '../../app/fileUploader',
         beforeSend: function (request) {
@@ -290,31 +290,44 @@ function aboutClickEvent() {
             $(this).text("编辑");
             $(this).attr("class", "btn btn-primary aEditbtn3");
         });
-    // function avatarImgBtn
-    $('body').on("click", ".avatarImgBtn",
-        function () {
-            var datajson = {
-                avatarLink: FileUpload(new FormData($('.avatarForm')[0]))[0],
-            };
-            var json = $.toJSON(datajson);
-            var userNew = UpdateUserProfile(userID, json);
-            $('.profile_user_img').find('img').attr("src", $.parseJSON(userNew.attributes.avatarLink).src);
-            $('#myModal').modal('hide');
-            $('.avatarForm').get(0).reset();
+    (function () {
+        $(function () {
+            var cropper1 = new CropAvatar($("#avatar-modal"));
+
+            var cropper2 = new CropAvatar($("#userbg-modal"), {
+                aspectRatio: 2.067,
+                imgPreferredSize: 5,
+                imgUrlAttrName: 'profileImageLink'
+            });
 
         });
-    // change Background
-    $('body').on("click", ".changeBg",
-        function () {
-            var datajson = {
-                profileImageLink: FileUpload(new FormData($('.changBgForm')[0]))[0],
-            };
-            var json = $.toJSON(datajson);
-            var userNew = UpdateUserProfile(userID, json);
-            $('#myModalB').modal('hide');
-            $('.profile_img').find('img').attr("src", $.parseJSON(userNew.attributes.profileImageLink).src);
-            $('.changBgForm').get(0).reset();
-        });
+    })(jQuery);
+    // function avatarImgBtn
+//    $('body').on("click", ".avatarImgBtn",
+//        function () {
+//            var datajson = {
+//                avatarLink: FileUpload(new FormData($('.avatarForm')[0]))[0],
+//            };
+//            var json = $.toJSON(datajson);
+//            var userNew = UpdateUserProfile(userID, json);
+//            $('.profile_user_img').find('img').attr("src", $.parseJSON(userNew.attributes.avatarLink).src);
+//            $('#myModal').modal('hide');
+//            $('.avatarForm').get(0).reset();
+//
+//        });
+//
+//    // change Background
+//    $('body').on("click", ".changeBg",
+//        function () {
+//            var datajson = {
+//                profileImageLink: FileUpload(new FormData($('.changBgForm')[0]))[0],
+//            };
+//            var json = $.toJSON(datajson);
+//            var userNew = UpdateUserProfile(userID, json);
+//            $('#myModalB').modal('hide');
+//            $('.profile_img').find('img').attr("src", $.parseJSON(userNew.attributes.profileImageLink).src);
+//            $('.changBgForm').get(0).reset();
+//        });
     // function addPhoto
     $('body').on("click", ".addPhoto",
         function () {
@@ -442,7 +455,7 @@ function fetchUserByID() {
         $('.aEditbtn2').css("display", "inline");
         // function profileBg
         $('.profile_img').hover(function () {
-                var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button></div>";
+                var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#userbg-modal'>Change BlackgroundImg</button></div>";
                 $('.profileImgDiv').after(changeBtn);
                 $('.changeBtnGroup').hide();
                 $('.changeBtnGroup').fadeIn(300);
@@ -460,7 +473,7 @@ function fetchUserByID() {
                 var nPos = pos;
                 nPos.top = pos.top;
                 nPos.left = pos.left + 10;
-                var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#myModal'></span></div>";
+                var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#avatar-modal'></span></div>";
                 $(this).append(changeBtn);
                 $('.profileImg').css(nPos);
                 $('.profileImg').hide();

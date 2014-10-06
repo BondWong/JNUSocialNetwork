@@ -3,7 +3,7 @@
 <div class="profile_head">
 	<div class="profile_info">
 		<div class="profile_container">
-			<div class="profile_user_img avatar-view">
+			<div class="profile_user_img show-view">
 				<img class="img-circle profileAvatar"
 					onload="javascript:auto_resize( 120, 120, this)" src=""
 					alt="Generic placeholder image"  style="display: none">
@@ -15,7 +15,7 @@
 			<div class='followInfo'><span class='followNum'>4</span><span>&nbsp;粉丝</span></div>
 		</div>
 	</div>
-	<div class="profile_img  avatar-view">
+	<div class="profile_img show-view">
 		<img class="profileImgDiv" src=""
 			onload="javascript:auto_resize( 620, 300, this)"
 			style="display: none" />
