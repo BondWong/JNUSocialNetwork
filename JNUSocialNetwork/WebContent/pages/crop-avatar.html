@@ -18,7 +18,7 @@
     <div class="container" id="crop-avatar">
 
         <!-- Current avatar -->
-        <div class="avatar-view" title="Change the avatar">
+        <div class="show-view" title="Change the avatar">
             <img src="images/picture.jpg" alt="Avatar">
         </div>
 
@@ -78,7 +78,7 @@
     <script src="js/crop-avatar.js"></script>
     <script>
         $(function () {
-            var example = new CropAvatar($("#crop-avatar"));
+            var example = new CropAvatar($("#crop-avatar"),{targetView: ".show-view"});
         });
     </script>
 </body>

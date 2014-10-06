@@ -18,7 +18,7 @@ public class RandomlyFetchMemberTransaction extends DAOTransaction {
 			startIndex -= 1;
 		else if(startIndex == 0 )
 			startIndex += 1;
-		return transaction.execute("Member.fetch", null, startIndex, 500);
+		return transaction.execute("Member.fetch", null, null, startIndex, 500);
 	}
 
 }
