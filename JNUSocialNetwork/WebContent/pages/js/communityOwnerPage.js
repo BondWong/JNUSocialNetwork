@@ -112,6 +112,7 @@ $(document)
 										// var formData = new
 										// FormData($('.photofom'));
 										var post = {
+											activityTypeTags :[],
 											postType : 'NORMAL',
 											attributes : {
 												content : $('#share_txt2')
@@ -169,7 +170,7 @@ $(window)
 					if ($(window).scrollTop() == $(document).height()
 							- window.windowHeight) {
 						
-						var startIndex = $('.post').length -1 ;
+						var startIndex = $('.post').length ;
 						if(USERID == community.attributes.userID){
 							startIndex -= 1;
 						}

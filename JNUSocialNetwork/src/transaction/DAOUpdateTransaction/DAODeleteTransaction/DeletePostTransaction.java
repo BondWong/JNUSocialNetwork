@@ -3,6 +3,7 @@ package transaction.DAOUpdateTransaction.DAODeleteTransaction;
 import javax.persistence.EntityManager;
 
 import model.Comment;
+import model.Member;
 import model.Post;
 import persistence.DAO;
 import transaction.DAOTransaction;
@@ -28,6 +29,8 @@ public class DeletePostTransaction extends DAOTransaction {
 		post.clearComments();
 		post.clearImageLinks();
 		post.clearLikers();
+		for (Member member : post.getParticipants())
+			member.leaveActivity(post);
 		post.clearParticipants();
 		post.setOwner(null);
 		dao.update(post);

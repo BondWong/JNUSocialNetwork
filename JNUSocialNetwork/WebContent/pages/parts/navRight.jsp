@@ -20,7 +20,8 @@
 					data-errormessage-value-missing="请输入密码" required maxLength="40" />
 			</div>
 			<input type="hidden" name="hiddenCode"
-				value="${sessionScope.hiddenCode }" />
+				value="${sessionScope.hiddenCode }" /> <input type="hidden"
+				name="origin" value="" />
 			<button class="btn btn-danger signInBtn" type="submit">登录</button>
 			<script src="js/jquery-1.10.2.js"></script>
 			<script src="js/md5.js"></script>

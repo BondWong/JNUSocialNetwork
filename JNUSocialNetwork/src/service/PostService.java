@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,8 @@ public class PostService {
 		try {
 			sse = (ServerSentEvent) transaction.execute(ID, PostType.NORMAL,
 					contentEncoder.encodeMapContent((Map<String, String>) post
-							.get("attributes")), post.get("imageLinks"));
+							.get("attributes")), post.get("imageLinks"),
+					new ArrayList<String>());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +82,8 @@ public class PostService {
 			sse = (ServerSentEvent) transaction.execute(ID, communityID,
 					PostType.valueOf((String) post.get("postType")),
 					contentEncoder.encodeMapContent((Map<String, String>) post
-							.get("attributes")), post.get("imageLinks"));
+							.get("attributes")), post.get("imageLinks"), post
+							.get("activityTypeTags"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -274,6 +277,89 @@ public class PostService {
 			activities = (List<Map<String, Object>>) transaction.execute(
 					"Post.fetchActivitiesByCommunity", communityID, startIndex,
 					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchAllActivities/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchAllActivities(@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchAllActivities", null, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchHeatActivities/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchHeatActivities(
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchHeatActivities", null, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchMyActivities/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchMyActivities(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchMyActivities", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchActivitiesByType/{tagID}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchActivitiesByType(@PathParam("tagID") String tagID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchActivitiesByTag", tagID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -13,7 +13,6 @@ import persistence.helper.EntityManagerFactoryUtil;
 import service.helper.ActivitySearchMap;
 import service.helper.CommunitySearchMap;
 import service.helper.DesertFileLinkMap;
-import service.helper.HeheUser;
 import service.helper.MemberSearchMap;
 import service.helper.NumberManager;
 import service.helper.OnlineUserIDArray;
@@ -31,8 +30,9 @@ import utils.RootPathHelper;
 // @WebListener
 public class Initialtor implements ServletContextListener {
 	private static final int ACTIVITYREMINDTIME = 5 * 60;
-	private static final int DELETEFILETIME = 61 * 60;
-	private static final int DELETEMODELTIME = 60 * 60;
+	private static final int DELETEFILETIME = 60 * 60;
+
+	// private static final int DELETEMODELTIME = 60 * 60;
 
 	/**
 	 * Default constructor.
@@ -75,9 +75,11 @@ public class Initialtor implements ServletContextListener {
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new DeleteFileTask(),
 				DELETEFILETIME, DELETEFILETIME, TimeUnit.SECONDS);
 
-		scheduledThreadPoolExecutor.scheduleAtFixedRate(
-				new DeleteUnavailableTask(), DELETEMODELTIME, DELETEMODELTIME,
-				TimeUnit.SECONDS);
+		/*
+		 * scheduledThreadPoolExecutor.scheduleAtFixedRate( new
+		 * DeleteUnavailableTask(), DELETEMODELTIME, DELETEMODELTIME,
+		 * TimeUnit.SECONDS);
+		 */
 
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
@@ -92,7 +94,6 @@ public class Initialtor implements ServletContextListener {
 			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
-			HeheUser.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
 

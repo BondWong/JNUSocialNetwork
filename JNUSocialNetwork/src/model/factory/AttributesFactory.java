@@ -80,6 +80,7 @@ public class AttributesFactory {
 				attributes.put("startDate", "");
 				attributes.put("reminded", "false");
 				attributes.put("limitation", "50");
+				attributes.put("activityType", "NONE");
 				attributes.put("background", JsonUtil.toJson(new Image(
 						"images/default/default-activity-background.jpg")));
 			}

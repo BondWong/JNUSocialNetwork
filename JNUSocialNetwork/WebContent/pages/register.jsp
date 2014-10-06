@@ -48,7 +48,8 @@
 								</div>
 							</div>
 							<input type="hidden" name="hiddenCode"
-								value="${sessionScope.hiddenCode }" />
+								value="${sessionScope.hiddenCode }" /> <input type="hidden"
+								name="origin" value="" />
 							<p style="float: left;">
 								<input type="checkbox" name="statement" value="agree" checked
 									required /><span class="agree" data-toggle='modal'
@@ -120,6 +121,8 @@
 		$('.displayBody').animate({
 			opacity : 1
 		}, 300);
+		$('input[name="origin"]').val(localStorage.getItem("url"));
+		localStorage.removeItem('url');
 	</script>
 	<script>
 		$("h4 span.signIn").click(function() {

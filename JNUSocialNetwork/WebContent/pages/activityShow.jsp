@@ -22,9 +22,11 @@
 	<!-- /.navbar -->
 	<div class="container container_actvity">
 		<div class="activityHead">
-			<img alt="" width="100%"
-				onload="javascript:auto_resize(1170, 300, this)" src=""
-				style="display: none">
+			<div class="activityPh">
+				<img alt="" width="100%"
+					onload="javascript:auto_resize(1140, getHeight(1140,this.width,this.height), this)" src=""
+					style="display: none">
+			</div>
 			<div class="activityInfo">
 				<p class="activityShowName"></p>
 				<div class="activityShare">
@@ -38,13 +40,7 @@
 						<a class="btn btn-default" target="_blank"
 							id="download-name-list-button">下载参与列表</a>
 					</div>
-					<button class="btn btn-default backActivity">返回活动列表</button>
-					<script type="text/javascript">
-						var url = window.location.search;
-						var activityID = url.substr(url.indexOf("&") + 1);
-						document.getElementById("download-name-list-button").href = "../app/fileDownloader?type=ACTIVITYNAMELIST&version=2007+&activityID="
-								+ activityID;
-					</script>
+					<button class="btn btn-default backActivity">查看社区活动列表</button>
 				</div>
 			</div>
 		</div>
@@ -95,9 +91,9 @@
 							</div>
 							<div class="activityItem">
 								<span>活动地点：</span>
-								<textarea class="form-control activityInput" placeholder=""
+								<input class="form-control activityInput" placeholder=""
 									id="activityAddr" required autofocus maxLength="150"
-									style="resize: none;"></textarea>
+									style="resize: none;" />
 							</div>
 							<div class="activityItem">
 								<span>活动细节：</span>
@@ -106,10 +102,19 @@
 									maxLength="200" style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
+										<span>活动类型：</span>
+										<select class="activityType">
+											<option value="ENTERTAINMENT">娱乐类</option>
+											<option value="ATHLETIC">体育类</option>
+											<option value="ACADEMIC">学术类</option>
+										</select>
+									</div>
+							<div class="activityItem">
 								<span>人数上限：</span><input type="text"
 									class="form-control activityInput" placeholder=""
-									id="activityNum" pattern="[0-9]{1,3}" data-errormessage-pattern-mismatch="请输入参与人数，最大999" required autofocus
-									maxLength="3" />
+									id="activityNum" pattern="[0-9]{1,3}"
+									data-errormessage-pattern-mismatch="请输入参与人数，最大999" required
+									autofocus maxLength="3" />
 							</div>
 							<div class="activityItem">
 								<span>活动图片</span> <span class="btn btn-success fileinput-button"
@@ -188,9 +193,7 @@
 				<div class="activityPhotos">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						<!-- Indicators -->
-						<div class="carousel-inner">
-							
-						</div>
+						<div class="carousel-inner"></div>
 						<a class="left carousel-control" href="#myCarousel"
 							data-slide="prev"><span
 							class="glyphicon glyphicon-chevron-left"></span></a> <a
@@ -287,7 +290,8 @@
 									$('.joinSActivity').remove();
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
-									$('.activityPhoto').css("display", "inline");
+									$('.activityPhoto')
+											.css("display", "inline");
 									$('#activityLike').css("display", "none");
 									$('.activityAddCommunity').css("display",
 											"none");
@@ -298,6 +302,13 @@
 										|| activity.attributes.reminded != "false") {
 									$('.joinSActivity').remove();
 									$('.editActivity').remove();
+									$('.ulR').remove();
+									$('.aUB').remove();
+								}
+								if (activity.participantIDs.length >= activity.attributes.limitation) {
+									$('.joinSActivity').remove();
+									$('.ulR').remove();
+									$('.aUB').remove();
 								}
 								$('.aCommentI')
 										.attr(

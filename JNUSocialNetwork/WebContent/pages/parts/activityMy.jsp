@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 	
 <div class="communityGroupTitle">
-			<h3>个人社区</h3>
+			<h3>我的活动</h3>
 		</div>
-		<div class="container containerFolk">
-			<div class="folkCommunity"></div>
+		<div class="activityBody">
+				<div class="activityBord"></div>
 		</div>

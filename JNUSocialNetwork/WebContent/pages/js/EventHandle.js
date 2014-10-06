@@ -323,6 +323,8 @@ function FOLLOW() {
 	source.addEventListener('FOLLOW', function(event) {
 		var jsondata = $.parseJSON(event.data);
 		$("button[id='followBtn']").text("Following");
+		//about.js
+		$(".followBtnAB").text("Following");
 		// people.js
 		$("button[id='" + jsondata.otherID + "']").text("Following");
 		oriented_follow(jsondata.otherID);

@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import model.Comment;
 import model.Community;
+import model.Member;
 import model.Post;
 import persistence.DAO;
 import service.helper.CommunitySearchMap;
@@ -33,6 +34,8 @@ public class DeleteCommunityTransaction extends DAOTransaction {
 			post.clearComments();
 			post.clearImageLinks();
 			post.clearLikers();
+			for (Member member : post.getParticipants())
+				member.leaveActivity(post);
 			post.clearParticipants();
 			dao.update(post);
 		}
@@ -42,6 +45,9 @@ public class DeleteCommunityTransaction extends DAOTransaction {
 				params[0] + "");
 		CommunitySearchMap.serialize();
 		community.clearAttributes();
+		for (Member member : community.getMembers()) {
+			member.leaveCommunity(community);
+		}
 		community.clearMembers();
 		community.clearPosts();
 		community.clearTags();

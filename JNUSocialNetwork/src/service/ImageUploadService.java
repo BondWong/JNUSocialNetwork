@@ -3,9 +3,11 @@ package service;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -23,6 +25,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.reflect.TypeToken;
+
 import service.helper.ExtensionManager;
 import utils.JsonUtil;
 
@@ -30,6 +34,8 @@ import utils.JsonUtil;
 public class ImageUploadService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final long MAXIMUMFILESIZE = 1024 * 1024 * 10 * 3;
+	private final static Type TYPE = new TypeToken<Map<String, Integer>>() {
+	}.getType();
 	private static String root;
 	private DiskFileItemFactory factory;
 	private ServletFileUpload upload;
@@ -57,7 +63,9 @@ public class ImageUploadService extends HttpServlet {
 			List<String> links = process(request);
 			response.setContentType("application/json");
 			response.setStatus(200);
+			System.out.println("about to write back:" + JsonUtil.toJson(links));
 			response.getWriter().write(JsonUtil.toJson(links));
+			response.flushBuffer();
 
 		} catch (FileUploadBase.InvalidContentTypeException icte) {
 			response.sendError(406);
@@ -88,12 +96,18 @@ public class ImageUploadService extends HttpServlet {
 		Iterator<FileItem> iter = items.iterator();
 		List<String> links = new ArrayList<String>();
 
+		String userID = "";
+		Map<String, Integer> cropData = null;
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
-			String userID = "";
-			if (item.isFormField()) {
+			if (item.isFormField()
+					&& !item.getFieldName().equals("crop_data")) {
 				userID = item.getString();
+				continue;
+			} else if (item.isFormField()
+					&& item.getFieldName().equals("crop_data")) {
+				cropData = JsonUtil.fromJson(item.getString(), TYPE);
 				continue;
 			}
 
@@ -117,6 +131,7 @@ public class ImageUploadService extends HttpServlet {
 					+ System.currentTimeMillis() + extention;
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
+
 			int size = (int) (uploaddedFile.length() / (1024 * 1024));
 			if (size >= 1)
 				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
@@ -127,6 +142,15 @@ public class ImageUploadService extends HttpServlet {
 			else if (size > 3)
 				Thumbnails.of(uploaddedFile).scale(0.4f).toFile(uploaddedFile);
 			BufferedImage bi = ImageIO.read(uploaddedFile);
+
+			if (cropData != null) {
+				bi = bi.getSubimage(cropData.get("x"), cropData.get("y"),
+						cropData.get("width"), cropData.get("height"));
+				ImageIO.write(bi, extention.substring(1), uploaddedFile);
+				bi = ImageIO.read(uploaddedFile);
+				cropData = null;
+			}
+
 			Image image = new Image(temp, bi.getHeight(), bi.getWidth());
 			links.add(JsonUtil.toJson(image));
 		}

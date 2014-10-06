@@ -120,20 +120,35 @@ body {
 
 .container.container_community {
 	background-color: #EEEEEE;
+	margin-top: 90px;
+	margin-left: 330px;
+	width: 970px;
+}
+.container.container_activity {
+	background-color: #EEEEEE;
 	margin-top: 70px;
 	margin-left: 120px;
 	width: 1170px;
 }
-
-.communitySideBar {
-	margin-top: 150px;
-	margin-left: 10px;
-	float: left;
-	width: 100px;
-	height: 280px;
-	position: fixed;
+.container.container_activityA {
+	background-color: #EEEEEE;
+	margin-top: 70px;
+	margin-left: 330px;
+	width: 970px;
 }
-
+.communitySideBar {
+	margin-left: 20px;
+	float: left;
+	width: 300px;
+	height: 280px;
+}
+.activitySideBar {
+	margin-top: 20px;
+	margin-left: 20px;
+	float: left;
+	width: 300px;
+	height: 280px;
+}
 .communitySideBar li a {
 	display: block;
 	padding: 4px 20px;
@@ -142,7 +157,14 @@ body {
 	color: #aaa;
 	cursor: pointer;
 }
-
+.activitySideBar li a {
+	display: block;
+	padding: 4px 20px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #aaa;
+	cursor: pointer;
+}
 .communitySideBar li a:hover {
 	padding-left: 18px;
 	font-weight: 700;
@@ -150,7 +172,13 @@ body {
 	background-color: transparent;
 	border-left: 2px solid #563d7c;
 }
-
+.activitySideBar li a:hover {
+	padding-left: 18px;
+	font-weight: 700;
+	color: #563d7c;
+	background-color: transparent;
+	border-left: 2px solid #563d7c;
+}
 .content_container {
 	opacity: 0;
 	background-color: #FFF;
@@ -453,7 +481,17 @@ body {
 	text-align: center;
 	font-size: 20px;
 }
-
+.followBtnA{
+	margin: 5px auto auto;
+	width: 50%;
+	text-align: center;
+}
+.followInfo{
+	margin: 5px auto auto;
+	width: 50%;
+	text-align: center;
+	color:#fff;
+}
 .share_txt {
 	height: 90px;
 	width: 90%;
@@ -847,6 +885,7 @@ body {
 }
 
 .member {
+	opacity:0;
 	margin-top: 10px;
 	width: 215px;
 	height: 80px;
@@ -1161,12 +1200,21 @@ body {
 	color: #5A5A5A;
 	float: right;
 }
-
 .deletePostBtn {
 	color: #CCC;
 	float: right;
 	cursor: pointer;
 }
+.deletePostFromCBtn{
+	color: #CCC;
+	float: right;
+	cursor: pointer;
+}
+.deletePostFromCBtn:hover {
+	color: #5A5A5A;
+	float: right;
+}
+
 
 .deleteActivity {
 	position: absolute;
@@ -1241,7 +1289,7 @@ body {
 	padding-bottom: 20px;
 	padding-top: 0px;
 }
-
+.activityAll {}
 .activityAvatar {
 	margin-left: 370px;
 	margin-top: -20px;
@@ -1254,13 +1302,21 @@ body {
 
 .activityItem {
 	margin-top: 20px;
+	width:92%;
 }
 
 .activityItem>span {
 	width: 70px;
 	float: left;
 }
-
+.uploadItem {
+	margin-top: 20px;
+}
+.uploadItem>span {
+	float: left;
+	width: 70px;
+	text-align: right;
+}
 .activityName {
 	margin-left: auto;
 	margin-right: auto;
@@ -1410,7 +1466,9 @@ body {
 	padding-top: 10px;
 	border-bottom: 1px solid #f7f7f7;
 }
-
+.peopeleTypeS{
+	padding-left:35px;
+}
 .peopeleType:hover {
 	background-color: #f6f6f6;
 	border-left: 2px solid #4285f4;
@@ -1800,4 +1858,61 @@ border: 0px;
 margin:0px;
 padding:0px;
 font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif !important;
+}
+.imgLeft{
+	width:200px;
+	float:left;
+}
+.imgRight{
+	width:200px;
+	float:right;
+}
+.follow {
+	margin-top: 10px;
+	margin-left:6px;
+	width: 125px;
+	height: 55px;
+	background-color: #fff;
+	float:left;
+}
+.followeeContainer{
+	width:100%;
+	position:relative;
+}
+.followName {
+	font-size: 16px;
+	color: #404040;
+	font-weight: bolder;
+	width: 50%;
+	margin-left: 10px;
+	display: block;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}
+.followeeShow{
+	position:absolute;
+}
+.followerShow{
+	position:absolute;
+}
+.aUB{
+	float:right;
+}
+.activityBg{
+	width:435px;
+	height:100px;
+	overflow:hidden;
+}
+.activityBgAll {
+    height: auto !important;
+}
+.activityPh{
+	width:1170px;
+	height:300px;
+	overflow:hidden;
+}
+.navbar-fixed-top .container{
+	width: 98% !important;
 }

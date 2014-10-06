@@ -38,7 +38,9 @@ import transaction.DAOFetchTransaction.SearchMemberTransaction;
 import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
+import transaction.DAOUpdateTransaction.MemberAddLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
+import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
@@ -509,6 +511,61 @@ public class UserService {
 			throw e;
 		}
 		return Response.ok(result).build();
+	}
+
+	@Path("addLookingForTag/{ID : \\d+}/{tagContent}")
+	@PUT
+	public Response addLookingForTag(@PathParam("ID") String ID,
+			@PathParam("tagContent") String tagContent) throws Exception {
+		transaction = new MemberAddLookingForTagTransaction();
+		try {
+			transaction.execute(ID, URLDecoder.decode(tagContent, "utf-8"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+
+	}
+
+	@Path("removeLookingForTag/{ID : \\d+}/{tagContent}")
+	@PUT
+	public Response removeLookingForTag(@PathParam("ID") String ID,
+			@PathParam("tagContent") String tagContent) throws Exception {
+		transaction = new MemberRemoveLookingForTagTransaction();
+		try {
+			transaction.execute(ID, tagContent);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchByLookingForTag/{tagContent}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchByLookingForTag(
+			@PathParam("tagContent") String tagContent,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchMembersTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.fetchByLookingForTag", tagContent, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
 	}
 
 	@SuppressWarnings("rawtypes")

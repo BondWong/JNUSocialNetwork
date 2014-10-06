@@ -1,6 +1,7 @@
 package security;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import security.helper.UAgentInfo;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
+import utils.MD5;
 import model.Account;
 import model.modelType.UserType;
 
@@ -68,6 +70,11 @@ public class LoginServlet extends HttpServlet {
 		String ID = request.getParameter("ID");
 		String password = request.getParameter("password");
 		String hiddenCode = request.getParameter("hiddenCode");
+		String origin = request.getParameter("origin");
+		System.out.println(origin);
+		boolean fromRegister = false;
+		fromRegister = new Boolean(true).equals(request
+				.getAttribute("fromRegister")) ? true : false;
 
 		HttpSession session = request.getSession();
 		String sessionHiddenCode = "";
@@ -75,10 +82,18 @@ public class LoginServlet extends HttpServlet {
 			sessionHiddenCode = (String) session.getAttribute("hiddenCode");
 			session.removeAttribute("hiddenCode");
 		}
-		if (sessionHiddenCode == null || hiddenCode == null
-				|| !sessionHiddenCode.equals(hiddenCode))
+		if (!fromRegister
+				&& (sessionHiddenCode == null || hiddenCode == null || !sessionHiddenCode
+						.equals(hiddenCode)))
 			response.sendRedirect("/pages/login.jsp");
 		else {
+			if (fromRegister)
+				try {
+					password = MD5.toMD5Code(password);
+				} catch (NoSuchAlgorithmException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			Transaction transaction = new FetchAccountTransaction();
 			try {
 				account = (Account) transaction.execute("Account.fetchByID",
@@ -107,7 +122,11 @@ public class LoginServlet extends HttpServlet {
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 
 						response.addCookie(cookie);
-						response.sendRedirect("/pages/community.jsp?nav=mycommunity");
+						if (origin.equals(null) || origin.equals(""))
+							response.sendRedirect("/pages/community.jsp?nav=mycommunity");
+						else
+							response.sendRedirect(origin.substring(origin
+									.indexOf("/pages")));
 					}
 				} else {
 					account.setLastAccessDate(new Date());
