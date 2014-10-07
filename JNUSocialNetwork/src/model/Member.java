@@ -400,8 +400,6 @@ public class Member extends User {
 	}
 
 	public void addLookingForTag(Tag tag) {
-		if (this.lookingForTags.size() >= 5)
-			return;
 		this.lookingForTags.add(tag);
 		tag.lookingForUsedBy(this);
 	}
