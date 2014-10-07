@@ -25,7 +25,7 @@
             imgUrlAttrName: 'avatarLink',
             targetView: ".profile_user_img"
         };
-        
+
         this.setDefaults(options);
 
         this.$container = $element;
@@ -129,15 +129,15 @@
 
         // 添加监听器，并利用代理改变回调函数作用域
         addListener: function () {
-//            this.$avatarView.on("click", $.proxy(this.click, this));
+            //            this.$avatarView.on("click", $.proxy(this.click, this));
             this.$avatarInput.on("change", $.proxy(this.change, this));
             this.$avatarForm.on("submit", $.proxy(this.submit, this));
         },
 
         // 点击显示模态框
-//        click: function () {
-//            this.$avatarModal.modal("show");
-//        },
+        //        click: function () {
+        //            this.$avatarModal.modal("show");
+        //        },
 
         // input[type=file]变更监听，主要验证图片是否符合规定，再读取文件信息
         change: function () {
@@ -317,8 +317,8 @@
 
                         // 更新用户信息
                         var datajson = {};
-                        datajson[this.defaults.imgUrlAttrName] = data;
-                        UpdateUserProfile(userID, $.toJSON(datajson));
+                        datajson[this.defaults.imgUrlAttrName] = JSON.stringify(data);
+                        UpdateUserProfile(userID, JSON.stringify(datajson));
 
                         this.cropDone();
                     } else {

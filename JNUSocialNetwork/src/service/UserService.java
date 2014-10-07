@@ -30,6 +30,7 @@ import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
+import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
 import transaction.DAOFetchTransaction.InstitutionRecommendationTransaction;
 import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
@@ -545,7 +546,7 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchByLookingForTag/{ID : \\d+}/{tagContent}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByLookingForTag/{tagContent}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByLookingForTag(@PathParam("ID") String ID,
@@ -556,8 +557,8 @@ public class UserService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Member.fetchByLookingForTag", ID, tagContent, startIndex,
-					pageSize);
+					"Member.fetchByLookingForTag", tagContent, null,
+					startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -566,6 +567,29 @@ public class UserService {
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchLookingForTag/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchLookingForTag(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchTagsTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(
+					"Member.fetchLookingForTags", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+
 	}
 
 	@SuppressWarnings("rawtypes")
