@@ -17,8 +17,8 @@ public class FetchTagsTransaction extends DAOTransaction {
 			throws Exception {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
-		List<Tag> tags = dao.read((String) params[0], (int) params[2],
-				(int) params[3], Tag.class, params[1]);
+		List<Tag> tags = dao.read((String) params[0], (int) params[1],
+				(int) params[2], Tag.class);
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		for (Tag tag : tags) {
 			results.add(tag.toRepresentation());
