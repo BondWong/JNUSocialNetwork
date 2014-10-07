@@ -546,7 +546,7 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchByLookingForTag/{ID : \\d+}/{tagContent}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchByLookingForTag/{tagContent}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchByLookingForTag(@PathParam("ID") String ID,
@@ -557,8 +557,8 @@ public class UserService {
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
-					"Member.fetchByLookingForTag", ID, tagContent, startIndex,
-					pageSize);
+					"Member.fetchByLookingForTag", tagContent, null,
+					startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
