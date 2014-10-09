@@ -287,7 +287,7 @@ function notifyFollow(followerID) {
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
-			+ data.attributes.lookingFor
+			+ data.attributes.introduce
 			+ '</p><button class="btn btn-danger followBtn2" id="'
 			+ followerID
 			+ '">' + followTxt + '</button></div></div></div>';

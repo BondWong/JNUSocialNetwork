@@ -204,6 +204,10 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 		$(".entertainmentCommunity").after(boarddiv);
 		Msnry('.containerEntertainment', '.content_container', 265);
 		break;
+	case "OTHERS":
+		$(".othersCommunity").after(boarddiv);
+		Msnry('.containerOthers', '.content_container', 265);
+		break;
 	case "searchCommunity":
 		$(".searchCommunity").after(boarddiv);
 		Msnry('.containerSearch', '.content_container', 265);

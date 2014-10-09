@@ -60,6 +60,15 @@ $(document)
 			fetchActivitiesByType("ENTERTAINMENT","0", "16");
 		</script>
 	</c:when>
+	<c:when test="${param.nav eq 'others' }">
+		<script type="text/javascript">
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.othersA').css("background-color", "#f6f6f6");
+			$('.othersA').css("border-left", "2px solid #4285f4");
+			fetchActivitiesByType("OTHERS","0", "16");
+		</script>
+	</c:when>
 	<c:when test="${param.nav eq 'academic' }">
 		<script type="text/javascript">
 			$('.peopeleType').css("background-color", "#fff");

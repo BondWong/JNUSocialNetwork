@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @Access(AccessType.FIELD)
-@NamedQueries(value = { @NamedQuery(name = "Tag.fetchHeatLookingFor", query = "SELECT t FROM Tag t ORDER BY SIZE(t.lookingForUsers) DESC") })
+@NamedQueries(value = { @NamedQuery(name = "Tag.fetchHeatLookingFor", query = "SELECT t FROM Tag t WHERE SIZE(t.activityTypeUsers) = 0 ORDER BY SIZE(t.lookingForUsers) DESC") })
 public class Tag extends Model {
 	@Id
 	private String ID;

@@ -20,6 +20,9 @@
 				<span class="Atitle">专业</span><span class="Amajor"></span>
 			</div>
 			<div class="InforItem">
+				<span class="Atitle">年级</span><span class="Aseason"></span><span>级</span>
+			</div>
+			<div class="InforItem">
 				<span class="Atitle">校区</span><span class="Acampus"></span>
 			</div>
 		</div>
@@ -86,7 +89,46 @@
 			<div class="InforItem">
 				<span class="Atitle">个人描述</span><span class="Alooking"></span>
 			</div>
-			<div class="InforItem"></div>
+		</div>
+	</div>
+	<div class="post about">
+		<div class="aboutGreen">
+			<div>
+				<span class="aboutTitle">个性标签</span>
+			</div>
+			<div class="InforItem" id="inforTag">
+				<div class="tags">
+					<div class="tagBoard"></div>
+					<span class="defaultTags"></span>
+				</div>
+				<div class="selectTags">
+					<div class="tagHead">
+						<span class="tagName">你现在状态是？</span> <input maxlength="8" type="text"
+							class="tagInput" />
+						<div class="btn-group btn-group-xs tagButton">
+							<button class="btn btn-xs btn-default addTag">贴上</button>
+							<button class="btn btn-xs btn-default changeTag">换一换</button>
+						</div>
+					</div>
+					<div class="tagContainer">
+						<span id="tagSpan" title="单身待解救">单身待解救</span>
+						<span id="tagSpan" title="奋斗ing">奋斗ing</span>
+						<span id="tagSpan" title="幸福ing">幸福ing</span>
+						<span id="tagSpan" title="成长ing">成长ing</span>
+						<span id="tagSpan" title="缺爱ing">缺爱ing</span>
+						<span id="tagSpan" title="静待缘分">静待缘分</span>
+						<span id="tagSpan" title="心如止水">心如止水</span>
+						<span id="tagSpan" title="寂寞ing">寂寞ing</span>
+						<span id="tagSpan" title="求职ing">求职ing</span>
+						<span id="tagSpan" title="考研ing">考研ing</span>
+						<span id="tagSpan" title="备战雅思">备战雅思</span>
+						<span id="tagSpan" title="备战托福">备战托福</span>
+						<span id="tagSpan" title="我是小鲜肉">我是小鲜肉</span>
+						<br clear="all" /> 
+					</div>
+				</div>
+			</div>
+			<br clear="all" /> 
 		</div>
 	</div>
 </div>

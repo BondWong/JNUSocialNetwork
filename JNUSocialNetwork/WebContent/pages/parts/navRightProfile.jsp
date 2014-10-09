@@ -12,7 +12,7 @@
 			class="img-circle img_cust" id="nav-bar-avatar" style="display: none"></a>
 		<ul class="dropdown-menu pull-right">
 			<li><a href="profile.jsp?nav=about&${sessionScope.ID}"><span
-					class="glyphicon glyphicon-credit-card">&nbsp;<span>个人信息</span></span></a></li>
+					class="glyphicon glyphicon-credit-card">&nbsp;<span id="nav-bar-user">个人中心</span></span></a></li>
 			<li><a href="profile.jsp?nav=photo&${sessionScope.ID}"><span
 					class="glyphicon glyphicon-picture">&nbsp;<span>我的相册</span></span></a></li>
 			<li><a href="profile.jsp?nav=circle&${sessionScope.ID}"><span
