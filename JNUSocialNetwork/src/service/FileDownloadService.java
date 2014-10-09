@@ -334,7 +334,6 @@ public class FileDownloadService extends HttpServlet {
 				.execute(activityID);
 		String addr = (String) ((Map<String, Object>) post.get("attributes"))
 				.get("registerTemplateAddr");
-		addr = root + addr;
 		File file = new File(addr);
 		FileInputStream fis = new FileInputStream(file);
 		// obtains ServletContext
