@@ -1103,6 +1103,99 @@ function UpdateUserProfile(userID, JsonData) {
 	});
 	return response;
 }
+//addLookingForTag 输入：被关注和关注userID
+function AddLookingForTag(userID, tag ) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/user/addLookingForTag/' + userID +"/" + tag,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		contentType : "application/json",
+		success : function(data, status) {
+			response = status;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+	});
+	return response;
+}
+//addLookingForTag 输入：被关注和关注userID
+function RemoveLookingForTag(userID, tag ) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/user/removeLookingForTag/' + userID +"/" + tag,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		contentType : "application/json",
+		success : function(data, status) {
+			response = status;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+	});
+	return response;
+}
+//FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+function FetchLookingForTag(userID, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/user/fetchLookingForTag/' + userID + '/' + startIndex
+				+ '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//FetchByLookingForTag 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+function FetchByLookingForTag(tag, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/user/fetchByLookingForTag/' + tag + '/'  + startIndex
+				+ '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+//FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+function FetchHeatLookingForTag(startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/tag/fetchHeatLookingForTag/' + startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // addImages 输入：数组ImageLinks[];返回：postJson
 function AddImages(userID, imageLinks) {
 	var response = "";

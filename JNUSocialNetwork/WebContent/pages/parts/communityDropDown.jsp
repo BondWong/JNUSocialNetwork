@@ -6,7 +6,7 @@
 		<ul class='nav home-bar show-bar'>
 			<li class='hrefIntro'>关于我们</li>
 		</ul></li>
-	<li class='navbar-community'><a href="community.jsp?nav=mycommunity" style='cursor: pointer;'><span>社区</span></a>
+	<li class='navbar-community'><a href="community.jsp?nav=discovery" style='cursor: pointer;'><span>社区</span></a>
 		<ul class='nav community-bar show-bar'>
 			<li class='communityD'>热门社区</li>
 			<li class="applyCommunity">申请社区</li>

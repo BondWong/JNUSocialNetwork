@@ -16,6 +16,9 @@ function login_initialization(ID) {
 					/*
 					 * initialize nav bar
 					 */
+					$("#nav-bar-user")
+					.text(
+							$.parseJSON(sessionStorage.getItem("user")).attributes.name);
 					$("#nav-bar-avatar")
 							.attr(
 									"src",
