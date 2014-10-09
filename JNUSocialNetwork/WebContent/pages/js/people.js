@@ -171,7 +171,7 @@ function searchUser(){
 		}
 	}
 }
-
+ 
 
 function AddUser(name, looking,tags, id,userType, avatarLink,followerIDs) {
 	var followTxt = "Follow";
