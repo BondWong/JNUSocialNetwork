@@ -23,7 +23,7 @@ public class MemberSearchMap {
 			List<Map<String, Object>> results;
 			try {
 				results = (List<Map<String, Object>>) transaction.execute(
-						"Member.fetch", null, 0, 500);
+						"Member.fetch", null, null, 0, 500);
 				for (Map<String, Object> result : results) {
 					addRecord(
 							((Map<String, String>) result.get("attributes"))

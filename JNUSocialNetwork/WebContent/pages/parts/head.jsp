@@ -7,7 +7,9 @@
 					|| uri.contains("register.jsp")
 					|| uri.contains("applyCommunity.jsp")
 					|| uri.contains("login.jsp") || uri.contains("home.jsp"));
+			boolean isProfile = uri.contains("profile.jsp");
 			request.setAttribute("isHome", isHome);
+			request.setAttribute("isProfile", isProfile);
 			request.setAttribute("needChatRoom", needChatRoom);</jsp:scriptlet>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -16,11 +18,11 @@
 	content="no-cache, no-store, must-revalidate">
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"> -->
 <!-- 由于国内浏览器 -->
-<meta name="renderer" content="webkit" />
+<meta name="renderer" content="ie-stand" />
 <link rel="shortcut icon" href="images/favicon.ico">
 <title>CampuSite</title>
 <!-- Bootstrap core CSS -->
-<link href="styles/bootstrap-3.0.3-dist/dist/css/bootstrap.css"
+<link href="styles/bootstrap-3.2.0-dist/css/bootstrap.css"
 	rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -38,6 +40,11 @@
 <c:choose>
 	<c:when test="${requestScope.isHome}">
 		<link href="styles/home.css" rel="stylesheet">
+	</c:when>
+	<c:when test="${requestScope.isProfile }">
+		<link rel="stylesheet" href="styles/cropper.min.css">
+        <link rel="stylesheet" href="styles/crop-avatar.css">
+		<link href="styles/custom.css" rel="stylesheet">
 	</c:when>
 	<c:otherwise>
 		<link href="styles/custom.css" rel="stylesheet">

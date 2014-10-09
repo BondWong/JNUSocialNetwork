@@ -264,6 +264,139 @@ $('body').on("click",".deletePostFromCBtn",function(){
 	DeletePostFromCommunity($(this).attr('id'),id);
 });
 function aboutClickEvent() {
+	//function addTags
+	$('body').on("click",".addTag",function(){
+		addTag();
+	});
+	
+	$('body').on("click","#tagSpan",function(){
+		if($('.tagItem').length >= 20 ){
+			alert("添加太多标签咯！");
+		}else{
+			AddLookingForTag(USERID,$(this).attr("title"));
+			var tag ="<span class='tagItem'>"+$(this).attr("title")+"</span>";
+			$('.tagBoard').after(tag);
+			$(".tagItem").hover(function(){
+				$(this).css("background-color","#357EBD");
+			},function(){
+				$(this).css("background-color","#428BCA");
+			});	
+		}		
+	});
+	$('body').on('keydown','.tagInput',function(event){
+		if(event.keyCode == 13){
+			addTag();
+		}
+	});
+	//标签组提示
+	var tagA = ["篮球","足球","网球","台球","羽毛球","游泳","网球","吉他","钢琴","唱K","爬山","吃！吃！吃！","我只喜欢睡觉"];
+	$('body').on("click",".changeTag",function(){
+		$('.tagName').text("你有什么爱好？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagA,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /> </div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagB");
+	});
+	var tagB = ["小清新","乐活族","重口味","外貌协会","技术宅","购物狂","文艺青年","相信缘分","我就是我,是不一样的烟火"];
+	$('body').on("click",".changeTagB",function(){
+		$('.tagName').text("你来自哪一派？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagB,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagC");
+	});
+	var tagC = ["白羊座","金牛座","双子座","巨蟹座","狮子座","处女座","天秤座","射手座","天蝎座","摩羯座","水瓶座","双鱼座"];
+	$('body').on("click",".changeTagC",function(){
+		$('.tagName').text("你是什么星座？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagC,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagD");
+	});
+	var tagD = ["幽默","乐观","低调","完美主义","三分钟热度","善良","阳光","直率","执着","体贴","内敛","温柔","自信","呆萌","纠结"];
+	$('body').on("click",".changeTagD",function(){
+		$('.tagName').text("你的性格是？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagD,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagE");
+	});
+	var tagE = ["周杰伦","林俊杰","王力宏","五月天","孙燕姿","邓紫棋","李敏浩","金秀贤","汤姆汉克斯","梁朝伟","吴彦祖","莱昂纳多","C罗"];
+	$('body').on("click",".changeTagE",function(){
+		$('.tagName').text("你是谁的粉？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagE,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagF");
+	});
+	var tagF = ["看书","好好学习","我要做学霸","我要做技术大牛","泡妹子","推倒帅哥","旅行","放空ing"];
+	$('body').on("click",".changeTagF",function(){
+		$('.tagName').text("你最想做什么？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagF,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagG");
+	});
+	var tagG = ["摇滚!","电台情歌","流行音乐","jazz","泡沫","旅行的意义","光辉岁月","爱我别走","小苹果","我的滑板鞋","海阔天空"];
+	$('body').on("click",".changeTagG",function(){
+		$('.tagName').text("什么音乐让你痴迷");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagG,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagH");
+	});
+	var tagH = ["LOL","DOTA","剑网2","魔兽","使命召唤","手游","老子从来不玩游戏"];
+	$('body').on("click",".changeTagH",function(){
+		$('.tagName').text("你是那种游戏控？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagH,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTagI");
+	});
+	var tagI = ["单身待解救","奋斗ing","幸福ing","成长ing","缺爱ing","静待缘分","心如止水","寂寞ing","求职ing","考研ing","备战雅思","备战托福","我是小鲜肉"];
+	$('body').on("click",".changeTagI",function(){
+		$('.tagName').text("你现在的状态？");
+		$('.tagContainer').remove();
+		var tagArray = "";
+		$.each(tagI,function(n,tag){
+			tagArray += "<span id='tagSpan' title='"+tag+"'>"+tag+"</span>";
+		});
+		var tagContainer = "<div class='tagContainer'>"+tagArray+"<br clear='all' /></div>";
+		$('.tagHead').after(tagContainer);
+		$(this).attr("class","btn btn-xs btn-default changeTag");
+	});
 	// function editProfileInfro
 	$('body').on(
 			'click',
@@ -293,7 +426,7 @@ function aboutClickEvent() {
 					campus = "GuangzhouCampus";
 				}
 
-				var dormInfo = GetDormInfo("ZhuhaiCampus");
+				var dormInfo = GetDormInfo(campus);
 				var option = "<option value=''>请选择</option>";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
@@ -301,6 +434,7 @@ function aboutClickEvent() {
 				});
 				$("span[class='Aaddress']").html(
 						"<select class='addressE'>" + option + "</select>");
+				$("option[value='"+userInfo.attributes.dorm+"']").attr("selected","selected");
 				$("span[class='Aemail']").html(
 						"<input class='emailE' id='focusedInput' type='text' value='"
 								+ userInfo.attributes.email
@@ -329,14 +463,16 @@ function aboutClickEvent() {
 					"click",
 					".aEditbtn2",
 					function() {
+
 						var userInfo = FetchUserByID(userID);
 						$("span[class='Alooking']").html(
 								"<textarea class='lookingforE' maxLength='30'>"
-										+ userInfo.attributes.lookingFor
+										+ userInfo.attributes.introduce
 										+ "</textarea>");
 						$("span[class='Arelationship']")
 								.html(
-										"<select class='relationshipnE'><option value=''>请选择</option><option value='没有目标'>没有目标</option><option value='单身'>单身</option><option value='有暗恋对象'>有暗恋对象</option><option value='恋爱中'>恋爱中</option><option value='准备分手'>准备分手</option><option value='已经分手'>已经分手</option></select>");
+										"<select class='relationshipnE' val='as'><option value=''>请选择</option><option value='没有目标'>没有目标</option><option value='单身'>单身</option><option value='有暗恋对象'>有暗恋对象</option><option value='恋爱中'>恋爱中</option><option value='准备分手'>准备分手</option><option value='已经分手'>已经分手</option></select>");
+						$("option[value='"+userInfo.attributes.relationship+"']").attr("selected","selected");
 						$(this).text("保存");
 						$(this).attr("class", "btn btn-primary aSavebtn2");
 					});
@@ -348,7 +484,7 @@ function aboutClickEvent() {
 				var userInfo = FetchUserByID(userID);
 				$("span[class='Cintro']").html(
 						"<textarea class='cintroE' id='focusedInput' type='text' value='' maxLength='30'>"
-								+ userInfo.attributes.lookingFor
+								+ userInfo.attributes.introduce
 								+ "</textarea>");
 				$("span[class='Cnickname']").html(
 						"<input class='cnicknameE' id='focusedInput' type='text' value='"
@@ -382,27 +518,34 @@ function aboutClickEvent() {
 		};
 
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(USERID, json);
-		fetchUserByID();
+		var userInfo = UpdateUserProfile(USERID, json);
+		$('.Aemail').html(userInfo.attributes.email);
+		$('.Awechat').html(userInfo.attributes.wechat);
+		$('.Atelenum').html(userInfo.attributes.telnum);
+		$('.Aaddress').html(userInfo.attributes.dorm);
+		$('.Abirth').html(
+				userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
+						+ userInfo.attributes.date);
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn");
 	});
 	$('body').on('click', '.aSavebtn2', function() {
 		$('.selectAbout').css("display", "none");
 		var datajson = {
-			lookingFor : $('.lookingforE').val(),
+			introduce : $('.lookingforE').val(),
 			relationship : $('.relationshipnE').val(),
 		};
 		if ($('.nameE').val() != null) {
 			datajson = {
-				lookingFor : $('.lookingforE').val(),
+				introduce : $('.lookingforE').val(),
 				relationship : $('.relationshipnE').val(),
 			};
 		}
 
 		var json = $.toJSON(datajson);
-		UpdateUserProfile(USERID, json);
-		fetchUserByID();
+		var data = UpdateUserProfile(USERID, json);
+		$('.Arelationship').html(data.attributes.relationship);
+		$('.Alooking').html(data.attributes.introduce);
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn2");
 	});
@@ -410,17 +553,31 @@ function aboutClickEvent() {
 		$('.selectAbout').css("display", "none");
 		var datajson = {
 				name : $('.cnicknameE').val(),
-				lookingFor : $('.cintroE').val(),
+				introduce : $('.cintroE').val(),
 				Cinstitution : $('.cinstitutionE').val(),
 				Ccontact : $('.ccontactE').val(),
 		};
 
 		var json = $.toJSON(datajson);
 		var userInfo = UpdateUserProfile(USERID, json);
-		communityShow(userInfo.attributes.name,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		communityShow(userInfo.attributes.name,userInfo.attributes.introduce,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
 		$(this).text("编辑");
 		$(this).attr("class", "btn btn-primary aEditbtn3");
 	});
+	 (function () {
+        $(function () {
+            var cropper1 = new CropAvatar($("#crop-avatar"));
+
+            var cropper2 = new CropAvatar($("#crop-userbg"), {
+                aspectRatio: 2.067,
+                imgPreferredSize: 5,
+                imgUrlAttrName: 'profileImageLink',
+                targetView: ".profile_img"
+            });
+
+        });
+    })(jQuery);
+    /*
 	// function avatarImgBtn
 	$('body')
 			.on(
@@ -456,6 +613,7 @@ function aboutClickEvent() {
 						$.parseJSON(userNew.attributes.profileImageLink).src);
 				$('.changBgForm').get(0).reset();
 			});
+	*/
 	// function addPhoto
 	$('body')
 			.on(
@@ -567,6 +725,23 @@ function fetchPostsByOwner() {
 		}
 	});
 }
+function addTag(){
+	if($('.tagInput').val() != ""){
+		if($('.tagItem').length >= 15 ){
+			alert("添加太多标签咯！");
+		}else{
+			AddLookingForTag(USERID,$('.tagInput').val());
+			var tag ="<span class='tagItem'>"+$('.tagInput').val()+"</span>";
+			$('.tagBoard').after(tag);
+			$('.tagInput').val("");
+			$(".tagItem").hover(function(){
+				$(this).css("background-color","#357EBD");
+			},function(){
+				$(this).css("background-color","#428BCA");
+			});
+		}
+}
+}
 // function communitydetail
 function communityInfo() {
 	var userInfo = FetchUserByID(userID);
@@ -578,7 +753,7 @@ function communityInfo() {
 		if (userID == USERID) {
 			$('.aEditbtn3').css("display", "inline");
 		}
-		 communityShow(userInfo.attributes.name,userInfo.attributes.lookingFor,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
+		 communityShow(userInfo.attributes.name,userInfo.attributes.introduce,userInfo.attributes.Cinstitution,userInfo.attributes.Ccontact);
 	}
 }
 function communityShow(Cnickname,Cintro,Cinstitution,Ccontact){
@@ -606,9 +781,18 @@ function fetchUserByID() {
 	}
 	if (USERID == userID) {
 		$('.followBtnA').remove();
+		$('.selectTags').fadeIn(300);
 	}
 	$(".followNum").text(userInfo.followerIDs.length);
 	if (userID == USERID) {
+		$('body').on("click",".tagItem",function(){
+			var con = confirm('您确定要删除吗？');
+			if(con == true){
+				if(RemoveLookingForTag(USERID,$(this).text()) == "success"){
+					$(this).remove();
+				};
+			}
+		});
 		$('.photoAddBtn').css("display", "inline");
 		$('.aEditbtn').css("display", "inline");
 		$('.aEditbtn2').css("display", "inline");
@@ -616,7 +800,7 @@ function fetchUserByID() {
 		$('.profile_img')
 				.hover(
 						function() {
-							var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#myModalB'>Change BlackgroundImg</button></div>";
+							var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#userbg-modal'>Change BlackgroundImg</button></div>";
 							$('.profileImgDiv').after(changeBtn);
 							$('.changeBtnGroup').hide();
 							$('.changeBtnGroup').fadeIn(300);
@@ -634,7 +818,7 @@ function fetchUserByID() {
 							var nPos = pos;
 							nPos.top = pos.top;
 							nPos.left = pos.left + 10;
-							var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#myModal'></span></div>";
+							var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#avatar-modal'></span></div>";
 							$(this).append(changeBtn);
 							$('.profileImg').css(nPos);
 							$('.profileImg').hide();
@@ -652,6 +836,17 @@ function fetchUserByID() {
 				userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
 						+ userInfo.attributes.date);
 	}
+	$.each(userInfo.lookingForTags,function(n,tag){
+		var tagS = "<span class='tagItem'>"+tag+"</span>";
+		$('.tagBoard').after(tagS);
+		if(USERID == userID){
+			$(".tagItem").hover(function(){
+				$(this).css("background-color","#357EBD");
+			},function(){
+				$(this).css("background-color","#428BCA");
+			});	
+		}
+	});
 	$('.profile_user_img').find('img').attr("src",
 			$.parseJSON(userInfo.attributes.avatarLink).src);
 	$('.profile_img').find('img').attr("src",
@@ -665,6 +860,7 @@ function fetchUserByID() {
 
 	$('.Acampus').html(userInfo.attributes.campus);
 	$('.Anickname').html(userInfo.attributes.name);
+	$('.Aseason').html(userInfo.attributes.season);
 	if (userInfo.attributes.selectBirth == "公开") {
 		$('.Abirth').html(
 				userInfo.attributes.year + "/" + userInfo.attributes.month + "/"
@@ -683,6 +879,6 @@ function fetchUserByID() {
 		$('.Aaddress').html(userInfo.attributes.dorm);
 	}
 	$('.Arelationship').html(userInfo.attributes.relationship);
-	$('.Alooking').html(userInfo.attributes.lookingFor);
+	$('.Alooking').html(userInfo.attributes.introduce);
 	
 }

@@ -651,7 +651,12 @@ function clickOffEvent() {
 		$(this).attr("data-toggle", "modal");
 		$(this).attr("data-target", "#myModal");
 	});
-	$('body').on('click', '。pClass', function() {
+	$('body').on('click', '.pClass', function() {
+		signInAlert();
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#myModal");
+	});
+	$('body').on('click', '.inforW', function() {
 		signInAlert();
 		$(this).attr("data-toggle", "modal");
 		$(this).attr("data-target", "#myModal");
@@ -750,7 +755,7 @@ var hoverT, timer;
 											+ '" /></div><p><h1><a class="tipUser">'
 											+ data.attributes.name
 											+ '</a></h1></p><p>'
-											+ data.attributes.lookingFor
+											+ data.attributes.introduce
 											+ '</p><button class="btn btn-danger" id="followBtn">'
 											+ followTxt + '</button></div>'
 											+ chatSpan + '</div></div>';
@@ -920,27 +925,21 @@ $('body').on(
 			window.location.href = 'profile.jsp?nav=post&'
 					+ sessionStorage.getItem("otherUserID");
 		});
-$('body').on(
-		"click",
-		".tipUser2",
-		function() {
-			window.location.href = 'profile.jsp?nav=post&'
-					+ $(this).attr("id");
-		});
+
 var hoverTimer, outTimer; 
 $(".home-nav").hover(function(){
 	clearTimeout(outTimer);
 	hoverTimer = setTimeout(function(){  
 		$(".home-nav").animate({height:"100px"});
 		 $('.show-bar').css("display","inline-block");
-	} ,250);
+	} ,500);
 	 
 },function(){
 	clearTimeout(hoverTimer);
 	outTimer = setTimeout(function(){ 
 		$(".home-nav").animate({height:"50px"});
 		 $('.show-bar').css("display","none");
-	},500);
+	},300);
 });
 $('body').on('click', '.communityO', function() {
 	window.location.href = "community.jsp?nav=official";

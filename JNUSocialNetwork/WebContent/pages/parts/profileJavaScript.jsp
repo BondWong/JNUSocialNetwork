@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/jquery.json.min.js"></script>
-<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
+<script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>
 <script src="js/jquery.ui.widget.js"></script>
@@ -28,6 +28,9 @@
 <script src="js/layer.ext.js"></script>
 <script src="js/EventAPI.js"></script>
 <script src="js/function.js"></script>
+<!-- cropper plugin -->
+<script src="js/cropper.min.js"></script>
+<script src="js/crop-avatar.js"></script>
 <script src="js/about.js"></script>
 <script src="js/EventHandle.js"></script>
 <script src="js/global-initialization.js"></script>

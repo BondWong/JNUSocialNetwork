@@ -11,14 +11,14 @@ $(".home-nav").hover(function(){
 	hoverTimer = setTimeout(function(){  
 		$(".home-nav").animate({height:"100px"});
 		 $('.show-bar').css("display","inline-block");
-	} ,250);
+	} ,500);
 	 
 },function(){
 	clearTimeout(hoverTimer);
 	outTimer = setTimeout(function(){ 
 		$(".home-nav").animate({height:"50px"});
 		 $('.show-bar').css("display","none");
-	},500);
+	},300);
 });
 $('body').on('click', '.communityO', function() {
 	window.location.href = "community.jsp?nav=official";
