@@ -466,12 +466,30 @@ function FetchHeatActivities(startIndex, pageSize) {
 	});
 	return response;
 }
-//FetchHeatActivities
-function FetchMyActivities(userID, startIndex, pageSize) {
+//FetchMyActivities
+function FetchJoinedActivities(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/post/fetchMyActivities/'+ userID +'/' + startIndex + '/' + pageSize,
+		url : '../../app/post/fetchJoinedActivities/'+ userID +'/' + startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+
+//FetchMyActivities
+function FetchActivitiesByOwner(userID, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchActivitiesByOwner/'+ userID +'/' + startIndex + '/' + pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
