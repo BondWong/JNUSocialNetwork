@@ -466,7 +466,7 @@ function aboutClickEvent() {
 
 						var userInfo = FetchUserByID(userID);
 						$("span[class='Alooking']").html(
-								"<textarea class='lookingforE' maxLength='30'>"
+								"<textarea class='lookingforE' style='resize: none;' maxLength='30'>"
 										+ userInfo.attributes.introduce
 										+ "</textarea>");
 						$("span[class='Arelationship']")

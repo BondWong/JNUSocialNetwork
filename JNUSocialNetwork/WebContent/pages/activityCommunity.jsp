@@ -123,7 +123,7 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">举办活动</h4>
 						</div>
-						<form class="activityForm" enctype="multipart/form-data"
+						<form class="activityForm" id="newActivity" enctype="multipart/form-data"
 							onsubmit="return false;"
 							style="position: relative; overflow: hidden;">
 							<div class="modal-body modalBody" style="height: 510px;">
@@ -212,8 +212,7 @@
 								<div id="page2"
 									style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
 									<div class="form-group">
-										<div class="col-sm-9">
-										
+										<div class="col-sm-12">
 											<label class="radio"> <input type="radio"
 												name="optionsRadios" id="optionsRadios1" value="option1"
 												checked> 默认报名：用户只需点击参加即可，无需填写报名表；
@@ -221,10 +220,11 @@
 												name="optionsRadios" id="optionsRadios2" value="option2">
 												上传报名表：用户需要下载报名表，填写报名表后上传。
 											</label>
+											<p>[上传报名表后不能修改，请小心上传！]</p>
 										</div>
 
 									</div>
-									<form class="regForm" enctype="multipart/form-data">
+									<form class="regForm" id="newActivity" enctype="multipart/form-data">
 									<div class="form-group" id="div_fileuploadB"
 										style="display: none; float: left;">
 										<label for="fileuploadB" class="col-sm-2 control-label"></label>
@@ -243,6 +243,7 @@
 								
 								<div id="page3"
 									style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
+									<form class="showFDetail">
 									<table class="table">
 										<caption style='font-size: 18px;'>确认信息</caption>
 										<tr>
@@ -282,6 +283,7 @@
 											<td id="table_fileuploadB" style="text-align: right"></td>
 										</tr>
 									</table>
+									</form>
 								</div>
 							</div>
 							
