@@ -101,6 +101,8 @@ function activityClickEvent() {
 							setTimeout('$("#fail_popover").fadeOut("slow")',
 									3000);
 						}
+						$('#newActivity').get(0).reset();
+						$('#go_page1').click();
 					});
 }
 var pageSize = 15;
@@ -150,8 +152,11 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		join = "";
 	}
 	var now = new Date();
-	if (joinIDs.length >= limitation || startDate - now.getTime() <= 0) {
-		join = "";
+	if (joinIDs.length >= limitation ) {
+		join = "<button class='btn btn-default'>已经满人</button>";
+	}
+	if(startDate - now.getTime() <= 0){
+		join = "<button class='btn btn-default'>已经过期</button>";
 	}
 	var boarddiv = "<div class='activity post"
 			+ activityID
@@ -237,7 +242,7 @@ $('body').on('click', '.deleteActivity', function() {
 	Msnry('.activityBody', '.activity', 435);
 });
 var date1 = new Date();
-date1.setDate(date1.getDate() + 1);
+date1.setTime(date1.getTime() + 0.25* 24 * 60 * 60 * 1000);
 $('.form_datetime1').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",
