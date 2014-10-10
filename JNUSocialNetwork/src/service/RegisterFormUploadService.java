@@ -109,6 +109,7 @@ public class RegisterFormUploadService extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				response.sendError(400);
 			}
 			break;
 		case "REGISTERFORM":
@@ -117,6 +118,7 @@ public class RegisterFormUploadService extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				response.sendError(400);
 			}
 			break;
 		}
