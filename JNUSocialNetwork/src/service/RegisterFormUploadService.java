@@ -58,6 +58,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		if (!dir.exists())
 			dir.mkdir();
 		em = new RegisterExtensionManager();
+		em.init();
 	}
 
 	/**

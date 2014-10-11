@@ -1,5 +1,9 @@
 package transaction.DAOFetchTransaction;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 
 import service.helper.NumberManager;
@@ -8,6 +12,7 @@ import transaction.DAOTransaction;
 public class RandomlyFetchCommunityTransaction extends DAOTransaction {
 	DAOTransaction transaction = new FetchCommunitiesTransaction();
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Object process(EntityManager em, Object... params)
 			throws Exception {
@@ -18,8 +23,10 @@ public class RandomlyFetchCommunityTransaction extends DAOTransaction {
 			startIndex -= 1;
 		else if (startIndex == 0)
 			startIndex += 1;
-		return transaction.execute("Community.fetch", null, null, startIndex,
-				params[0]);
+		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction
+				.execute("Community.fetch", null, null, startIndex, params[0]);
+		Collections.shuffle(results);
+		return results;
 	}
 
 }
