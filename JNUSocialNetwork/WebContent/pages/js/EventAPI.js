@@ -68,6 +68,9 @@ function RegisterFormUpload(formData) {
 		success : function(data) {
 			response = data;
 		},
+		error : function(data, status) {
+			response = status;
+		},
 		cache : false,
 		contentType : false,
 		processData : false

@@ -273,14 +273,18 @@ function aboutClickEvent() {
 		if($('.tagItem').length >= 20 ){
 			alert("添加太多标签咯！");
 		}else{
-			AddLookingForTag(USERID,$(this).attr("title"));
-			var tag ="<span class='tagItem'>"+$(this).attr("title")+"</span>";
-			$('.tagBoard').after(tag);
-			$(".tagItem").hover(function(){
-				$(this).css("background-color","#357EBD");
-			},function(){
-				$(this).css("background-color","#428BCA");
-			});	
+			if($('span[title="'+$(this).attr("title")+'"]').length <= 1){
+				AddLookingForTag(USERID,$(this).attr("title"));
+				var tag ="<span title='"+$(this).attr("title")+"' class='tagItem'>"+$(this).attr("title")+"</span>";
+				$('.tagBoard').after(tag);
+				$(".tagItem").hover(function(){
+					$(this).css("background-color","#357EBD");
+				},function(){
+					$(this).css("background-color","#428BCA");
+				});	
+			}else{
+				alert("标签已存在");
+			}
 		}		
 	});
 	$('body').on('keydown','.tagInput',function(event){
@@ -483,7 +487,7 @@ function aboutClickEvent() {
 			function() {
 				var userInfo = FetchUserByID(userID);
 				$("span[class='Cintro']").html(
-						"<textarea class='cintroE' id='focusedInput' type='text' value='' maxLength='30'>"
+						"<textarea class='cintroE' style='resize: none;' id='focusedInput' type='text' value='' maxLength='30'>"
 								+ userInfo.attributes.introduce
 								+ "</textarea>");
 				$("span[class='Cnickname']").html(
@@ -730,15 +734,19 @@ function addTag(){
 		if($('.tagItem').length >= 15 ){
 			alert("添加太多标签咯！");
 		}else{
-			AddLookingForTag(USERID,$('.tagInput').val());
-			var tag ="<span class='tagItem'>"+$('.tagInput').val()+"</span>";
-			$('.tagBoard').after(tag);
-			$('.tagInput').val("");
-			$(".tagItem").hover(function(){
-				$(this).css("background-color","#357EBD");
-			},function(){
-				$(this).css("background-color","#428BCA");
-			});
+			if($('span[title="'+$('.tagInput').val()+'"]').length <= 1){
+				AddLookingForTag(USERID,$('.tagInput').val());
+				var tag ="<span title='"+$('.tagInput').val()+"' class='tagItem'>"+$('.tagInput').val()+"</span>";
+				$('.tagBoard').after(tag);
+				$('.tagInput').val("");
+				$(".tagItem").hover(function(){
+					$(this).css("background-color","#357EBD");
+				},function(){
+					$(this).css("background-color","#428BCA");
+				});
+			}else{
+				alert("标签已存在");
+			}
 		}
 }
 }
@@ -837,7 +845,7 @@ function fetchUserByID() {
 						+ userInfo.attributes.date);
 	}
 	$.each(userInfo.lookingForTags,function(n,tag){
-		var tagS = "<span class='tagItem'>"+tag+"</span>";
+		var tagS = "<span title='"+tag+"' class='tagItem'>"+tag+"</span>";
 		$('.tagBoard').after(tagS);
 		if(USERID == userID){
 			$(".tagItem").hover(function(){

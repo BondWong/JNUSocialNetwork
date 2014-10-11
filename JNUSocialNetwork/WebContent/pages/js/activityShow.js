@@ -278,7 +278,7 @@ $('body').on("click", ".backActivity", function() {
 	window.location.href = "activityCommunity.jsp?" + community.ID;
 });
 $('body').on("click", ".backActivityA", function() {
-	window.location.href = "activity.jsp?nav=discovery" + community.ID;
+	window.location.href = "activity.jsp?nav=discovery";
 });
 $('body').on("click", ".editActivity", function() {
 	$('#activityName').val(activity.attributes.activityName);
