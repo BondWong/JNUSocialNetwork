@@ -2038,6 +2038,7 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 	word-break: break-all;
 	padding-left:2px;
 	padding-right:2px;
+	min-height:40px;
 }
 .tagCP > span {
 	margin-bottom:2px;
