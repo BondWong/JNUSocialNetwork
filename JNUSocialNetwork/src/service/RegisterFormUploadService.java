@@ -110,6 +110,7 @@ public class RegisterFormUploadService extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				response.sendError(400);
+				response.flushBuffer();
 			}
 			break;
 		case "REGISTERFORM":
@@ -119,6 +120,7 @@ public class RegisterFormUploadService extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				response.sendError(400);
+				response.flushBuffer();
 			}
 			break;
 		}
@@ -134,7 +136,7 @@ public class RegisterFormUploadService extends HttpServlet {
 				item.getName().indexOf("."))))
 			extention = item.getName().substring(item.getName().indexOf("."));
 		else
-			throw new Exception();
+			throw new Exception("Do Not Support File Type Exception");
 
 		String temp = "activityRegisterTemplate/" + "registerTemplate"
 				+ System.currentTimeMillis() + extention;
