@@ -10,11 +10,13 @@ public abstract class ExtensionManager {
 
 	public boolean containsMime(String mimeType) {
 		// TODO Auto-generated method stub
+		System.out.println("ExtensionManager:" + mimeType);
 		return mimeExtensionMap.containsKey(mimeType);
 	}
 
 	public boolean containsExtension(String extension) {
 		// TODO Auto-generated method stub
+		System.out.println("ExtensionManager:" + extension);
 		return mimeExtensionMap.containsValue(extension);
 	}
 

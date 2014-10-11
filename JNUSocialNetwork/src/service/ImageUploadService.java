@@ -90,6 +90,7 @@ public class ImageUploadService extends HttpServlet {
 		root = getServletConfig().getServletContext().getRealPath("/")
 				+ "pages/";
 		em = new MultiMediaExtensionManager();
+		em.init();
 	}
 
 	private List<String> process(HttpServletRequest request)
