@@ -27,7 +27,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.reflect.TypeToken;
 
-import service.helper.ExtensionManager;
+import service.helper.extensionManager.ExtensionManager;
+import service.helper.extensionManager.MultiMediaExtensionManager;
 import utils.JsonUtil;
 
 @WebServlet("/app/fileUploader")
@@ -39,6 +40,7 @@ public class ImageUploadService extends HttpServlet {
 	private static String root;
 	private DiskFileItemFactory factory;
 	private ServletFileUpload upload;
+	private ExtensionManager em;
 
 	public ImageUploadService() {
 		super();
@@ -87,6 +89,7 @@ public class ImageUploadService extends HttpServlet {
 		upload.setSizeMax(MAXIMUMFILESIZE);
 		root = getServletConfig().getServletContext().getRealPath("/")
 				+ "pages/";
+		em = new MultiMediaExtensionManager();
 	}
 
 	private List<String> process(HttpServletRequest request)
@@ -101,8 +104,7 @@ public class ImageUploadService extends HttpServlet {
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
-			if (item.isFormField()
-					&& !item.getFieldName().equals("crop_data")) {
+			if (item.isFormField() && !item.getFieldName().equals("crop_data")) {
 				userID = item.getString();
 				continue;
 			} else if (item.isFormField()
@@ -112,10 +114,9 @@ public class ImageUploadService extends HttpServlet {
 			}
 
 			String extention = "";
-			if (ExtensionManager.containsKey(item.getContentType()))
-				extention = ExtensionManager
-						.getExtention(item.getContentType());
-			else if (ExtensionManager.containsValue(item.getName().substring(
+			if (em.containsMime(item.getContentType()))
+				extention = em.getExtension(item.getContentType());
+			else if (em.containsExtension(item.getName().substring(
 					item.getName().indexOf("."))))
 				extention = item.getName().substring(
 						item.getName().indexOf("."));
