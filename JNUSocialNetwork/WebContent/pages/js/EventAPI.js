@@ -68,6 +68,9 @@ function RegisterFormUpload(formData) {
 		success : function(data) {
 			response = data;
 		},
+		error : function(data, status) {
+			response = status;
+		},
 		cache : false,
 		contentType : false,
 		processData : false
@@ -85,7 +88,7 @@ function formUpload(formData,activityID,name) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data,status) {
-			response = status;
+			response = "200";
 		},
 		cache : false,
 		contentType : false,
@@ -216,6 +219,7 @@ function DeleteAI(postID, imageLinks) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
+		async : false,
 		url : '../../app/post/removeImages/' + postID + '?imageLinks='
 				+ imageLinks,
 		beforeSend : function(request) {

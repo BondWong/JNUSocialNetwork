@@ -1,6 +1,5 @@
 package transaction.DAOFetchTransaction;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,6 @@ public class MajorRecommendationTransaction extends DAOTransaction {
 
 		recommendations = recommendations.size() > TOINDEX ? recommendations
 				.subList(STARTINDEX, TOINDEX) : recommendations;
-		Collections.shuffle(recommendations);
 		return recommendations;
 	}
 }

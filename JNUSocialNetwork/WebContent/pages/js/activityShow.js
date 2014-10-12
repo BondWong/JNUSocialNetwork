@@ -278,7 +278,7 @@ $('body').on("click", ".backActivity", function() {
 	window.location.href = "activityCommunity.jsp?" + community.ID;
 });
 $('body').on("click", ".backActivityA", function() {
-	window.location.href = "activity.jsp?nav=discovery" + community.ID;
+	window.location.href = "activity.jsp?nav=discovery";
 });
 $('body').on("click", ".editActivity", function() {
 	$('#activityName').val(activity.attributes.activityName);
@@ -317,9 +317,10 @@ $('body')
 							+ "&" + activity.ID;
 				});
 $('body').on('click', '.deleteAI', function() {
-	DeleteAI(activity.ID, $(this).next().attr("src"));
-	$($(this).parent()).next().attr("class", "item active");
-	$(this).parent().remove();
+	if(DeleteAI(activity.ID, $(this).next().attr("src")) == "success"){
+		window.location.href = "activityShow.jsp?" + community.ID
+		+ "&" + activity.ID;
+	};
 });
 function showImages() {
 	if (activity.imageLinks.length == 0) {
