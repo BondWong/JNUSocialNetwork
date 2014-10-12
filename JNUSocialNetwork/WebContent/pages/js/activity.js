@@ -171,7 +171,7 @@ if($('.tele').val()!=""){
 	UpdateUserProfile(USERID, $.toJSON(dataString));
 }
 var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
-if(response == 'success'){
+if(response == "200"){
 	alert("参加成功！");
 	JoinActivity(USERID, $('.ulR').attr('id'));
 	$('#uploadmodal').modal('hide');
