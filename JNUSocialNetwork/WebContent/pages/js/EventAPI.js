@@ -77,23 +77,25 @@ function RegisterFormUpload(formData) {
 	});
 	return response;
 }
-function formUpload(formData,activityID,name) {
+function formUpload(formData, activityID, name) {
 	var response = "";
-	$.ajax({
-		type : "POST",
-		url : '../../app/registerFormUpload?uploadType=REGISTERFORM&activityID='+activityID+'&memberName='+name+'',
-		data : formData,
-		async : false,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		success : function(data,status) {
-			response = "200";
-		},
-		cache : false,
-		contentType : false,
-		processData : false
-	});
+	$
+			.ajax({
+				type : "POST",
+				url : '../../app/registerFormUpload?uploadType=REGISTERFORM&activityID='
+						+ activityID + '&memberName=' + name + '',
+				data : formData,
+				async : false,
+				beforeSend : function(request) {
+					request.setRequestHeader("ID", USERID);
+				},
+				success : function(data, status) {
+					response = "200";
+				},
+				cache : false,
+				contentType : false,
+				processData : false
+			});
 	return response;
 }
 // ***********************************FileService
@@ -418,7 +420,7 @@ function FetchActivitiesByCommunity(communityID, startIndex, pageSize) {
 	});
 	return response;
 }
-//fetchActivityByType
+// fetchActivityByType
 function FetchActivitiesByType(activityType, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
@@ -436,12 +438,13 @@ function FetchActivitiesByType(activityType, startIndex, pageSize) {
 	});
 	return response;
 }
-//fetchActivityAll
+// fetchActivityAll
 function FetchAllActivities(startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/post/fetchAllActivities/'+ startIndex + '/' + pageSize,
+		url : '../../app/post/fetchAllActivities/' + startIndex + '/'
+				+ pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -453,12 +456,13 @@ function FetchAllActivities(startIndex, pageSize) {
 	});
 	return response;
 }
-//FetchHeatActivities
+// FetchHeatActivities
 function FetchHeatActivities(startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/post/fetchHeatActivities/'+ startIndex + '/' + pageSize,
+		url : '../../app/post/fetchHeatActivities/' + startIndex + '/'
+				+ pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -470,12 +474,13 @@ function FetchHeatActivities(startIndex, pageSize) {
 	});
 	return response;
 }
-//FetchMyActivities
+// FetchMyActivities
 function FetchJoinedActivities(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/post/fetchJoinedActivities/'+ userID +'/' + startIndex + '/' + pageSize,
+		url : '../../app/post/fetchJoinedActivities/' + userID + '/'
+				+ startIndex + '/' + pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -488,12 +493,13 @@ function FetchJoinedActivities(userID, startIndex, pageSize) {
 	return response;
 }
 
-//FetchMyActivities
+// FetchMyActivities
 function FetchActivitiesByOwner(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/post/fetchActivitiesByOwner/'+ userID +'/' + startIndex + '/' + pageSize,
+		url : '../../app/post/fetchActivitiesByOwner/' + userID + '/'
+				+ startIndex + '/' + pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -786,7 +792,7 @@ function AddCommunity(userID, JsonData) {
 			} else {
 				window.location.href = 'community.jsp?nav=mycommunity';
 			}
-			
+
 		},
 		error : function(data, status) {
 			response = status;
@@ -974,13 +980,13 @@ function FetchCommunityByOwner(userID, startIndex, pageSize) {
 	});
 	return response;
 }
-//fetchMyCommunities 
+// fetchMyCommunities
 function FetchMyCommunities(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/community/fetchMyCommunities/' + userID + '/' + startIndex
-				+ '/' + pageSize,
+		url : '../../app/community/fetchMyCommunities/' + userID + '/'
+				+ startIndex + '/' + pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
@@ -1125,12 +1131,12 @@ function UpdateUserProfile(userID, JsonData) {
 	});
 	return response;
 }
-//addLookingForTag 输入：被关注和关注userID
-function AddLookingForTag(userID, tag ) {
+// addLookingForTag 输入：被关注和关注userID
+function AddLookingForTag(userID, tag) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
-		url : '../../app/user/addLookingForTag/' + userID +"/" + tag,
+		url : '../../app/user/addLookingForTag/' + userID + "/" + tag,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -1145,12 +1151,12 @@ function AddLookingForTag(userID, tag ) {
 	});
 	return response;
 }
-//addLookingForTag 输入：被关注和关注userID
-function RemoveLookingForTag(userID, tag ) {
+// addLookingForTag 输入：被关注和关注userID
+function RemoveLookingForTag(userID, tag) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
-		url : '../../app/user/removeLookingForTag/' + userID +"/" + tag,
+		url : '../../app/user/removeLookingForTag/' + userID + "/" + tag,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -1165,7 +1171,7 @@ function RemoveLookingForTag(userID, tag ) {
 	});
 	return response;
 }
-//FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+// FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchLookingForTag(userID, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
@@ -1183,12 +1189,12 @@ function FetchLookingForTag(userID, startIndex, pageSize) {
 	});
 	return response;
 }
-//FetchByLookingForTag 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+// FetchByLookingForTag 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchByLookingForTag(tag, startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/fetchByLookingForTag/' + tag + '/'  + startIndex
+		url : '../../app/user/fetchByLookingForTag/' + tag + '/' + startIndex
 				+ '/' + pageSize,
 		async : false,
 		success : function(data, status) {
@@ -1201,12 +1207,13 @@ function FetchByLookingForTag(tag, startIndex, pageSize) {
 	});
 	return response;
 }
-//FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+// FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchHeatLookingForTag(startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/tag/fetchHeatLookingForTag/' + startIndex + '/' + pageSize,
+		url : '../../app/tag/fetchHeatLookingForTag/' + startIndex + '/'
+				+ pageSize,
 		async : false,
 		success : function(data, status) {
 			response = data;
