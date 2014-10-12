@@ -38,7 +38,9 @@
         } else if (slideIndex === 2) {
             $$target = $("#hzy,#hhc,#del");
         } else if (slideIndex === 3) {
-            $$target = $("#hjj");
+            $$target = $("#hjj,#xmt,#gkr");
+        } else if (slideIndex === 4) {
+            $$target = $("#lh,#lyd,#wjl,#xh,#xlc,#zjb");
         }
         if ($$target) {
             $$target.addClass("show");
@@ -57,7 +59,9 @@
         } else if (slideIndex === 2) {
             $$target = $("#hzy,#hhc,#del");
         } else if (slideIndex === 3) {
-            $$target = $("#hjj");
+            $$target = $("#hjj,#xmt,#gkr");
+        } else if (slideIndex === 4) {
+            $$target = $("#lh,#lyd,#wjl,#xh,#xlc,#zjb");
         }
         if ($$target) {
             $$target.css("opacity", 0);
