@@ -42,8 +42,6 @@ function activityClickEvent() {
 							if ($('#fileuploadB').val() != ""){
 								post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
 										$('.regForm')[0]));
-								alert(RegisterFormUpload(new FormData(
-										$('.regForm')[0])));
 							}
 							var diffDate = toTimeValue($('#activityTime').val()
 									+ "")
@@ -378,6 +376,11 @@ $(document)
 														+ "") < 0.021 * 24 * 60
 												* 60 * 1000) {
 									go_submit.click();
+									return;
+								}else if(current_page == 1 && $("#optionsRadios2").is(':checked') && !/.*\.xls|.xlsx|.doc|.docx|.wps|.et$/.test($('#fileuploadB').val())) {
+									$('#fail_popover3').css("display","block");
+									setTimeout('$("#fail_popover3").fadeOut("slow")',
+											3000);
 									return;
 								} else if (current_page < page.length - 1) {
 									go_page[++current_page].click();

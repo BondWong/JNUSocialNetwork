@@ -34,7 +34,7 @@
 			<a href="community.jsp?nav=academic" class="peopeleType peopeleTypeS academicC">学术类</a>
 			<a href="community.jsp?nav=others" class="peopeleType peopeleTypeS othersC">其它类</a>
 			<a href="community.jsp?nav=student" class="peopeleType studentC">学校组织</a> 
-			<a role="button" class="createCom peopeleType" data-toggle='modal'
+			<a role="button" class="createCom" data-toggle='modal'
 				data-target='#createCommunity' id="createCommunityBtn">创建社区</a>
 		</div>
 	</div>

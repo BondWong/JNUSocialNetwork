@@ -220,9 +220,7 @@
 												name="optionsRadios" id="optionsRadios2" value="option2">
 												上传报名表：用户需要下载报名表，填写报名表后上传。
 											</label>
-											<p>[上传报名表后不能修改，请小心上传！]</p>
 										</div>
-
 									</div>
 									<form class="regForm" id="newActivity" enctype="multipart/form-data">
 									<div class="form-group" id="div_fileuploadB"
@@ -231,13 +229,14 @@
 										<span class="btn btn-success fileinput-button"
 											style="width: auto; margin-left: 10px"> <i
 											class="glyphicon glyphicon-plus"></i> <span>添加报名表</span> <!-- The file input field used as target for the file upload widget -->
-											<input id="fileuploadB" type="file" name="file" />
+											<input id="fileuploadB" type="file" name="file"/>
 										</span>
 									</div>
 									</form>
-									<div class="activityItem">
-										<div id="fail_popover3" class="alert alert-danger"
-											style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">请上传报名表！</div>
+									<div>
+										<p>[只能上传后缀格式为.doc.wps.docx.xls.xlsx.et的文件]</p>
+										<p>[上传报名表后不能修改，请小心上传！]</p>
+										<p><span id="fail_popover3" style="width: 90%; text-align: center;display:none;" class="alert alert-danger">请上传正确格式文件</span></p>
 									</div>
 								</div>
 								
