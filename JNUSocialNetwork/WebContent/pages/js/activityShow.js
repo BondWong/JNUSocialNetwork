@@ -317,9 +317,10 @@ $('body')
 							+ "&" + activity.ID;
 				});
 $('body').on('click', '.deleteAI', function() {
-	DeleteAI(activity.ID, $(this).next().attr("src"));
-	$($(this).parent()).next().attr("class", "item active");
-	$(this).parent().remove();
+	if(DeleteAI(activity.ID, $(this).next().attr("src")) == "success"){
+		window.location.href = "activityShow.jsp?" + community.ID
+		+ "&" + activity.ID;
+	};
 });
 function showImages() {
 	if (activity.imageLinks.length == 0) {
