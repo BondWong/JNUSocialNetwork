@@ -2,6 +2,8 @@ package service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,6 +177,8 @@ public class RegisterFormUploadService extends HttpServlet {
 				+ System.currentTimeMillis() + "--"
 				+ java.net.URLDecoder.decode(name, "UTF-8") + extention;
 		File uploaddedFile = new File(root + temp);
+		Files.createDirectories(Paths.get(root + "activityRegisterForm/"
+				+ activityID + "/"));
 		item.write(uploaddedFile);
 
 		response.setContentType("application/json");
