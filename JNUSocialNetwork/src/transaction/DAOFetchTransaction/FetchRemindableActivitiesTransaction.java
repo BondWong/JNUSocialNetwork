@@ -41,7 +41,7 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 						.getAttribute("remindDate"));
 				String reminded = post.getAttribute("reminded");
 				if (reminded.equals("false") && startDate > remindDate
-						&& (startDate - remindDate) >= 12 * 60 * 60 * 1000)
+						&& (startDate - remindDate) >= 0.5 * 60 * 60 * 1000)
 					results.add(post.toRepresentation());
 			}
 		}

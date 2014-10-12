@@ -47,7 +47,8 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("user/updateProfile");
 		loginProtectionURLs.add("user/addImages");
 		loginProtectionURLs.add("user/removeImages");
-		loginProtectionURLs.add("user/fetchIDs");
+		loginProtectionURLs.add("user/addLookingForTag");
+		loginProtectionURLs.add("user/removeLookingForTag");
 
 		loginProtectionURLs.add("chatRoom");
 
@@ -56,6 +57,10 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("event/deleteUnhandledEvent");
 
 		loginProtectionURLs.add("fileUploader");
+
+		loginProtectionURLs.add("registerFormUpload");
+
+		// loginProtectionURLs.add("fileDownloader");
 
 		authorizationProtectionURLs = new HashMap<String, Set<UserType>>();
 		Set<UserType> userTypes = new LinkedHashSet<UserType>();
@@ -100,9 +105,12 @@ public class ProtectedURLManager {
 		authorizationProtectionURLs.put("user/fetchIDs", god);
 
 		authorizationProtectionURLs.put("user/addImages", userTypes);
+		authorizationProtectionURLs.put("user/removeImages", userTypes);
 		authorizationProtectionURLs.put("user/updateProfile", userTypes);
 		authorizationProtectionURLs.put("user/follow", userTypes);
 		authorizationProtectionURLs.put("user/cancelFollow", userTypes);
+		authorizationProtectionURLs.put("user/addLookingForTag", userTypes);
+		authorizationProtectionURLs.put("user/removeLookingForTag", userTypes);
 
 		authorizationProtectionURLs.put("chatRoom/fetch", userTypes);
 		authorizationProtectionURLs.put("chatRoom/fetchMessages", userTypes);
@@ -117,6 +125,10 @@ public class ProtectedURLManager {
 				userTypes);
 
 		authorizationProtectionURLs.put("fileUploader", userTypes);
+
+		authorizationProtectionURLs.put("registerFormUpload", userTypes);
+
+		// authorizationProtectionURLs.put("fileDownloader", userTypes);
 
 	}
 
