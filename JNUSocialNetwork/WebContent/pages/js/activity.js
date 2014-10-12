@@ -175,6 +175,7 @@ JoinActivity(USERID, $('.ulR').attr('id'));
 $('#uploadmodal').modal('hide');
 if(response == 'success'){
 	alert("参加成功！");
+	$('.uploadexe').val("");
 }else{
 	alert("参加出错，请重试！");
 }
