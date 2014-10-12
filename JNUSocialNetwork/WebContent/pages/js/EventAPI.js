@@ -88,7 +88,7 @@ function formUpload(formData,activityID,name) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data,status) {
-			response = status;
+			response = "200";
 		},
 		cache : false,
 		contentType : false,
