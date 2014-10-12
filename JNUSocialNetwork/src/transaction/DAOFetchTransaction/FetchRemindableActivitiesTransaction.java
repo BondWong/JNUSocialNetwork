@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import model.Post;
 import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
+import utils.ConstantValue;
 
 public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 
@@ -40,8 +41,9 @@ public class FetchRemindableActivitiesTransaction extends DAOTransaction {
 				Long remindDate = Long.parseLong(post
 						.getAttribute("remindDate"));
 				String reminded = post.getAttribute("reminded");
-				if (reminded.equals("false") && startDate > remindDate
-						&& (startDate - remindDate) >= 0.5 * 60 * 60 * 1000)
+				if (reminded.equals("false")
+						&& startDate > remindDate
+						&& (startDate - remindDate) >= ConstantValue.ACTIVITYINTERVAL)
 					results.add(post.toRepresentation());
 			}
 		}

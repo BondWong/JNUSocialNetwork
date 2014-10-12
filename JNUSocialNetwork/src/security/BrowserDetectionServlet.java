@@ -50,11 +50,11 @@ public class BrowserDetectionServlet extends HttpServlet {
 			synchronized (session) {
 				session.setAttribute("reminded", true);
 			}
-			System.out.println("needUpdateRemind:" + needUpdateRemind);
-			if (needUpdateRemind)
-				response.getWriter().write("false");
-			else
+			System.out.println("needUpdateRemind:" + !needUpdateRemind);
+			if (!needUpdateRemind)
 				response.getWriter().write("true");
+			else
+				response.getWriter().write("false");
 		} else {
 			System.out.println("needUpdateRemind:" + false);
 			response.getWriter().write("false");

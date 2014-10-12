@@ -21,9 +21,10 @@ public class RandomlyFetchMemberTransaction extends DAOTransaction {
 				.getMemberNum()));
 		if (startIndex > 1)
 			startIndex -= 1;
-		else if(startIndex == 0 )
+		else if (startIndex == 0)
 			startIndex += 1;
-		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction.execute("Member.fetch", null, null, startIndex, 500);
+		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction
+				.execute("Member.fetch", null, null, startIndex, 100);
 		Collections.shuffle(results);
 		return results;
 	}
