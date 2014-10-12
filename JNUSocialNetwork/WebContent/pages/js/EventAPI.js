@@ -65,8 +65,8 @@ function RegisterFormUpload(formData) {
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
-		success : function(data) {
-			response = data;
+		success : function(data, status) {
+			response = status;
 		},
 		error : function(data, status) {
 			response = status;
