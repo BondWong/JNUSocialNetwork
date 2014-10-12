@@ -219,6 +219,7 @@ function DeleteAI(postID, imageLinks) {
 	var response = "";
 	$.ajax({
 		type : "PUT",
+		async : false,
 		url : '../../app/post/removeImages/' + postID + '?imageLinks='
 				+ imageLinks,
 		beforeSend : function(request) {

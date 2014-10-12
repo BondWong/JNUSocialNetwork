@@ -69,6 +69,7 @@ function activityClickEvent() {
 						}
 						$('#newActivity').get(0).reset();
 						$('#go_page1').click();
+						$('#fileuploadB').val("");
 					});
 }
 var pageSize = 15;

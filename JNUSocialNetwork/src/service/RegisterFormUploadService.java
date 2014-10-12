@@ -174,6 +174,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		String temp = "activityRegisterForm/" + activityID + "/"
 				+ System.currentTimeMillis() + "--"
 				+ java.net.URLDecoder.decode(name, "UTF-8") + extention;
+		System.out.println(temp);
 		File uploaddedFile = new File(root + temp);
 		item.write(uploaddedFile);
 
