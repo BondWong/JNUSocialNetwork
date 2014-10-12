@@ -308,7 +308,7 @@
 
 				<!--.story-->
 			</div>
-
+			<%@ include file="parts/footer.jsp"%>
 		</div>
 
 	</div>
@@ -324,7 +324,7 @@
 	<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 	<script type="text/javascript" src="js/aboutus.js"></script>
-
+	<%@ include file="parts/baidu.jsp"%>
 </body>
 
 </html>
