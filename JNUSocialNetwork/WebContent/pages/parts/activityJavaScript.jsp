@@ -29,8 +29,8 @@ $(document)
 <c:choose>
 	<c:when test="${param.nav eq 'myactivity' }">
 		<script type="text/javascript">
-			
-			fetchMyActivities(USERID, "0", "16");
+			fetchJoinedActivities();
+			fetchActivitiesByOwner();
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'hit' }">

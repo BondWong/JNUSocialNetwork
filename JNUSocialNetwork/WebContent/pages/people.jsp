@@ -33,15 +33,12 @@
 				<span class="peopeleType pMajor">同专业伙伴</span>
 				<span class="peopeleType pSeason">同年级伙伴</span>
 				<span class="peopeleType pClass">同班同学</span>
-				
+				<span class="peopeleType pRandom">随便找找</span>
 				<span class=" pTag">标签搜索</span>
 				<div class="tagC">
 					<div class='tagB'></div>
-					<span class="searchTagUser" title="单身待解救">单身待解救</span>
 					<br clear="all" />
-				</div>
-				<span class="pTag pRandom">随便找找</span>
-					
+				</div>			
 			</div>
 		</div>
 		<div class="col-lg-9">

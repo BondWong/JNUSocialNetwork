@@ -125,6 +125,10 @@ function peopleClickEvent() {
 			'click',
 			'.pRandom',
 			function() {
+				$('.peopeleType').css("background-color", "#fff");
+				$('.peopeleType').css("border-left", "#4285f4");
+				$(this).css("background-color", "#f6f6f6");
+				$(this).css("border-left", "2px solid #4285f4");
 				$('.userContainer').remove();
 				var borddiv = "<div class='userContainer'><div class='recommendBord'></div></div>";
 				$('.containBord').after(borddiv);
@@ -171,7 +175,7 @@ function searchUser(){
 		}
 	}
 }
-
+ 
 
 function AddUser(name, looking,tags, id,userType, avatarLink,followerIDs) {
 	var followTxt = "Follow";

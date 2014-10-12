@@ -11,7 +11,7 @@
 			<li class='communityD'>热门社区</li>
 			<li class="applyCommunity">申请社区</li>
 		</ul></li>
-	<li><a style='cursor: pointer;'><span>动态圈</span></a>
+	<li><a href="activity.jsp?nav=discovery" style='cursor: pointer;'><span>动态圈</span></a>
 		<ul class='nav activity-bar show-bar'>
 			<li class='activityA'>活动圈</li>
 			<li class='activityC'>朋友圈</li>

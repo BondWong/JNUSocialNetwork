@@ -329,16 +329,37 @@ public class PostService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchMyActivities/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchJoinedActivities/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
-	public Response fetchMyActivities(@PathParam("ID") String ID,
+	public Response fetchJoinedActivities(@PathParam("ID") String ID,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
 		transaction = new FetchPostsTransaction();
 		List<Map<String, Object>> activities;
 		try {
 			activities = (List<Map<String, Object>>) transaction.execute(
-					"Post.fetchMyActivities", ID, startIndex, pageSize);
+					"Post.fetchJoinedActivities", ID, startIndex, pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(activities) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchActivitiesByOwner/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	public Response fetchActivitiesByOwner(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchPostsTransaction();
+		List<Map<String, Object>> activities;
+		try {
+			activities = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchActivitiesByOwner", ID, startIndex, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

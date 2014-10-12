@@ -7,80 +7,47 @@ function activityClickEvent() {
 					"click",
 					"#go_submit",
 					function() {
-						var post = "";
 						if ($('#activityTime').val() != ""
 								&& $('#activityRemind').val() != "") {
-							var comForm = new FormData();
-							comForm.append('file', ($('#fileuploadA')));
-							var regForm = new FormData();
-							regForm.append('file', $('#fileuploadB'));
+						var post = {
+								postType : 'ACTIVITY',
+								attributes : {
+									activityName : $('#activityName').val(),
+									startDate : toTimeValue($('#activityTime')
+											.val()
+											+ "")
+											+ "",
+									remindDate : toTimeValue($(
+											'#activityRemind').val()
+											+ "")
+											+ "",
+									activityTime : $('#activityTime').val(),
+									activityRemindTime : $('#activityRemind')
+											.val(),
+									activityAddr : $('#activityAddr').val(),
+									activityMore : $('#activityMore').val(),
+									limitation : $('.activityNum').val(),
+									communityName : community.attributes.name,
+									communityID : community.ID.toString(),
+									ifUpload : $('#table_activitySign').text(),
+								},
+								imageLinks : [],
+								activityTypeTags : [ $('#activityType').val() ]
+							};
 							if ($('#fileuploadA').val() != "") {
-								post = {
-									postType : 'ACTIVITY',
-									attributes : {
-										activityName : $('#activityName').val(),
-										startDate : toTimeValue($(
-												'#activityTime').val()
-												+ "")
-												+ "",
-										remindDate : toTimeValue($(
-												'#activityRemind').val()
-												+ "")
-												+ "",
-										activityTime : $('#activityTime').val(),
-										activityRemindTime : $(
-												'#activityRemind').val(),
-										activityAddr : $('#activityAddr').val(),
-										activityMore : $('#activityMore').val(),
-										limitation : $('.activityNum').val(),
-										communityName : community.attributes.name,
-										communityID : community.ID.toString(),
-										ifUpload : $('#table_activitySign')
-												.text(),
-										background : FileUpload(new FormData(
-												$('.activityForm')[0]))[0],
-										registerTemplateAddr : RegisterFormUpload(new FormData(
-												$('.regForm')[0]))
-									},
-									imageLinks : [],
-									activityTypeTags : [$('#activityType').val()]
-								};
-							} else {
-								post = {
-									postType : 'ACTIVITY',
-									attributes : {
-										activityName : $('#activityName').val(),
-										startDate : toTimeValue($(
-												'#activityTime').val()
-												+ "")
-												+ "",
-										remindDate : toTimeValue($(
-												'#activityRemind').val()
-												+ "")
-												+ "",
-										communityName : community.attributes.name,
-										activityTime : $('#activityTime').val(),
-										activityRemindTime : $(
-												'#activityRemind').val(),
-										activityAddr : $('#activityAddr').val(),
-										activityMore : $('#activityMore').val(),
-										limitation : $('#activityNum').val(),
-										communityID : community.ID.toString(),
-										ifUpload : $('#table_activitySign')
-												.text(),
-										registerTemplateAddr : RegisterFormUpload(new FormData(
-												$('.regForm')[0]))
-									},
-									imageLinks : [],
-									activityTypeTags : [$('#activityType').val()]
-								};
+								
+								post.attributes["background"] = FileUpload(new FormData(
+										$('.activityForm')[0]))[0];
+							}
+							if ($('#fileuploadB').val() != ""){
+								post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
+										$('.regForm')[0]));
 							}
 							var diffDate = toTimeValue($('#activityTime').val()
 									+ "")
 									- toTimeValue($('#activityRemind').val()
 											+ "");
 							if ($('.activityForm')[0].checkValidity()) {
-
 								if (diffDate >= 0.021 * 24 * 60 * 60 * 1000) {
 									var json = $.toJSON(post);
 									$('.layer2').fadeIn(300);
@@ -94,13 +61,15 @@ function activityClickEvent() {
 											'$("#fail_popover2").fadeOut("slow")',
 											3000);
 								}
-
 							}
 						} else {
 							$('#fail_popover').fadeIn("fast");
 							setTimeout('$("#fail_popover").fadeOut("slow")',
 									3000);
 						}
+						$('#newActivity').get(0).reset();
+						$('#go_page1').click();
+						$('#fileuploadB').val("");
 					});
 }
 var pageSize = 15;
@@ -136,7 +105,9 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 					+ activityID + "'><span>Joined</span></div></a>";
 		}
 	} else {
-		join = "<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="+activityID+"' class='btn btn-default dlR' id='"
+		join = "<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="
+				+ activityID
+				+ "' class='btn btn-default dlR' id='"
 				+ activityID
 				+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
 				+ activityID + "'>上传报名表</a></div>";
@@ -150,14 +121,20 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		join = "";
 	}
 	var now = new Date();
-	if (joinIDs.length >= limitation || startDate - now.getTime() <= 0) {
-		join = "";
+	if (joinIDs.length >= limitation) {
+		join = "<button class='btn btn-default'>已经满人</button>";
+	}
+	if (startDate - now.getTime() <= 0) {
+		join = "<button class='btn btn-default'>已经过期</button>";
 	}
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg'><img width='435' height='"+getHeight(435, $.parseJSON(imagelink).width, $.parseJSON(imagelink).height)+"'  src='"
+			+ "<div class='activityBg'><img width='435' height='"
+			+ getHeight(435, $.parseJSON(imagelink).width, $
+					.parseJSON(imagelink).height)
+			+ "'  src='"
 			+ $.parseJSON(imagelink).src
 			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
@@ -205,22 +182,30 @@ $('body')
 							+ "<div class='uploadItem'><span>报名表：</span><input class='uploadexe' type='file' name='file'/></div><p style='margin-top:20px;margin-left:14px;'>[注意：请先下载报名表，填写并上传，其他文件报名不成功！]</p></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='ulFile' value='upload'>上传</button></div></form></div></div></div>";
 					$('body').append(board);
 				});
-$('body').on('click','#ulFile',function(){
-	if($('.uploadForm')[0].checkValidity() && $('.uploadexe').val() != ""){
-		if($('.tele').val()!=""){
-			var dataString = {
-					telnum : $('#tele').val()
-				};
-			UpdateUserProfile(USERID, $.toJSON(dataString));
-		}
-		var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
-		JoinActivity(USERID, $('.ulR').attr('id'));
-		$('#uploadmodal').modal('hide');
-		if(response == 'success'){
-			alert("参加成功！");
-		}
-	}
-});
+$('body')
+		.on(
+				'click',
+				'#ulFile',
+				function() {
+					if ($('.uploadForm')[0].checkValidity()
+							&& $('.uploadexe').val() != "") {
+						if ($('.tele').val() != "") {
+							var dataString = {
+								telnum : $('#tele').val()
+							};
+							UpdateUserProfile(USERID, $.toJSON(dataString));
+						}
+						var response = formUpload(new FormData(
+								$('.uploadForm')[0]), $('.ulR').attr('id'),
+								encodeURI($.parseJSON(sessionStorage
+										.getItem("user")).attributes.name));
+						JoinActivity(USERID, $('.ulR').attr('id'));
+						$('#uploadmodal').modal('hide');
+						if (response == 'success') {
+							alert("参加成功！");
+						}
+					}
+				});
 // funtion sessionID
 $('body').on("click", ".communityHref", function() {
 	window.location.href = 'communityShow.jsp?' + community.ID;
@@ -237,7 +222,7 @@ $('body').on('click', '.deleteActivity', function() {
 	Msnry('.activityBody', '.activity', 435);
 });
 var date1 = new Date();
-date1.setDate(date1.getDate() + 1);
+date1.setTime(date1.getTime() + 0.25 * 24 * 60 * 60 * 1000);
 $('.form_datetime1').datetimepicker({
 	// language: 'fr',
 	format : "MM dd,yyyy - hh:ii",
@@ -390,10 +375,15 @@ $(document)
 														'#activityRemind')
 														.val()
 														+ "") < 0.021 * 24 * 60
-												* 60 * 1000  ) {
+												* 60 * 1000) {
 									go_submit.click();
 									return;
-								}else if (current_page < page.length - 1) {
+								}else if(current_page == 1 && $("#optionsRadios2").is(':checked') && !/.*\.xls|.xlsx|.doc|.docx|.wps|.et$/.test($('#fileuploadB').val())) {
+									$('#fail_popover3').css("display","block");
+									setTimeout('$("#fail_popover3").fadeOut("slow")',
+											3000);
+									return;
+								} else if (current_page < page.length - 1) {
 									go_page[++current_page].click();
 									if (current_page == 2) {
 										$('#table_activityName').html(

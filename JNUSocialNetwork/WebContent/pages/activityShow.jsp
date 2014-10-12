@@ -41,6 +41,7 @@
 							id="download-name-list-button">下载参与列表</a>
 					</div>
 					<button class="btn btn-default backActivity">查看社区活动列表</button>
+					<button class="btn btn-default backActivityA">查看活动圈</button>
 				</div>
 			</div>
 		</div>
@@ -276,12 +277,7 @@
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
 							showImages();
-							var now = new Date();
-							if (activity.participantIDs.length >= activity.attributes.limitation
-									|| activity.attributes.startDate
-											- now.getTime() <= 0) {
-								$('.joinSActivity').remove();
-							}
+							
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();
@@ -297,18 +293,23 @@
 											"none");
 								}
 								var now = new Date();
-								if (activity.attributes.startDate
-										- now.getTime() <= 0
-										|| activity.attributes.reminded != "false") {
-									$('.joinSActivity').remove();
-									$('.editActivity').remove();
-									$('.ulR').remove();
-									$('.aUB').remove();
-								}
 								if (activity.participantIDs.length >= activity.attributes.limitation) {
 									$('.joinSActivity').remove();
 									$('.ulR').remove();
 									$('.aUB').remove();
+									$('.activityShare').append("<button class='btn btn-default' style='float: right;'>已经满人</button>");
+								}
+								if (activity.attributes.startDate - now.getTime() <= 0) {
+									$('.joinSActivity').remove();
+									$('.ulR').remove();
+									$('.aUB').remove();
+									$('.activityShare').append("<button class='btn btn-default' style='float: right;'>已经过期</button>");
+								}
+								var now = new Date();
+								if (activity.attributes.startDate
+										- now.getTime() <= 0
+										|| activity.attributes.reminded != "false") {
+									$('.editActivity').remove();
 								}
 								$('.aCommentI')
 										.attr(

@@ -24,23 +24,15 @@
 							communityClickEvent();
 							var ownLength = FetchCommunityByOwner(USERID, "0", "1").length;
 							var joinLength  = FetchCommunityByJoin(USERID, "0", "2").length;
-							if ($.parseJSON(sessionStorage.getItem("user")) != null
-									&& $.parseJSON(sessionStorage
-											.getItem("user")).userType == 'COMMUNITYOWNER') {
-								if ( ownLength >= 1) {
-									$('.createCom').remove();
-								}
-								$('.appCom').remove();
+							if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && ownLength < 1) {
+								$('.createCom').css("display","block");
 							}
-							if ($.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER') {
-								$('.createCom').remove();
-							}
+							
 							if ( joinLength + ownLength  == 0) {
 								$('.guideCommunity').css("display","block");
 							}
 						} else {
 							clickOffEvent();
-							$('.createCom').remove();
 							$('.myCommunityBtn').remove();
 						}
 					});

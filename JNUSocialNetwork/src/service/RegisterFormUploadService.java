@@ -16,7 +16,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import service.helper.ExtensionManager;
+import service.helper.extensionManager.ExtensionManager;
+import service.helper.extensionManager.RegisterExtensionManager;
 
 /**
  * Servlet implementation class RegisterFormUploadService
@@ -28,6 +29,7 @@ public class RegisterFormUploadService extends HttpServlet {
 	private DiskFileItemFactory factory;
 	private ServletFileUpload upload;
 	private static final long serialVersionUID = 1L;
+	private ExtensionManager em;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -55,6 +57,8 @@ public class RegisterFormUploadService extends HttpServlet {
 		File dir = new File(root + "activityRegisterTemplate");
 		if (!dir.exists())
 			dir.mkdir();
+		em = new RegisterExtensionManager();
+		em.init();
 	}
 
 	/**
@@ -109,6 +113,8 @@ public class RegisterFormUploadService extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				response.sendError(400);
+				response.flushBuffer();
 			}
 			break;
 		case "REGISTERFORM":
@@ -117,6 +123,8 @@ public class RegisterFormUploadService extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				response.sendError(400);
+				response.flushBuffer();
 			}
 			break;
 		}
@@ -126,13 +134,13 @@ public class RegisterFormUploadService extends HttpServlet {
 			throws Exception {
 
 		String extention = "";
-		if (ExtensionManager.containsKey(item.getContentType()))
-			extention = ExtensionManager.getExtention(item.getContentType());
-		else if (ExtensionManager.containsValue(item.getName().substring(
+		if (em.containsMime(item.getContentType()))
+			extention = em.getExtension(item.getContentType());
+		else if (em.containsExtension(item.getName().substring(
 				item.getName().indexOf("."))))
 			extention = item.getName().substring(item.getName().indexOf("."));
 		else
-			throw new Exception();
+			throw new Exception("Do Not Support File Type Exception");
 
 		String temp = "activityRegisterTemplate/" + "registerTemplate"
 				+ System.currentTimeMillis() + extention;
@@ -150,9 +158,9 @@ public class RegisterFormUploadService extends HttpServlet {
 			HttpServletResponse response) throws Exception {
 
 		String extention = "";
-		if (ExtensionManager.containsKey(item.getContentType()))
-			extention = ExtensionManager.getExtention(item.getContentType());
-		else if (ExtensionManager.containsValue(item.getName().substring(
+		if (em.containsMime(item.getContentType()))
+			extention = em.getExtension(item.getContentType());
+		else if (em.containsExtension(item.getName().substring(
 				item.getName().indexOf("."))))
 			extention = item.getName().substring(item.getName().indexOf("."));
 		else
@@ -166,6 +174,7 @@ public class RegisterFormUploadService extends HttpServlet {
 		String temp = "activityRegisterForm/" + activityID + "/"
 				+ System.currentTimeMillis() + "--"
 				+ java.net.URLDecoder.decode(name, "UTF-8") + extention;
+		System.out.println(temp);
 		File uploaddedFile = new File(root + temp);
 		item.write(uploaddedFile);
 

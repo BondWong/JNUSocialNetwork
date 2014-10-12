@@ -40,7 +40,8 @@ import utils.RootPathHelper;
 		@NamedQuery(name = "Post.fetchActivitiesByCommunity", query = "SELECT p FROM Community c JOIN c.posts p WHERE c.ID = ?1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchAllActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchHeatActivities", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY ORDER BY SIZE(p.participants) DESC"),
-		@NamedQuery(name = "Post.fetchMyActivities", query = "SELECT p FROM Post p JOIN p.participants ps WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT m FROM Member m WHERE m.ID = ?1) IN ps ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchActivitiesByOwner", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND p.owner.ID = ?1 ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchJoinedActivities", query = "SELECT p FROM Post p JOIN p.participants m WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT me FROM Member me WHERE me.ID = ?1) IN m ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchActivitiesByTag", query = "SELECT p FROM Post p JOIN p.activityTypeTags t WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT tag FROM Tag tag WHERE tag.ID = ?1) IN t ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
@@ -101,7 +102,6 @@ public class Post extends AttributeModel {
 		participants = new LinkedHashSet<Member>();
 		comments = new LinkedHashSet<Comment>();
 		activityTypeTags = new LinkedHashSet<Tag>();
-		toActivityTypeTags((List<String>) initParams[3]);
 	}
 
 	public Long getID() {
@@ -317,14 +317,6 @@ public class Post extends AttributeModel {
 		for (Tag tag : this.activityTypeTags)
 			tag.activityTypeRemovedBy(this);
 		this.activityTypeTags.clear();
-	}
-
-	private void toActivityTypeTags(List<String> tags) {
-		for (String tag : tags) {
-			Tag t = new Tag();
-			t.init(tag);
-			addActivityTypeTag(t);
-		}
 	}
 
 	@Override

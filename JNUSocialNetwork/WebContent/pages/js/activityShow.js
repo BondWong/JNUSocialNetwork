@@ -277,6 +277,9 @@ $('body').on("click", ".glyphicon-heart", function() {
 $('body').on("click", ".backActivity", function() {
 	window.location.href = "activityCommunity.jsp?" + community.ID;
 });
+$('body').on("click", ".backActivityA", function() {
+	window.location.href = "activity.jsp?nav=discovery";
+});
 $('body').on("click", ".editActivity", function() {
 	$('#activityName').val(activity.attributes.activityName);
 	$('#activityTime').val(activity.attributes.activityTime);
@@ -314,9 +317,10 @@ $('body')
 							+ "&" + activity.ID;
 				});
 $('body').on('click', '.deleteAI', function() {
-	DeleteAI(activity.ID, $(this).next().attr("src"));
-	$($(this).parent()).next().attr("class", "item active");
-	$(this).parent().remove();
+	if(DeleteAI(activity.ID, $(this).next().attr("src")) == "success"){
+		window.location.href = "activityShow.jsp?" + community.ID
+		+ "&" + activity.ID;
+	};
 });
 function showImages() {
 	if (activity.imageLinks.length == 0) {
@@ -429,9 +433,8 @@ $('body')
 				});
 function dataPicker() {
 	var date1 = new Date();
-	date1.setDate(date1.getDate() + 1);
+	date1.setTime(date1.getTime() + 0.25* 24 * 60 * 60 * 1000);
 	$('.form_datetime1').datetimepicker({
-		// language: 'fr',
 		format : "MM dd,yyyy - hh:ii",
 		startDate : date1,
 		todayBtn : 0,
@@ -445,7 +448,6 @@ function dataPicker() {
 	var date2 = new Date();
 	date2.setTime(date2.getTime());
 	$('.form_datetime2').datetimepicker({
-		// language: 'fr',
 		format : "MM dd,yyyy - hh:ii",
 		startDate : date2,
 		todayBtn : 0,

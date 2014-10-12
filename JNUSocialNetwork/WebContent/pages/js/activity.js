@@ -26,8 +26,11 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		join = "";
 	}
 	var now = new Date();
-	if (joinIDs.length >= limitation || startDate - now.getTime() <= 0) {
-		join = "";
+	if (joinIDs.length >= limitation ) {
+		join = "<button class='btn btn-default'>已经满人</button>";
+	}
+	if(startDate - now.getTime() <= 0){
+		join = "<button class='btn btn-default'>已经过期</button>";
 	}
 	var boarddiv = "<div class='activity activityAll post"
 			+ activityID
@@ -92,8 +95,25 @@ function fetchHeatActivities() {
 		}
 	});
 }
-function fetchMyActivities() {
-	var response = FetchMyActivities(USERID, 0, pageSize);
+function fetchActivitiesByOwner() {
+	var response = FetchActivitiesByOwner(USERID, 0, "16");
+	$.each(response.reverse(), function(n, dataString) {
+		if (dataString.available == true) {
+			addActivity(dataString.ID, dataString.attributes.activityName,
+					dataString.attributes.activityTime,
+					dataString.attributes.activityAddr,
+					dataString.attributes.activityMore,
+					dataString.attributes.background,
+					dataString.owner.attributes.avatarLink,
+					dataString.owner.ID, dataString.participantIDs,
+					dataString.attributes.startDate,
+					dataString.attributes.limitation,
+					dataString.attributes.ifUpload);
+		}
+	});
+}
+function fetchJoinedActivities() {
+	var response = FetchJoinedActivities(USERID, 0,  "16");
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == true) {
 			addActivity(dataString.ID, dataString.attributes.activityName,
@@ -151,10 +171,13 @@ if($('.tele').val()!=""){
 	UpdateUserProfile(USERID, $.toJSON(dataString));
 }
 var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
-JoinActivity(USERID, $('.ulR').attr('id'));
-$('#uploadmodal').modal('hide');
-if(response == 'success'){
+if(response == "200"){
 	alert("参加成功！");
+	JoinActivity(USERID, $('.ulR').attr('id'));
+	$('#uploadmodal').modal('hide');
+	$('.uploadexe').val("");
+}else{
+	alert("参加出错，请重试！");
 }
 }
 });
