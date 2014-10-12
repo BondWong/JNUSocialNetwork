@@ -1,21 +1,21 @@
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		ownerID, joinIDs, startDate, limitation, ifUpload) {
 	var join = "";
-	if (ifUpload == "默认方式") {
-		join = "<a><div class='activityJoin' id='activity" + activityID
-				+ "'><input type='hidden' value='" + activityID
-				+ "'><span>Join</span></div></a>";
-		if ($.inArray(USERID, joinIDs) != -1) {
-			join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
-					+ activityID
-					+ "'><input type='hidden' value='"
-					+ activityID + "'><span>Joined</span></div></a>";
-		}
-	} else {
+	if (ifUpload == "上传报名表") {
 		join = "<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="+activityID+"' class='btn btn-default dlR' id='"
-				+ activityID
-				+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
-				+ activityID + "'>上传报名表</a></div>";
+		+ activityID
+		+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
+		+ activityID + "'>上传报名表</a></div>";
+	} else {
+		join = "<a><div class='activityJoin' id='activity" + activityID
+		+ "'><input type='hidden' value='" + activityID
+		+ "'><span>Join</span></div></a>";
+if ($.inArray(USERID, joinIDs) != -1) {
+	join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
+			+ activityID
+			+ "'><input type='hidden' value='"
+			+ activityID + "'><span>Joined</span></div></a>";
+}
 	}
 
 	var pRemoveBtn = "";
@@ -48,7 +48,7 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ time
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'
-			+ more + '</pre>' + "</span></div><div class='activityAsk'>" + join
+			+ replaceURLWithHTMLLinks(more) + '</pre>' + "</span></div><div class='activityAsk'>" + join
 			+ "</div></div>";
 	return boarddiv;
 }
@@ -163,23 +163,23 @@ $('body')
 			$('body').append(board);
 		});
 $('body').on('click','#ulFile',function(){
-if($('.uploadForm')[0].checkValidity() && $('.uploadexe').val() != ""){
-if($('.tele').val()!=""){
-	var dataString = {
-			telnum : $('#tele').val()
-		};
-	UpdateUserProfile(USERID, $.toJSON(dataString));
-}
-var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
-if(response == "200"){
-	alert("参加成功！");
-	JoinActivity(USERID, $('.ulR').attr('id'));
-	$('#uploadmodal').modal('hide');
-	$('.uploadexe').val("");
-}else{
-	alert("参加出错，请重试！");
-}
-}
+	if($('.uploadForm')[0].checkValidity() && $('.uploadexe').val() != ""){
+	if($('.tele').val()!=""){
+		var dataString = {
+				telnum : $('#tele').val()
+			};
+		UpdateUserProfile(USERID, $.toJSON(dataString));
+	}
+	var response = formUpload(new FormData($('.uploadForm')[0]),$('.ulR').attr('id'),encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.name));
+		if(response == "200"){
+			alert("参加成功！");
+			JoinActivity(USERID, $('.ulR').attr('id'));
+			$('.uploadexe').val("");
+			$('#uploadmodal').modal('hide');
+		}else{
+			alert("参加出错，请重试！");
+		}
+	}
 });
 $('body').on("click", ".activityShowHref", function() {
 	var id = $(this).attr("id");
