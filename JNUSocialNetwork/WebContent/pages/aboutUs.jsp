@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -72,6 +70,42 @@
 								alt="hjj.png" />
 						</div>
 					</div>
+					<div class="container col-md-10 col-md-offset-1 imgset">
+						<div class="col-md-2">
+							<img src="images/founder-avatar/gkr.jpg" class="round icon-like"
+								alt="gkr.jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/陆艺丹[公关-推广].jpg" class="round icon-like"
+								alt="陆艺丹[公关-推广].jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/王家琳[公关-推广].jpg" class="round icon-like"
+								alt="王家琳[公关-推广].jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/肖华[运营-推广].jpg" class="round icon-like"
+								alt="肖华[运营-推广].jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/徐灵聪[[公关-推广]].jpg" class="round icon-like"
+								alt="徐灵聪[[公关-推广]].jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/徐梦婷[前端设计-前端开发].jpg" class="round icon-like"
+								alt="徐梦婷[前端设计-前端开发].jpg" />
+						</div>
+					</div>
+					<div class="container col-md-10 col-md-offset-1 imgset">
+						<div class="col-md-2">
+							<img src="images/founder-avatar/郑家邦[运营-推广].jpg" class="round icon-like"
+								alt="郑家邦[运营-推广].jpg" />
+						</div>
+						<div class="col-md-2">
+							<img src="images/founder-avatar/刘卉[运营-推广].jpg" class="round icon-like"
+								alt="刘卉[运营-推广].jpg" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="slide" id="slide2">
@@ -117,6 +151,29 @@
 						</p>
 					</div>
 				</div>
+				<div id="xmt" class="intro container col-md-6">
+					<img src="images/founder-avatar/徐梦婷[前端设计-前端开发].jpg" class="round icon-like"
+						alt="徐梦婷[前端设计-前端开发].jpg" />
+					<div class="info">
+						<h2>徐梦婷</h2>
+						<p>
+							<span>前端设计</span> <span>|</span> <span>前端开发</span>
+						</p>			
+					</div>
+				</div>
+				<div id="gkr" class="intro container col-md-6">
+					<img src="images/founder-avatar/gkr.jpg" class="round icon-like"
+						alt="gkr.jpg" />
+					<div class="info">
+						<h2>郭凯瑞</h2>
+						<p>
+							<span>前端设计</span> <span>|</span> <span>前端开发</span>
+						</p>
+						<p>
+							<span>wechat:Edisondplus</span>
+						</p>
+					</div>
+				</div>
 			</div>
 			<div class="slide" id="slide3">
 				<div id="hzy" class="intro container col-md-6">
@@ -159,6 +216,68 @@
 					</div>
 				</div>
 			</div>
+			<div class="slide" id="slide5">
+				<div id="lh" class="intro container col-md-6">
+					<img src="images/founder-avatar/刘卉[运营-推广].jpg" class="round icon-like"
+						alt="刘卉[运营-推广].jpg" />
+					<div class="info">
+						<h2>刘卉</h2>
+						<p>
+							<span>运营</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+				<div id="lyd" class="intro container col-md-6">
+					<img src="images/founder-avatar/陆艺丹[公关-推广].jpg" class="round icon-like"
+						alt="陆艺丹[公关-推广].jpg" />
+					<div class="info">
+						<h2>陆艺丹</h2>
+						<p>
+							<span>公关</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+				<div id="wjl" class="intro container col-md-6">
+					<img src="images/founder-avatar/王家琳[公关-推广].jpg" class="round icon-like"
+						alt="王家琳[公关-推广].jpg" />
+					<div class="info">
+						<h2>王家琳</h2>
+						<p>
+							<span>公关</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+				<div id="xh" class="intro container col-md-6">
+					<img src="images/founder-avatar/肖华[运营-推广].jpg" class="round icon-like"
+						alt="肖华[运营-推广].jpg" />
+					<div class="info">
+						<h2>肖华</h2>
+						<p>
+							<span>运营</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+				<div id="xlc" class="intro container col-md-6">
+					<img src="images/founder-avatar/徐灵聪[[公关-推广]].jpg" class="round icon-like"
+						alt="徐灵聪[[公关-推广]].jpg" />
+					<div class="info">
+						<h2>徐灵聪</h2>
+						<p>
+							<span>公关</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+				<div id="zjb" class="intro container col-md-6">
+					<img src="images/founder-avatar/郑家邦[运营-推广].jpg" class="round icon-like"
+						alt="郑家邦[运营-推广].jpg" />
+					<div class="info">
+						<h2>郑家邦</h2>
+						<p>
+							<span>运营</span> <span>|</span> <span>推广</span>
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- section1 end -->
 
@@ -189,7 +308,7 @@
 
 				<!--.story-->
 			</div>
-			<%@ include file="parts/footer.jsp"%>
+
 		</div>
 
 	</div>
@@ -205,7 +324,7 @@
 	<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 	<script type="text/javascript" src="js/aboutus.js"></script>
-	<%@ include file="parts/baidu.jsp"%>
+
 </body>
 
 </html>
