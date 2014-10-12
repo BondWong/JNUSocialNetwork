@@ -141,19 +141,19 @@
             <table class="table table-striped">
                 <tr>
                     <td class="col-xs-3 ">活动名称:</td>
-                    <td><%=activityName%></td>
+                    <td>&lt;%=activityName%></td>
                 </tr>
                 <tr>
                     <td>活动时间:</td>
-                    <td><%=activityTime%></td>
+                    <td>&lt;%=activityTime%></td>
                 </tr>
                 <tr>
                     <td>活动地址:</td>
-                    <td><%=activityAddr%></td>
+                    <td>&lt;%=activityAddr%></td>
                 </tr>
                 <tr>
                     <td>活动细节:</td>
-                    <td><%=activityMore%></td>
+                    <td>&lt;%=activityMore%></td>
                 </tr>
             </table>
             <button type="submit" class="btn btn-success join-btn" value="submit" data-postid="<%=ID%>">åå </button>
