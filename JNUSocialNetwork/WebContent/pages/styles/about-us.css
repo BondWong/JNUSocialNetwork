@@ -280,7 +280,7 @@ img {
     padding: 0 0 0 0;
 }
 #slide4 {
-    background-image: url(../images/about-us/pr2.png);
+    background-image: url(../images/about-us/pr.png);
     padding: 0 0 0 0;
 }
 #slide5 {
@@ -332,6 +332,7 @@ a.white:link {
 	height:120px;
 	background: url(../images/about-us/header.png)  no-repeat scroll center
 		center transparent;
+	float:left;
 }
 .joinIntro{
 	margin-top:40px;
@@ -341,4 +342,12 @@ a.white:link {
 .join{
 	text-indent: 2em;
 	margin-bottom:30%;
+}
+.aboutT{
+	background: url('../images/about-us/about-us2.fw.png') no-repeat scroll center center transparent;
+	display:block;
+	width:60%;
+	height:100px;
+	float:left;
+	margin-top: -5px;
 }

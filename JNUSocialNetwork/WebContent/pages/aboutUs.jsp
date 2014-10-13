@@ -30,12 +30,14 @@
 	<div id="fullpage">
 		<div class="section" id="section0">
 			<div class="container home">
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<h1 class="about-h">
-						<a href="home.jsp" class='homeHref'></a>
+						<a href="home.jsp" class='homeHref'></a><span class="aboutT"></span>
 					</h1>
+					
 					<h2 class="sub-h2 about-h"></h2>
 				</div>
+				
 			</div>
 		</div>
 		<!-- section0 end -->
@@ -305,6 +307,7 @@
 					<h4 class="join">
 						将简单介绍发到<a href="mailto:campusite@outlook.com" style="">官方邮箱</a><span>campusite@outlook.com</span>，并说明为什么要加入我们，想在团队里担任什么样的位置,我们会尽快联系你。
 					</h4>
+					<div style="text-indent:2em"><a href="home.jsp">谢谢细心阅读，返回CampuSite首页</a></div>
 
 
 				</div>

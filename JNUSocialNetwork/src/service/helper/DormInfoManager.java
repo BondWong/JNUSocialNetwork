@@ -33,6 +33,9 @@ public class DormInfoManager {
 		GuangzhouCampus.add("建阳十八栋");
 		GuangzhouCampus.add("建阳十九栋");
 		GuangzhouCampus.add("建阳二十栋");
+		GuangzhouCampus.add("周转A");
+		GuangzhouCampus.add("周转B");
+		GuangzhouCampus.add("周转C");
 		
 		ZhuhaiCampus.add("一栋");
 		ZhuhaiCampus.add("二栋");
