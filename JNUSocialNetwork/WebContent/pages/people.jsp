@@ -74,7 +74,7 @@
 				clickOffEvent();
 			}
 			var tags = FetchHeatLookingForTag("0","20");
-			$.each(tags,function(n,tag){
+			$.each(tags.reverse(),function(n,tag){
 				var t = "<span class='searchTagUser' title='"+tag.ID+"'>"+tag.ID+"</span>";
 				$('.tagB').after(t);
 			});

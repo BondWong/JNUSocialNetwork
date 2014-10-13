@@ -76,34 +76,34 @@
 								alt="gkr.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/lyd.jpg"
-								class="round icon-like" alt="lyd.jpg" />
+							<img src="images/founder-avatar/lyd.jpg" class="round icon-like"
+								alt="lyd.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/hjl.jpg"
-								class="round icon-like" alt="hjl.jpg" />
+							<img src="images/founder-avatar/hjl.jpg" class="round icon-like"
+								alt="hjl.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/xh.jpg"
-								class="round icon-like" alt="xh.jpg" />
+							<img src="images/founder-avatar/xh.jpg" class="round icon-like"
+								alt="xh.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/xlc.jpg"
-								class="round icon-like" alt="xlc.jpg" />
+							<img src="images/founder-avatar/xlc.jpg" class="round icon-like"
+								alt="xlc.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/xmt.jpg"
-								class="round icon-like" alt="xmt.jpg" />
+							<img src="images/founder-avatar/xmt.jpg" class="round icon-like"
+								alt="xmt.jpg" />
 						</div>
 					</div>
 					<div class="container col-md-10 col-md-offset-1 imgset">
 						<div class="col-md-2">
-							<img src="images/founder-avatar/zjb.jpg"
-								class="round icon-like" alt="zjb.jpg" />
+							<img src="images/founder-avatar/zjb.jpg" class="round icon-like"
+								alt="zjb.jpg" />
 						</div>
 						<div class="col-md-2">
-							<img src="images/founder-avatar/zw.jpg"
-								class="round icon-like" alt="zw.jpg" />
+							<img src="images/founder-avatar/zw.jpg" class="round icon-like"
+								alt="zw.jpg" />
 						</div>
 					</div>
 				</div>
@@ -152,8 +152,8 @@
 					</div>
 				</div>
 				<div id="xmt" class="intro container col-md-6">
-					<img src="images/founder-avatar/xmt.jpg"
-						class="round icon-like" alt="xmt.jpg" />
+					<img src="images/founder-avatar/xmt.jpg" class="round icon-like"
+						alt="xmt.jpg" />
 					<div class="info">
 						<h2>徐梦婷</h2>
 						<p>
@@ -182,7 +182,7 @@
 					<div class="info">
 						<h2>黄子阳</h2>
 						<p>
-							<span>联合创始人</span> <span>|</span> <span>公关</span> <span>|</span>
+							<span>联合创始人</span> <span>|</span> <span>运营</span> <span>|</span>
 							<span>推广</span>
 						</p>
 						<p>
@@ -221,8 +221,8 @@
 			</div>
 			<div class="slide" id="slide5">
 				<div id="lh" class="intro container col-md-6">
-					<img src="images/founder-avatar/zw.jpg"
-						class="round icon-like" alt="zw.jpg" />
+					<img src="images/founder-avatar/zw.jpg" class="round icon-like"
+						alt="zw.jpg" />
 					<div class="info">
 						<h2>刘卉</h2>
 						<p>
@@ -231,8 +231,8 @@
 					</div>
 				</div>
 				<div id="lyd" class="intro container col-md-6">
-					<img src="images/founder-avatar/lyd.jpg"
-						class="round icon-like" alt="lyd.jpg" />
+					<img src="images/founder-avatar/lyd.jpg" class="round icon-like"
+						alt="lyd.jpg" />
 					<div class="info">
 						<h2>陆艺丹</h2>
 						<p>
@@ -241,8 +241,8 @@
 					</div>
 				</div>
 				<div id="wjl" class="intro container col-md-6">
-					<img src="images/founder-avatar/hjl.jpg"
-						class="round icon-like" alt="hjl.jpg" />
+					<img src="images/founder-avatar/hjl.jpg" class="round icon-like"
+						alt="hjl.jpg" />
 					<div class="info">
 						<h2>王家琳</h2>
 						<p>
@@ -251,8 +251,8 @@
 					</div>
 				</div>
 				<div id="xh" class="intro container col-md-6">
-					<img src="images/founder-avatar/xh.jpg"
-						class="round icon-like" alt="xh.jpg" />
+					<img src="images/founder-avatar/xh.jpg" class="round icon-like"
+						alt="xh.jpg" />
 					<div class="info">
 						<h2>肖华</h2>
 						<p>
@@ -261,8 +261,8 @@
 					</div>
 				</div>
 				<div id="xlc" class="intro container col-md-6">
-					<img src="images/founder-avatar/xlc.jpg"
-						class="round icon-like" alt="xlc.jpg" />
+					<img src="images/founder-avatar/xlc.jpg" class="round icon-like"
+						alt="xlc.jpg" />
 					<div class="info">
 						<h2>徐灵聪</h2>
 						<p>
@@ -271,8 +271,8 @@
 					</div>
 				</div>
 				<div id="zjb" class="intro container col-md-6">
-					<img src="images/founder-avatar/zjb.jpg"
-						class="round icon-like" alt="zjb.jpg" />
+					<img src="images/founder-avatar/zjb.jpg" class="round icon-like"
+						alt="zjb.jpg" />
 					<div class="info">
 						<h2>郑家邦</h2>
 						<p>

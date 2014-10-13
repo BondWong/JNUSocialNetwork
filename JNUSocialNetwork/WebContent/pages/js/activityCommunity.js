@@ -26,7 +26,7 @@ function activityClickEvent() {
 											.val(),
 									activityAddr : $('#activityAddr').val(),
 									activityMore : $('#activityMore').val(),
-									limitation : $('.activityNum').val(),
+									limitation : $('#activityNum').val(),
 									communityName : community.attributes.name,
 									communityID : community.ID.toString(),
 									ifUpload : $('#table_activitySign').text(),
