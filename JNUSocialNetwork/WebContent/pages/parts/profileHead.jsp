@@ -10,9 +10,10 @@
                     <strong></strong>
                 </div>
                 <div class='followBtnA'>
-                    <button class='btn btn-danger followBtnAB'>Follow</button>
+                    <button class='btn btn-danger followBtnAB'>Follow</button> <button class="btn btn-danger sayHi" >Say Hi</button>
                 </div>
-                <div class='followInfo'><span class='followNum'>4</span><span>&nbsp;粉丝</span>
+                <div class='followInfo'><span class='followNum'></span><span>&nbsp;粉丝</span>
+               
                 </div>
 
                 <!-- Cropping avatar modal -->

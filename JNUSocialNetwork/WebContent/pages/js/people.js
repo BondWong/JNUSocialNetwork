@@ -199,7 +199,7 @@ function AddUser(name, looking,tags, id,userType, avatarLink,followerIDs) {
 			+ $.parseJSON(avatarLink).src
 			+ "' ><p class='recommendName'><a id=" + id + " class='tipUser2'>"
 			+ name + "</a></p>"+pIn+"<div class='recommendBtn'><button  id=" + id
-			+ " class='btn btn-danger followBtn'>"+followTxt+"</button></div></div>";
+			+ " class='btn btn-danger followBtn' title='"+name+"'>"+followTxt+"</button></div></div>";
 	$(".recommendBord").after(boarddiv);
 	Msnry('.userContainer', '.userCard', 200);
 }
@@ -215,6 +215,7 @@ $('body').on("click", ".recommendBtn", function() {
 	var id = $(this).find('button').attr('id');
 	if ($(this).find('button').text() == "Follow") {
 		Follow(USERID, id);
+		open_chatroom(USERID,id,$(this).find('button').attr('title'));
 	}
 	if ($(this).find('button').text() == "Following") {
 		CancelFollow(USERID, id);

@@ -42,8 +42,6 @@ public class ClassRecommendationTransaction extends DAOTransaction {
 					&& mattributes.get("season") != null
 					&& mattributes.get("season").equals(
 							memberAttributes.get("season"))
-					&& !((List<String>) member.get("followeeIDs")).contains(m
-							.get("ID"))
 					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}

@@ -690,10 +690,12 @@ function showFollowers() {
 			.each(
 					response,
 					function(index, follower) {
-						var followeeDiv = addFollow(follower.ID,follower.attributes.avatarLink,follower.attributes.name);
-						$('.followerBoard').after(followeeDiv);
-						Msnry('.followerContainer', '.member', 215);
-						$('.followName').userTips();
+						if(follower.available == true){
+							var followeeDiv = addFollow(follower.ID,follower.attributes.avatarLink,follower.attributes.name);
+							$('.followerBoard').after(followeeDiv);
+							Msnry('.followerContainer', '.member', 215);
+							$('.followName').userTips();
+						}
 					});
 }
 function addFollow(id,avatarLink,name){
@@ -780,6 +782,9 @@ $('body').on('click', '.followBtnAB', function() {
 		CancelFollow(USERID, userID);
 		$(this).text('Follow');
 	}
+});
+$('body').on("click",".sayHi",function(){
+	open_chatroom(USERID,userID,$('.profile_user_name').text());
 });
 // fetchUserByID
 function fetchUserByID() {
