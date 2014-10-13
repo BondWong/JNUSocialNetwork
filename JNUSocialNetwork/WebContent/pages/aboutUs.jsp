@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-
+<link rel="shortcut icon" href="images/favicon.ico">
 <title>关于我们 - CampuSite</title>
 
 <!-- Bootstrap core CSS -->
@@ -244,7 +244,7 @@
 					<img src="images/founder-avatar/hjl.jpg" class="round icon-like"
 						alt="hjl.jpg" />
 					<div class="info">
-						<h2>王家琳</h2>
+						<h2>黄家琳</h2>
 						<p>
 							<span>公关</span> <span>|</span> <span>推广</span>
 						</p>
