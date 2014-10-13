@@ -790,7 +790,7 @@ $('body').on("click",".sayHi",function(){
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
 	if ($.inArray(USERID, userInfo.followerIDs) != -1) {
-		$('.followBtnA').find('button').text("Following");
+		$('.followBtnAB').text("Following");
 	}
 	if (USERID == userID) {
 		$('.followBtnA').remove();
