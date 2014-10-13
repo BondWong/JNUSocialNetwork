@@ -2056,3 +2056,12 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 .pRandom{
 	cursor:pointer;
 }
+.joinSActivity:active{
+	background-color:#E6E6E6;;
+}
+.joinSActivity:hover{
+	background-color:#E6E6E6;;
+}
+.joinSActivity:focus{
+	background-color:#E6E6E6;;
+}
