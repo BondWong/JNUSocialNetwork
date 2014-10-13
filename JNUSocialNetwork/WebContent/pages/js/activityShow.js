@@ -218,7 +218,6 @@ $('body')
 				});
 $('body').on('click', '.joinSActivity', function() {
 	if (FetchUserByID(USERID).attributes.telnum != "") {
-		alert($(this).css("background-color"));
 		if ($(this).css("background-color") == "rgb(230, 230, 230)") {
 			$(this).css("color", "rgb(255, 255, 255)");
 			$(this).css("background-color", "rgb(66,139,202)");
