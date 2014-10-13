@@ -107,7 +107,7 @@
 			<div class="share post">
 				<form enctype="multipart/form-data">
 					<textarea class="form-control share_txt" placeholder="分享你所想、所见"
-						data-toggle='modal' data-target='#addPostModal' maxLength="200"
+						data-toggle='modal' data-target='#addPostModal'
 						style="resize: none;"></textarea>
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
@@ -151,7 +151,7 @@
 								onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										placeholder="分享些什么吧" maxLength="200" style="resize: none;"
+										placeholder="分享些什么吧"  style="resize: none;"
 										required data-errormessage-value-missing="请输入内容"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
