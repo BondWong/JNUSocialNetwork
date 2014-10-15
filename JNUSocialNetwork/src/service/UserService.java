@@ -23,7 +23,6 @@ import model.ServerSentEvent;
 import security.helper.ContentEncoder;
 import service.helper.HeheUser;
 import system.ServerSentEventBroadcaster;
-import transaction.SendEmailTransaction;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
 import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
@@ -46,6 +45,8 @@ import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
+import transaction.EmailTransaction.InviteToAddImageTransaction;
+import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
 
 @Path("/user")
@@ -604,6 +605,19 @@ public class UserService {
 		try {
 			transaction.execute(fromID, toID, emailContent.get("content"));
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+	}
+	
+	@Path("inviteToAddImage/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response inviteToAddImage(@PathParam("fromID") String fromID, @PathParam("toID") String toID) throws Exception {
+		transaction = new InviteToAddImageTransaction();
+		try {
+			transaction.execute(fromID, toID);
+		} catch(Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
