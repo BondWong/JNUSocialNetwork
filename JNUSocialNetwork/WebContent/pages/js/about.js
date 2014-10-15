@@ -300,6 +300,24 @@ function aboutClickEvent() {
 		}
 	});
 	// 标签组提示
+	var tagI = [ "单身待解救", "奋斗ing", "幸福ing", "成长ing", "缺爱ing", "静待缘分", "心如止水",
+	 			"寂寞ing", "求职ing", "考研ing", "备战雅思", "备战托福", "我是小鲜肉" ];
+	 	$('body').on(
+	 			"click",
+	 			".changeTag0",
+	 			function() {
+	 				$('.tagName').text("你现在的状态？");
+	 				$('.tagContainer').remove();
+	 				var tagArray = "";
+	 				$.each(tagI, function(n, tag) {
+	 					tagArray += "<span id='tagSpan' title='" + tag + "'>" + tag
+	 							+ "</span>";
+	 				});
+	 				var tagContainer = "<div class='tagContainer'>" + tagArray
+	 						+ "<br clear='all' /></div>";
+	 				$('.tagHead').after(tagContainer);
+	 				$(this).attr("class", "btn btn-xs btn-default changeTag");
+	 			});
 	var tagA = [ "篮球", "足球", "网球", "台球", "羽毛球", "游泳", "网球", "吉他", "钢琴", "唱K",
 			"爬山", "吃！吃！吃！", "我只喜欢睡觉" ];
 	$('body').on(
@@ -442,23 +460,22 @@ function aboutClickEvent() {
 				$('.tagHead').after(tagContainer);
 				$(this).attr("class", "btn btn-xs btn-default changeTagI");
 			});
-	var tagI = [ "单身待解救", "奋斗ing", "幸福ing", "成长ing", "缺爱ing", "静待缘分", "心如止水",
-			"寂寞ing", "求职ing", "考研ing", "备战雅思", "备战托福", "我是小鲜肉" ];
 	$('body').on(
 			"click",
 			".changeTagI",
 			function() {
-				$('.tagName').text("你现在的状态？");
+				$('.tagName').text("热门标签:");
 				$('.tagContainer').remove();
 				var tagArray = "";
-				$.each(tagI, function(n, tag) {
-					tagArray += "<span id='tagSpan' title='" + tag + "'>" + tag
+				var tags = FetchHeatLookingForTag("0","20");
+				$.each(tags.reverse(), function(n, tag) {
+					tagArray += "<span title='" + tag.ID + "' class='tagSpan'>" + tag.ID
 							+ "</span>";
 				});
 				var tagContainer = "<div class='tagContainer'>" + tagArray
 						+ "<br clear='all' /></div>";
 				$('.tagHead').after(tagContainer);
-				$(this).attr("class", "btn btn-xs btn-default changeTag");
+				$(this).attr("class", "btn btn-xs btn-default changeTag0");
 			});
 	// function editProfileInfro
 	$('body').on(
@@ -853,11 +870,27 @@ $('body').on(
 			open_chatroom_with_message(USERID, userID, $('.profile_user_name')
 					.text(), 'hi');
 		});
+$('body').on("click",".emailIt",function(){
+	var teleAlert = "";
+	if ($.parseJSON(sessionStorage.getItem("user")).attributes.email == "") {
+		teleAlert = "<div class='uploadItem'><span>个人邮箱：</span><input type='email' style='margin-bottom:20px;width:80%;' class='form-control' placeholder='个人邮箱未填写，请填写自己的邮箱' id='email' autocomplete='off' data-errormessage-value-missing='请输入自己的邮箱号，才能发送邮件哦' data-errormessage-pattern-mismatch='请输入邮箱' required autofocus /></div>";
+	}
+	$(this).attr("data-toggle", "modal");
+	$(this).attr("data-target", "#emailmodal");
+	var board = "<div class='modal fade' id='emailmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>发送邮件</h4></div><form class='uploadForm' role='form' onsubmit='return false;'><div class='modal-body'>"
+			+ teleAlert
+			+ "<div class='uploadItem'><span>E-mail内容：</span><textarea class='emailContent' style='resize:none;width: 455px;'></textarea></div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='emailSend' value='upload'>确认</button></div></form></div></div></div>";
+	$('body').append(board);
+});
+
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
 	if ($.inArray(USERID, userInfo.followerIDs) != -1) {
 		$('.followBtnAB').text("Following");
+	}
+	if(userInfo.attributes.email != "" && USERID != userID && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'){
+		$('.sayHi').after("<button class='btn btn-default emailIt' >E-mail</button>");
 	}
 	if (USERID == userID) {
 		$('.followBtnA').remove();

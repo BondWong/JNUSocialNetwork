@@ -484,7 +484,7 @@ body {
 }
 .followBtnA{
 	margin: 5px auto auto;
-	width: 60%;
+	width: 90%;
 	text-align: center;
 }
 .followInfo{
@@ -1331,7 +1331,7 @@ body {
 }
 .uploadItem>span {
 	float: left;
-	width: 70px;
+	width: 80px;
 	text-align: right;
 }
 .activityName {
@@ -2064,4 +2064,7 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 }
 .joinSActivity:focus{
 	background-color:#E6E6E6;;
+}
+.emailIt{
+	margin-left: 4px;
 }
