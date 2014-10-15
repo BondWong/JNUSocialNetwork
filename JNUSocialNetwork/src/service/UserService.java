@@ -23,12 +23,14 @@ import model.ServerSentEvent;
 import security.helper.ContentEncoder;
 import service.helper.HeheUser;
 import system.ServerSentEventBroadcaster;
+import transaction.SendEmailTransaction;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
 import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
 import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
+import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
@@ -553,7 +555,7 @@ public class UserService {
 			@PathParam("tagContent") String tagContent,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchMembersTransaction();
+		transaction = new FetchMembersWithShuffleTransaction();
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
@@ -590,6 +592,22 @@ public class UserService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 
+	}
+
+	@SuppressWarnings({ "rawtypes" })
+	@Path("sendEmail/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response sendEmail(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID, Map emailContent) throws Exception {
+		transaction = new SendEmailTransaction();
+		try {
+			transaction.execute(fromID, toID, emailContent.get("content"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
 	}
 
 	@SuppressWarnings("rawtypes")
