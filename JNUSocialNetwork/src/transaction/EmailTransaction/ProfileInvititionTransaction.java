@@ -7,7 +7,7 @@ import persistence.DAO;
 import service.helper.EmailSender;
 import transaction.DAOTransaction;
 
-public class InviteToAddImageTransaction extends DAOTransaction {
+public class ProfileInvititionTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -23,8 +23,7 @@ public class InviteToAddImageTransaction extends DAOTransaction {
 		String toAddr = member.getAttribute("email");
 
 		StringBuffer sb = new StringBuffer();
-		sb.append("去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
-				+ member.getID());
+		sb.append(params[2]);
 		sb.append(System.getProperty("line.separator"));
 		sb.append(System.getProperty("line.separator"));
 		sb.append("对方资料：");

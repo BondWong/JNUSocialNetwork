@@ -45,7 +45,7 @@ import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
-import transaction.EmailTransaction.InviteToAddImageTransaction;
+import transaction.EmailTransaction.ProfileInvititionTransaction;
 import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
 
@@ -610,14 +610,33 @@ public class UserService {
 		}
 		return Response.ok().build();
 	}
-	
+
 	@Path("inviteToAddImage/{fromID : \\d+}/{toID : \\d+}")
 	@POST
-	public Response inviteToAddImage(@PathParam("fromID") String fromID, @PathParam("toID") String toID) throws Exception {
-		transaction = new InviteToAddImageTransaction();
+	public Response inviteToAddImage(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new ProfileInvititionTransaction();
 		try {
-			transaction.execute(fromID, toID);
-		} catch(Exception e) {
+			transaction.execute(fromID, toID,
+					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
+							+ toID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+	}
+
+	@Path("inviteToAddAvatar/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new ProfileInvititionTransaction();
+		try {
+			transaction.execute(fromID, toID,
+					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
+							+ toID);
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
