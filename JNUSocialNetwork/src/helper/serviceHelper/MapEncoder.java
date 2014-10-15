@@ -1,6 +1,6 @@
-package service.helper;
+package helper.serviceHelper;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
@@ -9,7 +9,7 @@ import javax.websocket.EndpointConfig;
 import utils.JsonUtil;
 
 @SuppressWarnings("rawtypes")
-public class ListEncoder implements Encoder.Text<List>{
+public class MapEncoder implements Encoder.Text<Map>{
 
 	@Override
 	public void destroy() {
@@ -24,7 +24,7 @@ public class ListEncoder implements Encoder.Text<List>{
 	}
 
 	@Override
-	public String encode(List arg0) throws EncodeException {
+	public String encode(Map arg0) throws EncodeException {
 		// TODO Auto-generated method stub
 		return JsonUtil.toJson(arg0);
 	}

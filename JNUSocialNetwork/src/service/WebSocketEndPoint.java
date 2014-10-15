@@ -1,5 +1,11 @@
 package service;
 
+import helper.serviceHelper.ListEncoder;
+import helper.serviceHelper.MapDecoder;
+import helper.serviceHelper.MapEncoder;
+import helper.serviceHelper.MessageStorage;
+import helper.serviceHelper.OnlineUserIDArray;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,11 +26,6 @@ import model.ServerSentEvent;
 import model.factory.ModelFactory;
 import model.modelType.SSEType;
 import service.actionType.WebSocketAction;
-import service.helper.MapEncoder;
-import service.helper.ListEncoder;
-import service.helper.MapDecoder;
-import service.helper.MessageStorage;
-import service.helper.OnlineUserIDArray;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateMessagesTransaction;
 import transaction.DAOCreateTransaction.CreateUnhandledEventsTransaction;

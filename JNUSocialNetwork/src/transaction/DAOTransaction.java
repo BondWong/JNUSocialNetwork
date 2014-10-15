@@ -1,12 +1,12 @@
 package transaction;
 
+import helper.persistenceHelper.EntityManagerFactoryUtil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.RollbackException;
-
-import persistence.helper.EntityManagerFactoryUtil;
 
 public abstract class DAOTransaction implements Transaction {
 	private EntityManagerFactory emf;

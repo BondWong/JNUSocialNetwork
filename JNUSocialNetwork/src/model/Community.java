@@ -1,5 +1,7 @@
 package model;
 
+import helper.serviceHelper.DesertFileLinkMap;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +27,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import service.helper.DesertFileLinkMap;
 import utils.JsonUtil;
 import model.factory.AttributesFactory;
 import model.modelType.CommunityType;

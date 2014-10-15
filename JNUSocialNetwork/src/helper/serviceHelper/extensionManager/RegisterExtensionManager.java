@@ -1,4 +1,4 @@
-package service.helper.extensionManager;
+package helper.serviceHelper.extensionManager;
 
 public class RegisterExtensionManager extends ExtensionManager {
 

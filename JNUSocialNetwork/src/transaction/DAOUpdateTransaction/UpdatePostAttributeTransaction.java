@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.ActivitySearchMap;
+
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -7,7 +9,6 @@ import javax.persistence.EntityManager;
 import model.AttributeModel;
 import model.Post;
 import persistence.DAO;
-import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
 import utils.ConstantValue;
 

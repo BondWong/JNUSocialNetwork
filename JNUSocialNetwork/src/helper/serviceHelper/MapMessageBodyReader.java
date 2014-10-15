@@ -1,4 +1,4 @@
-package service.helper;
+package helper.serviceHelper;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package service.helper;
+package helper.serviceHelper;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;

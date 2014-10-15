@@ -1,4 +1,4 @@
-package service.helper;
+package helper.serviceHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

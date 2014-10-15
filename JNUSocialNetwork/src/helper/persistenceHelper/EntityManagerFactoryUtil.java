@@ -1,4 +1,4 @@
-package persistence.helper;
+package helper.persistenceHelper;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

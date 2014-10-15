@@ -1,5 +1,7 @@
 package transaction.DAOFetchTransaction;
 
+import helper.serviceHelper.ActivitySearchMap;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Post;
-import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
 import utils.ConstantValue;
 

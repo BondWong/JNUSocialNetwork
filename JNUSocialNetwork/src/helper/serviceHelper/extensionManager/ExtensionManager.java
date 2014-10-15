@@ -1,4 +1,4 @@
-package service.helper.extensionManager;
+package helper.serviceHelper.extensionManager;
 
 import java.util.HashMap;
 import java.util.Map;

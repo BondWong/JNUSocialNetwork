@@ -1,5 +1,8 @@
 package service;
 
+import helper.securityHelper.ContentEncoder;
+import helper.serviceHelper.HeheUser;
+
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
@@ -20,8 +23,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
-import security.helper.ContentEncoder;
-import service.helper.HeheUser;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
@@ -45,7 +46,9 @@ import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
+import transaction.EmailTransaction.BegForConnectionTransaction;
 import transaction.EmailTransaction.ProfileInvititionTransaction;
+import transaction.EmailTransaction.SendConnectionTransaction;
 import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
 
@@ -636,6 +639,34 @@ public class UserService {
 			transaction.execute(fromID, toID,
 					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
 							+ toID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+	}
+
+	@Path("begForConnection/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response begForConnection(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new BegForConnectionTransaction();
+		try {
+			transaction.execute(fromID, toID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok().build();
+	}
+
+	@Path("sendConnection/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response sendConnection(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new SendConnectionTransaction();
+		try {
+			transaction.execute(fromID, toID);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

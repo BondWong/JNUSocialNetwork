@@ -1,4 +1,4 @@
-package security.helper;
+package helper.securityHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

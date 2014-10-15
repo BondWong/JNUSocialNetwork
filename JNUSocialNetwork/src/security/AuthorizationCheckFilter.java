@@ -1,5 +1,7 @@
 package security;
 
+import helper.securityHelper.ProtectedURLManager;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import security.helper.ProtectedURLManager;
 import model.modelType.UserType;
 
 /**

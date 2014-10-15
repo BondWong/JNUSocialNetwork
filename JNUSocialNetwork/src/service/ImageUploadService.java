@@ -1,5 +1,8 @@
 package service;
 
+import helper.serviceHelper.extensionManager.ExtensionManager;
+import helper.serviceHelper.extensionManager.MultiMediaExtensionManager;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +28,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.google.gson.reflect.TypeToken;
-
-import service.helper.extensionManager.ExtensionManager;
-import service.helper.extensionManager.MultiMediaExtensionManager;
 import utils.JsonUtil;
+
+import com.google.gson.reflect.TypeToken;
 
 @WebServlet("/app/fileUploader")
 public class ImageUploadService extends HttpServlet {

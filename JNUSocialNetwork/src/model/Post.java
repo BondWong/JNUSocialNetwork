@@ -1,5 +1,7 @@
 package model;
 
+import helper.serviceHelper.DesertFileLinkMap;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,11 +29,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import model.factory.AttributesFactory;
-import model.modelType.PostType;
-import service.helper.DesertFileLinkMap;
 import utils.DateTimeUtil;
 import utils.RootPathHelper;
+import model.factory.AttributesFactory;
+import model.modelType.PostType;
 
 @Entity
 @Access(AccessType.FIELD)

@@ -1,5 +1,7 @@
 package integratedTest;
 
+import helper.serviceHelper.EmailSender;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -13,8 +15,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
-import service.helper.EmailSender;
 
 public class SendingMailTest {
 	// @Ignore

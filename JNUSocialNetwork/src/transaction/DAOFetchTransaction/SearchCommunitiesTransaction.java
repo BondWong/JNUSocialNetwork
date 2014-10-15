@@ -1,5 +1,7 @@
 package transaction.DAOFetchTransaction;
 
+import helper.serviceHelper.CommunitySearchMap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Community;
-import service.helper.CommunitySearchMap;
 import transaction.DAOTransaction;
 
 public class SearchCommunitiesTransaction extends DAOTransaction {

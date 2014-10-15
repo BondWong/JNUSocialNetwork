@@ -1,5 +1,7 @@
 package service;
 
+import helper.serviceHelper.SSE;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -10,7 +12,6 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.media.sse.EventOutput;
 import org.glassfish.jersey.media.sse.SseFeature;
 
-import service.helper.SSE;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteUnhandledEventTransaction;

@@ -1,4 +1,4 @@
-package service.helper;
+package helper.serviceHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,26 +9,38 @@ import java.util.Map;
 import java.util.Set;
 
 import transaction.Transaction;
-import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
+import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import utils.JsonUtil;
 
-public class CommunitySearchMap {
-	private final static String PATH = "communitysearchmap.txt";
+public class MemberSearchMap {
+	private final static String PATH = "membersearchmap.txt";
 	private static Map<String, String> searchMap = new HashMap<String, String>();
 
 	@SuppressWarnings("unchecked")
 	public static void initializeEnvironment() throws Exception {
 		if (!Files.exists(Paths.get(PATH))) {
-			Transaction transaction = new FetchCommunitiesTransaction();
-			List<Map<String, Object>> communities;
+			Transaction transaction = new FetchMembersTransaction();
+			List<Map<String, Object>> results;
 			try {
-				communities = (List<Map<String, Object>>) transaction.execute(
-						"Community.fetch", null, null, 0, 500);
-				for (Map<String, Object> community : communities)
+				results = (List<Map<String, Object>>) transaction.execute(
+						"Member.fetch", null, null, 0, 500);
+				for (Map<String, Object> result : results) {
 					addRecord(
-							((Map<String, String>) community.get("attributes"))
+							((Map<String, String>) result.get("attributes"))
 									.get("name"),
-							community.get("ID") + "");
+							(String) result.get("ID"));
+					addRecord(
+							((Map<String, String>) result.get("attributes"))
+									.get("gender"),
+							(String) result.get("ID"));
+					if (((Map<String, String>) result.get("attributes"))
+							.get("relationship") != null
+							&& !((Map<String, String>) result.get("attributes"))
+									.get("relationship").equals(""))
+						addRecord(((Map<String, String>) result
+								.get("attributes")).get("relationship"),
+								(String) result.get("ID"));
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,7 +53,7 @@ public class CommunitySearchMap {
 		if (key == null)
 			return;
 		String IDs = null;
-		synchronized (CommunitySearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			IDs = searchMap.get(key);
 		}
 		if (IDs != null) {
@@ -55,14 +67,14 @@ public class CommunitySearchMap {
 			ID = IDs.trim();
 
 		}
-		synchronized (CommunitySearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			searchMap.put(key, ID);
 		}
 	}
 
 	public static void removeRecord(String key, String ID) {
 		String IDs = null;
-		synchronized (CommunitySearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			IDs = searchMap.get(key);
 		}
 
@@ -76,7 +88,7 @@ public class CommunitySearchMap {
 					IDs += " " + tempIDs[i];
 			}
 			IDs = IDs.trim();
-			synchronized (CommunitySearchMap.class) {
+			synchronized (MemberSearchMap.class) {
 				if (IDs.length() == 0)
 					searchMap.remove(key);
 				else
@@ -88,16 +100,14 @@ public class CommunitySearchMap {
 
 	public static String[] searchIDs(String key) {
 		String IDs = "";
-		synchronized (CommunitySearchMap.class) {
+		synchronized (MemberSearchMap.class) {
 			Set<String> keys = searchMap.keySet();
-			for (String k : keys) {
+			for (String k : keys)
 				if (k.contains(key)) {
 					IDs += searchMap.get(k);
 					IDs.trim();
 					IDs += " ";
-					System.out.println(IDs);
 				}
-			}
 		}
 		if (IDs.equals(""))
 			return new String[0];
@@ -111,7 +121,7 @@ public class CommunitySearchMap {
 				Files.createFile(Paths.get(PATH));
 			}
 			Files.write(Paths.get(PATH), JsonUtil.toJson(searchMap).getBytes());
-			System.out.println("communitySearchMap:" + searchMap);
+			System.out.println("memberSearchMap:" + searchMap);
 			searchMap.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -133,4 +143,5 @@ public class CommunitySearchMap {
 			throw e;
 		}
 	}
+
 }
