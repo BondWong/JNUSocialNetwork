@@ -1246,6 +1246,69 @@ function AddImages(userID, imageLinks) {
 	});
 	return response;
 }
+//发送邮件
+function SendEmail(userID, otherUser, json) {
+	var response = "";
+	$.ajax({
+		type : "POST",
+		url :'../../app/user/sendEmail/' + userID + '/' + otherUser,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		contentType : "application/json",
+		data: json,
+		success : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
+			alert("发送成功");
+			response = status;
+		},
+		error : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
+			alert("发送失败，请重试！[一天只能发5封邮件]");
+			response = status;
+		}
+
+	});
+	return response;
+}
+function InviteToAddImage(userID, otherUser) {
+	var response = "";
+	$.ajax({
+		type : "POST",
+		url :'../../app/user/inviteToAddImage/' + userID + '/' + otherUser,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			alert("邀请成功！");
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
+function BegForConnection(userID, otherUser) {
+	var response = "";
+	$.ajax({
+		type : "POST",
+		url :'../../app/user/begForConnection/' + userID + '/' + otherUser,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			alert("TA正在考虑要不要给你，注意邮箱哦！");
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // FetchFollowees 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchFollowees(userID, startIndex, pageSize) {
 	var response = "";

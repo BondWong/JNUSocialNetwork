@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction.DAODeleteTransaction;
 
+import helper.serviceHelper.NumberManager;
+
 import javax.persistence.EntityManager;
 
 import model.Account;
@@ -8,7 +10,6 @@ import model.Community;
 import model.Member;
 import model.Post;
 import persistence.DAO;
-import service.helper.NumberManager;
 import transaction.DAOTransaction;
 
 public class DeleteMemberTransaction extends DAOTransaction {

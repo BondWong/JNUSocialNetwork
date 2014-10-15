@@ -1,5 +1,7 @@
 package transaction.DAOCreateTransaction;
 
+import helper.serviceHelper.ActivitySearchMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,6 @@ import model.Post;
 import model.Tag;
 import model.factory.ModelFactory;
 import model.modelType.PostType;
-import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
 
 public class CreatePostInCommunityTransaction extends DAOTransaction {

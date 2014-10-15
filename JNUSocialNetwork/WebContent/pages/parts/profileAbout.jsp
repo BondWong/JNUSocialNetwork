@@ -30,7 +30,7 @@
 	<div class="post about">
 		<div class="aboutRed">
 			<div>
-				<span class="aboutTitle">个人信息
+				<span class="aboutTitle" id="afC">个人信息
 					<button class="btn btn-primary aEditbtn">编辑</button>
 				</span>
 			</div>

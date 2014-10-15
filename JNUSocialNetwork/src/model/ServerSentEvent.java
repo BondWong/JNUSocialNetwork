@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-import model.modelType.SSEType;
 import utils.JsonUtil;
+import model.modelType.SSEType;
 
 @Entity
 @Access(AccessType.FIELD)

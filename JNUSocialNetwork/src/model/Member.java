@@ -1,5 +1,7 @@
 package model;
 
+import helper.serviceHelper.DesertFileLinkMap;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import service.helper.DesertFileLinkMap;
 import utils.JsonUtil;
 import model.communityOwnerFeature.CommunityOwner;
 import model.communityOwnerFeature.CommunityOwnerFeature;

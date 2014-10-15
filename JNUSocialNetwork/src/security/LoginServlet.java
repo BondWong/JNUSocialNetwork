@@ -1,5 +1,7 @@
 package security;
 
+import helper.securityHelper.UAgentInfo;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import security.helper.UAgentInfo;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;

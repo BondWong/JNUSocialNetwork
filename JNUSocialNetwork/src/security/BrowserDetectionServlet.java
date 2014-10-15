@@ -1,5 +1,7 @@
 package security;
 
+import helper.securityHelper.UAgentInfo;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
-
-import security.helper.UAgentInfo;
 
 /**
  * Servlet implementation class BrowserDetectionServlet

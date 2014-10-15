@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.EmailSender;
+
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -10,7 +12,6 @@ import model.Member;
 import model.factory.ModelFactory;
 import model.modelType.UserType;
 import persistence.DAO;
-import service.helper.EmailSender;
 import transaction.DAOTransaction;
 import utils.MD5;
 
