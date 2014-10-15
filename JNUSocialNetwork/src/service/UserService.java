@@ -47,6 +47,7 @@ import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
 import transaction.EmailTransaction.BegForConnectionTransaction;
+import transaction.EmailTransaction.EmailTransaction;
 import transaction.EmailTransaction.ProfileInvititionTransaction;
 import transaction.EmailTransaction.SendConnectionTransaction;
 import transaction.EmailTransaction.SendEmailTransaction;
@@ -604,13 +605,16 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendEmail(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID, Map emailContent) throws Exception {
-		transaction = new SendEmailTransaction();
+		transaction = new EmailTransaction(new SendEmailTransaction());
+		boolean result = true;
 		try {
-			transaction.execute(fromID, toID, emailContent.get("content"));
+			result = (boolean) transaction.execute(fromID, toID, emailContent.get("content"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		if(!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
@@ -618,15 +622,18 @@ public class UserService {
 	@POST
 	public Response inviteToAddImage(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new ProfileInvititionTransaction();
+		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		boolean result = true;
 		try {
-			transaction.execute(fromID, toID,
+			result = (boolean) transaction.execute(fromID, toID,
 					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
 							+ toID, "邀请你去添加个人照片到CampuSite");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		if(!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
@@ -634,15 +641,18 @@ public class UserService {
 	@POST
 	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new ProfileInvititionTransaction();
+		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		boolean result = true;
 		try {
-			transaction.execute(fromID, toID,
+			result = (boolean) transaction.execute(fromID, toID,
 					"去添加头像:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
 							+ toID, "邀请你去添加CampuSite账号头像");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		if(!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
@@ -650,13 +660,16 @@ public class UserService {
 	@POST
 	public Response begForConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new BegForConnectionTransaction();
+		transaction = new EmailTransaction(new BegForConnectionTransaction());
+		boolean result = true;
 		try {
-			transaction.execute(fromID, toID);
+			result = (boolean) transaction.execute(fromID, toID);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		if(!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
@@ -664,13 +677,16 @@ public class UserService {
 	@GET
 	public Response sendConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new SendConnectionTransaction();
+		transaction = new EmailTransaction(new SendConnectionTransaction());
+		boolean result = true;
 		try {
-			transaction.execute(fromID, toID);
+			result = (boolean) transaction.execute(fromID, toID);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		if(!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
