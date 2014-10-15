@@ -5,6 +5,7 @@
 				session.setAttribute("hiddenCode", System.currentTimeMillis()
 						+ "");
 			}</jsp:scriptlet>
+
 <c:choose>
 	<c:when test="${sessionScope.ID eq null or sessionScope.ID eq ''}">
 		<form class="navbar-form navbar-costom" role="form" method="post"
