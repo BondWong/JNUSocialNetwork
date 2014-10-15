@@ -21,7 +21,7 @@ public class ProfileInvititionTransaction extends DAOTransaction {
 		Member invitor = dao.get(Member.class, fromID);
 		Member member = dao.get(Member.class, toID);
 
-		String subject = invitor.getAttribute("name") + "邀请你添加照片到CampuSite";
+		String subject = invitor.getAttribute("name") + params[3];
 		String toAddr = member.getAttribute("email");
 
 		StringBuffer sb = new StringBuffer();

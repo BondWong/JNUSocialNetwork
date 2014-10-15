@@ -622,7 +622,7 @@ public class UserService {
 		try {
 			transaction.execute(fromID, toID,
 					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
-							+ toID);
+							+ toID, "邀请你去添加个人照片到CampuSite");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -637,8 +637,8 @@ public class UserService {
 		transaction = new ProfileInvititionTransaction();
 		try {
 			transaction.execute(fromID, toID,
-					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
-							+ toID);
+					"去添加头像:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
+							+ toID, "邀请你去添加CampuSite账号头像");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -661,7 +661,7 @@ public class UserService {
 	}
 
 	@Path("sendConnection/{fromID : \\d+}/{toID : \\d+}")
-	@POST
+	@GET
 	public Response sendConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
 		transaction = new SendConnectionTransaction();

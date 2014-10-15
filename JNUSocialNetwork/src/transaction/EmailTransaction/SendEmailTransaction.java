@@ -28,7 +28,7 @@ public class SendEmailTransaction extends DAOTransaction {
 		StringBuffer sb = new StringBuffer(content);
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(sender));
 
-		new EmailSender().send(subject, content, toAddr);
+		new EmailSender().send(subject, sb.toString(), toAddr);
 
 		return null;
 	}
