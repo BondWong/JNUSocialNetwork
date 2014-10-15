@@ -1,6 +1,8 @@
 package helper.serviceHelper;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -27,14 +29,14 @@ public class EmailSender {
 
 	}
 
-	public void send(String subject, String test, String to) {
+	public void send(String subject, String content, String addr) {
 		Session session = Session.getInstance(props);
 		MimeMessage msg = new MimeMessage(session);
 		try {
 			Address campusite = new InternetAddress("campusite@outlook.com",
 					COMPANYNAME);
-			Address toAddress = new InternetAddress(to, GREETING);
-			msg.setText(test);
+			Address toAddress = new InternetAddress(addr, GREETING);
+			msg.setText(content);
 			msg.setFrom(campusite);
 			msg.setRecipient(Message.RecipientType.TO, toAddress);
 			msg.setSubject(subject);
@@ -43,4 +45,28 @@ public class EmailSender {
 			ex.printStackTrace();
 		}
 	}
+
+	public void send(String subject, String content, List<String> addrs) {
+		Session session = Session.getInstance(props);
+		MimeMessage msg = new MimeMessage(session);
+		try {
+			Address campusite = new InternetAddress("campusite@outlook.com",
+					COMPANYNAME);
+			Iterator<String> iter = addrs.iterator();
+			StringBuffer sb = new StringBuffer();
+			while (iter.hasNext())
+				sb.append(iter.next() + ",");
+			String addresses = sb.substring(0, sb.lastIndexOf(","));
+			System.out.println(addresses);
+			msg.setText(content);
+			msg.setFrom(campusite);
+			msg.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(addresses));
+			msg.setSubject(subject);
+			Transport.send(msg, "campusite@outlook.com", PASSWORD);
+		} catch (MessagingException | UnsupportedEncodingException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 }
