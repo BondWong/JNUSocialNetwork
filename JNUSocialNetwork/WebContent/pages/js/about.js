@@ -873,23 +873,58 @@ $('body').on(
 $('body').on("click",".emailIt",function(){
 	var teleAlert = "";
 	if ($.parseJSON(sessionStorage.getItem("user")).attributes.email == "") {
-		teleAlert = "<div class='uploadItem'><span>个人邮箱：</span><input type='email' style='margin-bottom:20px;width:80%;' class='form-control' placeholder='个人邮箱未填写，请填写自己的邮箱' id='email' autocomplete='off' data-errormessage-value-missing='请输入自己的邮箱号，才能发送邮件哦' data-errormessage-pattern-mismatch='请输入邮箱' required autofocus /></div>";
+		teleAlert = "<form class='emailForm' role='form' onsubmit='return false;'><div class='uploadItem'><span>个人邮箱：</span><input type='email' style='margin-bottom:20px;width:80%;' class='form-control' placeholder='个人邮箱未填写，请填写自己的邮箱' id='email' autocomplete='off' data-errormessage-value-missing='请输入自己的邮箱号，才能发送邮件哦' data-errormessage-pattern-mismatch='请输入邮箱' required autofocus /></div>";
 	}
 	$(this).attr("data-toggle", "modal");
 	$(this).attr("data-target", "#emailmodal");
-	var board = "<div class='modal fade' id='emailmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>发送邮件</h4></div><form class='uploadForm' role='form' onsubmit='return false;'><div class='modal-body'>"
+	var board = "<div class='modal fade' id='emailmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>发送邮件</h4></div><div class='modal-body'>"
 			+ teleAlert
-			+ "<div class='uploadItem'><span>E-mail内容：</span><textarea class='emailContent' style='resize:none;width: 455px;'></textarea></div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='emailSend' value='upload'>确认</button></div></form></div></div></div>";
+			+ "<div class='uploadItem'><span>E-mail内容：</span><textarea data-errormessage-value-missing='请输入自己的邮箱号，才能发送邮件哦' class='emailContent' style='resize:none;width: 455px;' required></textarea></div></div><div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button><button type='submit' class='btn btn-primary' id='emailSend' value='upload'>确认</button></div></div></div></div></form>";
 	$('body').append(board);
 });
-
+$('body').on("click","#emailSend",function(){
+	if( $('#email').length != 0 && $('#email').val() != "" ){
+		var email = {email:$('#email').val()};
+		UpdateUserProfile(USERID, $.toJSON(email));
+	}
+	if($('.emailContent').val()!=""){
+		var content= {
+				content : $('.emailContent').val()
+		};
+		$('.layer2').fadeIn(300);
+		$('#infinite_loader2').fadeIn(300);
+		SendEmail(USERID,userID,$.toJSON(content));
+		$('#emailmodal').modal('hide');
+	}
+});
+$('body').on("click",".profileAImg",function(){
+	InviteToAddImage(USERID,userID);
+});
+$('body').on("click",".begC",function(){
+	if($.parseJSON(sessionStorage.getItem("user")).attributes.email == ""){
+		$(this).attr("data-toggle", "modal");
+		$(this).attr("data-target", "#emailCmodal");
+		var alertA = "<div class='modal fade' id='emailCmodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>先填写自己的邮箱</h4></div><div class='modal-body modal-custom'><form class='emailFormA' role='form' onsubmit='return false;'><input type='email'  class='form-control' placeholder='请输入邮箱' id='emailA' autocomplete='off' data-errormessage-value-missing='请输入邮箱' data-errormessage-pattern-mismatch='请输入正确邮箱' required autofocus /><button class='btn btn-lg btn-success btn-block emailUpload' type='submit'>确认</button></form></div></div></div></div>";
+	$('body').append(alertA);
+	}else{
+		BegForConnection(USERID,userID);
+	}
+});
+$('body').on("click",".emailUpload",function(){
+	var email = {email:$('#emailA').val()};
+	if($('.emailFormA')[0].checkValidity()){
+		UpdateUserProfile(USERID, $.toJSON(email));
+		BegForConnection(USERID,userID);
+		$('#emailCmodal').modal('hide');
+	}
+});
 // fetchUserByID
 function fetchUserByID() {
 	var userInfo = FetchUserByID(userID);
 	if ($.inArray(USERID, userInfo.followerIDs) != -1) {
 		$('.followBtnAB').text("Following");
 	}
-	if(userInfo.attributes.email != "" && USERID != userID && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER'){
+	if(userInfo.attributes.email != "" && USERID != userID && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && userInfo.userType != 'COMMUNITYOWNER'){
 		$('.sayHi').after("<button class='btn btn-default emailIt' >E-mail</button>");
 	}
 	if (USERID == userID) {
@@ -903,8 +938,7 @@ function fetchUserByID() {
 			if (con == true) {
 				if (RemoveLookingForTag(USERID, $(this).text()) == "success") {
 					$(this).remove();
-				}
-				;
+				};
 			}
 		});
 		$('.photoAddBtn').css("display", "inline");
@@ -914,7 +948,7 @@ function fetchUserByID() {
 		$('.profile_img')
 				.hover(
 						function() {
-							var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success profileImgBtn' data-toggle='modal' data-target='#userbg-modal'>Change BlackgroundImg</button></div>";
+							var changeBtn = "<div class='changeBtnGroup'><button class='btn btn-success Btn' data-toggle='modal' data-target='#userbg-modal'>Change BlackgroundImg</button></div>";
 							$('.profileImgDiv').after(changeBtn);
 							$('.changeBtnGroup').hide();
 							$('.changeBtnGroup').fadeIn(300);
@@ -949,6 +983,29 @@ function fetchUserByID() {
 		$('.Abirth').html(
 				userInfo.attributes.year + "/" + userInfo.attributes.month
 						+ "/" + userInfo.attributes.date);
+	}else{
+		if($.parseJSON(userInfo.attributes.avatarLink).src == "images/default/default-user-avartar.png"){
+			$('.profile_user_img')
+			.hover(
+					function() {
+						var pos = $(this).offset();
+						var nPos = pos;
+						nPos.top = pos.top;
+						nPos.left = pos.left + 10;
+						var changeBtn = "<div class='img-circle profileAImg'><span style='font-size:20px;'>一起求头像!</span></div>";
+						$(this).append(changeBtn);
+						$('.profileAImg').css(nPos);
+						$('.profileAImg').hide();
+						$('.profileAImg').fadeIn(300);
+					}, function() {
+						$('.profileAImg').fadeOut(1, function() {
+							$(this).remove();
+						});
+					});
+		}
+		if((userInfo.attributes.wechat == "" && userInfo.attributes.email == "" && userInfo.attributes.telnum =="") || (userInfo.attributes.selectWechat !="公开" && userInfo.attributes.selectEmail != "公开") && userInfo.attributes.selectTele !="公开"){
+			$('#afC').append("<button class='btn btn-primary begC'>求联系方式</button>");
+		}
 	}
 	$.each(userInfo.lookingForTags, function(n, tag) {
 		var tagS = "<span title='" + tag + "' class='tagItem'>" + tag
