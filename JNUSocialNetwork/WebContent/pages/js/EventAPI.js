@@ -1282,7 +1282,7 @@ function InviteToAddImage(userID, otherUser) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data, status) {
-			alert("邀请成功！");
+			response = status;
 		},
 		error : function(data, status) {
 			response = status;

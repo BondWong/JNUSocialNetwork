@@ -13,7 +13,7 @@
 			<div class="collapse navbar-collapse">
 				<%@ include file="parts/communityDropDown.jsp"%>
 
-				<%@ include file="parts/navRightProfile.jsp"%>
+				<%@ include file="parts/navRight.jsp"%>
 			</div>
 			<!-- /.nav-collapse -->
 		</div>

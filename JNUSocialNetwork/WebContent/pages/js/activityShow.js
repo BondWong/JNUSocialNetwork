@@ -86,6 +86,7 @@ function showActivityDetail(activity, community) {
 
 	$('.activityShowName').html(activity.attributes.activityName);
 	$('.aT').html(activity.attributes.activityTime);
+	$('.aI').html(activity.attributes.inquery);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
 	$('.activityShowD').html(
 			"<pre>" + "&nbsp;" + activity.attributes.activityMore + "</pre>");
@@ -287,6 +288,7 @@ $('body').on("click", ".editActivity", function() {
 	$('#activityAddr').val(activity.attributes.activityAddr);
 	$('#activityMore').val(activity.attributes.activityMore);
 	$('#activityNum').val(activity.attributes.limitation);
+	$('#inquery').val(activity.attributes.inquery);
 	dataPicker();
 });
 
@@ -375,6 +377,7 @@ $('body')
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
 								limitation : $('#activityNum').val(),
+								inquery : $('#inquery').val(),
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0]
 							};
@@ -393,7 +396,8 @@ $('body')
 								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
-								limitation : $('#activityNum').val()
+								limitation : $('#activityNum').val(),
+								inquery : $('#inquery').val()
 							};
 						}
 
@@ -413,6 +417,7 @@ $('body')
 										"&nbsp;" + aup.attributes.activityAddr);
 								$('.activityShowD').html(
 										"&nbsp;" + aup.attributes.activityMore);
+								$('.aA').html("&nbsp;" + aup.attributes.inquery);
 								$('.activityHead')
 										.find('img')
 										.attr(

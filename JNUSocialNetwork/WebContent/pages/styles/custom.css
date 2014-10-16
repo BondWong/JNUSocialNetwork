@@ -1362,7 +1362,13 @@ body {
 	margin-top: 5px;
 	font-size: 16px;
 }
-
+.inquery{
+	margin-right: auto;
+	margin-left: auto;
+	width: 90%;
+	margin-top: 5px;
+	font-size: 16px;
+}
 .activityShowTime {
 	margin-top: 5px;
 	font-size: 16px;
