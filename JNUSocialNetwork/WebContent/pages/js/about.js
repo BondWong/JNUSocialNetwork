@@ -900,8 +900,9 @@ $('body').on("click","#emailSend",function(){
 	}
 });
 $('body').on("click",".profileAImg",function(){
+	$('.layer2').fadeIn(300);
+	$('#infinite_loader2').fadeIn(300);
 	InviteToAddImage(USERID,userID);
-	alert("邀请成功！");
 });
 $('body').on("click",".begC",function(){
 	if($.parseJSON(sessionStorage.getItem("user")).attributes.email == ""){
@@ -919,6 +920,7 @@ $('body').on("click",".emailUpload",function(){
 		UpdateUserProfile(USERID, $.toJSON(email));
 		BegForConnection(USERID,userID);
 		$('#emailCmodal').modal('hide');
+		alert("TA正在考虑要不要给你，注意邮箱哦！");
 	}
 });
 // fetchUserByID
@@ -927,7 +929,7 @@ function fetchUserByID() {
 	if ($.inArray(USERID, userInfo.followerIDs) != -1) {
 		$('.followBtnAB').text("Following");
 	}
-	if(userInfo.attributes.email != "" && USERID != userID && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && userInfo.userType != 'COMMUNITYOWNER'){
+	if(USERID != "" && userInfo.attributes.email != "" && USERID != userID && $.parseJSON(sessionStorage.getItem("user")).userType != 'COMMUNITYOWNER' && userInfo.userType != 'COMMUNITYOWNER'){
 		$('.sayHi').after("<button class='btn btn-default emailIt' >E-mail</button>");
 	}
 	if (USERID == userID) {
