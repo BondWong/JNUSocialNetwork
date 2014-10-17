@@ -10,6 +10,7 @@
 			<div class="followerContainer"><div class="followerBoard"></div></div>
 		</div>
 	</div>
+	<br clear="all" /> 
 	<div class="post about">
 		<div class="aboutRed followeeShow">
 			<div>
@@ -18,4 +19,5 @@
 			<div class="followeeContainer"><div class="followeeBoard"></div></div>
 		</div>
 	</div>
+	<br clear="all" /> 
 </div>
