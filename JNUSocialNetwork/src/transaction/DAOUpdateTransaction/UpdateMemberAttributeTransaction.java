@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.MemberSearchMap;
+
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -7,7 +9,6 @@ import javax.persistence.EntityManager;
 import model.AttributeModel;
 import model.Member;
 import persistence.DAO;
-import service.helper.MemberSearchMap;
 import transaction.DAOTransaction;
 
 public class UpdateMemberAttributeTransaction extends DAOTransaction {

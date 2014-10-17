@@ -1,5 +1,8 @@
 package service;
 
+import helper.securityHelper.ContentEncoder;
+import helper.serviceHelper.HeheUser;
+
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
@@ -20,8 +23,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
-import security.helper.ContentEncoder;
-import service.helper.HeheUser;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
@@ -29,6 +30,7 @@ import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
 import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
+import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
@@ -44,6 +46,11 @@ import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
+import transaction.EmailTransaction.BegForConnectionTransaction;
+import transaction.EmailTransaction.EmailTransaction;
+import transaction.EmailTransaction.ProfileInvititionTransaction;
+import transaction.EmailTransaction.SendConnectionTransaction;
+import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
 
 @Path("/user")
@@ -553,7 +560,7 @@ public class UserService {
 			@PathParam("tagContent") String tagContent,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchMembersTransaction();
+		transaction = new FetchMembersWithShuffleTransaction();
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(
@@ -590,6 +597,97 @@ public class UserService {
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
 
+	}
+
+	@SuppressWarnings({ "rawtypes" })
+	@Path("sendEmail/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response sendEmail(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID, Map emailContent) throws Exception {
+		transaction = new EmailTransaction(new SendEmailTransaction());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(fromID, toID, emailContent.get("content"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(!result)
+			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("inviteToAddImage/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response inviteToAddImage(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(fromID, toID,
+					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
+							+ toID, "邀请你去添加个人照片到CampuSite");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(!result)
+			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("inviteToAddAvatar/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(fromID, toID,
+					"去添加头像:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
+							+ toID, "邀请你去添加CampuSite账号头像");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(!result)
+			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("begForConnection/{fromID : \\d+}/{toID : \\d+}")
+	@POST
+	public Response begForConnection(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new EmailTransaction(new BegForConnectionTransaction());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(fromID, toID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(!result)
+			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("sendConnection/{fromID : \\d+}/{toID : \\d+}")
+	@GET
+	public Response sendConnection(@PathParam("fromID") String fromID,
+			@PathParam("toID") String toID) throws Exception {
+		transaction = new EmailTransaction(new SendConnectionTransaction());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(fromID, toID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if(!result)
+			return Response.status(401).build();
+		return Response.ok().build();
 	}
 
 	@SuppressWarnings("rawtypes")

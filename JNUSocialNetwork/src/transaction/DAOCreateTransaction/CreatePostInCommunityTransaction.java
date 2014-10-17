@@ -1,7 +1,11 @@
 package transaction.DAOCreateTransaction;
 
+import helper.serviceHelper.ActivitySearchMap;
+
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.persistence.EntityManager;
 
@@ -12,8 +16,9 @@ import model.Post;
 import model.Tag;
 import model.factory.ModelFactory;
 import model.modelType.PostType;
-import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
+import transaction.Transaction;
+import transaction.EmailTransaction.ActivityNotificationTransaction;
 
 public class CreatePostInCommunityTransaction extends DAOTransaction {
 
@@ -42,6 +47,32 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 					.parseLong((String) ((Map<String, Object>) params[3])
 							.get("remindDate")));
 			ActivitySearchMap.serialize();
+
+			StringBuffer sb = new StringBuffer();
+			sb.append("\"" + community.getAttribute("name") + "\"社区发布了活动："
+					+ "\"" + post.getAttribute("activityName") + "\"");
+			sb.append(System.getProperty("line.separator"));
+			sb.append(System.getProperty("line.separator"));
+			sb.append("查看详情：http://www.campusite.com.cn/pages/activityShow.jsp?"
+					+ community.getID() + "&" + post.getID());
+			final String content = sb.toString();
+
+			ExecutorService es = Executors.newSingleThreadExecutor();
+			es.execute(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Transaction transaction = new ActivityNotificationTransaction();
+					try {
+						transaction.execute(content);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			});
 		}
 
 		return post.toRepresentation();

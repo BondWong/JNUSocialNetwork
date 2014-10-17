@@ -1,5 +1,8 @@
 package service;
 
+import helper.securityHelper.ContentEncoder;
+import helper.serviceHelper.DepartmentsInfoManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +22,6 @@ import javax.ws.rs.core.Response;
 import model.Community;
 import model.ServerSentEvent;
 import model.modelType.CommunityType;
-import security.helper.ContentEncoder;
-import service.helper.DepartmentsInfoManager;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;

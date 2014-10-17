@@ -1,12 +1,13 @@
 package transaction.DAOFetchTransaction;
 
+import helper.serviceHelper.NumberManager;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-import service.helper.NumberManager;
 import transaction.DAOTransaction;
 
 public class RandomlyFetchMemberTransaction extends DAOTransaction {

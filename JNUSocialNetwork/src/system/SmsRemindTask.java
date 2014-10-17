@@ -140,9 +140,14 @@ public class SmsRemindTask implements Runnable {
 				+ "开始，地点是"
 				+ ((Map<String, String>) activity.get("attributes"))
 						.get("activityAddr")
+				+ "，如有问题请联系"
+				+ ((Map<String, String>) activity.get("attributes"))
+						.get("inquery")
+
 				+ "。[来自CampuSite\""
 				+ ((Map<String, String>) activity.get("attributes"))
 						.get("communityName") + "\"]";
+		msgContent = java.net.URLEncoder.encode(msgContent, "UTF-8");
 		// 组建请求
 		String straddr = addr
 				+ "?uid="

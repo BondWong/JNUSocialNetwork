@@ -37,8 +37,6 @@ public class InstitutionRecommendationTransaction extends DAOTransaction {
 					&& mattributes.get("institution") != null
 					&& mattributes.get("institution").equals(
 							memberAttributes.get("institution"))
-					&& !((List<String>) member.get("followeeIDs")).contains(m
-							.get("ID"))
 					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}

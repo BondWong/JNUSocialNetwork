@@ -74,18 +74,19 @@ function showActivityDetail(activity, community) {
 				"href",
 				"../app/fileDownloader?type=ACTIVITYREGISTERS&activityID="
 						+ activity.ID);
-		$('.joinSActivity')
+		/*$('.joinSActivity')
 				.replaceWith(
 						"<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="
 								+ activity.ID
 								+ "' class='btn btn-default dlR' id='"
 								+ activity.ID
 								+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
-								+ activity.ID + "'>上传报名表</a></div>");
+								+ activity.ID + "'>上传报名表</a></div>");*/
 	}
 
 	$('.activityShowName').html(activity.attributes.activityName);
 	$('.aT').html(activity.attributes.activityTime);
+	$('.aI').html(activity.attributes.inquery);
 	$('.aA').html("&nbsp;" + activity.attributes.activityAddr);
 	$('.activityShowD').html(
 			"<pre>" + "&nbsp;" + activity.attributes.activityMore + "</pre>");
@@ -218,26 +219,26 @@ $('body')
 				});
 $('body').on('click', '.joinSActivity', function() {
 	if (FetchUserByID(USERID).attributes.telnum != "") {
-		if ($(this).css("background-color") == "rgb(235, 235, 235)") {
+		if ($(this).css("background-color") == "rgb(230, 230, 230)") {
 			$(this).css("color", "rgb(255, 255, 255)");
 			$(this).css("background-color", "rgb(66,139,202)");
 			$(this).text("已经参加");
-			var response = JoinActivity(USERID, activityID);
+			var response = JoinActivity(USERID, activity.ID);
 			if (response == 'success') {
 				alert("参加成功！");
 			}
 			return 0;
 		} else {
 			$(this).css("color", "rgb(51,51,51)");
-			$(this).css("background-color", "rgb(235, 235, 235)");
+			$(this).css("background-color", "rgb(230, 230, 230)");
 			$(this).text("参加活动");
-			LeaveActivity(USERID, activityID);
+			LeaveActivity(USERID, activity.ID);
 			return 0;
 		}
 	} else {
 		$(this).attr("data-toggle", "modal");
 		$(this).attr("data-target", "#telemodal");
-		teleAlert2(activityID);
+		teleAlert2(activity.ID);
 	}
 
 });
@@ -247,7 +248,7 @@ $('body').on("click", ".teleUpload2", function() {
 	};
 	if ($('.teleForm')[0].checkValidity()) {
 		UpdateUserProfile(USERID, $.toJSON(dataString));
-		var response = JoinActivity(USERID, activityID);
+		var response = JoinActivity(USERID, activity.ID);
 		if (response == 'success') {
 			alert("参加成功！");
 		}
@@ -287,6 +288,7 @@ $('body').on("click", ".editActivity", function() {
 	$('#activityAddr').val(activity.attributes.activityAddr);
 	$('#activityMore').val(activity.attributes.activityMore);
 	$('#activityNum').val(activity.attributes.limitation);
+	$('#inquery').val(activity.attributes.inquery);
 	dataPicker();
 });
 
@@ -375,6 +377,7 @@ $('body')
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
 								limitation : $('#activityNum').val(),
+								inquery : $('#inquery').val(),
 								background : FileUpload(new FormData(
 										$('.activityForm')[0]))[0]
 							};
@@ -393,7 +396,8 @@ $('body')
 								activityRemindTime : $('#activityRemind').val(),
 								activityAddr : $('#activityAddr').val(),
 								activityMore : $('#activityMore').val(),
-								limitation : $('#activityNum').val()
+								limitation : $('#activityNum').val(),
+								inquery : $('#inquery').val()
 							};
 						}
 
@@ -413,6 +417,7 @@ $('body')
 										"&nbsp;" + aup.attributes.activityAddr);
 								$('.activityShowD').html(
 										"&nbsp;" + aup.attributes.activityMore);
+								$('.aA').html("&nbsp;" + aup.attributes.inquery);
 								$('.activityHead')
 										.find('img')
 										.attr(

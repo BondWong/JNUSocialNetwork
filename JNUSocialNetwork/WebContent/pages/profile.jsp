@@ -13,7 +13,7 @@
 			<div class="collapse navbar-collapse">
 				<%@ include file="parts/communityDropDown.jsp"%>
 
-				<%@ include file="parts/navRightProfile.jsp"%>
+				<%@ include file="parts/navRight.jsp"%>
 			</div>
 			<!-- /.nav-collapse -->
 		</div>
@@ -41,7 +41,7 @@
 						<form enctype="multipart/form-data">
 							<input class="form-control share_txt" type="text"
 								placeholder="说些什么？...." data-toggle='modal'
-								data-target='#addPostModal' maxLength="200" />
+								data-target='#addPostModal' />
 							<div class="shareBtnGroup">
 								<div role="button" class="Btnshare btnMotion"
 									data-toggle='modal' data-target='#addPostModal'>
@@ -84,7 +84,7 @@
 										onsubmit="return false;">
 										<div class="modal-body modalBody">
 											<textarea class="form-control share_txt2" id="share_txt2"
-												type="text" style="resize: none;" maxLength="200" required></textarea>
+												type="text" style="resize: none;"  required></textarea>
 											<br>
 											<!-- The fileinput-button span is used to style the file input field as button -->
 											<span class="btn btn-success fileinput-button"> <i
@@ -124,6 +124,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<%@ include file="parts/profileJavaScript.jsp"%>
+	<%@ include file="parts/contentScroll.jsp"%>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<%@ include file="parts/baidu.jsp"%>
 </body>

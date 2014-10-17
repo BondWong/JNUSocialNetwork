@@ -1,5 +1,8 @@
 package service;
 
+import helper.serviceHelper.extensionManager.ExtensionManager;
+import helper.serviceHelper.extensionManager.MultiMediaExtensionManager;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +28,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.google.gson.reflect.TypeToken;
-
-import service.helper.extensionManager.ExtensionManager;
-import service.helper.extensionManager.MultiMediaExtensionManager;
 import utils.JsonUtil;
+
+import com.google.gson.reflect.TypeToken;
 
 @WebServlet("/app/fileUploader")
 public class ImageUploadService extends HttpServlet {
@@ -136,13 +137,13 @@ public class ImageUploadService extends HttpServlet {
 
 			int size = (int) (uploaddedFile.length() / (1024 * 1024));
 			if (size >= 1)
-				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
-			else if (size > 1 && size <= 2)
-				Thumbnails.of(uploaddedFile).scale(0.6f).toFile(uploaddedFile);
-			else if (size > 2 && size <= 3)
-				Thumbnails.of(uploaddedFile).scale(0.5f).toFile(uploaddedFile);
-			else if (size > 3)
 				Thumbnails.of(uploaddedFile).scale(0.4f).toFile(uploaddedFile);
+			else if (size > 1 && size <= 2)
+				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(uploaddedFile);
+			else if (size > 2 && size <= 3)
+				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
+			else if (size > 3)
+				Thumbnails.of(uploaddedFile).scale(0.1f).toFile(uploaddedFile);
 			BufferedImage bi = ImageIO.read(uploaddedFile);
 
 			if (cropData != null) {

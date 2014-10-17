@@ -111,6 +111,13 @@
 										</select>
 									</div>
 							<div class="activityItem">
+										<span>联系电话：</span><input type="text"
+											class="form-control activityInput" placeholder=""
+											id="inquery" pattern="[0-9]{11}"
+											data-errormessage-pattern-mismatch="请输入手机号码" required
+											autofocus maxLength="11" />
+									</div>
+							<div class="activityItem">
 								<span>人数上限：</span><input type="text"
 									class="form-control activityInput" placeholder=""
 									id="activityNum" pattern="[0-9]{1,3}"
@@ -183,6 +190,10 @@
 						<div>
 							<span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span
 								class="aT"></span>
+						</div>
+						<div>
+							<span class="glyphicon glyphicon-phone activityShowTime">&nbsp;</span><span
+								class="aI"></span>
 						</div>
 						<div>
 							<span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span

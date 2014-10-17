@@ -28,7 +28,7 @@
 					style="cursor: pointer;font-size:20px;"></span> <span><input class='searchInput' placeholder='请输入社区ID或名称 ' maxLength='20'></span>
 			</div>
 			<a href="community.jsp?nav=mycommunity" class="peopeleType peopeleTypeHover">我的社区</a>
-			<a href="community.jsp?nav=discovery" class="peopeleType">热门社区</a>
+			<a href="community.jsp?nav=discovery" class="peopeleType discoveryC">热门社区</a>
 			<a href="community.jsp?nav=entertainment" class="peopeleType peopeleTypeS entertainmentC">娱乐类</a>
 			<a href="community.jsp?nav=athletic" class="peopeleType peopeleTypeS athleticC">体育类</a>
 			<a href="community.jsp?nav=academic" class="peopeleType peopeleTypeS academicC">学术类</a>

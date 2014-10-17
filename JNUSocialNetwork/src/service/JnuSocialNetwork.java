@@ -1,5 +1,7 @@
 package service;
 
+import helper.serviceHelper.AccessControlAllowOriginReponseFilter;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -8,8 +10,6 @@ import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
-
-import service.helper.AccessControlAllowOriginReponseFilter;
 
 @ApplicationPath("/app")
 public class JnuSocialNetwork extends Application {

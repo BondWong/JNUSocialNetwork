@@ -78,6 +78,7 @@ public class AttributesFactory {
 				attributes.put("topic", "");
 				attributes.put("content", "");
 				attributes.put("startDate", "");
+				attributes.put("inquery", "");
 				attributes.put("reminded", "false");
 				attributes.put("limitation", "50");
 				attributes.put("activityType", "NONE");

@@ -1,10 +1,11 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.EmailSender;
+
 import javax.persistence.EntityManager;
 
 import model.Application;
 import persistence.DAO;
-import service.helper.EmailSender;
 import transaction.DAOTransaction;
 
 public class RejectApplicationTransaction extends DAOTransaction {

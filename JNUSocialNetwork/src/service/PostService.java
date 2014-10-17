@@ -1,5 +1,7 @@
 package service;
 
+import helper.securityHelper.ContentEncoder;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -20,7 +22,6 @@ import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
 import model.modelType.PostType;
-import security.helper.ContentEncoder;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
