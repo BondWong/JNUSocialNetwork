@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
 
 						response.addCookie(cookie);
 						if (origin.equals(null) || origin.equals(""))
-							response.sendRedirect("/pages/community.jsp?nav=mycommunity");
+							response.sendRedirect("/pages/activity.jsp?nav=discovery");
 						else
 							response.sendRedirect(origin.substring(origin
 									.indexOf("/pages")));

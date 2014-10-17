@@ -137,13 +137,13 @@ public class ImageUploadService extends HttpServlet {
 
 			int size = (int) (uploaddedFile.length() / (1024 * 1024));
 			if (size >= 1)
-				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
-			else if (size > 1 && size <= 2)
-				Thumbnails.of(uploaddedFile).scale(0.6f).toFile(uploaddedFile);
-			else if (size > 2 && size <= 3)
-				Thumbnails.of(uploaddedFile).scale(0.5f).toFile(uploaddedFile);
-			else if (size > 3)
 				Thumbnails.of(uploaddedFile).scale(0.4f).toFile(uploaddedFile);
+			else if (size > 1 && size <= 2)
+				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(uploaddedFile);
+			else if (size > 2 && size <= 3)
+				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
+			else if (size > 3)
+				Thumbnails.of(uploaddedFile).scale(0.1f).toFile(uploaddedFile);
 			BufferedImage bi = ImageIO.read(uploaddedFile);
 
 			if (cropData != null) {
