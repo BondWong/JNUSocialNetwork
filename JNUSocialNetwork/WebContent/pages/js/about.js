@@ -506,7 +506,7 @@ function aboutClickEvent() {
 					campus = "GuangzhouCampus";
 				}
 
-				var dormInfo = GetDormInfo(campus);
+				var dormInfo = GetDormInfo("ZhuhaiCampus");
 				var option = "<option value=''>请选择</option>";
 				$.each(dormInfo, function(index, dorm) {
 					option = option + "<option value='" + dorm + "'>" + dorm
@@ -743,13 +743,12 @@ function showPhotos() {
 function showFollowees() {
 	var response = FetchFollowees(userID, "0", "30");
 	$.each(response, function(index, followee) {
-		if (follower.available == true) {
+		if (followee.available == true) {
 			var followeeDiv = addFollow(followee.ID,
 					followee.attributes.avatarLink, followee.attributes.name);
 	
 			$('.followeeBoard').after(followeeDiv);
 			Msnry('.followeeContainer', '.member', 215);
-			$('.followName').userTips();
 		}
 	});
 }
@@ -762,7 +761,6 @@ function showFollowers() {
 					follower.attributes.avatarLink, follower.attributes.name);
 			$('.followerBoard').after(followeeDiv);
 			Msnry('.followerContainer', '.member', 215);
-			$('.followName').userTips();
 		}
 	});
 }
@@ -776,6 +774,10 @@ function addFollow(id, avatarLink, name) {
 			+ "' name='userID'/></div>";
 	return followDiv;
 }
+$('body').on("click",".followName",function(){
+	window.location.href = 'profile.jsp?nav=about&'
+		+ $(this).next().val();
+});
 var pageSize = 15;
 // function fetchPostsByOwner()
 function fetchPostsByOwner() {
