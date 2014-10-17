@@ -1,5 +1,7 @@
 package model;
 
+import helper.serviceHelper.DesertFileLinkMap;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import service.helper.DesertFileLinkMap;
 import utils.JsonUtil;
 import model.communityOwnerFeature.CommunityOwner;
 import model.communityOwnerFeature.CommunityOwnerFeature;
@@ -45,7 +46,7 @@ import model.structure.Image;
 		@NamedQuery(name = "Member.fetchMembers", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.userType = model.modelType.UserType.MEMBER"),
 		@NamedQuery(name = "Member.fetchIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 1"),
 		@NamedQuery(name = "Member.fetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 ORDER BY SIZE(m.followers) DESC"),
-		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 AND m NOT IN (SELECT f FROM Member o JOIN o.followees f WHERE o.ID = ?1) ORDER BY SIZE(m.followers) DESC"),
+		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.fetchByLookingForTag", query = "SELECT m FROM Tag t JOIN t.lookingForUsers m WHERE t.ID = ?1"),
 		@NamedQuery(name = "Member.fetchLookingForTags", query = "SELECT t FROM Member m JOIN m.lookingForTags t WHERE m.available = 1 AND m.ID = ?1"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),

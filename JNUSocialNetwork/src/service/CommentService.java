@@ -1,5 +1,7 @@
 package service;
 
+import helper.securityHelper.ContentEncoder;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.ServerSentEvent;
-import security.helper.ContentEncoder;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchCommentTransaction;

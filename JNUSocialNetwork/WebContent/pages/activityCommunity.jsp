@@ -126,7 +126,7 @@
 						<form class="activityForm" id="newActivity" enctype="multipart/form-data"
 							onsubmit="return false;"
 							style="position: relative; overflow: hidden;">
-							<div class="modal-body modalBody" style="height: 510px;">
+							<div class="modal-body modalBody" style="height: 580px;">
 								<div class="innerNav" style="display: none; visibility: hidden">
 									<hr />
 									<ul>
@@ -189,6 +189,13 @@
 											<option value="ATHLETIC">体育类</option>
 											<option value="ACADEMIC">学术类</option>
 										</select>
+									</div>
+									<div class="activityItem">
+										<span>联系电话：</span><input type="text"
+											class="form-control activityInput" placeholder=""
+											id="inquery" pattern="[0-9]{11}"
+											data-errormessage-pattern-mismatch="请输入手机号码" required
+											autofocus maxLength="11" />
 									</div>
 									<div class="activityItem">
 										<span>人数上限：</span><input type="text"

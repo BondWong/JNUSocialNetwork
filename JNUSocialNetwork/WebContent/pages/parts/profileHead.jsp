@@ -9,11 +9,13 @@
                 <div class="profile_user_name">
                     <strong></strong>
                 </div>
+                 <div class='followInfo'><span class='followNum'></span><span>&nbsp;粉丝</span>
+               
+                </div>
                 <div class='followBtnA'>
-                    <button class='btn btn-danger followBtnAB'>Follow</button>
+                    <button class='btn btn-default followBtnAB'>Follow</button> <button class="btn btn-default sayHi" >Say Hi</button> 
                 </div>
-                <div class='followInfo'><span class='followNum'>4</span><span>&nbsp;粉丝</span>
-                </div>
+               
 
                 <!-- Cropping avatar modal -->
                 <div class="modal fade" id="avatar-modal" tabindex="-1" role="dialog" aria-labelledby="avatar-modal-label" aria-hidden="true">

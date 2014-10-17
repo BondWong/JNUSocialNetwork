@@ -68,7 +68,7 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("join failed! " + textStatus + " " + errorThrown);
-                displayAlert($("#errorAlert"), "未知错误，加入失败，抱歉！");
+                displayAlert($("#errorAlert"), "未知错误，加入失败，抱歉！");
             }
         });
     }
@@ -126,6 +126,13 @@
         if ($.inArray(window.USERID, data.participantIDs) >= 0) {
             switchButtonState($(".join-btn", $genearatedLI));
         }
+        if (data.participantIDs.length === data.attributes.limitation) {
+            $(".join-btn", $genearatedLI).prop("disabled", true).html("人数已满");
+        }
+        if (data.attributes.startDate - new Date().getTime() <= 0) {
+            $(".join-btn", $genearatedLI).prop("disabled", true).html("已过期");
+        }
+
         console.log($genearatedLI.get(0));
         $('#activity-list').append($genearatedLI[0]);
     }

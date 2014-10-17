@@ -1,5 +1,8 @@
 package transaction.DAOCreateTransaction;
 
+import helper.serviceHelper.CommunitySearchMap;
+import helper.serviceHelper.NumberManager;
+
 import java.util.HashMap;
 
 import javax.persistence.EntityManager;
@@ -9,8 +12,6 @@ import model.Member;
 import model.factory.ModelFactory;
 import model.modelType.UserType;
 import persistence.DAO;
-import service.helper.CommunitySearchMap;
-import service.helper.NumberManager;
 import transaction.DAOTransaction;
 
 public class CreateCommunityTransaction extends DAOTransaction {

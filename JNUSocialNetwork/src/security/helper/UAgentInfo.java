@@ -149,7 +149,7 @@ public class UAgentInfo {
 	public static final String msie8 = "msie 8.0";
 	public static final String msie9 = "msie 9.0";
 	public static final String msie10 = "msie 10.0";
-	public static final String msie11 = "Trident/7.0; rv:11.0";
+	public static final String msie11 = "trident/7.0; rv:11.0";
 	public static final String firefox = "firefox";
 	public static final String safari = "apple";
 	public static final String chrome = "chrome";
@@ -173,6 +173,8 @@ public class UAgentInfo {
 		if (httpAccept != null) {
 			this.httpAccept = httpAccept.toLowerCase();
 		}
+		System.out.println("userAgent:" + this.userAgent);
+		System.out.println("httpAccept:" + this.httpAccept);
 	}
 
 	/**

@@ -484,7 +484,7 @@ body {
 }
 .followBtnA{
 	margin: 5px auto auto;
-	width: 50%;
+	width: 90%;
 	text-align: center;
 }
 .followInfo{
@@ -613,7 +613,10 @@ body {
 	float: right;
 	display: none;
 }
-
+.begC {
+	margin-right: 50px;
+	float: right;
+}
 .aEditbtn2 {
 	margin-right: 50px;
 	float: right;
@@ -1331,7 +1334,7 @@ body {
 }
 .uploadItem>span {
 	float: left;
-	width: 70px;
+	width: 80px;
 	text-align: right;
 }
 .activityName {
@@ -1359,7 +1362,13 @@ body {
 	margin-top: 5px;
 	font-size: 16px;
 }
-
+.inquery{
+	margin-right: auto;
+	margin-left: auto;
+	width: 90%;
+	margin-top: 5px;
+	font-size: 16px;
+}
 .activityShowTime {
 	margin-top: 5px;
 	font-size: 16px;
@@ -1390,6 +1399,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	width: 90%;
+	text-align:right;
 }
 
 .activityAsk>span {
@@ -1742,7 +1752,22 @@ a.footer-cname:active {
 	opacity: .80;
 	filter: alpha(opacity = 93);
 }
-
+.profileAImg {
+	padding-top: 30px;
+	cursor: pointer;
+	position: absolute;
+	z-index: 1000;
+	color: #ddd;
+	font-size: 35px;
+	font-weight: bolder;
+	display: block;
+	width: 120px;
+	height: 120px;
+	background-color: black;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 93);
+}
 footer {
 	text-align: center;
 }
@@ -1816,7 +1841,9 @@ footer {
 .teleUpload {
 	margin-top: 20px;
 }
-
+.emailUpload {
+	margin-top: 20px;
+}
 .teleUpload2 {
 	margin-top: 20px;
 }
@@ -1910,12 +1937,7 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 	padding-bottom: 5px;
 	margin-top: 10px;
 }
-.followeeShow{
-	position:absolute;
-}
-.followerShow{
-	position:absolute;
-}
+
 .aUB{
 	float:right;
 }
@@ -2054,4 +2076,16 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 	}
 .pRandom{
 	cursor:pointer;
+}
+.joinSActivity:active{
+	background-color:#E6E6E6;;
+}
+.joinSActivity:hover{
+	background-color:#E6E6E6;;
+}
+.joinSActivity:focus{
+	background-color:#E6E6E6;;
+}
+.emailIt{
+	margin-left: 4px;
 }

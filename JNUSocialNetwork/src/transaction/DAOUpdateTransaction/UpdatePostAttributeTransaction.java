@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.ActivitySearchMap;
+
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -7,8 +9,8 @@ import javax.persistence.EntityManager;
 import model.AttributeModel;
 import model.Post;
 import persistence.DAO;
-import service.helper.ActivitySearchMap;
 import transaction.DAOTransaction;
+import utils.ConstantValue;
 
 public class UpdatePostAttributeTransaction extends DAOTransaction {
 	DAOTransaction transaction = new UpdateAttributeTransaction();
@@ -25,7 +27,7 @@ public class UpdatePostAttributeTransaction extends DAOTransaction {
 			Long startDate = Long.parseLong(attributes.get("startDate"));
 			Long remindDate = Long.parseLong(attributes.get("remindDate"));
 			if (startDate < remindDate
-					|| (startDate - remindDate) < 12 * 60 * 60 * 1000)
+					|| (startDate - remindDate) < ConstantValue.ACTIVITYINTERVAL)
 				return model.toRepresentation();
 			ActivitySearchMap.deserialize();
 			ActivitySearchMap.addRecord((Long) params[0], remindDate);

@@ -310,8 +310,8 @@
 		<script type="text/javascript">
 			$('.peopeleType').css("background-color", "#fff");
 			$('.peopeleType').css("border-left", "#4285f4");
-			$('.discoveryCommunity').css("background-color", "#f6f6f6");
-			$('.discoveryCommunity').css("border-left", "2px solid #4285f4");
+			$('.discoveryC').css("background-color", "#f6f6f6");
+			$('.discoveryC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchHotCommunity(pageSize);
 			$(window)

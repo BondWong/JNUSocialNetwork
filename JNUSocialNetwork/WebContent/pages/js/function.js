@@ -140,10 +140,10 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	}
 	var readmore = "";
 	var contentD = content;
-	if (content.length > 100) {
+	if (content.length > 200) {
 		readmore = "<div class='post_more"+postID+"' id='" + postID
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
-		contentD = content.substr(0, 100) + "......";
+		contentD = content.substr(0, 200) + "......";
 	}
 	
 	var boarddiv = "<div class='post "

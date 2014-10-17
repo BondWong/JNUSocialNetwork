@@ -71,7 +71,8 @@ p {
 #section0 .fp-tableCell,
 #slide2 .fp-tableCell,
 #slide3 .fp-tableCell,
-#slide4 .fp-tableCell {
+#slide4 .fp-tableCell,
+#slide5 .fp-tableCell {
     display: block;
 }
 .intro {
@@ -112,20 +113,34 @@ p {
     left: 0;
 }
 #hjj {
-    top: 30%;
-    left: 29%;
-}
-#hjj .info {
-    color: #000;
-    text-shadow: 2px 2px 13px #fff;
-    border-radius: 30px;
-    background-color: rgba(142, 142, 142, 0.7);
+    top: 15%;
+    left: 15%;
 }
 #hjj:hover {
     -webkit-transform: scale(1.5) translate(0, -5%);
     -ms-transform: scale(1.5) translate(0, -5%);
     transform: scale(1.5) translate(0, -5%);
 }
+#xmt {
+    top: 15%;
+    left: 55%;
+}
+#xmt:hover {
+    -webkit-transform: scale(1.5) translate(0, -5%);
+    -ms-transform: scale(1.5) translate(0, -5%);
+    transform: scale(1.5) translate(0, -5%);
+}
+#gkr {
+    top: 55%;
+    left: 35%;
+}
+#gkr:hover {
+    -webkit-transform: scale(1.5) translate(0, -5%);
+    -ms-transform: scale(1.5) translate(0, -5%);
+    transform: scale(1.5) translate(0, -5%);
+}
+
+
 #hzy {
     top: 15%;
     left: 15%;
@@ -138,9 +153,39 @@ p {
     top: 55%;
     left: 35%;
 }
+#lh {
+	top:55%;
+	left:5%
+}
+#lyd {
+	top:55%;
+	left:35%
+}
+#wjl {
+	top:55%;
+	left:65%
+}
+#xh {
+	top:15%;
+	left:65%
+}
+#xlc {
+	top:15%;
+	left:5%
+}
+#zjb {
+	top:15%;
+	left:35%
+}
 #hzy:hover,
 #hhc:hover,
-#del:hover {
+#del:hover,
+#lh:hover,
+#lyd:hover,
+#wjl:hover,
+#xh:hover,
+#xlc:hover,
+#zjb:hover {
     -webkit-transform: scale(1.5);
     -ms-transform: scale(1.5);
     transform: scale(1.5);
@@ -222,7 +267,8 @@ img {
 #slide1,
 #slide2,
 #slide3,
-#slide4 {
+#slide4,
+#slide5 {
     background-size: 100%;
 }
 #slide2 {
@@ -234,7 +280,15 @@ img {
     padding: 0 0 0 0;
 }
 #slide4 {
-    background-image: url(../images/about-us/pr.png);
+    background-image: url(../images/about-us/pr2.png);
+    padding: 0 0 0 0;
+}
+#slide5 {
+    background-image: url(../images/about-us/about-us-bg-4.jpg);
+    padding: 0 0 0 0;
+}
+#slide5 {
+    background-image: url(../images/about-us/about-us-bg-4.jpg);
     padding: 0 0 0 0;
 }
 /*==================join us list================*/
@@ -282,6 +336,7 @@ a.white:link {
 	height:120px;
 	background: url(../images/about-us/header.png)  no-repeat scroll center
 		center transparent;
+	float:left;
 }
 .joinIntro{
 	margin-top:40px;
@@ -291,4 +346,12 @@ a.white:link {
 .join{
 	text-indent: 2em;
 	margin-bottom:30%;
+}
+.aboutT{
+	background: url('../images/about-us/about-us2.fw.png') no-repeat scroll center center transparent;
+	display:block;
+	width:60%;
+	height:100px;
+	float:left;
+	margin-top: -5px;
 }

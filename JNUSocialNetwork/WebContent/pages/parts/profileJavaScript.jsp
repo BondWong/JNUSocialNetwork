@@ -75,6 +75,12 @@
 													"<div class='post about' style='width:80px;'><a class='btn btn-success' href='changePassword.jsp'>修改密码</button></a>");
 								}
 								Msnry('.about_body', '.post', 435);
+								var tags = FetchHeatLookingForTag("0","20");
+								$.each(tags.reverse(), function(n, tag) {
+									var tagS = "<span title='" + tag.ID + "' class='tagSpan'>" + tag.ID
+											+ "</span>";
+									$('.tagSB').after(tagS);
+								});
 							});
 		</script>
 	</c:when>

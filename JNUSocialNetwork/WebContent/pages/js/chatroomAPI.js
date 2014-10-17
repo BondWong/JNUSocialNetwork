@@ -2,7 +2,7 @@
  * 
  */
 
-function open_chatroom(fromID, toID, name) {
+function open_chatroom(fromID, toID, name, message) {
 	$.ajax({
 		type : "GET",
 		url : '../../app/chatRoom/fetch/' + fromID + '/' + toID,
@@ -26,13 +26,14 @@ function open_chatroom(fromID, toID, name) {
 					break;
 				}
 			create_chatroom(data, fromID, toID, name, online, top, right
-					+ width);
+					+ width, message);
 			add_chatroom(data);
 		}
 	});
 }
 
-function create_chatroom(data, fromID, toID, toName, online, top, right) {
+function create_chatroom(data, fromID, toID, toName, online, top, right,
+		message) {
 	$("#chatroom").remove();
 	var chatroom = '<div id="chatroom" class="panel panel-default chat-room"><div class="panel-heading chat-room-header"><a id="chatroom-close" href="javaScript:void(0);" class="chat-room-close chat-room"><span class="glyphicon glyphicon-remove"></span></a><h3 class="panel-title">';
 	if (online) {
@@ -74,6 +75,15 @@ function create_chatroom(data, fromID, toID, toName, online, top, right) {
 		$("#chatroom").fadeOut("fast");
 	});
 	do_fetch_messages(data.ID, fromID);
+
+	if (message != null && message != '') {
+		$("#chatroom textarea").val(message);
+		$("#chatroom textarea").focus();
+	}
+}
+
+function open_chatroom_with_message(fromID, toID, name, message) {
+	open_chatroom(fromID, toID, name, message);
 }
 
 function prepare_chat_room_load_more(data, fromID) {

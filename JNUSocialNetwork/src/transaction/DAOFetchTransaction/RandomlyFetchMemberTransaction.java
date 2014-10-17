@@ -1,12 +1,13 @@
 package transaction.DAOFetchTransaction;
 
+import helper.serviceHelper.NumberManager;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-import service.helper.NumberManager;
 import transaction.DAOTransaction;
 
 public class RandomlyFetchMemberTransaction extends DAOTransaction {
@@ -21,9 +22,10 @@ public class RandomlyFetchMemberTransaction extends DAOTransaction {
 				.getMemberNum()));
 		if (startIndex > 1)
 			startIndex -= 1;
-		else if(startIndex == 0 )
+		else if (startIndex == 0)
 			startIndex += 1;
-		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction.execute("Member.fetch", null, null, startIndex, 500);
+		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction
+				.execute("Member.fetch", null, null, startIndex, 100);
 		Collections.shuffle(results);
 		return results;
 	}
