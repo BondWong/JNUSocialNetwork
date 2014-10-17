@@ -1,5 +1,5 @@
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,
-		ownerID, joinIDs, startDate, limitation, ifUpload) {
+		ownerID, joinIDs, startDate, limitation, ifUpload, inquery) {
 	var join = "";
 	if (ifUpload == "上传报名表") {
 		join = "<div class='aUB'><a href='../../app/fileDownloader?type=REGISTERFORM&activityID="+activityID+"' class='btn btn-default dlR' id='"
@@ -46,6 +46,8 @@ if ($.inArray(USERID, joinIDs) != -1) {
 			+ name
 			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
 			+ time
+			+ "</span></div><div class='inquery'><span class='glyphicon glyphicon-phone'>&nbsp;</span><span class='aI'>"
+			+ inquery
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'
 			+ replaceURLWithHTMLLinks(more) + '</pre>' + "</span></div><div class='activityAsk'>" + join
@@ -54,9 +56,9 @@ if ($.inArray(USERID, joinIDs) != -1) {
 }
 // function addActivity
 function addActivity(activityID, name, time, addre, more, imagelink,
-		avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload) {
+		avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload);
+			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -74,7 +76,7 @@ function fetchAllActivities() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }
@@ -91,7 +93,7 @@ function fetchHeatActivities() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }
@@ -108,7 +110,7 @@ function fetchActivitiesByOwner() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }
@@ -125,7 +127,7 @@ function fetchJoinedActivities() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }
@@ -142,7 +144,7 @@ function fetchActivitiesByType(activityType) {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }

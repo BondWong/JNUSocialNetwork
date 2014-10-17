@@ -899,6 +899,7 @@ $('body').on("click","#emailSend",function(){
 });
 $('body').on("click",".profileAImg",function(){
 	InviteToAddImage(USERID,userID);
+	alert("邀请成功！");
 });
 $('body').on("click",".begC",function(){
 	if($.parseJSON(sessionStorage.getItem("user")).attributes.email == ""){

@@ -26,6 +26,7 @@ function activityClickEvent() {
 											.val(),
 									activityAddr : $('#activityAddr').val(),
 									activityMore : $('#activityMore').val(),
+									inquery : $('#inquery').val(),
 									limitation : $('#activityNum').val(),
 									communityName : community.attributes.name,
 									communityID : community.ID.toString(),
@@ -54,6 +55,9 @@ function activityClickEvent() {
 									$('#infinite_loader2').fadeIn(300);
 									AddPostToCommunity(USERID, community.ID,
 											json);
+									$('#newActivity').get(0).reset();
+									$('#go_page1').click();
+									$('#fileuploadB').val("");
 									$('#activityCommunity').modal('hide');
 								} else {
 									$('#fail_popover2').fadeIn("fast");
@@ -67,9 +71,7 @@ function activityClickEvent() {
 							setTimeout('$("#fail_popover").fadeOut("slow")',
 									3000);
 						}
-						$('#newActivity').get(0).reset();
-						$('#go_page1').click();
-						$('#fileuploadB').val("");
+						
 					});
 }
 var pageSize = 15;
@@ -87,12 +89,12 @@ function fetchActivitiesByCommunity() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload);
+					dataString.attributes.ifUpload,dataString.attributes.inquery);
 		}
 	});
 }
 function activity(activityID, name, time, addre, more, imagelink, avatarLink,
-		ownerID, joinIDs, startDate, limitation, ifUpload) {
+		ownerID, joinIDs, startDate, limitation, ifUpload, inquery) {
 	var join = "";
 	if (ifUpload == "默认方式") {
 		join = "<a><div class='activityJoin' id='activity" + activityID
@@ -144,6 +146,8 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 			+ name
 			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
 			+ time
+			+ "</span></div><div class='inquery'><span class='glyphicon glyphicon-phone'>&nbsp;</span><span class='aI'>"
+			+ inquery
 			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'
 			+ more + '</pre>' + "</span></div><div class='activityAsk'>" + join
@@ -152,9 +156,9 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 }
 // function addActivity
 function addActivity(activityID, name, time, addre, more, imagelink,
-		avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload) {
+		avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload);
+			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
@@ -475,7 +479,7 @@ $(window)
 															dataString.participantIDs,
 															dataString.attributes.startDate,
 															dataString.attributes.limitation,
-															dataString.attributes.ifUpload);
+															dataString.attributes.ifUpload,dataString.attributes.inquery);
 													$(".activityBord").after(
 															boarddiv);
 													Msnry('.activityBody',
