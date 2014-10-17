@@ -46,7 +46,7 @@
 // *******************************************
  */
 
-package security.helper;
+package helper.securityHelper;
 
 import javax.servlet.http.HttpServletRequest;
 

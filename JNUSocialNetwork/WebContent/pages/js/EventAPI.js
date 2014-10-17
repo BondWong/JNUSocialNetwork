@@ -1289,9 +1289,15 @@ function InviteToAddImage(userID, otherUser) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
+			alert("邀请成功");
 			response = status;
 		},
 		error : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
+			alert("邀请失败，请重试！[一天只能发5次请求]");
 			response = status;
 		}
 
@@ -1307,9 +1313,15 @@ function BegForConnection(userID, otherUser) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
 			alert("TA正在考虑要不要给你，注意邮箱哦！");
+			response = status;
 		},
 		error : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
+			alert("请求失败，请重试！[一天只能发5次请求]");
 			response = status;
 		}
 
