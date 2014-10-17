@@ -85,13 +85,31 @@
 	<filter-mapping>
 		<filter-name>AutoLoginFilter</filter-name>
 		<url-pattern>
+			/communityShow.jsp
+		</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
 			/home.jsp
 		</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>AutoLoginFilter</filter-name>
 		<url-pattern>
-			/myActivity.jsp
+			/activity.jsp
+		</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/activityCommunity.jsp
+		</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/activityShow.jsp
 		</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

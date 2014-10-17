@@ -1,5 +1,6 @@
 package transaction.DAOFetchTransaction;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,8 @@ public class FolloweeRecommendationTransaction extends DAOTransaction {
 					&& !member.get("ID").equals(m.get("ID")))
 				recommendations.add(m);
 		}
-
+		
+		Collections.shuffle(recommendations);
 		return recommendations;
 	}
 

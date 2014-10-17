@@ -49,6 +49,10 @@ public class ProtectedURLManager {
 		loginProtectionURLs.add("user/removeImages");
 		loginProtectionURLs.add("user/addLookingForTag");
 		loginProtectionURLs.add("user/removeLookingForTag");
+		loginProtectionURLs.add("user/sendEmail");
+		loginProtectionURLs.add("user/inviteToAddImage");
+		loginProtectionURLs.add("user/inviteToAddAvatar");
+		loginProtectionURLs.add("user/begForConnection");
 
 		loginProtectionURLs.add("chatRoom");
 
@@ -111,6 +115,10 @@ public class ProtectedURLManager {
 		authorizationProtectionURLs.put("user/cancelFollow", userTypes);
 		authorizationProtectionURLs.put("user/addLookingForTag", userTypes);
 		authorizationProtectionURLs.put("user/removeLookingForTag", userTypes);
+		authorizationProtectionURLs.put("user/sendEmail", userTypes);
+		authorizationProtectionURLs.put("user/inviteToAddImage", userTypes);
+		authorizationProtectionURLs.put("user/inviteToAddAvatar", userTypes);
+		authorizationProtectionURLs.put("user/begForConnection", userTypes);
 
 		authorizationProtectionURLs.put("chatRoom/fetch", userTypes);
 		authorizationProtectionURLs.put("chatRoom/fetchMessages", userTypes);
