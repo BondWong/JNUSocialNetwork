@@ -989,7 +989,7 @@ function fetchUserByID() {
 				userInfo.attributes.year + "/" + userInfo.attributes.month
 						+ "/" + userInfo.attributes.date);
 	}else{
-		if($.parseJSON(userInfo.attributes.avatarLink).src == "images/default/default-user-avartar.png"){
+		if($.parseJSON(userInfo.attributes.avatarLink).src == "images/default/default-user-avartar.png" && userInfo.attributes.email != ""){
 			$('.profile_user_img')
 			.hover(
 					function() {
