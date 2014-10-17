@@ -68,7 +68,7 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("join failed! " + textStatus + " " + errorThrown);
-                displayAlert($("#errorAlert"), "未知错误，加入失败，抱歉！");
+                displayAlert($("#errorAlert"), "未知错误，加入失败，抱歉！");
             }
         });
     }
