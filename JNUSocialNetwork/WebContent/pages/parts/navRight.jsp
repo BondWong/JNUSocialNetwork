@@ -31,7 +31,10 @@
 				$('body').on("click", ".signInBtn", function() {
 					var pass = $("#md5Password").val();
 					if (pass.length > 0) {
-						$("#md5Password").val("");
+						var fp = "";
+						for (var i = 0; i < pass.length; i++)
+							fp += "*";
+						$("#md5Password").val(fp);
 						$("#rPassword").val(md5(pass));
 					}
 				});
