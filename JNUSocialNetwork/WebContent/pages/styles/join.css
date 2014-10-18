@@ -1,0 +1,123 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: #EAE6E0;
+}
+h1 {
+    font-size: 1em;
+    margin: 0.6em 0;
+    color: #679cff;
+    text-shadow: 1px 1px 20px #4226dd;
+}
+header {
+    text-align: center;
+}
+/*special*/
+
+#header {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    padding: 0;
+    color: #fff;
+    /*fallback color*/
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.88);
+    z-index: 50;
+}
+#header {
+    top: 0;
+}
+ul {
+    list-style: none;
+}
+.acitivity {
+    border: 1px solid #dedede;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FAF9F7;
+}
+.act-img {
+    width: 100%;
+    display: block;
+    padding: 0.2em;
+    border: 1px solid #dedede;
+    box-shadow: 0.5px 0.5px 0.5px #e5e5e5;
+}
+.table {
+    margin: 10px 0;
+}
+.join-btn {
+    float: right;
+}
+.react-alert {
+    position: fixed;
+    bottom: 10%;
+    z-index: 200;
+    display: none;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.react-alert span {
+    padding: 0 0.1em;
+    color: #5199ed;
+    text-shadow: 1px 1px 1px #868686;
+}
+#successAlert {
+    box-shadow: 0 0 10px rgba(150, 235, 96, 0.68);
+}
+#errorAlert {
+    box-shadow: 0 0 10px rgba(237, 115, 115, 0.68);
+}
+.modal-body {
+    width: 100%;
+}
+.btn-long {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+/* Large desktops and laptops */
+
+@media (min-width: 1200px) {
+    .modal-dialog {
+        margin-top: 10%;
+    }
+}
+/* Portrait tablets and medium desktops */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .modal-dialog {
+        margin-top: 20%;
+    }
+}
+/* Portrait tablets and small desktops */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .modal-dialog {
+        margin-top: 25%;
+    }
+}
+/* Landscape phones and portrait tablets */
+
+@media (max-width: 767px) {
+    .modal-dialog {
+        margin-top: 30%;
+    }
+}
+/* Landscape phones and smaller */
+
+@media (max-width: 480px) {
+    .modal-dialog {
+        margin-top: 40%;
+    }
+}

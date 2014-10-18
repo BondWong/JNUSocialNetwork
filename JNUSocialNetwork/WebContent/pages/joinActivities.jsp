@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
     <meta name="description" content="CampuSite活动-快捷加入">
 
@@ -12,99 +12,12 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="styles/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="styles/join.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 <script src="//cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            background-color: #EAE6E0;
-        }
-        h1 {
-            font-size: 1em;
-            margin: 0.6em 0;
-            color: #679cff;
-            text-shadow: 1px 1px 20px #4226dd;
-        }
-        header {
-            text-align: center;
-        }
-        /*special*/
-        #header {
-            width: 100%;
-            text-align: center;
-            position: fixed;
-            padding: 0;
-            color: rgba(255, 255, 255, 0.8);
-            background-color: rgba(0, 0, 0, 0.88);
-            z-index: 50;
-        }
-        #header {
-            top: 0;
-        }
-        ul {
-            list-style: none;
-        }
-        .acitivity {
-            border: 1px solid #dedede;
-            margin-top: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            background-color: #FAF9F7;
-        }
-        .act-img {
-            width: 100%;
-            display: block;
-            padding: 0.2em;
-            border: 1px solid #dedede;
-            -moz-box-shadow: 0.5px 0.5px 0.5px #e5e5e5;
-            box-shadow: 0.5px 0.5px 0.5px #e5e5e5;
-        }
-        .table {
-            margin: 10px 0;
-        }
-        .join-btn {
-            float: right;
-        }
-        .react-alert {
-            position: fixed;
-            bottom: 10%;
-            z-index: 200;
-            display: none;
-            text-align: center;
-            font-size: 1.2em;
-            font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-        }
-        .react-alert span {
-            padding: 0 0.1em;
-            color: #5199ed;
-            text-shadow: 1px 1px 1px #868686;
-        }
-        #successAlert {
-            -moz-box-shadow: 0 0 10px rgba(150, 235, 96, 0.68);
-            box-shadow: 0 0 10px rgba(150, 235, 96, 0.68);
-        }
-        #errorAlert {
-            -moz-box-shadow: 0 0 10px rgba(237, 115, 115, 0.68);
-            box-shadow: 0 0 10px rgba(237, 115, 115, 0.68);
-        }
-        .modal-dialog {
-            margin-top: 40%;
-        }
-        .modal-body {
-            width: 100%;
-        }
-        .btn-long {
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-    </style>
     <script>
         window.USERID = '${sessionScope.ID}';
     </script>
@@ -112,10 +25,10 @@
 
 <body>
     <header id="header">
-        <h1>CampuSite活动-快捷加入 </h1>
+        <h1>CampuSite活动-快捷加入</h1>
     </header>
     <header style="visibility:hidden">
-        <h1>CampuSite活动-快捷加入 </h1>
+        <h1>CampuSite活动-快捷加入</h1>
     </header>
 
     <!-- Modal -->
@@ -148,9 +61,9 @@
                     <h4 class="modal-title" id="addPhoneModalLabel">亲！你还没登记手机号哦！</h4>
                 </div>
                 <div class="modal-body container">
-                    <form class="form-inline" role="form">
-                        <input type="tel" class="form-control" maxlength="11" autofocus />
-                        <input type="submit" class="btn btn-success" value="登记" />
+                    <form class="form-inline text-center" role="form">
+                        <input id="telnum" type="tel" class="form-control" maxlength="11" autofocus />
+                        <input id="checkTN" type="submit" class="btn btn-success" value="登记" />
                     </form>
                 </div>
             </div>

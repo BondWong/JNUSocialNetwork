@@ -2,9 +2,11 @@
 (function ($) {
     "use strict";
 
-    var FETCH_URL_BASE = "/app/post/fetchByID/",
+    var FETCH_POST_URL_BASE = "/app/post/fetchByID/",
+        FETCH_USERINFO_URL_BASE = "/app/user/fetchByID/",
         POSTID_asset_url = "/pages/assets/postID.json",
         JOIN_URL_BASE = "/app/post/joinActivity/",
+        UPDATE_USERINFO_URL_BASE = "/app/user/updateProfile/",
         LEAVE_URL_BASE = "/app/post/leaveActivity/",
         dataset = {};
 
@@ -14,19 +16,22 @@
             interpolate: /<@=([\s\S]+?)@>/g,
             escape: /<@-([\s\S]+?)@>/g
         };
+
         initialActivityList();
         initialListeners();
     });
 
+    // 根据配置文件的id初始化活动列表
     function initialActivityList() {
         $.getJSON(POSTID_asset_url).done(function (data) {
             for (var i in data) {
-                $.getJSON(FETCH_URL_BASE + data[i])
+                $.getJSON(FETCH_POST_URL_BASE + data[i])
                     .done(generateListItem);
             }
         });
     }
 
+    // 初始化特定元素的事件监听器
     function initialListeners() {
         $("#activity-list").delegate('.join-btn', 'click', function (ent) {
             if (!window.USERID) {
@@ -35,6 +40,8 @@
             }
             var $element = $(ent.currentTarget),
                 data = dataset[$element.data("postid")];
+
+            // 判断user是否已加入活动
             if ($.inArray(window.USERID, data.participantIDs) >= 0) {
                 leaveClickProcess($element);
             } else {
@@ -42,6 +49,7 @@
             }
         });
 
+        // 账号操作跳转
         $(".account-link").click(function (ent) {
             localStorage.setItem("url", window.location.href);
             window.location.href = ent.currentTarget.getAttribute("href");
@@ -49,8 +57,42 @@
         });
     }
 
+    //已存在用户时点击参加的处理，先获取该用户信息，再检查手机号
     function joinClickProcess($element) {
 
+        $.getJSON(FETCH_USERINFO_URL_BASE + window.USERID)
+            .done(function (data) {
+                if (!data.attributes.telnum) {
+                    $("#checkTN").data("postid", $element.data("postid"));
+                    $("#addPhoneModal").modal("show");
+                    $("#checkTN").click(function (ent) {
+                        var data = $("#telnum").val();
+                        // 错误手机号简单过滤
+                        if (data >= 10000000001) {
+                            $.ajax(UPDATE_USERINFO_URL_BASE + window.USERID, {
+                                type: "POST",
+                                data: {
+                                    telnum: data
+                                },
+                                processData: false,
+                                contentType: false,
+                                beforeSend: function (request) {
+                                    request.setRequestHeader("ID", window.USERID);
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                    joinProcess($element);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    joinProcess($element);
+                }
+            });
+    }
+
+    // 最终参加活动处理，并显示相应处理信息
+    function joinProcess($element) {
         var url = [JOIN_URL_BASE, window.USERID, "/",
                        $element.data("postid")].join("");
         $.ajax(url, {
@@ -58,7 +100,7 @@
             processData: false,
             contentType: false,
             beforeSend: function (request) {
-                request.setRequestHeader("ID", USERID);
+                request.setRequestHeader("ID", window.USERID);
             },
             success: function (data, textStatus, jqXHR) {
                 console.log("join succeed! " + textStatus);
@@ -73,6 +115,7 @@
         });
     }
 
+    // 离开活动点击处理
     function leaveClickProcess($element) {
         var url = [LEAVE_URL_BASE, window.USERID, "/",
                        $element.data("postid")].join("");
@@ -81,7 +124,7 @@
             processData: false,
             contentType: false,
             beforeSend: function (request) {
-                request.setRequestHeader("ID", USERID);
+                request.setRequestHeader("ID", window.USERID);
             },
             success: function (data, textStatus, jqXHR) {
                 console.log("leave succeed " + textStatus);
@@ -96,13 +139,15 @@
         });
     }
 
+    // 更新当前作用域全局的活动数据集的特定活动的数据
     function refreshDataSet(postid) {
-        $.getJSON(FETCH_URL_BASE + postid)
+        $.getJSON(FETCH_POST_URL_BASE + postid)
             .done(function (data) {
                 dataset[data.ID] = data;
             });
     }
 
+    // 切换按钮状态
     function switchButtonState($btn) {
         if ($btn.hasClass("btn-success")) {
             $btn.removeClass("btn-success").addClass("btn-danger").html("离开");
@@ -111,6 +156,7 @@
         }
     }
 
+    // 生成活动列表
     function generateListItem(data) {
         var testdata = {
             activityAddr: data.attributes.activityAddr,
@@ -123,10 +169,10 @@
         dataset[data.ID] = data;
         var genearatedLI = _.template($('#li-template').html())(testdata),
             $genearatedLI = $(genearatedLI);
+
         if ($.inArray(window.USERID, data.participantIDs) >= 0) {
             switchButtonState($(".join-btn", $genearatedLI));
-        }
-        if (data.participantIDs.length === data.attributes.limitation) {
+        } else if (data.participantIDs.length === data.attributes.limitation) {
             $(".join-btn", $genearatedLI).prop("disabled", true).html("人数已满");
         }
         if (data.attributes.startDate - new Date().getTime() <= 0) {
