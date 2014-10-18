@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 <!-- Generic page styles -->
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -94,7 +96,8 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				 <span class="activityHref">社区活动</span> <span class="showHref">社区帖子</span> <span>社区介绍</span>
+				<span class="activityHref">社区活动</span> <span class="showHref">社区帖子</span>
+				<span>社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -150,8 +153,8 @@
 								onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										placeholder="分享些什么吧"  style="resize: none;"
-										required data-errormessage-value-missing="请输入内容"></textarea>
+										placeholder="分享些什么吧" style="resize: none;" required
+										data-errormessage-value-missing="请输入内容"></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i
@@ -247,7 +250,7 @@
 									$('#leaveCommunityBtn').css("display",
 											"inline");
 								}
-								if(USERID != community.attributes.userID){
+								if (USERID != community.attributes.userID) {
 									$('.share').remove();
 								}
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'

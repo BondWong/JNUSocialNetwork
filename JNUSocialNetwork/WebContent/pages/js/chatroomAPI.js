@@ -40,7 +40,12 @@ function create_chatroom(data, fromID, toID, toName, online, top, right,
 		chatroom += '<span class="label label-success" id="'
 				+ toID
 				+ '">'
+				+ '<a class="instant-chat-name" href="../pages/profile.jsp?nav=about&'
+				+ toID
+				+ '"'
+				+ 'target="_blank">'
 				+ toName
+				+ '</a>'
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">历史对话</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
 				+ '"></div>';
@@ -48,7 +53,12 @@ function create_chatroom(data, fromID, toID, toName, online, top, right,
 		chatroom += '<span class="label label-default" id="'
 				+ toID
 				+ '">'
+				+ '<a class="instant-chat-name" href="../pages/profile.jsp?nav=about&'
+				+ toID
+				+ '"'
+				+ 'target="_blank">'
 				+ toName
+				+ '</a>'
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">历史对话</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
 				+ '"></div>';

@@ -17,12 +17,13 @@
 			</div>
 			<div class="form-group">
 				<input type="password" placeholder="请输入密码" class="form-control"
-					name="password" id="md5Password"
+					name="bPassword" id="md5Password"
 					data-errormessage-value-missing="请输入密码" required maxLength="40" />
 			</div>
 			<input type="hidden" name="hiddenCode"
 				value="${sessionScope.hiddenCode }" /> <input type="hidden"
-				name="origin" value="" />
+				name="origin" value="" /> <input type="hidden" id="rPassword"
+				name="password" value="" />
 			<button class="btn btn-danger signInBtn" type="submit">登录</button>
 			<script src="js/jquery-1.10.2.js"></script>
 			<script src="js/md5.js"></script>
@@ -30,7 +31,8 @@
 				$('body').on("click", ".signInBtn", function() {
 					var pass = $("#md5Password").val();
 					if (pass.length > 0) {
-						$("#md5Password").val(md5(pass));
+						$("#md5Password").attr("disabled", "true");
+						$("#rPassword").val(md5(pass));
 					}
 				});
 			</script>

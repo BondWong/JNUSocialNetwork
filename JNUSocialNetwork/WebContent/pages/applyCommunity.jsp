@@ -7,7 +7,9 @@
 				session.setAttribute("hiddenCode", System.currentTimeMillis()
 						+ "");
 			}</jsp:scriptlet>
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 
 <body>
 	<div class="coRegBody">

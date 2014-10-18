@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -24,8 +25,8 @@
 		<div class="activityHead">
 			<div class="activityPh">
 				<img alt="" width="100%"
-					onload="javascript:auto_resize(1140, getHeight(1140,this.width,this.height), this)" src=""
-					style="display: none">
+					onload="javascript:auto_resize(1140, getHeight(1140,this.width,this.height), this)"
+					src="" style="display: none">
 			</div>
 			<div class="activityInfo">
 				<p class="activityShowName"></p>
@@ -91,10 +92,9 @@
 									style="width: 81%; margin-left: 80px; text-align: center; padding: 0px; display: none;">提醒时间必须要比活动开始时间提前半个小时哦，亲</div>
 							</div>
 							<div class="activityItem">
-								<span>活动地点：</span>
-								<input class="form-control activityInput" placeholder=""
-									id="activityAddr" required autofocus maxLength="150"
-									style="resize: none;" />
+								<span>活动地点：</span> <input class="form-control activityInput"
+									placeholder="" id="activityAddr" required autofocus
+									maxLength="150" style="resize: none;" />
 							</div>
 							<div class="activityItem">
 								<span>活动细节：</span>
@@ -103,20 +103,19 @@
 									maxLength="200" style="resize: none;"></textarea>
 							</div>
 							<div class="activityItem">
-										<span>活动类型：</span>
-										<select class="activityType">
-											<option value="ENTERTAINMENT">娱乐类</option>
-											<option value="ATHLETIC">体育类</option>
-											<option value="ACADEMIC">学术类</option>
-										</select>
-									</div>
+								<span>活动类型：</span> <select class="activityType">
+									<option value="ENTERTAINMENT">娱乐类</option>
+									<option value="ATHLETIC">体育类</option>
+									<option value="ACADEMIC">学术类</option>
+								</select>
+							</div>
 							<div class="activityItem">
-										<span>联系电话：</span><input type="text"
-											class="form-control activityInput" placeholder=""
-											id="inquery" pattern="[0-9]{11}"
-											data-errormessage-pattern-mismatch="请输入手机号码" required
-											autofocus maxLength="11" />
-									</div>
+								<span>联系电话：</span><input type="text"
+									class="form-control activityInput" placeholder="" id="inquery"
+									pattern="[0-9]{11}"
+									data-errormessage-pattern-mismatch="请输入手机号码" required autofocus
+									maxLength="11" />
+							</div>
 							<div class="activityItem">
 								<span>人数上限：</span><input type="text"
 									class="form-control activityInput" placeholder=""
@@ -288,7 +287,7 @@
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
 							showImages();
-							
+
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();
@@ -308,13 +307,18 @@
 									$('.joinSActivity').remove();
 									$('.ulR').remove();
 									$('.aUB').remove();
-									$('.activityShare').append("<button class='btn btn-default' style='float: right;'>已经满人</button>");
+									$('.activityShare')
+											.append(
+													"<button class='btn btn-default' style='float: right;'>已经满人</button>");
 								}
-								if (activity.attributes.startDate - now.getTime() <= 0) {
+								if (activity.attributes.startDate
+										- now.getTime() <= 0) {
 									$('.joinSActivity').remove();
 									$('.ulR').remove();
 									$('.aUB').remove();
-									$('.activityShare').append("<button class='btn btn-default' style='float: right;'>已经过期</button>");
+									$('.activityShare')
+											.append(
+													"<button class='btn btn-default' style='float: right;'>已经过期</button>");
 								}
 								var now = new Date();
 								if (activity.attributes.startDate

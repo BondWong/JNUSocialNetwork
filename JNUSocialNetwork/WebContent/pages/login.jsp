@@ -29,13 +29,14 @@
 						</p>
 						<p>
 							<input type="password" class="form-control" placeholder="请输入密码"
-								name="password" id="md5Password"
+								name="bPassword" id="md5Password"
 								data-errormessage-value-missing="请输入密码" required autofocus
 								maxLength="40" />
 						</p>
 						<input type="hidden" name="hiddenCode"
 							value="${sessionScope.hiddenCode }" /> <input type="hidden"
-							name="origin" value="" />
+							name="origin" value="" /> <input type="hidden" name="password"
+							value="" id="rPassword" />
 						<button class="btn btn-lg btn-success btn-block signInBtn"
 							type="submit">登录</button>
 						<h4>
@@ -63,7 +64,8 @@
 		$('body').on("click", ".signInBtn", function() {
 			var pass = $("#md5Password").val();
 			if (pass.length > 0) {
-				$("#md5Password").val(md5(pass));
+				$("#md5Password").attr("disabled", "true");
+				$("#rPassword").val(md5(pass));
 			}
 		});
 		$("h4 span.signUp").click(function() {

@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 <!-- Generic page styles -->
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -28,7 +29,7 @@
 				<form enctype="multipart/form-data">
 					<input class="form-control share_txt" type="text"
 						placeholder="分享你所想、所见" data-toggle='modal'
-						data-target='#addPostModal'  />
+						data-target='#addPostModal' />
 					<div class="shareBtnGroup">
 						<div role="button" class="Btnshare btnMotion" data-toggle='modal'
 							data-target='#addPostModal'>
@@ -67,10 +68,11 @@
 									aria-hidden="true">&times;</button>
 								<h4 class="modal-title" id="myModalLabel">分享有趣事儿</h4>
 							</div>
-							<form class="postForm" enctype="multipart/form-data" onsubmit="return false;">
+							<form class="postForm" enctype="multipart/form-data"
+								onsubmit="return false;">
 								<div class="modal-body modalBody">
 									<textarea class="form-control share_txt2" id="share_txt2"
-										type="text" style="resize: none;"  required></textarea>
+										type="text" style="resize: none;" required></textarea>
 									<br>
 									<!-- The fileinput-button span is used to style the file input field as button -->
 									<span class="btn btn-success fileinput-button"> <i

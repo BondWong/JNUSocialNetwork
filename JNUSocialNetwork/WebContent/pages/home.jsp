@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 
 <body>
 	<div class="header">

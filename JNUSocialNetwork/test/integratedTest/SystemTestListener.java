@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebListener;
 import model.modelType.UserType;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
+import transaction.DAOCreateTransaction.RegisterMemberTransaction;
 import utils.MD5;
 
 /**
@@ -51,6 +53,13 @@ public class SystemTestListener implements ServletContextListener {
 		// TODO Auto-generated method stub
 		Transaction transaction;
 		try {
+			Map<String, String> attributes = new HashMap<String, String>();
+			attributes.put("name", "fucker");
+			attributes.put("gender", "男");
+			transaction = new RegisterMemberTransaction();
+			transaction.execute("2011052000", MD5.toMD5Code("123456"),
+					attributes);
+			
 			transaction = new RegisterCommunityOwnerTransaction();
 			transaction.execute("13750046645", MD5.toMD5Code("123456"),
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
