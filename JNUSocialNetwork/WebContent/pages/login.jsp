@@ -64,10 +64,7 @@
 		$('body').on("click", ".signInBtn", function() {
 			var pass = $("#md5Password").val();
 			if (pass.length > 0) {
-				var fp = "";
-				for (var i = 0; i < pass.length; i++)
-					fp += "*";
-				$("#md5Password").val(fp);
+				$("#md5Password").attr("disabled", "true");
 				$("#rPassword").val(md5(pass));
 			}
 		});
