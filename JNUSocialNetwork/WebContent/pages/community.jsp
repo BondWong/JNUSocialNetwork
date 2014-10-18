@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 
 <body>
 	<%@ include file="parts/ieReload.jsp"%>

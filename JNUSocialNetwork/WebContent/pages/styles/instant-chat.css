@@ -41,6 +41,31 @@ a.avatar:active {
 	font-weight: 500;
 }
 
+a.instant-chat-name:link {
+	text-decoration: none;
+	color: white;
+}
+
+a.instant-chat-name:hover {
+	text-decoration: none;
+	color: white;
+}
+
+a.instant-chat-name:link {
+	text-decoration: none;
+	color: white;
+}
+
+a.instant-chat-name:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a.instant-chat-name:active {
+	text-decoration: none;
+	color: white;
+}
+
 div.chat-room-body {
 	height: 300px;
 	overflow-x: hidden;

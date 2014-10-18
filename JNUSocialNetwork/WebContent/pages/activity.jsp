@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 
 <body>
 	<%@ include file="parts/ieReload.jsp"%>
@@ -23,13 +24,19 @@
 	<!-- /.navbar -->
 	<div class="activitySideBar">
 		<div class="peopleType">
-			<a href="activity.jsp?nav=myactivity" class="peopeleType peopeleTypeHover myActivity">我的活动</a>
-			<a href="activity.jsp?nav=discovery" class="peopeleType discoveryActivity">近期活动</a>
-			<a href="activity.jsp?nav=hit" class="peopeleType hitActivity">热门活动</a> 
-			<a href="activity.jsp?nav=entertainment" class="peopeleType peopeleTypeS entertainmentA">娱乐类</a>
-			<a href="activity.jsp?nav=athletic" class="peopeleType peopeleTypeS athleticA">体育类</a>
-			<a href="activity.jsp?nav=academic" class="peopeleType peopeleTypeS academicA">学术类</a>
-			<a href="activity.jsp?nav=others" class="peopeleType peopeleTypeS othersA">其他类</a>
+			<a href="activity.jsp?nav=myactivity"
+				class="peopeleType peopeleTypeHover myActivity">我的活动</a> <a
+				href="activity.jsp?nav=discovery"
+				class="peopeleType discoveryActivity">近期活动</a> <a
+				href="activity.jsp?nav=hit" class="peopeleType hitActivity">热门活动</a>
+			<a href="activity.jsp?nav=entertainment"
+				class="peopeleType peopeleTypeS entertainmentA">娱乐类</a> <a
+				href="activity.jsp?nav=athletic"
+				class="peopeleType peopeleTypeS athleticA">体育类</a> <a
+				href="activity.jsp?nav=academic"
+				class="peopeleType peopeleTypeS academicA">学术类</a> <a
+				href="activity.jsp?nav=others"
+				class="peopeleType peopeleTypeS othersA">其他类</a>
 		</div>
 	</div>
 	<div class="container container_activityA">
