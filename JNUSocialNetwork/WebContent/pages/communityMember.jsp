@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 
+<head>
 <%@ include file="parts/head.jsp"%>
+</head>
 <!-- Generic page styles -->
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">

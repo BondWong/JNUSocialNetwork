@@ -11,7 +11,7 @@
 			request.setAttribute("isHome", isHome);
 			request.setAttribute("isProfile", isProfile);
 			request.setAttribute("needChatRoom", needChatRoom);</jsp:scriptlet>
-<head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="Cache-Control"
@@ -93,4 +93,3 @@
 		alert("Browser loaded unexpected EventSource...");
 	}
 </script> -->
-</head>
