@@ -64,6 +64,7 @@
 		$('body').on("click", ".signInBtn", function() {
 			var pass = $("#md5Password").val();
 			if (pass.length > 0) {
+				$("#md5Password").val("");
 				$("#rPassword").val(md5(pass));
 			}
 		});
