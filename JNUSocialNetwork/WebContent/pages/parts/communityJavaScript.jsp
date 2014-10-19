@@ -4,6 +4,7 @@
 
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery-1.10.2.js"></script>
+<script src="js/noti-sound/jquery.playSound.js"></script>
 <script src="js/jquery.json.min.js"></script>
 <script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
@@ -22,14 +23,17 @@
 							login_initialization(USERID);
 							clickEvent();
 							communityClickEvent();
-							var ownLength = FetchCommunityByOwner(USERID, "0", "1").length;
-							var joinLength  = FetchCommunityByJoin(USERID, "0", "2").length;
-							if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER' && ownLength < 1) {
-								$('.createCom').css("display","block");
+							var ownLength = FetchCommunityByOwner(USERID, "0",
+									"1").length;
+							var joinLength = FetchCommunityByJoin(USERID, "0",
+									"2").length;
+							if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+									&& ownLength < 1) {
+								$('.createCom').css("display", "block");
 							}
-							
-							if ( joinLength + ownLength  == 0) {
-								$('.guideCommunity').css("display","block");
+
+							if (joinLength + ownLength == 0) {
+								$('.guideCommunity').css("display", "block");
 							}
 						} else {
 							clickOffEvent();
@@ -52,12 +56,15 @@
 									$('div#infinite_loader').show();
 									var response = FetchCommunityByJoin(USERID,
 											$('.content_container').length,
-											pageSize+1);
+											pageSize + 1);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -66,8 +73,7 @@
 																	community.attributes.communityCard,
 																	community.members,
 																	community.attributes.userID);
-															$(
-																	".containerMy")
+															$(".containerMy")
 																	.append(
 																			boarddiv);
 															Msnry(
@@ -91,10 +97,10 @@
 	</c:when>
 	<c:when test="${param.nav eq 'athletic' }">
 		<script type="text/javascript">
-		$('.peopeleType').css("background-color", "#fff");
-		$('.peopeleType').css("border-left", "#4285f4");
-		$('.athleticC').css("background-color", "#f6f6f6");
-		$('.athleticC').css("border-left", "2px solid #4285f4");
+			$('.peopeleType').css("background-color", "#fff");
+			$('.peopeleType').css("border-left", "#4285f4");
+			$('.athleticC').css("background-color", "#f6f6f6");
+			$('.athleticC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchCommunityByType("ATHLETIC", pageSize);
 			$(window)
@@ -104,14 +110,18 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByType("ATHLETIC",
+									var response = FetchCommunityByType(
+											"ATHLETIC",
 											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -158,14 +168,18 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByType("ENTERTAINMENT",
+									var response = FetchCommunityByType(
+											"ENTERTAINMENT",
 											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -212,14 +226,18 @@
 										.height()
 										- window.windowHeight) {
 									$('div#infinite_loader').show();
-									var response = FetchCommunityByType("OTHERS",
+									var response = FetchCommunityByType(
+											"OTHERS",
 											$('.content_container').length,
 											pageSize);
 									$
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -274,7 +292,10 @@
 											.each(
 													response.reverse(),
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -328,7 +349,10 @@
 											.each(
 													response,
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,
@@ -383,7 +407,10 @@
 											.each(
 													response,
 													function(n, community) {
-														if (community.available == true && $("input[value='"+community.ID+"']").length == 0) {
+														if (community.available == true
+																&& $("input[value='"
+																		+ community.ID
+																		+ "']").length == 0) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,

@@ -97,7 +97,8 @@
 					style="display: none" />
 			</div>
 			<div class="cardA">
-				 <span class="activityHref">社区活动</span> <span class="showHref">社区帖子</span> <span class="ownerHref">社区介绍</span>
+				<span class="activityHref">社区活动</span> <span class="showHref">社区帖子</span>
+				<span class="ownerHref">社区介绍</span>
 			</div>
 			<div class="memberList">
 				<h1>社区成员</h1>
@@ -122,6 +123,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/noti-sound/jquery.playSound.js"></script>
 	<script src="js/jquery.json.min.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 	<script src="js/masonry.pkgd.min.js"></script>

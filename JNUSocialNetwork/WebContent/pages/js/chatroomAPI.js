@@ -192,6 +192,7 @@ function do_receive(data) {
 	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
 			&& $("#chatroom #toID").val() == data.fromID) {
 		append_to_content_panel(data, "other");
+		$.playSound('../pages/noti-sound/youve-been-informed');
 		save_message(data);
 		oriented_send({
 			"action" : "UPDATEMESSAGESTATUS",
@@ -216,16 +217,27 @@ function do_send(data) {
 }
 
 function append_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="' + data.ID
-			+ '" ><img class="chat-avatar" src="'
-			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" width="30" height="30" /><p class="chat-content-' + who
-			+ '" >' + data.attributes.content;
-	if (who == "self")
+	var message = "";
+	if (who == "self") {
+		message = '<div class="chat-bubble" id="' + data.ID
+				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
+				+ data.fromID + '" ><img class="chat-avatar" src="'
+				+ $.parseJSON(data.attributes.avatarLink).src
+				+ '" width="30" height="30" /></a><p class="chat-content-'
+				+ who + '" >' + data.attributes.content;
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
-	if (who == "other")
+	}
+
+	if (who == "other") {
+		message = '<div class="chat-bubble" id="' + data.ID
+				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
+				+ data.fromID + '" ><img class="chat-avatar" src="'
+				+ $.parseJSON(data.attributes.avatarLink).src
+				+ '" width="30" height="30" /></a><p class="chat-content-'
+				+ who + '" >' + data.attributes.content;
 		message += '</p></div>';
+	}
 
 	var id = $("#chatroom .chat-bubble").last().attr("id");
 	id = parseInt(id);
@@ -246,16 +258,27 @@ function append_to_content_panel(data, who) {
 }
 
 function prepend_to_content_panel(data, who) {
-	var message = '<div class="chat-bubble" id="' + data.ID
-			+ '" ><img class="chat-avatar" src="'
-			+ $.parseJSON(data.attributes.avatarLink).src
-			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
-			+ data.attributes.content;
-	if (who == "self")
+	var message = "";
+	if (who == "self") {
+		message = '<div class="chat-bubble" id="' + data.ID
+				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
+				+ data.fromID + '"><img class="chat-avatar" src="'
+				+ $.parseJSON(data.attributes.avatarLink).src
+				+ '" width="30" height="30"/></a><p class="chat-content-' + who
+				+ '" >' + data.attributes.content;
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
-	if (who == "other")
+	}
+
+	if (who == "other") {
+		message = '<div class="chat-bubble" id="' + data.ID
+				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
+				+ data.toID + '"><img class="chat-avatar" src="'
+				+ $.parseJSON(data.attributes.avatarLink).src
+				+ '" width="30" height="30"/></a><p class="chat-content-' + who
+				+ '" >' + data.attributes.content;
 		message += '</p></div>';
+	}
 
 	var id = $("#chatroom .chat-bubble").first().attr("id");
 	id = parseInt(id);
@@ -326,6 +349,8 @@ function do_change_status(data) {
 	$("#" + data.ID + " span").replaceWith(
 			'<span class="label label-warning status">' + data.status
 					+ '</span>');
+	if (data.status == "SENT")
+		$.playSound('../pages/noti-sound/end-point-reached');
 	var messages = sessionStorage.getItem("messages");
 	messages = $.parseJSON(messages);
 	for (var i = 0; i < messages.length; i++)

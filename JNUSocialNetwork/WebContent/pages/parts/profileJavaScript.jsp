@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/noti-sound/jquery.playSound.js"></script>
 <script src="js/jquery.json.min.js"></script>
 <script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
@@ -75,12 +76,16 @@
 													"<div class='post about' style='width:80px;'><a class='btn btn-success' href='changePassword.jsp'>修改密码</button></a>");
 								}
 								Msnry('.about_body', '.post', 435);
-								var tags = FetchHeatLookingForTag("0","20");
-								$.each(tags.reverse(), function(n, tag) {
-									var tagS = "<span title='" + tag.ID + "' class='tagSpan'>" + tag.ID
-											+ "</span>";
-									$('.tagSB').after(tagS);
-								});
+								var tags = FetchHeatLookingForTag("0", "20");
+								$
+										.each(
+												tags.reverse(),
+												function(n, tag) {
+													var tagS = "<span title='" + tag.ID + "' class='tagSpan'>"
+															+ tag.ID
+															+ "</span>";
+													$('.tagSB').after(tagS);
+												});
 							});
 		</script>
 	</c:when>
@@ -158,7 +163,10 @@
 																				n,
 																				dataString) {
 																			if (dataString.postType == "NORMAL"
-																					&& dataString.available == true && $("div[class='post "+dataString.ID+"']").length == 0) {
+																					&& dataString.available == true
+																					&& $("div[class='post "
+																							+ dataString.ID
+																							+ "']").length == 0) {
 																				var boarddiv = post(
 																						dataString.owner.ID,
 																						dataString.owner.attributes.name,
