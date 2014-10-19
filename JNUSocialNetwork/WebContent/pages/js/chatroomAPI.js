@@ -349,8 +349,6 @@ function do_change_status(data) {
 	$("#" + data.ID + " span").replaceWith(
 			'<span class="label label-warning status">' + data.status
 					+ '</span>');
-	if (data.status == "SENT")
-		$.playSound('../pages/noti-sound/end-point-reached');
 	var messages = sessionStorage.getItem("messages");
 	messages = $.parseJSON(messages);
 	for (var i = 0; i < messages.length; i++)
