@@ -27,18 +27,53 @@
 			</div>
 		</div>
 	</div>
-	<div class="band">
-		<div class="band-bg"></div>
-
-		<div class="band-contain">
-			<div class="band-text">
-				<h1 class="band-title"></h1>
-				<div class="btn-inner">
-					<a class="btn btn-danger btnFind" href="register.jsp"></a>
+	<div id="Carousel" class="carousel slide"  data-ride="carousel" style="position: relative;min-height: 680px;overflow: hidden;margin-top: -81px;min-width: 1200px;background-color: #000">
+		<ol class="carousel-indicators">
+ 			<li data-target="#Carousel" data-slide-to="0" class="active" id="carousel_slide_to_0"></li>
+ 			<li data-target="#Carousel" data-slide-to="1" id="carousel_slide_to_1"></li>
+ 			<li data-target="#Carousel" data-slide-to="2" id="carousel_slide_to_2"></li>
+ 			<li data-target="#Carousel" data-slide-to="3" id="carousel_slide_to_3"></li>
+ 			<li data-target="#Carousel" data-slide-to="4" id="carousel_slide_to_4"></li>
+ 		</ol>
+		<div class="carousel-inner">
+    		<div class="active item" id="carousel_slide_0">
+    			<div class="band">
+					<div class="band-bg"></div>
+					<div class="band-contain">
+						<div class="band-text">
+							<h1 class="band-title"></h1>
+							<div class="btn-inner">
+								<a class="btn btn-danger btnFind" href="register.jsp"></a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
+			<div class="item" id="carousel_slide_1">
+				<img src="images/about-us/campus.jpg" id="test1" style="opacity:0"/>
+				<div class="carousel-caption">Page2 test</div>
+			</div>
+    		<div class="item" id="carousel_slide_2">
+    			<img src="images/about-us/campus.jpg" id="test2" style="opacity:0"/>
+    			<div class="carousel-caption">Page3 test</div>
+    		</div>
+    		<div class="item" id="carousel_slide_3">
+    			<img src="images/about-us/campus.jpg" id="test3" style="opacity:0"/>
+    			<div class="carousel-caption">Page4 test</div>
+    		</div>
+    		<div class="item" id="carousel_slide_4">
+    			<img src="images/about-us/campus.jpg" id="test4" style="opacity:0"/>
+    			<div class="carousel-caption">Page5 test</div>
+    		</div>
 		</div>
+		<a class="left carousel-control" href="#Carousel" data-slide="prev" id="carousel_slide_to_prev">
+ 			<span class="glyphicon glyphicon-chevron-left"></span></a>
+ 		<a class="right carousel-control" href="#Carousel" data-slide="next" id="carousel_slide_to_next">
+ 			<span class="glyphicon glyphicon-chevron-right"></span></a>
 	</div>
+	
+	<div id="test"></div>
+	
 	<div class="characters">
 		<div class="characters-container">
 			<span class="char-icon1"></span> <span class="char-icon2"></span> <span
@@ -107,19 +142,122 @@
 	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<script src="js/home.js"></script>
 	<script type="text/javascript">
+	
+	//carousel_slide_to_x功能是翻到第x页的时候页面完成的动画，reset功能是将其它页重置
+	function carousel_slide_to_0(){
 		$(".band-bg").animate({
 			opacity : 1
 		}, 500);
 		$(".band-text").delay(500).animate({
 			top : 330,
 			opacity : 1
-		}, 233);
+		}, 233,function(){
+			carousel_slide_to_1_reset();
+			carousel_slide_to_2_reset();
+			carousel_slide_to_3_reset();
+			carousel_slide_to_4_reset();
+		});
+		
+	};
+	function carousel_slide_to_1(){
+		$("#test1").animate({
+			opacity : 1
+		}, 500,function(){
+			carousel_slide_to_0_reset();
+			carousel_slide_to_2_reset();
+			carousel_slide_to_3_reset();
+			carousel_slide_to_4_reset();
+		});
+	};
+	function carousel_slide_to_2(){
+		$("#test2").animate({
+			opacity : 1
+		}, 500,function(){
+			carousel_slide_to_1_reset();
+			carousel_slide_to_0_reset();
+			carousel_slide_to_3_reset();
+			carousel_slide_to_4_reset();
+		});
+	};
+	function carousel_slide_to_3(){
+		$("#test3").animate({
+			opacity : 1
+		}, 500,function(){
+			carousel_slide_to_1_reset();
+			carousel_slide_to_2_reset();
+			carousel_slide_to_0_reset();
+			carousel_slide_to_4_reset();
+		});
+	};
+	function carousel_slide_to_4(){
+		$("#test4").animate({
+			opacity : 1
+		}, 500,function(){
+			carousel_slide_to_1_reset();
+			carousel_slide_to_2_reset();
+			carousel_slide_to_3_reset();
+			carousel_slide_to_0_reset();
+		});
+	};
+	function carousel_slide_to_0_reset(){
+		$(".band-bg").css({
+			opacity:0
+		});
+		$(".band-text").css({
+			top : 330,
+			opacity : 0
+		});
+	};
+	function carousel_slide_to_1_reset(){
+		$("#test1").animate({
+			opacity : 0
+		});
+	};
+	function carousel_slide_to_2_reset(){
+		$("#test2").animate({
+			opacity : 0
+		});
+	};
+	function carousel_slide_to_3_reset(){
+		$("#test3").animate({
+			opacity : 0
+		});
+	};
+	function carousel_slide_to_4_reset(){
+		$("#test4").animate({
+			opacity : 0
+		});
+	};
+	$('#Carousel').on('slide.bs.carousel', function (event) {
+		switch(event.relatedTarget.id){
+		case ('carousel_slide_0'):
+			carousel_slide_to_0();
+			break;
+		case ('carousel_slide_1'):
+			carousel_slide_to_1();
+			break;
+		case ('carousel_slide_2'):
+			carousel_slide_to_2();
+			break;
+		case ('carousel_slide_3'):
+			carousel_slide_to_3();
+			break;
+		case ('carousel_slide_4'):
+			carousel_slide_to_4();
+			break;
+		};
+	});
+	$(document).ready(function(){
 		$(".header").delay(633).animate({
 			top : 0,
 			opacity : 1
 		}, 267);
+		carousel_slide_to_0();
 		fetchHotCommunity();
+	});
+	
 	</script>
 	<%@ include file="parts/baidu.jsp"%>
+	
 </body>
 </html>
