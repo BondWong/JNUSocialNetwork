@@ -384,7 +384,7 @@ function aboutClickEvent()
         var tags = FetchHeatLookingForTag("0", "20");
         $.each(tags.reverse(), function (n, tag) 
         {
-            tagArray += "<span title='" + tag.ID + "' class='tagSpan'>" + tag.ID + "</span>";
+            tagArray += "<span title='" + tag.ID + "' id='tagSpan'>" + tag.ID + "</span>";
         });
         var tagContainer = "<div class='tagContainer'>" + tagArray + "<br clear='all' /></div>";
         $('.tagHead').after(tagContainer);
