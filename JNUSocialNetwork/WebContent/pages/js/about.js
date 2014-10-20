@@ -847,7 +847,7 @@ function fetchUserByID()
                 });
             });
         }
-        if ((userInfo.attributes.wechat == "" && userInfo.attributes.email == "" && userInfo.attributes.telnum == "") || (userInfo.attributes.selectWechat != "公开" && userInfo.attributes.selectEmail != "公开") && userInfo.attributes.selectTele != "公开") {
+        if (userInfo.attributes.email != "" && (userInfo.attributes.selectWechat != "公开" && userInfo.attributes.selectEmail != "公开") && userInfo.attributes.selectTele != "公开") {
             $('#afC').append( "<button class='btn btn-primary begC'>求联系方式</button>");
         }
     }
