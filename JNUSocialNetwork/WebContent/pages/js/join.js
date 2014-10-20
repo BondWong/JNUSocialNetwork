@@ -81,6 +81,7 @@
                                 },
                                 success: function (data, textStatus, jqXHR) {
                                     joinProcess($element);
+                                    $("#addPhoneModal").modal("hide");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     console.log("add Phone failed! " + textStatus + " " + errorThrown);
