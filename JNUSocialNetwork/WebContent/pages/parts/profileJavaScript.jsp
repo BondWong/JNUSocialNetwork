@@ -81,7 +81,7 @@
 										.each(
 												tags.reverse(),
 												function(n, tag) {
-													var tagS = "<span title='" + tag.ID + "' class='tagSpan'>"
+													var tagS = "<span title='" + tag.ID + "' id='tagSpan'>"
 															+ tag.ID
 															+ "</span>";
 													$('.tagSB').after(tagS);
