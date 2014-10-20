@@ -186,7 +186,7 @@ $('body').on('click','#ulFile',function(){
 $('body').on("click", ".activityShowHref", function() {
 	var id = $(this).attr("id");
 	var communityID = FetchPostByID(id).attributes.communityID;
-	window.location.href = 'activityShow.jsp?' + communityID + '&' + id;
+	window.open('activityShow.jsp?' + communityID + '&' + id);
 });
 $('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");

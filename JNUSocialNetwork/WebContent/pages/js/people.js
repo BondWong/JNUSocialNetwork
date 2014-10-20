@@ -204,7 +204,7 @@ function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs) {
 	Msnry('.userContainer', '.userCard', 200);
 }
 $('body').on("click", ".tipUser2", function() {
-	window.location.href = 'profile.jsp?nav=about&' + $(this).attr("id");
+	window.open('profile.jsp?nav=about&' + $(this).attr("id"));
 });
 
 $('body').on(

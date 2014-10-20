@@ -228,7 +228,7 @@ $(document).ready(
 			// funtion sessionID
 			$('body').on("click", ".img_container", function() {
 				var comm = $(this).find("input").attr("value");
-				window.location.href = 'communityOwnerPage.jsp?' + comm;
+				window.open('communityOwnerPage.jsp?' + comm);
 			});
 			$('body').on('click', '.userSearch', function() {
 				searchCommunity();

@@ -40,12 +40,7 @@ function create_chatroom(data, fromID, toID, toName, online, top, right,
 		chatroom += '<span class="label label-success" id="'
 				+ toID
 				+ '">'
-				+ '<a class="instant-chat-name" href="../pages/profile.jsp?nav=about&'
-				+ toID
-				+ '"'
-				+ 'target="_blank">'
 				+ toName
-				+ '</a>'
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">历史对话</span></a></div></div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
 				+ '"></div>';
@@ -53,12 +48,7 @@ function create_chatroom(data, fromID, toID, toName, online, top, right,
 		chatroom += '<span class="label label-default" id="'
 				+ toID
 				+ '">'
-				+ '<a class="instant-chat-name" href="../pages/profile.jsp?nav=about&'
-				+ toID
-				+ '"'
-				+ 'target="_blank">'
 				+ toName
-				+ '</a>'
 				+ '</span></h3></div><div class="panel-body chat-room-body"><div class="chat-room-load-histroy"><a href="javaScript:void(0);" class="chat-room" id="load_more"><span class="glyphicon glyphicon-cloud-download">历史对话</span></a></div></div><div><div class="panel-footer chat-room-footer"><textarea name="message-text-area" class="form-control chat-room-input" rows="3" cols="30" draggable="false" placeholder="Enter Here" autofocus maxlength="90"></textarea><div><button type="button" class="btn btn-default btn-xs btn-block">Send</button></div></div><input type="hidden" name="ID" value="'
 				+ data.ID + '"><input type="hidden" id="toID" value="' + toID
 				+ '"></div>';
@@ -192,7 +182,6 @@ function do_receive(data) {
 	} else if ($("#chatroom") != null && $("#chatroom").is(":visible")
 			&& $("#chatroom #toID").val() == data.fromID) {
 		append_to_content_panel(data, "other");
-		$.playSound('../pages/noti-sound/youve-been-informed');
 		save_message(data);
 		oriented_send({
 			"action" : "UPDATEMESSAGESTATUS",
@@ -217,27 +206,16 @@ function do_send(data) {
 }
 
 function append_to_content_panel(data, who) {
-	var message = "";
-	if (who == "self") {
-		message = '<div class="chat-bubble" id="' + data.ID
-				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
-				+ data.fromID + '" ><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
-				+ '" width="30" height="30" /></a><p class="chat-content-'
-				+ who + '" >' + data.attributes.content;
+	var message = '<div class="chat-bubble" id="' + data.ID
+			+ '" ><img class="chat-avatar" src="'
+			+ $.parseJSON(data.attributes.avatarLink).src
+			+ '" width="30" height="30" /><p class="chat-content-' + who
+			+ '" >' + data.attributes.content;
+	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
-	}
-
-	if (who == "other") {
-		message = '<div class="chat-bubble" id="' + data.ID
-				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
-				+ data.fromID + '" ><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
-				+ '" width="30" height="30" /></a><p class="chat-content-'
-				+ who + '" >' + data.attributes.content;
+	if (who == "other")
 		message += '</p></div>';
-	}
 
 	var id = $("#chatroom .chat-bubble").last().attr("id");
 	id = parseInt(id);
@@ -258,27 +236,16 @@ function append_to_content_panel(data, who) {
 }
 
 function prepend_to_content_panel(data, who) {
-	var message = "";
-	if (who == "self") {
-		message = '<div class="chat-bubble" id="' + data.ID
-				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
-				+ data.fromID + '"><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
-				+ '" width="30" height="30"/></a><p class="chat-content-' + who
-				+ '" >' + data.attributes.content;
+	var message = '<div class="chat-bubble" id="' + data.ID
+			+ '" ><img class="chat-avatar" src="'
+			+ $.parseJSON(data.attributes.avatarLink).src
+			+ '" width="30" height="30"/><p class="chat-content-' + who + '" >'
+			+ data.attributes.content;
+	if (who == "self")
 		message += '<br /><span class="label label-warning status">'
 				+ data.status + '</span></p></div>';
-	}
-
-	if (who == "other") {
-		message = '<div class="chat-bubble" id="' + data.ID
-				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
-				+ data.toID + '"><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
-				+ '" width="30" height="30"/></a><p class="chat-content-' + who
-				+ '" >' + data.attributes.content;
+	if (who == "other")
 		message += '</p></div>';
-	}
 
 	var id = $("#chatroom .chat-bubble").first().attr("id");
 	id = parseInt(id);

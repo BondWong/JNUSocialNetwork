@@ -922,8 +922,8 @@ $('body').on(
 		"click",
 		".tipUser",
 		function() {
-			window.location.href = 'profile.jsp?nav=post&'
-					+ sessionStorage.getItem("otherUserID");
+			window.open('profile.jsp?nav=post&'
+					+ sessionStorage.getItem("otherUserID"));
 		});
 
 var hoverTimer, outTimer; 
