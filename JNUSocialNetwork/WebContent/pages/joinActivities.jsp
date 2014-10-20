@@ -63,7 +63,7 @@
                 <div class="modal-body container">
                     <form class="form-inline text-center" role="form">
                         <input id="telnum" type="tel" class="form-control" maxlength="11" autofocus />
-                        <input id="checkTN" type="submit" class="btn btn-success" value="登记" />
+                        <button id="checkTN" class="btn btn-success">登记</button>
                     </form>
                 </div>
             </div>
@@ -119,10 +119,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
     <script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
     <script src="js/underscore-min.js"></script>
-    <script src="js/join.min.js"></script>
+    <script src="js/join.js"></script>
 
 </body>
 

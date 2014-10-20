@@ -69,21 +69,25 @@
                         var data = $("#telnum").val();
                         // 错误手机号简单过滤
                         if (data >= 10000000001) {
+                            var transit = {
+                                telnum: data
+                            };
                             $.ajax(UPDATE_USERINFO_URL_BASE + window.USERID, {
-                                type: "POST",
-                                data: {
-                                    telnum: data
-                                },
-                                processData: false,
-                                contentType: false,
+                                type: "PUT",
+                                data: JSON.stringify(transit),
+                                contentType: "application/json",
                                 beforeSend: function (request) {
                                     request.setRequestHeader("ID", window.USERID);
                                 },
                                 success: function (data, textStatus, jqXHR) {
                                     joinProcess($element);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    console.log("add Phone failed! " + textStatus + " " + errorThrown);
                                 }
                             });
                         }
+                        return false;
                     });
                 } else {
                     joinProcess($element);
