@@ -214,6 +214,7 @@
 										style="display: block; font-size: 12px; margin-top: 30px;">[请上传长宽比例1140*300的海报头，否则影响显示效果]</span>
 									<!-- The container for the uploaded files -->
 								</div>
+                            </div>
 						</form>
 						<div id="page2"
 							style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
@@ -313,7 +314,6 @@
 		<div class="activityBody">
 			<div class="activityBord"></div>
 		</div>
-	</div>
 	</div>
 	<!-- CHATROOM -->
 	<%@ include file="parts/chatRoom.jsp"%>
