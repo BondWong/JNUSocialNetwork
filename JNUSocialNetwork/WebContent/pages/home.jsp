@@ -6,6 +6,21 @@
 
 <head>
 <%@ include file="parts/head.jsp"%>
+<style type="text/css">
+/* flexslider */
+.flexslider{margin-top: -81px;margin-left:-40px;min-height: 680px;overflow: hidden;min-width: 1200px;background:url(images/loading.gif) 50% no-repeat; }
+.slides{position:relative;z-index:1;}
+.slides li{height: 680px}
+.flex-control-nav{position:absolute;top:640px;z-index:2;width:100%;text-align:center;}
+.flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
+.flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(images/dot.png) right 0 no-repeat;cursor:pointer;}
+.flex-control-nav .flex-active{background-position:0 0;}
+ 
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:320px;}
+.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+.flex-direction-nav li a.flex-prev{left:80px;background:url(images/prev.png) center center no-repeat;top:45%;}
+.flex-direction-nav li a.flex-next{right:40px;background:url(images/next.png) center center no-repeat;top:45%;}
+</style>
 </head>
 
 <body>
@@ -27,18 +42,28 @@
 			</div>
 		</div>
 	</div>
-	<div class="band">
-		<div class="band-bg"></div>
-
-		<div class="band-contain">
-			<div class="band-text">
-				<h1 class="band-title"></h1>
-				<div class="btn-inner">
-					<a class="btn btn-danger btnFind" href="register.jsp"></a>
+	<div class="flexslider">
+    <ul class="slides">
+		<li>
+    			<div class="band">
+					<div class="band-bg"></div>
+					<div class="band-contain">
+						<div class="band-text">
+							<h1 class="band-title"></h1>
+							<div class="btn-inner">
+								<a class="btn btn-danger btnFind" href="register.jsp"></a>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		</li>
+		<li>
+    		<img src="images/about-us/campus.jpg"/>
+		</li>
+	</ul>
+	</div>	
+
+	
 	<div class="characters">
 		<div class="characters-container">
 			<span class="char-icon1"></span> <span class="char-icon2"></span> <span
@@ -106,7 +131,14 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<script type="text/javascript" src="js/home-initialization.js"></script>
 	<script src="js/home.js"></script>
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$(".header").delay(633).animate({
+			top : 0,
+			opacity : 1
+		}, 267);
 		$(".band-bg").animate({
 			opacity : 1
 		}, 500);
@@ -114,12 +146,15 @@
 			top : 330,
 			opacity : 1
 		}, 233);
-		$(".header").delay(633).animate({
-			top : 0,
-			opacity : 1
-		}, 267);
+		$('.flexslider').flexslider({
+	        directionNav: true,
+	        pauseOnAction: true
+	    });
 		fetchHotCommunity();
+	});
+	
 	</script>
 	<%@ include file="parts/baidu.jsp"%>
+	
 </body>
 </html>
