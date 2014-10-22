@@ -58,7 +58,6 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 	<script src="js/md5.js"></script>
 	<script>
 		$('body').on("click", ".signInBtn", function() {
