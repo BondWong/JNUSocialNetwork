@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
 		if (!fromRegister
 				&& (sessionHiddenCode == null || hiddenCode == null || !sessionHiddenCode
 						.equals(hiddenCode)))
-			response.sendRedirect("/pages/login.jsp");
+			response.sendRedirect("/pages/account.jsp");
 		else {
 			if (fromRegister)
 				try {
@@ -123,16 +123,20 @@ public class LoginServlet extends HttpServlet {
 						cookie.setMaxAge(15 * 24 * 60 * 60);
 
 						response.addCookie(cookie);
-						if (origin.equals(null) || origin.equals(""))
-							response.sendRedirect("/pages/activity.jsp?nav=discovery");
-						else
+						if (origin.equals(null) || origin.equals("")) {
+							if (account.getUserType().equals(
+									UserType.COMMUNITYOWNER))
+								response.sendRedirect("/pages/community.jsp?nav=mycommunity");
+							else
+								response.sendRedirect("/pages/activity.jsp?nav=discovery");
+						} else
 							response.sendRedirect(origin.substring(origin
 									.indexOf("/pages")));
 					}
 				} else {
 					account.setLastAccessDate(new Date());
 					account.setChance((account.getChance() - 1));
-					response.sendRedirect("/pages/login.jsp?success=false");
+					response.sendRedirect("/pages/account.jsp?success=false");
 				}
 
 				Transaction t = new UpdateAccountTransaction();
@@ -146,7 +150,7 @@ public class LoginServlet extends HttpServlet {
 				}
 
 			} else {
-				response.sendRedirect("/pages/login.jsp?success=false");
+				response.sendRedirect("/pages/account.jsp?success=false");
 			}
 		}
 	}

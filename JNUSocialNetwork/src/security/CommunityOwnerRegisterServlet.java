@@ -48,7 +48,7 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String statement = request.getParameter("statement");
 		if (statement == null || !statement.equals("agree")) {
-			response.sendRedirect("/pages/applyCommunity.jsp?agree=false");
+			response.sendRedirect("/pages/account.jsp?agree=false");
 			return;
 		}
 
@@ -61,7 +61,7 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 		}
 		if (hiddenCode == null || sessionHiddenCode == null
 				|| !hiddenCode.equals(sessionHiddenCode))
-			response.sendRedirect("/pages/applyCommunity.jsp");
+			response.sendRedirect("/pages/account.jsp");
 		else {
 			String applicationID = request.getParameter("applicationID");
 
@@ -74,7 +74,7 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (!result) {
-				response.sendRedirect("/pages/applyCommunity.jsp?ID=exist");
+				response.sendRedirect("/pages/account.jsp?ID=exist");
 				return;
 			}
 
@@ -98,7 +98,7 @@ public class CommunityOwnerRegisterServlet extends HttpServlet {
 				return;
 			}
 
-			response.sendRedirect("/pages/applyCommunity.jsp?success=true");
+			response.sendRedirect("/pages/account.jsp?success=true");
 
 		}
 	}

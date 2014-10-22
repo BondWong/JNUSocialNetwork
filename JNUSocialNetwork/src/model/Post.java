@@ -44,17 +44,17 @@ import model.modelType.PostType;
 		@NamedQuery(name = "Post.fetchActivitiesByOwner", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND p.owner.ID = ?1 ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchJoinedActivities", query = "SELECT p FROM Post p JOIN p.participants m WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT me FROM Member me WHERE me.ID = ?1) IN m ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchActivitiesByTag", query = "SELECT p FROM Post p JOIN p.activityTypeTags t WHERE p.available = 1 AND p.postType = model.modelType.PostType.ACTIVITY AND (SELECT tag FROM Tag tag WHERE tag.ID = ?1) IN t ORDER BY p.ID DESC"),
-		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchByFolloweeOrOwner", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByFollowee", query = "SELECT p FROM Post p "
-				+ "WHERE p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
+				+ "WHERE p.available = 1 AND p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE "
 				+ "m.ID = ?1 ) ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByJoinedCommunity", query = "SELECT p FROM Community c JOIN c.posts p WHERE c IN "
 				+ "(SELECT cs FROM Member m JOIN m.joinedCommunities cs WHERE m.ID = ?1) ORDER BY p.ID"),
-		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.owner.ID = ?1 ORDER BY p.ID DESC"),
-		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID"),
-		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.postType = ?1 ORDER BY p.ID DESC"),
-		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.ID = ?1"),
-		@NamedQuery(name = "Post.fetchHeat", query = "SELECT p FROM Post p ORDER BY SIZE(p.comments) DESC, p.ID DESC"),
+		@NamedQuery(name = "Post.fetchByOwner", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.owner.ID = ?1 ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchByTypeASC", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = ?1 ORDER BY p.ID"),
+		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = ?1 ORDER BY p.ID DESC"),
+		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.ID = ?1"),
+		@NamedQuery(name = "Post.fetchHeat", query = "SELECT p FROM Post p WHERE p.available = 1 ORDER BY SIZE(p.comments) DESC, p.ID DESC"),
 		@NamedQuery(name = "Post.fetchUnavailableIDs", query = "SELECT p.ID FROM Post p WHERE p.available = 0"),
 		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0") })
 public class Post extends AttributeModel {
