@@ -148,22 +148,41 @@ public class WebSocketEndPoint {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@OnMessage
-	public void message(@PathParam("ID") String ID, Session session, Map param)
-			throws Exception {
+	public void message(@PathParam("ID") String ID, Session session, Map param) {
 		WebSocketAction action = WebSocketAction.valueOf((String) param
 				.get("action"));
 		switch (action) {
 		case EVENT:
-			handleEvent(session, param);
+			try {
+				handleEvent(session, param);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case CHAT:
-			handleMessageTransimit(session, param);
+			try {
+				handleMessageTransimit(session, param);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case UPDATEMESSAGESTATUS:
-			handleUpdateMessageStatus(session, param);
+			try {
+				handleUpdateMessageStatus(session, param);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case UPDATEMESSAGESTATUSTOSERVER:
-			handleUpdateMessageStatusToServer(session, param);
+			try {
+				handleUpdateMessageStatusToServer(session, param);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case SENDCONTACT:
 			break;

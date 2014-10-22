@@ -183,7 +183,7 @@ public class RegisterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String statement = request.getParameter("statement");
 		if (statement == null || !statement.equals("agree")) {
-			response.sendRedirect("/pages/register.jsp?agree=false");
+			response.sendRedirect("/pages/account.jsp?agree=false");
 			return;
 		}
 
@@ -200,7 +200,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 		if (hiddenCode == null || sessionHiddenCode == null
 				|| !hiddenCode.equals(sessionHiddenCode))
-			response.sendRedirect("/pages/register.jsp");
+			response.sendRedirect("/pages/account.jsp");
 		else {
 
 			DAOTransaction transaction = new DoesIDExistTransaction();
@@ -212,7 +212,7 @@ public class RegisterServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (!result) {
-				response.sendRedirect("/pages/login.jsp?registerExist=true");
+				response.sendRedirect("/pages/account.jsp?registerExist=true");
 				return;
 			}
 
@@ -269,7 +269,7 @@ public class RegisterServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 
 				} else {
-					response.sendRedirect("/pages/register.jsp?error="
+					response.sendRedirect("/pages/account.jsp?error="
 							+ findErrorMessage(httpResponse));
 				}
 			} catch (Exception e) {

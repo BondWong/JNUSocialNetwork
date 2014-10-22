@@ -7,6 +7,7 @@
 				session.setAttribute("hiddenCode", System.currentTimeMillis()
 						+ "");
 			}</jsp:scriptlet>
+
 <head>
 <%@ include file="parts/head.jsp"%>
 </head>
@@ -37,10 +38,10 @@
 							</p>
 							<div class="form-cust">
 								<input type="text" class="form-control form-control-cust"
-									placeholder="请输入验证码" name="valCode" pattern="[A-Za-z0-9]{4}"
+									placeholder="请输入验证码" name="valCode" maxLength="4"
+									pattern="[A-Za-z0-9]{4}"
 									data-errormessage-value-missing="请输入验证码"
-									data-errormessage-pattern-mismatch="验证码错误" required
-									maxLength="4" />
+									data-errormessage-pattern-mismatch="验证码错误" required />
 								<div class="form-cust-img">
 									<img src="../security/RegServlet"
 										onload="javascript:finish_loading_valcode();"
@@ -52,11 +53,11 @@
 							<input type="hidden" name="hiddenCode"
 								value="${sessionScope.hiddenCode }" /> <input type="hidden"
 								name="origin" value="" />
-							<p style="float: left;">
+							<div class="declaration">
 								<input type="checkbox" name="statement" value="agree" checked
-									required /><span class="agree" data-toggle='modal'
-									data-target='#declare'>我同意责任申明</span>
-							</p>
+									required /> <a class="agree" data-toggle='modal'
+									data-target='#declare'>我同意责任申明</a>
+							</div>
 							<button class="btn btn-lg btn-success btn-block signUpBtn"
 								type="submit">注册</button>
 							<h4>
@@ -71,6 +72,7 @@
 		</div>
 
 	</div>
+
 	<div class="modal fade" id="declare" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -112,8 +114,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery-1.10.2.js"></script>
-	<script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
-	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
+	<script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 	<script src="js/md5.js"></script>
 	<script>
 		function finish_loading_valcode() {
@@ -146,7 +147,7 @@
 				setTimeout('$("#register_fail").fadeOut("slow")', 3000);
 			</script>
 		</c:when>
-		<c:when test="${param.agree eq false }">
+		<c:when test="${param.agree eq false}">
 			<script type="text/javascript">
 				$("#register_fail").text("请同意责任申明");
 				$("#register_fail").fadeIn("fast");
@@ -156,4 +157,5 @@
 	</c:choose>
 	<%@ include file="parts/baidu.jsp"%>
 </body>
+
 </html>

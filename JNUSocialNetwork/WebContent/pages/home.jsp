@@ -51,7 +51,7 @@
 						<div class="band-text">
 							<h1 class="band-title"></h1>
 							<div class="btn-inner">
-								<a class="btn btn-danger btnFind" href="register.jsp"></a>
+								<a class="btn btn-danger btnFind" href="account.jsp"></a>
 							</div>
 						</div>
 					</div>
