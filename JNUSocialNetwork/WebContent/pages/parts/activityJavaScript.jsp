@@ -25,6 +25,10 @@ $(document)
 			} else {
 				clickOffEvent();
 			}
+			$('.activityHome').css({
+				"color":"#fff",
+				"border-bottom":"1px solid #BE3948"
+			});
 		});
 </script>
 <c:choose>

@@ -236,10 +236,12 @@ $('.act_content').hover(function() {
 function fetchPostByIDs(container) {
 	var response = FetchPostByIDs(container);
 	$.each(response, function(n, dataString) {
-		addPost(dataString.owner.ID, dataString.owner.attributes.name,
-				dataString.publishDate, dataString.attributes.content,
-				dataString.ID, dataString.likerIDs, dataString.collectorIDs,
-				dataString.imageLinks, dataString.owner.attributes.avatarLink);
+		if(dataString.available == true){
+			addPost(dataString.owner.ID, dataString.owner.attributes.name,
+					dataString.publishDate, dataString.attributes.content,
+					dataString.ID, dataString.likerIDs, dataString.collectorIDs,
+					dataString.imageLinks, dataString.owner.attributes.avatarLink);
+		}
 	});
 }
 
@@ -926,7 +928,7 @@ $('body').on(
 					+ sessionStorage.getItem("otherUserID"));
 		});
 
-var hoverTimer, outTimer; 
+/*var hoverTimer, outTimer; 
 $(".home-nav").hover(function(){
 	clearTimeout(outTimer);
 	hoverTimer = setTimeout(function(){  
@@ -946,11 +948,11 @@ $('body').on('click', '.communityO', function() {
 });
 $('body').on('click', '.communityD', function() {
 	window.location.href = "community.jsp?nav=discovery";
-});
+});*/
 $('body').on('click', '.applyCommunity', function() {
 	window.location.href = "applyCommunity.jsp";
 });
-$('body').on('click', '.activityA', function() {
+/*$('body').on('click', '.activityA', function() {
 	window.location.href = "activity.jsp?nav=discovery";
 });
 $('body').on('click', '.activityC', function() {
@@ -958,7 +960,7 @@ $('body').on('click', '.activityC', function() {
 });
 $('body').on('click', '.hrefIntro', function() {
 	window.location.href = "aboutUs.jsp";
-});
+});*/
 /**
  * auto_resize
  */

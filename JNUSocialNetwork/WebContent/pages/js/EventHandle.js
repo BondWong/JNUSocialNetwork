@@ -50,7 +50,7 @@ function CREATEPOSTINCOMMUNITY() {
 			}
 		}
 
-		if (jsondata.post.postType == "ACTIVITY") {
+		if (jsondata.post.postType == "ACTIVITY" && jsondata.post.available == true) {
 			addActivity(jsondata.post.ID,
 					jsondata.post.attributes.activityName,
 					jsondata.post.attributes.activityTime,

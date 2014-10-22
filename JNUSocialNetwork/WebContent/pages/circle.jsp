@@ -160,7 +160,10 @@
 								fectchHeatPost();
 							}
 							Msnry('.pro_body', '.post', 435);
-
+							$('.circleHome').css({
+								"color":"#fff",
+								"border-bottom":"1px solid #BE3948"
+							});
 						});
 	</script>
 	<%@ include file="parts/contentScroll.jsp"%>

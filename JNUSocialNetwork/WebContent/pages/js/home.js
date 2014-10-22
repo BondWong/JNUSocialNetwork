@@ -4,7 +4,7 @@ if(BrowserDetection() != false){
 	$('body').append(button);
 	$('body').append(alert);
 	$('.browserClick').click();
-}
+}/*
 var hoverTimer, outTimer; 
 $(".home-nav").hover(function(){
 	clearTimeout(outTimer);
@@ -19,7 +19,7 @@ $(".home-nav").hover(function(){
 		$(".home-nav").animate({height:"50px"});
 		 $('.show-bar').css("display","none");
 	},300);
-});
+});*/
 $('body').on('click', '.communityO', function() {
 	window.location.href = "community.jsp?nav=official";
 });

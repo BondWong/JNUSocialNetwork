@@ -1,0 +1,21 @@
+diff a/JNUSocialNetwork/WebContent/pages/home.jsp b/JNUSocialNetwork/WebContent/pages/home.jsp	(rejected hunks)
+@@ -42,16 +42,9 @@
+ 			</div>
+ 		</div>
+ 	</div>
+-	<div id="Carousel" class="carousel slide"  data-ride="carousel" style="position: relative;min-height: 680px;overflow: hidden;margin-top: -81px;min-width: 1200px;background-color: #000">
+-		<ol class="carousel-indicators">
+- 			<li data-target="#Carousel" data-slide-to="0" class="active" id="carousel_slide_to_0"></li>
+- 			<li data-target="#Carousel" data-slide-to="1" id="carousel_slide_to_1"></li>
+- 			<li data-target="#Carousel" data-slide-to="2" id="carousel_slide_to_2"></li>
+- 			<li data-target="#Carousel" data-slide-to="3" id="carousel_slide_to_3"></li>
+- 			<li data-target="#Carousel" data-slide-to="4" id="carousel_slide_to_4"></li>
+- 		</ol>
+-		<div class="carousel-inner">
+-    		<div class="active item" id="carousel_slide_0">
++	<div class="flexslider">
++    <ul class="slides">
++		<li>
+     			<div class="band">
+ 					<div class="band-bg"></div>
+ 					<div class="band-contain">

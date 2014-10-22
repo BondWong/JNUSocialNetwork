@@ -30,6 +30,7 @@ function fetchPostByIDs(){
 	$.each(response,function(n,value){
 		dataString = $.parseJSON(value);
 	});
-		
-	addPost(dataString.owner.ID,dataString.owner.attributes.name,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs,dataString.collectorIDs);
+	if(dataString.available == true){
+		addPost(dataString.owner.ID,dataString.owner.attributes.name,dataString.publishDate,dataString.attributes.content,dataString.ID,dataString.likerIDs,dataString.collectorIDs);
+	}	
 }

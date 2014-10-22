@@ -91,7 +91,10 @@
 												$('.tagB').after(t);
 											});
 							Msnry('.userContainer', '.userCard', 170);
-
+							$('.peopleHome').css({
+								"color":"#fff",
+								"border-bottom":"1px solid #BE3948"
+							});
 						});
 	</script>
 	<%@ include file="parts/loginJavaScript.jsp"%>

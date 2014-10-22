@@ -599,7 +599,7 @@ function fetchPostsByOwner()
     var response = FetchPostsByOwner(userID, 0, pageSize);
     $ .each( response.reverse(), function (n, dataString) 
     {
-        if (dataString.postType == "NORMAL") 
+        if (dataString.postType == "NORMAL" && dataString.available == true) 
         {
             addPost(dataString.owner.ID, dataString.owner.attributes.name, dataString.publishDate, dataString.attributes.content, 
             dataString.ID, dataString.likerIDs, dataString.collectorIDs, dataString.imageLinks, dataString.owner.attributes.avatarLink);
