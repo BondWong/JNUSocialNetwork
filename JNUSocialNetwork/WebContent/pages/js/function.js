@@ -28,7 +28,7 @@ function Msnry(selectContain, item, width) {
 
 function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 		collecters, srcImage, ownerImage) {
-	var content = '<pre>' + replaceURLWithHTMLLinks(contentR) +'</pre>';
+	var content = '<pre>' + replaceURLWithHTMLLinks(contentR) + '</pre>';
 	var response = FetchCommentByPost(postID, "0", "10");
 	var comment = "";
 	$
@@ -108,44 +108,55 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	var imageDiv1 = "";
 	var imageDiv2 = "";
 	if (srcImage.length > 3) {
-		$.each(srcImage, function(n, image) {
-			if(n%2 == 1){
-				imageDiv1 = imageDiv1
-				+ "<img style='float:right;' class='postimg' width='200' height="
-				+ getHeight(200, $.parseJSON(image).width, $
-						.parseJSON(image).height) + " onclick='showPost("
-				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-			}else{
-				imageDiv2 = imageDiv2
-				+ "<img style='float:left;' class='postimg' width='200' height="
-				+ getHeight(200, $.parseJSON(image).width, $
-						.parseJSON(image).height) + " onclick='showPost("
-				+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-			}
-			
-		});
-		postImgDiv = postImgDiv + "<div class='imgLeft'>" +imageDiv1 + "</div>" +"<div class='imgRight'>" +imageDiv2 + "</div>" + "</div>";
-	}else if( srcImage.length > 0 && srcImage.length <= 3){
+		$
+				.each(
+						srcImage,
+						function(n, image) {
+							if (n % 2 == 1) {
+								imageDiv1 = imageDiv1
+										+ "<img style='float:right;' class='postimg' width='200' height="
+										+ getHeight(200,
+												$.parseJSON(image).width,
+												$.parseJSON(image).height)
+										+ " onclick='showPost(" + postID
+										+ ")' src='" + $.parseJSON(image).src
+										+ "'/>";
+							} else {
+								imageDiv2 = imageDiv2
+										+ "<img style='float:left;' class='postimg' width='200' height="
+										+ getHeight(200,
+												$.parseJSON(image).width,
+												$.parseJSON(image).height)
+										+ " onclick='showPost(" + postID
+										+ ")' src='" + $.parseJSON(image).src
+										+ "'/>";
+							}
+
+						});
+		postImgDiv = postImgDiv + "<div class='imgLeft'>" + imageDiv1
+				+ "</div>" + "<div class='imgRight'>" + imageDiv2 + "</div>"
+				+ "</div>";
+	} else if (srcImage.length > 0 && srcImage.length <= 3) {
 		$.each(srcImage, function(n, image) {
 			imageDiv = imageDiv
 					+ "<img class='postimg' width='450' height="
 					+ getHeight(450, $.parseJSON(image).width, $
 							.parseJSON(image).height) + " onclick='showPost("
 					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
-			
+
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
-	}else{
+	} else {
 		postImgDiv = "";
 	}
 	var readmore = "";
 	var contentD = content;
 	if (content.length > 200) {
-		readmore = "<div class='post_more"+postID+"' id='" + postID
+		readmore = "<div class='post_more" + postID + "' id='" + postID
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 200) + "......";
 	}
-	
+
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
@@ -160,7 +171,9 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 			+ postID
 			+ "'>"
 			+ pRemoveBtn
-			+ "</div></div><div class='post_info'><span class='postContent' id='postContent"+postID+"'>"
+			+ "</div></div><div class='post_info'><span class='postContent' id='postContent"
+			+ postID
+			+ "'>"
 			+ contentD
 			+ "</span>"
 			+ readmore
@@ -181,7 +194,7 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	 * id='collectID' type='hidden' value=" + postID + "><span class='" +
 	 * collectClass + "' style='font-size:20px'></span></a></div>
 	 */
-	
+
 	$("#commentText" + postID).blur(function() {
 		$(this).attr("placeholder", "add a comment");
 	});
@@ -191,16 +204,16 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	}, function() {
 		$(this).find('a').fadeOut(300);
 	});
-	$('body').on("click",".post_more"+postID,function(){
+	$('body').on("click", ".post_more" + postID, function() {
 		var id = $(this).attr('id');
 		$("span[id='postContent" + id + "']").html(content);
 		Msnry('.pro_body', '.post', 435);
 		$(this).remove();
 	});
-	
-	$('body').on("click", ".post_more"+postID, function() {
+
+	$('body').on("click", ".post_more" + postID, function() {
 		var id = $(this).attr('id');
-		if($("div[id='postImg" + id + "']").find('img').length != 0){
+		if ($("div[id='postImg" + id + "']").find('img').length != 0) {
 			$("div[id='postImg" + id + "']").find('img')[0].click();
 		}
 		Msnry('.pro_body', '.post', 435);
@@ -213,13 +226,13 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var boarddiv = post(ownerID, ownerNickName, publishDate, content, postID,
 			likers, collecters, srcImage, ownerImage);
 	$(".share").after(boarddiv);
-	$('.'+postID).find('img.userImg').userTips();
+	$('.' + postID).find('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
 }
 function replaceURLWithHTMLLinks(text) {
-    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-    return text.replace(exp,"<a target='_blank' href='$1'>$1</a>"); 
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+	return text.replace(exp, "<a target='_blank' href='$1'>$1</a>");
 }
 // function hovercommentDeleteBtn
 
@@ -236,11 +249,12 @@ $('.act_content').hover(function() {
 function fetchPostByIDs(container) {
 	var response = FetchPostByIDs(container);
 	$.each(response, function(n, dataString) {
-		if(dataString.available == true){
+		if (dataString.available == true) {
 			addPost(dataString.owner.ID, dataString.owner.attributes.name,
 					dataString.publishDate, dataString.attributes.content,
-					dataString.ID, dataString.likerIDs, dataString.collectorIDs,
-					dataString.imageLinks, dataString.owner.attributes.avatarLink);
+					dataString.ID, dataString.likerIDs,
+					dataString.collectorIDs, dataString.imageLinks,
+					dataString.owner.attributes.avatarLink);
 		}
 	});
 }
@@ -358,7 +372,7 @@ function clickEvent() {
 					'.activityJoin',
 					function() {
 						var id = $(this).find("input").attr("value");
-						if ( FetchUserByID(USERID).attributes.telnum != "") {
+						if (FetchUserByID(USERID).attributes.telnum != "") {
 							if ($(this).css("background-color") == "rgb(255, 255, 255)") {
 								$("div[id='activity" + id + "']").css("color",
 										"rgb(255, 255, 255)");
@@ -389,32 +403,31 @@ function clickEvent() {
 						}
 
 					});
-	$('body')
-			.on(
-					"click",
-					".teleUpload",
-					function() {
-						var activityID = $(this).attr("id");
-						var dataString = {
-							telnum : $('#tele').val()
-						};
-						if ($('.teleForm')[0].checkValidity()) {
-							UpdateUserProfile(USERID, $.toJSON(dataString));
-							$('#telemodal').modal('hide');
-								$("div[id='activity" + activityID + "']").css("color",
-										"rgb(255, 255, 255)");
-								$("div[id='activity" + activityID + "']").css(
-										"background-color", "rgb(66,139,202)");
-								$("div[id='activity" + activityID + "']").find('span')
-										.text("Joined");
-								var response = JoinActivity(USERID, activityID);
-								if (response == 'success') {
-									alert("参加成功！");
-								}
-								$('.activityJoin').attr("data-toggle", "");
-								$('.activityJoin').attr("data-target", "");
-						}
-					});
+	$('body').on(
+			"click",
+			".teleUpload",
+			function() {
+				var activityID = $(this).attr("id");
+				var dataString = {
+					telnum : $('#tele').val()
+				};
+				if ($('.teleForm')[0].checkValidity()) {
+					UpdateUserProfile(USERID, $.toJSON(dataString));
+					$('#telemodal').modal('hide');
+					$("div[id='activity" + activityID + "']").css("color",
+							"rgb(255, 255, 255)");
+					$("div[id='activity" + activityID + "']").css(
+							"background-color", "rgb(66,139,202)");
+					$("div[id='activity" + activityID + "']").find('span')
+							.text("Joined");
+					var response = JoinActivity(USERID, activityID);
+					if (response == 'success') {
+						alert("参加成功！");
+					}
+					$('.activityJoin').attr("data-toggle", "");
+					$('.activityJoin').attr("data-target", "");
+				}
+			});
 
 	// function addComment
 	$('body').on('click', '#addComment', function() {
@@ -696,14 +709,14 @@ function signInAlert() {
 	var alert = "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>还没登陆哦</h4></div><div class='modal-body modal-custom'><a type='button' class='btn btn-primary registerA '>注册</a><a type='button' class='btn btn-primary loginA'>登录</a></div></div></div></div>";
 	$('body').append(alert);
 }
-$('body').on('click','.registerA',function(){
-	localStorage.setItem("url",window.location.href);
-	window.location.href = 'register.jsp';
+$('body').on('click', '.registerA', function() {
+	localStorage.setItem("url", window.location.href);
+	window.location.href = 'account.jsp';
 
 });
-$('body').on('click','.loginA',function(){
-	localStorage.setItem("url",window.location.href);
-	window.location.href = 'login.jsp';
+$('body').on('click', '.loginA', function() {
+	localStorage.setItem("url", window.location.href);
+	window.location.href = 'account.jsp';
 
 });
 function teleAlert(activityID) {
@@ -712,14 +725,14 @@ function teleAlert(activityID) {
 			+ "' type='submit'>确认</button></form></div></div></div></div>";
 	$('body').append(alert);
 }
-var hoverT, timer;  
+var hoverT, timer;
 (function($) {
 	$.fn.userTips = function() {
 		// Speed of the animations in milliseconds - 1000 =
 		// 1 second.
 		var animSpeed = 300;
-		var tinyTip=$("");
-		 
+		var tinyTip = $("");
+
 		// When we hover over the element that we want the
 		// tooltip applied to
 		$(this)
@@ -731,66 +744,70 @@ var hoverT, timer;
 							nPos.top = pos.top + 20;
 							nPos.left = pos.left + 40;
 							var userid = $(this).next().val();
-							hoverT = setTimeout(function(){ 
-								var data = FetchUserByID(userid);
-								var followTxt = "Follow";
-								if ($.inArray(USERID, data.followerIDs) != -1) {
-									followTxt = "Following";
-								}
-								if (USERID == userid) {
-									followTxt = "Yourself";
-								}
-								sessionStorage.setItem("otherUserID", data.ID);
-								var chatSpan = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color:#d7d7d7;"></span>';
-								if (data.ID == USERID) {
-									chatSpan = "";
-								}
-								if (data != "") {
-									var tipFrame = '<div id="'
-											+ data.ID
-											+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
-											+ $
-													.parseJSON(data.attributes.profileImageLink).src
-											+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
-											+ $
-													.parseJSON(data.attributes.avatarLink).src
-											+ '" /></div><p><h1><a class="tipUser">'
-											+ data.attributes.name
-											+ '</a></h1></p><p>'
-											+ data.attributes.introduce
-											+ '</p><button class="btn btn-danger" id="followBtn">'
-											+ followTxt + '</button></div>'
-											+ chatSpan + '</div></div>';
-									$('body').append(tipFrame);
-									var divTip = 'div.popTip';
-									tinyTip = $(divTip);
-									tinyTip.hide();
-									tinyTip.css('position', 'absolute').css(
-											'z-index', '1000');
-									tinyTip.css(nPos).fadeIn(animSpeed);
-									tinyTip.hover(function() {
-										clearTimeout(window.timer);
-									}, function() {
-										tinyTip.fadeOut(500, function() {
-											$(this).remove();
-										});
-									});
-									var chat = '';
-									$('.userInImg').after(chat);
-									if (USERID != null && USERID != "") {
-										$("span#chatCreate")
-												.click(
+							hoverT = setTimeout(
+									function() {
+										var data = FetchUserByID(userid);
+										var followTxt = "Follow";
+										if ($.inArray(USERID, data.followerIDs) != -1) {
+											followTxt = "Following";
+										}
+										if (USERID == userid) {
+											followTxt = "Yourself";
+										}
+										sessionStorage.setItem("otherUserID",
+												data.ID);
+										var chatSpan = '<span  class="glyphicon glyphicon-comment" id="chatCreate" style="font-size:24px;color:#d7d7d7;"></span>';
+										if (data.ID == USERID) {
+											chatSpan = "";
+										}
+										if (data != "") {
+											var tipFrame = '<div id="'
+													+ data.ID
+													+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
+													+ $
+															.parseJSON(data.attributes.profileImageLink).src
+													+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
+													+ $
+															.parseJSON(data.attributes.avatarLink).src
+													+ '" /></div><p><h1><a class="tipUser">'
+													+ data.attributes.name
+													+ '</a></h1></p><p>'
+													+ data.attributes.introduce
+													+ '</p><button class="btn btn-danger" id="followBtn">'
+													+ followTxt
+													+ '</button></div>'
+													+ chatSpan + '</div></div>';
+											$('body').append(tipFrame);
+											var divTip = 'div.popTip';
+											tinyTip = $(divTip);
+											tinyTip.hide();
+											tinyTip.css('position', 'absolute')
+													.css('z-index', '1000');
+											tinyTip.css(nPos).fadeIn(animSpeed);
+											tinyTip.hover(function() {
+												clearTimeout(window.timer);
+											}, function() {
+												tinyTip.fadeOut(500,
 														function() {
-															open_chatroom(
-																	USERID,
-																	sessionStorage
-																			.getItem("otherUserID"),
-																	data.attributes.name);
+															$(this).remove();
 														});
-									}
-								}
-							},200);
-							
+											});
+											var chat = '';
+											$('.userInImg').after(chat);
+											if (USERID != null && USERID != "") {
+												$("span#chatCreate")
+														.click(
+																function() {
+																	open_chatroom(
+																			USERID,
+																			sessionStorage
+																					.getItem("otherUserID"),
+																			data.attributes.name);
+																});
+											}
+										}
+									}, 200);
+
 						}, function() {
 							clearTimeout(hoverT);
 							window.timer = setTimeout(function() {
@@ -883,7 +900,9 @@ function showPost(postID) {
 						+ "</strong></div><div class='user_info'>"
 						+ dataString.publishDate
 						+ "</div></div></div><div class='post_info'><span class='postContent'>"
-						+ '<pre>' + dataString.attributes.content + '</pre>'
+						+ '<pre>'
+						+ dataString.attributes.content
+						+ '</pre>'
 						+ "</span></div><div class='row'><div class='col-md-6'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID
 						+ "></p><input id='likeID' type='hidden' value="
@@ -928,39 +947,28 @@ $('body').on(
 					+ sessionStorage.getItem("otherUserID"));
 		});
 
-/*var hoverTimer, outTimer; 
-$(".home-nav").hover(function(){
-	clearTimeout(outTimer);
-	hoverTimer = setTimeout(function(){  
-		$(".home-nav").animate({height:"100px"});
-		 $('.show-bar').css("display","inline-block");
-	} ,500);
-	 
-},function(){
-	clearTimeout(hoverTimer);
-	outTimer = setTimeout(function(){ 
-		$(".home-nav").animate({height:"50px"});
-		 $('.show-bar').css("display","none");
-	},300);
-});
-$('body').on('click', '.communityO', function() {
-	window.location.href = "community.jsp?nav=official";
-});
-$('body').on('click', '.communityD', function() {
-	window.location.href = "community.jsp?nav=discovery";
-});*/
+/*
+ * var hoverTimer, outTimer; $(".home-nav").hover(function(){
+ * clearTimeout(outTimer); hoverTimer = setTimeout(function(){
+ * $(".home-nav").animate({height:"100px"});
+ * $('.show-bar').css("display","inline-block"); } ,500);
+ * 
+ * },function(){ clearTimeout(hoverTimer); outTimer = setTimeout(function(){
+ * $(".home-nav").animate({height:"50px"});
+ * $('.show-bar').css("display","none"); },300); }); $('body').on('click',
+ * '.communityO', function() { window.location.href =
+ * "community.jsp?nav=official"; }); $('body').on('click', '.communityD',
+ * function() { window.location.href = "community.jsp?nav=discovery"; });
+ */
 $('body').on('click', '.applyCommunity', function() {
 	window.location.href = "applyCommunity.jsp";
 });
-/*$('body').on('click', '.activityA', function() {
-	window.location.href = "activity.jsp?nav=discovery";
-});
-$('body').on('click', '.activityC', function() {
-	window.location.href = "circle.jsp";
-});
-$('body').on('click', '.hrefIntro', function() {
-	window.location.href = "aboutUs.jsp";
-});*/
+/*
+ * $('body').on('click', '.activityA', function() { window.location.href =
+ * "activity.jsp?nav=discovery"; }); $('body').on('click', '.activityC',
+ * function() { window.location.href = "circle.jsp"; }); $('body').on('click',
+ * '.hrefIntro', function() { window.location.href = "aboutUs.jsp"; });
+ */
 /**
  * auto_resize
  */
@@ -1002,4 +1010,3 @@ function fixed_width_auto_resize(width, srcImage) {
 	srcImage.height = (width / originalWidth) * originalHeight;
 	$(srcImage).fadeIn("fast");
 }
-
