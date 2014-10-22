@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -5,17 +8,21 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="author" content="">
+  <meta name="description" content="unifined account entrance">
+  <meta name="keywords" content="account register login applyCommunity">
+  <meta name="author" content="Saint Scott">
 
-  <title>template</title>
-
+  <title>统一账户入口</title>
+  <%@ include file="parts/head.jsp" %>
   <!-- Bootstrap core CSS -->
   <!--  <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">-->
-  <link href="styles/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="styles/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="styles/account.css" rel="stylesheet">
-
+  <jsp:scriptlet>synchronized (session) {
+                session.setAttribute("hiddenCode", System.currentTimeMillis()
+                        + "");
+            }</jsp:scriptlet>
+  
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
 <script src="//cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -36,11 +43,11 @@
         <h1 class="camp-logo">Campusite</h1>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li class="active col-xs-4"><a class="text-center" href="#login" role="tab" data-toggle="tab">登录</a>
+          <li class="active onethird"><a class="text-center" href="#login" role="tab" data-toggle="tab">登录</a>
           </li>
-          <li class="col-xs-4"><a class="text-center" href="#common-reg" role="tab" data-toggle="tab">注册</a>
+          <li class="onethird"><a class="text-center" href="#common-reg" role="tab" data-toggle="tab">注册</a>
           </li>
-          <li class="col-xs-4"><a class="text-center" href="#community-reg" role="tab" data-toggle="tab">社区申请</a>
+          <li class="onethird"><a class="text-center" href="#community-reg" role="tab" data-toggle="tab">社区申请</a>
           </li>
         </ul>
 
@@ -84,16 +91,16 @@
           </div>
           <!-- community-reg tab -->
           <div class="tab-pane fade" id="community-reg">
-            <form action="../security/CORegServlet" role="form" method="post" class="form-signin">
+            <form action="/security/CORegServlet" role="form" method="post" class="form-signin">
               <input type="text" class="form-control no-bottom-radius" name="applicationID" placeholder="请输入手机号码作为ID" id="appTele" autocomplete="off" pattern="[0-9]{11}" data-errormessage-value-missing="请输入手机号码作为ID" data-errormessage-pattern-mismatch="请输入正确的手机号码" required autofocus maxlength="11" />
-              <input type="password" class="form-control no-radius" name="password" pattern="[A-Za-z0-9]{8,16}" placeholder="请输入密码" id="appPassword" autocomplete="off" data-errormessage-value-missing="请输入密码" data-errormessage-pattern-mismatch="请输入密码，长度：8-16，内容可为英文大写或小写或数字" required maxlength="40" />
+              <input type="password" class="form-control no-radius" name="password" maxlength="20"  pattern="\S{6}\S*" placeholder="请输入密码" id="appPassword" autocomplete="off" data-errormessage-value-missing="请输入密码" data-errormessage-pattern-mismatch="密码规范：长度6-20，内容可为英文大写或小写或数字" required />
               <input class="form-control no-radius" type="email" placeholder="请输入联系邮箱" name="email" id="appMail" data-errormessage-value-missing="请输入联系邮箱" data-errormessage-type-mismatch="请输入联系邮箱" autocomplete="off" required />
               <textarea class="form-control no-top-radius" placeholder="请填写申请理由" name="reason" id="appReasons" data-errormessage-value-missing="请填写申请理由" data-errormessage-too-long="不能超过200字" maxlength="200" required style="resize:vertical"></textarea>
               <div class="form-group declaration">
                 <input type="checkbox" name="statement" value="agree" checked required />
                 <a class="agree" data-toggle='modal' data-target='#declare'>我同意责任申明</a>
               </div>
-              <input type="hidden" name="hiddenCode" value="${sessionScope.hiddenCode }" />
+              <input type="hidden" name="hiddenCode" value="${sessionScope.hiddenCode}" />
               <div class="form-group btn-box">
                 <button class="btn btn-lg btn-success btn-block" id="appcommunityCreate" type="submit">申请</button>
               </div>
@@ -141,33 +148,42 @@
     </div>
   </div>
 
+  <%@ include file="parts/footer.jsp" %>
   <!-- ========================== scripts ======================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
   <script src="js/jquery-1.11.1.min.js"></script>
   <script src="styles/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-  <script src="js/civem.js"></script>
   <script src="js/md5.js"></script>
 
   <script>
-    (function ($, undefined) {
-      $(function () {
-        // console.log("document ready");
+    
+    $(function () {
+      // console.log("document ready");
 
-        $(".LogInBtn").click(function () {
-          var pass = $("#md5Password").val();
-          if (pass.length > 0) {
-            $("#md5Password").attr("disabled", "true");
-            $("#rPassword").val(md5(pass));
-          }
-        });
-
-        $('input[name="origin"]').val(localStorage.getItem("url"));
-        localStorage.removeItem('url');
+      $(".LogInBtn").click(function () {
+        var pass = $("#md5Password").val();
+        if (pass.length > 0) {
+          $("#md5Password").attr("disabled", "true");
+          $("#rPassword").val(md5(pass));
+        }
       });
 
-      function displayAccountAlert(classes, msg) {
+      $('input[name="origin"]').val(localStorage.getItem("url"));
+      localStorage.removeItem('url');
+    });
+
+    /*
+    displayAccountAlert("alert alert-danger","验证码错误");
+    displayAccountAlert("alert alert-success","验证码错误");      
+    */
+    function finish_loading_valcode() {
+      $("#register_loadingvalcode_image").hide();
+      $("#register_valcode_image").show();
+    }
+
+    function displayAccountAlert(classes, msg) {
         $("#account-alert").attr("class", classes).text(msg);
         $("#account-alert").fadeIn(500);
         setTimeout(function () {
@@ -175,14 +191,46 @@
         }, 4000);
       }
 
-      function finish_loading_valcode() {
-        $("#register_loadingvalcode_image").hide();
-        $("#register_valcode_image").show();
-      }
-
-    })(jQuery);
   </script>
-
+  <script type="text/javascript">
+  /* login scripts */
+  <c:choose>
+    <c:when test='${param.error == "VALCODEERROR"}'>
+    displayAccountAlert("alert alert-danger","验证码错误！");
+    </c:when>
+    <c:when test='${param.error == "IDORPAERROR"}'>
+    displayAccountAlert("alert alert-danger","ID或者密码错误！");
+    </c:when>
+    <c:when test="${param.agree eq false}">
+    displayAccountAlert("alert alert-danger","请阅读并同意责任申明！");
+    </c:when>
+  </c:choose>
+  /* register scripts */
+  <c:choose>
+      <c:when test="${ param.success eq false}">
+      displayAccountAlert("alert alert-danger","登录失败！");
+      </c:when>
+      <c:when test="${param.register}">
+      displayAccountAlert("alert alert-success","注册成功，请登录！");
+      </c:when>
+      <c:when test="${param.registerExist}">
+      displayAccountAlert("alert alert-warning","已有账号，请登录！");
+      </c:when>
+      <c:when test="${param.changePassword}">
+      displayAccountAlert("alert alert-success","修改密码成功，请重新登录！");
+      </c:when>
+  </c:choose>
+  /* apply community scripts */
+  <c:choose>
+      <c:when test='${param.success == "true"}'>displayAccountAlert("alert alert-danger","申请成功，请留意邮箱批准信息！");
+      </c:when>
+      <c:when test='${param.ID == "exist"}'>displayAccountAlert("alert alert-danger","ID已经存在！");
+      </c:when>
+      <c:when test='${param.agree eq false}'>displayAccountAlert("alert alert-danger","请阅读并同意责任申明！");
+      </c:when>
+  </c:choose>
+  </script>
+  <%@ include file="parts/baidu.jsp" %>
 </body>
 
 </html>

@@ -9,6 +9,9 @@ body {
   -webkit-animation: animation 1000ms linear both;
   animation: animation 1000ms linear both;
 }
+li.onethird {
+  width: 33.3%;
+}
 .declaration {
   margin-top: 15px;
   margin-left: 3px;
@@ -26,7 +29,6 @@ body {
   color: #d11212;
 }
 .form-signin .form-control {
-  position: relative;
   height: auto;
   padding: 10px;
   font-size: 1.2em;
@@ -68,6 +70,7 @@ body {
 .nav-tabs li a {
   font-weight: 500;
   font-size: 1.3em;
+  -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
   text-shadow: 0 0 20px #1a60b2;
   text-decoration: none;
@@ -75,6 +78,14 @@ body {
 .nav-tabs li.active a,
 .nav-tabs li a:hover {
   text-shadow: none;
+}
+.nav-tabs > li {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+.nav-tabs > li > a {
+  margin-left: 2px;
+  margin-right: 2px;
 }
 .no-bottom-radius {
   border-bottom-left-radius: 0;
@@ -91,6 +102,9 @@ body {
 }
 .btn-box {
   margin-top: 20px;
+}
+h1.title {
+  color: azure;
 }
 /* Generated with Bounce.js. Edit at http://goo.gl/y3FSYm */
 

@@ -25,9 +25,6 @@
 <link href="styles/bootstrap-3.2.0-dist/css/bootstrap.css"
 	rel="stylesheet">
 
-<!-- Just for debugging purposes. Don't actually copy this line! -->
-<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
@@ -36,7 +33,7 @@
 
 <!-- Custom styles for this template -->
 <link href="styles/footer.css" rel="stylesheet">
-<link href="styles/nav.css" rel="stylesheet">
+<!--<link href="styles/nav.css" rel="stylesheet">-->
 <c:choose>
 	<c:when test="${requestScope.isHome}">
 		<link href="styles/home.css" rel="stylesheet">
@@ -50,14 +47,13 @@
 		<link href="styles/custom.css" rel="stylesheet">
 	</c:otherwise>
 </c:choose>
-<c:if test="${requestScope.needChatRoom }">
+<c:if test="${requestScope.needChatRoom}">
 	<link href="styles/instant-chat.css" rel="stylesheet">
 </c:if>
 
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="styles/jquery.fileupload.css">
-<link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet"
-	media="screen">
+<link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <script type="text/javascript">
 	window.USERID = '${sessionScope.ID}';
 	window.windowHeight = "innerHeight" in window ? window.innerHeight
