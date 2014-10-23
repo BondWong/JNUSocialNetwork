@@ -705,6 +705,8 @@ public class UserService {
 		}
 		String result = ((Map<String, String>) member.get("attributes"))
 				.get("guide");
+		if (result == null || result.equals(""))
+			result = "false";
 		return Response.ok(result).build();
 	}
 
