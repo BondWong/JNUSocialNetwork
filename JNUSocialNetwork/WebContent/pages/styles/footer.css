@@ -1,73 +1,58 @@
 .footer-home {
-	background-color: #FFF;
-	min-width: 1200px;
-	margin: 0px auto;
+  background-color: #FFF;
+  margin: 0 auto;
 }
-
 .footer-wrap {
-	padding-top: 30px;
-	text-align: center;
+  padding-top: 30px;
+  text-align: center;
 }
-
 .footer-wrap a {
-	display: inline-block;
-	height: 32px;
-	width: 32px;
-	vertical-align: middle;
-	background-image: url('../images/idx-btm.png');
-	background-repeat: no-repeat;
-	margin: 0px 9px;
-	cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  background-image: url('../images/idx-btm.png');
+  background-repeat: no-repeat;
+  margin: 0 9px;
+  cursor: pointer;
 }
-
 .footer-weibo {
-	background-position: 0px -221px;
+  background-position: 0 -221px;
 }
-
 .footer-weibo:hover {
-	background-position: 0px -262px;
+  background-position: 0 -262px;
 }
-
 .footer-weixin {
-	position: relative;
-	background-position: -52px -221px;
+  position: relative;
+  background-position: -52px -221px;
 }
-
 .footer-weixin:hover {
-	background-position: -52px -262px;
+  background-position: -52px -262px;
 }
-
 .footer-qqbo {
-	background-position: -104px -221px;
+  background-position: -104px -221px;
 }
-
 .footer-qqbo:hover {
-	background-position: -104px -262px;
+  background-position: -104px -262px;
 }
-
 .footer-qqzone {
-	background-position: -156px -221px;
+  background-position: -156px -221px;
 }
-
 .footer-qqzone:hover {
-	background-position: -156px -262px;
+  background-position: -156px -262px;
 }
-
 .footer-link {
-	width: 900px;
-	padding: 25px 0px;
-	margin: 0px auto;
-	text-align: center;
-	border-bottom: 1px solid #F4F7F8;
+  padding: 25px 0;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid #F4F7F8;
 }
-
 .footer-link a {
-	margin: 0px 10px;
-	color: #99A1A6;
+  margin: 0 10px;
+  color: #99A1A6;
 }
-
 .footer-copyright {
-	padding: 20px 0px 25px;
-	text-align: center;
-	color: #B4BBBF;
+  padding: 20px 0 25px;
+  text-align: center;
+  color: #B4BBBF;
 }
