@@ -444,10 +444,14 @@ public class Member extends User {
 		representation.put("followeeIDs", followeeIDs);
 		representation.put("followerIDs", followerIDs);
 
-		List<Long> communityIDs = new ArrayList<Long>();
-		for (Community community : this.createdCommunities)
-			communityIDs.add(community.getID());
-		representation.put("communityIDs", communityIDs);
+		List<Map<Long, String>> communityIDNameTuples = new ArrayList<Map<Long, String>>();
+		for (Community community : this.createdCommunities) {
+			Map<Long, String> communityIDNameTuple = new HashMap<Long, String>();
+			communityIDNameTuple.put(community.getID(),
+					community.getAttribute("name"));
+			communityIDNameTuples.add(communityIDNameTuple);
+		}
+		representation.put("communityIDNameTuples", communityIDNameTuples);
 
 		List<String> lookingForTags = new ArrayList<String>();
 		for (Tag tag : this.lookingForTags)
