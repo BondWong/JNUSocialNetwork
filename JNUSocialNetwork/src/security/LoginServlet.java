@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
 		if (!fromRegister
 				&& (sessionHiddenCode == null || hiddenCode == null || !sessionHiddenCode
 						.equals(hiddenCode)))
-			response.sendRedirect("/pages/account.jsp");
+			response.sendRedirect("/pages/account.jsp？nav=loginTab");
 		else {
 			if (fromRegister)
 				try {
@@ -136,7 +136,7 @@ public class LoginServlet extends HttpServlet {
 				} else {
 					account.setLastAccessDate(new Date());
 					account.setChance((account.getChance() - 1));
-					response.sendRedirect("/pages/account.jsp?success=false");
+					response.sendRedirect("/pages/account.jsp?nav=loginTab&success=false");
 				}
 
 				Transaction t = new UpdateAccountTransaction();
@@ -150,7 +150,7 @@ public class LoginServlet extends HttpServlet {
 				}
 
 			} else {
-				response.sendRedirect("/pages/account.jsp?success=false");
+				response.sendRedirect("/pages/account.jsp?nav=loginTab&success=false");
 			}
 		}
 	}
