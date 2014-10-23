@@ -4,13 +4,14 @@ body {
   font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 .account-box {
-  background: #292929;
+  background-color: #3b3b3b;
+  background-color: rgba(0, 0, 0, 0.62);
   margin-top: 10%;
   -webkit-animation: animation 1000ms linear both;
   animation: animation 1000ms linear both;
 }
-li.onethird {
-  width: 33.3%;
+.onethird {
+  width: 33.333333%;
 }
 .declaration {
   margin-top: 15px;
@@ -60,12 +61,16 @@ li.onethird {
   filter: alpha(opacity=70);
 }
 .camp-logo {
-  text-indent: -3000em;
   background: url(/pages/images/campusite.png) no-repeat;
   background-size: 100%;
   max-width: 400px;
   margin: 0 auto;
   height: 100px;
+}
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .nav-tabs li a {
   font-weight: 500;
