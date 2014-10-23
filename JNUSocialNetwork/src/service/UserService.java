@@ -1,9 +1,7 @@
 package service;
 
 import helper.securityHelper.ContentEncoder;
-import helper.serviceHelper.HeheUser;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -608,12 +606,13 @@ public class UserService {
 		transaction = new EmailTransaction(new SendEmailTransaction());
 		boolean result = true;
 		try {
-			result = (boolean) transaction.execute(fromID, toID, emailContent.get("content"));
+			result = (boolean) transaction.execute(fromID, toID,
+					emailContent.get("content"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		if(!result)
+		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
 	}
@@ -632,7 +631,7 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		if(!result)
+		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
 	}
@@ -651,7 +650,7 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		if(!result)
+		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
 	}
@@ -668,7 +667,7 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		if(!result)
+		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
 	}
@@ -685,26 +684,28 @@ public class UserService {
 			e.printStackTrace();
 			throw e;
 		}
-		if(!result)
+		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
-	@SuppressWarnings("rawtypes")
-	@Path("registerCandC")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response helpMeRegister(Map hehe) throws IOException {
+	@SuppressWarnings("unchecked")
+	@Path("needGuidance/{ID : \\d+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Response needGuidance(@PathParam("ID") String ID) throws Exception {
+		transaction = new FetchMemberTransaction();
+		Map<String, Object> member;
 		try {
-			HeheUser.deserialize();
-			HeheUser.addHehe(hehe);
-			HeheUser.serialize();
-		} catch (IOException e) {
+			member = (Map<String, Object>) transaction.execute(ID);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		return Response.ok().build();
+		String result = ((Map<String, String>) member.get("attributes"))
+				.get("guide");
+		return Response.ok(result).build();
 	}
 
 }
