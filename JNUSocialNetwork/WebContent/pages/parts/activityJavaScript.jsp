@@ -9,10 +9,12 @@
 <script src="styles/bootstrap-3.0.3-dist/dist/js/bootstrap.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>
+ <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/global-initialization.js"></script>
 <script src="js/EventAPI.js"></script>
 <script src="js/function.js"></script>
 <script src="js/activity.js"></script>
+ <script src="js/activityCre.js"></script>
 <script src="js/EventHandle.js"></script>
 <%@ include file="loginJavaScript.jsp"%>
 <script>
@@ -22,6 +24,7 @@ $(document)
 			if (USERID != null && USERID != "") {
 				login_initialization(USERID);
 				clickEvent();
+				activityClickAEvent();
 			} else {
 				clickOffEvent();
 			}
