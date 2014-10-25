@@ -102,16 +102,21 @@ public class ImageUploadService extends HttpServlet {
 		List<String> links = new ArrayList<String>();
 
 		String userID = "";
+		String needCopy = "";
 		Map<String, Integer> cropData = null;
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
-			if (item.isFormField() && !item.getFieldName().equals("crop_data")) {
+			if (item.isFormField() && item.getFieldName().equals("user_id")) {
 				userID = item.getString();
 				continue;
 			} else if (item.isFormField()
 					&& item.getFieldName().equals("crop_data")) {
 				cropData = JsonUtil.fromJson(item.getString(), TYPE);
+				continue;
+			} else if (item.isFormField()
+					&& item.getFieldName().equals("need_copy")) {
+				needCopy = item.getString();
 				continue;
 			}
 
@@ -137,19 +142,35 @@ public class ImageUploadService extends HttpServlet {
 
 			int size = (int) (uploaddedFile.length() / (1024 * 1024));
 			if (size >= 1)
-				Thumbnails.of(uploaddedFile).scale(0.4f).toFile(uploaddedFile);
-			else if (size > 1 && size <= 2)
-				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(uploaddedFile);
-			else if (size > 2 && size <= 3)
 				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
+			else if (size > 1 && size <= 2)
+				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
+			else if (size > 2 && size <= 3)
+				Thumbnails.of(uploaddedFile).scale(0.15f).toFile(uploaddedFile);
 			else if (size > 3)
 				Thumbnails.of(uploaddedFile).scale(0.1f).toFile(uploaddedFile);
+
 			BufferedImage bi = ImageIO.read(uploaddedFile);
+			BufferedImage ci;
+			Image croppedImage;
 
 			if (cropData != null) {
 				bi = bi.getSubimage(cropData.get("x"), cropData.get("y"),
 						cropData.get("width"), cropData.get("height"));
-				ImageIO.write(bi, extention.substring(1), uploaddedFile);
+
+				if (needCopy != null && needCopy.equals("true")) {
+					File croppedFile = new File(root + extention.substring(1)
+							+ "/" + userID + "--" + System.currentTimeMillis()
+							+ "--cropped--" + extention);
+					ImageIO.write(bi, extention.substring(1), croppedFile);
+					ci = ImageIO.read(croppedFile);
+					croppedImage = new Image(extention.substring(1) + "/"
+							+ userID + "--" + System.currentTimeMillis()
+							+ "--cropped--" + extention, ci.getHeight(),
+							ci.getWidth());
+					links.add(JsonUtil.toJson(croppedImage));
+				} else
+					ImageIO.write(bi, extention.substring(1), uploaddedFile);
 				bi = ImageIO.read(uploaddedFile);
 				cropData = null;
 			}
