@@ -324,6 +324,30 @@ $('body').on('click', '.deleteAI', function() {
 		+ "&" + activity.ID;
 	};
 });
+//showJoinMembers
+function showJoinMembers() 
+{
+    var response = FetchParticipants(activity.ID, "0", "30");
+    $.each(response, function (index, aMember) 
+    {
+        if (aMember.available == true) 
+        {
+            var memberDiv = addMember(aMember.ID, aMember.attributes.avatarLink, aMember.attributes.name);
+            $('.activity-bords').after(memberDiv);
+            Msnry('.activity-members', '.member', 215);
+        }
+    });
+}
+//user的html代码
+function addMember(id, avatarLink, name) 
+{
+    var followDiv = "<div class='follow' id='" + id + "'><img width='50' height='50'  class='userMember' src='" + $.parseJSON(avatarLink).src + "' /><span class='followName'><a style='cursor:pointer;color:#404040'>" + name + "</a></span><input type='hidden' value='" + id + "' name='userID'/></div>";
+    return followDiv;
+}
+$('body').on("click", ".followName", function () 
+{
+    window.location.href = 'profile.jsp?nav=about&' + $(this).next().val();
+});
 function showImages() {
 	if (activity.imageLinks.length == 0) {
 		$('.activityPhotos').css("display", "none");

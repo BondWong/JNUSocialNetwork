@@ -240,6 +240,12 @@
 						<button class="btn btn-danger activityAddCommunity">添加社区</button>
 					</div>
 				</div>
+				<div class="joinMember">
+					<div class='activity-members'>
+						<div class='activity-bords'></div>
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -288,7 +294,7 @@
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
 							showImages();
-
+							showJoinMembers();
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();

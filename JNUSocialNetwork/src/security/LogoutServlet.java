@@ -68,7 +68,7 @@ public class LogoutServlet extends HttpServlet {
 		newCookie.setPath("/");
 
 		response.addCookie(newCookie);
-		response.sendRedirect("/pages/account.jsp?changePassword=true");
+		response.sendRedirect("/pages/account.jsp?nav=loginTab&changePassword=true");
 	}
 
 }

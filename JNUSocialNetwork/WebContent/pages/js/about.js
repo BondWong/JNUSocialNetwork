@@ -802,8 +802,8 @@ function fetchUserByID()
         {
             var pos = $(this).offset();
             var nPos = pos;
-            nPos.top = pos.top;
-            nPos.left = pos.left + 10;
+            nPos.top = 25;
+            nPos.left = 40;
             var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#avatar-modal'></span></div>";
             $(this).append(changeBtn);
             $('.profileImg').css(nPos);
