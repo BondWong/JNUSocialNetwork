@@ -341,7 +341,7 @@ function showJoinMembers()
 //user的html代码
 function addMember(id, avatarLink, name) 
 {
-    var followDiv = "<div class='follow' id='" + id + "'><img width='50' height='50'  class='userMember' src='" + $.parseJSON(avatarLink).src + "' /><span class='followName'><a style='cursor:pointer;color:#404040'>" + name + "</a></span><input type='hidden' value='" + id + "' name='userID'/></div>";
+    var followDiv = "<div class='aMember' id='" + id + "'><img width='50' height='50'  class='userMember' src='" + $.parseJSON(avatarLink).src + "' /><span class='followName'><a style='cursor:pointer;color:#404040'>" + name + "</a></span><input type='hidden' value='" + id + "' name='userID'/></div>";
     return followDiv;
 }
 $('body').on("click", ".followName", function () 

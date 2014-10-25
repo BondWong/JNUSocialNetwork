@@ -25,6 +25,7 @@
 				name="origin" value="" /> <input type="hidden" id="rPassword"
 				name="password" value="" />
 			<button class="btn btn-danger signInBtn" type="submit">登录</button>
+			<a class="btn btn-danger signupBtn" href="account.jsp?nav=regTab">注册</a>
 			<script src="js/jquery-1.10.2.js"></script>
 			<script src="js/md5.js"></script>
 			<script>
@@ -34,6 +35,9 @@
 						$("#md5Password").attr("disabled", "true");
 						$("#rPassword").val(md5(pass));
 					}
+				});
+				$('body').on("click", ".signupBtn", function() {
+					
 				});
 			</script>
 		</form>

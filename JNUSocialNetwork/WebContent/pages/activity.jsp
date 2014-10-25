@@ -37,8 +37,7 @@
 				class="peopeleType peopeleTypeS academicA">学术类</a> <a
 				href="activity.jsp?nav=others"
 				class="peopeleType peopeleTypeS othersA">其他类</a>
-				<a class="peopeleType" id="createActivityABtn" class="btn btn-primary"
-     data-toggle='modal' data-target='#activityCommunity'>创建活动</a>
+				
 		</div>
 	</div>
 	<div class="container container_activityA">

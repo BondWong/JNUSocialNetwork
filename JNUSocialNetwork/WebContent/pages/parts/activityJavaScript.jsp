@@ -25,6 +25,10 @@ $(document)
 				login_initialization(USERID);
 				clickEvent();
 				activityClickAEvent();
+				if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
+					&& $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.length >=1) {
+				$('.othersA').after("<a class='peopeleType' id='createActivityABtn' class='btn btn-primary' data-toggle='modal' data-target='#activityCommunity'>创建活动</a>");
+			}
 			} else {
 				clickOffEvent();
 			}
@@ -39,6 +43,55 @@ $(document)
 		<script type="text/javascript">
 			fetchJoinedActivities();
 			fetchActivitiesByOwner();
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchJoinedActivities(USERID,
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'hit' }">
@@ -48,6 +101,55 @@ $(document)
 			$('.hitActivity').css("background-color", "#f6f6f6");
 			$('.hitActivity').css("border-left", "2px solid #4285f4");
 			fetchHeatActivities("0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchHeatActivities(
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'discovery' }">
@@ -57,6 +159,55 @@ $(document)
 			$('.discoveryActivity').css("background-color", "#f6f6f6");
 			$('.discoveryActivity').css("border-left", "2px solid #4285f4");
 			fetchAllActivities("0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchAllActivities(
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'entertainment' }">
@@ -66,6 +217,55 @@ $(document)
 			$('.entertainmentA').css("background-color", "#f6f6f6");
 			$('.entertainmentA').css("border-left", "2px solid #4285f4");
 			fetchActivitiesByType("ENTERTAINMENT","0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchActivitiesByType("ENTERTAINMENT",
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'others' }">
@@ -75,6 +275,55 @@ $(document)
 			$('.othersA').css("background-color", "#f6f6f6");
 			$('.othersA').css("border-left", "2px solid #4285f4");
 			fetchActivitiesByType("OTHERS","0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchActivitiesByType("OTHERS",
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'academic' }">
@@ -84,6 +333,55 @@ $(document)
 			$('.academicA').css("background-color", "#f6f6f6");
 			$('.academicA').css("border-left", "2px solid #4285f4");
 			fetchActivitiesByType("ACADEMIC","0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchActivitiesByType("ACADEMIC",
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'athletic' }">
@@ -93,6 +391,55 @@ $(document)
 			$('.athleticA').css("background-color", "#f6f6f6");
 			$('.athleticA').css("border-left", "2px solid #4285f4");
 			fetchActivitiesByType("ATHLETIC","0", "16");
+			$(window)
+			.scroll(
+					function() {
+						if ($(window).scrollTop() == $(document).height()
+								- window.windowHeight) {
+							var startIndex = $('.activity').length;
+							$('div#infinite_loader').show();
+							var response = FetchActivitiesByType("ATHLETIC",
+									startIndex, pageSize);
+							if (response.length != 0) {
+								$
+										.each(
+												response,
+												function(n, dataString) {
+													if (dataString.available == true
+															&& $("div[class='activity post"
+																	+ dataString.ID
+																	+ "']").length == 0) {
+														var boarddiv = activity(
+																dataString.ID,
+																dataString.attributes.activityName,
+																dataString.attributes.activityTime,
+																dataString.attributes.activityAddr,
+																dataString.attributes.activityMore,
+																dataString.attributes.background,
+																dataString.owner.attributes.avatarLink,
+																dataString.owner.ID,
+																dataString.participantIDs,
+																dataString.attributes.startDate,
+																dataString.attributes.limitation,
+																dataString.attributes.ifUpload,dataString.attributes.inquery);
+														$(".activityBord").after(
+																boarddiv);
+														Msnry('.activityBody',
+																'.activity', 435);
+													}
+												});
+							}
+
+							if (response.length == pageSize) {
+								$('div#infinite_loader').hide();
+							} else {
+								$('div#infinite_loader')
+										.replaceWith(
+												'<div id="no_more_infinite_load"><span>no more</span></div>');
+								$(window).unbind("scroll");
+							}
+						}
+					});
 		</script>
 	</c:when>
 </c:choose>
