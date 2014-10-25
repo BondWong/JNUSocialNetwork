@@ -55,6 +55,7 @@ import model.modelType.PostType;
 		@NamedQuery(name = "Post.fetchByTypeDESC", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = ?1 ORDER BY p.ID DESC"),
 		@NamedQuery(name = "Post.fetchByID", query = "SELECT p FROM Post p WHERE p.available = 1 AND p.ID = ?1"),
 		@NamedQuery(name = "Post.fetchHeat", query = "SELECT p FROM Post p WHERE p.available = 1 ORDER BY SIZE(p.comments) DESC, p.ID DESC"),
+		@NamedQuery(name = "Post.fetchParticipants", query = "SELECT pa FROM Post p JOIN p.participants pa WHERE p .available = 1 AND p.ID = ?1"),
 		@NamedQuery(name = "Post.fetchUnavailableIDs", query = "SELECT p.ID FROM Post p WHERE p.available = 0"),
 		@NamedQuery(name = "Post.deleteUnavailable", query = "DELETE FROM Post p WHERE p.available = 0") })
 public class Post extends AttributeModel {

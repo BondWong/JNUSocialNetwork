@@ -24,6 +24,7 @@ import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchPostsTransaction;
@@ -592,4 +593,25 @@ public class PostService {
 		return Response.ok().build();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Path("fetchParticipants/{postID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchParticipants(@PathParam("postID") Long postID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSize") int pageSize) throws Exception {
+		transaction = new FetchMembersTransaction();
+		List<Map<String, Object>> members = new ArrayList<>();
+		try {
+			members = (List<Map<String, Object>>) transaction.execute(
+					"Post.fetchParticipants", postID, null, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(members) {
+				}).build();
+	}
 }
