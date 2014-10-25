@@ -240,6 +240,12 @@
 						<button class="btn btn-danger activityAddCommunity">添加社区</button>
 					</div>
 				</div>
+				<div class="joinMember">
+					<div class='activity-members'>
+						<div class='activity-bords'></div>
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

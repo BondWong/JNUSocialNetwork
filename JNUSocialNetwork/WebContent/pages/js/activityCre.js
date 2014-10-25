@@ -83,15 +83,6 @@ function activityClickAEvent() {
 					"click",
 					"#go_submit",
 					function() {
-						var communities = FetchCommunityByOwner(USERID, "0", pageSize);
-						$.each(communities.reverse(), function(n, community) {
-							if (community.available == true) {
-								addCommunity(community.ID, community.attributes.name,
-										community.members.length, "myCommunity",
-										community.attributes.communityCard, community.members,
-										community.attributes.userID);
-							}
-						});
 						if ($('#activityTime').val() != ""
 								&& $('#activityRemind').val() != "") {
 						var post = {
@@ -113,8 +104,8 @@ function activityClickAEvent() {
 									activityMore : $('#activityMore').val(),
 									inquery : $('#inquery').val(),
 									limitation : $('#activityNum').val(),
-									communityName : community.attributes.name,
-									communityID : community.ID.toString(),
+									communityName : $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.id,
+									communityID : $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.name,
 									ifUpload : $('#table_activitySign').text(),
 								},
 								imageLinks : [],
