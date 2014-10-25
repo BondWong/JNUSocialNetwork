@@ -36,6 +36,7 @@ function activityClickEvent() {
 								imageLinks : [],
 								activityTypeTags : [ $('#activityType').val() ]
 							};
+							//上传海报图的js控制
 							if ($('#fileuploadA').val() != "") {
 								
 								post.attributes["background"] = FileUpload(new FormData(
