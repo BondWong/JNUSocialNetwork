@@ -115,13 +115,15 @@
     <h1>～～社区活动详情～～</h1>
     <p>快来参加来认识认识一些小伙伴吧</p>
    </div>
-   <%@ include file="parts/activityCommunityModel.jsp"%>
+   
    <!-- /.modal-dialog -->
-  </div>
-  <div class="activityBody">
+   <div class="activityBody">
    <div class="activityBord"></div>
   </div>
+  </div>
+  
  </div>
+ <%@ include file="parts/activityCommunityModel.jsp"%>
  <!-- CHATROOM -->
  <%@ include file="parts/chatRoom.jsp"%>
  <!-- Bootstrap core JavaScript

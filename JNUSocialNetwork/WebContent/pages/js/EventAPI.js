@@ -382,6 +382,24 @@ function FetchPostsByOwner(ownerID, startIndex, pageSize) {
 	return response;
 
 }
+//fetchParticipants 输入：ownerID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+function FetchParticipants(postID,startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchParticipants/' + postID+ '/' + startIndex + '/' + pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+
+}
 // fetchByCommunity
 function FetchByCommunity(communityID, startIndex, pageSize) {
 	var response = "";

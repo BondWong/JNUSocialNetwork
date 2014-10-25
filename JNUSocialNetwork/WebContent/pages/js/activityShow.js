@@ -327,7 +327,7 @@ $('body').on('click', '.deleteAI', function() {
 //showJoinMembers
 function showJoinMembers() 
 {
-    var response = FetchFollowers(USERID, "0", "30");
+    var response = FetchParticipants(activity.ID, "0", "30");
     $.each(response, function (index, aMember) 
     {
         if (aMember.available == true) 

@@ -294,7 +294,7 @@
 									url.indexOf("&") - url.indexOf("?") - 1);
 							window.community = FetchCommunityByID(communityID);
 							showImages();
-
+							showJoinMembers();
 							if (USERID != null && USERID != "") {
 								login_initialization(USERID);
 								clickEvent();

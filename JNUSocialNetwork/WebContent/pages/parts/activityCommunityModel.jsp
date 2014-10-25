@@ -9,10 +9,8 @@
         aria-hidden="true">&times;</button>
        <h4 class="modal-title" id="myModalLabel">举办活动</h4>
       </div>
-      <form class="activityForm" id="newActivity"
-       enctype="multipart/form-data" onsubmit="return false;"
-       style="position: relative; overflow: hidden;">
-       <div class="modal-body modalBody" style="height: 580px;">
+      
+       <div class="modal-body modalBody" style="height: 580px; position: relative; overflow: hidden;">
         <div class="innerNav" style="display: none; visibility: hidden">
          <hr />
          <ul>
@@ -21,8 +19,12 @@
           <li id="go_page3"><span>上传报名表</span></li>
          </ul>
         </div>
+        <!-- 创建活动的第一页信息 -->
         <div id="page1"
          style="position: absolute; top: 30px; left: 0px; width: 100%">
+         <form class="activityForm" id="newActivity"
+       enctype="multipart/form-data" onsubmit="return false;"
+       >
          <div class="activityItem">
           <span>活动名：</span> <input type="text"
            class="form-control activityInput" placeholder=""
@@ -88,6 +90,7 @@
            data-errormessage-pattern-mismatch="请输入参与人数，最大999" required
            autofocus maxLength="3" />
          </div>
+         <!-- 添加活动图片在这里 -->
          <div class="activityItem">
           <span>活动图片</span> <span
            class="btn btn-success fileinput-button" style="width: auto;">
@@ -98,8 +101,10 @@
          <span
           style="display: block; font-size: 12px; margin-top: 30px;">[请上传长宽比例1140*300的海报头，否则影响显示效果]</span>
          <!-- The container for the uploaded files -->
+         </form>
         </div>
-      </form>
+      
+       <!-- 创建活动的第二页信息 -->
       <div id="page2"
        style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
        <div class="form-group">
@@ -135,7 +140,7 @@
         </p>
        </div>
       </div>
-
+		<!-- 创建活动的第三页信息 -->
       <div id="page3"
        style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
        <form class="showFDetail">
@@ -181,7 +186,7 @@
        </form>
       </div>
      </div>
-
+  
      <div class="modal-footer">
       <a href="#" class="btn btn-success" id="go_pre"
        style="display: none; width: 70px">上一步</a> <a href="#"
@@ -189,7 +194,7 @@
       <input type="submit" class="btn btn-success" value="完成"
        style="display: none; width: 70px" id="go_submit" />
      </div>
-
     </div>
+       </div>
     <!-- /.modal-content -->
    </div>

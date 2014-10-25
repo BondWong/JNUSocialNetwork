@@ -1,3 +1,4 @@
+//社区页面添加活动
 function activityClickEvent() {
 	$('body').on("click", '#createActivityBtn', function() {
 		$('.activityForm').get(0).reset();
@@ -74,6 +75,7 @@ function activityClickEvent() {
 						
 					});
 }
+//活动页面添加活动
 function activityClickAEvent() {
 	$('body').on("click", '#createActivityABtn', function() {
 		$('.activityForm').get(0).reset();
@@ -150,6 +152,7 @@ function activityClickAEvent() {
 						
 					});
 }
+//时间控件初始化
 var date1 = new Date();
 date1.setTime(date1.getTime() + 0.25 * 24 * 60 * 60 * 1000);
 $('.form_datetime1').datetimepicker({
@@ -225,6 +228,7 @@ function toTimeValue(dateTime) {
 	return d.valueOf();
 
 }
+//创建活动“下一步按钮”
 $(document)
 		.ready(
 				function() {
@@ -259,7 +263,7 @@ $(document)
 							left : '-700px'
 						}, easingtime);
 						page[1].animate({
-							left : '0px'
+							left : '10px'
 						}, easingtime);
 						page[2].animate({
 							left : '700px'
