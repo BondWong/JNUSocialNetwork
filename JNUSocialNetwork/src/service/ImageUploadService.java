@@ -71,12 +71,16 @@ public class ImageUploadService extends HttpServlet {
 			response.flushBuffer();
 
 		} catch (FileUploadBase.InvalidContentTypeException icte) {
+			icte.printStackTrace();
 			response.sendError(406);
 		} catch (FileUploadBase.FileSizeLimitExceededException fsle) {
+			fsle.printStackTrace();
 			response.sendError(413);
 		} catch (FileUploadException fue) {
+			fue.printStackTrace();
 			response.sendError(400);
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.sendError(500);
 		}
 	}
