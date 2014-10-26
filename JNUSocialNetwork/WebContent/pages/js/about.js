@@ -803,7 +803,7 @@ function fetchUserByID()
             var pos = $(this).offset();
             var nPos = pos;
             nPos.top = 25;
-            nPos.left = 40;
+            nPos.left = 60;
             var changeBtn = "<div class='img-circle profileImg'><span class='glyphicon glyphicon-camera ' data-toggle='modal' data-target='#avatar-modal'></span></div>";
             $(this).append(changeBtn);
             $('.profileImg').css(nPos);
@@ -831,8 +831,8 @@ function fetchUserByID()
             {
                 var pos = $(this).offset();
                 var nPos = pos;
-                nPos.top = pos.top;
-                nPos.left = pos.left + 10;
+                nPos.top = 25;
+                nPos.left = 60;
                 var changeBtn = "<div class='img-circle profileAImg'><span style='font-size:20px;'>一起求头像!</span></div>";
                 $(this).append(changeBtn);
                 $('.profileAImg').css(nPos);
