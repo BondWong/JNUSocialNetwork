@@ -77,6 +77,7 @@
                 <div class="banner-upload">
                   <input class="banner-src" name="banner1_src" type="hidden">
                   <input class="banner-data" name="crop_data" type="hidden">
+                  <input name="need_copy" type="hidden" value="true">
                   <span class="btn btn-primary fileinput-button"><i class="glyphicon glyphicon-folder-open"></i><span>&nbsp;&nbsp;browse...</span>
                   <input class="banner-input" id="fileuploadA" type="file" name="banner1_file" accept="image/jpeg,image/png">
                   </span>
