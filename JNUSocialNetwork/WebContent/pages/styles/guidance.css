@@ -1,0 +1,46 @@
+.mask{
+	width:100%;
+	height:100%;
+	z-index:990;
+	background-color:rgba(0,0,0,0.5);
+	position:absolute;
+	top:0px;
+	left:0px;
+	display:none;
+}
+.guide_step{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:991;
+	border:none;
+	display:none;
+}
+.guide_image{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:992;
+	border:none;
+}
+
+.guide_next_btn{
+	position:absolute;
+	top:0px;
+	left:0px;
+	cursor:pointer;
+	z-index:993;
+	border:none;
+	background-color:transparent;
+}
+.guide_exit_btn{
+	position:absolute;
+	top:0px;
+	left:0px;
+	cursor:pointer;
+	width:30px;
+	height:30px;
+	z-index:993;
+	border:none;
+	background-color:transparent;
+}

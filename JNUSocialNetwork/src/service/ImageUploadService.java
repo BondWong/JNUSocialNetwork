@@ -105,17 +105,12 @@ public class ImageUploadService extends HttpServlet {
 		Iterator<FileItem> iter = items.iterator();
 		List<String> links = new ArrayList<String>();
 
-		String userID = "";
 		String needCopy = "";
 		Map<String, Integer> cropData = null;
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
-			if (item.isFormField() && item.getFieldName().equals("user_id")) {
-				userID = item.getString();
-				continue;
-			} else if (item.isFormField()
-					&& item.getFieldName().equals("crop_data")) {
+			if (item.isFormField() && item.getFieldName().equals("crop_data")) {
 				cropData = JsonUtil.fromJson(item.getString(), TYPE);
 				continue;
 			} else if (item.isFormField()
@@ -128,10 +123,10 @@ public class ImageUploadService extends HttpServlet {
 			if (em.containsMime(item.getContentType()))
 				extention = em.getExtension(item.getContentType());
 			else if (em.containsExtension(item.getName().substring(
-					item.getName().indexOf("."))))
+					item.getName().lastIndexOf(".")))) {
 				extention = item.getName().substring(
 						item.getName().indexOf("."));
-			else
+			} else
 				continue;
 
 			File dir = new File(root + extention.substring(1));
@@ -139,7 +134,7 @@ public class ImageUploadService extends HttpServlet {
 				dir.mkdir();
 			}
 
-			String temp = extention.substring(1) + "/" + userID + "--"
+			String temp = extention.substring(1) + "--"
 					+ System.currentTimeMillis() + extention;
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
@@ -164,14 +159,13 @@ public class ImageUploadService extends HttpServlet {
 
 				if (needCopy != null && needCopy.equals("true")) {
 					File croppedFile = new File(root + extention.substring(1)
-							+ "/" + userID + "--" + System.currentTimeMillis()
+							+ "/" + "--" + System.currentTimeMillis()
 							+ "--cropped--" + extention);
 					ImageIO.write(bi, extention.substring(1), croppedFile);
 					ci = ImageIO.read(croppedFile);
 					croppedImage = new Image(extention.substring(1) + "/"
-							+ userID + "--" + System.currentTimeMillis()
-							+ "--cropped--" + extention, ci.getHeight(),
-							ci.getWidth());
+							+ "--" + System.currentTimeMillis() + "--cropped--"
+							+ extention, ci.getHeight(), ci.getWidth());
 					links.add(JsonUtil.toJson(croppedImage));
 				} else
 					ImageIO.write(bi, extention.substring(1), uploaddedFile);
