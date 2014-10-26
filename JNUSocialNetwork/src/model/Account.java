@@ -46,6 +46,7 @@ public class Account extends Model {
 	private Date lastAccessDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date expireDate;
+	private Boolean firstTime;
 
 	public Account() {
 		this.chance = 10;
@@ -149,6 +150,16 @@ public class Account extends Model {
 	public Map<String, Object> toRepresentation() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean isFirstTime() {
+		if (firstTime == null)
+			return true;
+		return firstTime;
+	}
+
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
 	}
 
 }
