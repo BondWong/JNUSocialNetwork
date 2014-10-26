@@ -15,44 +15,36 @@
     } catch (e) {}
   };
 
-  // 构造CropAvatar
-  function CropAvatar($element, options) {
+  // 构造CropBanner
+  function CropBanner($element, options) {
     // 默认参数
     this.defaults = {
       aspectRatio: 1,
       // unit=MB
       imgPreferredSize: 2,
-      imgUrlAttrName: 'avatarLink',
-      targetView: ".profile_user_img"
     };
 
     this.setDefaults(options);
 
-    this.$container = $element;
+    this.UPLOAD_URL = "/app/fileUploader";
 
-    this.$avatarView = this.$container.find(this.defaults.targetView); // to be modified
-    this.$avatar = this.$avatarView.find("img");
-    this.$avatarModal = this.$container.find(".modal"); // to be modified
-    this.$loading = this.$container.find(".loading");
+    this.$bannerModal = $element;
+    this.$loading = this.$bannerModal.find(".loading");
 
-    this.$avatarForm = this.$avatarModal.find(".avatar-form");
-    this.$avatarUpload = this.$avatarForm.find(".avatar-upload");
-    this.$avatarSrc = this.$avatarForm.find(".avatar-src");
-    this.$avatarData = this.$avatarForm.find(".avatar-data");
-    this.$avatarInput = this.$avatarForm.find(".avatar-input");
-    this.$avatarSave = this.$avatarForm.find(".avatar-save");
+    this.$bannerForm = this.$bannerModal.find(".banner-form");
+    this.$bannerUpload = this.$bannerForm.find(".banner-upload");
+    this.$bannerSrc = this.$bannerForm.find(".banner-src");
+    this.$bannerData = this.$bannerForm.find(".banner-data");
+    this.$bannerInput = this.$bannerForm.find(".banner-input");
 
-    this.$avatarWrapper = this.$avatarModal.find(".avatar-wrapper");
-    this.$avatarPreview = this.$avatarModal.find(".avatar-preview");
-
+    this.$bannerWrapper = this.$bannerModal.find(".banner-wrapper");
 
     this.init();
     log(this);
   }
 
-
-  CropAvatar.prototype = {
-    constructor: CropAvatar,
+  CropBanner.prototype = {
+    constructor: CropBanner,
 
     // 合并传入的参数
     setDefaults: function (options) {
@@ -68,27 +60,13 @@
     // 总体初始化
     init: function () {
       this.support.datauri = this.support.fileList && this.support.fileReader;
-
-      this.initModal();
       this.addListener();
-    },
-
-    // 初始化模态框
-    initModal: function () {
-      this.$avatarModal.modal("hide");
-      this.initPreview();
-    },
-
-    // 初始化预览窗口
-    initPreview: function () {
-      var url = this.$avatar.attr("src");
-      this.$avatarPreview.empty().html('<img src="' + url + '">');
     },
 
     // 添加监听器，并利用代理改变回调函数作用域
     addListener: function () {
-      this.$avatarInput.on("change", $.proxy(this.change, this));
-      this.$avatarForm.on("submit", $.proxy(this.submit, this));
+      this.$bannerInput.on("change", $.proxy(this.change, this));
+      this.$bannerForm.on("submit", $.proxy(this.submit, this));
     },
 
     // input[type=file]变更监听，主要验证图片是否符合规定，再读取文件信息
@@ -96,7 +74,7 @@
       var files, file;
 
       if (this.support.datauri) {
-        files = this.$avatarInput.prop("files");
+        files = this.$bannerInput.prop("files");
 
         if (files.length > 0) {
           file = files[0];
@@ -150,13 +128,12 @@
         this.$img.cropper("setImgSrc", this.url);
       } else {
         this.$img = $('<img src="' + this.url + '">');
-        this.$avatarWrapper.empty().html(this.$img);
+        this.$bannerWrapper.empty().html(this.$img);
         this.$img.cropper({
           aspectRatio: this.defaults.aspectRatio,
-          preview: this.$avatarPreview.selector,
           done: function (data) {
             log("crop-data: " + data);
-            _this.$avatarData.val(JSON.stringify(data));
+            _this.$bannerData.val(JSON.stringify(data));
           }
         });
 
@@ -175,21 +152,19 @@
 
     // 上传成功后，重置表单数据,并关闭cropper
     cropDone: function () {
-      this.$avatarSrc.val("");
-      this.$avatarData.val("");
-      this.$avatar.attr("src", this.url);
+      this.$bannerSrc.val("");
+      this.$bannerData.val("");
       this.stopCropper();
-      this.$avatarModal.modal("hide");
     },
 
-    // 上传处理
+    // 同步上传处理
     ajaxUpload: function () {
-      var url = this.$avatarForm.attr("action"),
-        data = new FormData(this.$avatarForm[0]),
+      var data = new FormData(this.$bannerForm[0]),
         _this = this;
 
-      $.ajax(url, {
+      $.ajax(_this.UPLOAD_URL, {
         type: "post",
+        async: false,
         data: data,
         processData: false,
         contentType: false,
@@ -233,7 +208,9 @@
 
       try {
         data = $.parseJSON(data);
-      } catch (e) {}
+      } catch (e) {
+        log(e);
+      }
 
       if (data) {
         if (data.src) {
@@ -241,25 +218,15 @@
 
           log("response url = " + this.url);
 
-          if (this.support.datauri || this.uploaded) {
-            this.uploaded = false;
+          // 储存返回的url
+          this.$bannerSrc.val(this.url);
 
-            // 更新用户信息
-            var datajson = {};
-            datajson[this.defaults.imgUrlAttrName] = JSON.stringify(data);
-            UpdateUserProfile(userID, JSON.stringify(datajson));
+          this.cropDone();
 
-            this.cropDone();
-          } else {
-            this.uploaded = true;
-            this.$avatarSrc.val(this.url);
-            this.startCropper();
-          }
+          //this.$bannerInput.val("");
 
-          this.$avatarInput.val("");
-
-        } else if (data.message) {
-          this.alert(data.message);
+        } else {
+          this.alert(data);
         }
       } else {
         this.alert("Failed to response");
@@ -279,20 +246,20 @@
     // 信息警报
     alert: function (msg) {
       var $alert = [
-            '<div class="alert alert-danger avatar-alert">',
+            '<div class="alert alert-danger banner-alert">',
               '<button type="button" class="close" data-dismiss="alert">&times;</button>',
               msg,
             '</div>'
           ].join("");
 
-      this.$avatarUpload.after($alert);
+      this.$bannerUpload.after($alert);
     }
   };
 
-  window.CropAvatar = CropAvatar;
+  window.CropBanner = CropBanner;
 
   //    $(function () {
-  //        var example = new CropAvatar($("#crop-avatar")
+  //        var example = new CropBanner($("#crop-banner")
   //            /*, {
   //            aspectRatio: 2.067,
   //            imgPreferredSize: 5

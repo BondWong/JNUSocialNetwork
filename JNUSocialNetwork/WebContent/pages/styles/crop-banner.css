@@ -1,0 +1,51 @@
+.banner-form {
+  overflow-y: auto;
+  height: auto;
+}
+.banner-upload {
+  overflow: hidden;
+}
+.banner-upload label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+.banner-upload input {
+  display: block;
+  margin-left: 110px;
+}
+.banner-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.banner-wrapper {
+  height: 300px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+.banner-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+/* ================= custom ====================== */
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
