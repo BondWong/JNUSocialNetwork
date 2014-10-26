@@ -117,7 +117,8 @@ public class ImageUploadService extends HttpServlet {
 					&& item.getFieldName().equals("need_copy")) {
 				needCopy = item.getString();
 				continue;
-			}
+			} else if (item.isFormField())
+				continue;
 
 			String extention = "";
 			if (em.containsMime(item.getContentType()))
