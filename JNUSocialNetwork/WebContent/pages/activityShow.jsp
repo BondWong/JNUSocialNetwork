@@ -241,10 +241,11 @@
 					</div>
 				</div>
 				<div class="joinMember">
+					<div class="joinMemberH1">参与成员</div>
 					<div class='activity-members'>
 						<div class='activity-bords'></div>
-						
 					</div>
+					<br clear='all' />
 				</div>
 			</div>
 		</div>

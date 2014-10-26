@@ -190,13 +190,7 @@ $('body').on("click", ".activityShowHref", function() {
 });
 $('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");
-	DeletePostFromCommunity(community.ID, id);
-	$(".post" + id + "").remove();
-	Msnry('.activityBody', '.activity', 435);
-});
-$('body').on('click', '.deleteActivity', function() {
-	var id = $(this).find("input").attr("value");
-	DeletePostFromCommunity(community.ID, id);
+	DeletePostFromCommunity(($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID, id);
 	$(".post" + id + "").remove();
 	Msnry('.activityBody', '.activity', 435);
 });

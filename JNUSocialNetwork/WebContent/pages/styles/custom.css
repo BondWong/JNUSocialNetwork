@@ -450,7 +450,7 @@ body {
 	margin-left:20px;
 	background-color: rgba(0,0,0,0.4);
 	height: 260px;
-	width: 200px;
+	width: 240px;
 	text-align:center;
 	-webkit-box-shadow:0 0 15px rgba(0,0,0,0.9);  
   	-moz-box-shadow:0 0 15px rgba(0,0,0,0.9);  
@@ -975,7 +975,14 @@ body {
 .activityBody {
 	margin-top: 30px;
 }
-
+.joinMember{
+	padding:10px;
+}
+.joinMemberH1 {
+	font-size: 20px;
+	display: block;
+	border-bottom: 1px solid #DFDFDF;
+}
 .activity {
 	opacity: 0;
 }
@@ -1935,6 +1942,14 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 	background-color: #fff;
 	float:left;
 }
+.aMember {
+	margin-top: 10px;
+	margin-left:6px;
+	width: 120px;
+	height: 55px;
+	background-color: #fff;
+	float:left;
+}
 .followeeContainer{
 	width:100%;
 	position:relative;
@@ -2102,4 +2117,8 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 }
 .emailIt{
 	margin-left: 4px;
+}
+#createActivityABtn{
+	background-color:#4285F4 !important;
+	color:#fff;
 }

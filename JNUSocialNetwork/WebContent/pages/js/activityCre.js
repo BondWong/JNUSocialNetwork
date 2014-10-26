@@ -69,6 +69,7 @@ function activityClickEvent() {
 }
 //活动页面添加活动
 function activityClickAEvent() {
+
   $('body').on("click", '#createActivityABtn', function () {
     $('.activityForm').get(0).reset();
   });
@@ -77,9 +78,7 @@ function activityClickAEvent() {
       "click",
       "#go_submit",
       function () {
-        // 提交原图
-        banner1.submit();
-        if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
+        if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
           var post = {
             postType: 'ACTIVITY',
             attributes: {
@@ -95,18 +94,19 @@ function activityClickAEvent() {
               activityMore: $('#activityMore').val(),
               inquery: $('#inquery').val(),
               limitation: $('#activityNum').val(),
-              communityName: $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.id,
-              communityID: $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.name,
+              communityName: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].name,
+              communityID: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
               ifUpload: $('#table_activitySign').text(),
             },
             imageLinks: [],
             activityTypeTags: [$('#activityType').val()]
           };
-          if ($('#fileuploadA').val() !== "") {
-            var result = $(".activityForm input[name='banner2_src']").val();
-            post.attributes["background"] = result;
+          if ($('#fileuploadA').val() != "") {
+
+            post.attributes["background"] = FileUpload(new FormData(
+              $('.activityForm')[0]))[0];
           }
-          if ($('#fileuploadB').val() !== "") {
+          if ($('#fileuploadB').val() != "") {
             post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
               $('.regForm')[0]));
           }
@@ -116,7 +116,7 @@ function activityClickAEvent() {
               var json = $.toJSON(post);
               $('.layer2').fadeIn(300);
               $('#infinite_loader2').fadeIn(300);
-              AddPostToCommunity(USERID, community.ID,
+              AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
                 json);
               $('#newActivity').get(0).reset();
               $('#go_page1').click();
