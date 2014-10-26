@@ -1,11 +1,11 @@
-/*global CropBanner,setTimeout,document,console,FormData,USERID,sessionStorage,community,AddPostToCommunity*/
+/*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
 var banner1, banner2, banner3;
 //社区页面添加活动
 function activityClickEvent() {
-  $('body').on("click", '#createActivityBtn', function () {
+  $('#createActivityBtn').click(function () {
     $('.activityForm').get(0).reset();
   });
-  $('body').on("click", "#go_submit", function () {
+  $("#go_submit").click(function () {
     if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
       // 提交原图
       banner1.submit();
@@ -33,7 +33,9 @@ function activityClickEvent() {
       };
       //上传海报图的js控制
       if ($('#fileuploadA').val() !== "") {
-        var result = $(".activityForm input[name='banner1_src']").val();
+        var target = $(".activityForm .banner-src");
+        var result = target.val();
+        if (!result) return;
         post.attributes["background"] = result;
       }
       if ($('#fileuploadB').val() !== "") {
@@ -78,7 +80,7 @@ function activityClickAEvent() {
       "click",
       "#go_submit",
       function () {
-        if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
+        if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
           var post = {
             postType: 'ACTIVITY',
             attributes: {
@@ -101,12 +103,12 @@ function activityClickAEvent() {
             imageLinks: [],
             activityTypeTags: [$('#activityType').val()]
           };
-          if ($('#fileuploadA').val() != "") {
+          if ($('#fileuploadA').val() !== "") {
 
             post.attributes["background"] = FileUpload(new FormData(
               $('.activityForm')[0]))[0];
           }
-          if ($('#fileuploadB').val() != "") {
+          if ($('#fileuploadB').val() !== "") {
             post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
               $('.regForm')[0]));
           }
@@ -350,7 +352,7 @@ $(document).ready(function () {
   });
 
   banner1 = new CropBanner($("#activityCommunity"), {
-    aspectRatio: 2.067,
+    aspectRatio: 3.8,
     imgPreferredSize: 5
   });
 });

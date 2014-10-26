@@ -152,8 +152,6 @@
 
     // 上传成功后，重置表单数据,并关闭cropper
     cropDone: function () {
-      this.$bannerSrc.val("");
-      this.$bannerData.val("");
       this.stopCropper();
     },
 
@@ -206,20 +204,12 @@
     submitDone: function (data) {
       log(data);
 
-      try {
-        data = $.parseJSON(data);
-      } catch (e) {
-        log(e);
-      }
-
       if (data) {
-        if (data.src) {
-          this.url = data.src;
-
-          log("response url = " + this.url);
+        if (data[0]) {
+          log("crop response = " + data[0]);
 
           // 储存返回的url
-          this.$bannerSrc.val(this.url);
+          this.$bannerSrc.val(data[0]);
 
           this.cropDone();
 
