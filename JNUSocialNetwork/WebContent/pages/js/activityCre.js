@@ -87,7 +87,7 @@ function activityClickAEvent() {
 					"#go_submit",
 					function() {
 						if ($('#activityTime').val() != ""
-								&& $('#activityRemind').val() != "") {
+								&& $('#activityRemind').val() != "") {	
 						var post = {
 								postType : 'ACTIVITY',
 								attributes : {
@@ -107,8 +107,8 @@ function activityClickAEvent() {
 									activityMore : $('#activityMore').val(),
 									inquery : $('#inquery').val(),
 									limitation : $('#activityNum').val(),
-									communityName : $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.id,
-									communityID : $.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples.name,
+									communityName : ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].name,
+									communityID : ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
 									ifUpload : $('#table_activitySign').text(),
 								},
 								imageLinks : [],
@@ -132,7 +132,7 @@ function activityClickAEvent() {
 									var json = $.toJSON(post);
 									$('.layer2').fadeIn(300);
 									$('#infinite_loader2').fadeIn(300);
-									AddPostToCommunity(USERID, community.ID,
+									AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
 											json);
 									$('#newActivity').get(0).reset();
 									$('#go_page1').click();
