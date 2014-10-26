@@ -135,7 +135,7 @@ public class ImageUploadService extends HttpServlet {
 				dir.mkdir();
 			}
 
-			String temp = extention.substring(1) + "--"
+			String temp = extention.substring(1) + "/--"
 					+ System.currentTimeMillis() + extention;
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
@@ -159,14 +159,14 @@ public class ImageUploadService extends HttpServlet {
 						cropData.get("width"), cropData.get("height"));
 
 				if (needCopy != null && needCopy.equals("true")) {
-					File croppedFile = new File(root + extention.substring(1)
-							+ "/" + "--" + System.currentTimeMillis()
-							+ "--cropped--" + extention);
+					String subdir = extention.substring(1) + "/" + "--"
+							+ System.currentTimeMillis() + "--cropped"
+							+ extention;
+					File croppedFile = new File(root + subdir);
 					ImageIO.write(bi, extention.substring(1), croppedFile);
 					ci = ImageIO.read(croppedFile);
-					croppedImage = new Image(extention.substring(1) + "/"
-							+ "--" + System.currentTimeMillis() + "--cropped--"
-							+ extention, ci.getHeight(), ci.getWidth());
+					croppedImage = new Image(subdir, ci.getHeight(),
+							ci.getWidth());
 					links.add(JsonUtil.toJson(croppedImage));
 				} else
 					ImageIO.write(bi, extention.substring(1), uploaddedFile);
