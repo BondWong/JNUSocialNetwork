@@ -92,8 +92,8 @@
 	<div class="mask" id="guide_mask" content-image-data="6">
 		<div  class="guide_step" data="1">
 			<img class="guide_image" src="./images/guidance/activity.png" data="1"/>
-			<button type="button" class="guide_next_btn" data="1" style="left:321px;top:373px;width:80px;height:26px"></button>
-			<button type="button" class="guide_exit_btn" data="1" style="left:500px;top:200px"></button>
+			<button type="button" class="guide_next_btn" data="1" style="left: 338px;top: 470px;width:100px;height:35px"></button>
+			<button type="button" class="guide_exit_btn" data="1" style="left: 575px;top: 235px;"></button>
 		</div>
 		<div  class="guide_step" data="2">
 			<img class="guide_image" src="./images/guidance/social.png" data="2"/>
