@@ -707,7 +707,7 @@ public class UserService {
 		String result = ((Map<String, String>) member.get("attributes"))
 				.get("guide");
 		if (result == null || result.equals(""))
-			result = "false";
+			result = "true";
 		return Response.ok(JsonUtil.toJson(result)).build();
 	}
 
