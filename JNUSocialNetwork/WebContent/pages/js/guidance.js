@@ -56,7 +56,7 @@ function Guidance(data){
 			});
 		});
 		$(window).resize(function(){
-			$('.guide_step[data=1]').css({'top':$('.activityHome').offset().top-30,'left':$('.activityHome').offset().left-40});
+			$('.guide_step[data=1]').css({'top':$('.activityHome').offset().top-5,'left':$('.activityHome').offset().left-15});
 			$('.guide_step[data=2]').css({'top':$('.communityHome').offset().top-45,'left':$('.communityHome').offset().left-55});
 			$('.guide_step[data=3]').css({'top':$('.circleHome').offset().top-140,'left':$('.circleHome').offset().left-100});
 			$('.guide_step[data=4]').css({'top':$('.peopleHome').offset().top-165,'left':$('.peopleHome').offset().left-90});
