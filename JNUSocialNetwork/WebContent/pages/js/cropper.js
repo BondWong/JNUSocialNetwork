@@ -1,4 +1,4 @@
-/*!
+q/*!
  * Cropper v0.6.1
  * https://github.com/fengyuanchen/cropper
  *

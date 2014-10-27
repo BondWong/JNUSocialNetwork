@@ -5,8 +5,7 @@ $(document).ready(function(){
 			url:'/app/user/needGuidance',
 			dataType:'json',
 			type:'GET',
-			success:function(data){
-				
+			success:function(data){	
 				if(JSON.stringify(data)=='\"true\"'){
 					Guidance(guide_type);
 				}
