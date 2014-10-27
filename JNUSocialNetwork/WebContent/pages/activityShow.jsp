@@ -5,6 +5,8 @@
 
     <head>
       <%@ include file="parts/head.jsp" %>
+        <link rel="stylesheet" href="styles/cropper.min.css">
+        <link rel="stylesheet" href="styles/crop-banner.css">
     </head>
 
     <body>
@@ -48,7 +50,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel2">编辑活动</h4>
               </div>
-              <form class="activityForm" enctype="multipart/form-data" onsubmit="return false;">
+              <form class="activityForm banner-form" enctype="multipart/form-data" onsubmit="return false;">
                 <div class="modal-body modalBody">
                   <div class="activityItem">
                     <span>活动名：</span> 
@@ -254,6 +256,8 @@
         <script src="js/EventHandle.js"></script>
         <script src="js/activityShow.js"></script>
         <script src="js/global-initialization.js"></script>
+        <script src="js/cropper.min.js"></script>
+        <script src="js/crop-banner.js"></script>
         <script type="text/javascript">
           $(document)
             .ready(

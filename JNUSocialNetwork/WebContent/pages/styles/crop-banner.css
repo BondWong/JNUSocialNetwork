@@ -20,6 +20,7 @@
   margin-bottom: 10px;
 }
 .banner-wrapper {
+  display: none;
   height: 300px;
   width: 100%;
   margin-top: 15px;

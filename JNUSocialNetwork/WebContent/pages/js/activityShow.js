@@ -328,7 +328,7 @@ function showImages() {
 }
 var banner2;
 $(function () {
-  banner2 = new CropBanner($("#activityCommunity"), {
+  banner2 = new CropBanner($("#editActivity"), {
     aspectRatio: 3.8,
     imgPreferredSize: 5
   });
@@ -349,11 +349,11 @@ $('body').on("click", "#saveActivity", function () {
         activityMore: $('#activityMore').val(),
         limitation: $('#activityNum').val(),
         inquery: $('#inquery').val(),
-        background: function () {
+        background: (function () {
           var target = $(".activityForm .banner-src");
           var result = target.val();
           return result;
-        }
+        }())
       };
     } else {
       attributes = {
