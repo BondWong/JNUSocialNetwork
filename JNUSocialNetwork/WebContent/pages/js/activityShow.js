@@ -326,32 +326,40 @@ function showImages() {
   }
 
 }
+var banner2;
+$(function () {
+  banner2 = new CropBanner($("#editActivity"), {
+    aspectRatio: 3.8,
+    imgPreferredSize: 5
+  });
+});
+
 $('body').on("click", "#saveActivity", function () {
+  banner2.submit();
   var attributes = "";
   if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
     if ($('#fileupload').val() != "") {
       attributes = {
         activityName: $('#activityName').val(),
-        startDate: toTimeValue($('#activityTime')
-          .val() + "") + "",
-        remindDate: toTimeValue($('#activityRemind')
-          .val() + "") + "",
+        startDate: toTimeValue($('#activityTime').val() + "") + "",
+        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
         activityTime: $('#activityTime').val(),
         activityRemindTime: $('#activityRemind').val(),
         activityAddr: $('#activityAddr').val(),
         activityMore: $('#activityMore').val(),
         limitation: $('#activityNum').val(),
         inquery: $('#inquery').val(),
-        background: FileUpload(new FormData(
-          $('.activityForm')[0]))[0]
+        background: (function () {
+          var target = $(".activityForm .banner-src");
+          var result = target.val();
+          return result;
+        }())
       };
     } else {
       attributes = {
         activityName: $('#activityName').val(),
-        startDate: toTimeValue($('#activityTime')
-          .val() + "") + "",
-        remindDate: toTimeValue($('#activityRemind')
-          .val() + "") + "",
+        startDate: toTimeValue($('#activityTime').val() + "") + "",
+        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
         activityTime: $('#activityTime').val(),
         activityRemindTime: $('#activityRemind').val(),
         activityAddr: $('#activityAddr').val(),

@@ -71,6 +71,7 @@
 
     // input[type=file]变更监听，主要验证图片是否符合规定，再读取文件信息
     change: function () {
+      this.$bannerWrapper.show();
       var files, file;
 
       if (this.support.datauri) {
@@ -159,6 +160,7 @@
     ajaxUpload: function () {
       var data = new FormData(this.$bannerForm[0]),
         _this = this;
+      if (!this.$bannerInput.val()) return;
 
       $.ajax(_this.UPLOAD_URL, {
         type: "post",
@@ -205,11 +207,11 @@
       log(data);
 
       if (data) {
-        if (data[0]) {
-          log("crop response = " + data[0]);
+        if ($.isArray(data)) {
+          log("crop response = " + data);
 
           // 储存返回的url
-          this.$bannerSrc.val(data[0]);
+          this.$bannerSrc.val(data);
 
           this.cropDone();
 
