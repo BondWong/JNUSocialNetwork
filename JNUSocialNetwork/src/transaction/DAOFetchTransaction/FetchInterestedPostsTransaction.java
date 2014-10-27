@@ -32,13 +32,15 @@ public class FetchInterestedPostsTransaction extends DAOTransaction {
 		for (Long communityID : communityIDs) {
 			cIDs += communityID + ",";
 		}
-		cIDs = cIDs.substring(0, cIDs.lastIndexOf(","));
+		if (cIDs.endsWith(","))
+			cIDs = cIDs.substring(0, cIDs.lastIndexOf(","));
 
 		String mIDs = "";
 		for (String memberID : memberIDs) {
 			mIDs += memberID + ",";
 		}
-		mIDs = mIDs.substring(0, mIDs.lastIndexOf(","));
+		if (mIDs.endsWith(","))
+			mIDs = mIDs.substring(0, mIDs.lastIndexOf(","));
 
 		String query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.NORMAL AND (p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) OR (p.owner.ID IN ("
 				+ mIDs

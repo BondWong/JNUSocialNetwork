@@ -1,5 +1,5 @@
 /*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
-var banner1, banner2, banner3;
+var banner1 ;
 //社区页面添加活动
 function activityClickEvent() {
   $('#createActivityBtn').click(function () {
@@ -80,6 +80,8 @@ function activityClickAEvent() {
       "click",
       "#go_submit",
       function () {
+          // 提交原图
+          banner1.submit();
         if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
           var post = {
             postType: 'ACTIVITY',
@@ -104,9 +106,10 @@ function activityClickAEvent() {
             activityTypeTags: [$('#activityType').val()]
           };
           if ($('#fileuploadA').val() !== "") {
-
-            post.attributes["background"] = FileUpload(new FormData(
-              $('.activityForm')[0]))[0];
+              var target = $(".activityForm .banner-src");
+              var result = target.val();
+              if (!result) return;
+              post.attributes["background"] = result;
           }
           if ($('#fileuploadB').val() !== "") {
             post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
