@@ -8,6 +8,7 @@ import java.util.Map;
 
 import transaction.Transaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
+import utils.EmailDetector;
 
 public class ActivityNotificationTransaction implements Transaction {
 	private static final int BUCKETSIZE = 50;
@@ -29,7 +30,8 @@ public class ActivityNotificationTransaction implements Transaction {
 			for (Map<String, Object> member : members) {
 				String receiverAddr = ((Map<String, String>) member
 						.get("attributes")).get("email");
-				if (receiverAddr != null && receiverAddr.length() > 0) {
+				if (receiverAddr != null && receiverAddr.length() > 0
+						&& EmailDetector.isEmailAddress(receiverAddr)) {
 					addrs.add(receiverAddr);
 				}
 			}

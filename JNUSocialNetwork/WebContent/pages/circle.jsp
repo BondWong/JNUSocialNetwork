@@ -151,7 +151,7 @@
 								window.postIdContainer = [];
 								clickEvent();
 								if ($.parseJSON(sessionStorage.getItem("user")).followeeIDs != null) {
-									fetchByFolloweeOrOwner();
+									fetchInterested();
 								} else {
 									fectchHeatPost();
 								}

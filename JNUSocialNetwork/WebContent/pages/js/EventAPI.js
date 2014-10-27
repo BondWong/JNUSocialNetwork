@@ -561,6 +561,27 @@ function FetchPostsByFollowee(userID, startIndex, pageSize) {
 	});
 	return response;
 }
+//FetchInterested 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
+function FetchInterested(userID, startIndex, pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/post/fetchInterested/' + userID + '/' + startIndex
+				+ '/' + pageSize,
+		async : false,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // FetchByFolloweeOrOwner 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchByFolloweeOrOwner(userID, startIndex, pageSize) {
 	var response = "";

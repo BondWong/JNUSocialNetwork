@@ -169,6 +169,35 @@ function fetchByFolloweeOrOwner() {
 						}
 					});
 }
+function fetchInterested() {
+	var response = FetchInterested(USERID, 0, pageSize);
+	$
+			.each(
+					response.reverse(),
+					function(n, dataString) {
+						if (dataString.postType == "NORMAL"
+								&& dataString.available == true) {
+							addPost(dataString.owner.ID,
+									dataString.owner.attributes.name,
+									dataString.publishDate,
+									dataString.attributes.content,
+									dataString.ID, dataString.likerIDs,
+									dataString.collectorIDs,
+									dataString.imageLinks,
+									dataString.owner.attributes.avatarLink);
+							if (dataString.attributes.communityName != null) {
+								var board = "<a class='communityPostSpan' id = '"
+										+ dataString.attributes.communityID
+										+ "'><span class='glyphicon glyphicon-th-large'></span>&nbsp;"
+										+ dataString.attributes.communityName
+										+ "</a> ";
+								$(".postComm" + dataString.ID).children('.deletePostBtn').attr('class','deletePostFromCBtn').attr('id',dataString.attributes.communityID);
+								$(".postComm" + dataString.ID).append(board);
+								
+							}
+						}
+					});
+}
 $('body').on("click", ".communityPostSpan", function() {
 	window.location.href = "communityShow.jsp?" + $(this).attr('id');
 });
@@ -225,7 +254,7 @@ $(window)
 						if (USERID == null || USERID == "")
 							response = FetchHeatPost(startIndex, pageSize);
 						else
-							response = FetchByFolloweeOrOwner(USERID,
+							response = FetchInterested(USERID,
 									startIndex, pageSize);
 						$
 								.each(

@@ -1,252 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>CampuSite</display-name>
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>CampuSite</web-resource-name>
-      <url-pattern>/*</url-pattern>
-    </web-resource-collection>
-    <user-data-constraint>
-      <transport-guarantee>NONE</transport-guarantee>
-    </user-data-constraint>
-  </security-constraint>
-  <session-config>
-    <cookie-config>
-      <http-only>true</http-only>
-    </cookie-config>
-    <tracking-mode>COOKIE</tracking-mode>
-  </session-config>
-  <listener>
-    <listener-class>system.Initialtor</listener-class>
-  </listener>
-  <error-page>
-    <error-code>404</error-code>
-    <location>/pages/404.html</location>
-  </error-page>
-  <error-page>
-    <error-code>500</error-code>
-    <location>/pages/500.html</location>
-  </error-page>
-  <filter>
-    <filter-name>AutoLoginFilter</filter-name>
-    <filter-class>security.AutoLoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/aboutUs.jsp
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>CampuSite</display-name>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>CampuSite</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<session-config>
+		<cookie-config>
+			<http-only>true</http-only>
+		</cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+	<listener>
+		<listener-class>system.Initialtor</listener-class>
+	</listener>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/pages/500.html</location>
+	</error-page>
+	<filter>
+		<filter-name>AutoLoginFilter</filter-name>
+		<filter-class>security.AutoLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/aboutUs.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/activity.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activity.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/activityShow.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activityShow.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/circle.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activityCommunity.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/community.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/circle.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/communityShow.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/community.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/communityMember.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/communityShow.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/communityOwnerPage.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/communityMember.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/communityShow.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/communityOwnerPage.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/home.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/communityShow.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/activity.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/home.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/activityCommunity.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activity.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/activityShow.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activityCommunity.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/people.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/activityShow.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AutoLoginFilter</filter-name>
-    <url-pattern>
-			/profile.jsp
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/people.jsp
 		</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>LoginCheckFilter</filter-name>
-    <filter-class>security.LoginCheckFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>
+			/pages/profile.jsp
+		</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>LoginCheckFilter</filter-name>
+		<filter-class>security.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/post/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/comment/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/user/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/event/deleteUnhandledEvent/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/community/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/chatRoom/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/application/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/fileUploader/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/registerFormUpload/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>LoginCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>
 			/app/fileDownloader/*
 		</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <filter-class>security.AuthorizationCheckFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<filter-class>security.AuthorizationCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/post/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/comment/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/user/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/event/deleteUnhandledEvent/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/community/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/chatRoom/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/application/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/fileUploader/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/registerFormUpload/*
 		</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>AuthorizationCheckFilter</filter-name>
-    <url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationCheckFilter</filter-name>
+		<url-pattern>
 			/app/fileDownloader/*
 		</url-pattern>
-  </filter-mapping>
+	</filter-mapping>
 </web-app>
