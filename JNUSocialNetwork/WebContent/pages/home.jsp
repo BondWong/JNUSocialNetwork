@@ -88,8 +88,8 @@
 </style>
 </head>
 
-<body>
-	<div class="mask" id="guide_mask" content-image-data="7">
+<body data="home">
+	<div class="mask" id="guide_mask" content-image-data="6">
 		<div  class="guide_step" data="1">
 			<img class="guide_image" src="./images/guidance/activity.png" data="1"/>
 			<button type="button" class="guide_next_btn" data="1" style="left:321px;top:373px;width:80px;height:26px"></button>
@@ -110,19 +110,21 @@
 			<button type="button" class="guide_next_btn" data="4" style="left:435px;top:600px;width:110px;height:35px"></button>
 			<button type="button" class="guide_exit_btn" data="4" style="left:705px;top:405px"></button>
 		</div>
-		<div  class="guide_step" data="6">
-			<img class="guide_image" src="./images/guidance/q&a.png" data="6"/>
-			<button type="button" class="guide_next_btn" data="6" style="left:425px;top:645px;width:120px;height:40px"></button>
-			<button type="button" class="guide_exit_btn" data="6" style="left:655px;top:361px"></button>
+		<div  class="guide_step" data="5">
+			<img class="guide_image" src="./images/guidance/q&a.png" data="5"/>
+			<button type="button" class="guide_next_btn" data="5" style="left:425px;top:645px;width:120px;height:40px"></button>
+			<button type="button" class="guide_exit_btn" data="5" style="left:655px;top:361px"></button>
 		</div>
+		<!--
 		<div  class="guide_step" data="5">
 			<img class="guide_image" src="./images/guidance/personal.png" data="5"/>
 			<button type="button" class="guide_next_btn" data="5" style="left:257px;top:635px;width:106px;height:35px"></button>
 			<button type="button" class="guide_exit_btn" data="5" style="left:445px;top:370px"></button>
 		</div>
-		<div  class="guide_step" data="7">
-			<img class="guide_image" src="./images/guidance/done.png" data="7"/>
-			<button type="button" class="guide_next_btn" data="7" style="left:240px;top:300px;width:108px;height:38px"></button>
+		-->
+		<div  class="guide_step" data="6">
+			<img class="guide_image" src="./images/guidance/done.png" data="6"/>
+			<button type="button" class="guide_next_btn" data="6" style="left:240px;top:300px;width:108px;height:38px"></button>
 		</div>
 	</div>
 	<div class="header">
