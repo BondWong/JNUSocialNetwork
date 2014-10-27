@@ -32,12 +32,14 @@ if ($.inArray(USERID, joinIDs) != -1) {
 	if(startDate - now.getTime() <= 0){
 		join = "<button class='btn btn-default'>已经过期</button>";
 	}
+	
+	var imageObject = imagelink.substr(imagelink.indexOf(",{")+1);
 	var boarddiv = "<div class='activity activityAll post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg activityBgAll'><img width='435' height='"+getHeight(435, $.parseJSON(imagelink).width, $.parseJSON(imagelink).height)+"'  src='"
-			+ $.parseJSON(imagelink).src
+			+ "<div class='activityBg activityBgAll'><img width='435' height='"+getHeight(435,$.parseJSON(imageObject).width, $.parseJSON(imageObject).height)+"'  src='"
+			+ $.parseJSON(imageObject).src
 			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' /></div><div class='activityName activityShowHref' id='"
@@ -67,6 +69,7 @@ function fetchAllActivities() {
 	var response = FetchAllActivities( 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == true) {
+			
 			addActivity(dataString.ID, dataString.attributes.activityName,
 					dataString.attributes.activityTime,
 					dataString.attributes.activityAddr,
@@ -77,6 +80,7 @@ function fetchAllActivities() {
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
 					dataString.attributes.ifUpload,dataString.attributes.inquery);
+			
 		}
 	});
 }

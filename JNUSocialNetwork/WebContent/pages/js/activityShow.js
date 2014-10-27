@@ -90,8 +90,9 @@ function showActivityDetail(activity, community) {
   $('.aA').html("&nbsp;" + activity.attributes.activityAddr);
   $('.activityShowD').html(
     "<pre>" + "&nbsp;" + activity.attributes.activityMore + "</pre>");
+  var imagelink = activity.attributes.background;
   $('.activityPh').find('img').attr("src",
-    $.parseJSON(activity.attributes.background).src);
+    $.parseJSON(imagelink.split(",{")[0]).src);
   $('#addComment').attr("value", activity.ID);
   $('.acBtn').attr("id", "commentText" + activity.ID);
   $('.communityName').html(community.attributes.name);
