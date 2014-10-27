@@ -10,20 +10,26 @@
 </head>
 
 <body data="profile">
-	<div class="mask" id="guide_mask" content-image-data="3">
+	<div class="mask" id="guide_mask" content-image-data="4">
+	
 		<div  class="guide_step" data="1">
-			<img class="guide_image" src="./images/guidance/u500Bu4EBAu8CC7u6599.png" data="1"/>
-			<button type="button" class="guide_next_btn" data="1" style="left: 236px;top: 740px;width:135px;height:43px"></button>
+			<img class="guide_image" src="./images/guidance/welcome.png" data="1"/>
+			<button type="button" class="guide_next_btn" data="1" style="left: 340px;top: 523px;width:135px;height:45px"></button>
 			
 		</div>
 		<div  class="guide_step" data="2">
-			<img class="guide_image" src="./images/guidance/u500Bu4EBAu7167u7247.png" data="2"/>
-			<button type="button" class="guide_next_btn" data="2" style="left: 510px;top: 615px;width:115px;height:40px"></button>
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu8CC7u6599.png" data="2"/>
+			<button type="button" class="guide_next_btn" data="2" style="left: 167px;top: 517px;width:100px;height:32px"></button>
 			
 		</div>
 		<div  class="guide_step" data="3">
-			<img class="guide_image" src="./images/guidance/u6A19u7C3D.png" data="3"/>
-			<button type="button" class="guide_next_btn" data="3" style="left: 756px;top: 470px;width:110px;height:35px"></button>
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu7167u7247.png" data="3"/>
+			<button type="button" class="guide_next_btn" data="3" style="left: 390px;top: 435px;width:90px;height:30px"></button>
+			
+		</div>
+		<div  class="guide_step" data="4">
+			<img class="guide_image" src="./images/guidance/u6A19u7C3D.png" data="4"/>
+			<button type="button" class="guide_next_btn" data="4" style="left: 746px;top: 445px;width:110px;height:35px"></button>
 			
 		</div>
 		
