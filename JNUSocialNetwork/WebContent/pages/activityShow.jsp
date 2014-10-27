@@ -22,7 +22,7 @@
   <div class="container container_actvity">
     <div class="activityHead">
       <div class="activityPh">
-        <img alt="" width="100%" onload="javascript:auto_resize(1140, getHeight(1140,this.width,this.height), this)" src="" style="display: none">
+        <img alt="" height="300" width="1140" style="display:none" onload="javascript:$(this).fadeIn('fast');" >
       </div>
       <div class="activityInfo">
         <p class="activityShowName"></p>

@@ -42,9 +42,9 @@
                 </div>
                 <div class="modal-body container">
 
-                    <div class="col-xs-6 text-center"><a class="btn btn-primary btn-long account-link" href="register.jsp">注册</a>
+                    <div class="col-xs-6 text-center"><a class="btn btn-primary btn-long account-link" href="account.jsp?nav=regTab">注册</a>
                     </div>
-                    <div class="col-xs-6 text-center"><a class="btn btn-success btn-long account-link" href="login.jsp">登录</a>
+                    <div class="col-xs-6 text-center"><a class="btn btn-success btn-long account-link" href="account.jsp">登录</a>
                     </div>
                 </div>
             </div>

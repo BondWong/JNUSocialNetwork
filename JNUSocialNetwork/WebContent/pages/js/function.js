@@ -711,7 +711,7 @@ function signInAlert() {
 }
 $('body').on('click', '.registerA', function() {
 	localStorage.setItem("url", window.location.href);
-	window.location.href = 'account.jsp';
+	window.location.href = 'account.jsp?nav=regTab';
 
 });
 $('body').on('click', '.loginA', function() {
@@ -901,7 +901,7 @@ function showPost(postID) {
 						+ dataString.publishDate
 						+ "</div></div></div><div class='post_info'><span class='postContent'>"
 						+ '<pre>'
-						+ dataString.attributes.content
+						+ replaceURLWithHTMLLinks(dataString.attributes.content)
 						+ '</pre>'
 						+ "</span></div><div class='row'><div class='col-md-6'><div class='post_like' style='cursor:pointer'><a><p id='ownerID' style='display:none;' value="
 						+ dataString.owner.ID

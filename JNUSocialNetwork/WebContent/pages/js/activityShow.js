@@ -321,10 +321,8 @@ function showImages() {
         $('.carousel-inner').append(
           "<div class='item'>" + pRemoveBtn + photoContainer + "</div>");
       }
-
     });
   }
-
 }
 $('body').on("click", "#saveActivity", function () {
   var attributes = "";
