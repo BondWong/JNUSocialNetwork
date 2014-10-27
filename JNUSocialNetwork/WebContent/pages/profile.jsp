@@ -5,10 +5,29 @@
 <html>
 
 <head>
+<link href="styles/guidance.css" rel="stylesheet">
 <%@ include file="parts/head.jsp"%>
 </head>
 
-<body>
+<body data="profile">
+	<div class="mask" id="guide_mask" content-image-data="3">
+		<div  class="guide_step" data="1">
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu8CC7u6599.png" data="1"/>
+			<button type="button" class="guide_next_btn" data="1" style="left: 236px;top: 740px;width:135px;height:43px"></button>
+			
+		</div>
+		<div  class="guide_step" data="2">
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu7167u7247.png" data="2"/>
+			<button type="button" class="guide_next_btn" data="2" style="left: 510px;top: 615px;width:115px;height:40px"></button>
+			
+		</div>
+		<div  class="guide_step" data="3">
+			<img class="guide_image" src="./images/guidance/u6A19u7C3D.png" data="3"/>
+			<button type="button" class="guide_next_btn" data="3" style="left: 756px;top: 470px;width:110px;height:35px"></button>
+			
+		</div>
+		
+	</div>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
@@ -129,5 +148,6 @@
 	<%@ include file="parts/contentScroll.jsp"%>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<%@ include file="parts/baidu.jsp"%>
+	<script src="js/guidance.js"></script>
 </body>
 </html>
