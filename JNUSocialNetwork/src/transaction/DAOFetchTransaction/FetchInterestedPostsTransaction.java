@@ -42,10 +42,14 @@ public class FetchInterestedPostsTransaction extends DAOTransaction {
 		if (mIDs.endsWith(","))
 			mIDs = mIDs.substring(0, mIDs.lastIndexOf(","));
 
-		String query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.NORMAL AND (p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) OR (p.owner.ID IN ("
-				+ mIDs
-				+ ") AND p IN (SELECT po FROM Community c JOIN c.posts po WHERE c.ID IN ("
-				+ cIDs + ")))) ORDER BY p.ID DESC";
+		String query = "";
+		if (cIDs.length() > 0 && mIDs.length() > 0)
+			query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.NORMAL AND (p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1) OR (p.owner.ID IN ("
+					+ mIDs
+					+ ") AND p IN (SELECT po FROM Community c JOIN c.posts po WHERE c.ID IN ("
+					+ cIDs + ")))) ORDER BY p.ID DESC";
+		else
+			query = "SELECT p FROM Post p WHERE p.available = 1 AND p.postType = model.modelType.PostType.NORMAL AND (p.owner.ID = ?1 OR p.owner IN(SELECT f FROM Member m JOIN m.followees f WHERE m.ID = ?1)) ORDER BY p.ID DESC";
 
 		TypedQuery<Post> q = em.createQuery(query, Post.class);
 		q.setParameter(1, ID);
