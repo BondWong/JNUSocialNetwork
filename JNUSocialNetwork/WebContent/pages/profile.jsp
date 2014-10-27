@@ -5,10 +5,35 @@
 <html>
 
 <head>
+<link href="styles/guidance.css" rel="stylesheet">
 <%@ include file="parts/head.jsp"%>
 </head>
 
-<body>
+<body data="profile">
+	<div class="mask" id="guide_mask" content-image-data="4">
+	
+		<div  class="guide_step" data="1">
+			<img class="guide_image" src="./images/guidance/welcome.png" data="1"/>
+			<button type="button" class="guide_next_btn" data="1" style="left: 340px;top: 523px;width:135px;height:45px"></button>
+			
+		</div>
+		<div  class="guide_step" data="2">
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu8CC7u6599.png" data="2"/>
+			<button type="button" class="guide_next_btn" data="2" style="left: 167px;top: 517px;width:100px;height:32px"></button>
+			
+		</div>
+		<div  class="guide_step" data="3">
+			<img class="guide_image" src="./images/guidance/u500Bu4EBAu7167u7247.png" data="3"/>
+			<button type="button" class="guide_next_btn" data="3" style="left: 390px;top: 435px;width:90px;height:30px"></button>
+			
+		</div>
+		<div  class="guide_step" data="4">
+			<img class="guide_image" src="./images/guidance/u6A19u7C3D.png" data="4"/>
+			<button type="button" class="guide_next_btn" data="4" style="left: 746px;top: 445px;width:110px;height:35px"></button>
+			
+		</div>
+		
+	</div>
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
@@ -129,5 +154,6 @@
 	<%@ include file="parts/contentScroll.jsp"%>
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<%@ include file="parts/baidu.jsp"%>
+	<script src="js/guidance.js"></script>
 </body>
 </html>

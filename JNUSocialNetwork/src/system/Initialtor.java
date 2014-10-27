@@ -2,6 +2,7 @@ package system;
 
 import helper.persistenceHelper.EntityManagerFactoryUtil;
 import helper.serviceHelper.ActivitySearchMap;
+import helper.serviceHelper.AdmirationMap;
 import helper.serviceHelper.CommunitySearchMap;
 import helper.serviceHelper.DesertFileLinkMap;
 import helper.serviceHelper.MemberSearchMap;
@@ -95,6 +96,7 @@ public class Initialtor implements ServletContextListener {
 			CommunitySearchMap.initializeEnvironment();
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
+			AdmirationMap.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
 

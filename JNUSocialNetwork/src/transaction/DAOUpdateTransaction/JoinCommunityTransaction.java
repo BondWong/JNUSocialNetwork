@@ -1,5 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
+import helper.serviceHelper.AdmirationMap;
+
 import javax.persistence.EntityManager;
 
 import model.Community;
@@ -7,7 +9,7 @@ import model.Member;
 import persistence.DAO;
 import transaction.DAOTransaction;
 
-public class JoinCommunityTransaction extends DAOTransaction{
+public class JoinCommunityTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -19,6 +21,10 @@ public class JoinCommunityTransaction extends DAOTransaction{
 		member.joinCommunity(community);
 		dao.update(member);
 		dao.update(community);
+		AdmirationMap.deserialize();
+		AdmirationMap.addRecord(member.getID(), community.getID(), community
+				.getOwner().getID());
+		AdmirationMap.serialize();
 		return community.toRepresentation();
 	}
 

@@ -50,6 +50,7 @@ import transaction.EmailTransaction.ProfileInvititionTransaction;
 import transaction.EmailTransaction.SendConnectionTransaction;
 import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
+import utils.JsonUtil;
 
 @Path("/user")
 public class UserService {
@@ -707,7 +708,7 @@ public class UserService {
 				.get("guide");
 		if (result == null || result.equals(""))
 			result = "false";
-		return Response.ok(result).build();
+		return Response.ok(JsonUtil.toJson(result)).build();
 	}
 
 }

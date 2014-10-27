@@ -24,6 +24,7 @@ import model.ServerSentEvent;
 import model.modelType.PostType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
+import transaction.DAOFetchTransaction.FetchInterestedPostsTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchPostTransaction;
 import transaction.DAOFetchTransaction.FetchPostsByIDsTransaction;
@@ -432,6 +433,27 @@ public class PostService {
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchInterested/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchInterestedPosts(@PathParam("ID") String ID,
+			@PathParam("startIndex") int startIndex,
+			@PathParam("pageSie") int pageSize) throws Exception {
+		transaction = new FetchInterestedPostsTransaction();
+		List<Map<String, Object>> posts;
+		try {
+			posts = (List<Map<String, Object>>) transaction.execute(ID, startIndex,
+					pageSize);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		return Response.ok(new GenericEntity<List<Map<String, Object>>>(posts) {
+		}).build();
 	}
 
 	@Path("like/{ID : \\d+}/{postID : \\d+}")
