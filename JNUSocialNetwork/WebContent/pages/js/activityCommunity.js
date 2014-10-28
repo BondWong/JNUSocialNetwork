@@ -54,15 +54,15 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 	if (startDate - now.getTime() <= 0) {
 		join = "<button class='btn btn-default'>已经过期</button>";
 	}
+	var imageObject = imagelink.split(",{")[0];
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
 			+ "<div class='activityBg'><img width='435' height='"
-			+ getHeight(435, $.parseJSON(imagelink).width, $
-					.parseJSON(imagelink).height)
+			+ getHeight(435, $.parseJSON(imageObject).width,$.parseJSON(imageObject).height)
 			+ "'  src='"
-			+ $.parseJSON(imagelink).src
+			+ $.parseJSON(imageObject).src
 			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' /></div><div class='activityName activityShowHref' id='"
