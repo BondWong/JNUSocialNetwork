@@ -15,7 +15,7 @@ import transaction.DAOTransaction;
 import transaction.Transaction;
 
 public class FetchInterestedPostsTransaction extends DAOTransaction {
-	private static final int HIT = 8;
+	private static final int HIT = 7;
 	private static final int BUCKETSIZE = 5;
 
 	@SuppressWarnings("unchecked")
@@ -42,7 +42,7 @@ public class FetchInterestedPostsTransaction extends DAOTransaction {
 			List<Map<String, Object>> results = (List<Map<String, Object>>) transaction
 					.execute(BUCKETSIZE);
 			for (Map<String, Object> result : results) {
-				if (Integer.parseInt((String) result.get("postNum")) == 0)
+				if ((int) result.get("postNum") == 0)
 					continue;
 				oIDs += result.get("ownerID") + ",";
 				cIDs += result.get("ID") + ",";

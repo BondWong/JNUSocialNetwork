@@ -22,8 +22,6 @@ public class RandomlyFetchCommunityTransaction extends DAOTransaction {
 				.getCommunityNum()));
 		if (startIndex > 1)
 			startIndex -= 1;
-		else if (startIndex == 0)
-			startIndex += 1;
 		List<Map<String, Object>> results = (List<Map<String, Object>>) transaction
 				.execute("Community.fetch", null, null, startIndex, params[0]);
 		Collections.shuffle(results);
