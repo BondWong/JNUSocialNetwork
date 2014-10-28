@@ -3,6 +3,7 @@ package transaction.DAOFetchTransaction;
 import helper.serviceHelper.MemberSearchMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,8 @@ public class SearchMemberTransaction extends DAOTransaction {
 			else
 				results.add(new HashMap<String, Object>());
 		}
+
+		Collections.shuffle(results);
 		return results;
 	}
 

@@ -234,6 +234,7 @@ public class Community extends AttributeModel {
 		representation.put("attributes", this.attributes);
 		representation.put("communityType", this.communityType);
 		representation.put("ownerID", this.owner.getID());
+		representation.put("postNum", this.posts.size());
 
 		List<Map<String, String>> members = new ArrayList<Map<String, String>>();
 		for (Member member : this.members) {

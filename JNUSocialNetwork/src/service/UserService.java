@@ -24,8 +24,6 @@ import model.Account;
 import model.ServerSentEvent;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
-import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
-import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
 import transaction.DAOFetchTransaction.DoesIDExistTransaction;
 import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
@@ -34,11 +32,8 @@ import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
-import transaction.DAOFetchTransaction.InstitutionRecommendationTransaction;
-import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.RandomlyFetchMemberTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
-import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberAddLookingForTagTransaction;
@@ -347,106 +342,6 @@ public class UserService {
 	public Response recommendateViaFollowee(@PathParam("ID") String ID)
 			throws Exception {
 		transaction = new FolloweeRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaCampus/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaCampus(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new CampusRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaInstitution/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaInstitution(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new InstitutionRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaMajor/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaMajor(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new MajorRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaSession/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaSeason(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new SeasonRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaClass/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaClass(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new ClassRecommendationTransaction();
 		List<Map<String, Object>> members;
 		try {
 			members = (List<Map<String, Object>>) transaction.execute(ID);
