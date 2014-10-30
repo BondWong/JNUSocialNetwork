@@ -395,9 +395,28 @@ body {
 	cursor: pointer;
 	position: absolute;
 	bottom: 10px;
-	right: 10px;
+	right: 80px;
 }
-
+.content_view{
+	display: block;
+	height: 30px;
+	width: 70px;
+	text-align: center;
+	border: 1px solid #E6E6E6;
+	font-size: 14px;
+	vertical-align: middle;
+	padding: 5px;
+	float: right;
+	background-color: #fff;
+	cursor: pointer;
+	position: absolute;
+	bottom: 10px;
+	right: 5px;
+	color: #428BCA;
+}
+.content_view:hover {
+	color: #2A6496;
+}
 .activityJoin {
 	display: block;
 	height: 30px;
