@@ -29,16 +29,47 @@ public class MemberSearchMap {
 							((Map<String, String>) result.get("attributes"))
 									.get("name"),
 							(String) result.get("ID"));
+
 					addRecord(
 							((Map<String, String>) result.get("attributes"))
 									.get("gender"),
 							(String) result.get("ID"));
-					if (((Map<String, String>) result.get("attributes"))
-							.get("relationship") != null
-							&& !((Map<String, String>) result.get("attributes"))
-									.get("relationship").equals(""))
-						addRecord(((Map<String, String>) result
-								.get("attributes")).get("relationship"),
+
+					Map<String, String> attributes = (Map<String, String>) result
+							.get("attributes");
+
+					if (attributes.get("relationship") != null
+							&& !attributes.get("relationship").equals(""))
+						addRecord(attributes.get("relationship"),
+								(String) result.get("ID"));
+
+					if (attributes.get("campus") != null
+							&& !attributes.get("campus").equals(""))
+						addRecord(attributes.get("campus"),
+								(String) result.get("ID"));
+
+					if (attributes.get("major") != null
+							&& !attributes.get("major").equals(""))
+						addRecord(attributes.get("major"),
+								(String) result.get("ID"));
+
+					if (attributes.get("season") != null
+							&& !attributes.get("season").equals(""))
+						addRecord(attributes.get("season"),
+								(String) result.get("ID"));
+
+					if (attributes.get("institution") != null
+							&& !attributes.get("institution").equals(""))
+						addRecord(attributes.get("institution"),
+								(String) result.get("ID"));
+
+					if (attributes.get("major") != null
+							&& attributes.get("season") != null
+							&& !attributes.get("major").equals("")
+							&& !attributes.get("season").equals(""))
+						addRecord(
+								attributes.get("season")
+										+ attributes.get("major"),
 								(String) result.get("ID"));
 				}
 			} catch (Exception e) {

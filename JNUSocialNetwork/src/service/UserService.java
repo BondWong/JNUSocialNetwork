@@ -20,28 +20,26 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.Account;
 import model.ServerSentEvent;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
-import transaction.DAOFetchTransaction.CampusRecommendationTransaction;
-import transaction.DAOFetchTransaction.ClassRecommendationTransaction;
 import transaction.DAOFetchTransaction.DoesIDExistTransaction;
+import transaction.DAOFetchTransaction.FetchAccountTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
-import transaction.DAOFetchTransaction.InstitutionRecommendationTransaction;
-import transaction.DAOFetchTransaction.MajorRecommendationTransaction;
 import transaction.DAOFetchTransaction.RandomlyFetchMemberTransaction;
 import transaction.DAOFetchTransaction.SearchMemberTransaction;
-import transaction.DAOFetchTransaction.SeasonRecommendationTransaction;
 import transaction.DAOUpdateTransaction.CancelFollowTransaction;
 import transaction.DAOUpdateTransaction.MemberAddImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberAddLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveImageLinksTransaction;
 import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
+import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
 import transaction.EmailTransaction.BegForConnectionTransaction;
@@ -358,106 +356,6 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("recommendateViaCampus/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaCampus(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new CampusRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaInstitution/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaInstitution(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new InstitutionRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaMajor/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaMajor(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new MajorRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaSession/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaSeason(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new SeasonRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Path("recommendateViaClass/{ID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recommendateViaClass(@PathParam("ID") String ID)
-			throws Exception {
-		transaction = new ClassRecommendationTransaction();
-		List<Map<String, Object>> members;
-		try {
-			members = (List<Map<String, Object>>) transaction.execute(ID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		return Response.ok(
-				new GenericEntity<List<Map<String, Object>>>(members) {
-				}).build();
-	}
-
-	@SuppressWarnings("unchecked")
 	@Path("search/{ID : \\d+}/{key}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -690,24 +588,26 @@ public class UserService {
 		return Response.ok().build();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Path("needGuidance/{ID : \\d+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	public Response needGuidance(@PathParam("ID") String ID) throws Exception {
-		transaction = new FetchMemberTransaction();
-		Map<String, Object> member;
+		transaction = new FetchAccountTransaction();
+		Account account;
 		try {
-			member = (Map<String, Object>) transaction.execute(ID);
+			account = (Account) transaction.execute("Account.fetchByID", ID,
+					null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
-		String result = ((Map<String, String>) member.get("attributes"))
-				.get("guide");
-		if (result == null || result.equals(""))
-			result = "true";
+		String result = account.isFirstTime() + "";
+		if (account.isFirstTime()) {
+			account.setFirstTime(false);
+			transaction = new UpdateAccountTransaction();
+			transaction.execute(account);
+		}
 		return Response.ok(JsonUtil.toJson(result)).build();
 	}
 

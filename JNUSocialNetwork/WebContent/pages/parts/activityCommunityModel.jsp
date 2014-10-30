@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-  <div class="modal fade" id="activityCommunity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <div class="modal fade" id="activityCommunity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:630px; overflow: hidden;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">举办活动</h4>
         </div>
 
-        <div class="modal-body modalBody" style="height: 580px; position: relative; overflow-x: hidden;">
+        <div class="modal-body modalBody" style="height: 580px; position: relative; overflow: hidden;">
           <div class="innerNav" style="display: none; visibility: hidden">
             <hr />
             <ul>
@@ -20,7 +20,7 @@
             </ul>
           </div>
           <!-- 创建活动的第一页信息 -->
-          <div id="page1" style="position: absolute; top: 30px; left: 0px; width: 100%">
+          <div id="page1" style="position: absolute; top: 0px; left: 0px; width: 100%; max-height:570px; overflow: auto;" >
             <form class="activityForm banner-form" id="newActivity" enctype="multipart/form-data" onsubmit="return false;">
               <div class="activityItem">
                 <span>活动名：</span> 

@@ -440,21 +440,15 @@ body {
 }
 
 .profileImgDiv {
-	width: 900px;
+	width: 600px;
 	height: 300px;
 }
 
 .profile_info {
-	position:absolute;
-	margin-top:25px;
-	margin-left:20px;
-	background-color: rgba(0,0,0,0.4);
-	height: 260px;
-	width: 240px;
+	float: left;
+	height: 300px;
+	width: 300px;
 	text-align:center;
-	-webkit-box-shadow:0 0 15px rgba(0,0,0,0.9);  
-  	-moz-box-shadow:0 0 15px rgba(0,0,0,0.9);  
-  	box-shadow:0 0 15px rgba(0,0,0,0.9);
 }
 
 .profile_container {
@@ -478,7 +472,7 @@ body {
 
 .profile_img {
 	float: left;
-	width: 900px;
+	width: 600px;
 	height: 300px;
 }
 

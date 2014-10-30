@@ -127,7 +127,6 @@ public class LoginServlet extends HttpServlet {
 							if (account.isFirstTime()) {
 								response.sendRedirect("/pages/profile.jsp?nav=about&"
 										+ account.getID());
-								account.setFirstTime(false);
 							} else if (account.getUserType().equals(
 									UserType.COMMUNITYOWNER))
 								response.sendRedirect("/pages/community.jsp?nav=mycommunity");

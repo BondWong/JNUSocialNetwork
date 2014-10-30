@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <div class="profile_head">
 
-        <div class="profile_info">
+        <div class="profile_info" id="profile_info">
             <div class="profile_container" id="crop-avatar">
                 <div class="profile_user_img">
                     <img class="img-circle profileAvatar" onload="javascript:auto_resize( 120, 120, this)" src="" alt="Generic placeholder image" style="display: none">
@@ -70,7 +70,7 @@
 
         <div id="crop-userbg">
             <div class="profile_img">
-                <img class="profileImgDiv" src="" onload="javascript:auto_resize( 620, 300, this)" style="display: none" />
+                <img class="profileImgDiv" id="profile_background_image" src="" onload="javascript:auto_resize( 600, 300, this)" style="display: none" />
             </div>
             <!-- Cropping userbackgroud modal -->
             <div class="modal fade" id="userbg-modal" tabindex="-1" role="dialog" aria-labelledby="userbg-modal-label" aria-hidden="true">
