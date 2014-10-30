@@ -155,5 +155,17 @@
 	<%@ include file="parts/loginJavaScript.jsp"%>
 	<%@ include file="parts/baidu.jsp"%>
 	<script src="js/guidance.js"></script>
+	<script src="js/rgbaster.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		var img = document.getElementById('profile_background_image');
+		RGBaster.colors(img, {
+				success: function(payload) {
+			   $("#profile_info").css("background-color", payload.secondary);
+			}
+		});
+	});
+	
+	</script>
 </body>
 </html>

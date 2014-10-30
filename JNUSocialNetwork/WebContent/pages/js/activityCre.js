@@ -1,4 +1,4 @@
-/*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
+﻿/*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
 var banner1 ;
 //社区页面添加活动
 function activityClickEvent() {
@@ -287,13 +287,20 @@ $(document).ready(function () {
     if (current_page > 0) {
       go_page[--current_page].click();
     }
+    if(current_page==0){
+    	$('.modalBody').css({'overflow-y':'auto'});
+    }
+    
   });
   go_next
     .click(function (event) {
+    	$('.modalBody').css({'max-height':'570px'});
+    	
       if (!$('.activityForm')[0].checkValidity() || toTimeValue($('#activityTime').val() + "") - toTimeValue($(
           '#activityRemind')
         .val() + "") < 0.021 * 24 * 60 * 60 * 1000) {
         go_submit.click();
+    	
         return;
       } else if (current_page == 1 && $("#optionsRadios2").is(':checked') && !/.*\.xls|.xlsx|.doc|.docx|.wps|.et$/.test($('#fileuploadB').val())) {
         $('#fail_popover3').css("display", "block");
