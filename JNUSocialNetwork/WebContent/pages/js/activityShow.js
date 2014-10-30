@@ -116,7 +116,7 @@ function showActivityDetail(activity, community) {
           commentReply = "";
         }
         comment = comment + "<div class='aBodyComment' id='commentTxt" + jsonComment.ID + "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' width='50' width='50'  src='" + $
-          .parseJSON(jsonComment.owner.attributes.avatarLink).src + "'></div><div class='user_name'><strong>" + jsonComment.owner.attributes.name + "</strong></div><div class='user_info'><span>" + jsonComment.publishDate + "</span>" + removeBtn + commentReply + "<input type='hidden' id='" + activity.ID + "' value='" + jsonComment.ID + "' /></span></div><br><div class='aC'>" + "<span class='commentHead'>" + atComment + "</span>" + "&nbsp;" + jsonComment.attributes.content + "</div></div></div>";
+          .parseJSON(jsonComment.owner.attributes.avatarLink).src + "'></div><div class='user_name'><strong>" + jsonComment.owner.attributes.name + "</strong></div><div class='user_info'><span>" + jsonComment.publishDate + "</span>" + removeBtn + commentReply + "<input type='hidden' id='" + activity.ID + "' value='" + jsonComment.ID + "' /></span></div><br><div class='aC'>" + "<span class='commentHead'>" + atComment + "</span>" + "&nbsp;<pre>" + replaceURLWithHTMLLinks(jsonComment.attributes.content) + "</pre></div></div></div>";
         $("#commentText" + jsonComment.attributes.postID).blur(
           function () {
             $(this)
@@ -373,6 +373,7 @@ $('body').on("click", "#saveActivity", function () {
       if (diffDate > 0.021 * 24 * 60 * 60 * 1000) {
         var json = $.toJSON(attributes);
         var aup = UpdateActivity(activity.ID, json);
+        $('.banner-wrapper').css("display","none");
         $('#editActivity').modal('hide');
         $('.activityShowName').html(
           aup.attributes.activityName);

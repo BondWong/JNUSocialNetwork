@@ -51,6 +51,7 @@ function activityClickEvent() {
           AddPostToCommunity(USERID, community.ID,
             json);
           $('#newActivity').get(0).reset();
+          $('.banner-wrapper').css("display","none");
           $('#go_page1').click();
           $('#fileuploadB').val("");
           $('#activityCommunity').modal('hide');
@@ -124,6 +125,7 @@ function activityClickAEvent() {
               AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
                 json);
               $('#newActivity').get(0).reset();
+              $('.banner-wrapper').css("display","none");
               $('#go_page1').click();
               $('#fileuploadB').val("");
               $('#activityCommunity').modal('hide');

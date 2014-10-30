@@ -1811,7 +1811,8 @@ footer {
 
 .aC {
 	font-size: 16px;
-	width: 90%
+	width: 90%;
+	word-wrap: break-word;
 }
 
 #createActivityBtn {
