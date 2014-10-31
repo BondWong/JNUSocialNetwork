@@ -172,7 +172,8 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 			+ name
 			+ "</div><div class='content_count'>"
 			+ memberNum
-			+ " members</div>" + join + "</div></div>";
+			+ " members</div><div class='content_view'><input type='hidden' value='" + id
+			+ "'><span>View</span></div>" + join + "</div></div>";
 	return boarddiv;
 }
 function addCommunity(id, name, memberNum, communityType, communityImg,
@@ -228,7 +229,11 @@ $(document).ready(
 			// funtion sessionID
 			$('body').on("click", ".img_container", function() {
 				var comm = $(this).find("input").attr("value");
-				window.open('communityOwnerPage.jsp?' + comm);
+				window.open('communityShow.jsp?' + comm);
+			});
+			$('body').on("click", ".content_view", function() {
+				var comm = $(this).find("input").attr("value");
+				window.open('communityShow.jsp?' + comm);
 			});
 			$('body').on('click', '.userSearch', function() {
 				searchCommunity();

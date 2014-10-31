@@ -349,6 +349,8 @@
 									var response = FetchCommunity(
 											$('.content_container').length,
 											pageSize);
+									var array = ["1411124370449","1411312081553","1411456804204","1411566818530"];
+									
 									$
 											.each(
 													response,
@@ -356,7 +358,7 @@
 														if (community.available == true
 																&& $("input[value='"
 																		+ community.ID
-																		+ "']").length == 0) {
+																		+ "']").length == 0 && $.inArray(community.ID, array) != -1) {
 															var boarddiv = communities(
 																	community.ID,
 																	community.attributes.name,

@@ -86,7 +86,7 @@ function fetchHotCommunity() {
 }
 $('body').on("click", ".img_container", function() {
 	var comm = $(this).find("input").attr("value");
-	window.location.href = 'communityOwnerPage.jsp?' + comm;
+	window.location.href = 'communityShow.jsp?' + comm;
 });
 
 /**
