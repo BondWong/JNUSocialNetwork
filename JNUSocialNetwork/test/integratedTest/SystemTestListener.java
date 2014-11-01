@@ -4,16 +4,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import model.modelType.CommunityType;
 import model.modelType.UserType;
+import model.structure.Image;
 import transaction.Transaction;
+import transaction.DAOCreateTransaction.CreateCommunityTransaction;
 import transaction.DAOCreateTransaction.RegisterCommunityOwnerTransaction;
 import transaction.DAOCreateTransaction.RegisterMemberTransaction;
+import utils.DateTimeUtil;
+import utils.JsonUtil;
 import utils.MD5;
 
 /**
@@ -61,7 +67,7 @@ public class SystemTestListener implements ServletContextListener {
 					attributes);
 			transaction.execute("2011052000", MD5.toMD5Code("123456"),
 					attributes);
-			
+
 			transaction = new RegisterCommunityOwnerTransaction();
 			transaction.execute("13750046645", MD5.toMD5Code("123456"),
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
@@ -83,48 +89,46 @@ public class SystemTestListener implements ServletContextListener {
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
 			transaction.execute("13750046640", MD5.toMD5Code("123456"),
 					new HashMap<String, Object>(), UserType.COMMUNITYOWNER);
-			/*
-			 * transaction = new CreateCommunityTransaction(); Map<String,
-			 * String> attributes = new HashMap<String, String>();
-			 * attributes.put("name", "測試"); attributes.put("introduce",
-			 * "test"); attributes.put("foundDate",
-			 * DateTimeUtil.getCurrnetDateTime());
-			 * attributes.put("communityCard", JsonUtil.toJson(new Image(
-			 * "images/default/default-community-card.png")));
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.OFFICIAL);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.OFFICIAL);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.OFFICIAL);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * attributes.put("name", "test");
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.SCHOOLUNION);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.FOLK);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.FOLK);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.FOLK);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.FOLK);
-			 * transaction.execute("13750046645", attributes, new
-			 * LinkedList<String>(), CommunityType.FOLK);
-			 */
+
+			transaction = new CreateCommunityTransaction();
+			attributes = new HashMap<String, String>();
+			attributes.put("name", "測試");
+			attributes.put("introduce", "test");
+			attributes.put("foundDate", DateTimeUtil.getCurrnetDateTime());
+			attributes.put("communityCard", JsonUtil.toJson(new Image(
+					"images/default/default-community-card.png")));
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ENTERTAINMENT);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ACADEMIC);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ATHLETIC);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.OTHERS);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.STUDENTUNION);
+			attributes.put("name", "test");
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.STUDENTUNION);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.STUDENTUNION);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ACADEMIC);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ATHLETIC);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.ENTERTAINMENT);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.OTHERS);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.OTHERS);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.OTHERS);
+			transaction.execute("13750046645", attributes,
+					new LinkedList<String>(), CommunityType.OTHERS);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
