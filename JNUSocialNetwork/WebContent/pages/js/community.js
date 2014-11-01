@@ -166,7 +166,7 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 			+ id
 			+ "'><img src='"
 			+ $.parseJSON(communityImg).src
-			+ "' width='266' height='266' />"
+			+ "' width='245' height='245' />"
 			+ officalIcon
 			+ "</div></a><div class='content_info'><div class='conten_head'>"
 			+ name
@@ -183,35 +183,35 @@ function addCommunity(id, name, memberNum, communityType, communityImg,
 	switch (communityType) {
 	case "discoverCommunity":
 		$(".communityDiscovery").after(boarddiv);
-		Msnry('.containerDiscovery', '.content_container', 265);
+		Msnry('.containerDiscovery', '.content_container', 245);
 		break;
 	case "ACADEMIC":
 		$(".communityAcademic").after(boarddiv);
-		Msnry('.containerAcademic', '.content_container', 265);
+		Msnry('.containerAcademic', '.content_container', 245);
 		break;
 	case "myCommunity":
 		$(".myCommunity").after(boarddiv);
-		Msnry('.containerMy', '.content_container', 265);
+		Msnry('.containerMy', '.content_container', 245);
 		break;
 	case "ATHLETIC":
 		$(".athleticCommunity").after(boarddiv);
-		Msnry('.containerAthletic', '.content_container', 265);
+		Msnry('.containerAthletic', '.content_container', 245);
 		break;
 	case "STUDENTUNION":
 		$(".schoolUnionCommunity").after(boarddiv);
-		Msnry('.containerSchool', '.content_container', 265);
+		Msnry('.containerSchool', '.content_container', 245);
 		break;
 	case "ENTERTAINMENT":
 		$(".entertainmentCommunity").after(boarddiv);
-		Msnry('.containerEntertainment', '.content_container', 265);
+		Msnry('.containerEntertainment', '.content_container', 245);
 		break;
 	case "OTHERS":
 		$(".othersCommunity").after(boarddiv);
-		Msnry('.containerOthers', '.content_container', 265);
+		Msnry('.containerOthers', '.content_container', 245);
 		break;
 	case "searchCommunity":
 		$(".searchCommunity").after(boarddiv);
-		Msnry('.containerSearch', '.content_container', 265);
+		Msnry('.containerSearch', '.content_container', 245);
 		break;
 	}
 }

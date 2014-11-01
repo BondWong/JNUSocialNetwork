@@ -122,8 +122,8 @@ body {
 .container.container_community {
 	background-color: #EEEEEE;
 	margin-top: 90px;
-	margin-left: 330px;
-	width: 970px;
+	margin-left: 270px;
+	width: 1079px;
 }
 .container.container_activity {
 	background-color: #EEEEEE;
@@ -134,20 +134,20 @@ body {
 .container.container_activityA {
 	background-color: #EEEEEE;
 	margin-top: 70px;
-	margin-left: 330px;
-	width: 970px;
+	margin-left: 270px;
+	width: 1079px;
 }
 .communitySideBar {
 	margin-left: 20px;
 	float: left;
-	width: 300px;
+	width: 240px;
 	height: 280px;
 }
 .activitySideBar {
 	margin-top: 20px;
 	margin-left: 20px;
 	float: left;
-	width: 300px;
+	width: 240px;
 	height: 280px;
 }
 .communitySideBar li a {
@@ -185,15 +185,15 @@ body {
 	background-color: #FFF;
 	display: block;
 	height: 375px;
-	width: 265px;
+	width: 245px;
 	margin-top: 10px;
 	box-shadow: 1px 2px 0 rgba(0, 0, 0, .05);
 	position: relative;
 }
 
 .img_container {
-	height: 265px;
-	width: 265px;
+	height: 245px;
+	width: 245px;
 	cursor: pointer;
 	position: relative;
 }
@@ -1278,7 +1278,9 @@ body {
 	float: right;
 	cursor: pointer;
 }
-
+.deleteActivityA{
+	left: 310px !important;
+}
 .deleteCommBtn {
 	float: right;
 }
@@ -1343,9 +1345,15 @@ body {
 	padding-bottom: 20px;
 	padding-top: 0px;
 }
-.activityAll {}
+.activityAll {
+	width:330px !important;
+}
 .activityAvatar {
 	margin-left: 370px;
+	margin-top: -20px;
+}
+.activityAvatarA {
+	margin-left: 270px;
 	margin-top: -20px;
 }
 
@@ -1990,6 +1998,7 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 }
 .activityBgAll {
     height: auto !important;
+    width:330px !important;
 }
 .activityPh{
 	width:1170px;

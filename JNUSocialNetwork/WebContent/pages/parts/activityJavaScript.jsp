@@ -77,7 +77,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -135,7 +135,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -193,7 +193,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -251,7 +251,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -309,7 +309,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -367,7 +367,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}
@@ -425,7 +425,7 @@ $(document)
 														$(".activityBord").after(
 																boarddiv);
 														Msnry('.activityBody',
-																'.activity', 435);
+																'.activity', 330);
 													}
 												});
 							}

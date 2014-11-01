@@ -83,7 +83,7 @@
 															Msnry(
 																	'.containerMy',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -141,7 +141,7 @@
 															Msnry(
 																	'.containerOffical',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -199,7 +199,7 @@
 															Msnry(
 																	'.containerEntertainment',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -257,7 +257,7 @@
 															Msnry(
 																	'.containerOthers',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -315,7 +315,7 @@
 															Msnry(
 																	'.containerSchool',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -374,7 +374,7 @@
 															Msnry(
 																	'.containerDiscovery',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {
@@ -432,7 +432,7 @@
 															Msnry(
 																	'.containerAcademic',
 																	'.content_container',
-																	265);
+																	245);
 														}
 													});
 									if (response.length == "15") {

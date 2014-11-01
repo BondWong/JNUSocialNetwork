@@ -20,7 +20,7 @@ if ($.inArray(USERID, joinIDs) != -1) {
 
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
-		pRemoveBtn = "<div class='deleteActivity'><input id='deleteID' type='hidden' value="
+		pRemoveBtn = "<div class='deleteActivity deleteActivityA'><input id='deleteID' type='hidden' value="
 				+ activityID
 				+ " /><span class='glyphicon glyphicon-remove'></span></div>";
 		join = "";
@@ -38,9 +38,9 @@ if ($.inArray(USERID, joinIDs) != -1) {
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg activityBgAll'><img width='435' height='"+getHeight(435,$.parseJSON(imageObject).width, $.parseJSON(imageObject).height)+"'  src='"
+			+ "<div class='activityBg activityBgAll'><img width='330' height='"+getHeight(330,$.parseJSON(imageObject).width, $.parseJSON(imageObject).height)+"'  src='"
 			+ $.parseJSON(imageObject).src
-			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
+			+ "' /></div><div class='user_img activityAvatarA'><img width='49' height='49' class='img-circle userImg' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' /></div><div class='activityName activityShowHref' id='"
 			+ activityID
@@ -62,7 +62,7 @@ function addActivity(activityID, name, time, addre, more, imagelink,
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
 			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery);
 	$(".activityBord").after(boarddiv);
-	Msnry('.activityBody', '.activity', 435);
+	Msnry('.activityBody', '.activity', 330);
 }
 var pageSize = "16";
 function fetchAllActivities() {
