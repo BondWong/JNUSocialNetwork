@@ -22,6 +22,8 @@ import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import transaction.DAOFetchTransaction.GetCommunityNumTransaction;
 import transaction.DAOFetchTransaction.GetMemberNumTransaction;
+import utils.ExecutorUtil;
+import utils.Logger;
 import utils.MD5;
 import utils.RootPathHelper;
 
@@ -57,6 +59,8 @@ public class Initialtor implements ServletContextListener {
 				.getAttribute("scheduledThreadPoolExecutor");
 		scheduledThreadPoolExecutor.shutdownNow();
 
+		ExecutorUtil.destory();
+
 		EntityManagerFactoryUtil.getInstance().closeEntityManagerFactory();
 	}
 
@@ -85,7 +89,9 @@ public class Initialtor implements ServletContextListener {
 
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
-
+		
+		Logger.initialize();
+		
 		Transaction transaction;
 		try {
 			transaction = new RegisterGodTransaction();

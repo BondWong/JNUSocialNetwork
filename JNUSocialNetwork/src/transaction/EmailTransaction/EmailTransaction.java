@@ -1,10 +1,8 @@
 package transaction.EmailTransaction;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import helper.securityHelper.SendEmailTracker;
 import transaction.Transaction;
+import utils.ExecutorUtil;
 
 public class EmailTransaction implements Transaction {
 	private Transaction transaction;
@@ -19,9 +17,9 @@ public class EmailTransaction implements Transaction {
 	public Object execute(final Object... params) {
 		// TODO Auto-generated method stub
 		if (tracker.canSend((String) params[0])) {
-			ExecutorService es = Executors.newSingleThreadExecutor();
+			ExecutorUtil eu = ExecutorUtil.createInstance();
 
-			es.execute(new Runnable() {
+			eu.execute(new Runnable() {
 
 				@Override
 				public void run() {
