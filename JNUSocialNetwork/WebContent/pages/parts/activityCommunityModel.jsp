@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <div class="modal fade" id="activityCommunity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog" style="width:630px; overflow: hidden;">
+    <form class="activityForm banner-form" id="newActivity" enctype="multipart/form-data" onsubmit="return false;">
+          
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -21,7 +23,7 @@
           </div>
           <!-- 创建活动的第一页信息 -->
           <div id="page1" style="position: absolute; top: 0px; left: 0px; width: 100%; max-height:570px; overflow: auto;" >
-            <form class="activityForm banner-form" id="newActivity" enctype="multipart/form-data" onsubmit="return false;">
+            
               <div class="activityItem">
                 <span>活动名：</span> 
                 <input type="text" class="form-control activityInput" placeholder="" id="activityName" required autofocus maxLength="30" />
@@ -85,7 +87,7 @@
                 </div>
                 <div class="banner-wrapper col-xs-12"></div>
               </div>
-            </form>
+            
           </div>
 
           <!-- 创建活动的第二页信息 -->
@@ -100,7 +102,7 @@
                 </label>
               </div>
             </div>
-            <form class="regForm" id="newActivity" enctype="multipart/form-data">
+            
               <div class="form-group" id="div_fileuploadB" style="display: none; float: left;">
                 <label for="fileuploadB" class="col-sm-2 control-label"></label>
                 <span class="btn btn-success fileinput-button" style="width: auto; margin-left: 10px"> <i
@@ -109,7 +111,6 @@
                 <input id="fileuploadB" type="file" name="file" />
                 </span>
               </div>
-            </form>
             <div>
               <p>[只能上传后缀格式为.doc.wps.docx.xls.xlsx.et的文件]</p>
               <p>[上传报名表后不能修改，请小心上传！]</p>
@@ -120,7 +121,7 @@
           </div>
           <!-- 创建活动的第三页信息 -->
           <div id="page3" style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
-            <form class="showFDetail">
+            <div class="showFDetail">
               <table class="table">
                 <caption style='font-size: 18px;'>确认信息</caption>
                 <tr>
@@ -160,15 +161,17 @@
                   <td id="table_fileuploadB" style="text-align: right"></td>
                 </tr>
               </table>
-            </form>
+            </div>
           </div>
+          
         </div>
-
+		
         <div class="modal-footer">
           <a href="#" class="btn btn-success" id="go_pre" style="display: none; width: 70px">上一步</a>  <a href="#" class="btn btn-success" id="go_next" style="width: 70px">下一步</a>
           <input type="submit" class="btn btn-success" value="完成" style="display: none; width: 70px" id="go_submit" />
         </div>
       </div>
+      </form>
     </div>
     <!-- /.modal-content -->
   </div>
