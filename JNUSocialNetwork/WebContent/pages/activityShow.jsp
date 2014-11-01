@@ -38,7 +38,7 @@
               <div class="downLoadList">
                 <a class="btn btn-default" target="_blank" id="download-name-list-button">下载参与列表</a>
               </div>
-              <button class="btn btn-default backActivity">查看社区活动列表</button>
+              <button class="btn btn-default backActivity">查看社区</button>
               <button class="btn btn-default backActivityA">查看活动圈</button>
             </div>
           </div>
@@ -168,13 +168,13 @@
               <span class="activityTitle">活动细节</span>
               <div class="detailBody">
                 <div>
-                  <span class="glyphicon glyphicon-time activityShowTime">&nbsp;</span><span class="aT"></span>
+                  <span class="glyphicon glyphicon-time activityShowTime"></span><span id='font14'>&nbsp;活动时间:&nbsp;</span><span class="aT"></span>
                 </div>
                 <div>
-                  <span class="glyphicon glyphicon-phone activityShowTime">&nbsp;</span><span class="aI"></span>
+                  <span class="glyphicon glyphicon-phone activityShowTime"></span><span id='font14'>&nbsp;联系方式:&nbsp;</span><span class="aI"></span>
                 </div>
                 <div>
-                  <span class="glyphicon glyphicon-flag activityShowAddre">&nbsp;</span><span class='aA'></span>
+                  <span class="glyphicon glyphicon-flag activityShowAddre"></span><span id='font14'>&nbsp;活动地点:&nbsp;</span><span class='aA'></span>
                 </div>
                 <div class="detailTxt activityShowD"></div>
               </div>

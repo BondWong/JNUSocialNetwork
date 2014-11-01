@@ -3,7 +3,7 @@ function pHot() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function pRandom() {
@@ -11,7 +11,7 @@ function pRandom() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function PinCommon() {
@@ -19,7 +19,7 @@ function PinCommon() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function pCampus() {
@@ -27,7 +27,7 @@ function pCampus() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function pMajor() {
@@ -35,7 +35,7 @@ function pMajor() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function pSeason() {
@@ -43,7 +43,7 @@ function pSeason() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function pClass() {
@@ -51,7 +51,7 @@ function pClass() {
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
-				user.attributes.avatarLink, user.followerIDs);
+				user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 	});
 }
 function peopleClickEvent() {
@@ -167,7 +167,7 @@ function searchUser() {
 			$.each(users, function(n, user) {
 				AddUser(user.attributes.name, user.attributes.introduce,
 						user.lookingForTags, user.ID, user.userType,
-						user.attributes.avatarLink, user.followerIDs);
+						user.attributes.avatarLink, user.followerIDs,user.attributes.email);
 			});
 		} else {
 			$('.recommendBord').after("<span>没有找到结果</span>");
@@ -175,7 +175,7 @@ function searchUser() {
 	}
 }
 
-function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs) {
+function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs,email) {
 	var followTxt = "Follow";
 	if ($.inArray(USERID, followerIDs) != -1) {
 		followTxt = "Following";
@@ -193,20 +193,38 @@ function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs) {
 	if (userType == "COMMUNITYOWNER") {
 		pIn = "<p class='recommendLooking'>" + looking + "</p>";
 	}
-	var boarddiv = "<div class='userCard'><img height='170' width='170' src='"
+	var peopleI = "<img  height='170' width='170' src='"
 			+ $.parseJSON(avatarLink).src
-			+ "' ><p class='recommendName'><a id=" + id + " class='tipUser2'>"
+			+ "' >";
+	if ($.parseJSON(avatarLink).src == "images/default/default-user-avartar.png" && email!="") {
+		peopleI ="<div class='peopleImgP' style='cursor:pointer;' id='"+id +"'><img  height='170' width='170' src='"
+			+ $.parseJSON(avatarLink).src
+			+ "' ></div>";
+	}
+	var boarddiv = "<div class='userCard'>"+peopleI+"<p class='recommendName'><a id=" + id + " class='tipUser2'>"
 			+ name + "</a></p>" + pIn
 			+ "<div class='recommendBtn'><button  id=" + id
 			+ " class='btn btn-danger followBtn' title='" + name + "'>"
 			+ followTxt + "</button></div></div>";
 	$(".recommendBord").after(boarddiv);
+	
+		$("div[id='"+id +"']").hover(function(){
+			$(this).append("<div class='begAP begAP"+id+"'><span style='font-size:20px;'>一起求头像!</span></div>");
+			$(".begAP"+id+"").hide();
+			$(".begAP"+id+"").fadeIn(300);
+		},function(){
+			$(".begAP"+id+"").fadeOut(300);
+		});
 	Msnry('.userContainer', '.userCard', 200);
 }
+$('body').on("click",".peopleImgP",function(){
+	  $('.layer2').fadeIn(300);
+	  $('#infinite_loader2').fadeIn(300);
+	  InviteToAddImage(USERID, $(this).attr("id"));
+});
 $('body').on("click", ".tipUser2", function() {
 	window.open('profile.jsp?nav=about&' + $(this).attr("id"));
 });
-
 $('body').on(
 		"click",
 		".recommendBtn",
@@ -242,7 +260,7 @@ $('body')
 										user.lookingForTags, user.ID,
 										user.userType,
 										user.attributes.avatarLink,
-										user.followerIDs);
+										user.followerIDs,user.attributes.email);
 							}
 						});
 					}

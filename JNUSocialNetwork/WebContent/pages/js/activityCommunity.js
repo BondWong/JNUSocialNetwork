@@ -142,7 +142,7 @@ $('body').on("click", ".communityHref", function() {
 
 $('body').on("click", ".activityShowHref", function() {
 	var id = $(this).attr("id");
-	window.location.href = 'activityShow.jsp?' + community.ID + '&' + id;
+	window.open('activityShow.jsp?' + community.ID + '&' + id);
 });
 $('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");

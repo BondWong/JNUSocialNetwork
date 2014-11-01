@@ -46,11 +46,11 @@ if ($.inArray(USERID, joinIDs) != -1) {
 			+ activityID
 			+ "'><a><span>"
 			+ name
-			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'>&nbsp;</span><span class='aT'>"
+			+ "</span></a></div><div class='activityTime'><span class='glyphicon glyphicon-time'></span><span id='font14'>&nbsp;活动时间:&nbsp;</span><span class='aT'>"
 			+ time
-			+ "</span></div><div class='inquery'><span class='glyphicon glyphicon-phone'>&nbsp;</span><span class='aI'>"
+			+ "</span></div><div class='inquery'><span class='glyphicon glyphicon-phone'></span><span id='font14'>&nbsp;联系方式:&nbsp;</span><span class='aI'>"
 			+ inquery
-			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'>&nbsp;</span><span class='aA'>"
+			+ "</span></div><div class='activityaddre'><span class='glyphicon glyphicon-flag'></span><span id='font14'>&nbsp;活动地点:&nbsp;</span><span class='aA'>"
 			+ addre + "</span></div><div class='activityD'><span>" + '<pre>'
 			+ replaceURLWithHTMLLinks(more) + '</pre>' + "</span></div><div class='activityAsk'>" + join
 			+ "</div></div>";
@@ -196,5 +196,5 @@ $('body').on('click', '.deleteActivity', function() {
 	var id = $(this).find("input").attr("value");
 	DeletePostFromCommunity(($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID, id);
 	$(".post" + id + "").remove();
-	Msnry('.activityBody', '.activity', 435);
+	Msnry('.activityBody', '.activity', 330);
 });

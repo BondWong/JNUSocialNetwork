@@ -243,7 +243,7 @@ $('body').on("click", ".glyphicon-heart", function () {
   $('.glyphicon-heart').attr("class", "glyphicon glyphicon-heart-empty");
 });
 $('body').on("click", ".backActivity", function () {
-  window.location.href = "activityCommunity.jsp?" + community.ID;
+  window.location.href = "communityShow.jsp?" + community.ID;
 });
 $('body').on("click", ".backActivityA", function () {
   window.location.href = "activity.jsp?nav=discovery";
