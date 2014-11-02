@@ -15,32 +15,34 @@ import model.modelType.SSEType;
 
 @Entity
 @Access(AccessType.FIELD)
-@NamedQueries({ @NamedQuery(name = "ServerSentEvent.fetchUnhandled", query = "SELECT s FROM Member m JOIN m.unhandledEvents s WHERE m.ID = ?1"),
-				@NamedQuery(name = "ServerSentEvent.fetchUnavailableIDs", query = "SELECT s.ID FROM ServerSentEvent s WHERE s.available = 0"),
-				@NamedQuery(name = "ServerSentEvent.deleteUnavailable", query = "DELETE FROM ServerSentEvent s WHERE s.available = 0")})
-public class ServerSentEvent extends Model{
+@NamedQueries({
+		@NamedQuery(name = "ServerSentEvent.fetchUnhandled", query = "SELECT sse FROM ServerSentEvent sse WHERE sse.available = 1 AND sse IN (SELECT s FROM Member m JOIN m.unhandledEvents s WHERE m.ID = ?1)"),
+		@NamedQuery(name = "ServerSentEvent.fetchUnavailableIDs", query = "SELECT s.ID FROM ServerSentEvent s WHERE s.available = 0"),
+		@NamedQuery(name = "ServerSentEvent.deleteUnavailable", query = "DELETE FROM ServerSentEvent s WHERE s.available = 0") })
+public class ServerSentEvent extends Model {
 	@Id
 	private Long ID;
 	private String name;
 	private String data;
-	
-	public ServerSentEvent() {}
-	
+
+	public ServerSentEvent() {
+	}
+
 	@Override
 	public void init(Object... initParams) {
 		// TODO Auto-generated method stub
-		this.name = ((SSEType)initParams[0]).name();
+		this.name = ((SSEType) initParams[0]).name();
 		this.data = JsonUtil.toJson(initParams[1]);
 	}
-	
+
 	public Long getID() {
 		return ID;
 	}
-	
+
 	public void setID(Long ID) {
 		this.ID = ID;
 	}
-	
+
 	public void delete() {
 		this.available = false;
 	}
@@ -48,11 +50,11 @@ public class ServerSentEvent extends Model{
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getData() {
 		return data;
 	}
-	
+
 	public String toString() {
 		return this.name + "\n" + this.data;
 	}
@@ -65,5 +67,5 @@ public class ServerSentEvent extends Model{
 		representation.put("data", this.data);
 		return representation;
 	}
-	
+
 }
