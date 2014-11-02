@@ -17,12 +17,15 @@ function login_initialization(ID) {
 					 * initialize nav bar
 					 */
 					$("#nav-bar-user")
-					.text(
-							$.parseJSON(sessionStorage.getItem("user")).attributes.name);
+							.text(
+									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
 					$("#nav-bar-avatar")
 							.attr(
 									"src",
-									$.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src);
+									$
+											.parseJSON($
+													.parseJSON(sessionStorage
+															.getItem("user")).attributes.avatarLink).src);
 				}
 			});
 
