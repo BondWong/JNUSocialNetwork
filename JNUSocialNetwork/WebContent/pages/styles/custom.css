@@ -466,8 +466,9 @@ body {
 .profile_info {
 	float: left;
 	height: 300px;
-	width: 300px;
+	width: 280px;
 	text-align:center;
+	background-image:url('../images/default/profile-bg.jpg');
 }
 
 .profile_container {
