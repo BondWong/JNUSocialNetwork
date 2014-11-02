@@ -60,7 +60,7 @@ function CREATEPOSTINCOMMUNITY() {
 					jsondata.post.owner.attributes.avatarLink,
 					jsondata.post.owner.ID, jsondata.post.participantIDs,
 					jsondata.post.owner.attributes.startDate,
-					jsondata.post.owner.attributes.limitation,jsondata.post.owner.attributes.inquery);
+					jsondata.post.owner.attributes.limitation,jsondata.post.attributes.ifUpload,jsondata.post.attributes.inquery);
 
 		}
 	});

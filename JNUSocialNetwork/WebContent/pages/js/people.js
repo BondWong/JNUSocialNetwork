@@ -23,7 +23,7 @@ function PinCommon() {
 	});
 }
 function pCampus() {
-	var users = RecommendateViaInstitution(USERID);
+	var users = RecommendateViaCampus(USERID,encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.campus),"0","30");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
@@ -31,7 +31,7 @@ function pCampus() {
 	});
 }
 function pMajor() {
-	var users = RecommendateViaMajor(USERID);
+	var users = RecommendateViaMajor(USERID,encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.major),"0","30");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
@@ -39,7 +39,7 @@ function pMajor() {
 	});
 }
 function pSeason() {
-	var users = RecommendateViaSession(USERID);
+	var users = RecommendateViaSession(USERID,$.parseJSON(sessionStorage.getItem("user")).attributes.season,"0","30");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
@@ -47,7 +47,7 @@ function pSeason() {
 	});
 }
 function pClass() {
-	var users = RecommendateViaClass(USERID);
+	var users = RecommendateViaClass(USERID,$.parseJSON(sessionStorage.getItem("user")).attributes.season,encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.major),"0","30");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
@@ -196,7 +196,7 @@ function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs,emai
 	var peopleI = "<img  height='170' width='170' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' >";
-	if ($.parseJSON(avatarLink).src == "images/default/default-user-avartar.png" && email!="") {
+	if ($.parseJSON(avatarLink).src == "images/default/default-user-avartar.png" && email!="" && id!=USERID) {
 		peopleI ="<div class='peopleImgP' style='cursor:pointer;' id='"+id +"'><img  height='170' width='170' src='"
 			+ $.parseJSON(avatarLink).src
 			+ "' ></div>";

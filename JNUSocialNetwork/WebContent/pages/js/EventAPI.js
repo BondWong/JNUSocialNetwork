@@ -1474,11 +1474,11 @@ function RecommendateViaFollowee(userID) {
 	return response;
 }
 // RecommendateViaCampus 输入：userID;返回：userJson
-function RecommendateViaCampus(userID) {
+function RecommendateViaCampus(userID,campus,startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/recommendateViaCampus/' + userID,
+		url : '../../app/user/search/' + userID+'/'+campus+'/'+startIndex+'/'+pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -1493,32 +1493,13 @@ function RecommendateViaCampus(userID) {
 	});
 	return response;
 }
-// RecommendateViaCampus 输入：userID;返回：userJson
-function RecommendateViaInstitution(userID) {
-	var response = "";
-	$.ajax({
-		type : "GET",
-		url : '../../app/user/recommendateViaInstitution/' + userID,
-		beforeSend : function(request) {
-			request.setRequestHeader("ID", USERID);
-		},
-		async : false,
-		success : function(data, status) {
-			response = data;
-		},
-		error : function(data, status) {
-			response = status;
-		}
 
-	});
-	return response;
-}
 // RecommendateViaMajor 输入：userID;返回：userJson
-function RecommendateViaMajor(userID) {
+function RecommendateViaMajor(userID,major,startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/recommendateViaMajor/' + userID,
+		url : '../../app/user/search/' + userID+'/'+major+'/'+startIndex+'/'+pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -1534,11 +1515,11 @@ function RecommendateViaMajor(userID) {
 	return response;
 }
 // RecommendateViaSession 输入：userID;返回：userJson
-function RecommendateViaSession(userID) {
+function RecommendateViaSession(userID,season,startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/recommendateViaSession/' + userID,
+		url : '../../app/user/search/' + userID+'/'+season+'/'+startIndex+'/'+pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
@@ -1554,11 +1535,11 @@ function RecommendateViaSession(userID) {
 	return response;
 }
 // RecommendateViaClass 输入：userID;返回：userJson
-function RecommendateViaClass(userID) {
+function RecommendateViaClass(userID,season,major,startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../app/user/recommendateViaClass/' + userID,
+		url : '../../user/search/' + userID+'/'+season+major+'/'+startIndex+'/'+pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
