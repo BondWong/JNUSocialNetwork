@@ -35,15 +35,15 @@ import model.structure.Image;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Community.size", query = "SELECT COUNT(c) FROM Community c"),
+		@NamedQuery(name = "Community.size", query = "SELECT COUNT(c) FROM Community c where c.available = 1"),
 		@NamedQuery(name = "Community.fetch", query = "SELECT c FROM Community c WHERE c.available = 1 ORDER BY SIZE(c.members) DESC"),
-		@NamedQuery(name = "Community.fetchJoined", query = "SELECT jc FROM Member m JOIN m.joinedCommunities jc WHERE m.ID = ?1"),
-		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1"),
-		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1"),
+		@NamedQuery(name = "Community.fetchJoined", query = "SELECT jc FROM Member m JOIN m.joinedCommunities jc WHERE m.ID = ?1 AND m.available = 1"),
+		@NamedQuery(name = "Community.fetchByOwner", query = "SELECT c FROM Community c WHERE c.owner.ID = ?1 AND c.available = 1"),
+		@NamedQuery(name = "Community.fetchByID", query = "SELECT c FROM Community c WHERE c.ID = ?1 AND c.available = 1"),
 		@NamedQuery(name = "Community.fetchMyCommunities", query = "SELECT c FROM Community c JOIN c.members ms WHERE c.available = 1 AND (c.owner.ID = ?1 OR (SELECT me FROM Member me WHERE me.ID = ?1) IN ms)"),
-		@NamedQuery(name = "Community.signInFetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1) ORDER BY SIZE(c.members) DESC"),
-		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.communityType = ?1 ORDER BY SIZE(c.members) DESC"),
-		@NamedQuery(name = "Community.fetchByMember", query = "SELECT c FROM Member m JOIN m.joinedCommunities c WHERE m.ID = ?1 ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.signInFetchByType", query = "SELECT c FROM Community c WHERE c.available = 1 AND c.communityType = ?2 AND  c NOT IN (SELECT mc FROM Member m JOIN m.joinedCommunities mc WHERE m.ID = ?1) ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.fetchByType", query = "SELECT c FROM Community c WHERE c.available = 1 AND c.communityType = ?1 ORDER BY SIZE(c.members) DESC"),
+		@NamedQuery(name = "Community.fetchByMember", query = "SELECT c FROM Member m JOIN m.joinedCommunities c WHERE m.ID = ?1 AND m.available = 1 ORDER BY SIZE(c.members) DESC"),
 		@NamedQuery(name = "Community.fetchUnavailableIDs", query = "SELECT c.ID FROM Community c WHERE c.available = 0"),
 		@NamedQuery(name = "Community.deleteUnavailable", query = "DELETE FROM Community c WHERE c.available = 0") })
 public class Community extends AttributeModel {
