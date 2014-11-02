@@ -110,6 +110,8 @@ public class ImageUploadService extends HttpServlet {
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
 
+			System.out.println(item.isFormField() + " " + item.getFieldName());
+
 			if (item.isFormField() && item.getFieldName().equals("crop_data")) {
 				cropData = JsonUtil.fromJson(item.getString(), TYPE);
 				continue;
@@ -118,6 +120,9 @@ public class ImageUploadService extends HttpServlet {
 				needCopy = item.getString();
 				continue;
 			} else if (item.isFormField())
+				continue;
+			else if (!item.isFormField()
+					&& (item.getName() == null || item.getName().equals("")))
 				continue;
 
 			String extention = "";
@@ -141,9 +146,9 @@ public class ImageUploadService extends HttpServlet {
 			item.write(uploaddedFile);
 
 			int size = (int) (uploaddedFile.length() / (1024 * 1024));
-			if (size >= 1)
+			if (size >= 0.5)
 				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
-			else if (size > 1 && size <= 2)
+			else if (size > 0.5 && size <= 2)
 				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
 			else if (size > 2 && size <= 3)
 				Thumbnails.of(uploaddedFile).scale(0.15f).toFile(uploaddedFile);

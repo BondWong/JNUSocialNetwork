@@ -44,6 +44,7 @@ public class UserInfoCrawler {
 		String response = "";
 		try {
 			response = httpClient.execute(get, responseHandler);
+			System.out.println(response);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
