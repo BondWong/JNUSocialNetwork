@@ -1,6 +1,9 @@
-﻿﻿/*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
+﻿﻿/*
+	 * global define,
+	 * jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner
+	 */
 var banner1 ;
-//社区页面添加活动
+// 社区页面添加活动
 function activityClickEvent() {
   $('#createActivityBtn').click(function () {
     $('.activityForm').get(0).reset();
@@ -31,7 +34,7 @@ function activityClickEvent() {
         imageLinks: [],
         activityTypeTags: [$('#activityType').val()]
       };
-      //上传海报图的js控制
+      // 上传海报图的js控制
       if ($('#fileuploadA').val() !== "") {
         var target = $(".activityForm .banner-src");
         var result = target.val();
@@ -70,7 +73,7 @@ function activityClickEvent() {
 
   });
 }
-//活动页面添加活动
+// 活动页面添加活动
 function activityClickAEvent() {
 
   $('body').on("click", '#createActivityABtn', function () {
@@ -144,7 +147,7 @@ function activityClickAEvent() {
 
       });
 }
-//时间控件初始化
+// 时间控件初始化
 var date1 = new Date();
 date1.setTime(date1.getTime() + 0.25 * 24 * 60 * 60 * 1000);
 $('.form_datetime1').datetimepicker({
@@ -221,7 +224,7 @@ function toTimeValue(dateTime) {
   return d.valueOf();
 
 }
-//创建活动“下一步按钮”
+// 创建活动“下一步按钮”
 $(document).ready(function () {
   var easingtime = 300;
   var go_page = [$('#go_page1'), $('#go_page2'),
@@ -241,9 +244,6 @@ $(document).ready(function () {
     page[0].animate({
       left: '0px'
     }, easingtime);
-    go_page[0].addClass('active');
-    go_page[1].removeClass();
-    go_page[2].removeClass();
     go_pre.css('display', 'none');
     go_next.css('display', '');
     go_submit.css('display', 'none');
@@ -259,9 +259,6 @@ $(document).ready(function () {
     page[2].animate({
       left: '700px'
     }, easingtime);
-    go_page[1].addClass('active');
-    go_page[0].removeClass();
-    go_page[2].removeClass();
     go_pre.css('display', '');
     go_next.css('display', '');
     go_submit.css('display', 'none');
@@ -277,9 +274,6 @@ $(document).ready(function () {
     page[2].animate({
       left: '0px'
     }, easingtime);
-    go_page[2].addClass('active');
-    go_page[0].removeClass();
-    go_page[1].removeClass();
     go_pre.css('display', '');
     go_next.css('display', 'none');
     go_submit.css('display', '');
@@ -294,22 +288,25 @@ $(document).ready(function () {
     }
     
   });
-  go_next
-    .click(function (event) {
-    	$('.modalBody').css({'max-height':'570px'});
-    	
-      if (!$('.activityForm')[0].checkValidity() || toTimeValue($('#activityTime').val() + "") - toTimeValue($(
+  go_next.click(function (event) {
+	  if (current_page == 0 && $("#optionsRadios2").is(':checked') && !/.*\.xls|.xlsx|.doc|.docx|.wps|.et$/.test($('#fileuploadB').val())) {
+            $('#fail_popover3').css("display", "block");
+            setTimeout('$("#fail_popover3").fadeOut("slow")',
+              3000);
+            return;
+      } else if (current_page == 1 && (!$('.activityForm')[0].checkValidity() || ($('#div_activityRemind').css('display')=='block' && toTimeValue($('#activityTime').val() + "") - toTimeValue($(
           '#activityRemind')
-        .val() + "") < 0.021 * 24 * 60 * 60 * 1000) {
+        .val() + "") < 0.021 * 24 * 60 * 60 * 1000))) {
         go_submit.click();
-    	
-        return;
-      } else if (current_page == 1 && $("#optionsRadios2").is(':checked') && !/.*\.xls|.xlsx|.doc|.docx|.wps|.et$/.test($('#fileuploadB').val())) {
-        $('#fail_popover3').css("display", "block");
-        setTimeout('$("#fail_popover3").fadeOut("slow")',
-          3000);
         return;
       } else if (current_page < page.length - 1) {
+    	if($('#optionsRadios3').is(':checked')){
+    		$('#div_activityRemind').hide();
+    	}
+    	else{
+    		$('#div_activityRemind').show();
+    	}
+    	  
         go_page[++current_page].click();
         if (current_page == 2) {
           $('#table_activityName').html(
@@ -317,6 +314,8 @@ $(document).ready(function () {
           $('#table_activityTime').html(
             $('#activityTime').val());
           $('#table_activityRemind').html(
+        		  $('#optionsRadios3').is(
+                  ':checked') ? '无需提醒' :
             $('#activityRemind').val());
           $('#table_activityAddr')
             .html(
@@ -342,7 +341,8 @@ $(document).ready(function () {
             $('#activityNum').val());
           $('#table_activitySign').html(
             $('#optionsRadios1').is(
-              ':checked') ? '默认方式' : '上传报名表');
+              ':checked') ? '默认方式' : $('#optionsRadios2').is(
+              ':checked') ? '上传报名表' : '无需报名');
           $('#table_fileuploadA')
             .html(
               $('#fileuploadA').val() === '' ? '否' : $(
@@ -362,7 +362,9 @@ $(document).ready(function () {
   $('#optionsRadios2').click(function (event) {
     $('#div_fileuploadB').fadeIn(easingtime);
   });
-
+  $('#optionsRadios3').click(function (event) {
+	    $('#div_fileuploadB').fadeOut(easingtime);
+	  });
   banner1 = new CropBanner($("#activityCommunity"), {
     aspectRatio: 3.8,
     imgPreferredSize: 5

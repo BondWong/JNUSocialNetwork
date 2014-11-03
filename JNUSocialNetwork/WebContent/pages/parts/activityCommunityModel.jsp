@@ -9,24 +9,21 @@
           <h4 class="modal-title" id="myModalLabel">举办活动</h4>
         </div>
 
-        <div class="modal-body modalBody" style="height: 580px; position: relative; overflow: hidden;">
+        <div class="modal-body modalBody" style="min-height: 580px;max-height:580px; position: relative; overflow: hidden;">
           <div class="innerNav" style="display: none; visibility: hidden">
             <hr />
             <ul>
-              <li class="active" id="go_page1"><span>基本信息</span>
-              </li>
-              <li id="go_page2"><span>报名方式</span>
-              </li>
-              <li id="go_page3"><span>上传报名表</span>
-              </li>
+              <li class="active" id="go_page1"></li>
+              <li id="go_page2"></li>
+              <li id="go_page3"></li>
             </ul>
           </div>
           <!-- 创建活动的第一页信息 -->
-          <div id="page1" style="position: absolute; top: 0px; left: 0px; width: 100%; max-height:570px; overflow: auto;" >
+          <div id="page2" style="position: absolute; top: 0px; left: 700px; width: 100%; max-height:570px; overflow-y: auto;" >
             
               <div class="activityItem">
                 <span>活动名：</span> 
-                <input type="text" class="form-control activityInput" placeholder="" id="activityName" required autofocus maxLength="30" />
+                <input type="text" class="form-control activityInput" placeholder="" id="activityName" required  maxLength="30" />
               </div>
               <div class="activityItem">
                 <span>活动时间：</span>
@@ -35,7 +32,7 @@
             class="glyphicon glyphicon-th"></i></span>
                 </div>
               </div>
-              <div class="activityItem">
+              <div class="activityItem" id="div_activityRemind">
                 <span>提醒时间：</span>
                 <div class="input-group date form_datetime2 col-lg-10" data-link-field="dtp_input1">
                   <input type="text" class="form-control activityInput" id="activityRemind" readonly required /> <span class="input-group-addon"><i
@@ -50,11 +47,11 @@
               </div>
               <div class="activityItem">
                 <span>活动地点：</span> 
-                <input class="form-control activityInput" placeholder="" id="activityAddr" required autofocus maxLength="100" style="resize: none;" />
+                <input class="form-control activityInput" placeholder="" id="activityAddr" required  maxLength="100" style="resize: none;" />
               </div>
               <div class="activityItem">
                 <span>活动细节：</span>
-                <textarea class="form-control activityInput" placeholder="" id="activityMore" required autofocus maxLength="200" style="resize: none;"></textarea>
+                <textarea class="form-control activityInput" placeholder="" id="activityMore" required  maxLength="200" style="resize: none;"></textarea>
               </div>
               <div class="activityItem">
                 <span>活动类型：</span> 
@@ -66,11 +63,11 @@
               </div>
               <div class="activityItem">
                 <span>联系电话：</span>
-                <input type="text" class="form-control activityInput" placeholder="" id="inquery" pattern="[0-9]{11}" data-errormessage-pattern-mismatch="请输入手机号码" required autofocus maxLength="11" />
+                <input type="text" class="form-control activityInput" placeholder="" id="inquery" pattern="[0-9]{11}" data-errormessage-pattern-mismatch="请输入手机号码" required  maxLength="11" />
               </div>
               <div class="activityItem">
                 <span>人数上限：</span>
-                <input type="text" class="form-control activityInput" placeholder="" id="activityNum" pattern="[0-9]{1,3}" data-errormessage-pattern-mismatch="请输入参与人数，最大999" required autofocus maxLength="3" />
+                <input type="text" class="form-control activityInput" placeholder="" id="activityNum" pattern="[0-9]{1,3}" data-errormessage-pattern-mismatch="请输入参与人数，最大999" required  maxLength="3" />
               </div>
               <!-- 添加活动图片在这里 -->
               <div class="activityItem">
@@ -91,7 +88,7 @@
           </div>
 
           <!-- 创建活动的第二页信息 -->
-          <div id="page2" style="position: absolute; top: 30px; left: 700px; height: 400px; width: 100%;">
+          <div id="page1" style="position: absolute; top: 30px; left: 0px; height: 400px; width: 100%; padding-left: 30px">
             <div class="form-group">
               <div class="col-sm-12">
                 <label class="radio">
@@ -99,6 +96,9 @@
                 </label>
                 <label class="radio">
                   <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">上传报名表：用户需要下载报名表，填写报名表后上传。
+                </label>
+                <label class="radio">
+                  <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">无需报名
                 </label>
               </div>
             </div>
