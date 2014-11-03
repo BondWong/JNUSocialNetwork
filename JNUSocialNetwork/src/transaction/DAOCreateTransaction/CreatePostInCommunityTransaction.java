@@ -19,6 +19,7 @@ import model.modelType.PostType;
 import transaction.DAOTransaction;
 import transaction.Transaction;
 import transaction.EmailTransaction.ActivityNotificationTransaction;
+import utils.ConstantValue;
 
 public class CreatePostInCommunityTransaction extends DAOTransaction {
 
@@ -42,11 +43,15 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 		user.createPost(community, post);
 		dao.update(community);
 		if (params[2].equals(PostType.ACTIVITY)) {
-			ActivitySearchMap.deserialize();
-			ActivitySearchMap.addRecord(post.getID(), Long
-					.parseLong((String) ((Map<String, Object>) params[3])
-							.get("remindDate")));
-			ActivitySearchMap.serialize();
+
+			if (Long.parseLong((String) ((Map<String, Object>) params[3])
+					.get("remindDate")) != ConstantValue.NONREMINDABLEMARK) {
+				ActivitySearchMap.deserialize();
+				ActivitySearchMap.addRecord(post.getID(), Long
+						.parseLong((String) ((Map<String, Object>) params[3])
+								.get("remindDate")));
+				ActivitySearchMap.serialize();
+			}
 
 			StringBuffer sb = new StringBuffer();
 			sb.append("\"" + community.getAttribute("name") + "\"社区发布了活动："
@@ -77,5 +82,4 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 
 		return post.toRepresentation();
 	}
-
 }
