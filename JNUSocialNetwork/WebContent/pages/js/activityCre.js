@@ -1,4 +1,4 @@
-﻿﻿/*global define, jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner */
+﻿
 var banner1 ;
 //社区页面添加活动
 function activityClickEvent() {

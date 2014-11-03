@@ -63,7 +63,7 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
+								+ "'><div class='row'><div class='col-lg-1'><img style='cursor:pointer;' class='comHr' id='"+jsonComment.owner.ID+"' width='30' height='30' src='"
 								+ $
 										.parseJSON(jsonComment.owner.attributes.avatarLink).src
 								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
@@ -718,6 +718,9 @@ $('body').on('click', '.loginA', function() {
 	localStorage.setItem("url", window.location.href);
 	window.location.href = 'account.jsp';
 
+});
+$('body').on("click",".comHr",function(){
+	window.open('profile.jsp?nav=about&'+$(this).attr('id'));
 });
 function teleAlert(activityID) {
 	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload ' id='"

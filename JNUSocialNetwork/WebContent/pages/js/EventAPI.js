@@ -1539,7 +1539,7 @@ function RecommendateViaClass(userID,season,major,startIndex, pageSize) {
 	var response = "";
 	$.ajax({
 		type : "GET",
-		url : '../../user/search/' + userID+'/'+season+major+'/'+startIndex+'/'+pageSize,
+		url : '../../app/user/search/' + userID+'/'+season+major+'/'+startIndex+'/'+pageSize,
 		beforeSend : function(request) {
 			request.setRequestHeader("ID", USERID);
 		},
