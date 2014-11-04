@@ -251,7 +251,11 @@ $('body').on("click", ".backActivityA", function () {
 $('body').on("click", ".editActivity", function () {
   $('#activityName').val(activity.attributes.activityName);
   $('#activityTime').val(activity.attributes.activityTime);
-  $('#activityRemind').val(activity.attributes.activityRemindTime);
+  if(activity.attributes.ifUpload!="无需报名"){
+	  $('#activityRemind').val(activity.attributes.activityRemindTime);
+  }else{
+	  $('#activityRemind').remove();
+  }
   $('#activityAddr').val(activity.attributes.activityAddr);
   $('#activityMore').val(activity.attributes.activityMore);
   $('#activityNum').val(activity.attributes.limitation);
@@ -336,66 +340,121 @@ $(function () {
 $('body').on("click", "#saveActivity", function () {
   banner2.submit();
   var attributes = "";
-  if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
-    if ($('#fileupload').val() != "") {
-      attributes = {
-        activityName: $('#activityName').val(),
-        startDate: toTimeValue($('#activityTime').val() + "") + "",
-        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
-        activityTime: $('#activityTime').val(),
-        activityRemindTime: $('#activityRemind').val(),
-        activityAddr: $('#activityAddr').val(),
-        activityMore: $('#activityMore').val(),
-        limitation: $('#activityNum').val(),
-        inquery: $('#inquery').val(),
-        background: (function () {
-          var target = $(".activityForm .banner-src");
-          var result = target.val();
-          return result;
-        }())
-      };
-    } else {
-      attributes = {
-        activityName: $('#activityName').val(),
-        startDate: toTimeValue($('#activityTime').val() + "") + "",
-        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
-        activityTime: $('#activityTime').val(),
-        activityRemindTime: $('#activityRemind').val(),
-        activityAddr: $('#activityAddr').val(),
-        activityMore: $('#activityMore').val(),
-        limitation: $('#activityNum').val(),
-        inquery: $('#inquery').val()
-      };
-    }
+  if(activity.attributes.ifUpload!="无需报名"){
+	  if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
+		    if ($('#fileupload').val() != "") {
+		      attributes = {
+		        activityName: $('#activityName').val(),
+		        startDate: toTimeValue($('#activityTime').val() + "") + "",
+		        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
+		        activityTime: $('#activityTime').val(),
+		        activityRemindTime: $('#activityRemind').val(),
+		        activityAddr: $('#activityAddr').val(),
+		        activityMore: $('#activityMore').val(),
+		        limitation: $('#activityNum').val(),
+		        inquery: $('#inquery').val(),
+		        background: (function () {
+		          var target = $(".activityForm .banner-src");
+		          var result = target.val();
+		          return result;
+		        }())
+		      };
+		    } else {
+		      attributes = {
+		        activityName: $('#activityName').val(),
+		        startDate: toTimeValue($('#activityTime').val() + "") + "",
+		        remindDate: toTimeValue($('#activityRemind').val() + "") + "",
+		        activityTime: $('#activityTime').val(),
+		        activityRemindTime: $('#activityRemind').val(),
+		        activityAddr: $('#activityAddr').val(),
+		        activityMore: $('#activityMore').val(),
+		        limitation: $('#activityNum').val(),
+		        inquery: $('#inquery').val()
+		      };
+		    }
 
-    var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
-    if ($('.activityForm')[0].checkValidity()) {
-      if (diffDate > 0.021 * 24 * 60 * 60 * 1000) {
-        var json = $.toJSON(attributes);
-        var aup = UpdateActivity(activity.ID, json);
-        $('.banner-wrapper').css("display","none");
-        $('#editActivity').modal('hide');
-        $('.activityShowName').html(
-          aup.attributes.activityName);
-        $('.aT').html(
-          "&nbsp;" + aup.attributes.activityTime);
-        $('.aA').html(
-          "&nbsp;" + aup.attributes.activityAddr);
-        $('.activityShowD').html(
-          "&nbsp;" + aup.attributes.activityMore);
-        $('.aA').html("&nbsp;" + aup.attributes.inquery);
-        $('.activityHead').find('img').attr("src", $.parseJSON(aup.attributes.background).src);
-      } else {
-        $('#fail_popover2').fadeIn("fast");
-        setTimeout(
-          '$("#fail_popover2").fadeOut("slow")',
-          3000);
-      }
-    }
-  } else {
-    $('#fail_popover').fadeIn("fast");
-    setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+		    var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
+		    if ($('.activityForm')[0].checkValidity()) {
+		      if (diffDate > 0.021 * 24 * 60 * 60 * 1000) {
+		        var json = $.toJSON(attributes);
+		        var aup = UpdateActivity(activity.ID, json);
+		        $('.banner-wrapper').css("display","none");
+		        $('#editActivity').modal('hide');
+		        $('.activityShowName').html(
+		          aup.attributes.activityName);
+		        $('.aT').html(
+		          "&nbsp;" + aup.attributes.activityTime);
+		        $('.aA').html(
+		          "&nbsp;" + aup.attributes.activityAddr);
+		        $('.activityShowD').html(
+		          "&nbsp;" + aup.attributes.activityMore);
+		        $('.aA').html("&nbsp;" + aup.attributes.inquery);
+		        $('.activityHead').find('img').attr("src", $.parseJSON(aup.attributes.background).src);
+		      } else {
+		        $('#fail_popover2').fadeIn("fast");
+		        setTimeout(
+		          '$("#fail_popover2").fadeOut("slow")',
+		          3000);
+		      }
+		    }
+		  } else {
+		    $('#fail_popover').fadeIn("fast");
+		    setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+		  } 
+  }else{
+	  if ($('#activityTime').val() != "" && $('#activityRemind').val() != "") {
+		    if ($('#fileupload').val() != "") {
+		      attributes = {
+		        activityName: $('#activityName').val(),
+		        startDate: toTimeValue($('#activityTime').val() + "") + "",
+		        remindDate: "0",
+		        activityTime: $('#activityTime').val(),
+		        activityRemindTime: "0",
+		        activityAddr: $('#activityAddr').val(),
+		        activityMore: $('#activityMore').val(),
+		        limitation: $('#activityNum').val(),
+		        inquery: $('#inquery').val(),
+		        background: (function () {
+		          var target = $(".activityForm .banner-src");
+		          var result = target.val();
+		          return result;
+		        }())
+		      };
+		    } else {
+		      attributes = {
+		        activityName: $('#activityName').val(),
+		        startDate: toTimeValue($('#activityTime').val() + "") + "",
+		        remindDate: "0",
+		        activityTime: $('#activityTime').val(),
+		        activityRemindTime: "0",
+		        activityAddr: $('#activityAddr').val(),
+		        activityMore: $('#activityMore').val(),
+		        limitation: $('#activityNum').val(),
+		        inquery: $('#inquery').val()
+		      };
+		    }
+		    if ($('.activityForm')[0].checkValidity()) {
+		        var json = $.toJSON(attributes);
+		        var aup = UpdateActivity(activity.ID, json);
+		        $('.banner-wrapper').css("display","none");
+		        $('#editActivity').modal('hide');
+		        $('.activityShowName').html(
+		          aup.attributes.activityName);
+		        $('.aT').html(
+		          "&nbsp;" + aup.attributes.activityTime);
+		        $('.aA').html(
+		          "&nbsp;" + aup.attributes.activityAddr);
+		        $('.activityShowD').html(
+		          "&nbsp;" + aup.attributes.activityMore);
+		        $('.aA').html("&nbsp;" + aup.attributes.inquery);
+		        $('.activityHead').find('img').attr("src", $.parseJSON(aup.attributes.background).src);
+		    }
+		  } else {
+		    $('#fail_popover').fadeIn("fast");
+		    setTimeout('$("#fail_popover").fadeOut("slow")', 3000);
+		  } 
   }
+ 
 });
 
 function dataPicker() {
