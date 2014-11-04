@@ -6,18 +6,17 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		+ activityID
 		+ "'>下载报名表</a><a class='btn btn-default ulR' id='"
 		+ activityID + "'>上传报名表</a></div>";
-	} else {
+	} else if(ifUpload == "默认方式") {
 		join = "<a><div class='activityJoin' id='activity" + activityID
 		+ "'><input type='hidden' value='" + activityID
 		+ "'><span>Join</span></div></a>";
-if ($.inArray(USERID, joinIDs) != -1) {
-	join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
-			+ activityID
-			+ "'><input type='hidden' value='"
-			+ activityID + "'><span>Joined</span></div></a>";
-}
+	if ($.inArray(USERID, joinIDs) != -1) {
+		join = "<a><div style='color: #FFF;background-color: #428BCA;' class='activityJoin' id='activity"
+				+ activityID
+				+ "'><input type='hidden' value='"
+				+ activityID + "'><span>Joined</span></div></a>";
 	}
-
+	}
 	var pRemoveBtn = "";
 	if (USERID == ownerID) {
 		pRemoveBtn = "<div class='deleteActivity deleteActivityA'><input id='deleteID' type='hidden' value="

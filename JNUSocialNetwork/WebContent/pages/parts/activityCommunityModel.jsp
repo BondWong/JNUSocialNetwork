@@ -9,7 +9,7 @@
           <h4 class="modal-title" id="myModalLabel">举办活动</h4>
         </div>
 
-        <div class="modal-body modalBody" style="min-height: 580px;max-height:580px; position: relative; overflow: hidden;">
+        <div class="modal-body modalBody" style="min-height: 530px;max-height:580px; position: relative; overflow: hidden;">
           <div class="innerNav" style="display: none; visibility: hidden">
             <hr />
             <ul>
@@ -111,7 +111,7 @@
                 <input id="fileuploadB" type="file" name="file" />
                 </span>
               </div>
-            <div>
+            <div class='docI' style="display:none;">
               <p>[只能上传后缀格式为.doc.wps.docx.xls.xlsx.et的文件]</p>
               <p>[上传报名表后不能修改，请小心上传！]</p>
               <p>

@@ -1,75 +1,122 @@
-﻿﻿/*
-	 * global define,
-	 * jQuery,console,window,_,alert,document,setTimeout,FormData,community,sessionStorage,USERID,CropBanner
-	 */
-var banner1 ;
+﻿var banner1 ;
 // 社区页面添加活动
 function activityClickEvent() {
   $('#createActivityBtn').click(function () {
     $('.activityForm').get(0).reset();
   });
   $("#go_submit").click(function () {
-    if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
-      // 提交原图
-      banner1.submit();
-      var post = {
-        postType: 'ACTIVITY',
-        attributes: {
-          activityName: $('#activityName').val(),
-          startDate: toTimeValue($('#activityTime')
-            .val() + "") + "",
-          remindDate: toTimeValue($(
-            '#activityRemind').val() + "") + "",
-          activityTime: $('#activityTime').val(),
-          activityRemindTime: $('#activityRemind')
-            .val(),
-          activityAddr: $('#activityAddr').val(),
-          activityMore: $('#activityMore').val(),
-          inquery: $('#inquery').val(),
-          limitation: $('#activityNum').val(),
-          communityName: community.attributes.name,
-          communityID: community.ID.toString(),
-          ifUpload: $('#table_activitySign').text(),
-        },
-        imageLinks: [],
-        activityTypeTags: [$('#activityType').val()]
-      };
-      // 上传海报图的js控制
-      if ($('#fileuploadA').val() !== "") {
-        var target = $(".activityForm .banner-src");
-        var result = target.val();
-        if (!result) return;
-        post.attributes["background"] = result;
-      }
-      if ($('#fileuploadB').val() !== "") {
-        post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
-          $('.regForm')[0]));
-      }
-      var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
-      if ($('.activityForm')[0].checkValidity()) {
-        if (diffDate >= 0.021 * 24 * 60 * 60 * 1000) {
-          var json = $.toJSON(post);
-          $('.layer2').fadeIn(300);
-          $('#infinite_loader2').fadeIn(300);
-          AddPostToCommunity(USERID, community.ID,
-            json);
-          $('#newActivity').get(0).reset();
-          $('.banner-wrapper').css("display","none");
-          $('#go_page1').click();
-          $('#fileuploadB').val("");
-          $('#activityCommunity').modal('hide');
-        } else {
-          $('#fail_popover2').fadeIn("fast");
-          setTimeout(
-            '$("#fail_popover2").fadeOut("slow")',
-            3000);
-        }
-      }
-    } else {
-      $('#fail_popover').fadeIn("fast");
-      setTimeout('$("#fail_popover").fadeOut("slow")',
-        3000);
-    }
+	  if($('#table_activitySign').text()!="无需报名"){
+		  if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
+		      // 提交原图
+		      banner1.submit();
+		      var post = {
+		        postType: 'ACTIVITY',
+		        attributes: {
+		          activityName: $('#activityName').val(),
+		          startDate: toTimeValue($('#activityTime')
+		            .val() + "") + "",
+		          remindDate: toTimeValue($(
+		            '#activityRemind').val() + "") + "",
+		          activityTime: $('#activityTime').val(),
+		          activityRemindTime: $('#activityRemind')
+		            .val(),
+		          activityAddr: $('#activityAddr').val(),
+		          activityMore: $('#activityMore').val(),
+		          inquery: $('#inquery').val(),
+		          limitation: $('#activityNum').val(),
+		          communityName: community.attributes.name,
+		          communityID: community.ID.toString(),
+		          ifUpload: $('#table_activitySign').text(),
+		        },
+		        imageLinks: [],
+		        activityTypeTags: [$('#activityType').val()]
+		      };
+		      // 上传海报图的js控制
+		      if ($('#fileuploadA').val() !== "") {
+		        var target = $(".activityForm .banner-src");
+		        var result = target.val();
+		        if (!result) return;
+		        post.attributes["background"] = result;
+		      }
+		      if ($('#fileuploadB').val() !== "") {
+		        post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
+		          $('.regForm')[0]));
+		      }
+		      var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
+		      if ($('.activityForm')[0].checkValidity()) {
+		        if (diffDate >= 0.021 * 24 * 60 * 60 * 1000) {
+		          var json = $.toJSON(post);
+		          $('.layer2').fadeIn(300);
+		          $('#infinite_loader2').fadeIn(300);
+		          AddPostToCommunity(USERID, community.ID,
+		            json);
+		          $('#newActivity').get(0).reset();
+		          $('.banner-wrapper').css("display","none");
+		          $('#go_page1').click();
+		          $('#fileuploadB').val("");
+		          $('#activityCommunity').modal('hide');
+		        } else {
+		          $('#fail_popover2').fadeIn("fast");
+		          setTimeout(
+		            '$("#fail_popover2").fadeOut("slow")',
+		            3000);
+		        }
+		      }
+		    } else {
+		      $('#fail_popover').fadeIn("fast");
+		      setTimeout('$("#fail_popover").fadeOut("slow")',
+		        3000);
+		    }
+	  }else{
+		  if ($('#activityTime').val() !== "") {
+		      // 提交原图
+		      banner1.submit();
+		      var post = {
+		        postType: 'ACTIVITY',
+		        attributes: {
+		          activityName: $('#activityName').val(),
+		          startDate: toTimeValue($('#activityTime')
+		            .val() + "") + "",  
+		          remindDate: "0",
+		          activityRemindTime: "0",
+		          activityTime: $('#activityTime').val(),
+		          activityAddr: $('#activityAddr').val(),
+		          activityMore: $('#activityMore').val(),
+		          inquery: $('#inquery').val(),
+		          limitation: $('#activityNum').val(),
+		          communityName: community.attributes.name,
+		          communityID: community.ID.toString(),
+		          ifUpload: $('#table_activitySign').text(),
+		        },
+		        imageLinks: [],
+		        activityTypeTags: [$('#activityType').val()]
+		      };
+		      // 上传海报图的js控制
+		      if ($('#fileuploadA').val() !== "") {
+		        var target = $(".activityForm .banner-src");
+		        var result = target.val();
+		        if (!result) return;
+		        post.attributes["background"] = result;
+		      }
+		      if ($('.activityForm')[0].checkValidity()) {
+		          var json = $.toJSON(post);
+		          $('.layer2').fadeIn(300);
+		          $('#infinite_loader2').fadeIn(300);
+		          AddPostToCommunity(USERID, community.ID,
+		            json);
+		          $('#newActivity').get(0).reset();
+		          $('.banner-wrapper').css("display","none");
+		          $('#go_page1').click();
+		          $('#fileuploadB').val("");
+		          $('#activityCommunity').modal('hide');
+		      }
+		    } else {
+		      $('#fail_popover').fadeIn("fast");
+		      setTimeout('$("#fail_popover").fadeOut("slow")',
+		        3000);
+		    }
+	  }
+   
 
   });
 }
@@ -86,64 +133,113 @@ function activityClickAEvent() {
       function () {
           // 提交原图
           banner1.submit();
-        if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
-          var post = {
-            postType: 'ACTIVITY',
-            attributes: {
-              activityName: $('#activityName').val(),
-              startDate: toTimeValue($('#activityTime')
-                .val() + "") + "",
-              remindDate: toTimeValue($(
-                '#activityRemind').val() + "") + "",
-              activityTime: $('#activityTime').val(),
-              activityRemindTime: $('#activityRemind')
-                .val(),
-              activityAddr: $('#activityAddr').val(),
-              activityMore: $('#activityMore').val(),
-              inquery: $('#inquery').val(),
-              limitation: $('#activityNum').val(),
-              communityName: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].name,
-              communityID: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
-              ifUpload: $('#table_activitySign').text(),
-            },
-            imageLinks: [],
-            activityTypeTags: [$('#activityType').val()]
-          };
-          if ($('#fileuploadA').val() !== "") {
-              var target = $(".activityForm .banner-src");
-              var result = target.val();
-              if (!result) return;
-              post.attributes["background"] = result;
-          }
-          if ($('#fileuploadB').val() !== "") {
-            post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
-              $('.regForm')[0]));
-          }
-          var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
-          if ($('.activityForm')[0].checkValidity()) {
-            if (diffDate >= 0.021 * 24 * 60 * 60 * 1000) {
-              var json = $.toJSON(post);
-              $('.layer2').fadeIn(300);
-              $('#infinite_loader2').fadeIn(300);
-              AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
-                json);
-              $('#newActivity').get(0).reset();
-              $('.banner-wrapper').css("display","none");
-              $('#go_page1').click();
-              $('#fileuploadB').val("");
-              $('#activityCommunity').modal('hide');
-            } else {
-              $('#fail_popover2').fadeIn("fast");
-              setTimeout(
-                '$("#fail_popover2").fadeOut("slow")',
-                3000);
-            }
-          }
-        } else {
-          $('#fail_popover').fadeIn("fast");
-          setTimeout('$("#fail_popover").fadeOut("slow")',
-            3000);
+        if($('#table_activitySign').text()!='无需报名'){
+        	if ($('#activityTime').val() !== "" && $('#activityRemind').val() !== "") {
+                var post = {
+                  postType: 'ACTIVITY',
+                  attributes: {
+                    activityName: $('#activityName').val(),
+                    startDate: toTimeValue($('#activityTime')
+                      .val() + "") + "",
+                    remindDate: toTimeValue($(
+                      '#activityRemind').val() + "") + "",
+                    activityTime: $('#activityTime').val(),
+                    activityRemindTime: $('#activityRemind')
+                      .val(),
+                    activityAddr: $('#activityAddr').val(),
+                    activityMore: $('#activityMore').val(),
+                    inquery: $('#inquery').val(),
+                    limitation: $('#activityNum').val(),
+                    communityName: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].name,
+                    communityID: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
+                    ifUpload: $('#table_activitySign').text(),
+                  },
+                  imageLinks: [],
+                  activityTypeTags: [$('#activityType').val()]
+                };
+                if ($('#fileuploadA').val() !== "") {
+                    var target = $(".activityForm .banner-src");
+                    var result = target.val();
+                    if (!result) return;
+                    post.attributes["background"] = result;
+                }
+                if ($('#fileuploadB').val() !== "") {
+                  post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
+                    $('.regForm')[0]));
+                }
+                var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
+                if ($('.activityForm')[0].checkValidity()) {
+                  if (diffDate >= 0.021 * 24 * 60 * 60 * 1000) {
+                    var json = $.toJSON(post);
+                    $('.layer2').fadeIn(300);
+                    $('#infinite_loader2').fadeIn(300);
+                    AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
+                      json);
+                    $('#newActivity').get(0).reset();
+                    $('.banner-wrapper').css("display","none");
+                    $('#go_page1').click();
+                    $('#fileuploadB').val("");
+                    $('#activityCommunity').modal('hide');
+                  } else {
+                    $('#fail_popover2').fadeIn("fast");
+                    setTimeout(
+                      '$("#fail_popover2").fadeOut("slow")',
+                      3000);
+                  }
+                }
+              } else {
+                $('#fail_popover').fadeIn("fast");
+                setTimeout('$("#fail_popover").fadeOut("slow")',
+                  3000);
+              }
+        }else{
+        	if ($('#activityTime').val() !== "") {
+                var post = {
+                  postType: 'ACTIVITY',
+                  attributes: {
+                    activityName: $('#activityName').val(),
+                    startDate: toTimeValue($('#activityTime')
+                      .val() + "") + "",
+                    remindDate: "0",
+    		        activityRemindTime: "0",
+                    activityTime: $('#activityTime').val(),
+                    activityAddr: $('#activityAddr').val(),
+                    activityMore: $('#activityMore').val(),
+                    inquery: $('#inquery').val(),
+                    limitation: $('#activityNum').val(),
+                    communityName: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].name,
+                    communityID: ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
+                    ifUpload: $('#table_activitySign').text(),
+                  },
+                  imageLinks: [],
+                  activityTypeTags: [$('#activityType').val()]
+                };
+                if ($('#fileuploadA').val() !== "") {
+                    var target = $(".activityForm .banner-src");
+                    var result = target.val();
+                    if (!result) return;
+                    post.attributes["background"] = result;
+                }
+               
+                if ($('.activityForm')[0].checkValidity()) {
+                    var json = $.toJSON(post);
+                    $('.layer2').fadeIn(300);
+                    $('#infinite_loader2').fadeIn(300);
+                    AddPostToCommunity(USERID, ($.parseJSON(sessionStorage.getItem("user")).communityIDNameTuples)[0].ID,
+                      json);
+                    $('#newActivity').get(0).reset();
+                    $('.banner-wrapper').css("display","none");
+                    $('#go_page1').click();
+                    $('#fileuploadB').val("");
+                    $('#activityCommunity').modal('hide');
+                }
+              } else {
+                $('#fail_popover').fadeIn("fast");
+                setTimeout('$("#fail_popover").fadeOut("slow")',
+                  3000);
+              }
         }
+        
 
       });
 }
@@ -358,12 +454,15 @@ $(document).ready(function () {
     });
   $('#optionsRadios1').click(function (event) {
     $('#div_fileuploadB').fadeOut(easingtime);
+    $('.docI').fadeOut(easingtime);
   });
   $('#optionsRadios2').click(function (event) {
     $('#div_fileuploadB').fadeIn(easingtime);
+    $('.docI').fadeIn(easingtime);
   });
   $('#optionsRadios3').click(function (event) {
 	    $('#div_fileuploadB').fadeOut(easingtime);
+	    $('.docI').fadeOut(easingtime);
 	  });
   banner1 = new CropBanner($("#activityCommunity"), {
     aspectRatio: 3.8,
