@@ -29,9 +29,15 @@ public class UpdatePostAttributeTransaction extends DAOTransaction {
 			if (startDate < remindDate
 					|| (startDate - remindDate) < ConstantValue.ACTIVITYINTERVAL)
 				return model.toRepresentation();
-			ActivitySearchMap.deserialize();
-			ActivitySearchMap.addRecord((Long) params[0], remindDate);
-			ActivitySearchMap.serialize();
+
+			if (Long.parseLong(model.getAttribute("remindDate")) == ConstantValue.NONREMINDABLEMARK)
+				attributes.put("remindDate", ""
+						+ ConstantValue.NONREMINDABLEMARK);
+			else {
+				ActivitySearchMap.deserialize();
+				ActivitySearchMap.addRecord((Long) params[0], remindDate);
+				ActivitySearchMap.serialize();
+			}
 			model.updateAttributes((Map<String, String>) params[1]);
 			dao.update(model);
 		}
