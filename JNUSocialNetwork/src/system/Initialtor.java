@@ -59,9 +59,9 @@ public class Initialtor implements ServletContextListener {
 				.getAttribute("scheduledThreadPoolExecutor");
 		scheduledThreadPoolExecutor.shutdownNow();
 
-		ExecutorUtil.destory();
-
 		EntityManagerFactoryUtil.getInstance().closeEntityManagerFactory();
+		
+		ExecutorUtil.destory();
 	}
 
 	/**

@@ -27,6 +27,7 @@ public class ExecutorUtil {
 
 	public static void destory() {
 		es.shutdownNow();
+		System.out.println("es shutting down");
 		eu = null;
 	}
 
