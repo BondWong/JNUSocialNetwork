@@ -3,6 +3,7 @@ package transaction.DAOFetchTransaction;
 import helper.serviceHelper.MemberSearchMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,10 @@ public class SearchMemberTransaction extends DAOTransaction {
 		MemberSearchMap.serialize();
 		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
 		if (IDs != null && IDs.length != 0) {
+
+			List<String> temp = Arrays.asList(IDs);
+			Collections.shuffle(temp);
+			temp.toArray(IDs);
 
 			String query = "";
 			for (int i = 0; i < IDs.length; i++) {
