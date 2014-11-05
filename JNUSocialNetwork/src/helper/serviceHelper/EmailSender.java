@@ -56,6 +56,8 @@ public class EmailSender {
 			StringBuffer sb = new StringBuffer();
 			while (iter.hasNext())
 				sb.append(iter.next() + ",");
+			if (sb.lastIndexOf(",") == -1)
+				return;
 			String addresses = sb.substring(0, sb.lastIndexOf(","));
 			System.out.println(addresses);
 			msg.setText(content);
