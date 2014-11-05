@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import model.structure.Image;
 import utils.JsonUtil;
+import utils.RootPathHelper;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -54,11 +56,22 @@ public class DesertFileLinkMap {
 	}
 
 	public synchronized static void addLinks(Collection<String> imageLinks) {
-		links.addAll(imageLinks);
+		if (imageLinks.isEmpty())
+			return;
+		for (String imageLink : imageLinks)
+			addLink(imageLink);
 	}
 
 	public synchronized static void addLink(String imageLink) {
-		links.add(imageLink);
+		if (imageLink == null || imageLink.equals(""))
+			return;
+		if (imageLink.contains("src") && imageLink.contains("width")
+				&& imageLink.contains("height")) {
+			Image image = JsonUtil.fromJson(imageLink, Image.class);
+			imageLink = image.getSrc();
+		}
+
+		links.add(RootPathHelper.getRootPath() + "pages/" + imageLink);
 	}
 
 	public synchronized static void removeLinks() {
@@ -66,7 +79,6 @@ public class DesertFileLinkMap {
 	}
 
 	public synchronized static List<String> getLinks() {
-		System.out.println(links);
 		return links;
 	}
 

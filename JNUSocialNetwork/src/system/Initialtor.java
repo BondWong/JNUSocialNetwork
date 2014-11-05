@@ -60,7 +60,7 @@ public class Initialtor implements ServletContextListener {
 		scheduledThreadPoolExecutor.shutdownNow();
 
 		EntityManagerFactoryUtil.getInstance().closeEntityManagerFactory();
-		
+
 		ExecutorUtil.destory();
 	}
 
@@ -89,9 +89,9 @@ public class Initialtor implements ServletContextListener {
 
 		servletContextEvent.getServletContext().setAttribute(
 				"scheduledThreadPoolExecutor", scheduledThreadPoolExecutor);
-		
+
 		Logger.initialize();
-		
+
 		Transaction transaction;
 		try {
 			transaction = new RegisterGodTransaction();
