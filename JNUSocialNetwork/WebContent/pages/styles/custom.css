@@ -456,6 +456,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 20px;
+	overflow:hidden;
 }
 
 .profileImgDiv {
@@ -805,7 +806,8 @@ body {
 	cursor: pointer;
 	padding-left: 20px;
 	padding-top: 10px;
-	border-bottom: 1px solid #f7f7f7;
+	background-color:#4285F4;
+	color:#fff !important;
 }
 .downLoadList {
 	display: none;

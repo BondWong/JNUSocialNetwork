@@ -160,7 +160,8 @@
 					</div>
 				</div>
 			</li>
-			<li><img src="images/about-us/campus.jpg" /></li>
+			<li><img src="images/about-us/community.jpg" /></li>
+			<li><img src="images/about-us/activity.jpg" /></li>
 		</ul>
 	</div>
 

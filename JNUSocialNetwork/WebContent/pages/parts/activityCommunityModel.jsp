@@ -102,7 +102,7 @@
                 </label>
               </div>
             </div>
-            
+           
               <div class="form-group" id="div_fileuploadB" style="display: none; float: left;">
                 <label for="fileuploadB" class="col-sm-2 control-label"></label>
                 <span class="btn btn-success fileinput-button" style="width: auto; margin-left: 10px"> <i
@@ -111,6 +111,7 @@
                 <input id="fileuploadB" type="file" name="file" />
                 </span>
               </div>
+          
             <div class='docI' style="display:none;">
               <p>[只能上传后缀格式为.doc.wps.docx.xls.xlsx.et的文件]</p>
               <p>[上传报名表后不能修改，请小心上传！]</p>

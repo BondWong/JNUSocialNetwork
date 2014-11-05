@@ -164,8 +164,10 @@ function activityClickAEvent() {
                     post.attributes["background"] = result;
                 }
                 if ($('#fileuploadB').val() !== "") {
-                  post.attributes["registerTemplateAddr"] = RegisterFormUpload(new FormData(
-                    $('.regForm')[0]));
+                	var oMyForm = new FormData();
+                	var ft=$('#fileuploadB')[0].files[0];
+                	oMyForm.append("fileuploadB", ft);
+                  post.attributes["registerTemplateAddr"] = RegisterFormUpload(oMyForm);
                 }
                 var diffDate = toTimeValue($('#activityTime').val() + "") - toTimeValue($('#activityRemind').val() + "");
                 if ($('.activityForm')[0].checkValidity()) {
