@@ -9,6 +9,4 @@
     </li>
     <li><a class="peopleHome" href="people.jsp"><span>寻找伙伴</span></a>
     </li>
-    <li><a class="QA" href=""><span>Q&amp;A</span></a>
-    </li>
   </ul>
