@@ -106,7 +106,7 @@ function Guidance(data){
 		});
 		$(window).resize();
 		$('.mask').css({height:document.body.scrollHeight+200}).delay(1000).fadeIn(200,function(){
-			$('.guide_step[data=1]').delay(300).fadeIn(500);
+			$('.guide_step[data=1]').fadeIn(500);
 		});
 	}
 	

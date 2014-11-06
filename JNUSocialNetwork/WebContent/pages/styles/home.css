@@ -159,7 +159,32 @@ a:hover {
 	background: url('../images/begin-text.png') no-repeat scroll center
 		center #A32929;
 }
-
+.btnFindC{
+	display: inline-block;
+	height: 80px;
+	width: 200px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 30px;
+	color: #FFF;
+	border-radius: 50px;
+	transition: all 0.15s ease 0s;
+	background: url('../images/begin-text2.png') no-repeat scroll center
+		center #A32929;
+}
+.btnFindA{
+	display: inline-block;
+	height: 80px;
+	width: 200px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 30px;
+	color: #FFF;
+	border-radius: 50px;
+	transition: all 0.15s ease 0s;
+	background: url('../images/begin-text3.png') no-repeat scroll center
+		center #A32929;
+}
 .btnFind2 {
 	width: 240px;
 	background: url('../images/begin.png') no-repeat scroll center center
@@ -180,7 +205,12 @@ a:hover {
 	margin-top: 40px;
 	text-align: right;
 }
-
+.btn-innerT {
+	text-align: right;
+	top: 538px;
+	position: absolute;
+	right: 80px;
+}
 .characters {
 	min-width: 1200px;
 	background-color: #FFF;
