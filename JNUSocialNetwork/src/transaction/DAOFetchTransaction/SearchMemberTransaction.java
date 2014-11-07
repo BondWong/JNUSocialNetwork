@@ -28,8 +28,13 @@ public class SearchMemberTransaction extends DAOTransaction {
 		if (IDs != null && IDs.length != 0) {
 
 			List<String> temp = Arrays.asList(IDs);
-			Collections.shuffle(temp);
-			temp.toArray(IDs);
+			int random = (int) (Math.round((Math.random() * 10)) + 1);
+			for (int i = 0; i < random; i++)
+				Collections.shuffle(temp);
+			if (temp.size() > (int) params[3])
+				temp = temp.subList(0, (int) params[3]);
+			System.out.println(temp);
+			IDs = temp.toArray(new String[0]);
 
 			String query = "";
 			for (int i = 0; i < IDs.length; i++) {
