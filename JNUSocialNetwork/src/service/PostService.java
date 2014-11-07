@@ -441,7 +441,7 @@ public class PostService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchInterestedPosts(@PathParam("ID") String ID,
 			@PathParam("startIndex") int startIndex,
-			@PathParam("pageSie") int pageSize) throws Exception {
+			@PathParam("pageSize") int pageSize) throws Exception {
 		transaction = new FetchInterestedPostsTransaction();
 		List<Map<String, Object>> posts;
 		try {
