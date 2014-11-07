@@ -791,7 +791,7 @@ function fetchUserByID() {
       $('.profile_user_img').hover(function () {
           var pos = $(this).offset();
           var nPos = pos;
-          nPos.top = pos.top + 20;
+          nPos.top = pos.top;
           nPos.left = pos.left + 80;
           var changeBtn = "<div class='img-circle profileAImg'><span style='font-size:20px;'>一起求头像!</span></div>";
           $(this).append(changeBtn);

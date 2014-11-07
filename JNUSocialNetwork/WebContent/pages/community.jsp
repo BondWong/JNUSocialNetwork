@@ -106,6 +106,7 @@
 								<option value="ENTERTAINMENT">娱乐类</option>
 								<option value="ATHLETIC">体育类</option>
 								<option value="ACADEMIC">学术类</option>
+								<option value="OTHERS">其他类</option>
 							</select>
 						</p>
 						<span>社区名片</span> <span class="btn btn-success fileinput-button">

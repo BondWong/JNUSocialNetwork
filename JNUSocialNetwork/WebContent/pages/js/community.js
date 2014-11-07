@@ -113,7 +113,7 @@ function fetchMyCommunities(pageSize) {
 function fetchHotCommunity(pageSize) {
 	var communities = FetchCommunity("0", pageSize);
 	$.each(communities.reverse(), function(n, community) {
-		var array = [1411124370449,1411312081553,1411456804204,1411566818530];
+		var array = [1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533];
 		if (community.available == true && $.inArray(community.ID, array) != -1) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
@@ -141,15 +141,7 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 	$.each(members, function(n, member) {
 		memberIDs.push(member.ID);
 	});
-	var officalID = [ "13750070105", "13750059219", "13143127771",
-			"13750056472", "13728357716", "13286050151", "13631272706",
-			"13726285186", "13750044036", "13750057060", "13750066893",
-			"13750069327", "13750069659", "13750069678", "13750070025",
-			"13750072213", "13750075145", "13750075284", "18666561301" ];
 	var officalIcon = "";
-	if ($.inArray(ownerID, officalID) != -1) {
-		officalIcon = "<span class='officalIcon'><img src='images/offical.png' /><span>";
-	}
 	var join = "<a><div class='content_join' id='" + id
 			+ "'><input type='hidden' value='" + id
 			+ "'><span>Join</span></div></a>";

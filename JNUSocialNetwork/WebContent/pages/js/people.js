@@ -23,7 +23,7 @@ function PinCommon() {
 	});
 }
 function pCampus() {
-	var users = RecommendateViaCampus(USERID,encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.campus),"0","30");
+	var users = RecommendateViaCampus(USERID,encodeURI($.parseJSON(sessionStorage.getItem("user")).attributes.institution),"0","30");
 	$.each(users, function(n, user) {
 		AddUser(user.attributes.name, user.attributes.introduce,
 				user.lookingForTags, user.ID, user.userType,
