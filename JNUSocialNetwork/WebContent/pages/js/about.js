@@ -539,7 +539,7 @@ function aboutClickEvent() {
     AddImages(userID, photosfileDri);
     $('#myModalPhoto').modal('hide');
     $.each(photosfileDri, function (index, imageLink) {
-      var photoContainer = "<div class='photo'><img width='280' height='" + getHeight(280, $.parseJSON(decodeURIComponent(imageLink)).width,
+      var photoContainer = "<div class='photo'><div class='deleteImg'><span class='glyphicon glyphicon-remove'></span></div><img width='280' height='" + getHeight(280, $.parseJSON(decodeURIComponent(imageLink)).width,
         $.parseJSON(decodeURIComponent(imageLink)).height) + "' src='" + $.parseJSON(decodeURIComponent(imageLink)).src + "' /></div>";
       $('.photoAddBtn').after(photoContainer);
       Msnry('.pro_body', '.photo', 280);
@@ -554,13 +554,22 @@ function aboutClickEvent() {
 // show photos
 function showPhotos() {
   var response = FetchUserByID(userID);
+  var pRemoveBtn = "";
+  if(userID == USERID){
+	  pRemoveBtn = "<div class='deleteImg'><span class='glyphicon glyphicon-remove'></span></div>";
+  }
   $.each(response.imageLinks, function (index, imageLink) {
-    var photoContainer = "<div class='photo'><img width='280' height='" + getHeight(280, $.parseJSON(imageLink).width,
+    var photoContainer = "<div class='photo'>"+pRemoveBtn+"<img width='280' height='" + getHeight(280, $.parseJSON(imageLink).width,
       $.parseJSON(imageLink).height) + "' src='" + $.parseJSON(imageLink).src + "' /></div>";
     $('.photoAddBtn').after(photoContainer);
     Msnry('.pro_body', '.photo', 280);
   });
 }
+$('body').on("click",".deleteImg",function(){
+	RemoveImages(USERID,$(this).next().attr("src"));
+	$(this).parent().remove();
+	Msnry('.pro_body', '.photo', 280);
+});
 // show followees
 function showFollowees() {
   var response = FetchFollowees(userID, "0", "30");

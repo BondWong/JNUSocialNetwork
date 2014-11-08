@@ -2163,3 +2163,8 @@ font-family: "Helvetica Neue","Hiragino Sans GB","Segoe UI","Microsoft Yahei","å
 	text-align:center;
 	padding-top:70px;
 }
+.deleteImg{
+	float: right;
+	cursor: pointer;
+	margin-right: 5px;
+}

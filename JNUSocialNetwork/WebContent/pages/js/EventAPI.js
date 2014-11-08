@@ -1285,6 +1285,26 @@ function AddImages(userID, imageLinks) {
 	});
 	return response;
 }
+//removeImages 输入：数组ImageLinks[];返回：postJson
+function RemoveImages(userID, imageLink) {
+	var response = "";
+	$.ajax({
+		type : "PUT",
+		url : '../../app/user/removeImages/' + userID + '?imageLinks='+imageLink,
+		beforeSend : function(request) {
+			request.setRequestHeader("ID", USERID);
+		},
+		async : false,
+		success : function(data, status) {
+			response = status;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 //发送邮件
 function SendEmail(userID, otherUser, json) {
 	var response = "";

@@ -5,7 +5,7 @@
 	<div class="post about">
 		<div class="aboutBlue followerShow">
 			<div>
-				<span class="aboutTitle">关注你的小伙伴</span>
+				<span class="aboutTitle">粉丝团</span>
 			</div>
 			<div class="followerContainer"><div class="followerBoard"></div></div>
 		</div>
@@ -14,7 +14,7 @@
 	<div class="post about">
 		<div class="aboutRed followeeShow">
 			<div>
-				<span class="aboutTitle">你关注的小伙伴</span>
+				<span class="aboutTitle">崇拜者</span>
 			</div>
 			<div class="followeeContainer"><div class="followeeBoard"></div></div>
 		</div>
