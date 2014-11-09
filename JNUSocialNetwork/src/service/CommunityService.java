@@ -25,6 +25,7 @@ import model.modelType.CommunityType;
 import system.ServerSentEventBroadcaster;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.CreateCommunityTransaction;
+import transaction.DAOFetchTransaction.FetchCommunitiesByIDsTransaction;
 import transaction.DAOFetchTransaction.FetchCommunitiesTransaction;
 import transaction.DAOFetchTransaction.FetchCommunityTransaction;
 import transaction.DAOFetchTransaction.RandomlyFetchCommunityTransaction;
@@ -337,6 +338,27 @@ public class CommunityService {
 			throw e;
 		}
 
+		return Response.ok(
+				new GenericEntity<List<Map<String, Object>>>(results) {
+				}).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Path("fetchByIDs")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchByIDs(List<Long> communityIDs)
+			throws Exception {
+		transaction = new FetchCommunitiesByIDsTransaction();
+		List<Map<String, Object>> results;
+		try {
+			results = (List<Map<String, Object>>) transaction.execute(communityIDs);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
