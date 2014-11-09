@@ -74,7 +74,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -132,7 +132,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -190,7 +190,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -248,7 +248,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -306,7 +306,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -364,7 +364,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);
@@ -422,7 +422,7 @@ $(document)
 																dataString.attributes.startDate,
 																dataString.attributes.limitation,
 																dataString.attributes.ifUpload,dataString.attributes.inquery);
-														$(".activityBord").after(
+														$(".activityBody").append(
 																boarddiv);
 														Msnry('.activityBody',
 																'.activity', 330);

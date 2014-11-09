@@ -573,6 +573,8 @@ function FetchInterested(userID, startIndex, pageSize) {
 			request.setRequestHeader("ID", USERID);
 		},
 		success : function(data, status) {
+			$('#infinite_loader2').fadeOut(300);
+			$('.layer2').fadeOut(300);
 			response = data;
 		},
 		error : function(data, status) {

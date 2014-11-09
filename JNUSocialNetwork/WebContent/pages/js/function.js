@@ -133,8 +133,8 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 							}
 
 						});
-		postImgDiv = postImgDiv + "<div class='imgLeft'>" + imageDiv1
-				+ "</div>" + "<div class='imgRight'>" + imageDiv2 + "</div>"
+		postImgDiv = postImgDiv + "<div class='imgLeft'>" + imageDiv2
+				+ "</div>" + "<div class='imgRight'>" + imageDiv1 + "</div>"
 				+ "</div>";
 	} else if (srcImage.length > 0 && srcImage.length <= 3) {
 		$.each(srcImage, function(n, image) {

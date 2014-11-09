@@ -111,6 +111,7 @@ $(document)
 									function() {
 										// var formData = new
 										// FormData($('.photofom'));
+										alert(fileDri);
 										var post = {
 											postType : 'NORMAL',
 											attributes : {
@@ -170,6 +171,8 @@ function fetchByFolloweeOrOwner() {
 					});
 }
 function fetchInterested() {
+	$('.layer2').fadeIn(300);
+	$('#infinite_loader2').fadeIn(300);
 	var response = FetchInterested(USERID, 0, pageSize);
 	$
 			.each(
