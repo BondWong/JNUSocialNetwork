@@ -111,7 +111,6 @@ $(document)
 									function() {
 										// var formData = new
 										// FormData($('.photofom'));
-										alert(fileDri);
 										var post = {
 											postType : 'NORMAL',
 											attributes : {

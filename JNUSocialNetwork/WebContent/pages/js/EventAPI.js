@@ -1015,6 +1015,32 @@ function FetchCommunityByOwner(userID, startIndex, pageSize) {
 	});
 	return response;
 }
+//fetchCommunityByIDs 输入：communityID;返回：postJson
+function FetchCommunityByIDs(jsondata) {
+	var response = "";
+	var Urls = '../../app/community/fetchByIDs?';
+	$.each(jsondata, function(n, value) {
+		if (n != jsondata.length - 1) {
+			Urls = Urls + 'communityIDs=' + value + '&';
+		} else {
+			Urls = Urls + 'communityIDs=' + value;
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : Urls,
+		async : false,
+		contentType : "application/json",
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 //fetchMyCommunities 
 function FetchMyCommunities(userID, startIndex, pageSize) {
 	var response = "";

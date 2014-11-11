@@ -111,10 +111,9 @@ function fetchMyCommunities(pageSize) {
 }
 // fetchCommunity()
 function fetchHotCommunity(pageSize) {
-	var communities = FetchCommunity("0", pageSize);
+	var communities = FetchCommunityByIDs($.toJSON([1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533]));
 	$.each(communities.reverse(), function(n, community) {
-		var array = [1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533];
-		if (community.available == true && $.inArray(community.ID, array) != -1) {
+		if (community.available == true ) {
 			addCommunity(community.ID, community.attributes.name,
 					community.members.length, "discoverCommunity",
 					community.attributes.communityCard, community.members,
