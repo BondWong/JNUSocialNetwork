@@ -164,6 +164,19 @@ function events_remind(event) {
 	var isOnline = event.action == null ? false : true;
 	$("div#" + event.data.eventID).click(
 			function(e) {
+				if (!isOnline) {
+					$.ajax({
+						type : "PUT",
+						url : '../../app/event/deleteUnhandledEvent/' + USERID
+								+ '/' + eventID,
+						beforeSend : function(request) {
+							request.setRequestHeader("ID", USERID);
+						},
+						success : function(data) {
+						}
+					});
+				}
+				
 				e.stopPropagation();
 				var incomingEvents = sessionStorage.getItem("incomingEvents");
 				incomingEvents = $.parseJSON(incomingEvents);
@@ -225,18 +238,6 @@ function events_remind(event) {
 					$(".mentionBody-content").empty();
 					show_remind_content();
 				});
-				if (!isOnline) {
-					$.ajax({
-						type : "PUT",
-						url : '../../app/event/deleteUnhandledEvent/' + USERID
-								+ '/' + eventID,
-						beforeSend : function(request) {
-							request.setRequestHeader("ID", USERID);
-						},
-						success : function(data) {
-						}
-					});
-				}
 			});
 
 }
@@ -395,7 +396,9 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ "</strong></div><div class='user_info'>"
 			+ publishDate
 			+ "</div></div></div><div class='post_info'><span class='postContent'>"
-			+ '<pre>' + content +'</pre>'
+			+ '<pre>'
+			+ content
+			+ '</pre>'
 			+ "</span></div>"
 			+ postImgDiv
 			+ "<div class='row'><div class='col-md-1'><div class='post_like' style='cursor:pointer'><a><p id='ownerID'  value="

@@ -15,6 +15,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -346,14 +347,15 @@ public class CommunityService {
 	@SuppressWarnings("unchecked")
 	@Path("fetchByIDs")
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response fetchByIDs(List<Long> communityIDs)
+	public Response fetchByIDs(
+			@QueryParam("communityIDs") List<Long> communityIDs)
 			throws Exception {
 		transaction = new FetchCommunitiesByIDsTransaction();
 		List<Map<String, Object>> results;
 		try {
-			results = (List<Map<String, Object>>) transaction.execute(communityIDs);
+			results = (List<Map<String, Object>>) transaction
+					.execute(communityIDs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
