@@ -111,7 +111,7 @@ function fetchMyCommunities(pageSize) {
 }
 // fetchCommunity()
 function fetchHotCommunity(pageSize) {
-	var communities = FetchCommunityByIDs($.toJSON([1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533]));
+	var communities = FetchCommunityByIDs([1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533]);
 	$.each(communities.reverse(), function(n, community) {
 		if (community.available == true ) {
 			addCommunity(community.ID, community.attributes.name,

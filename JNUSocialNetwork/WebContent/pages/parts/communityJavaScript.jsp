@@ -339,54 +339,6 @@
 			$('.discoveryC').css("border-left", "2px solid #4285f4");
 			pageSize = 16;
 			fetchHotCommunity(pageSize);
-			$(window)
-					.scroll(
-							function() {
-								if ($(window).scrollTop() == $(document)
-										.height()
-										- window.windowHeight) {
-									$('div#infinite_loader').show();
-									var response = FetchCommunity(
-											$('.content_container').length,
-											pageSize);
-									var array = [1411124370449,1411312081553,1411456804204,1411566818530,1411092566183,1411094627377,1415010467533];
-									$
-											.each(
-													response,
-													function(n, community) {
-														if (community.available == true
-																&& $("input[value='"
-																		+ community.ID
-																		+ "']").length == 0 && $.inArray(community.ID, array) != -1) {
-															var boarddiv = communities(
-																	community.ID,
-																	community.attributes.name,
-																	community.members.length,
-																	community.communityType,
-																	community.attributes.communityCard,
-																	community.members,
-																	community.attributes.userID);
-															$(
-																	".containerDiscovery")
-																	.append(
-																			boarddiv);
-															Msnry(
-																	'.containerDiscovery',
-																	'.content_container',
-																	245);
-														}
-													});
-									if (response.length == "15") {
-										$('div#infinite_loader').hide();
-									} else {
-										$('div#infinite_loader')
-												.replaceWith(
-														'<div id="no_more_infinite_load"><span>no more</span></div>');
-										$(window).unbind("scroll");
-									}
-
-								}
-							});
 		</script>
 	</c:when>
 	<c:when test="${param.nav eq 'academic' }">
