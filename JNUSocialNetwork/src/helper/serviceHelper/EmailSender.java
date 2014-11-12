@@ -14,7 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
-	final static String PASSWORD = "OOPScampus";
+	final static String PASSWORD = "BM1003mb";
 	final static String GREETING = "Dear User";
 	final static String COMPANYNAME = "CampuSite";
 	static Properties props = new Properties();
