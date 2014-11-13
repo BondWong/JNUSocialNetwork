@@ -1,6 +1,7 @@
 package transaction.EmailTransaction;
 
 import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.RankMap;
 import helper.transactionHelper.EmailMemberProfileHelper;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import model.Member;
 import persistence.DAO;
 import transaction.DAOTransaction;
+import utils.ConstantValue;
 
 public class BegForConnectionTransaction extends DAOTransaction {
 
@@ -34,6 +36,11 @@ public class BegForConnectionTransaction extends DAOTransaction {
 				+ member.getID());
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(begger));
 		new EmailSender().send(subject, sb.toString(), toAddr);
+
+		RankMap.deserialize();
+		RankMap.addLonlinessRankRecord(begger.getID(),
+				ConstantValue.BEGFORCONNECTIONWEIGHT);
+		RankMap.serialize();
 
 		return null;
 	}

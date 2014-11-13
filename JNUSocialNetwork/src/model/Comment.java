@@ -27,6 +27,7 @@ import model.factory.AttributesFactory;
 @NamedQueries(value = {
 		@NamedQuery(name = "Comment.fetchByPost", query = "SELECT c FROM Post p JOIN p.comments c WHERE p.ID = ?1 ORDER BY c.ID DESC"),
 		@NamedQuery(name = "Comment.fetchByID", query = "SELECT c FROM Comment c WHERE c.ID = ?1"),
+		@NamedQuery(name = "Comment.fetchByOwnerSize", query = "SELECT COUNT(c) FROM Comment c WHERE c.available = 1 AND c.owner.ID = ?1"),
 		@NamedQuery(name = "Comment.fetchUnavailableIDs", query = "SELECT c.ID FROM Comment c WHERE c.available = 0"),
 		@NamedQuery(name = "Comment.deleteUnavailable", query = "DELETE FROM Comment c WHERE c.available = 0") })
 public class Comment extends AttributeModel {

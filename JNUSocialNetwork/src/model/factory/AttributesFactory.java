@@ -44,6 +44,7 @@ public class AttributesFactory {
 				attributes.put("gender", "");
 				attributes.put("name", "");
 				attributes.put("relationship", "");
+				attributes.put("introduct", "");
 				attributes.put("introduce", "");
 				attributes.put("institution", "");
 				attributes.put("major", "");
@@ -63,6 +64,7 @@ public class AttributesFactory {
 				attributes.put("gender", "");
 				attributes.put("name", "社区用户");
 				attributes.put("relationship", "");
+				attributes.put("introduct", "");
 				attributes.put("introduce", "");
 				attributes.put("telnum", "");
 				attributes.put("email", "");
