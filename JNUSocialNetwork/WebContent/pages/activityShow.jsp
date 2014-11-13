@@ -35,6 +35,7 @@
 				<div class="activityShare">
 
 					<button class="btn btn-default joinSActivity">参加活动</button>
+					<button class="btn btn-default inventActivity">邀请好友</button>
 					<button class="btn btn-default editActivity" data-toggle='modal'
 						data-target='#editActivity'>管理活动</button>
 					<button class="btn btn-default activityPhoto" data-toggle='modal'
@@ -313,6 +314,7 @@
 								if ($.parseJSON(sessionStorage.getItem("user")).userType == 'COMMUNITYOWNER'
 										&& USERID == community.attributes.userID) {
 									$('.joinSActivity').remove();
+									$('.inventActivity').remove();
 									$('.editActivity').css("display", "inline");
 									$('.downLoadList').css("display", "inline");
 									$('.activityPhoto')
@@ -324,15 +326,23 @@
 								var now = new Date();
 								if (activity.participantIDs.length >= activity.attributes.limitation) {
 									$('.joinSActivity').remove();
+									$('.inventActivity').remove();
 									$('.ulR').remove();
 									$('.aUB').remove();
 									$('.activityShare')
 											.append(
 													"<button class='btn btn-default' style='float: right;'>已经满人</button>");
 								}
+								if (activity.attributes.ifUpload == "无需报名") {
+									$('.joinSActivity').remove();
+									$('.inventActivity').remove();
+									$('.ulR').remove();
+									$('.aUB').remove();
+								}
 								if (activity.attributes.startDate
 										- now.getTime() <= 0) {
 									$('.joinSActivity').remove();
+									$('.inventActivity').remove();
 									$('.ulR').remove();
 									$('.aUB').remove();
 									$('.activityShare')
