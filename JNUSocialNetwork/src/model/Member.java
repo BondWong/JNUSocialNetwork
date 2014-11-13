@@ -25,6 +25,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Transient;
 
 import utils.JsonUtil;
@@ -74,9 +75,11 @@ public class Member extends User {
 	private Set<ServerSentEvent> unhandledEvents;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "MEMBER_FOLLOWEE", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "OTHERMEMBER_ID"))
-	private Set<Member> followees;
+	@OrderColumn(name = "ORDER_INDEX")
+	private List<Member> followees;
 	@ManyToMany(mappedBy = "followees", fetch = FetchType.LAZY)
-	private Set<Member> followers;
+	@OrderColumn(name = "ORDER_INDEX")
+	private List<Member> followers;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Tag> lookingForTags;
 	@Transient
@@ -95,8 +98,8 @@ public class Member extends User {
 		this.collectedPosts = new LinkedHashSet<Post>();
 		this.joinedCommunities = new LinkedHashSet<Community>();
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
-		this.followees = new LinkedHashSet<Member>();
-		this.followers = new LinkedHashSet<Member>();
+		this.followees = new ArrayList<Member>();
+		this.followers = new ArrayList<Member>();
 		this.lookingForTags = new LinkedHashSet<>();
 		this.userType = (UserType) initParams[2];
 		switch (this.userType) {
@@ -367,7 +370,7 @@ public class Member extends User {
 		member.followers.remove(this);
 	}
 
-	public Set<Member> getFollowees() {
+	public List<Member> getFollowees() {
 		return this.followees;
 	}
 
@@ -375,7 +378,7 @@ public class Member extends User {
 		this.followees.clear();
 	}
 
-	public Set<Member> getFollowers() {
+	public List<Member> getFollowers() {
 		return this.followers;
 	}
 
@@ -434,11 +437,13 @@ public class Member extends User {
 
 		List<String> followeeIDs = new ArrayList<String>();
 		for (Member followee : this.followees) {
-			followeeIDs.add(followee.getID());
+			if (followee != null)
+				followeeIDs.add(followee.getID());
 		}
 		List<String> followerIDs = new ArrayList<String>();
 		for (Member follower : this.followers) {
-			followerIDs.add(follower.getID());
+			if (follower != null)
+				followerIDs.add(follower.getID());
 		}
 
 		representation.put("followeeIDs", followeeIDs);
