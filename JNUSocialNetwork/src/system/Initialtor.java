@@ -8,6 +8,7 @@ import helper.serviceHelper.DesertFileLinkMap;
 import helper.serviceHelper.MemberSearchMap;
 import helper.serviceHelper.NumberManager;
 import helper.serviceHelper.OnlineUserIDArray;
+import helper.serviceHelper.RankMap;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -20,8 +21,7 @@ import javax.servlet.ServletContextListener;
 
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
-import transaction.DAOFetchTransaction.GetCommunityNumTransaction;
-import transaction.DAOFetchTransaction.GetMemberNumTransaction;
+import transaction.DAOFetchTransaction.GetNumTransaction;
 import utils.ExecutorUtil;
 import utils.Logger;
 import utils.MD5;
@@ -103,13 +103,13 @@ public class Initialtor implements ServletContextListener {
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
 			AdmirationMap.initializeEnvironment();
+			RankMap.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
 
-			transaction = new GetMemberNumTransaction();
-			long mnum = (long) transaction.execute();
-			transaction = new GetCommunityNumTransaction();
-			long cnum = (long) transaction.execute();
+			transaction = new GetNumTransaction();
+			long mnum = (long) transaction.execute("Member.size");
+			long cnum = (long) transaction.execute("Community.size");
 			NumberManager.initiate(mnum, cnum);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

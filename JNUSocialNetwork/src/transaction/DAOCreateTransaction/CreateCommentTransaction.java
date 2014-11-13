@@ -1,5 +1,7 @@
 package transaction.DAOCreateTransaction;
 
+import helper.serviceHelper.RankMap;
+
 import javax.persistence.EntityManager;
 
 import model.Comment;
@@ -8,6 +10,7 @@ import model.Post;
 import model.factory.ModelFactory;
 import persistence.DAO;
 import transaction.DAOTransaction;
+import utils.ConstantValue;
 
 public class CreateCommentTransaction extends DAOTransaction {
 
@@ -23,6 +26,10 @@ public class CreateCommentTransaction extends DAOTransaction {
 		comment.setAttribute("postID", params[1] + "");
 		member.createComment(post, comment);
 		dao.update(post);
+		RankMap.deserialize();
+		RankMap.addLonlinessRankRecord(member.getID(),
+				ConstantValue.COMMENTWEIGHT);
+		RankMap.serialize();
 		return comment.toRepresentation();
 	}
 

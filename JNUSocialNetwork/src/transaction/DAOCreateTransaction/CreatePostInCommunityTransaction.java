@@ -1,6 +1,7 @@
 package transaction.DAOCreateTransaction;
 
 import helper.serviceHelper.ActivitySearchMap;
+import helper.serviceHelper.RankMap;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,9 @@ public class CreatePostInCommunityTransaction extends DAOTransaction {
 		}
 		user.createPost(community, post);
 		dao.update(community);
+		RankMap.deserialize();
+		RankMap.addLonlinessRankRecord(user.getID(), ConstantValue.POSTWEIGHT);
+		RankMap.serialize();
 		if (params[2].equals(PostType.ACTIVITY)) {
 
 			if (Long.parseLong((String) ((Map<String, Object>) params[3])
