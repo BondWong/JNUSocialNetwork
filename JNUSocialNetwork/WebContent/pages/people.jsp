@@ -76,7 +76,7 @@
 								login_initialization(USERID);
 								peopleClickEvent();
 								clickEvent();
-								PinCommon();
+								pHot();
 							} else {
 								pHot();
 								clickOffEvent();

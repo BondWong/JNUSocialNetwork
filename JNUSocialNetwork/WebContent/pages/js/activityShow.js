@@ -96,9 +96,10 @@ function showActivityDetail(activity, community) {
   $('#addComment').attr("value", activity.ID);
   $('.acBtn').attr("id", "commentText" + activity.ID);
   $('.communityName').html(community.attributes.name);
-
-  $('.communityNum')
-    .html(activity.participantIDs.length + "&nbsp个小伙伴参加了这个活动");
+  if(activity.participantIDs.length != 0){
+	  $('.communityNum')
+	    .html(activity.participantIDs.length + "&nbsp个小伙伴参加了这个活动");
+  }
   var comments = FetchCommentByPost(activity.ID, "0", "5");
   var comment = "";
   $
