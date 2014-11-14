@@ -1,6 +1,6 @@
 package transaction.EmailTransaction;
 
-import helper.securityHelper.SendEmailTracker;
+import helper.securityHelper.sendEmailTracker.SendEmailTracker;
 import transaction.Transaction;
 import utils.ExecutorUtil;
 
@@ -8,15 +8,15 @@ public class EmailTransaction implements Transaction {
 	private Transaction transaction;
 	private SendEmailTracker tracker;
 
-	public EmailTransaction(Transaction transaction) {
+	public EmailTransaction(Transaction transaction, SendEmailTracker tracker) {
 		this.transaction = transaction;
-		tracker = SendEmailTracker.getInstance();
+		this.tracker = tracker;
 	}
 
 	@Override
 	public Object execute(final Object... params) {
 		// TODO Auto-generated method stub
-		if (tracker.canSend((String) params[0])) {
+		if (tracker.canSend(params)) {
 			ExecutorUtil eu = ExecutorUtil.createInstance();
 
 			eu.execute(new Runnable() {
@@ -34,10 +34,9 @@ public class EmailTransaction implements Transaction {
 
 			});
 
-			tracker.record((String) params[0]);
+			tracker.record(params);
 			return true;
 		} else
 			return false;
 	}
-
 }

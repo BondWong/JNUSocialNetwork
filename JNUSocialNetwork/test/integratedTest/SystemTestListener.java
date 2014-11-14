@@ -73,7 +73,7 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("institution", "");
 			attributes.put("major", "");
 			attributes.put("telnum", "");
-			attributes.put("email", "");
+			attributes.put("email", "kingkong_webber@hotmail.com");
 			attributes.put("birthday", "");
 			attributes.put("campus", "");
 			attributes.put("dorm", "");
@@ -108,7 +108,7 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("introduct", "");
 			attributes.put("introduce", "");
 			attributes.put("telnum", "");
-			attributes.put("email", "");
+			attributes.put("email", "kingkong_webber@hotmail.com");
 			attributes.put("institution", "");
 			attributes.put("campus", "");
 			attributes.put("wechat", "");

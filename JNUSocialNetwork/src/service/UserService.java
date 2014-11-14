@@ -1,6 +1,8 @@
 package service;
 
 import helper.securityHelper.ContentEncoder;
+import helper.securityHelper.sendEmailTracker.ActivityInvitationEmailTracker;
+import helper.securityHelper.sendEmailTracker.SimpleSendEmailTracker;
 
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
@@ -44,6 +46,7 @@ import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
+import transaction.EmailTransaction.ActivityInvitationTransaction;
 import transaction.EmailTransaction.BegForConnectionTransaction;
 import transaction.EmailTransaction.EmailTransaction;
 import transaction.EmailTransaction.ProfileInvititionTransaction;
@@ -550,7 +553,8 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendEmail(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID, Map emailContent) throws Exception {
-		transaction = new EmailTransaction(new SendEmailTransaction());
+		transaction = new EmailTransaction(new SendEmailTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -568,7 +572,8 @@ public class UserService {
 	@POST
 	public Response inviteToAddImage(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -587,7 +592,8 @@ public class UserService {
 	@POST
 	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -606,7 +612,8 @@ public class UserService {
 	@POST
 	public Response begForConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new BegForConnectionTransaction());
+		transaction = new EmailTransaction(new BegForConnectionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID);
@@ -623,7 +630,8 @@ public class UserService {
 	@GET
 	public Response sendConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new SendConnectionTransaction());
+		transaction = new EmailTransaction(new SendConnectionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID);
@@ -636,11 +644,26 @@ public class UserService {
 		return Response.ok().build();
 	}
 
-	@Path("sendInvitation/{senderID : \\d+}")
+	@Path("sendInvitation/{senderID : \\d+}/{activityID : \\d+}")
 	@POST
 	public Response sendInvitation(@PathParam("senderID") String ID,
-			@QueryParam("receiverIDs") List<String> receiverIDs) {
-		System.out.println(receiverIDs);
+			@PathParam("activityID") Long activityID,
+			@QueryParam("receiverEmails") List<String> receiverEmails)
+			throws Exception {
+		System.out.println(receiverEmails);
+		transaction = new EmailTransaction(new ActivityInvitationTransaction(),
+				ActivityInvitationEmailTracker.getInstance());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(ID, activityID,
+					receiverEmails);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+		if (!result)
+			return Response.status(401).build();
 		return Response.ok().build();
 	}
 
