@@ -667,6 +667,19 @@ public class UserService {
 		return Response.ok().build();
 	}
 
+	@Path("canSendInvitation/{senderID : \\d+}/{activityID : \\d+}")
+	@GET
+	public Response canSendInvitation(@PathParam("senderID") String ID,
+			@PathParam("activityID") Long activityID) {
+		boolean result = true;
+		result = ActivityInvitationEmailTracker.getInstance().canSend(ID,
+				activityID);
+		if (result)
+			return Response.ok().build();
+		else
+			return Response.status(401).build();
+	}
+
 	@Path("needGuidance/{ID : \\d+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
