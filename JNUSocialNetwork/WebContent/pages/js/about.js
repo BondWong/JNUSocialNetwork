@@ -583,7 +583,7 @@ function showFollowees() {
       Msnry('.followeeContainer', '.member', 215);
     }
   });
-  if(response.length > followSize){
+  if($.parseJSON(sessionStorage.getItem("user")).followeeIDs.length > followSize){
 	 $("#eeN").css("display","inline");
   }
   
@@ -636,7 +636,7 @@ function showFollowers() {
       Msnry('.followerContainer', '.member', 215);
     }
   });
-  if(response.length > followSize){
+  if($.parseJSON(sessionStorage.getItem("user")).followerIDs.length > followSize){
 	  $("#erN").css("display","inline");
   }
 }

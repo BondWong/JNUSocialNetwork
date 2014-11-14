@@ -310,7 +310,7 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 										+ jsonComment.attributes.commentToComment;
 							}
 							var removeBtn = "";
-							var commentReply = "<div class='comment_reply' id="
+							var commentReply = "<div class='comment_replyR' id="
 									+ postID
 									+ " style='cursor: pointer'><a><input id='replyName' type='hidden' value='"
 									+ jsonComment.owner.attributes.name
@@ -410,14 +410,11 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 			+ likeClass
 			+ "' style='font-size:20px'>"
 			+ likerIDs.length
-			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentText"
+			+ "</span></a></div></div><div class='col-md-1'></div><div class='col-md-1'></div></div><div class='media_comm'><div class='row addCommentBtn'><div class='col-lg-8'><div class='form-group'><input type='text' placeholder='Add a comment' class='form-control  commentTxt' id='commentTextR"
 			+ postID
 			+ "' maxLength='100'></div></div><div class='col-lg-4'><button type='submit' class='btn btn-success' id='addComment' value="
 			+ postID + ">发送</button></div></div>" + comment + "</div>";
 
-	$("#commentText" + postID).blur(function() {
-		$(this).attr("placeholder", "add a comment");
-	});
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
 

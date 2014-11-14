@@ -195,9 +195,8 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	 * collectClass + "' style='font-size:20px'></span></a></div>
 	 */
 
-	$("#commentText" + postID).blur(function() {
-		$(this).attr("placeholder", "add a comment");
-	});
+	
+	
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
 		$(this).find('a').fadeIn(300);
@@ -226,6 +225,11 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 	var boarddiv = post(ownerID, ownerNickName, publishDate, content, postID,
 			likers, collecters, srcImage, ownerImage);
 	$(".share").after(boarddiv);
+	$("#commentText" + postID).blur(function() {
+		sessionStorage.setItem("commentOwnerName", "");
+		sessionStorage.setItem("commentID", "");
+		$(this).attr("placeholder", "add a comment");
+	});
 	$('.' + postID).find('img.userImg').userTips();
 	Msnry('.pro_body', '.post', 435);
 
@@ -343,6 +347,16 @@ function clickEvent() {
 		sessionStorage.setItem("commentOwnerName", commmentName);
 		sessionStorage.setItem("commentID", commentID);
 		var inputID = $("input[id='commentText" + postID + "']");
+		inputID.attr("placeholder", "@" + commmentName);
+		inputID.focus();
+	});
+	$('body').on("click", ".comment_replyR", function() {
+		var postID = $(this).attr("id");
+		var commmentName = $(this).find("input[id='replyName']").attr("value");
+		var commentID = $(this).find("input[id='replyID']").attr("value");
+		sessionStorage.setItem("commentOwnerName", commmentName);
+		sessionStorage.setItem("commentID", commentID);
+		var inputID = $("input[id='commentTextR" + postID + "']");
 		inputID.attr("placeholder", "@" + commmentName);
 		inputID.focus();
 	});
