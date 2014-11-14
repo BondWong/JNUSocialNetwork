@@ -570,9 +570,12 @@ $('body').on("click",".deleteImg",function(){
 	$(this).parent().remove();
 	Msnry('.pro_body', '.photo', 280);
 });
+var followSize = 15;
+var indexER = 0;
+var indexEE = 0;
 // show followees
 function showFollowees() {
-  var response = FetchFollowees(userID, "0", "30");
+  var response = FetchFollowees(userID, "0", followSize);
   $.each(response, function (index, followee) {
     if (followee.available == true) {
       var followeeDiv = addFollow(followee.ID, followee.attributes.avatarLink, followee.attributes.name);
@@ -580,10 +583,52 @@ function showFollowees() {
       Msnry('.followeeContainer', '.member', 215);
     }
   });
+  if(response.length > followSize){
+	 $("#eeN").css("display","inline");
+  }
+  
 }
+$('body').on("click","#eeN",function(){
+	$("#eeP").css("display","inline");
+	indexEE = indexEE + followSize;
+	var response = FetchFollowees(userID, indexEE, followSize);
+	if(response.length != 0){
+		$('.followeeContainer').remove();
+		$('#FeA').after("<div class='followeeContainer'><div class='followeeBoard'></div></div>");
+		$.each(response, function (index, followee) {
+		    if (followee.available == true) {
+		      var followeeDiv = addFollow(followee.ID, followee.attributes.avatarLink, followee.attributes.name);
+		      $('.followeeBoard').after(followeeDiv);
+		      Msnry('.followeeContainer', '.member', 215);
+		    }
+		});
+	}else{
+		$(this).css("display","none");
+	}
+});
+$('body').on("click","#eeP",function(){
+	indexEE = indexEE - followSize;
+	var response = FetchFollowees(userID, indexEE, followSize);
+	if(indexEE >= 0){
+		$('.followeeContainer').remove();
+		$('#FeA').after("<div class='followeeContainer'><div class='followeeBoard'></div></div>");
+		$.each(response, function (index, followee) {
+		    if (followee.available == true) {
+		      var followeeDiv = addFollow(followee.ID, followee.attributes.avatarLink, followee.attributes.name);
+		      $('.followeeBoard').after(followeeDiv);
+		      Msnry('.followeeContainer', '.member', 215);
+		    }
+		});
+	}
+	if(indexEE == 0){
+		$(this).css("display","none");
+		$("#eeN").css("display","inline");
+	}
+});
+
 // show followers
 function showFollowers() {
-  var response = FetchFollowers(userID, "0", "30");
+  var response = FetchFollowers(userID, indexER, followSize);
   $.each(response, function (index, follower) {
     if (follower.available == true) {
       var followeeDiv = addFollow(follower.ID, follower.attributes.avatarLink, follower.attributes.name);
@@ -591,7 +636,48 @@ function showFollowers() {
       Msnry('.followerContainer', '.member', 215);
     }
   });
+  if(response.length > followSize){
+	  $("#erN").css("display","inline");
+  }
 }
+$('body').on("click","#erN",function(){
+	$("#erP").css("display","inline");
+	indexER = indexER + followSize;
+	var response = FetchFollowers(userID, indexER, followSize);
+	if(response.length != 0){
+		$('.followerContainer').remove();
+		$('#FrA').after("<div class='followerContainer'><div class='followerBoard'></div></div>");
+		$.each(response, function (index, follower) {
+		    if (follower.available == true) {
+		      var followeeDiv = addFollow(follower.ID, follower.attributes.avatarLink, follower.attributes.name);
+		      $('.followerBoard').after(followeeDiv);
+		      Msnry('.followerContainer', '.member', 215);
+		    }
+		 });	
+	}else{
+		$(this).css("display","none");
+	}
+});
+$('body').on("click","#erP",function(){
+	indexER = indexER - followSize;
+	var response = FetchFollowers(userID, indexER, followSize);
+	if(indexER >= 0){
+		$('.followerContainer').remove();
+		$('#FrA').after("<div class='followerContainer'><div class='followerBoard'></div></div>");
+		$.each(response, function (index, follower) {
+		    if (follower.available == true) {
+		      var followeeDiv = addFollow(follower.ID, follower.attributes.avatarLink, follower.attributes.name);
+		      $('.followerBoard').after(followeeDiv);
+		      Msnry('.followerContainer', '.member', 215);
+		    }
+		 });	
+	}
+	if(indexER == 0){
+		$(this).css("display","none");
+		$("#erN").css("display","inline");
+	}
+});
+
 //user的html代码
 function addFollow(id, avatarLink, name) {
   var followDiv = "<div class='follow' id='" + id + "'><img width='50' height='50'  class='userMember' src='" + $.parseJSON(avatarLink).src + "' /><span class='followName'><a style='cursor:pointer;color:#404040'>" + name + "</a></span><input type='hidden' value='" + id + "' name='userID'/></div>";

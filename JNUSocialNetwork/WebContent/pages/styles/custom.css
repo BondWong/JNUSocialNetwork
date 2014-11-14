@@ -267,7 +267,7 @@ body {
 
 .about {
 	padding-top: 0px;
-	padding-bottom: 15px;
+	padding-bottom: 25px;
 }
 
 .pro_body .user_img {
@@ -564,7 +564,16 @@ body {
 	border-color: #76a7fa #d8d8d8 #d8d8d8;
 	padding: 30px 20px 10px 20px;
 }
-
+.nextF{
+	position: absolute;
+    bottom: 5px;
+    cursor: pointer;
+    left: 25px;
+}
+.nextF a{
+    display:none;
+    margin-right:5px;
+}
 .post .aboutRed {
 	background-color: #FFF;
 	width: 100%;
@@ -579,7 +588,7 @@ body {
 	background-color: #FFF;
 	width: 100%;
 	min-height: 200px;
-	border-width: 5px 1px 2px 1px;
+	border-width: 5px 1px 0px;
 	border-style: solid;
 	border-color: #101010 #d8d8d8 #d8d8d8;
 	padding: 30px 20px 10px 20px;
@@ -588,7 +597,7 @@ body {
 	background-color: #FFF;
 	width: 100%;
 	min-height: 400px;
-	border-width: 5px 1px 2px 1px;
+	border-width: 5px 1px 0px;
 	border-style: solid;
 	border-color: #aaa #d8d8d8 #d8d8d8;
 	padding: 30px 20px 10px 20px;
