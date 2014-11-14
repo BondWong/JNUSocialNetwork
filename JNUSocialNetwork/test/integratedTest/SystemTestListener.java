@@ -45,6 +45,8 @@ public class SystemTestListener implements ServletContextListener {
 			Files.deleteIfExists(Paths.get("membersearchmap.txt"));
 			Files.deleteIfExists(Paths.get("activitysearchmap.txt"));
 			Files.deleteIfExists(Paths.get("communitysearchmap.txt"));
+			Files.deleteIfExists(Paths.get("admirationmap.txt"));
+			Files.deleteIfExists(Paths.get("rankmap.txt"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +65,16 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("name", "fucker");
 			attributes.put("gender", "男");
 			transaction = new RegisterMemberTransaction();
+			transaction.execute("2011052666", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052555", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052444", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052333", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052222", MD5.toMD5Code("123456"),
+					attributes);
 			transaction.execute("2011052111", MD5.toMD5Code("123456"),
 					attributes);
 			transaction.execute("2011052000", MD5.toMD5Code("123456"),
