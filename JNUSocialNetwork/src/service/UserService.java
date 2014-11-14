@@ -1,6 +1,8 @@
 package service;
 
 import helper.securityHelper.ContentEncoder;
+import helper.securityHelper.sendEmailTracker.ActivityInvitationEmailTracker;
+import helper.securityHelper.sendEmailTracker.SimpleSendEmailTracker;
 
 import java.net.URLDecoder;
 import java.util.LinkedHashSet;
@@ -30,7 +32,7 @@ import transaction.DAOFetchTransaction.FetchLonelySoulsTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
-import transaction.DAOFetchTransaction.FetchMembersWithTelNumTransaction;
+import transaction.DAOFetchTransaction.FetchMembersWithEmailTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
@@ -44,6 +46,7 @@ import transaction.DAOUpdateTransaction.MemberRemoveLookingForTagTransaction;
 import transaction.DAOUpdateTransaction.UpdateAccountTransaction;
 import transaction.DAOUpdateTransaction.UpdateMemberAttributeTransaction;
 import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransaction;
+import transaction.EmailTransaction.ActivityInvitationTransaction;
 import transaction.EmailTransaction.BegForConnectionTransaction;
 import transaction.EmailTransaction.EmailTransaction;
 import transaction.EmailTransaction.ProfileInvititionTransaction;
@@ -234,13 +237,13 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchFolloweesWithTelNumFilter/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchFolloweesWithEmail/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchFolloweesWithTelNumFilter(@PathParam("ID") String ID,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchMembersWithTelNumTransaction();
+		transaction = new FetchMembersWithEmailTransaction();
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(ID,
@@ -550,7 +553,8 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendEmail(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID, Map emailContent) throws Exception {
-		transaction = new EmailTransaction(new SendEmailTransaction());
+		transaction = new EmailTransaction(new SendEmailTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -568,7 +572,8 @@ public class UserService {
 	@POST
 	public Response inviteToAddImage(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -587,7 +592,8 @@ public class UserService {
 	@POST
 	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction());
+		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
@@ -606,7 +612,8 @@ public class UserService {
 	@POST
 	public Response begForConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new BegForConnectionTransaction());
+		transaction = new EmailTransaction(new BegForConnectionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID);
@@ -623,11 +630,35 @@ public class UserService {
 	@GET
 	public Response sendConnection(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new SendConnectionTransaction());
+		transaction = new EmailTransaction(new SendConnectionTransaction(),
+				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID);
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		if (!result)
+			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("sendInvitation/{senderID : \\d+}/{activityID : \\d+}")
+	@POST
+	public Response sendInvitation(@PathParam("senderID") String ID,
+			@PathParam("activityID") Long activityID,
+			@QueryParam("receiverEmails") List<String> receiverEmails)
+			throws Exception {
+		System.out.println(receiverEmails);
+		transaction = new EmailTransaction(new ActivityInvitationTransaction(),
+				ActivityInvitationEmailTracker.getInstance());
+		boolean result = true;
+		try {
+			result = (boolean) transaction.execute(ID, activityID,
+					receiverEmails);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

@@ -20,7 +20,7 @@ import utils.JsonUtil;
 import com.google.gson.reflect.TypeToken;
 
 public class RankMap {
-	private final static String PATH = "lonlinessranklist.txt";
+	private final static String PATH = "rankmap.txt";
 	private final static Type TYPE = new TypeToken<Map<String, Map<String, Long>>>() {
 	}.getType();
 	private final static int STARTINDEX = 0;

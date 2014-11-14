@@ -1,9 +1,7 @@
 package service;
 
 import helper.securityHelper.ContentEncoder;
-import helper.serviceHelper.DepartmentsInfoManager;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -451,16 +449,6 @@ public class CommunityService {
 		return Response.ok(
 				new GenericEntity<List<Map<String, Object>>>(results) {
 				}).build();
-	}
-
-	@Path("getDepartment/{communityID : \\d+}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getDepartment(@PathParam("communityID") Long communityID) {
-		List<String> departments = new ArrayList<String>();
-		departments = DepartmentsInfoManager.get(communityID);
-		return Response.ok(new GenericEntity<List<String>>(departments) {
-		}).build();
 	}
 
 }

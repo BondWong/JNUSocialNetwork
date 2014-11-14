@@ -11,7 +11,7 @@ import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import utils.EmailDetector;
 
 public class ActivityNotificationTransaction implements Transaction {
-	private static final int BUCKETSIZE = 50;
+	private static final int BUCKETSIZE = 200;
 	private static final String TITLE = "CampuSite活动提醒";
 
 	@SuppressWarnings("unchecked")
