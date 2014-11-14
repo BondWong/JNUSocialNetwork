@@ -65,15 +65,15 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("name", "fucker");
 			attributes.put("gender", "男");
 			transaction = new RegisterMemberTransaction();
-			transaction.execute("2011052666", MD5.toMD5Code("123456"),
-					attributes);
-			transaction.execute("2011052555", MD5.toMD5Code("123456"),
-					attributes);
 			transaction.execute("2011052444", MD5.toMD5Code("123456"),
 					attributes);
 			transaction.execute("2011052333", MD5.toMD5Code("123456"),
 					attributes);
 			transaction.execute("2011052222", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052666", MD5.toMD5Code("123456"),
+					attributes);
+			transaction.execute("2011052555", MD5.toMD5Code("123456"),
 					attributes);
 			transaction.execute("2011052111", MD5.toMD5Code("123456"),
 					attributes);
