@@ -30,7 +30,7 @@ import transaction.DAOFetchTransaction.FetchLonelySoulsTransaction;
 import transaction.DAOFetchTransaction.FetchMemberTransaction;
 import transaction.DAOFetchTransaction.FetchMembersTransaction;
 import transaction.DAOFetchTransaction.FetchMembersWithShuffleTransaction;
-import transaction.DAOFetchTransaction.FetchMembersWithTelNumTransaction;
+import transaction.DAOFetchTransaction.FetchMembersWithEmailTransaction;
 import transaction.DAOFetchTransaction.FetchModelColumnTransaction;
 import transaction.DAOFetchTransaction.FetchTagsTransaction;
 import transaction.DAOFetchTransaction.FolloweeRecommendationTransaction;
@@ -234,13 +234,13 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Path("fetchFolloweesWithTelNumFilter/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
+	@Path("fetchFolloweesWithEmail/{ID : \\d+}/{startIndex : \\d{1,}}/{pageSize : \\d{1,}}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchFolloweesWithTelNumFilter(@PathParam("ID") String ID,
 			@PathParam("startIndex") int startIndex,
 			@PathParam("pageSize") int pageSize) throws Exception {
-		transaction = new FetchMembersWithTelNumTransaction();
+		transaction = new FetchMembersWithEmailTransaction();
 		List<Map<String, Object>> results;
 		try {
 			results = (List<Map<String, Object>>) transaction.execute(ID,
@@ -633,6 +633,14 @@ public class UserService {
 		}
 		if (!result)
 			return Response.status(401).build();
+		return Response.ok().build();
+	}
+
+	@Path("sendInvitation/{senderID : \\d+}")
+	@POST
+	public Response sendInvitation(@PathParam("senderID") String ID,
+			@QueryParam("receiverIDs") List<String> receiverIDs) {
+		System.out.println(receiverIDs);
 		return Response.ok().build();
 	}
 

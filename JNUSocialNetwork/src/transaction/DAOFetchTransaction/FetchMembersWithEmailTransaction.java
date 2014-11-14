@@ -6,7 +6,7 @@ import java.util.Map;
 
 import transaction.Transaction;
 
-public class FetchMembersWithTelNumTransaction implements Transaction {
+public class FetchMembersWithEmailTransaction implements Transaction {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -22,9 +22,9 @@ public class FetchMembersWithTelNumTransaction implements Transaction {
 				"Member.fetchFollowees", ID, null, startIndex, pageSize);
 
 		for (Map<String, Object> t : temp) {
-			String telnum = ((Map<String, String>) t.get("attributes"))
-					.get("telnum");
-			if (telnum != null && telnum != "")
+			String email = ((Map<String, String>) t.get("attributes"))
+					.get("email");
+			if (email != null && !email.equals(""))
 				results.add(t);
 		}
 

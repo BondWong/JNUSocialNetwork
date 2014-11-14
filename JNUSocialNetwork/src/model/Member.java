@@ -436,9 +436,14 @@ public class Member extends User {
 		representation.put("userType", this.userType);
 
 		List<String> followeeIDs = new ArrayList<String>();
+		List<String> followeeWithEmailIDs = new ArrayList<String>();
 		for (Member followee : this.followees) {
-			if (followee != null)
+			if (followee != null) {
 				followeeIDs.add(followee.getID());
+				if (followee.getAttribute("email") != null
+						&& !followee.getAttribute("email").equals(""))
+					followeeWithEmailIDs.add(followee.getID());
+			}
 		}
 		List<String> followerIDs = new ArrayList<String>();
 		for (Member follower : this.followers) {
@@ -447,6 +452,7 @@ public class Member extends User {
 		}
 
 		representation.put("followeeIDs", followeeIDs);
+		representation.put("followeeWithEmailIDs", followeeWithEmailIDs);
 		representation.put("followerIDs", followerIDs);
 
 		List<Map<String, String>> communityIDNameTuples = new ArrayList<Map<String, String>>();
