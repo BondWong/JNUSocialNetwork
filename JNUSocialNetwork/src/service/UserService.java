@@ -646,10 +646,10 @@ public class UserService {
 
 	@Path("sendInvitation/{senderID : \\d+}/{activityID : \\d+}")
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendInvitation(@PathParam("senderID") String ID,
 			@PathParam("activityID") Long activityID,
-			@QueryParam("receiverEmails") List<String> receiverEmails)
-			throws Exception {
+			List<String> receiverEmails) throws Exception {
 		System.out.println(receiverEmails);
 		transaction = new EmailTransaction(new ActivityInvitationTransaction(),
 				ActivityInvitationEmailTracker.getInstance());
