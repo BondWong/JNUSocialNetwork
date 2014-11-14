@@ -594,7 +594,7 @@ function init(){
 				selectedFriendNumber++;
 				selectedIndexs[data]=true;
 			}else {
-				target.animate({backgroundColor:'#EEEEEE',color:'#000000'},easingtime);
+				target.animate({backgroundColor:'#ffffff',color:'#000000'},easingtime);
 				target.attr('active','false');
 				selectedFriendNumber--;
 				selectedIndexs[data]=false;
@@ -643,7 +643,7 @@ function init(){
 						selectedFriendNumber++;
 						selectedIndexs[data]=true;
 					}else {
-						target.animate({backgroundColor:'#EEEEEE',color:'#000000'},easingtime);
+						target.animate({backgroundColor:'#ffffff',color:'#000000'},easingtime);
 						target.attr('active','false');
 						selectedFriendNumber--;
 						selectedIndexs[data]=false;
