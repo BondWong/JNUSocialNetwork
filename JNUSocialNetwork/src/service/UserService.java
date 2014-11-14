@@ -646,10 +646,10 @@ public class UserService {
 
 	@Path("sendInvitation/{senderID : \\d+}/{activityID : \\d+}")
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendInvitation(@PathParam("senderID") String ID,
 			@PathParam("activityID") Long activityID,
-			@QueryParam("receiverEmails") List<String> receiverEmails)
-			throws Exception {
+			List<String> receiverEmails) throws Exception {
 		System.out.println(receiverEmails);
 		transaction = new EmailTransaction(new ActivityInvitationTransaction(),
 				ActivityInvitationEmailTracker.getInstance());
@@ -665,6 +665,19 @@ public class UserService {
 		if (!result)
 			return Response.status(401).build();
 		return Response.ok().build();
+	}
+
+	@Path("canSendInvitation/{senderID : \\d+}/{activityID : \\d+}")
+	@GET
+	public Response canSendInvitation(@PathParam("senderID") String ID,
+			@PathParam("activityID") Long activityID) {
+		boolean result = true;
+		result = ActivityInvitationEmailTracker.getInstance().canSend(ID,
+				activityID);
+		if (result)
+			return Response.ok().build();
+		else
+			return Response.status(401).build();
 	}
 
 	@Path("needGuidance/{ID : \\d+}")
