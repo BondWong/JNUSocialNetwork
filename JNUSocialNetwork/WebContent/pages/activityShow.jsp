@@ -44,8 +44,43 @@
 						<a class="btn btn-default" target="_blank"
 							id="download-name-list-button">下载参与列表</a>
 					</div>
+					<button class="btn btn-default" id="inviteFriendsButton"  data-toggle='modal'
+						data-target='#inviteFriends'>邀请朋友</button>
 					<button class="btn btn-default backActivity">查看社区</button>
 					<button class="btn btn-default backActivityA">查看活动圈</button>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="inviteFriends" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel3" aria-hidden="true">
+			<div class="modal-dialog" style="width:630px; overflow: hidden;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel2">邀请朋友</h4>
+					</div>
+					<div id="invite_friends_modal_body" style="min-height:400px;overflow: hidden;">
+						<div class="contener" id="invite_friends_modal_contener">
+							
+						</div>
+						
+						<div class="text-center">
+                    		<ul id="pagination-demo" class="pagination-sm"></ul>
+                		</div>
+						
+						<div id="max_invite_friends_alert" class="alert alert-info" style="margin-top:10px;width: 81%; margin-left: 50px; text-align: center;display:none;">最多只能邀请五名小伙伴哦！</div>
+						<div id="cannot_invite_friends_alert" class="alert alert-warning" style="margin-top:10px;width: 81%; margin-left: 50px; text-align: center;display:none;">你的帐号无法发送邀请，请联系网站管理员。</div>
+					
+					</div>
+					
+					<div class="modal-footer">
+					
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">取消</button>
+							<button type="sumbit" class="btn btn-primary" id="sendInvite"
+								value="sendInvite">发送邀请！</button>
+					</div>
 				</div>
 			</div>
 		</div>
