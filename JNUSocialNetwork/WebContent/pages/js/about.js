@@ -583,7 +583,7 @@ function showFollowees() {
       Msnry('.followeeContainer', '.member', 215);
     }
   });
-  if($.parseJSON(sessionStorage.getItem("user")).followeeIDs.length > followSize){
+  if(userInfo.followeeIDs.length > followSize){
 	 $("#eeN").css("display","inline");
   }
   
@@ -636,7 +636,7 @@ function showFollowers() {
       Msnry('.followerContainer', '.member', 215);
     }
   });
-  if($.parseJSON(sessionStorage.getItem("user")).followerIDs.length > followSize){
+  if(userInfo.followerIDs.length > followSize){
 	  $("#erN").css("display","inline");
   }
 }
@@ -823,7 +823,6 @@ $('body').on("click", ".emailUpload", function () {
 });
 // fetchUserByID profile页面初始化
 function fetchUserByID() {
-  var userInfo = FetchUserByID(userID);
   if ($.inArray(USERID, userInfo.followerIDs) != -1) {
     $('.followBtnAB').text("Following");
   }

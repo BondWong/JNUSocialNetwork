@@ -226,8 +226,6 @@ function addPost(ownerID, ownerNickName, publishDate, content, postID, likers,
 			likers, collecters, srcImage, ownerImage);
 	$(".share").after(boarddiv);
 	$("#commentText" + postID).blur(function() {
-		sessionStorage.setItem("commentOwnerName", "");
-		sessionStorage.setItem("commentID", "");
 		$(this).attr("placeholder", "add a comment");
 	});
 	$('.' + postID).find('img.userImg').userTips();
@@ -456,6 +454,9 @@ function clickEvent() {
 			commentOwnerName = sessionStorage.getItem("commentOwnerName");
 		}
 		var inputComm = $("input[id='commentText" + id + "']");
+		if($("input[id='commentText" + id + "']").length == 0){
+			inputComm = $("input[id='commentTextR" + id + "']");
+		}
 		var comment = {
 			attributes : {
 				content : inputComm.val(),

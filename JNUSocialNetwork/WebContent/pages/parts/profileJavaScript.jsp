@@ -39,6 +39,7 @@
 <script type="text/javascript">
 	var url = window.location.search;
 	window.userID = url.substr(url.indexOf("&") + 1);
+	window.userInfo = FetchUserByID(userID);
 	window.fileDri = [];
 	window.postIdContainer = [];
 	$('body').on('click', '.aboutNav', function() {
