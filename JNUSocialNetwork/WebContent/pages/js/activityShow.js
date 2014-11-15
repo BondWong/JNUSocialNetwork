@@ -609,7 +609,7 @@ function init(){
 	        visiblePages: pageNum>7?7:pageNum,
 	        version: '1.1',
 	        onPageClick: function (event, page) {
-	            pageRun(page);
+	            //pageRun(page);
 	        }
 	    });
 		function pageRun(index){
