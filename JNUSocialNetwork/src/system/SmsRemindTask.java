@@ -1,5 +1,7 @@
 package system;
 
+import helper.securityHelper.sendEmailTracker.ActivityInvitationEmailTracker;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -69,6 +71,9 @@ public class SmsRemindTask implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			ActivityInvitationEmailTracker.getInstance().removeRecord(
+					activity.get("ID"));
 
 		}
 	}
