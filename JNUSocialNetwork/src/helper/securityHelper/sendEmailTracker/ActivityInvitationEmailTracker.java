@@ -29,8 +29,8 @@ public class ActivityInvitationEmailTracker extends SendEmailTracker {
 	@Override
 	public void record(Object... params) {
 		// TODO Auto-generated method stub
-		Long activityID = (Long) params[0];
-		String ID = (String) params[1];
+		Long activityID = (Long) params[1];
+		String ID = (String) params[0];
 		int times = ((List<String>) params[2]).size();
 
 		synchronized (this) {
@@ -56,6 +56,15 @@ public class ActivityInvitationEmailTracker extends SendEmailTracker {
 				return true;
 			else
 				return false;
+		}
+	}
+
+	@Override
+	public void removeRecord(Object... params) {
+		// TODO Auto-generated method stub
+		Long activityID = (Long) params[0];
+		synchronized (this) {
+			recorder.remove(activityID);
 		}
 	}
 }

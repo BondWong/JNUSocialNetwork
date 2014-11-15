@@ -51,4 +51,10 @@ public class SimpleSendEmailTracker extends SendEmailTracker {
 
 	}
 
+	@Override
+	public void removeRecord(Object... params) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
