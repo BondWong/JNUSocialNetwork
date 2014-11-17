@@ -71,7 +71,8 @@
 						
 						<div id="max_invite_friends_alert" class="alert alert-info" style="margin-top:10px;width: 81%; margin-left: 50px; text-align: center;display:none;">最多只能邀请五名小伙伴哦！</div>
 						<div id="cannot_invite_friends_alert" class="alert alert-warning" style="margin-top:10px;width: 81%; margin-left: 50px; text-align: center;display:none;">你的帐号无法发送邀请，请联系网站管理员。</div>
-					
+						<div id="success_invite_friends_alert" class="alert alert-success" style="margin-top:10px;width: 81%; margin-left: 50px; text-align: center;display:none;">邀请邮件已发送！</div>
+						
 					</div>
 					
 					<div class="modal-footer">
