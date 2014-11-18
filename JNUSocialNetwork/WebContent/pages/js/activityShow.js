@@ -756,14 +756,6 @@ function init() {
 		var pageNum = Math
 				.ceil($.parseJSON(sessionStorage.getItem("user")).followeeWithEmailIDs.length / 6);
 		var pageCurrent = 1;
-		$('#pagination-demo').twbsPagination({
-			totalPages : pageNum,
-			visiblePages : pageNum > 7 ? 7 : pageNum,
-			version : '1.1',
-			onPageClick : function(event, page) {
-				// pageRun(page);
-			}
-		});
 		function pageRun(index) {
 			if (index == pageCurrent) {
 				return;
@@ -860,6 +852,15 @@ function init() {
 			pageCurrent = index;
 		}
 		;
+		$('#pagination-demo').twbsPagination({
+			totalPages : pageNum,
+			visiblePages : pageNum > 7 ? 7 : pageNum,
+			version : '1.1',
+			onPageClick : function(event, page) {
+				 pageRun(page);
+			}
+		});
+		
 	}
 	$('#sendInvite')
 			.click(
@@ -889,7 +890,7 @@ function init() {
 												}
 											}
 											emails = $.toJSON(emails);
-											console.log(emails);
+											//console.log(emails);
 											$
 													.ajax({
 														type : 'POST',
@@ -904,6 +905,10 @@ function init() {
 															console.log('good');
 														}
 													});
+											$('#success_invite_friends_alert').fadeIn(easingtime)
+											.delay(1500).fadeOut(easingtime,function(){
+												$('#inviteFriends').modal('hide');
+											})
 
 										}
 									}
