@@ -160,15 +160,18 @@
             $btn.removeClass("btn-danger").addClass("btn-success").html("参加");
         }
     }
-
+   
+    
     // 生成活动列表
     function generateListItem(data) {
+    	var imageLink = data.attributes.background;
+    	var imageObject = imageLink.substr(imageLink.indexOf(",{")+1);
         var testdata = {
             activityAddr: data.attributes.activityAddr,
             activityMore: data.attributes.activityMore,
             activityName: data.attributes.activityName,
             activityTime: data.attributes.activityTime,
-            imgsrc: JSON.parse(data.attributes.background).src,
+            imgsrc: JSON.parse(imageObject).src,
             ID: data.ID
         };
         dataset[data.ID] = data;

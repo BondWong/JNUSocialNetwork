@@ -1426,6 +1426,22 @@ function FetchFollowees(userID, startIndex, pageSize) {
 	});
 	return response;
 }
+function FetchLonelySouls(pageSize) {
+	var response = "";
+	$.ajax({
+		type : "GET",
+		url : '../../app/user/fetchLonelySouls/'+ pageSize,
+		async : false,
+		success : function(data, status) {
+			response = data;
+		},
+		error : function(data, status) {
+			response = status;
+		}
+
+	});
+	return response;
+}
 // FetchFollowers 输入：userID 开始index，数量 如：0/5 表示最新的5个;返回：postJson
 function FetchFollowers(userID, startIndex, pageSize) {
 	var response = "";

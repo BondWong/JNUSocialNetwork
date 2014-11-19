@@ -145,7 +145,7 @@ public class ImageUploadService extends HttpServlet {
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
 
-			int size = (int) (uploaddedFile.length() / (1024 * 1024));
+			double size = (double) ((uploaddedFile.length() *1.0) / (1024 * 1024));
 			if (size >= 0.5)
 				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
 			else if (size > 0.5 && size <= 2)

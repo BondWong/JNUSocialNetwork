@@ -9,7 +9,9 @@ body {
 	margin: 0px;
 	padding: 0px;
 }
-
+.container {
+    width: 100%;
+}
 .navbar-inverse {
 	opacity: 0.9;
 }
@@ -20,7 +22,7 @@ a:hover {
 
 .header {
 	position: relative;
-	height: 80px;
+	height: 70px;
 	min-width: 1200px;
 	z-index: 10;
 	top: -10px;
@@ -90,62 +92,6 @@ a:hover {
 	text-align: center;
 }
 
-.band {
-	position: relative;
-	min-height: 680px;
-	overflow: hidden;
-	min-width: 1200px;
-	background-color: #000;
-}
-
-.band-bg {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	opacity: 0;
-	background: url('../images/band-bg3.jpg') no-repeat scroll center 0px
-		transparent;
-	min-width: 1200px;
-}
-
-.band-about {
-	margin-top: 30px;
-}
-
-.band-about span {
-	display: inline-block;
-	padding-right: 18px;
-	height: 16px;
-	line-height: 16px;
-	font-size: 18px;
-	color: #CECECE;
-	cursor: pointer;
-	background: url('../images/play-icon.png') no-repeat scroll right 0px
-		transparent;
-}
-
-.band-text {
-	position: absolute;
-	top: 330px;
-	right: 80px;;
-	opacity: 0;
-	text-align: right;
-}
-
-.band-contain {
-	position: relative;
-	z-index: 9;
-}
-
-.band-title {
-	width: 644px;
-	height: 147px;
-	background: url('../images/main-text.png') no-repeat scroll 0% 0%
-		transparent;
-}
-
 .btnFind {
 	display: inline-block;
 	height: 80px;
@@ -157,32 +103,6 @@ a:hover {
 	border-radius: 50px;
 	transition: all 0.15s ease 0s;
 	background: url('../images/begin-text.png') no-repeat scroll center
-		center #A32929;
-}
-.btnFindC{
-	display: inline-block;
-	height: 80px;
-	width: 200px;
-	line-height: 60px;
-	text-align: center;
-	font-size: 30px;
-	color: #FFF;
-	border-radius: 50px;
-	transition: all 0.15s ease 0s;
-	background: url('../images/begin-text2.png') no-repeat scroll center
-		center #A32929;
-}
-.btnFindA{
-	display: inline-block;
-	height: 80px;
-	width: 200px;
-	line-height: 60px;
-	text-align: center;
-	font-size: 30px;
-	color: #FFF;
-	border-radius: 50px;
-	transition: all 0.15s ease 0s;
-	background: url('../images/begin-text3.png') no-repeat scroll center
 		center #A32929;
 }
 .btnFind2 {
@@ -214,7 +134,7 @@ a:hover {
 .characters {
 	min-width: 1200px;
 	background-color: #FFF;
-	margin: 0px auto;
+	margin: 30px auto;
 }
 
 .characters-container {
@@ -384,8 +304,8 @@ a:hover {
 }
 
 .icommunity {
-	margin-top: 50px;
 	background-color: #fff;
+	margin-top: 50px;
 }
 
 .icommunity-contain {
@@ -400,17 +320,29 @@ a:hover {
 }
 
 .icommunity-title {
-	text-align: center;
-	width: 64px;
+	text-align: left;
 	height: 31px;
-	margin: 0px auto;
-	font-size: 32px;
-	padding: 40px 0px 30px;
+	font-size: 28px;
 	line-height: 1em;
-	background: url('../images/community-text.png') no-repeat scroll center
-		center transparent;
+	display: block;
+	margin-left: 70px;
+	border-left: 3px solid #C9302C;
+	padding-left: 10px;
 }
-
+.icommunity-title a{
+	float: right;
+	font-size: 18px;
+	margin-right: 10px;
+}
+.icommunity-ty {
+	text-align: center;
+	height: 31px;
+	font-size: 28px;
+	line-height: 1em;
+	display: block;
+	padding-left: 10px;
+	color:#C9302C;
+}
 .communityShowItem {
 	display: inline-block;
 	margin-top: 10px;
@@ -422,7 +354,7 @@ a:hover {
 }
 
 .icommunity-footer {
-	padding: 40px 0px 60px;
+	padding: 40px 0px 30px;
 	text-align: center;
 }
 
@@ -578,4 +510,10 @@ a:hover {
 	position:absolute;
 	bottom:5px;
 	right:5px;
+}
+.info-Bg{
+	height:350px;
+	background: url('../images/banner_bg.jpg') no-repeat scroll center
+		center transparent;
+	margin-top: 70px;
 }
