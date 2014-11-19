@@ -1,2 +1,4 @@
 *.DS_Store
 **/*.DS_Store
+JNUSocialNetwork/WebContent/pages/home2.jsp
+JNUSocialNetwork/WebContent/pages/styles/home2.css

@@ -105,6 +105,7 @@ public class ImageUploadService extends HttpServlet {
 		Iterator<FileItem> iter = items.iterator();
 		List<String> links = new ArrayList<String>();
 
+		String needOrigin = "";
 		String needCopy = "";
 		Map<String, Integer> cropData = null;
 		while (iter.hasNext()) {
@@ -115,6 +116,9 @@ public class ImageUploadService extends HttpServlet {
 			if (item.isFormField() && item.getFieldName().equals("crop_data")) {
 				cropData = JsonUtil.fromJson(item.getString(), TYPE);
 				continue;
+			} else if (item.isFormField()
+					&& item.getFieldName().equals("need_origin")) {
+				needOrigin = item.getString();
 			} else if (item.isFormField()
 					&& item.getFieldName().equals("need_copy")) {
 				needCopy = item.getString();
@@ -145,15 +149,48 @@ public class ImageUploadService extends HttpServlet {
 			File uploaddedFile = new File(root + temp);
 			item.write(uploaddedFile);
 
-			double size = (double) ((uploaddedFile.length() *1.0) / (1024 * 1024));
-			if (size >= 0.5)
+			String thumbDir = "";
+			if (needOrigin != null && needOrigin.equals("true")) {
+				thumbDir = extention.substring(1) + "/--"
+						+ System.currentTimeMillis() + "--thumbnail"
+						+ extention;
+				uploaddedFile = new File(root + thumbDir);
+			}
+			double size = (double) ((uploaddedFile.length() * 1.0) / (1024 * 1024));
+			if (size >= 0.1 && size < 0.15)
+				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(uploaddedFile);
+			else if (size >= 0.15 && size < 0.2)
+				Thumbnails.of(uploaddedFile).scale(0.9f).toFile(uploaddedFile);
+			else if (size >= 0.2 && size < 0.3)
+				Thumbnails.of(uploaddedFile).scale(0.88f).toFile(uploaddedFile);
+			else if (size >= 0.3 && size < 0.5)
+				Thumbnails.of(uploaddedFile).scale(0.85f).toFile(uploaddedFile);
+			else if (size >= 0.5 && size < 0.7)
+				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
+			else if (size >= 0.7 && size < 0.9)
+				Thumbnails.of(uploaddedFile).scale(0.68f).toFile(uploaddedFile);
+			else if (size >= 0.9 && size < 1)
+				Thumbnails.of(uploaddedFile).scale(0.67f).toFile(uploaddedFile);
+			else if (size >= 1 && size < 1.1)
+				Thumbnails.of(uploaddedFile).scale(0.66f).toFile(uploaddedFile);
+			else if (size >= 1.1 && size < 1.3)
+				Thumbnails.of(uploaddedFile).scale(0.65f).toFile(uploaddedFile);
+			else if (size > 1.3 && size <= 1.5)
+				Thumbnails.of(uploaddedFile).scale(0.57f).toFile(uploaddedFile);
+			else if (size > 1.5 && size <= 1.7)
+				Thumbnails.of(uploaddedFile).scale(0.54f).toFile(uploaddedFile);
+			else if (size > 1.7 && size <= 1.9)
+				Thumbnails.of(uploaddedFile).scale(0.50f).toFile(uploaddedFile);
+			else if (size > 2.1 && size <= 2.3)
+				Thumbnails.of(uploaddedFile).scale(0.40f).toFile(uploaddedFile);
+			else if (size > 2.3 && size <= 2.5)
+				Thumbnails.of(uploaddedFile).scale(0.35f).toFile(uploaddedFile);
+			else if (size > 2.5 && size <= 2.7)
+				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(uploaddedFile);
+			else if (size > 2.7 && size <= 2.9)
+				Thumbnails.of(uploaddedFile).scale(0.25f).toFile(uploaddedFile);
+			else
 				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
-			else if (size > 0.5 && size <= 2)
-				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
-			else if (size > 2 && size <= 3)
-				Thumbnails.of(uploaddedFile).scale(0.15f).toFile(uploaddedFile);
-			else if (size > 3)
-				Thumbnails.of(uploaddedFile).scale(0.1f).toFile(uploaddedFile);
 
 			BufferedImage bi = ImageIO.read(uploaddedFile);
 			BufferedImage ci;
@@ -181,6 +218,12 @@ public class ImageUploadService extends HttpServlet {
 
 			Image image = new Image(temp, bi.getHeight(), bi.getWidth());
 			links.add(JsonUtil.toJson(image));
+
+			if (needOrigin != null && needOrigin.equals("true")) {
+				image = new Image(thumbDir, bi.getHeight(), bi.getWidth());
+				links.add(JsonUtil.toJson(image));
+			}
+
 		}
 
 		return links;
