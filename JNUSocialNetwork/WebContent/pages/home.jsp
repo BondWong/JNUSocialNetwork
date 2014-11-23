@@ -10,31 +10,62 @@
 </head>
 
 <body data="home">
-	
-        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-          <div class="container">
-            <%@ include file="parts/navLeft.jsp" %>
-              <div class="collapse navbar-collapse">
-                <%@ include file="parts/communityDropDown.jsp" %>
 
-                  <%@ include file="parts/navRight.jsp" %>
-              </div>
-              <!-- /.nav-collapse -->
-          </div>
-          <!-- /.container -->
-        </div>
-	<div class="info-Bg">
-		<div class="move-ad"></div>
-		<div class="text-ad"></div>
+	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container">
+			<%@ include file="parts/navLeft.jsp"%>
+			<div class="collapse navbar-collapse">
+				<%@ include file="parts/communityDropDown.jsp"%>
+
+				<%@ include file="parts/navRight.jsp"%>
+			</div>
+			<!-- /.nav-collapse -->
+		</div>
+		<!-- /.container -->
 	</div>
-	<div class="icommunity">
+	<div class="info-Bg">
+		<div class="info-contener">
+			<div class="move-ad">
+				<div class="flexslider">
+					<ul class="slides">
+						<!-- Slide images' width:height must be 2:1 !important -->
+						<li><a href="#"><img
+								src="./images/about-us/frontend-3-1.png" /></a></li>
+						<li><a href="#"><img src="./images/about-us/server-3-1.png" /></a></li>
+		
+					</ul>
+				</div>
+			</div>
+			<div class="texts-ad">
+				<div class="texts-ad-title">推荐咨询</div><hr style="width:90%"/>
+				<div class="texts-ad-body"></div>
+				<div class="texts-ad-foot">
+                    <ul id="texts-ad-pagination" class="pagination-custom-1-sm"></ul>
+                </div>
+                
+			</div>
+		</div>
+		
+	</div>
+	<div class="icommunity-123">
 		<div class="icommunity-contain">
-			<div class="icommunity-title"><span>寂寞排行榜</span></div>
-			<ul class="icommunity-container">
-				<li class="userBoard">
-					<div class="loneUser"></div>
-				</li>
-			</ul>
+			<div class="icommunity-title">
+				<span>寂寞排行榜</span>
+			</div>
+			<div class="icommunity-container">
+				<div class="userBoard">
+					<div class="loneUserPlaceHolder" place="1" style="float:left;margin-left: 400px"></div>
+					<div class="loneUserPlaceHolder" place="2" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="3" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="4" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="5" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="6" style="float:left;margin-left: 400px"></div>
+					<div class="loneUserPlaceHolder" place="7" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="8" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="9" style="float:left"></div>
+					<div class="loneUserPlaceHolder" place="10" style="float:left"></div>
+				</div>
+			</div>
 		</div>
 		<div class="icommunity-footer">
 			<a href="community.jsp?nav=discovery">寻找朋友</a>
@@ -42,7 +73,9 @@
 	</div>
 	<div class="icommunity">
 		<div class="icommunity-contain">
-			<div class="icommunity-title"><span>热门社区</span><a href="#">更多</a></div>
+			<div class="icommunity-title">
+				<span>热门社区</span><a href="#">更多</a>
+			</div>
 			<ul class="icommunity-container">
 				<li class="communityBoard"></li>
 
@@ -91,8 +124,8 @@
 			<div class="intro4-img"></div>
 		</div>
 	</div>
-	
-	
+
+
 
 	<div class="joinCampusite">
 		<h1 class="hide-text"></h1>
@@ -114,6 +147,15 @@
 	<script src="js/guidance.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('.flexslider').flexslider({
+				animation : "fade",
+				slideshowSpeed: 5000,
+				animationDuration: 800,
+				controlNav : true,
+				directionNav : true,
+				animationLoop : true,
+				slideshow : true
+			});
 			fetchLonelySouls();
 			fetchHotCommunity();
 		});
