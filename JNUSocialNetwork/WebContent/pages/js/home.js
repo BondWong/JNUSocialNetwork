@@ -349,7 +349,8 @@ $(document).ready(
 					lonelySouls[index].css({
 						height : '+=100',
 						width : '+=100',
-						top : $('.loneUserPlaceHolder[place=1]').offset().top
+						top : $('.loneUserPlaceHolder[place=1]').offset().top,
+						left:'-=30'
 					}).delay(300).fadeIn(400).children('.loneUsersName').delay(
 							600).fadeIn(400).siblings('.loneUsersTags').delay(
 							900).fadeIn(

@@ -54,12 +54,12 @@
 			</div>
 			<div class="icommunity-container">
 				<div class="userBoard">
-					<div class="loneUserPlaceHolder" place="1" style="float:left;margin-left: 400px"></div>
+					<div class="loneUserPlaceHolder" place="1" style="float:left;margin-left: 330px"></div>
 					<div class="loneUserPlaceHolder" place="2" style="float:left"></div>
 					<div class="loneUserPlaceHolder" place="3" style="float:left"></div>
 					<div class="loneUserPlaceHolder" place="4" style="float:left"></div>
 					<div class="loneUserPlaceHolder" place="5" style="float:left"></div>
-					<div class="loneUserPlaceHolder" place="6" style="float:left;margin-left: 400px"></div>
+					<div class="loneUserPlaceHolder" place="6" style="float:left;margin-left: 330px"></div>
 					<div class="loneUserPlaceHolder" place="7" style="float:left"></div>
 					<div class="loneUserPlaceHolder" place="8" style="float:left"></div>
 					<div class="loneUserPlaceHolder" place="9" style="float:left"></div>
