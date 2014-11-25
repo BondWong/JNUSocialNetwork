@@ -532,13 +532,13 @@ a:hover {
 }
 
 .info-contener {
-	width: 1300px;
+	width: 1137.5px;
 	margin: 0 auto;
 	overflow: hidden;
 }
 
 .move-ad {
-	width: 975px;
+	width: 812.5px;
 	position: relative;
 	top: 10px;
 	float: left
