@@ -1,6 +1,6 @@
 package transaction.DAOCreateTransaction;
 
-import helper.serviceHelper.RankMap;
+import helper.serviceHelper.searchHelper.RankMap;
 
 import javax.persistence.EntityManager;
 

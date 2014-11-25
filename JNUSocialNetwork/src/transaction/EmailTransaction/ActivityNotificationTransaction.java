@@ -1,6 +1,7 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ActivityNotificationTransaction implements Transaction {
 					addrs.add(receiverAddr);
 				}
 			}
-			es.send(TITLE, content, addrs);
+			es.send(TITLE, content, addrs, EmailType.TEXT);
 			startIndex += BUCKETSIZE;
 		} while (members.size() == BUCKETSIZE);
 

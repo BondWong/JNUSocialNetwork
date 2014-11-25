@@ -1,6 +1,7 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
 
 import javax.persistence.EntityManager;
@@ -34,7 +35,7 @@ public class SendConnectionTransaction extends DAOTransaction {
 
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(sender));
 
-		new EmailSender().send(subject, sb.toString(), toAddr);
+		new EmailSender().send(subject, sb.toString(), toAddr, EmailType.TEXT);
 
 		return null;
 	}

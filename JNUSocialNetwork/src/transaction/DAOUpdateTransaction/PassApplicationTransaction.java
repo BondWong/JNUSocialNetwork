@@ -1,6 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
-import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class PassApplicationTransaction extends DAOTransaction {
 				+ "\npassword:"
 				+ password
 				+ "\nPlease login using this link: http://218.244.137.34/pages/login.jsp";
-		new EmailSender().send("Your application passed!", content, email);
+		new EmailSender().send("Your application passed!", content, email, EmailType.TEXT);
 
 		account.setID(id);
 		account.setPassword(MD5.toMD5Code(password));

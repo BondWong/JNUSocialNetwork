@@ -1,6 +1,7 @@
 package transaction.DAOUpdateTransaction;
 
-import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 
 import javax.persistence.EntityManager;
 
@@ -21,7 +22,7 @@ public class RejectApplicationTransaction extends DAOTransaction {
 		String reason = (String) params[1];
 
 		new EmailSender().send("Sorry! Your application is rejected!", reason,
-				email);
+				email, EmailType.TEXT);
 
 		application.delete();
 		application.clearAttributes();

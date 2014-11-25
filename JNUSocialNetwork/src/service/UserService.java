@@ -49,7 +49,7 @@ import transaction.DAOUpdateTransaction.DAODeleteTransaction.DeleteMemberTransac
 import transaction.EmailTransaction.ActivityInvitationTransaction;
 import transaction.EmailTransaction.BegForConnectionTransaction;
 import transaction.EmailTransaction.EmailTransaction;
-import transaction.EmailTransaction.ProfileInvititionTransaction;
+import transaction.EmailTransaction.BegProfileInfoTransaction;
 import transaction.EmailTransaction.SendConnectionTransaction;
 import transaction.EmailTransaction.SendEmailTransaction;
 import transaction.SSETransaction.SSEFollowTransaction;
@@ -572,12 +572,12 @@ public class UserService {
 	@POST
 	public Response inviteToAddImage(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+		transaction = new EmailTransaction(new BegProfileInfoTransaction(),
 				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
-					"去添加图片:http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
+					"去添加图片：http://www.campusite.com.cn/pages/profile.jsp?nav=photo&"
 							+ toID, "邀请你去添加个人照片到CampuSite");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -592,12 +592,12 @@ public class UserService {
 	@POST
 	public Response inviteToAddAvatar(@PathParam("fromID") String fromID,
 			@PathParam("toID") String toID) throws Exception {
-		transaction = new EmailTransaction(new ProfileInvititionTransaction(),
+		transaction = new EmailTransaction(new BegProfileInfoTransaction(),
 				SimpleSendEmailTracker.getInstance());
 		boolean result = true;
 		try {
 			result = (boolean) transaction.execute(fromID, toID,
-					"去添加头像:http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
+					"去添加头像：http://www.campusite.com.cn/pages/profile.jsp?nav=about&"
 							+ toID, "邀请你去添加CampuSite账号头像");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import helper.serviceHelper.AdmirationMap;
+import helper.serviceHelper.searchHelper.AdmirationMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

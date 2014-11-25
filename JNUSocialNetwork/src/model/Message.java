@@ -22,8 +22,8 @@ import model.modelType.MessageStatus;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries(value = {
-		@NamedQuery(name = "Message.fetchByID", query = "SELECT m FROM Message m WHERE m.ID = ?1 "),
-		@NamedQuery(name = "Message.fetchUnread", query = "SELECT m FROM Message m WHERE m.messageStatus != model.modelType.MessageStatus.READ AND m.to.ID = ?1 ORDER BY m.ID DESC"),
+		@NamedQuery(name = "Message.fetchByID", query = "SELECT m FROM Message m WHERE m.ID = ?1 AND m.available = 1"),
+		@NamedQuery(name = "Message.fetchUnread", query = "SELECT m FROM Message m WHERE m.messageStatus != model.modelType.MessageStatus.READ AND m.to.ID = ?1 AND m.available = 1 ORDER BY m.ID DESC"),
 		@NamedQuery(name = "Message.fetchUnavailableIDs", query = "SELECT m.ID FROM Message m WHERE m.available = 0"),
 		@NamedQuery(name = "Message.deleteUnavailable", query = "DELETE FROM Message m WHERE m.available = 0"),
 		@NamedQuery(name = "Message.fetchByChatRoom", query = "SELECT m FROM ChatRoom c JOIN c.messages m WHERE c.ID = ?1 ORDER BY m.ID DESC") })

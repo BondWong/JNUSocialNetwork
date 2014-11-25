@@ -1,6 +1,6 @@
 package transaction.DAOUpdateTransaction;
 
-import helper.serviceHelper.MemberSearchMap;
+import helper.serviceHelper.searchHelper.MemberSearchMap;
 
 import java.util.Map;
 

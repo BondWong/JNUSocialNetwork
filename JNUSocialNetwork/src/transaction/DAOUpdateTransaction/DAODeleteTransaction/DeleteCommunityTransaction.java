@@ -1,7 +1,7 @@
 package transaction.DAOUpdateTransaction.DAODeleteTransaction;
 
-import helper.serviceHelper.CommunitySearchMap;
 import helper.serviceHelper.NumberManager;
+import helper.serviceHelper.searchHelper.CommunitySearchMap;
 
 import javax.persistence.EntityManager;
 
