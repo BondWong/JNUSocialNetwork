@@ -78,12 +78,12 @@ function fetchHotCommunity() {
 			});
 }
 function fetchLonelySouls() {
-	 var users = FetchLonelySouls(11);
-	 $.each(users.reverse(), function(n, user) {
-	 if (user.available == true) {
-	 addUser();
-	 }
-	 });
+	var users = FetchLonelySouls(11);
+	$.each(users.reverse(), function(n, user) {
+		if (user.available == true) {
+			addUser();
+		}
+	});
 }
 function addUser() {
 
@@ -130,11 +130,9 @@ $(document)
 
 					var textList = new Array();
 					var easingtime = 200;
-					$(document).ready(function() {
-						if (textList.length == 0) {
-							init();
-						}
-					});
+					if (textList.length === 0) {
+						init();
+					}
 					function init() {
 
 						$('.texts-ad-body').empty();
@@ -285,7 +283,7 @@ $(document).ready(
 			var userBoard = $('.userBoard');
 			var lonelySouls = new Array();
 			var isFold = true;
-			
+
 			function createLonelyUserDiv(name, headSrc, tags) {
 				return $(
 						'<div class="loneUser"><img class="loneUsersHead" src="'
@@ -294,7 +292,8 @@ $(document).ready(
 								+ tags[0] + ', ' + tags[1] + '</div></div>')
 						.css({
 							'top' : userBoard.offset().top + 150,
-							'left' : userBoard.offset().left + 100
+							'left' : userBoard.offset().left + 100,
+							'display':'none'
 						});
 			}
 			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
@@ -334,12 +333,16 @@ $(document).ready(
 
 			function unFold(index) {
 				if (index > 0) {
-					lonelySouls[index].animate({
-						left : $('.loneUserPlaceHolder[place=' + index + ']')
-								.offset().left,
-						top : $('.loneUserPlaceHolder[place=' + index + ']')
-								.offset().top
-					}, 200, function() {
+
+					lonelySouls[index].css(
+							{
+								left : $(
+										'.loneUserPlaceHolder[place=' + index
+												+ ']').offset().left,
+								top : $(
+										'.loneUserPlaceHolder[place=' + index
+												+ ']').offset().top
+							}).fadeIn(150, function() {
 						unFold(index - 1);
 					});
 				} else if (index === 0) {
