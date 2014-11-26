@@ -1,6 +1,6 @@
 package system;
 
-import helper.serviceHelper.DesertFileLinkMap;
+import helper.serviceHelper.searchHelper.DesertFileLinkMap;
 
 import java.io.File;
 import java.io.IOException;

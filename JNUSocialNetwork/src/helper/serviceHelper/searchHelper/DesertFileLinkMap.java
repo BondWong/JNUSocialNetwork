@@ -1,4 +1,4 @@
-package helper.serviceHelper;
+package helper.serviceHelper.searchHelper;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

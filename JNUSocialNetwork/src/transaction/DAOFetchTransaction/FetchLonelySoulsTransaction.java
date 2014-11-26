@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import helper.serviceHelper.RankMap;
+import helper.serviceHelper.searchHelper.RankMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

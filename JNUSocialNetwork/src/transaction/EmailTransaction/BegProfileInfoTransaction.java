@@ -1,7 +1,8 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.EmailSender;
-import helper.serviceHelper.RankMap;
+import helper.serviceHelper.searchHelper.RankMap;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,7 @@ import persistence.DAO;
 import transaction.DAOTransaction;
 import utils.ConstantValue;
 
-public class ProfileInvititionTransaction extends DAOTransaction {
+public class BegProfileInfoTransaction extends DAOTransaction {
 
 	@Override
 	protected Object process(EntityManager em, Object... params)
@@ -30,7 +31,7 @@ public class ProfileInvititionTransaction extends DAOTransaction {
 		sb.append(params[2]);
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(invitor));
 
-		new EmailSender().send(subject, sb.toString(), toAddr);
+		new EmailSender().send(subject, sb.toString(), toAddr, EmailType.TEXT);
 
 		RankMap.deserialize();
 		RankMap.addLonlinessRankRecord(invitor.getID(),

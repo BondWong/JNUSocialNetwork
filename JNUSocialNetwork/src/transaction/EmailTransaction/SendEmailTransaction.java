@@ -1,7 +1,8 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.EmailSender;
-import helper.serviceHelper.RankMap;
+import helper.serviceHelper.searchHelper.RankMap;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
 
 import javax.persistence.EntityManager;
@@ -30,7 +31,7 @@ public class SendEmailTransaction extends DAOTransaction {
 		StringBuffer sb = new StringBuffer(content);
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(sender));
 
-		new EmailSender().send(subject, sb.toString(), toAddr);
+		new EmailSender().send(subject, sb.toString(), toAddr, EmailType.TEXT);
 
 		RankMap.deserialize();
 		RankMap.addLonlinessRankRecord(sender.getID(),

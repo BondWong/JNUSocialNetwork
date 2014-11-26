@@ -1,6 +1,6 @@
 package transaction.DAOFetchTransaction;
 
-import helper.serviceHelper.MemberSearchMap;
+import helper.serviceHelper.searchHelper.MemberSearchMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;

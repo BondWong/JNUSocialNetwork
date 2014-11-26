@@ -1,7 +1,7 @@
 package transaction.DAOCreateTransaction;
 
-import helper.serviceHelper.CommunitySearchMap;
 import helper.serviceHelper.NumberManager;
+import helper.serviceHelper.searchHelper.CommunitySearchMap;
 
 import java.util.HashMap;
 

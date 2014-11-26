@@ -1,6 +1,6 @@
 package model;
 
-import helper.serviceHelper.DesertFileLinkMap;
+import helper.serviceHelper.searchHelper.DesertFileLinkMap;
 
 import java.io.IOException;
 import java.util.ArrayList;

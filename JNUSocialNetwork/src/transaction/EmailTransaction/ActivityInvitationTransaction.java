@@ -1,6 +1,7 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailSender;
+import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class ActivityInvitationTransaction extends DAOTransaction {
 					&& EmailDetector.isEmailAddress(email))
 				receiverEmails.add(email);
 
-		es.send(subject, sb.toString(), receiverEmails);
+		es.send(subject, sb.toString(), receiverEmails, EmailType.TEXT);
 		return null;
 	}
 
