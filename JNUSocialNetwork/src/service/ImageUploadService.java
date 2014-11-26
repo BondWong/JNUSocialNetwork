@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.structure.Image;
+import model.structure.ImageTuple;
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.apache.commons.fileupload.FileItem;
@@ -136,6 +137,7 @@ public class ImageUploadService extends HttpServlet {
 			}
 			String imageName = extention.substring(1) + "/--"
 					+ System.currentTimeMillis();
+			ImageTuple imageTuple = new ImageTuple();
 
 			String orignDir = imageName + "--original" + extention;
 			File uploaddedFile = new File(root + orignDir);
@@ -146,7 +148,7 @@ public class ImageUploadService extends HttpServlet {
 
 			double size = (double) ((uploaddedFile.length() * 1.0) / (1024 * 1024));
 			if (size > 0 && size < 0.1)
-				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(thumbnail);
+				Thumbnails.of(uploaddedFile).scale(1f).toFile(thumbnail);
 			else if (size >= 0.1 && size < 0.15)
 				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(thumbnail);
 			else if (size >= 0.15 && size < 0.2)
@@ -184,11 +186,11 @@ public class ImageUploadService extends HttpServlet {
 
 			BufferedImage bi = ImageIO.read(thumbnail);
 			Image image = new Image(thumbDir, bi.getHeight(), bi.getWidth());
-			links.add(JsonUtil.toJson(image));
+			imageTuple.setThumbnail(JsonUtil.toJson(image));
 
 			bi = ImageIO.read(uploaddedFile);
 			image = new Image(orignDir, bi.getHeight(), bi.getWidth());
-			links.add(JsonUtil.toJson(image));
+			imageTuple.setOriginalImaage(JsonUtil.toJson(image));
 
 			BufferedImage ci;
 			Image croppedImage;
@@ -203,9 +205,11 @@ public class ImageUploadService extends HttpServlet {
 				ci = ImageIO.read(croppedFile);
 				croppedImage = new Image(croppedImageDir, ci.getHeight(),
 						ci.getWidth());
-				links.add(JsonUtil.toJson(croppedImage));
+				imageTuple.setCroppedImaage(JsonUtil.toJson(croppedImage));
 				cropData = null;
 			}
+
+			links.add(JsonUtil.toJson(imageTuple.toTuple()));
 
 		}
 
