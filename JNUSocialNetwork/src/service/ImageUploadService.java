@@ -105,8 +105,6 @@ public class ImageUploadService extends HttpServlet {
 		Iterator<FileItem> iter = items.iterator();
 		List<String> links = new ArrayList<String>();
 
-		String needOrigin = "";
-		String needCopy = "";
 		Map<String, Integer> cropData = null;
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
@@ -115,13 +113,6 @@ public class ImageUploadService extends HttpServlet {
 
 			if (item.isFormField() && item.getFieldName().equals("crop_data")) {
 				cropData = JsonUtil.fromJson(item.getString(), TYPE);
-				continue;
-			} else if (item.isFormField()
-					&& item.getFieldName().equals("need_origin")) {
-				needOrigin = item.getString();
-			} else if (item.isFormField()
-					&& item.getFieldName().equals("need_copy")) {
-				needCopy = item.getString();
 				continue;
 			} else if (item.isFormField())
 				continue;
@@ -143,56 +134,62 @@ public class ImageUploadService extends HttpServlet {
 			if (!dir.exists()) {
 				dir.mkdir();
 			}
+			String imageName = extention.substring(1) + "/--"
+					+ System.currentTimeMillis();
 
-			String temp = extention.substring(1) + "/--"
-					+ System.currentTimeMillis() + extention;
-			File uploaddedFile = new File(root + temp);
+			String orignDir = imageName + extention;
+			File uploaddedFile = new File(root + orignDir);
 			item.write(uploaddedFile);
 
-			String thumbDir = "";
-			if (needOrigin != null && needOrigin.equals("true")) {
-				thumbDir = extention.substring(1) + "/--"
-						+ System.currentTimeMillis() + "--thumbnail"
-						+ extention;
-				uploaddedFile = new File(root + thumbDir);
-			}
-			double size = (double) ((uploaddedFile.length() * 1.0) / (1024 * 1024));
-			if (size >= 0.1 && size < 0.15)
-				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(uploaddedFile);
-			else if (size >= 0.15 && size < 0.2)
-				Thumbnails.of(uploaddedFile).scale(0.9f).toFile(uploaddedFile);
-			else if (size >= 0.2 && size < 0.3)
-				Thumbnails.of(uploaddedFile).scale(0.88f).toFile(uploaddedFile);
-			else if (size >= 0.3 && size < 0.5)
-				Thumbnails.of(uploaddedFile).scale(0.85f).toFile(uploaddedFile);
-			else if (size >= 0.5 && size < 0.7)
-				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(uploaddedFile);
-			else if (size >= 0.7 && size < 0.9)
-				Thumbnails.of(uploaddedFile).scale(0.68f).toFile(uploaddedFile);
-			else if (size >= 0.9 && size < 1)
-				Thumbnails.of(uploaddedFile).scale(0.67f).toFile(uploaddedFile);
-			else if (size >= 1 && size < 1.1)
-				Thumbnails.of(uploaddedFile).scale(0.66f).toFile(uploaddedFile);
-			else if (size >= 1.1 && size < 1.3)
-				Thumbnails.of(uploaddedFile).scale(0.65f).toFile(uploaddedFile);
-			else if (size > 1.3 && size <= 1.5)
-				Thumbnails.of(uploaddedFile).scale(0.57f).toFile(uploaddedFile);
-			else if (size > 1.5 && size <= 1.7)
-				Thumbnails.of(uploaddedFile).scale(0.54f).toFile(uploaddedFile);
-			else if (size > 1.7 && size <= 1.9)
-				Thumbnails.of(uploaddedFile).scale(0.50f).toFile(uploaddedFile);
-			else if (size > 2.1 && size <= 2.3)
-				Thumbnails.of(uploaddedFile).scale(0.40f).toFile(uploaddedFile);
-			else if (size > 2.3 && size <= 2.5)
-				Thumbnails.of(uploaddedFile).scale(0.35f).toFile(uploaddedFile);
-			else if (size > 2.5 && size <= 2.7)
-				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(uploaddedFile);
-			else if (size > 2.7 && size <= 2.9)
-				Thumbnails.of(uploaddedFile).scale(0.25f).toFile(uploaddedFile);
-			else
-				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(uploaddedFile);
+			String thumbDir = imageName + "--thumbnail" + extention;
+			File thumbnail = new File(root + thumbDir);
 
-			BufferedImage bi = ImageIO.read(uploaddedFile);
+			double size = (double) ((uploaddedFile.length() * 1.0) / (1024 * 1024));
+			if (size > 0 && size < 0.1)
+				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(thumbnail);
+			else if (size >= 0.1 && size < 0.15)
+				Thumbnails.of(uploaddedFile).scale(0.95f).toFile(thumbnail);
+			else if (size >= 0.15 && size < 0.2)
+				Thumbnails.of(uploaddedFile).scale(0.9f).toFile(thumbnail);
+			else if (size >= 0.2 && size < 0.3)
+				Thumbnails.of(uploaddedFile).scale(0.88f).toFile(thumbnail);
+			else if (size >= 0.3 && size < 0.5)
+				Thumbnails.of(uploaddedFile).scale(0.85f).toFile(thumbnail);
+			else if (size >= 0.5 && size < 0.7)
+				Thumbnails.of(uploaddedFile).scale(0.7f).toFile(thumbnail);
+			else if (size >= 0.7 && size < 0.9)
+				Thumbnails.of(uploaddedFile).scale(0.68f).toFile(thumbnail);
+			else if (size >= 0.9 && size < 1)
+				Thumbnails.of(uploaddedFile).scale(0.67f).toFile(thumbnail);
+			else if (size >= 1 && size < 1.1)
+				Thumbnails.of(uploaddedFile).scale(0.66f).toFile(thumbnail);
+			else if (size >= 1.1 && size < 1.3)
+				Thumbnails.of(uploaddedFile).scale(0.65f).toFile(thumbnail);
+			else if (size > 1.3 && size <= 1.5)
+				Thumbnails.of(uploaddedFile).scale(0.57f).toFile(thumbnail);
+			else if (size > 1.5 && size <= 1.7)
+				Thumbnails.of(uploaddedFile).scale(0.54f).toFile(thumbnail);
+			else if (size > 1.7 && size <= 1.9)
+				Thumbnails.of(uploaddedFile).scale(0.50f).toFile(thumbnail);
+			else if (size > 2.1 && size <= 2.3)
+				Thumbnails.of(uploaddedFile).scale(0.40f).toFile(thumbnail);
+			else if (size > 2.3 && size <= 2.5)
+				Thumbnails.of(uploaddedFile).scale(0.35f).toFile(thumbnail);
+			else if (size > 2.5 && size <= 2.7)
+				Thumbnails.of(uploaddedFile).scale(0.3f).toFile(thumbnail);
+			else if (size > 2.7 && size <= 2.9)
+				Thumbnails.of(uploaddedFile).scale(0.25f).toFile(thumbnail);
+			else if (size >= 3.0)
+				Thumbnails.of(uploaddedFile).scale(0.2f).toFile(thumbnail);
+
+			BufferedImage bi = ImageIO.read(thumbnail);
+			Image image = new Image(thumbDir, bi.getHeight(), bi.getWidth());
+			links.add(JsonUtil.toJson(image));
+
+			bi = ImageIO.read(uploaddedFile);
+			image = new Image(orignDir, bi.getHeight(), bi.getWidth());
+			links.add(JsonUtil.toJson(image));
+
 			BufferedImage ci;
 			Image croppedImage;
 
@@ -200,28 +197,14 @@ public class ImageUploadService extends HttpServlet {
 				bi = bi.getSubimage(cropData.get("x"), cropData.get("y"),
 						cropData.get("width"), cropData.get("height"));
 
-				if (needCopy != null && needCopy.equals("true")) {
-					String subdir = extention.substring(1) + "/" + "--"
-							+ System.currentTimeMillis() + "--cropped"
-							+ extention;
-					File croppedFile = new File(root + subdir);
-					ImageIO.write(bi, extention.substring(1), croppedFile);
-					ci = ImageIO.read(croppedFile);
-					croppedImage = new Image(subdir, ci.getHeight(),
-							ci.getWidth());
-					links.add(JsonUtil.toJson(croppedImage));
-				} else
-					ImageIO.write(bi, extention.substring(1), uploaddedFile);
-				bi = ImageIO.read(uploaddedFile);
+				String croppedImageDir = imageName + "--cropped" + extention;
+				File croppedFile = new File(root + croppedImageDir);
+				ImageIO.write(bi, extention.substring(1), croppedFile);
+				ci = ImageIO.read(croppedFile);
+				croppedImage = new Image(croppedImageDir, ci.getHeight(),
+						ci.getWidth());
+				links.add(JsonUtil.toJson(croppedImage));
 				cropData = null;
-			}
-
-			Image image = new Image(temp, bi.getHeight(), bi.getWidth());
-			links.add(JsonUtil.toJson(image));
-
-			if (needOrigin != null && needOrigin.equals("true")) {
-				image = new Image(thumbDir, bi.getHeight(), bi.getWidth());
-				links.add(JsonUtil.toJson(image));
 			}
 
 		}
