@@ -201,7 +201,7 @@ $(document)
 							var page1size = textList.length > 5 ? 5
 									: textList.length;
 							for (var i = 0; i < page1size; i++) {
-								var textUrl = $("<a data="
+								var textUrl = $("<li><a data="
 										+ i
 										+ " class='texts-ad-url' href='"
 										+ textList[i].url
@@ -209,7 +209,7 @@ $(document)
 										+ (textList[i].title.length > 30 ? textList[i].title
 												.substr(0, 30)
 												+ "..."
-												: textList[i].title) + "</a>");
+												: textList[i].title) + "</a></li>");
 
 								textUrl.appendTo($('.texts-ad-body'));
 								$('<hr class="texts-ad-hr"/>').appendTo(
@@ -393,7 +393,7 @@ $(document).ready(
 										}
 									});
 								}
-							})
+							});
 
 				}
 			}
