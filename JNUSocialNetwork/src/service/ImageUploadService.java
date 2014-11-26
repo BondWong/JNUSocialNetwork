@@ -135,7 +135,7 @@ public class ImageUploadService extends HttpServlet {
 				dir.mkdir();
 			}
 			String imageName = extention.substring(1) + "/--"
-					+ System.currentTimeMillis();
+					+ System.currentTimeMillis() + "--original";
 
 			String orignDir = imageName + extention;
 			File uploaddedFile = new File(root + orignDir);
