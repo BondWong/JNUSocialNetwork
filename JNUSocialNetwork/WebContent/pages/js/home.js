@@ -296,42 +296,15 @@ $(document).ready(
 							'display':'none'
 						});
 			}
-			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
-					'./images/founder-avatar/lwx.png', [ '唱歌', '跳舞' ])
-					.appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Huang Junbang',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
-					'./images/founder-avatar/lwx.png', [ '唱歌', '跳舞' ])
-					.appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Huang Junbang',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
-					'./images/founder-avatar/lwx.png', [ '唱歌', '跳舞' ])
-					.appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv(
-					'Huang 123123Junbang12331231212321',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
-					'./images/founder-avatar/lwx.png', [ '唱歌', '跳舞' ])
-					.appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Huang Junbang',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Liu Weixiong',
-					'./images/founder-avatar/lwx.png', [ '唱歌', '跳舞' ])
-					.appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Huang Junbang',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-			lonelySouls.push(createLonelyUserDiv('Huang Junbang',
-					'./images/founder-avatar/hjb.png',
-					[ '唱歌唱歌唱歌唱歌', '跳舞跳舞跳舞跳舞' ]).appendTo(userBoard));
-
-			function unFold(index) {
+			var users = FetchLonelySouls(11);
+			$.each(users.reverse(), function(n, user) {
+				if (user.available == true) {
+					lonelySouls.push(createLonelyUserDiv(user.attributes.name,
+							$.parseJSON(user.attributes.avatarLink).src,user.lookingForTags)
+							.appendTo(userBoard));
+				}
+			});
+						function unFold(index) {
 				if (index > 0) {
 
 					lonelySouls[index].css(
