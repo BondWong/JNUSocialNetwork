@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import model.structure.Image;
+import model.structure.ImageTuple;
 import utils.JsonUtil;
 import utils.RootPathHelper;
 
@@ -65,13 +66,36 @@ public class DesertFileLinkMap {
 	public synchronized static void addLink(String imageLink) {
 		if (imageLink == null || imageLink.equals(""))
 			return;
-		if (imageLink.contains("src") && imageLink.contains("width")
+		else if (imageLink.contains("originalImage")
+				&& imageLink.contains("thumbnail")
+				&& imageLink.contains("croppedImage")) {
+			ImageTuple tuple = JsonUtil.fromJson(imageLink, ImageTuple.class);
+			String originalImage = tuple.getOriginalImage();
+			String croppedImage = tuple.getCroppedImage();
+			String thumbnail = tuple.getThumbnail();
+			if (!originalImage.equals("")) {
+				originalImage = JsonUtil.fromJson(originalImage, Image.class)
+						.getSrc();
+				links.add(RootPathHelper.getRootPath() + "pages/"
+						+ originalImage);
+			}
+			if (!croppedImage.equals("")) {
+				croppedImage = JsonUtil.fromJson(croppedImage, Image.class)
+						.getSrc();
+				links.add(RootPathHelper.getRootPath() + "pages/"
+						+ croppedImage);
+			}
+			if (!thumbnail.equals("")) {
+				thumbnail = JsonUtil.fromJson(thumbnail, Image.class).getSrc();
+				links.add(RootPathHelper.getRootPath() + "pages/" + thumbnail);
+			}
+
+		} else if (imageLink.contains("src") && imageLink.contains("width")
 				&& imageLink.contains("height")) {
 			Image image = JsonUtil.fromJson(imageLink, Image.class);
 			imageLink = image.getSrc();
+			links.add(RootPathHelper.getRootPath() + "pages/" + imageLink);
 		}
-
-		links.add(RootPathHelper.getRootPath() + "pages/" + imageLink);
 	}
 
 	public synchronized static void removeLinks() {

@@ -18,12 +18,24 @@ public class ImageTuple {
 		this.originalImage = originalImage;
 	}
 
+	public String getOriginalImage() {
+		return this.originalImage;
+	}
+
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 
+	public String getThumbnail() {
+		return this.thumbnail;
+	}
+
 	public void setCroppedImaage(String croppedImage) {
 		this.croppedImage = croppedImage;
+	}
+
+	public String getCroppedImage() {
+		return this.croppedImage;
 	}
 
 	public Map<String, String> toTuple() {
