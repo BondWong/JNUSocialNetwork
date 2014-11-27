@@ -60,12 +60,17 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 							commentReply = "";
 						}
+						var imageL = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+						if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+							imageL = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+						}
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
-								+ "'><div class='row'><div class='col-lg-1'><img style='cursor:pointer;' class='comHr' id='"+jsonComment.owner.ID+"' width='30' height='30' src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ "'><div class='row'><div class='col-lg-1'><img style='cursor:pointer;' class='comHr' id='"
+								+ jsonComment.owner.ID
+								+ "' width='30' height='30' src='"
+								+ imageL
 								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -112,24 +117,36 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 				.each(
 						srcImage,
 						function(n, image) {
+							var srcAttr200 = "height="
+									+ getHeight(200, $.parseJSON(image).width,
+											$.parseJSON(image).height)
+									+ " onclick='showPost(" + postID
+									+ ")' src='" + $.parseJSON(image).src + "'";
+							if ($.parseJSON(image).thumbnail != undefined) {
+								srcAttr200 = "height="
+										+ getHeight(
+												200,
+												$
+														.parseJSON($
+																.parseJSON(image).thumbnail).width,
+												$
+														.parseJSON($
+																.parseJSON(image).thumbnail).height)
+										+ " onclick='showPost("
+										+ postID
+										+ ")' src='"
+										+ $
+												.parseJSON($.parseJSON(image).thumbnail).src
+										+ "'";
+							}
 							if (n % 2 == 1) {
 								imageDiv1 = imageDiv1
-										+ "<img style='float:right;' class='postimg' width='200' height="
-										+ getHeight(200,
-												$.parseJSON(image).width,
-												$.parseJSON(image).height)
-										+ " onclick='showPost(" + postID
-										+ ")' src='" + $.parseJSON(image).src
-										+ "'/>";
+										+ "<img style='float:right;' class='postimg' width='200' "
+										+ srcAttr200 + "/>";
 							} else {
 								imageDiv2 = imageDiv2
-										+ "<img style='float:left;' class='postimg' width='200' height="
-										+ getHeight(200,
-												$.parseJSON(image).width,
-												$.parseJSON(image).height)
-										+ " onclick='showPost(" + postID
-										+ ")' src='" + $.parseJSON(image).src
-										+ "'/>";
+										+ "<img style='float:left;' class='postimg' width='200' "
+										+ srcAttr200 + "/>";
 							}
 
 						});
@@ -137,14 +154,37 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 				+ "</div>" + "<div class='imgRight'>" + imageDiv1 + "</div>"
 				+ "</div>";
 	} else if (srcImage.length > 0 && srcImage.length <= 3) {
-		$.each(srcImage, function(n, image) {
-			imageDiv = imageDiv
-					+ "<img class='postimg' width='450' height="
-					+ getHeight(450, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+		$
+				.each(
+						srcImage,
+						function(n, image) {
+							var srcAttr400 = "height="
+									+ getHeight(435, $.parseJSON(image).width,
+											$.parseJSON(image).height)
+									+ " onclick='showPost(" + postID
+									+ ")' src='" + $.parseJSON(image).src + "'";
+							if ($.parseJSON(image).thumbnail != undefined) {
+								srcAttr400 = "height="
+										+ getHeight(
+												435,
+												$
+														.parseJSON($
+																.parseJSON(image).thumbnail).width,
+												$
+														.parseJSON($
+																.parseJSON(image).thumbnail).height)
+										+ " onclick='showPost("
+										+ postID
+										+ ")' src='"
+										+ $
+												.parseJSON($.parseJSON(image).thumbnail).src
+										+ "'";
+							}
+							imageDiv = imageDiv
+									+ "<img class='postimg' width='435' "
+									+ srcAttr400 + "/>";
 
-		});
+						});
 		postImgDiv = postImgDiv + imageDiv + "</div>";
 	} else {
 		postImgDiv = "";
@@ -156,11 +196,14 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 				+ "' ><a style='cursor:pointer'>read more</a></div>";
 		contentD = content.substr(0, 200) + "......";
 	}
-
+	var imageO = $.parseJSON(ownerImage).src;
+	if($.parseJSON(ownerImage).thumbnail != undefined){
+		imageO = $.parseJSON($.parseJSON(ownerImage).thumbnail).src;
+	}
 	var boarddiv = "<div class='post "
 			+ postID
 			+ "'><div class='post_body'><div class='row'><div class='col-md-2'><div class='user_img'><img class='img-circle userImg' width='50' height='50' src='"
-			+ $.parseJSON(ownerImage).src
+			+ imageO
 			+ "' /><input type='hidden' value='"
 			+ ownerID
 			+ "' name='userID'/></div></div><div class='col-md-6'><div class='user_name'><strong>"
@@ -195,8 +238,6 @@ function post(ownerID, ownerNickName, publishDate, contentR, postID, likers,
 	 * collectClass + "' style='font-size:20px'></span></a></div>
 	 */
 
-	
-	
 	$('.act_content').find('a').hide();
 	$('.act_content').hover(function() {
 		$(this).find('a').fadeIn(300);
@@ -454,7 +495,7 @@ function clickEvent() {
 			commentOwnerName = sessionStorage.getItem("commentOwnerName");
 		}
 		var inputComm = $("input[id='commentText" + id + "']");
-		if($("input[id='commentText" + id + "']").length == 0){
+		if ($("input[id='commentText" + id + "']").length == 0) {
 			inputComm = $("input[id='commentTextR" + id + "']");
 		}
 		var comment = {
@@ -558,13 +599,18 @@ function clickEvent() {
 			introduct : $('#communityIntro').val(),
 			communityCard : card
 		};
+		
 		var json = $.toJSON(attributes);
 		if ($('.editCommunityForm')[0].checkValidity()) {
 			var c = UpdateCommunity(community.ID, json);
 			$('#editCommunity').modal('hide');
 			$('.cName').html(c.attributes.name);
 			$('.cIntro').html(c.attributes.introduct);
-			$('.communityPic').find('img').attr("src", $.parseJSON(card).src);
+			var imageC = $.parseJSON(card).src;
+			if($.parseJSON(card).thumbnail != undefined){
+				imagec = $.parseJSON($.parseJSON(card).thumbnail).src;
+			}
+			$('.communityPic').find('img').attr("src", imageC);
 		}
 	});
 
@@ -734,8 +780,8 @@ $('body').on('click', '.loginA', function() {
 	window.location.href = 'account.jsp';
 
 });
-$('body').on("click",".comHr",function(){
-	window.open('profile.jsp?nav=about&'+$(this).attr('id'));
+$('body').on("click", ".comHr", function() {
+	window.open('profile.jsp?nav=about&' + $(this).attr('id'));
 });
 function teleAlert(activityID) {
 	var alert = "<div class='modal fade' id='telemodal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4 class='modal-title'>没填写电话是不能参加活动的哦，请填写电话</h4></div><div class='modal-body modal-custom'><form class='teleForm' role='form' onsubmit='return false;'><input type='text' pattern='[0-9]{11}' class='form-control' placeholder='请输入手机号码' id='tele' autocomplete='off' data-errormessage-value-missing='请输入手机号码，才能参加活动哦' data-errormessage-pattern-mismatch='请输入正确手机号码' required autofocus maxLength='11' /><button class='btn btn-lg btn-success btn-block teleUpload ' id='"
@@ -778,15 +824,21 @@ var hoverT, timer;
 										if (data.ID == USERID) {
 											chatSpan = "";
 										}
+										var imageP = $.parseJSON(data.attributes.profileImageLink).src;
+										if($.parseJSON(data.attributes.profileImageLink).thumbnail != undefined){
+											imageP = $.parseJSON($.parseJSON(data.attributes.profileImageLink).thumbnail).src;
+										}
+										var imageA = $.parseJSON(data.attributes.avatarLink).src;
+										if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+											imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+										}
 										if (data != "") {
 											var tipFrame = '<div id="'
 													+ data.ID
 													+ '" class="popTip"><div class="content"><div class="urserBgShort"><img width="240" height="135" src="'
-													+ $
-															.parseJSON(data.attributes.profileImageLink).src
+													+ imageP
 													+ '" /></div><div class="urserInfShort"><div class="userInImg"><img width="120" height="120"  src="'
-													+ $
-															.parseJSON(data.attributes.avatarLink).src
+													+ imageA
 													+ '" /></div><p><h1><a class="tipUser">'
 													+ data.attributes.name
 													+ '</a></h1></p><p>'
@@ -867,12 +919,15 @@ function showPost(postID) {
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 							commentReply = "";
 						}
+						var imageA = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+						if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+							imageA = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+						}
 						comment = comment
 								+ "<div class='act_content' id='"
 								+ jsonComment.ID
 								+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ imageA
 								+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -894,8 +949,34 @@ function showPost(postID) {
 					});
 
 	var dataString = FetchPostByID(postID);
-	var likeClass = "glyphicon glyphicon-heart-empty";
+	var imagejson = new Array();
+	$.each(dataString.imageLinks, function(n, image) {
+		if ($.parseJSON(image).thumbnail != undefined) {
+			var tmpjson = {
+				"name" : "", // 图片名
+				"pid" : 0, // 图片id
+				"src" : $.parseJSON($.parseJSON(image).originalImage).src, // 原图地址
+				"thumb" : $.parseJSON($.parseJSON(image).thumbnail).src, // 缩略图地址
+				"area" : [ $.parseJSON($.parseJSON(image).originalImage).width,
+						$.parseJSON($.parseJSON(image).originalImage).height ]
+			// 原图宽高
+			};
+			imagejson.push(tmpjson);
+		} else {
+			var tmpjson = {
+				"name" : "", // 图片名
+				"pid" : 0, // 图片id
+				"src" : $.parseJSON(image).src, // 原图地址
+				"thumb" :  $.parseJSON(image).src, // 缩略图地址
+				"area" : [  $.parseJSON(image).width,
+				            $.parseJSON(image).height ]
+			// 原图宽高
+			};
+			imagejson.push(tmpjson);
 
+		}
+	});
+	var likeClass = "glyphicon glyphicon-heart-empty";
 	if ($.inArray(USERID, dataString.likerIDs) != -1) {
 		likeClass = "glyphicon glyphicon-heart";
 	}
@@ -907,10 +988,14 @@ function showPost(postID) {
 	}, function() {
 		$(this).find('a').fadeOut(300);
 	});
+	var imageAv = $.parseJSON(dataString.owner.attributes.avatarLink).src;
+	if($.parseJSON(dataString.owner.attributes.avatarLink).thumbnail != undefined){
+		imageAv = $.parseJSON($.parseJSON(dataString.owner.attributes.avatarLink).thumbnail).src;
+	}
 	layer
 			.photos({
 				html : "<div class='showPost'><div class='row'><div class='col-md-3'><div class='user_img'><img class='userImg img-circle' width='50' height='50' src='"
-						+ $.parseJSON(dataString.owner.attributes.avatarLink).src
+						+ imageAv
 						+ "'/><input type='hidden' value='"
 						+ dataString.owner.ID
 						+ "' name='userID'/></div></div><div class='col-md-8'><div class='user_name'><strong>"
@@ -937,10 +1022,13 @@ function showPost(postID) {
 						+ ">Submit</button></div></div>"
 						+ comment
 						+ "</div></div>",
-				page : {
-					parent : '#postImg' + postID,
-					title : '',
-					start : 0
+				json : {
+					"status" : 1, // 请求的状态，1表示成功，其它表示失败
+					"msg" : "", // 状态提示语
+					"title" : "", // 相册标题
+					"id" : 0, // 相册id
+					"start" : 0, // 初始显示的图片序号，默认0
+					"data" : imagejson
 				}
 			});
 }

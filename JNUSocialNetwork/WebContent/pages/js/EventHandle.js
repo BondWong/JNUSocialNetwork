@@ -209,11 +209,14 @@ function CREATECOMMENT() {
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 								commentReply = "";
 							}
+							var imageL = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+							if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+								imageL = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+							}
 							var boarddiv = "<div class='act_content' id='"
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img height='30' width='30' src='"
-									+ $
-											.parseJSON(jsonComment.owner.attributes.avatarLink).src
+									+ imageL
 									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -267,11 +270,14 @@ function CREATECOMMENT() {
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 								commentReply = "";
 							}
+							var imageL = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+							if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+								imageL = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+							}
 							var comment = "<div class='aBodyComment' id='commentTxt"
 									+ jsonComment.ID
 									+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' width='50' height='50'  src='"
-									+ $
-											.parseJSON(jsonComment.owner.attributes.avatarLink).src
+									+ imageL
 									+ "'></div><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div><div class='user_info'><span>"

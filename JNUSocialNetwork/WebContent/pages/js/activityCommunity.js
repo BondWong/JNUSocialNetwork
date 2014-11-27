@@ -1,4 +1,3 @@
-
 var pageSize = 15;
 // function fetchActivitiesByCommunity()
 function fetchActivitiesByCommunity() {
@@ -14,7 +13,8 @@ function fetchActivitiesByCommunity() {
 					dataString.owner.ID, dataString.participantIDs,
 					dataString.attributes.startDate,
 					dataString.attributes.limitation,
-					dataString.attributes.ifUpload,dataString.attributes.inquery);
+					dataString.attributes.ifUpload,
+					dataString.attributes.inquery);
 		}
 	});
 }
@@ -55,16 +55,28 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 		join = "<button class='btn btn-default'>已经过期</button>";
 	}
 	var imageObject = imagelink.split(",{")[0];
+	var attrO = "height='"
+			+ getHeight(435, $.parseJSON(imageObject).width, $
+					.parseJSON(imageObject).height) + "'  src='"
+			+ $.parseJSON(imageObject).src + "'";
+	if ($.parseJSON(imageObject).thumbnail != undefined) {
+		attrO = "height='"
+				+ getHeight(435,
+						$.parseJSON($.parseJSON(imagelink).thumbnail).width,
+						$.parseJSON($.parseJSON(imagelink).thumbnail).height)
+				+ "'  src='"
+				+ $.parseJSON($.parseJSON(imagelink).thumbnail).src + "'";
+	}
+	var imageA = $.parseJSON(avatarLink).src;
+	if($.parseJSON(avatarLink).thumbnail != undefined){
+		imageA = $.parseJSON($.parseJSON(avatarLink).thumbnail).src;
+	}
 	var boarddiv = "<div class='activity post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg'><img width='435' height='"
-			+ getHeight(435, $.parseJSON(imageObject).width,$.parseJSON(imageObject).height)
-			+ "'  src='"
-			+ $.parseJSON(imageObject).src
-			+ "' /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
-			+ $.parseJSON(avatarLink).src
+			+ "<div class='activityBg'><img width='435' "+attrO+" /></div><div class='user_img activityAvatar'><img width='49' height='49' class='img-circle userImg' src='"
+			+ imageA
 			+ "' /></div><div class='activityName activityShowHref' id='"
 			+ activityID
 			+ "'><a><span>"
@@ -83,16 +95,20 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 function addActivity(activityID, name, time, addre, more, imagelink,
 		avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery) {
 	var boarddiv = activity(activityID, name, time, addre, more, imagelink,
-			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload, inquery);
+			avatarLink, ownerID, joinIDs, startDate, limitation, ifUpload,
+			inquery);
 	$(".activityBord").after(boarddiv);
 	Msnry('.activityBody', '.activity', 435);
 }
 
 function showCommunityInfo() {
+	var imageC = $.parseJSON(community.attributes.communityCard).src;
+	if($.parseJSON(community.attributes.communityCard).thumbnail != undefined){
+		imageC = $.parseJSON($.parseJSON(community.attributes.communityCard).thumbnail).src;
+	}
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
-	$('.communityPic').find('img').attr("src",
-			$.parseJSON(community.attributes.communityCard).src);
+	$('.communityPic').find('img').attr("src",imageC);
 }
 
 $('body')
@@ -180,7 +196,8 @@ $(window)
 															dataString.participantIDs,
 															dataString.attributes.startDate,
 															dataString.attributes.limitation,
-															dataString.attributes.ifUpload,dataString.attributes.inquery);
+															dataString.attributes.ifUpload,
+															dataString.attributes.inquery);
 													$(".activityBord").after(
 															boarddiv);
 													Msnry('.activityBody',

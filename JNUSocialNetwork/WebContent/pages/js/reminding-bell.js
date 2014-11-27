@@ -97,10 +97,14 @@ function add_events_to_bell() {
 
 function messages_remind(message) {
 	if ($("div.mentionBody-content #" + message.fromID).length == 0) {
+		var imageO = $.parseJSON(message.attributes.avatarLink).src;
+		if($.parseJSON(message.attributes.avatarLink).thumbnail != undefined){
+			imageO = $.parseJSON($.parseJSON(message.attributes.avatarLink).thumbnail).src;
+		}
 		$("div.mentionBody-content").append(
 				'<div class="NotiItem" id="' + message.fromID
 						+ '"><div class="col-lg-3"><div><img src="'
-						+ $.parseJSON(message.attributes.avatarLink).src
+						+ imageO
 						+ '" width="50" height="50" /></div></div>'
 						+ '<div class="col-lg-9"><div>' + message.from
 						+ '<span class="badge">1</span></div></div></div>');
@@ -149,12 +153,16 @@ function events_remind(event) {
 		description = "Follow";
 		break;
 	}
+	var imageO = $.parseJSON(event.data.avatar).src;
+	if($.parseJSON(event.data.avatar).thumbnail != undefined){
+		imageO = $.parseJSON($.parseJSON(event.data.avatar).thumbnail).src;
+	}
 	$("div.mentionBody-content")
 			.append(
 					'<div class="NotiItem" id="'
 							+ event.data.eventID
 							+ '"><div class="col-lg-3"><div><img src="'
-							+ $.parseJSON(event.data.avatar).src
+							+ imageO
 							+ '" width="50" height="50" /></div></div><div class="col-lg-9"><h1>'
 							+ head + '</h1><div class="remindConent">'
 							+ event.data.name + ' ' + description
@@ -281,10 +289,18 @@ function notifyFollow(followerID) {
 	if (USERID == followerID) {
 		followTxt = "Yourself";
 	}
+	var imageP = $.parseJSON(data.attributes.profileImageLink).src;
+	if($.parseJSON(data.attributes.profileImageLink).thumbnail != undefined){
+		imageP = $.parseJSON($.parseJSON(data.attributes.profileImageLink).thumbnail).src;
+	}
+	var imageA = $.parseJSON(data.attributes.avatarLink).src;
+	if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+		imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+	}
 	var tipFrame = '<div class="popTip notifyItem" id="popR"><div class="content"><div class="urserBgShort"><img  width="350" height="180" src="'
-			+ $.parseJSON(data.attributes.profileImageLink).src
+			+ imageP
 			+ '" id="remind-bell-profileImg" /></div><div class="urserInfShort"><img class="img-circle" width="120" height="120" src="'
-			+ $.parseJSON(data.attributes.avatarLink).src
+			+ imageA
 			+ '" id="remind-bell-avatarImg"/><p><h1><a class="tipUser">'
 			+ data.attributes.name
 			+ '</a></h1></p><p>'
@@ -325,12 +341,15 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 										+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 								commentReply = "";
 							}
+							var imageA = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+							if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+								imageA = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+							}
 							comment = comment
 									+ "<div class='act_content' id='"
 									+ jsonComment.ID
 									+ "'><div class='row'><div class='col-lg-1'><img width='30' height='30' src='"
-									+ $
-											.parseJSON(jsonComment.owner.attributes.avatarLink).src
+									+ imageA
 									+ "' /></div><div class='col-lg-10 cus-lg-10'><div class='row'><div class='col-lg-5 custom_lg-6'><div class='user_name'><strong>"
 									+ jsonComment.owner.attributes.name
 									+ "</strong></div></div><div class='col-lg-6 custom_lg-6'>"
@@ -360,27 +379,54 @@ function notifyItem(response, ownerID, ownerNickName, publishDate, content,
 	}
 	var postImgDiv = "<div class='post_img' id='postImg" + postID + "'>";
 	var imageDiv = "";
+	var imageDiv1 = "";
+	var imageDiv2 = "";
 	if (postImage.length > 3) {
 		$
 				.each(
 						postImage,
 						function(n, image) {
-							imageDiv = imageDiv
-									+ "<img style='float:left;' class='postimg' width='160' height="
-									+ getHeight(160, $.parseJSON(image).width,
-											$.parseJSON(image).height)
+							var srcAttr160 = "height="
+										+ getHeight(160,
+												$.parseJSON(image).width,
+												$.parseJSON(image).height)
+										+ " onclick='showPost(" + postID
+										+ ")' src='" + $.parseJSON(image).src
+										+ "'";
+							if($.parseJSON(image).thumbnail != undefined){
+								srcAttr160 = "height="
+									+ getHeight(160,
+											$.parseJSON($.parseJSON(image).thumbnail).width,
+											$.parseJSON($.parseJSON(image).thumbnail).height)
 									+ " onclick='showPost(" + postID
-									+ ")' src='" + $.parseJSON(image).src
-									+ "'/>";
+									+ ")' src='" + $.parseJSON($.parseJSON(image).thumbnail).src
+									+ "'";
+							}
+							if (n % 2 == 1) {
+								imageDiv1 = imageDiv1
+										+ "<img style='float:right;width:160px;' class='postimg' width='160' "+srcAttr160+"/>";
+							} else {
+								imageDiv2 = imageDiv2
+										+ "<img style='float:left;width:160px;' class='postimg' width='160' "+srcAttr160+"/>";
+							}
+
 						});
-		postImgDiv = postImgDiv + imageDiv + "</div>";
+		postImgDiv = postImgDiv + "<div class='imgLeft'>" + imageDiv2
+				+ "</div>" + "<div class='imgRight'>" + imageDiv1 + "</div>"
+				+ "</div>";
 	} else if (postImage.length > 0 && postImage.length <= 3) {
 		$.each(postImage, function(n, image) {
+			var srcAttr350 = "height="
+				+ getHeight(350, $.parseJSON(image).width, $
+						.parseJSON(image).height) + " onclick='showPost("
+				+ postID + ")' src='" + $.parseJSON(image).src + "'";
+			if($.parseJSON(image).thumbnail != undefined){
+				srcAttr350 = "height="
+					+ getHeight(350, $.parseJSON($.parseJSON(image).thumbnail).width,$.parseJSON($.parseJSON(image).thumbnail).height) + " onclick='showPost("
+					+ postID + ")' src='" + $.parseJSON($.parseJSON(image).thumbnail).src + "'";
+			}
 			imageDiv = imageDiv
-					+ "<img class='postimg' width='350' height="
-					+ getHeight(350, $.parseJSON(image).width, $
-							.parseJSON(image).height) + " onclick='showPost("
-					+ postID + ")' src='" + $.parseJSON(image).src + "'/>";
+					+ "<img class='postimg' width='350' "+srcAttr350+"/>";
 
 		});
 		postImgDiv = postImgDiv + imageDiv + "</div>";

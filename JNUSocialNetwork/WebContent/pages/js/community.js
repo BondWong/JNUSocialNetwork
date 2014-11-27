@@ -154,10 +154,14 @@ function communities(id, name, memberNum, communityType, communityImg, members,
 	if (ownerID == USERID) {
 		join = '';
 	}
+	var imageC = $.parseJSON(communityImg).src;
+	if($.parseJSON(communityImg).thumbnail != undefined){
+		imageC = $.parseJSON($.parseJSON(communityImg).thumbnail).src;
+	}
 	var boarddiv = "<div class='content_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
-			+ $.parseJSON(communityImg).src
+			+ imageC
 			+ "' width='245' height='245' />"
 			+ officalIcon
 			+ "</div></a><div class='content_info'><div class='conten_head'>"

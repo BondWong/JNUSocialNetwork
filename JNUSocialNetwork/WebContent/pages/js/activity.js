@@ -33,14 +33,24 @@ function activity(activityID, name, time, addre, more, imagelink, avatarLink,
 	}
 	
 	var imageObject = imagelink.substr(imagelink.indexOf(",{")+1);
+	var attrO = "height='"+getHeight(330,$.parseJSON(imageObject).width, $.parseJSON(imageObject).height)+"'  src='"
+			+ $.parseJSON(imageObject).src
+			+ "'";
+	if($.parseJSON(imageObject).thumbnail != undefined){
+		attrO = "height='"+getHeight(330,$.parseJSON($.parseJSON(imagelink).thumbnail).width, $.parseJSON($.parseJSON(imagelink).thumbnail).height)+"'  src='"
+			+ $.parseJSON($.parseJSON(imagelink).thumbnail).src
+			+ "'";
+	}
+	var imageA = $.parseJSON(avatarLink).src;
+	if($.parseJSON(avatarLink).thumbnail != undefined){
+		imageA = $.parseJSON($.parseJSON(avatarLink).thumbnail).src;
+	}
 	var boarddiv = "<div class='activity activityAll post"
 			+ activityID
 			+ "' >"
 			+ pRemoveBtn
-			+ "<div class='activityBg activityBgAll'><img width='330' height='"+getHeight(330,$.parseJSON(imageObject).width, $.parseJSON(imageObject).height)+"'  src='"
-			+ $.parseJSON(imageObject).src
-			+ "' /></div><div class='user_img activityAvatarA'><img width='49' height='49' class='img-circle userImg' src='"
-			+ $.parseJSON(avatarLink).src
+			+ "<div class='activityBg activityBgAll'><img width='330' "+attrO+" /></div><div class='user_img activityAvatarA'><img width='49' height='49' class='img-circle userImg' src='"
+			+ imageA
 			+ "' /></div><div class='activityName activityShowHref' id='"
 			+ activityID
 			+ "'><a><span>"

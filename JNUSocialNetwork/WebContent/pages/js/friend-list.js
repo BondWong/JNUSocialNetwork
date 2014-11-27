@@ -14,10 +14,14 @@ function on_friends_node_click() {
 		for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
 			if (chatRooms[i].m1ID == USERID) {
 				names[chatRooms[i].m2ID] = chatRooms[i].m2.name;
+				var imageL = $.parseJSON(chatRooms[i].m2.avatarLink).src;
+				if($.parseJSON(chatRooms[i].m2.avatarLink).thumbnail != undefined){
+					imageL = $.parseJSON($.parseJSON(chatRooms[i].m2.avatarLink).thumbnail).src;
+				}
 				var info = '<div class="person" id="'
 						+ chatRooms[i].m2ID
 						+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-						+ $.parseJSON(chatRooms[i].m2.avatarLink).src
+						+ imageL
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m2.name;
 				var online = false;
@@ -45,10 +49,14 @@ function on_friends_node_click() {
 				});
 			} else {
 				names[chatRooms[i].m1ID] = chatRooms[i].m1.name;
+				var imageL = $.parseJSON(chatRooms[i].m1.avatarLink).src;
+				if($.parseJSON(chatRooms[i].m1.avatarLink).thumbnail != undefined){
+					imageL = $.parseJSON($.parseJSON(chatRooms[i].m1.avatarLink).thumbnail).src;
+				}
 				var info = '<div class="person" id="'
 						+ chatRooms[i].m1ID
 						+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-						+ $.parseJSON(chatRooms[i].m1.avatarLink).src
+						+ imageL
 						+ '" class="person-img" /><p class="person-info">'
 						+ chatRooms[i].m1.name;
 				var online = false;
@@ -114,10 +122,14 @@ function add_to_friend_list() {
 	chatRooms = $.parseJSON(chatRooms);
 	for (var i = 0; chatRooms != null && i < chatRooms.length; i++) {
 		if (chatRooms[i].m1ID == USERID) {
+			var imageL = $.parseJSON(chatRooms[i].m2.avatarLink).src;
+			if($.parseJSON(chatRooms[i].m2.avatarLink).thumbnail != undefined){
+				imageL = $.parseJSON($.parseJSON(chatRooms[i].m2.avatarLink).thumbnail).src;
+			}
 			var info = '<div class="person" id="'
 					+ chatRooms[i].m2ID
 					+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-					+ $.parseJSON(chatRooms[i].m2.avatarLink).src
+					+ imageL
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m2.name;
 			var online = false;
@@ -144,10 +156,14 @@ function add_to_friend_list() {
 				open_chatroom(USERID, $(this).attr("id"), name);
 			});
 		} else {
+			var imageL = $.parseJSON(chatRooms[i].m1.avatarLink).src;
+			if($.parseJSON(chatRooms[i].m1.avatarLink).thumbnail != undefined){
+				imageL = $.parseJSON($.parseJSON(chatRooms[i].m1.avatarLink).thumbnail).src;
+			}
 			var info = '<div class="person" id="'
 					+ chatRooms[i].m1ID
 					+ '"><a href="javascript:void(0);" class="avatar"><img src="'
-					+ $.parseJSON(chatRooms[i].m1.avatarLink).src
+					+ imageL
 					+ '" class="person-img" /><p class="person-info">'
 					+ chatRooms[i].m1.name;
 			var online = false;

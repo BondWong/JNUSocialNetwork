@@ -90,8 +90,11 @@ function showActivityDetail(activity, community) {
 	$('.activityShowD').html(
 			"<pre>" + "&nbsp;" + activity.attributes.activityMore + "</pre>");
 	var imagelink = activity.attributes.background;
-	$('.activityPh').find('img').attr("src",
-			$.parseJSON(imagelink.split(",{")[0]).src);
+	var imageA = $.parseJSON(imagelink.split(",{")[0]).src;
+	if($.parseJSON(imagelink.split(",{")[0]).croppedImage != undefined){
+		imageA = $.parseJSON($.parseJSON(imagelink).croppedImage).src;
+	}
+	$('.activityPh').find('img').attr("src",imageA);
 	$('#addComment').attr("value", activity.ID);
 	$('.acBtn').attr("id", "commentText" + activity.ID);
 	$('.communityName').html(community.attributes.name);
@@ -126,12 +129,15 @@ function showActivityDetail(activity, community) {
 									+ "' /><span class='glyphicon glyphicon-remove' style='font-size: 8px'></span></a></div>";
 							commentReply = "";
 						}
+						var imageL = $.parseJSON(jsonComment.owner.attributes.avatarLink).src;
+						if($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail != undefined){
+							imageL = $.parseJSON($.parseJSON(jsonComment.owner.attributes.avatarLink).thumbnail).src;
+						}
 						comment = comment
 								+ "<div class='aBodyComment' id='commentTxt"
 								+ jsonComment.ID
 								+ "'><div class='aCommentItem'><div class='col-lg-2 col-lg-2-cust'><img class='img-circle userImg' width='50' width='50'  src='"
-								+ $
-										.parseJSON(jsonComment.owner.attributes.avatarLink).src
+								+ imageL
 								+ "'></div><div class='user_name'><strong>"
 								+ jsonComment.owner.attributes.name
 								+ "</strong></div><div class='user_info'><span>"
@@ -165,8 +171,11 @@ function showActivityDetail(activity, community) {
 						});
 					});
 	$(".commentBtn").after(comment);
-	$('.communityBS').find('img').attr("src",
-			$.parseJSON(community.attributes.communityCard).src);
+	var imageCa = $.parseJSON(community.attributes.communityCard).src;
+	if($.parseJSON(community.attributes.communityCard).thumbnail != undefined){
+		imageCa = $.parseJSON($.parseJSON(community.attributes.communityCard).thumbnail).src;
+	}
+	$('.communityBS').find('img').attr("src",imageCa);
 	$('.addcommunityA').attr("id", community.ID);
 	if ($.inArray(USERID, activity.participantIDs) != -1) {
 		$('.joinSActivity').css("color", "rgb(255, 255, 255)");
@@ -315,9 +324,12 @@ $('body')
 							.each(
 									photosfileDri,
 									function(index, imageLink) {
+										var imageD = $.parseJSON(decodeURIComponent(imageLink)).src;
+										if($.parseJSON(decodeURIComponent(imageLink)).thumbnail != undefined){
+											imageD = $.parseJSON($.parseJSON(decodeURIComponent(imageLink)).thumbnail).src;
+										}
 										var photoContainer = "<img width='600' height='450' src='"
-												+ $
-														.parseJSON(decodeURIComponent(imageLink)).src
+												+ imageD
 												+ "' />";
 										$('.carousel-inner')
 												.append(
@@ -354,10 +366,14 @@ function showJoinMembers() {
 }
 // user的html代码
 function addMember(id, avatarLink, name) {
+	var imageA = $.parseJSON(avatarLink).src;
+	if($.parseJSON(avatarLink).thumbnail != undefined){
+		imageA = $.parseJSON($.parseJSON(avatarLink).thumbnail).src;
+	}
 	var followDiv = "<div class='aMember' id='"
 			+ id
 			+ "'><img width='50' height='50'  class='userMember' src='"
-			+ $.parseJSON(avatarLink).src
+			+ imageA
 			+ "' /><span class='followName'><a style='cursor:pointer;color:#404040'>"
 			+ name + "</a></span><input type='hidden' value='" + id
 			+ "' name='userID'/></div>";
@@ -376,16 +392,20 @@ function showImages() {
 			pRemoveBtn = "<div class='deleteAI'><span style='color:#000;' class='glyphicon glyphicon-remove'></span></div>";
 		}
 		$.each(activity.imageLinks, function(index, imageLink) {
+			var imagel = $.parseJSON(decodeURIComponent(imageLink)).src;
+			if($.parseJSON(decodeURIComponent(imageLink)).thumbnail != undefined){
+				imagel = $.parseJSON($.parseJSON(decodeURIComponent(imageLink)).thumbnail).src;
+			}
 			if (index == 0) {
 				var photoContainer = "<img width='600' height='450' src='"
-						+ $.parseJSON(decodeURIComponent(imageLink)).src
+						+ imagel
 						+ "' />";
 				$('.carousel-inner').append(
 						"<div class='item active'>" + pRemoveBtn
 								+ photoContainer + "</div>");
 			} else {
 				var photoContainer = "<img width='600' height='450' src='"
-						+ $.parseJSON(decodeURIComponent(imageLink)).src
+						+ imagel
 						+ "' />";
 				$('.carousel-inner').append(
 						"<div class='item'>" + pRemoveBtn + photoContainer
@@ -487,8 +507,7 @@ $('body')
 											.find('img')
 											.attr(
 													"src",
-													$
-															.parseJSON(aup.attributes.background).src);
+													$.parseJSON($.parseJSON(aup.attributes.background).croppedImage).src);
 								} else {
 									$('#fail_popover2').fadeIn("fast");
 									setTimeout(
@@ -559,8 +578,7 @@ $('body')
 										.find('img')
 										.attr(
 												"src",
-												$
-														.parseJSON(aup.attributes.background).src);
+												$.parseJSON($.parseJSON(aup.attributes.background).croppedImage).src);
 							}
 						} else {
 							$('#fail_popover').fadeIn("fast");

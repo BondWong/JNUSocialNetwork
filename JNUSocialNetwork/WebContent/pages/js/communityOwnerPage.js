@@ -158,10 +158,13 @@ function fetchPostsByCommunityOwner() {
 	});
 }
 function showCommunityInfo() {
+	var imageC = $.parseJSON(community.attributes.communityCard).src;
+	if($.parseJSON(community.attributes.communityCard).thumbnail != undefined){
+		imageC = $.parseJSON($.parseJSON(community.attributes.communityCard).thumbnail).src;
+	}
 	$('.cName').html(community.attributes.name);
 	$('.cIntro').html(community.attributes.introduct);
-	$('.communityPic').find('img').attr("src",
-			$.parseJSON(community.attributes.communityCard).src);
+	$('.communityPic').find('img').attr("src",imageC);
 }
 
 $(window)

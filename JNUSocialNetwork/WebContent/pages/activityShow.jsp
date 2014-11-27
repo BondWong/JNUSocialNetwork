@@ -388,13 +388,11 @@
 								if (activity.attributes.reminded == "true") {
 									$('.editActivity').remove();
 								}
-								$('.aCommentI')
-										.attr(
-												"src",
-												$
-														.parseJSON($
-																.parseJSON(sessionStorage
-																		.getItem("user")).attributes.avatarLink).src);
+								var imageO = $.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src;
+								if($.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).thumbnail != undefined){
+									imageO = $.parseJSON($.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).thumbnail).src;
+								}
+								$('.aCommentI').attr("src",imageO);
 							} else {
 								clickOffEvent();
 							}

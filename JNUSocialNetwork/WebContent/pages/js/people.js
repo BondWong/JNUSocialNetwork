@@ -193,12 +193,16 @@ function AddUser(name, looking, tags, id, userType, avatarLink, followerIDs,emai
 	if (userType == "COMMUNITYOWNER") {
 		pIn = "<p class='recommendLooking'>" + looking + "</p>";
 	}
+	var imageO = $.parseJSON(avatarLink).src;
+	if($.parseJSON(avatarLink).thumbnail != undefined){
+		imageO = $.parseJSON($.parseJSON(avatarLink).thumbnail).src;
+	}
 	var peopleI = "<img  height='170' width='170' src='"
-			+ $.parseJSON(avatarLink).src
+			+ imageO
 			+ "' >";
-	if ($.parseJSON(avatarLink).src == "images/default/default-user-avartar.png" && email!="" && id!=USERID) {
+	if (imageO == "images/default/default-user-avartar.png" && email!="" && id!=USERID) {
 		peopleI ="<div class='peopleImgP' style='cursor:pointer;' id='"+id +"'><img  height='170' width='170' src='"
-			+ $.parseJSON(avatarLink).src
+			+ imageO
 			+ "' ></div>";
 	}
 	var boarddiv = "<div class='userCard'>"+peopleI+"<p class='recommendName'><a id=" + id + " class='tipUser2'>"

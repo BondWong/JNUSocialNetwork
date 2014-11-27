@@ -178,8 +178,6 @@
 		});
 	}
 
-   
-    
 	// 展示通知框
 	function displayAlert(target, message) {
 		if (message) {
@@ -190,54 +188,56 @@
 			target.fadeOut(500);
 		}, 4000);
 	}
-    // 切换按钮状态
-    function switchButtonState($btn) {
-        if ($btn.hasClass("btn-success")) {
-            $btn.removeClass("btn-success").addClass("btn-danger").html("离开");
-        } else {
-            $btn.removeClass("btn-danger").addClass("btn-success").html("参加");
-        }
-    }
-   
-    
-    // 生成活动列表
-    function generateListItem(data) {
-    	var imageLink = data.attributes.background;
-    	var imageObject = imageLink.substr(imageLink.indexOf(",{")+1);
-        var testdata = {
-            activityAddr: data.attributes.activityAddr,
-            activityMore: data.attributes.activityMore,
-            activityName: data.attributes.activityName,
-            activityTime: data.attributes.activityTime,
-            imgsrc: JSON.parse(imageObject).src,
-            ID: data.ID
-        };
-        dataset[data.ID] = data;
-        var genearatedLI = _.template($('#li-template').html())(testdata),
-            $genearatedLI = $(genearatedLI);
+	// 切换按钮状态
+	function switchButtonState($btn) {
+		if ($btn.hasClass("btn-success")) {
+			$btn.removeClass("btn-success").addClass("btn-danger").html("离开");
+		} else {
+			$btn.removeClass("btn-danger").addClass("btn-success").html("参加");
+		}
+	}
 
-        if ($.inArray(window.USERID, data.participantIDs) >= 0) {
-            switchButtonState($(".join-btn", $genearatedLI));
-        } else if (data.participantIDs.length === data.attributes.limitation) {
-            $(".join-btn", $genearatedLI).prop("disabled", true).html("人数已满");
-        }
-        if (data.attributes.startDate - new Date().getTime() <= 0) {
-            $(".join-btn", $genearatedLI).prop("disabled", true).html("已过期");
-        }
+	// 生成活动列表
+	function generateListItem(data) {
+		var imageLink = data.attributes.background;
+		var imageObject = imageLink.substr(imageLink.indexOf(",{") + 1);
+		var attrO = JSON.parse(imageObject).src;
+		if ($.parseJSON(imageObject).thumbnail != undefined) {
+			attrO = JSON.parse(JSON.parse(imageObject).thumbnail).src;
+		}
+		var testdata = {
+			activityAddr : data.attributes.activityAddr,
+			activityMore : data.attributes.activityMore,
+			activityName : data.attributes.activityName,
+			activityTime : data.attributes.activityTime,
+			imgsrc : attrO,
+			ID : data.ID
+		};
+		dataset[data.ID] = data;
+		var genearatedLI = _.template($('#li-template').html())(testdata), $genearatedLI = $(genearatedLI);
 
-        console.log($genearatedLI.get(0));
-        $('#activity-list').append($genearatedLI[0]);
-    }
+		if ($.inArray(window.USERID, data.participantIDs) >= 0) {
+			switchButtonState($(".join-btn", $genearatedLI));
+		} else if (data.participantIDs.length === data.attributes.limitation) {
+			$(".join-btn", $genearatedLI).prop("disabled", true).html("人数已满");
+		}
+		if (data.attributes.startDate - new Date().getTime() <= 0) {
+			$(".join-btn", $genearatedLI).prop("disabled", true).html("已过期");
+		}
 
-    // 展示通知框
-    function displayAlert(target, message) {
-        if (message) {
-            $("p", target).html(message);
-        }
-        target.fadeIn(500);
-        setTimeout(function () {
-            target.fadeOut(500);
-        }, 4000);
-    }
+		console.log($genearatedLI.get(0));
+		$('#activity-list').append($genearatedLI[0]);
+	}
+
+	// 展示通知框
+	function displayAlert(target, message) {
+		if (message) {
+			$("p", target).html(message);
+		}
+		target.fadeIn(500);
+		setTimeout(function() {
+			target.fadeOut(500);
+		}, 4000);
+	}
 
 }(jQuery));

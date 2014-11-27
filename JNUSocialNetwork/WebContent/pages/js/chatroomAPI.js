@@ -219,10 +219,14 @@ function do_send(data) {
 function append_to_content_panel(data, who) {
 	var message = "";
 	if (who == "self") {
+		var imageA = $.parseJSON(data.attributes.avatarLink).src;
+		if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+			imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+		}
 		message = '<div class="chat-bubble" id="' + data.ID
 				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
 				+ data.fromID + '" ><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
+				+ imageA
 				+ '" width="30" height="30" /></a><p class="chat-content-'
 				+ who + '" >' + data.attributes.content;
 		message += '<br /><span class="label label-warning status">'
@@ -230,10 +234,14 @@ function append_to_content_panel(data, who) {
 	}
 
 	if (who == "other") {
+		var imageA = $.parseJSON(data.attributes.avatarLink).src;
+		if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+			imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+		}
 		message = '<div class="chat-bubble" id="' + data.ID
 				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
 				+ data.fromID + '" ><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
+				+ imageA
 				+ '" width="30" height="30" /></a><p class="chat-content-'
 				+ who + '" >' + data.attributes.content;
 		message += '</p></div>';
@@ -260,10 +268,14 @@ function append_to_content_panel(data, who) {
 function prepend_to_content_panel(data, who) {
 	var message = "";
 	if (who == "self") {
+		var imageA = $.parseJSON(data.attributes.avatarLink).src;
+		if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+			imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+		}
 		message = '<div class="chat-bubble" id="' + data.ID
 				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
 				+ data.fromID + '"><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
+				+ imageA
 				+ '" width="30" height="30"/></a><p class="chat-content-' + who
 				+ '" >' + data.attributes.content;
 		message += '<br /><span class="label label-warning status">'
@@ -271,10 +283,14 @@ function prepend_to_content_panel(data, who) {
 	}
 
 	if (who == "other") {
+		var imageA = $.parseJSON(data.attributes.avatarLink).src;
+		if($.parseJSON(data.attributes.avatarLink).thumbnail != undefined){
+			imageA = $.parseJSON($.parseJSON(data.attributes.avatarLink).thumbnail).src;
+		}
 		message = '<div class="chat-bubble" id="' + data.ID
 				+ '" ><a target="_blank" href="../pages/profile.jsp?nav=about&'
 				+ data.toID + '"><img class="chat-avatar" src="'
-				+ $.parseJSON(data.attributes.avatarLink).src
+				+ imageA
 				+ '" width="30" height="30"/></a><p class="chat-content-' + who
 				+ '" >' + data.attributes.content;
 		message += '</p></div>';

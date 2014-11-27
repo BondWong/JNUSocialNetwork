@@ -34,10 +34,14 @@ $('body').on('click', '.hrefIntro', function() {
 });
 
 function addCommunity(id, name, memberNum, communityImg, introduce, ownerID) {
+	var imageC = $.parseJSON(communityImg).src;
+	if($.parseJSON(communityImg).thumbnail != undefined){
+		imageC = $.parseJSON($.parseJSON(communityImg).thumbnail).src;
+	}
 	var boarddiv = "<li class='communityShowItem'><div class='community_container'><a><div class='img_container'><input type='hidden' value='"
 			+ id
 			+ "'><img src='"
-			+ $.parseJSON(communityImg).src
+			+ imageC
 			+ "' width='267' height='267' /></div></a><div class='content_info'><div class='conten_head'>"
 			+ name
 			+ "</div><div class='content_count'>"
@@ -299,8 +303,12 @@ $(document).ready(
 			var users = FetchLonelySouls(11);
 			$.each(users.reverse(), function(n, user) {
 				if (user.available == true) {
+					var imageAC = $.parseJSON(user.attributes.avatarLink).src;
+					if($.parseJSON(user.attributes.avatarLink).thumbnail != undefined){
+						imageAC = $.parseJSON($.parseJSON(user.attributes.avatarLink).thumbnail).src;
+					}
 					lonelySouls.push(createLonelyUserDiv(user.attributes.name,
-							$.parseJSON(user.attributes.avatarLink).src,user.lookingForTags)
+							imageAC,user.lookingForTags)
 							.appendTo(userBoard));
 				}
 			});

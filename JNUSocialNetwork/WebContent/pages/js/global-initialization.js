@@ -19,13 +19,11 @@ function login_initialization(ID) {
 					$("#nav-bar-user")
 							.text(
 									$.parseJSON(sessionStorage.getItem("user")).attributes.name);
-					$("#nav-bar-avatar")
-							.attr(
-									"src",
-									$
-											.parseJSON($
-													.parseJSON(sessionStorage
-															.getItem("user")).attributes.avatarLink).src);
+					var imageO = $.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).src;
+					if($.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).thumbnail != undefined){
+						imageO = $.parseJSON($.parseJSON($.parseJSON(sessionStorage.getItem("user")).attributes.avatarLink).thumbnail).src;
+					}
+					$("#nav-bar-avatar").attr("src",imageO);
 				}
 			});
 
