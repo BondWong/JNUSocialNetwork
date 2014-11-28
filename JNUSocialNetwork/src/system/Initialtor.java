@@ -34,7 +34,7 @@ import utils.RootPathHelper;
 // @WebListener
 public class Initialtor implements ServletContextListener {
 	private static final int ACTIVITYREMINDTIME = 5 * 60;
-	private static final int DELETEFILETIME = 60;
+	private static final int DELETEFILETIME = 60 * 60;
 
 	// private static final int DELETEMODELTIME = 60 * 60;
 
