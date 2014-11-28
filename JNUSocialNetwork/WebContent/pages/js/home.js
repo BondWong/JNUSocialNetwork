@@ -32,7 +32,9 @@ $('body').on('click', '.activityC', function() {
 $('body').on('click', '.hrefIntro', function() {
 	window.location.href = "aboutUs.jsp";
 });
-
+$('body').on('click', '.loneUser', function() {
+	window.open('profile.jsp?nav=about&' + $(this).attr("id"));
+});
 function addCommunity(id, name, memberNum, communityImg, introduce, ownerID) {
 	var imageC = $.parseJSON(communityImg).src;
 	if($.parseJSON(communityImg).thumbnail != undefined){
@@ -142,61 +144,24 @@ $(document)
 						$('.texts-ad-body').empty();
 						textList
 								.push({
-									title : 'texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext',
-									url : '#'
+									title : 'To Be Warm 社区开启！',
+									url : 'http://campusite.com.cn/pages/communityShow.jsp?1415010467533'
 								});
 						textList.push({
-							title : 'text test 2',
-							url : '#'
+							title : 'Running Man 社区开启！',
+							url : 'http://campusite.com.cn/pages/communityShow.jsp?1416360968810'
 						});
 						textList.push({
-							title : 'text test 3',
-							url : '#'
+							title : '暨大表白墙 爱需要勇气！',
+							url : 'http://campusite.com.cn/pages/communityShow.jsp?1411092566183'
 						});
 						textList.push({
-							title : 'text test 4',
-							url : '#'
+							title : '【益箩筐】“益彩画”公益涂鸦系列活动',
+							url : 'http://campusite.com.cn/pages/activityShow.jsp?1411094627377&1416667468313'
 						});
 						textList.push({
-							title : 'text test 5',
-							url : '#'
-						});
-						textList
-								.push({
-									title : 'texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext',
-									url : '#'
-								});
-						textList.push({
-							title : 'text test 7',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 8',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 9',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 10',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 111',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 12',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 13',
-							url : '#'
-						});
-						textList.push({
-							title : 'text test 14',
-							url : '#'
+							title : '【Running Man】第一期 Running Man 候补召集！',
+							url : 'http://campusite.com.cn/pages/activityShow.jsp?1416360968810&1416447822779'
 						});
 						if (textList.length == 0) {
 							var alertbox = $('<div class="alert alert-info" style="width: 91%;height:70px;padding-top:25px; text-align: center;margin-top:70px;background-color:rgba(0,0,0,0.5);border:none;color:#cccccc">还没有任何咨询哦！</div>');
@@ -210,8 +175,8 @@ $(document)
 										+ " class='texts-ad-url' href='"
 										+ textList[i].url
 										+ "'>"
-										+ (textList[i].title.length > 30 ? textList[i].title
-												.substr(0, 30)
+										+ (textList[i].title.length > 27 ? textList[i].title
+												.substr(0, 27)
 												+ "..."
 												: textList[i].title) + "</a></li>");
 
@@ -239,18 +204,18 @@ $(document)
 													$('.texts-ad-body').empty();
 													for (var i = (index - 1) * 5; i < (index - 1)
 															* 5 + pagensize; i++) {
-														var textUrl = $("<a data="
+														var textUrl = $("<li><a data="
 																+ i
 																+ " class='texts-ad-url' href='"
 																+ textList[i].url
 																+ "'>"
-																+ (textList[i].title.length > 30 ? textList[i].title
+																+ (textList[i].title.length > 28 ? textList[i].title
 																		.substr(
 																				0,
-																				30)
+																				28)
 																		+ "..."
 																		: textList[i].title)
-																+ "</a>");
+																+ "</a></li>");
 														textUrl
 																.appendTo($('.texts-ad-body'));
 														$(
@@ -288,9 +253,9 @@ $(document).ready(
 			var lonelySouls = new Array();
 			var isFold = true;
 
-			function createLonelyUserDiv(name, headSrc, tags) {
+			function createLonelyUserDiv(id,name, headSrc, tags) {
 				return $(
-						'<div class="loneUser"><img class="loneUsersHead" src="'
+						'<div class="loneUser" id="'+id+'"><img class="loneUsersHead" src="'
 								+ headSrc + '"/><div class="loneUsersName">'
 								+ name + '</div><div class="loneUsersTags">'
 								+ tags[0] + ', ' + tags[1] + '</div></div>')
@@ -307,7 +272,7 @@ $(document).ready(
 					if($.parseJSON(user.attributes.avatarLink).thumbnail != undefined){
 						imageAC = $.parseJSON($.parseJSON(user.attributes.avatarLink).thumbnail).src;
 					}
-					lonelySouls.push(createLonelyUserDiv(user.attributes.name,
+					lonelySouls.push(createLonelyUserDiv(user.ID,user.attributes.name,
 							imageAC,user.lookingForTags)
 							.appendTo(userBoard));
 				}

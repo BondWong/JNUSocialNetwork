@@ -30,8 +30,8 @@
 					<ul class="slides">
 						<!-- Slide images' width:height must be 2:1 !important -->
 						<li><a href="#"><img
-								src="./images/about-us/frontend-3-1.png" /></a></li>
-						<li><a href="#"><img src="./images/about-us/server-3-1.png" /></a></li>
+								src="./images/about-us/activity.jpg" /></a></li>
+						<li><a href="#"><img src="./images/about-us/community.jpg" /></a></li>
 		
 					</ul>
 				</div>
