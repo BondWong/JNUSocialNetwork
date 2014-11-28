@@ -588,8 +588,8 @@ a:hover {
 	color: #cccccc;
 	display: block;
 	height: 20px;
-	width: 300px;
-	float: left;
+	width: 280px;
+	float: right;
 }
 
 .texts-ad-url:hover {
@@ -614,7 +614,7 @@ a:hover {
 
 .userBoard {
 	margin:20px auto 0 auto;
-	height:310px;
+	height:370px;
 	width:100%;
 }
 .loneUserPlaceHolder{
@@ -623,7 +623,7 @@ a:hover {
 	border: none;
 	position:relative;
 	overflow:hidden;
-	margin:0 0 20px 20px;
+	margin:0 0 50px 20px;
 }
 
 .loneUser{
@@ -639,16 +639,21 @@ a:hover {
 	cursor:pointer;
 }
 .loneUserMask{
-	position:absolute;
+	position:relative;
+	border:none;
+	background-color:rgba(0,0,0,0.5);
+	cursor:pointer;
+	overflow:hidden
+}
+.loneUsersHeadContainer{
 	border:none;
 	border-radius:20px;
-	background-color:rgba(0,0,0,0.2);
-	z-index:99;
-	cursor:pointer;
+	width:100%;
+	height:100%;
+	overflow:hidden;
 }
 .loneUsersHead{
 	border:none;
-	border-radius:20px;
 	width:100%;
 	height:100%;
 }
@@ -657,9 +662,8 @@ a:hover {
 	font-size:large;
 	font-weight:bold;
 	position:relative;
-	margin:10px auto 0 auto;
+	margin:0px auto 0 auto;
 	z-index:98;
-	display:none;
 	word-wrap: break-word
 }
 .loneUsersTags{
@@ -667,9 +671,6 @@ a:hover {
 	font-size:small;
 	position:relative;
 	margin:10px auto 0 auto;
-	z-index:98;
-	top:-50;
-	display:none;
 	word-wrap: break-word
 }
 

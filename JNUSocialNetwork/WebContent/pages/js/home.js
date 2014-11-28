@@ -37,7 +37,7 @@ $('body').on('click', '.loneUser', function() {
 });
 function addCommunity(id, name, memberNum, communityImg, introduce, ownerID) {
 	var imageC = $.parseJSON(communityImg).src;
-	if($.parseJSON(communityImg).thumbnail != undefined){
+	if ($.parseJSON(communityImg).thumbnail != undefined) {
 		imageC = $.parseJSON($.parseJSON(communityImg).thumbnail).src;
 	}
 	var boarddiv = "<li class='communityShowItem'><div class='community_container'><a><div class='img_container'><input type='hidden' value='"
@@ -84,7 +84,9 @@ function fetchHotCommunity() {
 			});
 }
 function fetchLonelySouls() {
+
 	var users = FetchLonelySouls(11);
+
 	$.each(users.reverse(), function(n, user) {
 		if (user.available == true) {
 			addUser();
@@ -147,22 +149,26 @@ $(document)
 									title : 'To Be Warm 社区开启！',
 									url : 'http://campusite.com.cn/pages/communityShow.jsp?1415010467533'
 								});
-						textList.push({
-							title : 'Running Man 社区开启！',
-							url : 'http://campusite.com.cn/pages/communityShow.jsp?1416360968810'
-						});
-						textList.push({
-							title : '暨大表白墙 爱需要勇气！',
-							url : 'http://campusite.com.cn/pages/communityShow.jsp?1411092566183'
-						});
-						textList.push({
-							title : '【益箩筐】“益彩画”公益涂鸦系列活动',
-							url : 'http://campusite.com.cn/pages/activityShow.jsp?1411094627377&1416667468313'
-						});
-						textList.push({
-							title : '【Running Man】第一期 Running Man 候补召集！',
-							url : 'http://campusite.com.cn/pages/activityShow.jsp?1416360968810&1416447822779'
-						});
+						textList
+								.push({
+									title : 'Running Man 社区开启！',
+									url : 'http://campusite.com.cn/pages/communityShow.jsp?1416360968810'
+								});
+						textList
+								.push({
+									title : '暨大表白墙 爱需要勇气！',
+									url : 'http://campusite.com.cn/pages/communityShow.jsp?1411092566183'
+								});
+						textList
+								.push({
+									title : '【益箩筐】“益彩画”公益涂鸦系列活动',
+									url : 'http://campusite.com.cn/pages/activityShow.jsp?1411094627377&1416667468313'
+								});
+						textList
+								.push({
+									title : '【Running Man】第一期 Running Man 候补召集！',
+									url : 'http://campusite.com.cn/pages/activityShow.jsp?1416360968810&1416447822779'
+								});
 						if (textList.length == 0) {
 							var alertbox = $('<div class="alert alert-info" style="width: 91%;height:70px;padding-top:25px; text-align: center;margin-top:70px;background-color:rgba(0,0,0,0.5);border:none;color:#cccccc">还没有任何咨询哦！</div>');
 							alertbox.appendTo($('.texts-ad-body'));
@@ -175,10 +181,11 @@ $(document)
 										+ " class='texts-ad-url' href='"
 										+ textList[i].url
 										+ "'>"
-										+ (textList[i].title.length > 27 ? textList[i].title
-												.substr(0, 27)
+										+ (textList[i].title.length > 15 ? textList[i].title
+												.substr(0, 15)
 												+ "..."
-												: textList[i].title) + "</a></li>");
+												: textList[i].title)
+										+ "</a></li>");
 
 								textUrl.appendTo($('.texts-ad-body'));
 								$('<hr class="texts-ad-hr"/>').appendTo(
@@ -246,143 +253,137 @@ $(document)
 				});
 
 // lonely-souls-js 所有内容放进Ajax的成功回调，并插入真实数据即可
-$(document).ready(
-		function() {
-			var showAllSpeed = 200;
-			var userBoard = $('.userBoard');
-			var lonelySouls = new Array();
-			var isFold = true;
-
-			function createLonelyUserDiv(id,name, headSrc, tags) {
-				return $(
-						'<div class="loneUser" id="'+id+'"><img class="loneUsersHead" src="'
-								+ headSrc + '"/><div class="loneUsersName">'
-								+ name + '</div><div class="loneUsersTags">'
-								+ tags[0] + ', ' + tags[1] + '</div></div>')
-						.css({
+$(document)
+		.ready(
+				function() {
+					var userBoard = $('.userBoard');
+					var lonelySouls = new Array();
+					function createLonelyUserDiv(id, name, headSrc, tags) {
+						return $(
+								'<div class="loneUser" id="'
+										+ id
+										+ '"><div class="loneUsersHeadContainer"><img class="loneUsersHead" src="'
+										+ headSrc
+										+ '"/></div><div class="loneUsersName">'
+										+ name
+										+ '</div><div class="loneUsersTags">'
+										+ tags[0] + ', ' + tags[1]
+										+ '</div></div>').css({
 							'top' : userBoard.offset().top + 150,
 							'left' : userBoard.offset().left + 100,
-							'display':'none'
+							'display' : 'block'
 						});
-			}
-			var users = FetchLonelySouls(11);
-			$.each(users.reverse(), function(n, user) {
-				if (user.available == true) {
-					var imageAC = $.parseJSON(user.attributes.avatarLink).src;
-					if($.parseJSON(user.attributes.avatarLink).thumbnail != undefined){
-						imageAC = $.parseJSON($.parseJSON(user.attributes.avatarLink).thumbnail).src;
 					}
-					lonelySouls.push(createLonelyUserDiv(user.ID,user.attributes.name,
-							imageAC,user.lookingForTags)
-							.appendTo(userBoard));
-				}
-			});
-						function unFold(index) {
-				if (index > 0) {
+					var users = FetchLonelySouls(11);
 
-					lonelySouls[index].css(
-							{
+					$
+							.each(
+									users.reverse(),
+									function(n, user) {
+										if (user.available == true) {
+											var imageAC = $
+													.parseJSON(user.attributes.avatarLink).src;
+											if ($
+													.parseJSON(user.attributes.avatarLink).thumbnail != undefined) {
+												imageAC = $
+														.parseJSON($
+																.parseJSON(user.attributes.avatarLink).thumbnail).src;
+											}
+											lonelySouls
+													.push(createLonelyUserDiv(
+															user.ID,
+															user.attributes.name,
+															imageAC,
+															user.lookingForTags)
+															.appendTo(userBoard));
+										}
+									});
+					function unFold(index) {
+						if (index > 0) {
+
+							lonelySouls[index].css({
 								left : $(
 										'.loneUserPlaceHolder[place=' + index
 												+ ']').offset().left,
 								top : $(
 										'.loneUserPlaceHolder[place=' + index
 												+ ']').offset().top
-							}).fadeIn(150, function() {
-						unFold(index - 1);
-					});
-				} else if (index === 0) {
-					lonelySouls[index].css({
-						height : '+=100',
-						width : '+=100',
-						top : $('.loneUserPlaceHolder[place=1]').offset().top,
-						left:'-=30'
-					}).delay(300).fadeIn(400).children('.loneUsersName').delay(
-							600).fadeIn(400).siblings('.loneUsersTags').delay(
-							900).fadeIn(
-							400,
-							function() {
-								var masks = new Array();
-								for (var i = 0; i < lonelySouls.length; i++) {
-									masks[i] = $(
-											'<div class="loneUserMask" place="'
-													+ i + '"></div>').css({
-										'height' : lonelySouls[i].height(),
-										'width' : lonelySouls[i].width(),
-										'left' : lonelySouls[i].offset().left,
-										'top' : lonelySouls[i].offset().top,
-										'opacity' : '0'
-									}).appendTo('body');
-									if (i > 0) {
-										lonelySouls[i].children(
-												'.loneUsersName').css({
-											'position' : 'absolute',
-											'left' : 5,
-											'top' : 0,
-											'color' : '#ffffff',
-											'display' : 'none'
-										});
-										lonelySouls[i].children(
-												'.loneUsersTags').css({
-											'position' : 'absolute',
-											'left' : 5,
-											'top' : 90,
-											'color' : '#ffffff',
-											'display' : 'none'
-										});
-									}
-
-								}
-								for (var i = 0; i < lonelySouls.length; i++) {
-									masks[i].mouseout(function(e) {
-										$(e.target)
-										$(e.target).animate({
-											opacity : '0'
-										}, 300);
-										var index = parseInt($(e.target).attr(
-												'place'));
-										if (index > 0) {
-											lonelySouls[index].children(
-													'.loneUsersName').fadeOut(
-													300);
-											lonelySouls[index].children(
-													'.loneUsersTags').fadeOut(
-													300);
-										}
-									});
-									masks[i].mouseover(function(e) {
-										$(e.target).animate({
-											opacity : '1'
-										}, 300);
-										var index = parseInt($(e.target).attr(
-												'place'));
-										if (index > 0) {
-											lonelySouls[index].children(
-													'.loneUsersName').fadeIn(
-													300);
-											lonelySouls[index].children(
-													'.loneUsersTags').fadeIn(
-													300);
-										}
-									});
-								}
 							});
+							unFold(index - 1);
 
-				}
-			}
+						} else if (index === 0) {
+							lonelySouls[index]
+									.css(
+											{
+												height : '+=100',
+												width : '+=100',
+												top : $(
+														'.loneUserPlaceHolder[place=1]')
+														.offset().top,
+												left : '-=30'
+											}).children('.loneUsersName')
+									.show().siblings('.loneUsersTags').show();
 
-			$(window)
-					.scroll(
-							function() {
-								if (isFold) {
-									if ($(window).scrollTop() > $(userBoard)
-											.offset().top - 300) {
-										lonelySouls[0].hide();
-										unFold(lonelySouls.length - 1);
-										isFold = false;
-									}
+							var masks = new Array();
+							for (var i = 1; i < lonelySouls.length; i++) {
+								masks[i] = $(
+										'<div class="loneUserMask" place="' + i
+												+ '"></div>')
+										.css({
+											'height' : '40px',
+											'width' : lonelySouls[i].width(),
+											'left' : '0',
+											'top' : '0',
+											'opacity' : '0'
+										})
+										.appendTo(
+												lonelySouls[i]
+														.children('.loneUsersHeadContainer'));
+								if (i > 0) {
+									lonelySouls[i].children('.loneUsersName')
+											.css({
+												'left' : 5,
+												'top' : 0
+											});
+									lonelySouls[i].children('.loneUsersTags')
+											.css({
+												'left' : 0,
+												'top' : 0,
+												'color' : '#ffffff'
+											}).appendTo(masks[i]);
 								}
 
-							});
+							}
 
-		});
+							$('.loneUsersHeadContainer').mouseleave(
+									function(e) {
+										var target = $(e.target);
+										if (!target.hasClass('loneUserMask')) {
+											target = target
+													.siblings(".loneUserMask");
+										}
+										target.animate({
+											opacity : '0',
+											top : '0px'
+										}, 300);
+									});
+							$('.loneUsersHeadContainer').mouseenter(
+									function(e) {
+										var target = $(e.target);
+										if (!target.hasClass('loneUserMask')) {
+											target = target
+													.siblings(".loneUserMask");
+										}
+
+										target.animate({
+											opacity : '1',
+											top : '-40px'
+										}, 300);
+									});
+
+						}
+					}
+
+					unFold(lonelySouls.length - 1);
+
+				});
