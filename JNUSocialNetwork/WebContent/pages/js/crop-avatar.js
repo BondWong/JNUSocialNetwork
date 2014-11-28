@@ -236,8 +236,8 @@
       } catch (e) {}
 
       if (data) {
-        if (data.src) {
-          this.url = data.src;
+        if (data.croppedImage) {
+          this.url = $.parseJSON(data.croppedImage).src;
 
           log("response url = " + this.url);
 
@@ -247,7 +247,7 @@
             // 更新用户信息
             var datajson = {};
             datajson[this.defaults.imgUrlAttrName] = JSON.stringify(data);
-            UpdateUserProfile(userID, JSON.stringify(datajson));
+            UpdateUserProfile(userID, datajson);
 
             this.cropDone();
           } else {
