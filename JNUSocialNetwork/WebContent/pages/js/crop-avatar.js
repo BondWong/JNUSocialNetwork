@@ -247,7 +247,7 @@
             // 更新用户信息
             var datajson = {};
             datajson[this.defaults.imgUrlAttrName] = JSON.stringify(data);
-            UpdateUserProfile(userID, datajson);
+            UpdateUserProfile(userID, JSON.stringify(datajson));
 
             this.cropDone();
           } else {
