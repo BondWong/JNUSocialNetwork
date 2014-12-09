@@ -93,7 +93,7 @@ function fetchAllActivities() {
 		}
 	});
 }
-function fetchHeatActivities() {
+function fetchHeatActivities() { 
 	var response = FetchHeatActivities( 0, pageSize);
 	$.each(response.reverse(), function(n, dataString) {
 		if (dataString.available == true) {
