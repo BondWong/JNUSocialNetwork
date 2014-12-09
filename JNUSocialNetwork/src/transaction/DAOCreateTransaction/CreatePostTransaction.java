@@ -1,7 +1,5 @@
 package transaction.DAOCreateTransaction;
 
-import helper.serviceHelper.searchHelper.RankMap;
-
 import javax.persistence.EntityManager;
 
 import persistence.DAO;
@@ -23,9 +21,7 @@ public class CreatePostTransaction extends DAOTransaction {
 				params[2], params[3], params[4]);
 		member.createPost(post);
 		dao.update(member);
-		RankMap.deserialize();
-		RankMap.addLonlinessRankRecord(member.getID(), ConstantValue.POSTWEIGHT);
-		RankMap.serialize();
+		member.increaseLonelinessDegree(ConstantValue.POSTWEIGHT);
 		return post.toRepresentation();
 	}
 

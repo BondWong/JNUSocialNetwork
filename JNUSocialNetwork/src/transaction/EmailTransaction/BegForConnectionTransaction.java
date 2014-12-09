@@ -1,6 +1,5 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.searchHelper.RankMap;
 import helper.serviceHelper.sendEmailHelper.EmailSender;
 import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
@@ -38,10 +37,7 @@ public class BegForConnectionTransaction extends DAOTransaction {
 		sb.append(new EmailMemberProfileHelper().generateMemberProfile(begger));
 		new EmailSender().send(subject, sb.toString(), toAddr, EmailType.TEXT);
 
-		RankMap.deserialize();
-		RankMap.addLonlinessRankRecord(begger.getID(),
-				ConstantValue.BEGFORCONNECTIONWEIGHT);
-		RankMap.serialize();
+		begger.increaseLonelinessDegree(ConstantValue.BEGFORCONNECTIONWEIGHT);
 
 		return null;
 	}

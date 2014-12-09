@@ -1,6 +1,5 @@
 package transaction.EmailTransaction;
 
-import helper.serviceHelper.searchHelper.RankMap;
 import helper.serviceHelper.sendEmailHelper.EmailSender;
 import helper.serviceHelper.sendEmailHelper.EmailType;
 import helper.transactionHelper.EmailMemberProfileHelper;
@@ -33,12 +32,8 @@ public class BegProfileInfoTransaction extends DAOTransaction {
 
 		new EmailSender().send(subject, sb.toString(), toAddr, EmailType.TEXT);
 
-		RankMap.deserialize();
-		RankMap.addLonlinessRankRecord(invitor.getID(),
-				ConstantValue.ASKFORAVATARWEIGHT);
-		RankMap.serialize();
+		invitor.increaseLonelinessDegree(ConstantValue.ASKFORAVATARWEIGHT);
 
 		return null;
 	}
-
 }

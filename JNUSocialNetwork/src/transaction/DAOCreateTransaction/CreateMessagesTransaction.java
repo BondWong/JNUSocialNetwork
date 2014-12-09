@@ -1,7 +1,5 @@
 package transaction.DAOCreateTransaction;
 
-import helper.serviceHelper.searchHelper.RankMap;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +24,6 @@ public class CreateMessagesTransaction extends DAOTransaction {
 		// TODO Auto-generated method stub
 		DAO dao = new DAO(em);
 		List<Map<String, Object>> messages = (List<Map<String, Object>>) params[0];
-		RankMap.deserialize();
 		for (Object param : messages) {
 			Map<String, Object> messageMap = (Map<String, Object>) param;
 			Member from = dao.get(Member.class, messageMap.get("fromID"));
@@ -45,10 +42,8 @@ public class CreateMessagesTransaction extends DAOTransaction {
 			chatRoom.addMessage(message);
 			chatRoom.setLastAccessTime(new Date());
 			dao.update(chatRoom);
-			RankMap.addLonlinessRankRecord(from.getID(),
-					ConstantValue.MESSAGEWEIGHT);
+			from.increaseLonelinessDegree(ConstantValue.MESSAGEWEIGHT);
 		}
-		RankMap.serialize();
 		return null;
 	}
 

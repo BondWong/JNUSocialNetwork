@@ -8,7 +8,6 @@ import helper.serviceHelper.searchHelper.AdmirationMap;
 import helper.serviceHelper.searchHelper.CommunitySearchMap;
 import helper.serviceHelper.searchHelper.DesertFileLinkMap;
 import helper.serviceHelper.searchHelper.MemberSearchMap;
-import helper.serviceHelper.searchHelper.RankMap;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -19,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import transaction.ModelUpdateInitiationTransaction;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import transaction.DAOFetchTransaction.GetNumTransaction;
@@ -96,6 +96,8 @@ public class Initialtor implements ServletContextListener {
 		try {
 			transaction = new RegisterGodTransaction();
 			transaction.execute("Admin", MD5.toMD5Code("123456"));
+			transaction  = new ModelUpdateInitiationTransaction();
+			transaction.execute();
 
 			MemberSearchMap.initializeEnvironment();
 			ActivitySearchMap.initializeEnvironment();
@@ -103,7 +105,6 @@ public class Initialtor implements ServletContextListener {
 			DesertFileLinkMap.initializeEnvironment();
 			OnlineUserIDArray.initializeEnvironment();
 			AdmirationMap.initializeEnvironment();
-			RankMap.initializeEnvironment();
 			RootPathHelper.setRootPath(servletContextEvent.getServletContext()
 					.getRealPath("/"));
 

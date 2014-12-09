@@ -1,7 +1,5 @@
 package transaction.DAOCreateTransaction;
 
-import helper.serviceHelper.searchHelper.RankMap;
-
 import javax.persistence.EntityManager;
 
 import model.Comment;
@@ -26,10 +24,9 @@ public class CreateCommentTransaction extends DAOTransaction {
 		comment.setAttribute("postID", params[1] + "");
 		member.createComment(post, comment);
 		dao.update(post);
-		RankMap.deserialize();
-		RankMap.addLonlinessRankRecord(member.getID(),
-				ConstantValue.COMMENTWEIGHT);
-		RankMap.serialize();
+
+		member.increaseLonelinessDegree(ConstantValue.COMMENTWEIGHT);
+		
 		return comment.toRepresentation();
 	}
 

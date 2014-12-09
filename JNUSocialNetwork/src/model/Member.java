@@ -25,7 +25,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderColumn;
 import javax.persistence.Transient;
 
 import utils.JsonUtil;
@@ -50,9 +49,11 @@ import model.structure.Image;
 		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.fetchByLookingForTag", query = "SELECT m FROM Tag t JOIN t.lookingForUsers m WHERE t.ID = ?1"),
 		@NamedQuery(name = "Member.fetchLookingForTags", query = "SELECT t FROM Member m JOIN m.lookingForTags t WHERE m.available = 1 AND m.ID = ?1"),
+		@NamedQuery(name = "Member.fetchLonelySouls", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.userType = model.modelType.UserType.MEMBER ORDER BY m.lonelinessDegree"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {
+	private long lonelinessDegree;
 	@Lob
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> imageLinks;
@@ -75,11 +76,11 @@ public class Member extends User {
 	private Set<ServerSentEvent> unhandledEvents;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "MEMBER_FOLLOWEE", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "OTHERMEMBER_ID"))
-	@OrderColumn(name = "ORDER_INDEX")
-	private List<Member> followees;
+	//@OrderColumn(name = "ORDER_INDEX")
+	private Set<Member> followees;
 	@ManyToMany(mappedBy = "followees", fetch = FetchType.LAZY)
-	@OrderColumn(name = "ORDER_INDEX")
-	private List<Member> followers;
+	//@OrderColumn(name = "ORDER_INDEX")
+	private Set<Member> followers;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Tag> lookingForTags;
 	@Transient
@@ -90,6 +91,7 @@ public class Member extends User {
 
 	public void init(Object... initParams) {
 		this.available = true;
+		this.setLonelinessDegree(0);
 		this.ID = (String) initParams[0];
 		this.password = (String) initParams[1];
 		this.imageLinks = new LinkedHashSet<String>();
@@ -98,8 +100,8 @@ public class Member extends User {
 		this.collectedPosts = new LinkedHashSet<Post>();
 		this.joinedCommunities = new LinkedHashSet<Community>();
 		this.unhandledEvents = new LinkedHashSet<ServerSentEvent>();
-		this.followees = new ArrayList<Member>();
-		this.followers = new ArrayList<Member>();
+		this.followees = new LinkedHashSet<Member>();
+		this.followers = new LinkedHashSet<Member>();
 		this.lookingForTags = new LinkedHashSet<>();
 		this.userType = (UserType) initParams[2];
 		switch (this.userType) {
@@ -121,6 +123,18 @@ public class Member extends User {
 
 	public String getID() {
 		return ID;
+	}
+
+	public long getLonelinessDegree() {
+		return lonelinessDegree;
+	}
+
+	public void setLonelinessDegree(long lonelinessDegree) {
+		this.lonelinessDegree = lonelinessDegree;
+	}
+	
+	public void increaseLonelinessDegree(long value) {
+		this.lonelinessDegree += value;
 	}
 
 	public String getPassword() {
@@ -370,7 +384,7 @@ public class Member extends User {
 		member.followers.remove(this);
 	}
 
-	public List<Member> getFollowees() {
+	public Set<Member> getFollowees() {
 		return this.followees;
 	}
 
@@ -378,7 +392,7 @@ public class Member extends User {
 		this.followees.clear();
 	}
 
-	public List<Member> getFollowers() {
+	public Set<Member> getFollowers() {
 		return this.followers;
 	}
 
