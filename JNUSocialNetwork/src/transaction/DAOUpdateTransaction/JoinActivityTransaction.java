@@ -21,7 +21,8 @@ public class JoinActivityTransaction extends DAOTransaction {
 		int currentParticipantNum = post.getParticipants().size();
 		if (limitation > MAXIMUM)
 			limitation = MAXIMUM;
-		if (currentParticipantNum < limitation) {
+		if (!post.getAttribute("activityClass").equals("personal")
+				&& currentParticipantNum < limitation) {
 			member.joinActivity(post);
 			dao.update(post);
 		}

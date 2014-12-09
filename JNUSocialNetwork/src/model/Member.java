@@ -76,10 +76,8 @@ public class Member extends User {
 	private Set<ServerSentEvent> unhandledEvents;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "MEMBER_FOLLOWEE", joinColumns = @JoinColumn(name = "MEMBER_ID"), inverseJoinColumns = @JoinColumn(name = "OTHERMEMBER_ID"))
-	//@OrderColumn(name = "ORDER_INDEX")
 	private Set<Member> followees;
 	@ManyToMany(mappedBy = "followees", fetch = FetchType.LAZY)
-	//@OrderColumn(name = "ORDER_INDEX")
 	private Set<Member> followers;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Tag> lookingForTags;
