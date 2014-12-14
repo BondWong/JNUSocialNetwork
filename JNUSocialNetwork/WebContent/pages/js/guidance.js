@@ -2,11 +2,11 @@ $(document).ready(function(){
 	var guide_type=$('body').attr('data');
 	if(guide_type=='home'){
 		$.ajax({
-			url:'/app/user/needGuidance',
+			url:'/CampuSite/app/user/needGuidance',
 			dataType:'json',
 			type:'GET',
 			success:function(data){	
-				if(JSON.stringify(data)=='\"true\"'){
+				if(JSON.stringify(data)=='\"false\"'){
 					Guidance(guide_type);
 				}
 				
@@ -54,11 +54,11 @@ function Guidance(data){
 			});
 		});
 		$(window).resize(function(){
-			$('.guide_step[data=1]').css({'top':$('.activityHome').offset().top-5,'left':$('.activityHome').offset().left-15});
-			$('.guide_step[data=2]').css({'top':$('.communityHome').offset().top-45,'left':$('.communityHome').offset().left-55});
-			$('.guide_step[data=3]').css({'top':$('.circleHome').offset().top-140,'left':$('.circleHome').offset().left-100});
-			$('.guide_step[data=4]').css({'top':$('.peopleHome').offset().top-165,'left':$('.peopleHome').offset().left-90});
-			$('.guide_step[data=5]').css({'top':$('.btnFind').offset().top-493,'left':$('.btnFind').offset().left-581});
+			$('.guide_step[data=1]').css({'top':$('.activityHome').offset().top-10,'left':$('.activityHome').offset().left-10});
+			$('.guide_step[data=2]').css({'top':$('.communityHome').offset().top-52,'left':$('.communityHome').offset().left-58});
+			$('.guide_step[data=3]').css({'top':$('.circleHome').offset().top-147,'left':$('.circleHome').offset().left-95});
+			$('.guide_step[data=4]').css({'top':$('.peopleHome').offset().top-172,'left':$('.peopleHome').offset().left-94});
+			$('.guide_step[data=5]').css({'top':$('.signupBtn').offset().top-162,'left':$('.signupBtn').offset().left-744});
 		});
 		$(window).resize();
 		$('.mask').css({height:document.body.scrollHeight}).delay(1000).fadeIn(500,function(){

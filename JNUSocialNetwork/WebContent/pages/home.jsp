@@ -10,7 +10,43 @@
 </head>
 
 <body data="home">
-
+	<div class="mask" id="guide_mask" content-image-data="5">
+		<div class="guide_step" data="1">
+			<img class="guide_image" src="./images/guidance/activity.png"
+				data="1" />
+			<button type="button" class="guide_next_btn" data="1"
+				style="left: 338px; top: 470px; width: 100px; height: 35px"></button>
+			<button type="button" class="guide_exit_btn" data="1"
+				style="left: 575px; top: 235px;"></button>
+		</div>
+		<div class="guide_step" data="2">
+			<img class="guide_image" src="./images/guidance/social.png" data="2" />
+			<button type="button" class="guide_next_btn" data="2"
+				style="left: 375px; top: 583px; width: 115px; height: 40px"></button>
+			<button type="button" class="guide_exit_btn" data="2"
+				style="left: 590px; top: 300px"></button>
+		</div>
+		<div class="guide_step" data="3">
+			<img class="guide_image" src="./images/guidance/friend.png" data="3" />
+			<button type="button" class="guide_next_btn" data="3"
+				style="left: 425px; top: 585px; width: 110px; height: 35px"></button>
+			<button type="button" class="guide_exit_btn" data="3"
+				style="left: 655px; top: 370px"></button>
+		</div>
+		<div class="guide_step" data="4">
+			<img class="guide_image" src="./images/guidance/find.png" data="4" />
+			<button type="button" class="guide_next_btn" data="4"
+				style="left: 435px; top: 600px; width: 110px; height: 35px"></button>
+			<button type="button" class="guide_exit_btn" data="4"
+				style="left: 705px; top: 405px"></button>
+		</div>
+		<div class="guide_step" data="5">
+			<img class="guide_image" src="./images/guidance/finish2.png" data="5" />
+			<button type="button" class="guide_next_btn" data="5"
+				style="left: 295px; top: 600px; width: 108px; height: 30px;"></button>
+		</div>
+	</div>
+	
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container">
 			<%@ include file="parts/navLeft.jsp"%>
