@@ -49,7 +49,7 @@ import model.structure.Image;
 		@NamedQuery(name = "Member.loginFetchFamous", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.ID != ?1 ORDER BY SIZE(m.followers) DESC"),
 		@NamedQuery(name = "Member.fetchByLookingForTag", query = "SELECT m FROM Tag t JOIN t.lookingForUsers m WHERE t.ID = ?1"),
 		@NamedQuery(name = "Member.fetchLookingForTags", query = "SELECT t FROM Member m JOIN m.lookingForTags t WHERE m.available = 1 AND m.ID = ?1"),
-		@NamedQuery(name = "Member.fetchLonelySouls", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.userType = model.modelType.UserType.MEMBER ORDER BY m.lonelinessDegree"),
+		@NamedQuery(name = "Member.fetchLonelySouls", query = "SELECT m FROM Member m WHERE m.available = 1 AND m.userType = model.modelType.UserType.MEMBER ORDER BY m.lonelinessDegree DESC"),
 		@NamedQuery(name = "Member.fetchUnavailableIDs", query = "SELECT m.ID FROM Member m WHERE m.available = 0"),
 		@NamedQuery(name = "Member.deleteUnavailable", query = "DELETE FROM Member m WHERE m.available = 0") })
 public class Member extends User {

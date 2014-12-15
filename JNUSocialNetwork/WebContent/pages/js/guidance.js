@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var guide_type=$('body').attr('data');
 	if(guide_type=='home'){
 		$.ajax({
-			url:'/CampuSite/app/user/needGuidance',
+			url:'../../app/user/needGuidance',
 			dataType:'json',
 			type:'GET',
 			success:function(data){	
