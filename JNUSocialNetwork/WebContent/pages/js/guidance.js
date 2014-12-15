@@ -6,7 +6,7 @@ $(document).ready(function(){
 			dataType:'json',
 			type:'GET',
 			success:function(data){	
-				if(JSON.stringify(data)=='\"false\"'){
+				if(JSON.stringify(data)=='\"true\"'){
 					Guidance(guide_type);
 				}
 				

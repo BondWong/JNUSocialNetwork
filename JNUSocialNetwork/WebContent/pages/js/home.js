@@ -278,7 +278,7 @@ $(document)
 
 					$
 							.each(
-									users.reverse(),
+									users,
 									function(n, user) {
 										if (user.available == true) {
 											var imageAC = $
