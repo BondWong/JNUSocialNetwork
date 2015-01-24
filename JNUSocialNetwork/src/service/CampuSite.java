@@ -12,7 +12,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 @ApplicationPath("/app")
-public class JnuSocialNetwork extends Application {
+public class CampuSite extends Application {
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
 

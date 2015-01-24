@@ -15,7 +15,7 @@ public class RemindUnaTask implements Runnable {
 
 	@Override
 	public void run() {
-		String msgContent = "古捷靓女，记得去睇牙医（来自10年前黃俊邦）";
+		String msgContent = "古捷靓女，记得去睇牙医（2014.12.29,黃俊邦）";
 		try {
 			msgContent = java.net.URLEncoder.encode(msgContent, "UTF-8");
 			// 组建请求
