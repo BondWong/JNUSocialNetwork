@@ -8,14 +8,7 @@
 </head>
 <body>
 	<%
-		String url = request.getServerName();
-		if(url.contains("campusite")) {
-			response.sendRedirect("pages/home.jsp");
-		} else if(url.contains("huntingweb")){
-			response.sendRedirect("/HuntingWeb/index.html");
-		} else {
-			response.sendRedirect("pages/home.jsp");
-		}
+		response.sendRedirect("pages/home.jsp");
 	%>
 </body>
 </html>
