@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import transaction.ModelUpdateInitiationTransaction;
 import transaction.Transaction;
 import transaction.DAOCreateTransaction.RegisterGodTransaction;
 import transaction.DAOFetchTransaction.GetNumTransaction;
@@ -96,8 +95,9 @@ public class Initialtor implements ServletContextListener {
 		try {
 			transaction = new RegisterGodTransaction();
 			transaction.execute("Admin", MD5.toMD5Code("123456"));
-			transaction  = new ModelUpdateInitiationTransaction();
-			transaction.execute();
+			//for the first time update
+			//transaction  = new ModelUpdateInitiationTransaction();
+			//transaction.execute();
 
 			MemberSearchMap.initializeEnvironment();
 			ActivitySearchMap.initializeEnvironment();
