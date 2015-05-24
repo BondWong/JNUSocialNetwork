@@ -81,6 +81,10 @@ public class SystemTestListener implements ServletContextListener {
 			attributes.put("regDate", DateTimeUtil.getCurrnetDateTime());
 
 			transaction = new RegisterMemberTransaction();
+			for (int i = 2000; i > 0; i--) {
+				transaction.execute("201105" + i, MD5.toMD5Code("123456"),
+						attributes);
+			}
 			transaction.execute("2011052444", MD5.toMD5Code("123456"),
 					attributes);
 			transaction.execute("2011052333", MD5.toMD5Code("123456"),
